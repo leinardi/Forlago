@@ -10,4 +10,7 @@ include(
 
         // Apps
         ':app',
+
+        // Modules
+        ':modules:library-i18n'
 )

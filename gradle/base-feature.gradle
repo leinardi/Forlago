@@ -14,6 +14,6 @@ dependencies {
     implementation Libs.Timber.timber
 
     // Modules
-//    implementation rootProject.project(':modules:library-string')
+    implementation rootProject.project(':modules:library-i18n')
 
 }
