@@ -1,0 +1,19 @@
+import com.leinardi.androidtemplateproject.buildsrc.Libs
+
+apply plugin: 'kotlin-parcelize'
+apply from: rootProject.file('gradle/base-library.gradle')
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+dependencies {
+
+    // Android
+    implementation Libs.AndroidX.Navigation.fragment
+    implementation Libs.AndroidX.Navigation.uiKtx
+
+    // General
+    implementation Libs.Timber.timber
+
+    // Modules
+//    implementation rootProject.project(':modules:library-string')
+
+}
