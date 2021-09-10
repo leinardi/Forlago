@@ -1,0 +1,164 @@
+apply plugin: 'com.github.ben-manes.versions'
+
+dependencyUpdates {
+    gradleReleaseChannel = 'current'
+    resolutionStrategy {
+        componentSelection { rules ->
+            rules.all { ComponentSelection selection ->
+                boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'preview', 'b', 'ea'].any { qualifier ->
+                    selection.candidate.version ==~ /(?i).*[.-]$qualifier[.\d-+]*/
+                }
+                if (rejected) {
+                    selection.reject('Release candidate')
+                }
+            }
+        }
+    }
+    outputFormatter = { result ->
+        def writer = new StringWriter()
+        def html = new groovy.xml.MarkupBuilder(writer)
+        html.html {
+            body {
+                h1 'Outdated dependencies'
+                def updatable = result.outdated.dependencies
+                if (!updatable.isEmpty()) {
+                    table {
+                        thead {
+                            tr {
+                                td { strong 'Dependency' }
+                                td { strong 'Current version' }
+                                td { strong 'Latest version' }
+                            }
+                        }
+                        tbody {
+                            updatable.each { dependency ->
+                                tr {
+                                    def dependencyName = "${dependency.group}:${dependency.name}"
+                                    if (dependency.projectUrl != null) {
+                                        td { a(href: dependency.projectUrl, dependencyName) }
+                                    } else {
+                                        td(dependencyName)
+                                    }
+                                    td(style: 'color:red', dependency.version)
+                                    td(style: 'color:green', dependency.available.release ?: dependency.available.milestone)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                h1 'Exceed latest dependencies'
+                def exceeded = result.exceeded.dependencies
+                if (!exceeded.isEmpty()) {
+                    table {
+                        thead {
+                            tr {
+                                td { strong 'Dependency' }
+                                td { strong 'Current version' }
+                                td { strong 'Latest version' }
+                            }
+                        }
+                        tbody {
+                            exceeded.each { dependency ->
+                                tr {
+                                    def dependencyName = "${dependency.group}:${dependency.name}"
+                                    if (dependency.projectUrl != null) {
+                                        td { a(href: dependency.projectUrl, dependencyName) }
+                                    } else {
+                                        td(dependencyName)
+                                    }
+                                    td(style: 'color:red', dependency.version)
+                                    td(style: 'color:green', dependency.latest)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                h1 'Unresolved dependencies'
+                def unresolved = result.unresolved.dependencies
+                if (!unresolved.isEmpty()) {
+                    table {
+                        thead {
+                            tr {
+                                td { strong 'Dependency' }
+                                td { strong 'Current version' }
+                            }
+                        }
+                        tbody {
+                            unresolved.each { dependency ->
+                                tr {
+                                    def dependencyName = "${dependency.group}:${dependency.name}"
+                                    if (dependency.projectUrl != null) {
+                                        td { a(href: dependency.projectUrl, dependencyName) }
+                                    } else {
+                                        td(dependencyName)
+                                    }
+                                    td(style: 'color:red', dependency.version)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                h1('Gradle')
+                result.gradle.with {
+
+                    table {
+                        thead {
+                            tr {
+                                td { strong 'Current version' }
+                                if (current != running) {
+                                    td { strong 'Latest version' }
+                                }
+                            }
+                        }
+                        tbody {
+                            if (current == running) {
+                                tr {
+                                    td(style: 'color:green', running.version)
+                                }
+                            } else {
+                                tr {
+                                    td(style: 'color:red', running.version)
+                                    td(style: 'color:green', current.version)
+                                }
+                            }
+                        }
+                    }
+                }
+
+                h1 'UpToDate dependencies'
+                def current = result.current.dependencies
+                if (!current.isEmpty()) {
+                    table {
+                        thead {
+                            tr {
+                                td { strong 'Dependency' }
+                                td { strong 'Current version' }
+                            }
+                        }
+                        tbody {
+                            current.each { dependency ->
+                                tr {
+                                    def dependencyName = "${dependency.group}:${dependency.name}"
+                                    if (dependency.projectUrl != null) {
+                                        td { a(href: dependency.projectUrl, dependencyName) }
+                                    } else {
+                                        td(dependencyName)
+                                    }
+                                    td(style: 'color:green', dependency.version)
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        new File("${project.buildDir}/dependencyUpdates").mkdirs()
+        def file = new File("${project.buildDir}/dependencyUpdates/report.html")
+        file.createNewFile()
+        file.write(writer.toString())
+    }
+}

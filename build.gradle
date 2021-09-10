@@ -9,14 +9,20 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath Libs.androidGradlePlugin
-        classpath Libs.Kotlin.gradlePlugin
         classpath Libs.AndroidX.Navigation.safeArgsPlugin
+        classpath Libs.Detekt.gradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.androidGradlePlugin
+        classpath Libs.versionsGradlePlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
+
+apply from: 'gradle/detekt.gradle'
+apply from: 'gradle/versions.gradle'
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

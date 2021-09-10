@@ -1,0 +1,17 @@
+import com.leinardi.androidtemplateproject.buildsrc.Libs
+
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+detekt {
+    toolVersion = Libs.Detekt.version
+    input = files(rootDir)
+}
+
+dependencies {
+    detektPlugins Libs.Detekt.formatting
+}
+
+tasks.getByName('detekt') {
+    exclude("**/.feature-template/**")
+    exclude("**/build/generated/**")
+}

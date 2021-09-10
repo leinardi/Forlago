@@ -1,7 +1,5 @@
 package com.leinardi.androidtemplateproject.buildsrc
 
-import org.gradle.api.JavaVersion
-
 object Versions {
     const val buildToolsVersion = "30.0.3"
     const val compileSdkVersion = 31
@@ -9,15 +7,23 @@ object Versions {
     const val targetSdkVersion = 31
 }
 
+@Suppress("MemberNameEqualsClassName")
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.2"
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.1.5"
+    const val versionsGradlePlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
 
     object Accompanist {
         const val version = "0.18.0"
         const val insets = "com.google.accompanist:accompanist-insets:$version"
         const val pager = "com.google.accompanist:accompanist-pager:$version"
         const val permissions = "com.google.accompanist:accompanist-permissions:$version"
+    }
+
+    object Detekt {
+        const val version = "1.17.1"
+        const val gradlePlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version"
+        const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
     }
 
     object Kotlin {
@@ -41,12 +47,12 @@ object Libs {
     }
 
     object JUnit {
-        private const val version = "4.13"
+        private const val version = "4.13.2"
         const val junit = "junit:junit:$version"
     }
 
     object AndroidX {
-        const val appcompat = "androidx.appcompat:appcompat:1.3.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.3.1"
         const val palette = "androidx.palette:palette:1.0.0"
 
         const val coreKtx = "androidx.core:core-ktx:1.6.0"
@@ -89,12 +95,12 @@ object Libs {
         }
 
         object Material {
-            private const val version = "1.3.0"
+            private const val version = "1.4.0"
             const val material = "com.google.android.material:material:$version"
         }
 
         object Navigation {
-            private const val version = "2.3.4"
+            private const val version = "2.3.5"
             const val safeArgsPlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$version"
             const val fragment = "androidx.navigation:navigation-fragment-ktx:$version"
             const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
@@ -106,18 +112,18 @@ object Libs {
             const val rules = "androidx.test:rules:$version"
 
             object Ext {
-                private const val version = "1.1.2"
+                private const val version = "1.1.3"
                 const val junit = "androidx.test.ext:junit-ktx:$version"
             }
 
-            const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+            const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0"
         }
 
         object Room {
             private const val version = "2.3.0"
-            const val runtime = "androidx.room:room-runtime:${version}"
-            const val ktx = "androidx.room:room-ktx:${version}"
-            const val compiler = "androidx.room:room-compiler:${version}"
+            const val runtime = "androidx.room:room-runtime:$version"
+            const val ktx = "androidx.room:room-ktx:$version"
+            const val compiler = "androidx.room:room-compiler:$version"
         }
     }
 
@@ -134,6 +140,5 @@ object Libs {
     object Timber {
         const val timber = "com.jakewharton.timber:timber:5.0.1"
     }
-
 
 }
