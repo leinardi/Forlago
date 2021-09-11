@@ -1,0 +1,15 @@
+task copyMergedManifests(type: Copy) {
+    afterEvaluate {
+        tasks.findAll { it.name.matches("process.*Manifest") }.forEach { processManifestTask ->
+            dependsOn processManifestTask
+            mustRunAfter processManifestTask
+        }
+        mkdir 'versions/mergedManifests'
+        from("$buildDir/intermediates/merged_manifests") {
+            include '**/*.xml'
+        }
+        into 'versions/mergedManifests'
+        filter { line -> line.replaceAll("(android:version.*=\".*\")|(android:testOnly=\".*\")", "") }
+        check.dependsOn copyMergedManifests
+    }
+}

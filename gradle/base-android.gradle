@@ -73,3 +73,9 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
     }
 }
+
+tasks.withType(Test) {
+    testLogging {
+        events "skipped", "failed"
+    }
+}
