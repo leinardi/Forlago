@@ -1,6 +1,7 @@
 import com.leinardi.androidtemplateproject.buildsrc.Libs
 
 apply from: rootProject.file('gradle/base-app.gradle')
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
 
@@ -22,10 +23,11 @@ android {
 
 dependencies {
 
-    implementation Libs.AndroidX.coreKtx
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.Lifecycle.runtime
     implementation Libs.AndroidX.Activity.activityCompose
+    implementation Libs.AndroidX.Lifecycle.runtime
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.startup
 
     testImplementation Libs.JUnit.junit
     androidTestImplementation Libs.AndroidX.Test.Ext.junit

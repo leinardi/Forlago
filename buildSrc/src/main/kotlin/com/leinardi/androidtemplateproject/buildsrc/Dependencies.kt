@@ -21,42 +21,11 @@ object Libs {
         const val permissions = "com.google.accompanist:accompanist-permissions:$version"
     }
 
-    object Detekt {
-        const val version = "1.17.1"
-        const val gradlePlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version"
-        const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
-    }
-
-    object Kotlin {
-        private const val version = "1.5.21"
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
-        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
-    }
-
-    object Coroutines {
-        private const val version = "1.5.2"
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
-        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
-        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
-    }
-
-    object OkHttp {
-        private const val version = "4.9.1"
-        const val okhttp = "com.squareup.okhttp3:okhttp:$version"
-        const val logging = "com.squareup.okhttp3:logging-interceptor:$version"
-    }
-
-    object JUnit {
-        private const val version = "4.13.2"
-        const val junit = "junit:junit:$version"
-    }
-
     object AndroidX {
         const val appcompat = "androidx.appcompat:appcompat:1.3.1"
-        const val palette = "androidx.palette:palette:1.0.0"
-
         const val coreKtx = "androidx.core:core-ktx:1.6.0"
+        const val palette = "androidx.palette:palette:1.0.0"
+        const val startup = "androidx.startup:startup-runtime:1.1.0"
 
         object Activity {
             const val activityCompose = "androidx.activity:activity-compose:1.3.1"
@@ -130,10 +99,48 @@ object Libs {
         const val coilCompose = "io.coil-kt:coil-compose:1.3.0"
     }
 
-    object Rome {
-        private const val version = "1.14.1"
-        const val rome = "com.rometools:rome:$version"
-        const val modules = "com.rometools:rome-modules:$version"
+    object Coroutines {
+        private const val version = "1.5.2"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
+        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+        const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
+    }
+
+    object Firebase {
+        const val analytics = "com.google.firebase:firebase-analytics-ktx:19.0.0"
+        const val crashlyticsGradlePlugin = "com.google.firebase:firebase-crashlytics-gradle:2.7.1"
+        const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx:18.2.0"
+    }
+
+    object Detekt {
+        const val version = "1.17.1"
+        const val formatting = "io.gitlab.arturbosch.detekt:detekt-formatting:$version"
+        const val gradlePlugin = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$version"
+    }
+
+    object Hilt {
+        const val version = "2.38.1"
+        const val android = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-compiler:$version"
+        const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
+    }
+
+    object Kotlin {
+        private const val version = "1.5.21"
+        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
+    }
+
+    object JUnit {
+        private const val version = "4.13.2"
+        const val junit = "junit:junit:$version"
+    }
+
+    object OkHttp {
+        private const val version = "4.9.1"
+        const val logging = "com.squareup.okhttp3:logging-interceptor:$version"
+        const val okhttp = "com.squareup.okhttp3:okhttp:$version"
     }
 
     object Timber {

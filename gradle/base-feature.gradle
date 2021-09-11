@@ -3,6 +3,7 @@ import com.leinardi.androidtemplateproject.buildsrc.Libs
 apply from: rootProject.file('gradle/base-library.gradle')
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     buildFeatures {
@@ -25,10 +26,13 @@ dependencies {
     implementation Libs.AndroidX.Activity.activityCompose
 
     // General
+    implementation Libs.Hilt.android
+    kapt Libs.Hilt.compiler
     implementation Libs.Timber.timber
 
     // Modules
     implementation rootProject.project(':modules:core-i18n')
+    implementation rootProject.project(':modules:core-logging')
     implementation rootProject.project(':modules:core-ui')
 
 }

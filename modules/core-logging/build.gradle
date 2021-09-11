@@ -1,0 +1,17 @@
+import com.leinardi.androidtemplateproject.buildsrc.Libs
+
+apply from: rootProject.file('gradle/base-library.gradle')
+
+android {
+    resourcePrefix 'logging_'
+    defaultConfig {
+        consumerProguardFiles "$projectDir/proguard-logging-consumer-rules.pro"
+    }
+}
+
+dependencies {
+    api Libs.Timber.timber
+    implementation Libs.AndroidX.startup
+    implementation Libs.Firebase.crashlytics
+    implementation Libs.Firebase.analytics
+}

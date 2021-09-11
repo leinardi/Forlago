@@ -4,7 +4,9 @@ apply from: rootProject.file('gradle/base-library.gradle')
 
 android {
     resourcePrefix 'ui_'
-
+    defaultConfig {
+        consumerProguardFiles "$projectDir/proguard-ui-consumer-rules.pro"
+    }
     buildFeatures {
         compose true
     }

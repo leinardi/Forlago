@@ -13,6 +13,7 @@ include(
 
         // Modules
         ':modules:core-i18n',
+        ':modules:core-logging',
         ':modules:core-ui',
         ':modules:feature-home',
 

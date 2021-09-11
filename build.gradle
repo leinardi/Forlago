@@ -10,15 +10,13 @@ buildscript {
     }
     dependencies {
         classpath Libs.AndroidX.Navigation.safeArgsPlugin
+        classpath Libs.Firebase.crashlyticsGradlePlugin
         classpath Libs.Detekt.gradlePlugin
+        classpath Libs.Hilt.gradlePlugin
         classpath Libs.Kotlin.gradlePlugin
         classpath Libs.androidGradlePlugin
-        classpath Libs.versionsGradlePlugin
-
         classpath Libs.spotlessGradlePlugin
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath Libs.versionsGradlePlugin
     }
 }
 
