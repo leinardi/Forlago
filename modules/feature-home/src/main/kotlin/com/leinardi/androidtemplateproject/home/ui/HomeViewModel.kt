@@ -12,7 +12,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
-
     val counterLiveData: LiveData<Int>
         get() = counter
 
@@ -28,5 +27,4 @@ class HomeViewModel @Inject constructor(
     companion object {
         private const val SAVED_COUNT = "saved_count"
     }
-
 }

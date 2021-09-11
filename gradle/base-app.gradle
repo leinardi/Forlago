@@ -5,6 +5,7 @@ apply plugin: 'kotlin-parcelize'
 apply from: rootProject.file('gradle/base-android.gradle')
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
+apply from: rootProject.file('gradle/dependencies.gradle')
 
 android {
     buildFeatures {
