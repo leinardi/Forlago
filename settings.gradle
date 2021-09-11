@@ -12,5 +12,8 @@ include(
         ':app',
 
         // Modules
-        ':modules:library-i18n'
+        ':modules:core-i18n',
+        ':modules:core-ui',
+        ':modules:feature-home',
+
 )

@@ -1,19 +1,34 @@
 import com.leinardi.androidtemplateproject.buildsrc.Libs
 
-apply plugin: 'kotlin-parcelize'
 apply from: rootProject.file('gradle/base-library.gradle')
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+android {
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+    }
+}
 
 dependencies {
 
     // Android
     implementation Libs.AndroidX.Navigation.fragment
     implementation Libs.AndroidX.Navigation.uiKtx
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.Lifecycle.runtime
+    implementation Libs.AndroidX.Lifecycle.viewModelCompose
+    implementation Libs.AndroidX.Activity.activityCompose
 
     // General
     implementation Libs.Timber.timber
 
     // Modules
-    implementation rootProject.project(':modules:library-i18n')
+    implementation rootProject.project(':modules:core-i18n')
+    implementation rootProject.project(':modules:core-ui')
 
 }

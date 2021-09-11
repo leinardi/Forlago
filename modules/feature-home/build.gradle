@@ -1,0 +1,5 @@
+apply from: rootProject.file('gradle/base-feature.gradle')
+
+android {
+    resourcePrefix 'home_'
+}

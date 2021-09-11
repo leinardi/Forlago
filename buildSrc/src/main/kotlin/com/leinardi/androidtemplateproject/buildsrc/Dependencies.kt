@@ -63,8 +63,7 @@ object Libs {
         }
 
         object Constraint {
-            const val constraintLayoutCompose =
-                "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
+            const val constraintLayoutCompose = "androidx.constraintlayout:constraintlayout-compose:1.0.0-beta02"
         }
 
         object Compose {
@@ -78,8 +77,7 @@ object Libs {
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
             const val material = "androidx.compose.material:material:$version"
-            const val materialIconsExtended =
-                "androidx.compose.material:material-icons-extended:$version"
+            const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$version"
             const val test = "androidx.compose.test:test-core:$version"
@@ -90,9 +88,9 @@ object Libs {
 
         object Lifecycle {
             private const val version = "2.3.1"
-            const val viewModelCompose =
-                "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
+            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
+            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
         }
 
         object Material {

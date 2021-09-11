@@ -23,5 +23,6 @@ buildscript {
 }
 
 apply from: 'gradle/detekt.gradle'
+apply from: 'gradle/feature.gradle'
 apply from: 'gradle/spotless.gradle'
 apply from: 'gradle/versions.gradle'

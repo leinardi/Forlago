@@ -5,16 +5,30 @@ apply plugin: 'kotlin-parcelize'
 apply from: rootProject.file('gradle/base-android.gradle')
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
+android {
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+    }
+}
+
 dependencies {
 
     // Android
     implementation Libs.AndroidX.Navigation.fragment
     implementation Libs.AndroidX.Navigation.uiKtx
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.Lifecycle.runtime
+    implementation Libs.AndroidX.Activity.activityCompose
 
     // General
     implementation Libs.Timber.timber
 
     // Modules
-    implementation rootProject.project(':modules:library-i18n')
+    implementation rootProject.project(':modules:core-i18n')
+    implementation rootProject.project(':modules:core-ui')
 
 }

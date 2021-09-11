@@ -1,0 +1,24 @@
+import com.leinardi.androidtemplateproject.buildsrc.Libs
+
+apply from: rootProject.file('gradle/base-library.gradle')
+
+android {
+    resourcePrefix 'ui_'
+
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+    }
+}
+
+dependencies {
+    api Libs.AndroidX.Material.material
+    api Libs.AndroidX.Compose.ui
+    api Libs.AndroidX.Compose.material
+    api Libs.AndroidX.Compose.runtime
+    api Libs.AndroidX.Compose.runtimeLivedata
+    api Libs.AndroidX.Compose.tooling
+
+}
