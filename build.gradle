@@ -15,15 +15,13 @@ buildscript {
         classpath Libs.androidGradlePlugin
         classpath Libs.versionsGradlePlugin
 
+        classpath Libs.spotlessGradlePlugin
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
 apply from: 'gradle/detekt.gradle'
+apply from: 'gradle/spotless.gradle'
 apply from: 'gradle/versions.gradle'
-
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}

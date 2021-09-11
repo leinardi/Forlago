@@ -12,6 +12,7 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.2"
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.1.5"
     const val versionsGradlePlugin = "com.github.ben-manes:gradle-versions-plugin:0.39.0"
+    const val spotlessGradlePlugin = "com.diffplug.spotless:spotless-plugin-gradle:5.15.0"
 
     object Accompanist {
         const val version = "0.18.0"
@@ -140,5 +141,4 @@ object Libs {
     object Timber {
         const val timber = "com.jakewharton.timber:timber:5.0.1"
     }
-
 }
