@@ -1,0 +1,157 @@
+/*
+ * Copyright 2021 Roberto Leinardi.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import org.apache.tools.ant.filters.ReplaceTokens
+
+tasks.register("generateFeatureDestinationObject", Copy) {
+    includeEmptyDirs = false
+    checkModuleNameProperty(name)
+
+    moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
+
+    def tokens = generatePlaceholderTokens()
+    def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/destination")
+    def navigationDir = file("${rootProject.rootDir}/modules/core-navigation/src/main/kotlin/com/leinardi/template/navigation/destination/${tokens.placeholderlowercase}")
+
+    from templateDirPath
+    into navigationDir
+
+    // Directory and file name replacement
+    tokens.each { placeholderKey, placeholderValue ->
+        filesMatching("**/$placeholderKey/**/*") {
+            it.path = it.path.replace(placeholderKey, placeholderValue)
+        }
+        rename(placeholderKey, placeholderValue)
+    }
+
+    // File extension replacement
+    rename('.ktemplate', '.kt')
+
+    // Content replacement
+    filter(ReplaceTokens, tokens: tokens)
+}
+
+tasks.register("generateFeatureModule", Copy) {
+    dependsOn generateFeatureDestinationObject
+    includeEmptyDirs = false
+    checkModuleNameProperty(name)
+
+    moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
+
+    def tokens = generatePlaceholderTokens()
+    def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/feature")
+    def featureDir = file("${rootProject.rootDir}/modules/feature-${tokens.placeholderlowercase}")
+
+    from templateDirPath
+    into featureDir
+
+    // Directory and file name replacement
+    tokens.each { placeholderKey, placeholderValue ->
+        filesMatching("**/$placeholderKey/**/*") {
+            it.path = it.path.replace(placeholderKey, placeholderValue)
+        }
+        rename(placeholderKey, placeholderValue)
+    }
+
+    // File extension replacement
+    rename('.ktemplate', '.kt')
+
+    // Content replacement
+    filter(ReplaceTokens, tokens: tokens)
+
+    doLast {
+        printAddModuleHelp(tokens, featureDir)
+        println("""
+    4. Register ${tokens.PlaceholderName}Feature.kt into FeatureManager (see Template.registerFeatures()). 
+    """)
+    }
+}
+
+tasks.register("generateCoreModule", Copy) {
+    includeEmptyDirs = false
+    checkModuleNameProperty(name)
+
+    moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
+
+    def tokens = generatePlaceholderTokens()
+    def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/core")
+    def coreDirPath = file("${rootProject.rootDir}/modules/core-${tokens.placeholderlowercase}")
+
+    from templateDirPath
+    into coreDirPath
+
+    // Directory and file name replacement
+    tokens.each { placeholderKey, placeholderValue ->
+        filesMatching("**/$placeholderKey/**/*") {
+            it.path = it.path.replace(placeholderKey, placeholderValue)
+        }
+        rename(placeholderKey, placeholderValue)
+    }
+
+    // File extension replacement
+    rename('.ktemplate', '.kt')
+
+    // Content replacement
+    filter(ReplaceTokens, tokens: tokens)
+
+    doLast {
+        printAddModuleHelp(tokens, coreDirPath)
+    }
+}
+
+private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirPath) {
+    def tokensUsed = tokens.collect { k, v -> "            ${k}: ${v}" }.join("\n")
+    println("""
+
+    Core created:
+        Name: ${tokens.PlaceholderName}
+        Package: com.leinardi.template.${tokens.placeholderlowercase}
+        Directory: ${moduleDirPath}
+
+    Placeholders used:\n${tokensUsed}
+
+    1. Declare the module in settings.gradle (alphabetically ordered):
+        // Cores
+        [...]
+        ':modules:$moduleDirPath.name',
+        [...]
+
+    2. Declare the dependency on the module on build.gradle that requires it (alphabetically ordered):
+        // Modules
+        [...]
+        implementation project(':modules:$moduleDirPath.name')
+        [...]
+
+    3. Synchronize the project for the new module to be available.
+    """)
+}
+
+private LinkedHashMap<String, Object> generatePlaceholderTokens() {
+    def tokens = [
+            PlaceholderName        : moduleName.capitalize(),
+            placeholderUncaptalized: moduleName.uncapitalize(),
+            PLACEHOLDER_UPPERCASE  : moduleName.toSnakeCase().toUpperCase(),
+            placeholderlowercase   : moduleName.toLowerCase(),
+            placeholder_snake_case : moduleName.toSnakeCase()
+    ]
+    tokens
+}
+
+private boolean checkModuleNameProperty(taskName) {
+    if (!rootProject.hasProperty('moduleName')) {
+        throw InvalidUserDataException("moduleName] [Please provide the module name: ./gradlew $taskName -PmoduleName=Foo")
+    }
+}
