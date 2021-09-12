@@ -31,6 +31,7 @@ dependencies {
     implementation Libs.Hilt.android
     kapt Libs.Hilt.compiler
     implementation Libs.Timber.timber
+    debugImplementation Libs.LeakCanary.android
 
     // Modules
     implementation rootProject.project(':modules:core-i18n')

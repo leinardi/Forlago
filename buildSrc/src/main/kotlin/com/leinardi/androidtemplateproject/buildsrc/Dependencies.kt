@@ -125,6 +125,11 @@ object Libs {
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
     }
 
+    object JUnit {
+        private const val version = "4.13.2"
+        const val junit = "junit:junit:$version"
+    }
+
     object Kotlin {
         private const val version = "1.5.21"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
@@ -132,9 +137,8 @@ object Libs {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
     }
 
-    object JUnit {
-        private const val version = "4.13.2"
-        const val junit = "junit:junit:$version"
+    object LeakCanary {
+        const val android = "com.squareup.leakcanary:leakcanary-android:2.7"
     }
 
     object OkHttp {
