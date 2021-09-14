@@ -41,6 +41,7 @@ object Libs {
         const val appcompat = "androidx.appcompat:appcompat:1.3.1"
         const val coreKtx = "androidx.core:core-ktx:1.6.0"
         const val palette = "androidx.palette:palette:1.0.0"
+        const val splashscreen = "androidx.core:core-splashscreen:1.0.0-alpha01"
         const val startup = "androidx.startup:startup-runtime:1.1.0"
 
         object Activity {

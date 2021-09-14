@@ -17,6 +17,7 @@
 package com.leinardi.template
 
 import android.app.Application
+import android.os.SystemClock
 import com.leinardi.template.bar.feature.BarFeature
 import com.leinardi.template.feature.FeatureManager
 import com.leinardi.template.foo.feature.FooFeature
@@ -34,6 +35,12 @@ class Template : Application() {
     override fun onCreate() {
         super.onCreate()
         registerFeatures()
+        simulateHeavyLoad()
+    }
+
+    @Suppress("MagicNumber")
+    private fun simulateHeavyLoad() {
+        SystemClock.sleep(1500)
     }
 
     private fun registerFeatures() {

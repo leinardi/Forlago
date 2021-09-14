@@ -13,8 +13,7 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
-
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.leinardi.template"
     
@@ -33,15 +32,16 @@
         android:name="com.leinardi.template.Template"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ui_ic_launcher"
         android:label="@string/i18n_app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ui_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/UiTheme.Template" >
+        android:theme="@style/Ui.Theme.SplashScreen" >
         <activity
             android:name="com.leinardi.template.ui.MainActivity"
             android:exported="true"
             android:label="@string/i18n_app_name"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,9 +54,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="accounts"
-                    android:scheme="rally" />
+                <data android:scheme="template" />
             </intent-filter>
         </activity>
 
@@ -96,6 +94,8 @@
                 <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name="androidx.core.splashscreen.test.SplashScreenAppCompatTestActivity" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"

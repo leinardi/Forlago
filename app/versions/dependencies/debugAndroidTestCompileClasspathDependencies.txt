@@ -353,8 +353,6 @@ debugAndroidTestCompileClasspath - Compile classpath for compilation 'debugAndro
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21 -> 1.5.30 (*)
 +--- project :modules:core-ui
-|    +--- com.google.android.material:material:1.4.0 (*)
-|    +--- androidx.compose.ui:ui:1.0.2 (*)
 |    +--- androidx.compose.material:material:1.0.2
 |    |    +--- androidx.compose.animation:animation-core:1.0.2 (*)
 |    |    +--- androidx.compose.foundation:foundation:1.0.2
@@ -375,6 +373,10 @@ debugAndroidTestCompileClasspath - Compile classpath for compilation 'debugAndro
 |    |    +--- androidx.compose.runtime:runtime:1.0.2 (*)
 |    |    \--- androidx.lifecycle:lifecycle-livedata:2.2.0 (*)
 |    +--- androidx.compose.ui:ui-tooling:1.0.2 (*)
+|    +--- androidx.compose.ui:ui:1.0.2 (*)
+|    +--- com.google.android.material:material:1.4.0 (*)
+|    +--- androidx.core:core-splashscreen:1.0.0-alpha01
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.5.30 (*)
 |    +--- androidx.compose.material:material-icons-extended:1.0.2
 |    |    \--- androidx.compose.material:material-icons-core:1.0.2 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21 -> 1.5.30 (*)
@@ -390,9 +392,6 @@ debugAndroidTestCompileClasspath - Compile classpath for compilation 'debugAndro
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21 -> 1.5.30 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21 -> 1.5.30 (*)
-+--- project :modules:feature-baz
-|    +--- project :modules:core-feature (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21 -> 1.5.30 (*)
 +--- project :modules:feature-foo
 |    +--- project :modules:core-feature (*)

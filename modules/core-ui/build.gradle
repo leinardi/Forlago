@@ -32,11 +32,12 @@ android {
 }
 
 dependencies {
-    api Libs.AndroidX.Material.material
-    api Libs.AndroidX.Compose.ui
     api Libs.AndroidX.Compose.material
     api Libs.AndroidX.Compose.runtime
     api Libs.AndroidX.Compose.runtimeLivedata
     api Libs.AndroidX.Compose.tooling
+    api Libs.AndroidX.Compose.ui
+    api Libs.AndroidX.Material.material
+    api Libs.AndroidX.splashscreen
     api "androidx.compose.material:material-icons-extended:1.0.2"
 }

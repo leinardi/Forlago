@@ -18,5 +18,6 @@
 <resources>
 
     <color name="ui_status_bar_color">#000000</color>
+    <color name="ui_window_background">#000000</color>
 
 </resources>
