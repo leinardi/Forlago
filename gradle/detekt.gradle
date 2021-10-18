@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-import com.leinardi.template.buildsrc.Libs
-
 apply plugin: 'io.gitlab.arturbosch.detekt'
 
 detekt {
-    toolVersion = Libs.Detekt.version
+    toolVersion = libs.versions.detekt.get()
     input = files(rootDir)
 }
 
 dependencies {
-    detektPlugins Libs.Detekt.formatting
+    detektPlugins libs.detekt
 }
 
 tasks.getByName('detekt') {

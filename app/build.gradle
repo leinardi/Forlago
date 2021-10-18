@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import com.leinardi.template.buildsrc.Libs
 
 apply from: rootProject.file('gradle/base-app.gradle')
 apply plugin: 'com.google.firebase.crashlytics'
@@ -39,19 +38,19 @@ android {
 
 dependencies {
 
-    implementation Libs.AndroidX.Activity.activityCompose
-    implementation Libs.AndroidX.Lifecycle.runtime
-    implementation Libs.AndroidX.Navigation.compose
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.coreKtx
-    implementation Libs.AndroidX.startup
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.navigation.compose
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.startup
 
-    testImplementation Libs.JUnit.junit
-    androidTestImplementation Libs.AndroidX.Test.Ext.junit
-    androidTestImplementation Libs.AndroidX.Test.espressoCore
-    androidTestImplementation Libs.AndroidX.Compose.ui
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.androidx.test.espresso.core
+    androidTestImplementation libs.androidx.compose.ui
 
-    debugImplementation Libs.AndroidX.Compose.tooling
+    debugImplementation libs.androidx.compose.tooling
 
     // Modules
     implementation project(':modules:feature-bar')

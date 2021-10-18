@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import com.leinardi.template.buildsrc.Libs
-
 apply from: rootProject.file('gradle/base-library.gradle')
 apply plugin: 'dagger.hilt.android.plugin'
 
@@ -27,10 +25,10 @@ android {
 }
 
 dependencies {
-    api Libs.AndroidX.Navigation.compose
-    api Libs.Coroutines.core
-    api Libs.Coroutines.android
-    implementation Libs.Hilt.android
-    implementation Libs.Hilt.navigationCompose
-    kapt Libs.Hilt.compiler
+    api libs.androidx.navigation.compose
+    api libs.coroutines.core
+    api libs.coroutines.android
+    implementation libs.hilt.android
+    implementation libs.hilt.navigation.compose
+    kapt libs.hilt.compiler
 }

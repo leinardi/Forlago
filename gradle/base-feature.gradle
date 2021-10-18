@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import com.leinardi.template.buildsrc.Libs
-
 apply from: rootProject.file('gradle/base-library.gradle')
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
@@ -26,26 +24,26 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+        kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
     }
 }
 
 dependencies {
 
     // Android
-    implementation Libs.AndroidX.Navigation.fragment
-    implementation Libs.AndroidX.Navigation.uiKtx
-    implementation Libs.AndroidX.coreKtx
-    implementation Libs.AndroidX.appcompat
-    implementation Libs.AndroidX.Lifecycle.runtime
-    implementation Libs.AndroidX.Lifecycle.viewModelCompose
-    implementation Libs.AndroidX.Activity.activityCompose
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.ui.ktx
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.lifecycle.viewmodel.compose
+    implementation libs.androidx.activity.compose
 
     // General
-    implementation Libs.Hilt.android
-    implementation Libs.Hilt.navigationCompose
-    kapt Libs.Hilt.compiler
-    implementation Libs.Timber.timber
+    implementation libs.hilt.android
+    implementation libs.hilt.navigation.compose
+    kapt libs.hilt.compiler
+    implementation libs.timber
 
     // Modules
     api rootProject.project(':modules:core-feature')

@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import com.leinardi.template.buildsrc.Libs
-
 apply from: rootProject.file('gradle/base-library.gradle')
 
 android {
@@ -26,8 +24,8 @@ android {
 }
 
 dependencies {
-    api Libs.Timber.timber
-    implementation Libs.AndroidX.startup
-    implementation Libs.Firebase.crashlytics
-    implementation Libs.Firebase.analytics
+    api libs.timber
+    implementation libs.androidx.startup
+    implementation libs.firebase.crashlytics
+    implementation libs.firebase.analytics
 }

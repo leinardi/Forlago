@@ -13,9 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import com.leinardi.template.buildsrc.Versions
-
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
@@ -28,12 +25,12 @@ kapt {
 }
 
 android {
-    compileSdk Versions.compileSdkVersion
-    buildToolsVersion Versions.buildToolsVersion
+    compileSdk libs.versions.compileSdk.get() as int
+    buildToolsVersion libs.versions.buildTools.get()
 
     defaultConfig {
-        minSdk Versions.minSdkVersion
-        targetSdk Versions.targetSdkVersion
+        minSdk libs.versions.minSdk.get() as int
+        targetSdk libs.versions.targetSdk.get()  as int
         versionCode 1
         versionName "1.0"
 

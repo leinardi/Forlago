@@ -16,8 +16,6 @@
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-import com.leinardi.template.buildsrc.Libs
-
 buildscript {
     repositories {
         google()
@@ -25,14 +23,14 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath Libs.AndroidX.Navigation.safeArgsPlugin
-        classpath Libs.Firebase.crashlyticsGradlePlugin
-        classpath Libs.Detekt.gradlePlugin
-        classpath Libs.Hilt.gradlePlugin
-        classpath Libs.Kotlin.gradlePlugin
-        classpath Libs.androidGradlePlugin
-        classpath Libs.spotlessGradlePlugin
-        classpath Libs.versionsGradlePlugin
+        classpath libs.plugin.androidx.navigation.safeargs
+        classpath libs.plugin.firebase.crashlytics
+        classpath libs.plugin.detekt
+        classpath libs.plugin.hilt
+        classpath libs.plugin.kotlin
+        classpath libs.plugin.android
+        classpath libs.plugin.spotless
+        classpath libs.plugin.versionsgradle
     }
 }
 
