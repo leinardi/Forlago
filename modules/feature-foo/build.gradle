@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-apply from: rootProject.file('gradle/base-feature.gradle')
+plugins {
+    id 'template.android-feature-conventions'
+}
 
 android {
     resourcePrefix 'foo_'

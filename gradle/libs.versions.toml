@@ -1,3 +1,6 @@
+# Sharing dependency versions between projects
+# https://docs.gradle.org/current/userguide/platforms.html
+
 [versions]
 buildTools = "30.0.3"
 compileSdk = "31"
@@ -13,7 +16,7 @@ androidx-navigation = "2.4.0-alpha08"
 androidx-room = "2.3.0"
 androidx-test = "1.4.0"
 coroutines = "1.5.2"
-detekt = "1.17.1"
+detekt = "1.18.1"
 hilt = "2.38.1"
 kotlin = "1.5.21"
 

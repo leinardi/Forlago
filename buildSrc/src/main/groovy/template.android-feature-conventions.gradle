@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-apply from: rootProject.file('gradle/base-library.gradle')
-apply plugin: 'kotlin-parcelize'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'dagger.hilt.android.plugin'
+plugins {
+    id 'template.android-library-conventions'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
     buildFeatures {
@@ -31,13 +33,13 @@ android {
 dependencies {
 
     // Android
-    implementation libs.androidx.navigation.fragment
-    implementation libs.androidx.navigation.ui.ktx
-    implementation libs.androidx.core.ktx
+    implementation libs.androidx.activity.compose
     implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.viewmodel.compose
-    implementation libs.androidx.activity.compose
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.ui.ktx
 
     // General
     implementation libs.hilt.android

@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-apply from: rootProject.file('gradle/base-library.gradle')
-apply plugin: 'dagger.hilt.android.plugin'
+plugins {
+    id 'template.android-library-conventions'
+    id 'dagger.hilt.android.plugin'
+}
 
 android {
     resourcePrefix 'navigation_'

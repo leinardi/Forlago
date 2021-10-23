@@ -22,19 +22,11 @@ buildscript {
         mavenCentral()
         maven { url 'https://plugins.gradle.org/m2/' }
     }
-    dependencies {
-        classpath libs.plugin.androidx.navigation.safeargs
-        classpath libs.plugin.firebase.crashlytics
-        classpath libs.plugin.detekt
-        classpath libs.plugin.hilt
-        classpath libs.plugin.kotlin
-        classpath libs.plugin.android
-        classpath libs.plugin.spotless
-        classpath libs.plugin.versionsgradle
-    }
 }
 
-apply from: 'gradle/detekt.gradle'
-apply from: 'gradle/generate-module.gradle'
-apply from: 'gradle/spotless.gradle'
-apply from: 'gradle/versions.gradle'
+plugins {
+    id 'template.detekt-conventions'
+    id 'template.generate-module-conventions'
+    id 'template.spotless-conventions'
+    id 'template.versions-conventions'
+}

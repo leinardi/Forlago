@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-
-apply from: rootProject.file('gradle/base-app.gradle')
-apply plugin: 'com.google.firebase.crashlytics'
+plugins {
+    id 'template.android-app-conventions'
+}
 
 android {
 
@@ -39,10 +39,10 @@ android {
 dependencies {
 
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.lifecycle.runtime
-    implementation libs.androidx.navigation.compose
     implementation libs.androidx.appcompat
     implementation libs.androidx.core.ktx
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.navigation.compose
     implementation libs.androidx.startup
 
     testImplementation libs.junit

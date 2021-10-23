@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-apply plugin: 'com.android.library'
-apply from: rootProject.file('gradle/base-android.gradle')
+plugins {
+    id 'com.android.library'
+    id 'template.android-android-conventions'
+}

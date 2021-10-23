@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-apply from: rootProject.file('gradle/base-library.gradle')
+plugins {
+    id 'template.android-library-conventions'
+}
 
 android {
     resourcePrefix 'logging_'

@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 kapt {
     useBuildCache = true
@@ -30,7 +32,7 @@ android {
 
     defaultConfig {
         minSdk libs.versions.minSdk.get() as int
-        targetSdk libs.versions.targetSdk.get()  as int
+        targetSdk libs.versions.targetSdk.get() as int
         versionCode 1
         versionName "1.0"
 

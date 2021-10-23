@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
+// Sharing build logic between subprojects
+// https://docs.gradle.org/current/samples/sample_convention_plugins.html
+
 plugins {
-    id 'template.android-feature-conventions'
+    id 'groovy-gradle-plugin'
 }
 
-android {
-    resourcePrefix 'bar_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-bar-consumer-rules.pro"
-    }
+
+dependencies {
+    implementation libs.plugin.android
+    implementation libs.plugin.androidx.navigation.safeargs
+    implementation libs.plugin.detekt
+    implementation libs.plugin.firebase.crashlytics
+    implementation libs.plugin.hilt
+    implementation libs.plugin.kotlin
+    implementation libs.plugin.spotless
+    implementation libs.plugin.versionsgradle
 }

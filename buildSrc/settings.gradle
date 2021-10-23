@@ -14,13 +14,20 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'template.android-feature-conventions'
-}
+// Central declaration of dependencies is an incubating feature. It requires the activation of the VERSION_CATALOGS feature preview.
+enableFeaturePreview("VERSION_CATALOGS")
 
-android {
-    resourcePrefix 'bar_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-bar-consumer-rules.pro"
+dependencyResolutionManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+    versionCatalogs {
+        libs {
+            from(files("../gradle/libs.versions.toml"))
+        }
     }
 }
+
+

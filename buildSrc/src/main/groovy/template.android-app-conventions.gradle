@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-parcelize'
-apply from: rootProject.file('gradle/base-android.gradle')
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: 'dagger.hilt.android.plugin'
-apply from: rootProject.file('gradle/dependencies.gradle')
-apply from: rootProject.file('gradle/merged-manifests.gradle')
+plugins {
+    id 'com.android.application'
+    id 'template.android-android-conventions'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.firebase.crashlytics'
+    id 'template.merged-manifests-conventions'
+    id 'template.dependencies-conventions'
+}
 
 android {
     buildFeatures {
@@ -34,12 +37,12 @@ android {
 dependencies {
 
     // Android
+    implementation libs.androidx.activity.compose
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.navigation.fragment
     implementation libs.androidx.navigation.ui.ktx
-    implementation libs.androidx.core.ktx
-    implementation libs.androidx.appcompat
-    implementation libs.androidx.lifecycle.runtime
-    implementation libs.androidx.activity.compose
 
     // General
     implementation libs.hilt.android

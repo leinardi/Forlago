@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-apply plugin: 'com.github.ben-manes.versions'
+plugins {
+    id 'com.github.ben-manes.versions'
+}
 
 dependencyUpdates {
     gradleReleaseChannel = 'current'
