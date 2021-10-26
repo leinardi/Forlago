@@ -13,19 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-task copyMergedManifests(type: Copy) {
-    afterEvaluate {
-        tasks.findAll { it.name.matches("process.*Manifest") }.forEach { processManifestTask ->
-            dependsOn processManifestTask
-            mustRunAfter processManifestTask
-        }
-        mkdir 'versions/mergedManifests'
-        from("$buildDir/intermediates/merged_manifests") {
-            include '**/*.xml'
-        }
-        into 'versions/mergedManifests'
-        filter { line -> line.replaceAll("(android:version.*=\".*\")|(android:testOnly=\".*\")", "") }
-        check.dependsOn copyMergedManifests
+tasks.register("copyMergedManifests", Copy) {
+    dependsOn tasks.matching { (it.name ==~ /^process.*Manifest$/) }
+    mustRunAfter tasks.matching { (it.name ==~ /^process.*Manifest$/) }
+    mkdir 'versions/mergedManifests'
+    from("$buildDir/intermediates/merged_manifests") {
+        include '**/*.xml'
     }
+    into 'versions/mergedManifests'
+    filter { line -> line.replaceAll("(android:version.*=\".*\")|(android:testOnly=\".*\")", "") }
+    check.dependsOn copyMergedManifests
 }

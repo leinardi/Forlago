@@ -27,7 +27,7 @@ dependencies {
     detektPlugins libs.detekt
 }
 
-tasks.getByName('detekt') {
+tasks.named('detekt') {
     exclude("**/.module-template/**")
     exclude("**/build/generated/**")
 }
