@@ -18,9 +18,9 @@ package com.leinardi.template.foo.feature
 
 import androidx.compose.runtime.Composable
 import com.leinardi.template.feature.Feature
-import com.leinardi.template.navigation.destination.foo.FooDestination
-import com.leinardi.template.navigation.NavigationDestination
 import com.leinardi.template.foo.ui.FooScreen
+import com.leinardi.template.navigation.NavigationDestination
+import com.leinardi.template.navigation.destination.foo.FooDestination
 
 class FooFeature : Feature() {
     override val id = "Foo"

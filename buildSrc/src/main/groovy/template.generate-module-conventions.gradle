@@ -80,7 +80,7 @@ tasks.register("generateFeatureModule") {
 
             printAddModuleHelp(tokens, featureDir)
             println("""
-    4. Register ${tokens.PlaceholderName}Feature.kt into FeatureManager (see Template.registerFeatures()). 
+    4. Register ${tokens.PlaceholderName}Feature.kt into FeatureManager (see Template.registerFeatures()).
     """)
         }
     }
