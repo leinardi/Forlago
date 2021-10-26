@@ -26,6 +26,8 @@ rootProject.name = "Template"
 // Central declaration of dependencies is an incubating feature. It requires the activation of the VERSION_CATALOGS feature preview.
 enableFeaturePreview("VERSION_CATALOGS")
 
+includeBuild("build-conventions")
+
 include(
 
         // Apps

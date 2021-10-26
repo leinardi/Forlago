@@ -22,7 +22,7 @@ import timber.log.Timber
 
 class CrashlyticsTree : Timber.Tree() {
 
-    override fun log(priority: Int, tag: String?, message: String, throwable: Throwable?) {
+    override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.VERBOSE || priority == Log.DEBUG || priority == Log.INFO) {
             return
         }
@@ -31,10 +31,10 @@ class CrashlyticsTree : Timber.Tree() {
         crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag ?: "")
         crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message)
 
-        if (throwable == null) {
+        if (t == null) {
             crashlytics.recordException(Exception(message))
         } else {
-            crashlytics.recordException(throwable)
+            crashlytics.recordException(t)
         }
     }
 
