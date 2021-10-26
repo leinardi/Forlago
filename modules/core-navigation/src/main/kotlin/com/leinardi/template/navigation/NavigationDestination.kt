@@ -16,8 +16,8 @@
 
 package com.leinardi.template.navigation
 
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavDeepLink
-import androidx.navigation.compose.NamedNavArgument
 
 fun interface NavigationDestination {
     val arguments: List<NamedNavArgument>
