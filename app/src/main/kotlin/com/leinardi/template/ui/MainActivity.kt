@@ -20,7 +20,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -77,14 +76,13 @@ fun TemplateScaffold(navController: NavHostController, templateNavigator: Templa
             }
         }
     }
-    Scaffold {
-        NavHost(
-            navController = navController,
-            startDestination = FooDestination.route(),
-            builder = {
-                addComposableDestinations()
-                addDialogDestinations()
-            }
-        )
-    }
+
+    NavHost( // check https://google.github.io/accompanist/navigation-animation/
+        navController = navController,
+        startDestination = FooDestination.route(),
+        builder = {
+            addComposableDestinations()
+            addDialogDestinations()
+        }
+    )
 }

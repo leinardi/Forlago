@@ -16,32 +16,26 @@
 
 package com.leinardi.template.@placeholderlowercase@.ui
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
+import com.leinardi.template.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class @PlaceholderName@ViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator,
-    savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+    private val savedStateHandle: SavedStateHandle,
+) : BaseViewModel<@PlaceholderName@Contract.Event, @PlaceholderName@Contract.State, @PlaceholderName@Contract.Effect>() {
 
-    val viewState = ViewState()
+    override fun provideInitialState() = @PlaceholderName@Contract.State(savedStateHandle[@PlaceholderName@Destination.TEXT_PARAM] ?: "")
 
-    init {
-        viewState.text.value = checkNotNull(savedStateHandle[BarDestination.TEXT_PARAM])
-    }
-
-    fun onBackClicked() {
-        templateNavigator.navigateUp()
-    }
-
-    inner class ViewState {
-        val text = mutableStateOf("")
+    override fun handleEvent(event: @PlaceholderName@Contract.Event) {
+        when (event) {
+            is @PlaceholderName@Contract.Event.OnBackButtonClicked -> templateNavigator.navigateUp()
+            @PlaceholderName@Contract.Event.OnShowSnackbarButtonClicked -> sendEffect { @PlaceholderName@Contract.Effect.ShowSnackbar("Lorem ipsum dolor sit amet...") }
+        }
     }
 
 }

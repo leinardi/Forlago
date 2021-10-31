@@ -124,7 +124,7 @@ private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirP
     def tokensUsed = tokens.collect { k, v -> "            ${k}: ${v}" }.join("\n")
     println("""
 
-    Core created:
+    Module created:
         Name: ${tokens.PlaceholderName}
         Package: com.leinardi.template.${tokens.placeholderlowercase}
         Directory: ${moduleDirPath}
@@ -137,7 +137,7 @@ private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirP
         ':modules:$moduleDirPath.name',
         [...]
 
-    2. Declare the dependency on the module on build.gradle that requires it (alphabetically ordered):
+    2. Declare the dependency of the module on build.gradle that requires it (alphabetically ordered):
         // Modules
         [...]
         implementation project(':modules:$moduleDirPath.name')

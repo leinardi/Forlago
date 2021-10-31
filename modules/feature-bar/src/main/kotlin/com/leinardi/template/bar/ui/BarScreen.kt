@@ -26,7 +26,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme.typography
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,50 +42,55 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun BarScreen() {
     val viewModel = hiltViewModel<BarViewModel>()
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Green)
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-            .semantics { contentDescription = "Bar" },
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .background(Color.Yellow)
-        ) {
-            Text(
-                "Bar screen",
-                Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = typography.h4,
-            )
+
+    BarScreen(
+        state = viewModel.viewState.value,
+        sendEvent = { viewModel.onUiEvent(it) },
+    )
+}
+
+@Composable
+fun BarScreen(
+    state: BarContract.State,
+    sendEvent: (event: BarContract.Event) -> Unit,
+) {
+    Scaffold(
+        topBar = { TopAppBar(title = { Text("Bar screen") }) },
+        content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Green)
+                    .padding(16.dp)
+                    .verticalScroll(rememberScrollState())
+                    .semantics { contentDescription = "Bar" },
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .background(Color.LightGray)
+                ) {
+                    Text(
+                        "Text = ${state.text}",
+                        Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        style = typography.h4,
+                    )
+                }
+                Button(
+                    onClick = { sendEvent(BarContract.Event.OnBackButtonClicked) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Back")
+                }
+            }
         }
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .background(Color.LightGray)
-        ) {
-            Text(
-                "Text = ${viewModel.viewState.text.value}",
-                Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = typography.h4,
-            )
-        }
-        Button(
-            onClick = { viewModel.onBackClicked() },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Back")
-        }
-    }
+    )
 }
 
 @Preview
 @Composable
 fun BarScreenPreview() {
-    BarScreen()
+    BarScreen(BarContract.State("Preview")) {}
 }

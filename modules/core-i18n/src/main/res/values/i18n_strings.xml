@@ -16,10 +16,4 @@
 
 <resources>
     <string name="i18n_app_name">Template</string>
-    <string name="i18n_total">Total</string>
-    <string name="i18n_due">Due</string>
-    <string name="i18n_accounts">Accounts</string>
-    <string name="i18n_bills">Bills</string>
-    <string name="i18n_sort">Sort</string>
-    <string name="i18n_see_all">SEE ALL</string>
 </resources>
