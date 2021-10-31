@@ -16,26 +16,37 @@
 
 package com.leinardi.template.foo.ui
 
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.navigation.destination.bar.BarDestination
+import com.leinardi.template.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
 class FooViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator
-) : ViewModel() {
+) : BaseViewModel<FooContract.Event, FooContract.State, FooContract.Effect>() {
 
-    val viewState = ViewState()
+    override fun provideInitialState() = FooContract.State("Change me")
 
-    fun onBarButtonClicked() {
-        templateNavigator.navigate(BarDestination.createBarRoute(viewState.text.value))
+    override fun handleEvent(event: FooContract.Event) {
+        when (event) {
+            is FooContract.Event.OnBarButtonClicked -> sendText(event.text)
+            FooContract.Event.OnShowSnackbarButtonClicked -> sendEffect { FooContract.Effect.ShowSnackbar("Lorem ipsum dolor sit amet...") }
+        }
     }
 
-    inner class ViewState {
-        val text = mutableStateOf("Change me")
-    }
+    private fun sendText(text: String) {
+        viewModelScope.launch {
+            updateState { viewState.value.copy(isLoading = true) }
+            delay(TimeUnit.SECONDS.toMillis(1))
+            updateState { viewState.value.copy(isLoading = false) }
+            templateNavigator.navigate(BarDestination.createBarRoute(text))
+        }
 
+    }
 }

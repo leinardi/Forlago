@@ -47,7 +47,10 @@ android {
             freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
         }
     }
-
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11.toString()
+        useIR = true
+    }
     testOptions {
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
         animationsDisabled = true
@@ -69,10 +72,6 @@ android {
         disable 'ResourceType'
         lintConfig file("${project.rootDir}/config/lint/lint.xml")
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-        useIR = true
-    }
     packagingOptions {
         resources {
             exclude '.readme'
@@ -89,6 +88,15 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
         test.java.srcDirs += 'src/test/kotlin'
+    }
+}
+
+kotlin {
+    sourceSets.all {
+        languageSettings {
+            languageVersion = '1.6' // Needed to have exhaustive when on kotlin 1.5.x
+            progressiveMode = true
+        }
     }
 }
 

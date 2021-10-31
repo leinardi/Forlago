@@ -17,7 +17,7 @@
 package com.leinardi.template.navigation.destination.@placeholderlowercase@
 
 import androidx.navigation.NavType
-import androidx.navigation.compose.navArgument
+import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.leinardi.template.navigation.BuildConfig
 import com.leinardi.template.navigation.NavigationDestination

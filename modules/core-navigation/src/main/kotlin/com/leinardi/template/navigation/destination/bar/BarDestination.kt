@@ -29,6 +29,8 @@ object BarDestination : NavigationDestination {
     override val arguments = listOf(
         navArgument(TEXT_PARAM) {
             type = NavType.StringType
+            nullable = true
+            defaultValue = null
         }
     )
 
@@ -38,7 +40,7 @@ object BarDestination : NavigationDestination {
         }
     )
 
-    override fun route() = "$BAR_ROUTE/{$TEXT_PARAM}"
+    override fun route() = "$BAR_ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
 
-    fun createBarRoute(text: String) = "$BAR_ROUTE/$text"
+    fun createBarRoute(text: String) = "$BAR_ROUTE/?$TEXT_PARAM=$text"
 }

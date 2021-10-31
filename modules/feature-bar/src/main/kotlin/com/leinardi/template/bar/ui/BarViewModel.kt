@@ -16,32 +16,25 @@
 
 package com.leinardi.template.bar.ui
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.navigation.destination.bar.BarDestination
+import com.leinardi.template.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class BarViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator,
-    savedStateHandle: SavedStateHandle,
-) : ViewModel() {
+    private val savedStateHandle: SavedStateHandle,
+) : BaseViewModel<BarContract.Event, BarContract.State, BarContract.Effect>() {
 
-    val viewState = ViewState()
+    override fun provideInitialState() = BarContract.State(savedStateHandle[BarDestination.TEXT_PARAM] ?: "")
 
-    init {
-        viewState.text.value = checkNotNull(savedStateHandle[BarDestination.TEXT_PARAM])
+    override fun handleEvent(event: BarContract.Event) {
+        when (event) {
+            is BarContract.Event.OnBackButtonClicked -> templateNavigator.navigateUp()
+        }
+
     }
-
-    fun onBackClicked() {
-        templateNavigator.navigateUp()
-    }
-
-    inner class ViewState {
-        val text = mutableStateOf("")
-    }
-
 }
