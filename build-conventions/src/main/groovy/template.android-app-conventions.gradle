@@ -21,6 +21,7 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
     id 'com.google.firebase.crashlytics'
+    id 'com.mikepenz.aboutlibraries.plugin'
     id 'template.merged-manifests-conventions'
     id 'template.dependencies-conventions'
 }
@@ -45,6 +46,7 @@ dependencies {
     implementation libs.androidx.navigation.ui.ktx
 
     // General
+    implementation libs.aboutlibraries
     implementation libs.hilt.android
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.compiler

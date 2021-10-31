@@ -185,10 +185,7 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 |    |    |    |    +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
 |    |    |    |    +--- androidx.customview:customview:1.0.0 -> 1.1.0 (*)
 |    |    |    |    \--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
-|    |    |    +--- androidx.constraintlayout:constraintlayout:2.0.1
-|    |    |    |    +--- androidx.appcompat:appcompat:1.2.0 -> 1.3.1 (*)
-|    |    |    |    +--- androidx.core:core:1.3.1 -> 1.7.0 (*)
-|    |    |    |    \--- androidx.constraintlayout:constraintlayout-solver:2.0.1
+|    |    |    +--- androidx.constraintlayout:constraintlayout:2.0.1 -> 2.1.1
 |    |    |    +--- androidx.core:core:1.5.0 -> 1.7.0 (*)
 |    |    |    +--- androidx.dynamicanimation:dynamicanimation:1.0.0
 |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
@@ -206,11 +203,10 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.1.0
 |    |    |    +--- androidx.fragment:fragment:1.0.0 -> 1.4.0-beta01 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.4.0 (*)
-|    |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
+|    |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.2.1
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
-|    |    |    |    +--- androidx.customview:customview:1.0.0 -> 1.1.0 (*)
-|    |    |    |    \--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
+|    |    |    |    +--- androidx.core:core:1.3.2 -> 1.7.0 (*)
+|    |    |    |    \--- androidx.customview:customview:1.0.0 -> 1.1.0 (*)
 |    |    |    +--- androidx.transition:transition:1.2.0 -> 1.4.1
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |    |    \--- androidx.core:core:1.1.0 -> 1.7.0 (*)
@@ -218,11 +214,18 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 |    |    |    \--- androidx.viewpager2:viewpager2:1.0.0
 |    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |         +--- androidx.fragment:fragment:1.1.0 -> 1.4.0-beta01 (*)
-|    |    |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
+|    |    |         +--- androidx.recyclerview:recyclerview:1.1.0 -> 1.2.1 (*)
 |    |    |         +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
 |    |    |         \--- androidx.collection:collection:1.1.0 (*)
 |    |    \--- androidx.annotation:annotation-experimental:1.1.0
 |    \--- androidx.navigation:navigation-runtime-ktx:2.4.0-beta01 (*)
++--- com.mikepenz:aboutlibraries:8.9.4
+|    +--- com.mikepenz:aboutlibraries-core:8.9.4
+|    |    +--- androidx.appcompat:appcompat:1.3.1 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    +--- androidx.databinding:viewbinding:7.0.2
+|    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 +--- com.google.dagger:hilt-android:2.40
 |    +--- com.google.dagger:dagger:2.40
 |    |    \--- javax.inject:javax.inject:1
@@ -344,6 +347,7 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 +--- androidx.appcompat:appcompat:{strictly 1.3.1} -> 1.3.1 (c)
 +--- androidx.navigation:navigation-fragment-ktx:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
 +--- androidx.navigation:navigation-ui-ktx:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
++--- com.mikepenz:aboutlibraries:{strictly 8.9.4} -> 8.9.4 (c)
 +--- com.google.dagger:hilt-android:{strictly 2.40} -> 2.40 (c)
 +--- androidx.hilt:hilt-navigation-compose:{strictly 1.0.0-alpha03} -> 1.0.0-alpha03 (c)
 +--- androidx.navigation:navigation-compose:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
@@ -370,6 +374,8 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 +--- androidx.navigation:navigation-fragment:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
 +--- androidx.navigation:navigation-runtime-ktx:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
 +--- androidx.navigation:navigation-ui:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
++--- com.mikepenz:aboutlibraries-core:{strictly 8.9.4} -> 8.9.4 (c)
++--- androidx.databinding:viewbinding:{strictly 7.0.2} -> 7.0.2 (c)
 +--- com.google.dagger:dagger:{strictly 2.40} -> 2.40 (c)
 +--- com.google.dagger:dagger-lint-aar:{strictly 2.40} -> 2.40 (c)
 +--- com.google.dagger:hilt-core:{strictly 2.40} -> 2.40 (c)
@@ -420,9 +426,9 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 +--- androidx.compose.ui:ui-tooling-data:{strictly 1.0.4} -> 1.0.4 (c)
 +--- androidx.cardview:cardview:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.coordinatorlayout:coordinatorlayout:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.constraintlayout:constraintlayout:{strictly 2.0.1} -> 2.0.1 (c)
++--- androidx.constraintlayout:constraintlayout:{strictly 2.1.1} -> 2.1.1 (c)
 +--- androidx.dynamicanimation:dynamicanimation:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.recyclerview:recyclerview:{strictly 1.1.0} -> 1.1.0 (c)
++--- androidx.recyclerview:recyclerview:{strictly 1.2.1} -> 1.2.1 (c)
 +--- androidx.transition:transition:{strictly 1.4.1} -> 1.4.1 (c)
 +--- androidx.viewpager2:viewpager2:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.compose.foundation:foundation-layout:{strictly 1.0.4} -> 1.0.4 (c)
@@ -432,7 +438,6 @@ releaseUnitTestCompileClasspath - Compile classpath for compilation 'releaseUnit
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.3.1} -> 2.3.1 (c)
 +--- androidx.navigation:navigation-common:{strictly 2.4.0-beta01} -> 2.4.0-beta01 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
-+--- androidx.constraintlayout:constraintlayout-solver:{strictly 2.0.1} -> 2.0.1 (c)
 +--- androidx.legacy:legacy-support-core-utils:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
