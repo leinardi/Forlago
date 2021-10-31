@@ -26,7 +26,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
@@ -47,6 +46,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.template.ui.component.AutoSizedCircularProgressIndicator
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -107,9 +107,7 @@ fun FooScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     if (state.isLoading) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(24.dp)
-                        )
+                        AutoSizedCircularProgressIndicator(Modifier.size(20.dp))
                     } else {
                         Text("Send text to Bar screen")
                     }

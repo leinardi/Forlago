@@ -46,7 +46,7 @@ dependencies {
     implementation libs.androidx.navigation.ui.ktx
 
     // General
-    implementation libs.aboutlibraries
+    implementation libs.aboutlibraries.core
     implementation libs.hilt.android
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.compiler

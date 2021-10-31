@@ -48,7 +48,7 @@ android {
         }
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_11
         useIR = true
     }
     testOptions {
@@ -65,7 +65,7 @@ android {
     lintOptions {
         abortOnError true
         checkAllWarnings false
-        checkDependencies false
+        checkDependencies true
         checkReleaseBuilds false
         ignoreTestSources true
         warningsAsErrors false
@@ -76,12 +76,19 @@ android {
         resources {
             exclude '.readme'
             exclude 'LICENSE.txt'
+            exclude 'fabric/*.properties'
+            // Exclude the Firebase/Fabric/other random properties files
+            exclude '/*.properties'
+            // Exclude AndroidX version files
+            exclude 'META-INF/*.version'
+            // Exclude consumer proguard files
+            exclude 'META-INF/proguard/*'
+            exclude 'META-INF/*.properties'
             exclude 'META-INF/LICENSE.txt'
             exclude 'META-INF/MANIFEST.MF'
             exclude 'META-INF/NOTICE.txt'
             exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
             exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
-            exclude 'META-INF/rxjava.properties'
             exclude 'META-INF/*.kotlin_module'
         }
     }

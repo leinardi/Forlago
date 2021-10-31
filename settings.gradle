@@ -23,7 +23,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Template"
 
-// Central declaration of dependencies is an incubating feature. It requires the activation of the VERSION_CATALOGS feature preview.
+// Enable Gradle's version catalog support
+// https://docs.gradle.org/current/userguide/platforms.html
 enableFeaturePreview("VERSION_CATALOGS")
 
 includeBuild("build-conventions")
