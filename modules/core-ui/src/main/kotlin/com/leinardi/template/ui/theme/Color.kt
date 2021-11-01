@@ -16,6 +16,8 @@
 
 package com.leinardi.template.ui.theme
 
+import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 
-val ColorPalette = lightColors()
+val TemplateLightColors = lightColors()
+val TemplateDarkColors = darkColors()

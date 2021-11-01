@@ -43,7 +43,7 @@ class FooViewModel @Inject constructor(
     private fun sendText(text: String) {
         viewModelScope.launch {
             updateState { viewState.value.copy(isLoading = true) }
-            delay(TimeUnit.SECONDS.toMillis(1))
+            delay(TimeUnit.SECONDS.toMillis(2))
             updateState { viewState.value.copy(isLoading = false) }
             templateNavigator.navigate(BarDestination.createBarRoute(text))
         }

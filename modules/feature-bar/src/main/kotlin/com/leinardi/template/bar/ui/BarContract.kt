@@ -27,6 +27,7 @@ class BarContract {
 
     sealed class Event : ViewEvent {
         object OnBackButtonClicked : Event()
+        object OnUpButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect

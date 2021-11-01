@@ -40,4 +40,5 @@ dependencies {
     api libs.androidx.core.splashscreen
     api libs.androidx.lifecycle.viewmodel
     api libs.androidx.material
+    implementation rootProject.project(':modules:core-i18n')
 }

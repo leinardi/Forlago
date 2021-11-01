@@ -33,7 +33,8 @@ class BarViewModel @Inject constructor(
 
     override fun handleEvent(event: BarContract.Event) {
         when (event) {
-            is BarContract.Event.OnBackButtonClicked -> templateNavigator.navigateUp()
+            is BarContract.Event.OnBackButtonClicked,
+            is BarContract.Event.OnUpButtonClicked -> templateNavigator.navigateUp()
         }
 
     }
