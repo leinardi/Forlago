@@ -22,11 +22,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
 object AppEntryPoints {
-
     @EntryPoint
     @InstallIn(SingletonComponent::class)
     interface FeatureManagerInterface {
         fun getFeatureManager(): FeatureManager
     }
-
 }

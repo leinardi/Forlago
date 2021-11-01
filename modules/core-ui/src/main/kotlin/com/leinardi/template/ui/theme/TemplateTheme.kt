@@ -25,7 +25,6 @@ fun TemplateTheme(
     useDarkColors: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-
     MaterialTheme(
         colors = if (useDarkColors) TemplateDarkColors else TemplateLightColors,
         typography = TemplateTypography,

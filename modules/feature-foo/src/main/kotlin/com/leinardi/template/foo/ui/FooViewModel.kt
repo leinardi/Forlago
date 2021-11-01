@@ -30,7 +30,6 @@ import javax.inject.Inject
 class FooViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator
 ) : BaseViewModel<FooContract.Event, FooContract.State, FooContract.Effect>() {
-
     override fun provideInitialState() = FooContract.State("Change me")
 
     override fun handleEvent(event: FooContract.Event) {
@@ -47,6 +46,5 @@ class FooViewModel @Inject constructor(
             updateState { viewState.value.copy(isLoading = false) }
             templateNavigator.navigate(BarDestination.createBarRoute(text))
         }
-
     }
 }
