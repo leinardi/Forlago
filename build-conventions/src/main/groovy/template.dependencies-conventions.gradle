@@ -27,5 +27,5 @@ afterEvaluate {
         }
         compileDependencyReportTask.configure { dependsOn configurationTask }
     }
-    check.dependsOn compileDependencyReportTask
+    check.dependsOn tasks.named("generateCompileDependenciesReport")
 }

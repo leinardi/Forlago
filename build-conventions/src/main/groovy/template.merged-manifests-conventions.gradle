@@ -22,5 +22,6 @@ tasks.register("copyMergedManifests", Copy) {
     }
     into 'versions/mergedManifests'
     filter { line -> line.replaceAll("(android:version.*=\".*\")|(android:testOnly=\".*\")", "") }
-    check.dependsOn copyMergedManifests
 }
+
+check.dependsOn tasks.named("copyMergedManifests")

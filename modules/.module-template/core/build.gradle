@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'template.android-library-conventions'
+    id 'template.android-core-conventions'
 }
 
 android {

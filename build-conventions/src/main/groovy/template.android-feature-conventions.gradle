@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'template.android-library-conventions'
+    id 'template.android-core-conventions'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
