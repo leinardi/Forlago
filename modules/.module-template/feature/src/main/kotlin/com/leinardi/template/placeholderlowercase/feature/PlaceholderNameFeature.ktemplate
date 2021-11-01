@@ -18,9 +18,10 @@ package com.leinardi.template.@placeholderlowercase@.feature
 
 import androidx.compose.runtime.Composable
 import com.leinardi.template.feature.Feature
-import com.leinardi.template.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
 import com.leinardi.template.navigation.NavigationDestination
+import com.leinardi.template.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
 import com.leinardi.template.@placeholderlowercase@.ui.@PlaceholderName@Screen
+import com.leinardi.template.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugSection
 
 class @PlaceholderName@Feature : Feature() {
     override val id = "@PlaceholderName@"
@@ -28,4 +29,6 @@ class @PlaceholderName@Feature : Feature() {
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
         @PlaceholderName@Destination to { @PlaceholderName@Screen() }
     )
+
+    override val debugComposable: @Composable () -> Unit = { @PlaceholderName@DebugSection() }
 }

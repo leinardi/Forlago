@@ -18,6 +18,7 @@ package com.leinardi.template.bar.feature
 
 import androidx.compose.runtime.Composable
 import com.leinardi.template.bar.ui.BarScreen
+import com.leinardi.template.bar.ui.debug.BarDebugSection
 import com.leinardi.template.feature.Feature
 import com.leinardi.template.navigation.NavigationDestination
 import com.leinardi.template.navigation.destination.bar.BarDestination
@@ -28,4 +29,6 @@ class BarFeature : Feature() {
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
         BarDestination to { BarScreen() }
     )
+
+    override val debugComposable: @Composable () -> Unit = { BarDebugSection() }
 }

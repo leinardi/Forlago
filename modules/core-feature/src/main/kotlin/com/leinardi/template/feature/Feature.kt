@@ -27,4 +27,6 @@ abstract class Feature {
     open val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
 
     open val dialogDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
+
+    open val debugComposable: @Composable () -> Unit = {}
 }

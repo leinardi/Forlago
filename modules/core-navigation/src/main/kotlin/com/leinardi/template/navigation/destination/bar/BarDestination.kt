@@ -42,5 +42,5 @@ object BarDestination : NavigationDestination {
 
     override fun route() = "$BAR_ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
 
-    fun createBarRoute(text: String) = "$BAR_ROUTE/?$TEXT_PARAM=$text"
+    fun createRoute(text: String) = "$BAR_ROUTE/?$TEXT_PARAM=$text"
 }

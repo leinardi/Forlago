@@ -37,7 +37,7 @@ class StrictModeInitializer : Initializer<Unit> {
             StrictMode.setThreadPolicy(builderThread.build())
 
             val builderVM = StrictMode.VmPolicy.Builder()
-                .detectActivityLeaks()
+//                .detectActivityLeaks() // https://issuetracker.google.com/issues/204905432
                 .detectFileUriExposure()
                 .detectLeakedRegistrationObjects()
                 .detectLeakedSqlLiteObjects()

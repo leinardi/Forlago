@@ -171,29 +171,9 @@ tasks.named("dependencyUpdates").configure {
 
             }
         }
-        new File("${project.buildDir}/dependencyUpdates").mkdirs()
-        def file = new File("${project.buildDir}/dependencyUpdates/report.html")
+        new File("${project.buildDir}/reports/dependencyUpdates").mkdirs()
+        def file = new File("${project.buildDir}/reports/dependencyUpdates/dependencyUpdates.html")
         file.createNewFile()
         file.write(writer.toString())
     }
 }
-//tasks.named("dependencyUpdates").configure {
-//    gradleReleaseChannel = 'current'
-//    resolutionStrategy {
-//        componentSelection { rules ->
-//            rules.all { ComponentSelection selection ->
-//                boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'preview', 'b', 'ea'].any { qualifier ->
-//                    selection.candidate.version ==~ /(?i).*[.-]$qualifier[.\d-+]*/
-//                }
-//                if (rejected) {
-//                    selection.reject('Release candidate')
-//                }
-//            }
-//        }
-//    }
-//    outputFormatter = { result ->
-//        def writer = new StringWriter()
-//        def html = new groovy.xml.MarkupBuilder(writer)
-//
-//    }
-//}

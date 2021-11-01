@@ -399,6 +399,9 @@ debugAndroidTestCompileClasspath - Compile classpath for compilation 'debugAndro
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
++--- project :modules:feature-debug
+|    +--- project :modules:core-feature (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 +--- project :modules:feature-foo
 |    +--- project :modules:core-feature (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)

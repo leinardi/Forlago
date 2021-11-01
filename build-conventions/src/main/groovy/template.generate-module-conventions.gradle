@@ -132,7 +132,7 @@ private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirP
     Placeholders used:\n${tokensUsed}
 
     1. Declare the module in settings.gradle (alphabetically ordered):
-        // Cores
+        // Modules
         [...]
         ':modules:$moduleDirPath.name',
         [...]

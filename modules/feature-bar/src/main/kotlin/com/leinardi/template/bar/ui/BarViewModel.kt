@@ -17,6 +17,9 @@
 package com.leinardi.template.bar.ui
 
 import androidx.lifecycle.SavedStateHandle
+import com.leinardi.template.bar.ui.BarContract.Effect
+import com.leinardi.template.bar.ui.BarContract.Event
+import com.leinardi.template.bar.ui.BarContract.State
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.navigation.destination.bar.BarDestination
 import com.leinardi.template.ui.base.BaseViewModel
@@ -27,13 +30,13 @@ import javax.inject.Inject
 class BarViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator,
     private val savedStateHandle: SavedStateHandle,
-) : BaseViewModel<BarContract.Event, BarContract.State, BarContract.Effect>() {
-    override fun provideInitialState() = BarContract.State(savedStateHandle[BarDestination.TEXT_PARAM] ?: "")
+) : BaseViewModel<Event, State, Effect>() {
+    override fun provideInitialState() = State(savedStateHandle[BarDestination.TEXT_PARAM] ?: "")
 
-    override fun handleEvent(event: BarContract.Event) {
+    override fun handleEvent(event: Event) {
         when (event) {
-            is BarContract.Event.OnBackButtonClicked,
-            is BarContract.Event.OnUpButtonClicked -> templateNavigator.navigateUp()
+            is Event.OnBackButtonClicked,
+            is Event.OnUpButtonClicked -> templateNavigator.navigateUp()
         }
     }
 }

@@ -16,7 +16,6 @@
 
 package com.leinardi.template.ui
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -41,35 +40,27 @@ class MainActivity : ComponentActivity() {
 
     @Inject lateinit var templateNavigator: TemplateNavigator
 
-    lateinit var navHostController: NavHostController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            val navHostController: NavHostController = rememberNavController().also { this.navHostController = it }
             TemplateTheme {
                 TemplateScaffold(
-                    navController = navHostController,
                     templateNavigator = templateNavigator,
                 )
             }
         }
     }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        navHostController.handleDeepLink(intent)
-    }
 }
 
 @Composable
-fun TemplateScaffold(navController: NavHostController, templateNavigator: TemplateNavigator) {
-    LaunchedEffect(navController) {
+fun TemplateScaffold(templateNavigator: TemplateNavigator) {
+    val navHostController: NavHostController = rememberNavController()
+    LaunchedEffect(navHostController) {
         templateNavigator.destinations.collect {
             when (val event = it) {
-                is NavigatorEvent.NavigateUp -> navController.navigateUp()
-                is NavigatorEvent.Directions -> navController.navigate(
+                is NavigatorEvent.NavigateUp -> navHostController.navigateUp()
+                is NavigatorEvent.Directions -> navHostController.navigate(
                     event.destination,
                     event.builder
                 )
@@ -78,7 +69,7 @@ fun TemplateScaffold(navController: NavHostController, templateNavigator: Templa
     }
 
     NavHost( // check https://google.github.io/accompanist/navigation-animation/
-        navController = navController,
+        navController = navHostController,
         startDestination = FooDestination.route(),
         builder = {
             addComposableDestinations()

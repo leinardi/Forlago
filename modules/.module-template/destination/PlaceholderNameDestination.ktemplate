@@ -38,5 +38,5 @@ object @PlaceholderName@Destination : NavigationDestination {
 
     override fun route() = "$@PLACEHOLDER_UPPERCASE@_ROUTE/{$TEXT_PARAM}"
 
-    fun create@PlaceholderName@Route(text: String) = "$@PLACEHOLDER_UPPERCASE@_ROUTE/$text"
+    fun createRoute(text: String) = "$@PLACEHOLDER_UPPERCASE@_ROUTE/$text"
 }
