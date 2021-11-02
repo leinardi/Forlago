@@ -22,6 +22,7 @@ import androidx.navigation.NavDeepLink
 fun interface NavigationDestination {
     val arguments: List<NamedNavArgument>
         get() = emptyList()
+
     val deepLinks: List<NavDeepLink>
         get() = emptyList()
 

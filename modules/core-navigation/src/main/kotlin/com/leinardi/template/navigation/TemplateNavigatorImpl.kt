@@ -25,9 +25,11 @@ import javax.inject.Singleton
 @Singleton
 internal class TemplateNavigatorImpl @Inject constructor() : TemplateNavigator {
     private val navigationEvents = Channel<NavigatorEvent>()
+
     override val destinations = navigationEvents.receiveAsFlow()
 
     override fun navigateUp(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateUp).isSuccess
+
     override fun navigate(route: String, builder: NavOptionsBuilder.() -> Unit): Boolean =
         navigationEvents.trySend(NavigatorEvent.Directions(route, builder)).isSuccess
 }
