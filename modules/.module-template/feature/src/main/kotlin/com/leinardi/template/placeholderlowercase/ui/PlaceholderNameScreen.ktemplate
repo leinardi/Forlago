@@ -83,7 +83,6 @@ fun @PlaceholderName@Screen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Cyan)
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState())
                     .semantics { contentDescription = "@PlaceholderName@" },

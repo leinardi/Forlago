@@ -24,6 +24,12 @@ android {
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-feature-consumer-rules.pro"
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
+    }
 }
 
 dependencies {

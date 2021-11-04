@@ -30,18 +30,18 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.template.bar.R
+import com.leinardi.template.bar.ui.BarContract.Event
+import com.leinardi.template.bar.ui.BarContract.State
 import com.leinardi.template.ui.component.TopAppBar
 
 @Composable
-fun BarScreen() {
-    val viewModel = hiltViewModel<BarViewModel>()
-
+fun BarScreen(viewModel: BarViewModel = hiltViewModel()) {
     BarScreen(
         state = viewModel.viewState.value,
         sendEvent = { viewModel.onUiEvent(it) },
@@ -50,14 +50,16 @@ fun BarScreen() {
 
 @Composable
 fun BarScreen(
-    state: BarContract.State,
-    sendEvent: (event: BarContract.Event) -> Unit,
+    state: State,
+    sendEvent: (event: Event) -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
-                title = "Foo screen",
-                navigateUp = { sendEvent(BarContract.Event.OnUpButtonClicked) }
+                title = stringResource(R.string.i18n_bar_screen_title),
+                navigateUp = { sendEvent(Event.OnUpButtonClicked) }
             )
         },
         content = {
@@ -65,8 +67,7 @@ fun BarScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
-                    .semantics { contentDescription = "Bar" },
+                    .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Box(
@@ -74,17 +75,17 @@ fun BarScreen(
                         .fillMaxWidth()
                 ) {
                     Text(
-                        "Text = ${state.text}",
+                        stringResource(R.string.i18n_bar_text_received, state.text),
                         Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
                         style = typography.h4,
                     )
                 }
                 Button(
-                    onClick = { sendEvent(BarContract.Event.OnBackButtonClicked) },
+                    onClick = { sendEvent(Event.OnBackButtonClicked) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Back")
+                    Text(stringResource(R.string.i18n_back))
                 }
             }
         }
@@ -94,5 +95,5 @@ fun BarScreen(
 @Preview
 @Composable
 fun BarScreenPreview() {
-    BarScreen(BarContract.State("Preview")) {}
+    BarScreen(State("Preview"), {})
 }

@@ -54,6 +54,7 @@ dependencies {
 
     // Modules
     implementation project(':modules:feature-bar')
+    implementation project(':modules:feature-debug')
     implementation project(':modules:feature-foo')
 
 }

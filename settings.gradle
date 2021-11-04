@@ -35,12 +35,13 @@ include(
         ':app',
 
         // Modules
-        ':modules:core-i18n',
         ':modules:core-feature',
+        ':modules:core-i18n',
         ':modules:core-logging',
         ':modules:core-navigation',
         ':modules:core-ui',
         ':modules:feature-bar',
+        ':modules:feature-debug',
         ':modules:feature-foo',
 
 )

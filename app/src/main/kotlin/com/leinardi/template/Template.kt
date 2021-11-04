@@ -19,6 +19,7 @@ package com.leinardi.template
 import android.app.Application
 import android.os.SystemClock
 import com.leinardi.template.bar.feature.BarFeature
+import com.leinardi.template.debug.feature.DebugFeature
 import com.leinardi.template.feature.FeatureManager
 import com.leinardi.template.foo.feature.FooFeature
 import dagger.hilt.android.HiltAndroidApp
@@ -48,6 +49,7 @@ class Template : Application() {
             listOf(
                 FooFeature(),
                 BarFeature(),
+                DebugFeature(),
             )
         )
     }

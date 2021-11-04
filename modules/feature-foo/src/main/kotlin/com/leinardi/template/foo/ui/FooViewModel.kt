@@ -16,7 +16,12 @@
 
 package com.leinardi.template.foo.ui
 
+import android.app.Application
 import androidx.lifecycle.viewModelScope
+import com.leinardi.template.foo.R
+import com.leinardi.template.foo.ui.FooContract.Effect
+import com.leinardi.template.foo.ui.FooContract.Event
+import com.leinardi.template.foo.ui.FooContract.State
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.navigation.destination.bar.BarDestination
 import com.leinardi.template.ui.base.BaseViewModel
@@ -28,14 +33,16 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FooViewModel @Inject constructor(
-    private val templateNavigator: TemplateNavigator
-) : BaseViewModel<FooContract.Event, FooContract.State, FooContract.Effect>() {
-    override fun provideInitialState() = FooContract.State("Change me")
+    private val templateNavigator: TemplateNavigator,
+    private val app: Application
+) : BaseViewModel<Event, State, Effect>() {
+    override fun provideInitialState() = State(app.getString(R.string.i18n_foo_change_me))
 
-    override fun handleEvent(event: FooContract.Event) {
+    override fun handleEvent(event: Event) {
         when (event) {
-            is FooContract.Event.OnBarButtonClicked -> sendText(event.text)
-            FooContract.Event.OnShowSnackbarButtonClicked -> sendEffect { FooContract.Effect.ShowSnackbar("Lorem ipsum dolor sit amet...") }
+            is Event.OnBarButtonClicked -> sendText(event.text)
+            Event.OnShowSnackbarButtonClicked ->
+                sendEffect { Effect.ShowSnackbar(app.getString(R.string.i18n_foo_snackbar_text)) }
         }
     }
 
@@ -44,7 +51,7 @@ class FooViewModel @Inject constructor(
             updateState { viewState.value.copy(isLoading = true) }
             delay(TimeUnit.SECONDS.toMillis(2))
             updateState { viewState.value.copy(isLoading = false) }
-            templateNavigator.navigate(BarDestination.createBarRoute(text))
+            templateNavigator.navigate(BarDestination.createRoute(text))
         }
     }
 }
