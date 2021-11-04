@@ -39,6 +39,7 @@ include(
         ':modules:core-i18n',
         ':modules:core-logging',
         ':modules:core-navigation',
+        ':modules:core-rocketserver',
         ':modules:core-ui',
         ':modules:feature-bar',
         ':modules:feature-debug',

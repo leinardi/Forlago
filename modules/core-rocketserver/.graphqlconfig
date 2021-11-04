@@ -1,0 +1,15 @@
+{
+  "name": "RocketServer GraphQL Schema",
+  "schemaPath": "src/main/graphql/com/leinardi/template/rocketserver/schema.json",
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "https://apollo-fullstack-tutorial.herokuapp.com",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
