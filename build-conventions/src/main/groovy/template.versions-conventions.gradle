@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.github.benmanes.gradle.versions.reporter.PlainTextReporter
 
 plugins {
     id 'com.github.ben-manes.versions'
@@ -175,5 +176,8 @@ tasks.named("dependencyUpdates").configure {
         def file = new File("${project.buildDir}/reports/dependencyUpdates/dependencyUpdates.html")
         file.createNewFile()
         file.write(writer.toString())
+
+        PlainTextReporter plainTextReporter = new PlainTextReporter(project, revision, gradleReleaseChannel)
+        plainTextReporter.write(System.out, result)
     }
 }
