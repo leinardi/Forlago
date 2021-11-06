@@ -14,18 +14,25 @@
   ~ limitations under the License.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen">
-        <item name="postSplashScreenTheme">@style/Ui.Theme.Template</item>
+        <item name="postSplashScreenTheme">@style/Ui.Theme.Template.NoActionBar</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ui_ic_launcher</item>
         <item name="windowSplashScreenBackground">@color/ui_window_background</item>
     </style>
 
-    <style name="Ui.Theme.Template" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/ui_status_bar_color</item>
-        <item name="android:windowBackground">@color/ui_window_background</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    <style name="Ui.Theme.Platform.Template" parent="android:Theme.Material.Light" />
+
+    <style name="Ui.Theme.Base.Template" parent="Ui.Theme.Platform.Template">
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+
+    <style name="Ui.Theme.Template" parent="Ui.Theme.Base.Template" />
+
+    <style name="Ui.Theme.Template.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
 </resources>
