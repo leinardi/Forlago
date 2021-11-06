@@ -16,6 +16,7 @@
 
 package com.leinardi.template.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,22 +41,31 @@ class MainActivity : ComponentActivity() {
 
     @Inject lateinit var templateNavigator: TemplateNavigator
 
+    lateinit var navHostController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
+            val navHostController: NavHostController = rememberNavController().also { this.navHostController = it }
             TemplateTheme {
                 TemplateScaffold(
+                    navHostController = navHostController,
                     templateNavigator = templateNavigator,
                 )
             }
         }
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        navHostController.handleDeepLink(intent)
+    }
 }
 
 @Composable
-fun TemplateScaffold(templateNavigator: TemplateNavigator) {
-    val navHostController: NavHostController = rememberNavController()
+fun TemplateScaffold(navHostController: NavHostController, templateNavigator: TemplateNavigator) {
     LaunchedEffect(navHostController) {
         templateNavigator.destinations.collect {
             when (val event = it) {
