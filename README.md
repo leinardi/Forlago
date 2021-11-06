@@ -11,3 +11,4 @@ Inspired by the following open source projects:
 - https://proandroiddev.com/mvi-architecture-with-kotlin-flows-and-channels-d36820b2028d
 - https://github.com/chrisbanes/tivi/
 - https://github.com/alorma/Compose-Settings
+- https://github.com/SamYStudiO/Beaver

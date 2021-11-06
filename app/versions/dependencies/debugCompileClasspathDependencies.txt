@@ -127,62 +127,38 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.5.31 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
 |    \--- androidx.compose.ui:ui:1.0.1 -> 1.0.5 (*)
-+--- androidx.appcompat:appcompat:1.3.1
-|    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    +--- androidx.core:core:1.5.0 -> 1.7.0 (*)
-|    +--- androidx.cursoradapter:cursoradapter:1.0.0
-|    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    +--- androidx.activity:activity:1.2.4 -> 1.4.0 (*)
-|    +--- androidx.fragment:fragment:1.3.6 -> 1.4.0-rc01
-|    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.core:core-ktx:1.2.0 -> 1.7.0 (*)
-|    |    +--- androidx.collection:collection:1.1.0 (*)
-|    |    +--- androidx.viewpager:viewpager:1.0.0
-|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
-|    |    |    \--- androidx.customview:customview:1.0.0 -> 1.1.0
-|    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |         \--- androidx.core:core:1.3.0 -> 1.7.0 (*)
-|    |    +--- androidx.loader:loader:1.0.0
-|    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
-|    |    |    +--- androidx.lifecycle:lifecycle-livedata:2.0.0 -> 2.2.0
-|    |    |    |    +--- androidx.arch.core:core-runtime:2.1.0
-|    |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    |    \--- androidx.arch.core:core-common:2.1.0 (*)
-|    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.2.0 -> 2.3.1 (*)
-|    |    |    |    \--- androidx.arch.core:core-common:2.1.0 (*)
-|    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.0.0 -> 2.4.0 (*)
-|    |    +--- androidx.activity:activity:1.2.4 -> 1.4.0 (*)
-|    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.3.1 (*)
-|    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0 (*)
-|    |    +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1 (*)
-|    |    +--- androidx.savedstate:savedstate:1.1.0 (*)
-|    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.1.0
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
-|    +--- androidx.appcompat:appcompat-resources:1.3.1
-|    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.core:core:1.0.1 -> 1.7.0 (*)
-|    |    +--- androidx.vectordrawable:vectordrawable:1.1.0
-|    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
-|    |    |    \--- androidx.collection:collection:1.1.0 (*)
-|    |    \--- androidx.vectordrawable:vectordrawable-animated:1.1.0
-|    |         +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
-|    |         +--- androidx.interpolator:interpolator:1.0.0
-|    |         |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |         \--- androidx.collection:collection:1.1.0 (*)
-|    +--- androidx.drawerlayout:drawerlayout:1.0.0 -> 1.1.1
-|    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.core:core:1.2.0 -> 1.7.0 (*)
-|    |    \--- androidx.customview:customview:1.1.0 (*)
-|    \--- androidx.savedstate:savedstate:1.1.0 (*)
 +--- androidx.core:core-ktx:1.7.0 (*)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:2.4.0 (*)
 +--- androidx.navigation:navigation-fragment-ktx:2.4.0-beta02
 |    +--- androidx.navigation:navigation-fragment:2.4.0-beta02
 |    |    +--- androidx.fragment:fragment-ktx:1.4.0-rc01
-|    |    |    +--- androidx.fragment:fragment:1.4.0-rc01 (*)
+|    |    |    +--- androidx.fragment:fragment:1.4.0-rc01
+|    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.7.0 (*)
+|    |    |    |    +--- androidx.collection:collection:1.1.0 (*)
+|    |    |    |    +--- androidx.viewpager:viewpager:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
+|    |    |    |    |    \--- androidx.customview:customview:1.0.0 -> 1.1.0
+|    |    |    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    |    |         \--- androidx.core:core:1.3.0 -> 1.7.0 (*)
+|    |    |    |    +--- androidx.loader:loader:1.0.0
+|    |    |    |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
+|    |    |    |    |    +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
+|    |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata:2.0.0 -> 2.2.0
+|    |    |    |    |    |    +--- androidx.arch.core:core-runtime:2.1.0
+|    |    |    |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    |    |    |    |    \--- androidx.arch.core:core-common:2.1.0 (*)
+|    |    |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.2.0 -> 2.3.1 (*)
+|    |    |    |    |    |    \--- androidx.arch.core:core-common:2.1.0 (*)
+|    |    |    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.0.0 -> 2.4.0 (*)
+|    |    |    |    +--- androidx.activity:activity:1.2.4 -> 1.4.0 (*)
+|    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.3.1 (*)
+|    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0 (*)
+|    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1 (*)
+|    |    |    |    +--- androidx.savedstate:savedstate:1.1.0 (*)
+|    |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.1.0
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
 |    |    |    +--- androidx.activity:activity-ktx:1.2.3 -> 1.4.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.7.0 (*)
 |    |    |    +--- androidx.collection:collection-ktx:1.1.0
@@ -219,58 +195,12 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    +--- androidx.navigation:navigation-ui:2.4.0-beta02
 |    |    +--- androidx.navigation:navigation-runtime:2.4.0-beta02 (*)
 |    |    +--- androidx.customview:customview:1.1.0 (*)
-|    |    +--- androidx.drawerlayout:drawerlayout:1.1.1 (*)
-|    |    +--- com.google.android.material:material:1.4.0-beta01 -> 1.4.0
-|    |    |    +--- androidx.annotation:annotation:1.0.1 -> 1.2.0
-|    |    |    +--- androidx.appcompat:appcompat:1.1.0 -> 1.3.1 (*)
-|    |    |    +--- androidx.cardview:cardview:1.0.0
-|    |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    +--- androidx.coordinatorlayout:coordinatorlayout:1.1.0
-|    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
-|    |    |    |    +--- androidx.customview:customview:1.0.0 -> 1.1.0 (*)
-|    |    |    |    \--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
-|    |    |    +--- androidx.constraintlayout:constraintlayout:2.0.1
-|    |    |    |    +--- androidx.appcompat:appcompat:1.2.0 -> 1.3.1 (*)
-|    |    |    |    +--- androidx.core:core:1.3.1 -> 1.7.0 (*)
-|    |    |    |    \--- androidx.constraintlayout:constraintlayout-solver:2.0.1
-|    |    |    +--- androidx.core:core:1.5.0 -> 1.7.0 (*)
-|    |    |    +--- androidx.dynamicanimation:dynamicanimation:1.0.0
-|    |    |    |    +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
-|    |    |    |    +--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
-|    |    |    |    \--- androidx.legacy:legacy-support-core-utils:1.0.0
-|    |    |    |         +--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    |         +--- androidx.core:core:1.0.0 -> 1.7.0 (*)
-|    |    |    |         +--- androidx.documentfile:documentfile:1.0.0
-|    |    |    |         |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    |         +--- androidx.loader:loader:1.0.0 (*)
-|    |    |    |         +--- androidx.localbroadcastmanager:localbroadcastmanager:1.0.0
-|    |    |    |         |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    |         \--- androidx.print:print:1.0.0
-|    |    |    |              \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
-|    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.1.0
-|    |    |    +--- androidx.fragment:fragment:1.0.0 -> 1.4.0-rc01 (*)
-|    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.0.0 -> 2.4.0 (*)
-|    |    |    +--- androidx.recyclerview:recyclerview:1.0.0 -> 1.1.0
-|    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
-|    |    |    |    +--- androidx.customview:customview:1.0.0 -> 1.1.0 (*)
-|    |    |    |    \--- androidx.collection:collection:1.0.0 -> 1.1.0 (*)
-|    |    |    +--- androidx.transition:transition:1.2.0 -> 1.4.1
-|    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    \--- androidx.core:core:1.1.0 -> 1.7.0 (*)
-|    |    |    +--- androidx.vectordrawable:vectordrawable:1.1.0 (*)
-|    |    |    \--- androidx.viewpager2:viewpager2:1.0.0
-|    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |         +--- androidx.fragment:fragment:1.1.0 -> 1.4.0-rc01 (*)
-|    |    |         +--- androidx.recyclerview:recyclerview:1.1.0 (*)
-|    |    |         +--- androidx.core:core:1.1.0 -> 1.7.0 (*)
-|    |    |         \--- androidx.collection:collection:1.1.0 (*)
+|    |    +--- androidx.drawerlayout:drawerlayout:1.1.1
+|    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    +--- androidx.core:core:1.2.0 -> 1.7.0 (*)
+|    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- androidx.annotation:annotation-experimental:1.1.0
 |    \--- androidx.navigation:navigation-runtime-ktx:2.4.0-beta02 (*)
-+--- com.mikepenz:aboutlibraries-core:8.9.4
-|    +--- androidx.appcompat:appcompat:1.3.1 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 +--- com.google.dagger:hilt-android:2.40
 |    +--- com.google.dagger:dagger:2.40
 |    |    \--- javax.inject:javax.inject:1
@@ -350,7 +280,6 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    +--- androidx.core:core-splashscreen:1.0.0-alpha02
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.5.31 (*)
 |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0 (*)
-|    +--- com.google.android.material:material:1.4.0 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 +--- androidx.navigation:navigation-compose:2.4.0-beta02 (*)
 +--- androidx.startup:startup-runtime:1.1.0
@@ -374,12 +303,10 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- com.squareup.leakcanary:leakcanary-android:{strictly 2.7} -> 2.7 (c)
 +--- androidx.compose.ui:ui-tooling:{strictly 1.0.5} -> 1.0.5 (c)
 +--- androidx.activity:activity-compose:{strictly 1.4.0} -> 1.4.0 (c)
-+--- androidx.appcompat:appcompat:{strictly 1.3.1} -> 1.3.1 (c)
 +--- androidx.core:core-ktx:{strictly 1.7.0} -> 1.7.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.navigation:navigation-fragment-ktx:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
 +--- androidx.navigation:navigation-ui-ktx:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
-+--- com.mikepenz:aboutlibraries-core:{strictly 8.9.4} -> 8.9.4 (c)
 +--- com.google.dagger:hilt-android:{strictly 2.40} -> 2.40 (c)
 +--- androidx.hilt:hilt-navigation-compose:{strictly 1.0.0-alpha03} -> 1.0.0-alpha03 (c)
 +--- com.jakewharton.timber:timber:{strictly 5.0.1} -> 5.0.1 (c)
@@ -394,7 +321,6 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.compose.ui:ui:{strictly 1.0.5} -> 1.0.5 (c)
 +--- androidx.core:core-splashscreen:{strictly 1.0.0-alpha02} -> 1.0.0-alpha02 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.4.0} -> 2.4.0 (c)
-+--- com.google.android.material:material:{strictly 1.4.0} -> 1.4.0 (c)
 +--- com.squareup.leakcanary:leakcanary-android-core:{strictly 2.7} -> 2.7 (c)
 +--- androidx.annotation:annotation:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.compose.ui:ui-tooling-preview:{strictly 1.0.5} -> 1.0.5 (c)
@@ -402,12 +328,6 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.compose.runtime:runtime-saveable:{strictly 1.0.5} -> 1.0.5 (c)
 +--- androidx.activity:activity-ktx:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.core:core:{strictly 1.7.0} -> 1.7.0 (c)
-+--- androidx.cursoradapter:cursoradapter:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.activity:activity:{strictly 1.4.0} -> 1.4.0 (c)
-+--- androidx.fragment:fragment:{strictly 1.4.0-rc01} -> 1.4.0-rc01 (c)
-+--- androidx.appcompat:appcompat-resources:{strictly 1.3.1} -> 1.3.1 (c)
-+--- androidx.drawerlayout:drawerlayout:{strictly 1.1.1} -> 1.1.1 (c)
-+--- androidx.savedstate:savedstate:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime:{strictly 2.4.0} -> 2.4.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.5.2} -> 1.5.2 (c)
 +--- androidx.navigation:navigation-fragment:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
@@ -417,9 +337,12 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- com.google.dagger:dagger-lint-aar:{strictly 2.40} -> 2.40 (c)
 +--- com.google.dagger:hilt-core:{strictly 2.40} -> 2.40 (c)
 +--- com.google.code.findbugs:jsr305:{strictly 3.0.1} -> 3.0.1 (c)
++--- androidx.activity:activity:{strictly 1.4.0} -> 1.4.0 (c)
++--- androidx.fragment:fragment:{strictly 1.4.0-rc01} -> 1.4.0-rc01 (c)
 +--- androidx.lifecycle:lifecycle-common:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:{strictly 2.3.1} -> 2.3.1 (c)
++--- androidx.savedstate:savedstate:{strictly 1.1.0} -> 1.1.0 (c)
 +--- javax.inject:javax.inject:{strictly 1} -> 1 (c)
 +--- androidx.hilt:hilt-navigation:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-compose:{strictly 2.4.0} -> 2.4.0 (c)
@@ -435,15 +358,6 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.compose.ui:ui-geometry:{strictly 1.0.5} -> 1.0.5 (c)
 +--- androidx.compose.ui:ui-graphics:{strictly 1.0.5} -> 1.0.5 (c)
 +--- androidx.compose.ui:ui-unit:{strictly 1.0.5} -> 1.0.5 (c)
-+--- androidx.cardview:cardview:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.coordinatorlayout:coordinatorlayout:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.constraintlayout:constraintlayout:{strictly 2.0.1} -> 2.0.1 (c)
-+--- androidx.dynamicanimation:dynamicanimation:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.annotation:annotation-experimental:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.recyclerview:recyclerview:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.transition:transition:{strictly 1.4.1} -> 1.4.1 (c)
-+--- androidx.vectordrawable:vectordrawable:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.viewpager2:viewpager2:{strictly 1.0.0} -> 1.0.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.5.2} -> 1.5.2 (c)
 +--- com.squareup.leakcanary:shark-android:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android:{strictly 2.7} -> 2.7 (c)
@@ -451,35 +365,30 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:plumber-android:{strictly 2.7} -> 2.7 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.1.0} -> 1.1.0 (c)
++--- androidx.annotation:annotation-experimental:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.versionedparcelable:versionedparcelable:{strictly 1.1.1} -> 1.1.1 (c)
-+--- androidx.collection:collection:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.viewpager:viewpager:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.loader:loader:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.lifecycle:lifecycle-livedata-core:{strictly 2.3.1} -> 2.3.1 (c)
-+--- androidx.vectordrawable:vectordrawable-animated:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.customview:customview:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- androidx.fragment:fragment-ktx:{strictly 1.4.0-rc01} -> 1.4.0-rc01 (c)
 +--- androidx.navigation:navigation-runtime:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
 +--- androidx.slidingpanelayout:slidingpanelayout:{strictly 1.2.0-beta01} -> 1.2.0-beta01 (c)
 +--- androidx.navigation:navigation-common-ktx:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
++--- androidx.customview:customview:{strictly 1.1.0} -> 1.1.0 (c)
++--- androidx.drawerlayout:drawerlayout:{strictly 1.1.1} -> 1.1.1 (c)
++--- androidx.collection:collection:{strictly 1.1.0} -> 1.1.0 (c)
++--- androidx.viewpager:viewpager:{strictly 1.0.0} -> 1.0.0 (c)
++--- androidx.loader:loader:{strictly 1.0.0} -> 1.0.0 (c)
++--- androidx.lifecycle:lifecycle-livedata-core:{strictly 2.3.1} -> 2.3.1 (c)
 +--- androidx.compose.foundation:foundation-layout:{strictly 1.0.5} -> 1.0.5 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
-+--- androidx.constraintlayout:constraintlayout-solver:{strictly 2.0.1} -> 2.0.1 (c)
-+--- androidx.legacy:legacy-support-core-utils:{strictly 1.0.0} -> 1.0.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.5.2} -> 1.5.2 (c)
 +--- com.squareup.leakcanary:shark:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-android-utils:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.curtains:curtains:{strictly 1.0.1} -> 1.0.1 (c)
 +--- com.squareup.leakcanary:shark-log:{strictly 2.7} -> 2.7 (c)
-+--- androidx.interpolator:interpolator:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.collection:collection-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.3.1} -> 2.3.1 (c)
 +--- androidx.navigation:navigation-common:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
-+--- androidx.documentfile:documentfile:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.localbroadcastmanager:localbroadcastmanager:{strictly 1.0.0} -> 1.0.0 (c)
-+--- androidx.print:print:{strictly 1.0.0} -> 1.0.0 (c)
 +--- com.squareup.leakcanary:shark-graph:{strictly 2.7} -> 2.7 (c)
 \--- com.squareup.leakcanary:shark-hprof:{strictly 2.7} -> 2.7 (c)
 

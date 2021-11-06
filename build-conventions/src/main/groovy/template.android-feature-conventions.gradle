@@ -48,9 +48,10 @@ dependencies {
     implementation libs.timber
 
     // Modules
-    api rootProject.project(':modules:core-feature')
-    implementation rootProject.project(':modules:core-i18n')
-    implementation rootProject.project(':modules:core-logging')
-    implementation rootProject.project(':modules:core-ui')
+    api project(':modules:core-feature')
+    implementation project(':modules:core-android')
+    implementation project(':modules:core-i18n')
+    implementation project(':modules:core-logging')
+    implementation project(':modules:core-ui')
 
 }

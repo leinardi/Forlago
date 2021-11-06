@@ -19,7 +19,7 @@ package com.leinardi.template.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
-import com.leinardi.template.Template
+import com.leinardi.template.android.initializer.ContextProvider
 import com.leinardi.template.di.AppEntryPoints
 import dagger.hilt.EntryPoints
 
@@ -41,5 +41,5 @@ fun NavGraphBuilder.addDialogDestinations() {
     }
 }
 
-private fun getFeatures() = EntryPoints.get(Template.getApplicationContext(), AppEntryPoints.FeatureManagerInterface::class.java)
+private fun getFeatures() = EntryPoints.get(ContextProvider.applicationContext, AppEntryPoints.FeatureManagerInterface::class.java)
     .getFeatureManager().features

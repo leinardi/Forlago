@@ -29,10 +29,6 @@ import javax.inject.Inject
 class Template : Application() {
     @Inject lateinit var featureManager: FeatureManager
 
-    init {
-        instance = this
-    }
-
     override fun onCreate() {
         super.onCreate()
         registerFeatures()
@@ -52,10 +48,5 @@ class Template : Application() {
                 DebugFeature(),
             )
         )
-    }
-
-    companion object {
-        private var instance: Template? = null
-        fun getApplicationContext() = checkNotNull(instance)
     }
 }
