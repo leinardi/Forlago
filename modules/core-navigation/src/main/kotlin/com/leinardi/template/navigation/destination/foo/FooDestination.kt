@@ -22,4 +22,6 @@ object FooDestination : NavigationDestination {
     private const val FOO_ROUTE = "foo"
 
     override fun route() = FOO_ROUTE
+
+    fun createRoute() = route()
 }

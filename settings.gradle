@@ -42,6 +42,7 @@ include(
         ':modules:core-navigation',
         ':modules:core-rocketserver',
         ':modules:core-ui',
+        ':modules:feature-account',
         ':modules:feature-bar',
         ':modules:feature-debug',
         ':modules:feature-foo',

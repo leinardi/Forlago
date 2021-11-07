@@ -19,20 +19,20 @@ package com.leinardi.template.debug.interactor
 import android.app.Application
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.core.content.pm.PackageInfoCompat
 import javax.inject.Inject
 
 class GetDebugInfoInteractor @Inject constructor(
     private val context: Application
 ) {
-
     operator fun invoke(): DebugInfo {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
         val appName: String = context.packageManager.run {
             return@run getApplicationLabel(getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)).toString()
         }
+
         val versionName = packageInfo?.versionName ?: "Undefined"
-        val versionCode: Long =
-            (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) packageInfo?.longVersionCode else packageInfo?.versionCode?.toLong()) ?: 0
+        val versionCode: Long = PackageInfoCompat.getLongVersionCode(packageInfo)
         val displayMetrics = context.resources.displayMetrics
 
         return DebugInfo(

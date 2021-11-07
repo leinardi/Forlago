@@ -16,17 +16,20 @@
 
 package com.leinardi.template.feature
 
+import android.content.Intent
 import androidx.compose.runtime.Composable
 import com.leinardi.template.navigation.NavigationDestination
 
 abstract class Feature {
     abstract val id: String
 
-    open val serviceLifecycle: FeatureLifecycle = FeatureLifecycle()
-
     open val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
+
+    open val debugComposable: @Composable (() -> Unit)? = null
 
     open val dialogDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
 
-    open val debugComposable: @Composable () -> Unit = {}
+    open val serviceLifecycle: FeatureLifecycle = FeatureLifecycle()
+
+    open val handleIntent: (suspend (intent: Intent) -> Unit) = {}
 }

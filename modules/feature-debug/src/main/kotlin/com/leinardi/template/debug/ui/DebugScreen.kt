@@ -30,23 +30,33 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScrollableTabRow
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.pagerTabIndicatorOffset
+import com.google.accompanist.pager.rememberPagerState
 import com.leinardi.template.debug.R
 import com.leinardi.template.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.template.debug.ui.DebugContract.Event
 import com.leinardi.template.debug.ui.DebugContract.State
+import com.leinardi.template.ui.component.LocalSnackbarHostState
 import com.leinardi.template.ui.component.SettingsGroup
 import com.leinardi.template.ui.component.SettingsMenuLink
 import com.leinardi.template.ui.component.TopAppBar
 import com.leinardi.template.ui.theme.TemplateTypography
+import kotlinx.coroutines.launch
 
 @Composable
 fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
@@ -63,46 +73,60 @@ fun DebugScreen(
     modifier: Modifier = Modifier
 ) {
     val scaffoldState = rememberScaffoldState()
-    Scaffold(
-        modifier = modifier,
-        scaffoldState = scaffoldState,
-        topBar = {
-            TopAppBar(
-                title = stringResource(R.string.debug_screen),
-                navigateUp = { sendEvent(Event.OnUpButtonClicked) }
-            )
-        },
-        content = { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(start = 0.dp, end = 0.dp, bottom = innerPadding.calculateBottomPadding(), top = innerPadding.calculateTopPadding())
-            ) {
+    CompositionLocalProvider(
+        LocalSnackbarHostState provides scaffoldState.snackbarHostState
+    ) {
+        Scaffold(
+            modifier = modifier,
+            scaffoldState = scaffoldState,
+            topBar = {
+                TopAppBar(
+                    title = stringResource(R.string.debug_screen),
+                    navigateUp = { sendEvent(Event.OnUpButtonClicked) }
+                )
+            },
+            content = { innerPadding ->
                 when (state.selectedNavigationItem) {
                     DebugViewModel.BottomNavigationItem.Info -> Info(
                         state = state,
-                        modifier = Modifier.padding(start = 16.dp, top = 16.dp, end = 16.dp)
+                        modifier = modifier
+                            .fillMaxSize()
+                            .padding(
+                                start = 0.dp,
+                                end = 0.dp,
+                                bottom = innerPadding.calculateBottomPadding(),
+                                top = innerPadding.calculateTopPadding()
+                            )
                     )
-                    DebugViewModel.BottomNavigationItem.Features -> Features(state = state)
+                    DebugViewModel.BottomNavigationItem.Features -> Features(
+                        state = state,
+                        modifier = modifier
+                            .fillMaxSize()
+                            .padding(
+                                start = 0.dp,
+                                end = 0.dp,
+                                bottom = innerPadding.calculateBottomPadding(),
+                                top = innerPadding.calculateTopPadding()
+                            )
+                    )
+                }
+            },
+            bottomBar = {
+                BottomNavigation {
+                    state.bottomNavigationItems.forEachIndexed { index, screen ->
+                        BottomNavigationItem(
+                            icon = { Icon(screen.icon, screen.label) },
+                            label = { Text(screen.label) },
+                            selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
+                            onClick = {
+                                sendEvent(Event.OnBottomNavigationItemSelected(state.bottomNavigationItems[index]))
+                            }
+                        )
+                    }
                 }
             }
-        },
-        bottomBar = {
-            BottomNavigation {
-                state.bottomNavigationItems.forEachIndexed() { index, screen ->
-                    BottomNavigationItem(
-                        icon = { Icon(screen.icon, screen.label) },
-                        label = { Text(screen.label) },
-                        selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
-                        onClick = {
-                            sendEvent(Event.OnBottomNavigationItemSelected(state.bottomNavigationItems[index]))
-                        }
-                    )
-                }
-            }
-        }
-    )
+        )
+    }
 }
 
 @Composable
@@ -110,25 +134,31 @@ private fun Info(
     state: State,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier) {
-        Text(
-            modifier = Modifier.padding(bottom = 8.dp),
-            text = state.debugInfo.app.name,
-            color = MaterialTheme.colors.primary,
-            style = TemplateTypography.h4
-        )
-        ProvideTextStyle(value = MaterialTheme.typography.caption) {
-            CompositionLocalProvider(
-                LocalContentAlpha provides ContentAlpha.medium,
-                content = {
-                    Text(text = "Version name: ${state.debugInfo.app.versionName}")
-                    Text(text = "Version code: ${state.debugInfo.app.versionCode}")
-                    Text(text = "Application ID: ${state.debugInfo.app.packageName}")
-                }
+    Column(
+        modifier = modifier.verticalScroll(rememberScrollState())
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 16.dp)
+        ) {
+            Text(
+                modifier = Modifier.padding(bottom = 8.dp),
+                text = state.debugInfo.app.name,
+                color = MaterialTheme.colors.primary,
+                style = TemplateTypography.h4
             )
+            ProvideTextStyle(value = MaterialTheme.typography.caption) {
+                CompositionLocalProvider(
+                    LocalContentAlpha provides ContentAlpha.medium,
+                    content = {
+                        Text(text = "Version name: ${state.debugInfo.app.versionName}")
+                        Text(text = "Version code: ${state.debugInfo.app.versionCode}")
+                        Text(text = "Application ID: ${state.debugInfo.app.packageName}")
+                    }
+                )
+            }
         }
+        DeviceInfo(state)
     }
-    DeviceInfo(state)
 }
 
 @Composable
@@ -144,23 +174,19 @@ private fun DeviceInfo(
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_manufacturer)) },
                 subtitle = { Text(text = state.debugInfo.device.manufacturer) }
-            ) {
-            }
+            )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_model)) },
                 subtitle = { Text(text = state.debugInfo.device.model) }
-            ) {
-            }
+            )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_resolution_px)) },
                 subtitle = { Text(text = state.debugInfo.device.resolutionPx) }
-            ) {
-            }
+            )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_resolution_dp)) },
                 subtitle = { Text(text = state.debugInfo.device.resolutionDp) }
-            ) {
-            }
+            )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_density)) },
                 subtitle = {
@@ -172,20 +198,49 @@ private fun DeviceInfo(
                         )
                     )
                 }
-            ) {
-            }
+            )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_api_level)) },
                 subtitle = { Text(text = state.debugInfo.device.apiLevel.toString()) }
-            ) {
-            }
+            )
         }
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
-private fun Features(state: State) {
-    state.featureComposableList.forEach { composable -> composable() }
+private fun Features(
+    state: State,
+    modifier: Modifier = Modifier
+) {
+    val pagerState = rememberPagerState()
+    val scope = rememberCoroutineScope()
+    Column(
+        modifier = modifier
+    ) {
+        ScrollableTabRow(
+            selectedTabIndex = pagerState.currentPage,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+                )
+            }
+        ) {
+            state.featureList.forEachIndexed { index, feature ->
+                Tab(
+                    text = { Text(feature.featureId) },
+                    selected = pagerState.currentPage == index,
+                    onClick = { scope.launch { pagerState.animateScrollToPage(index) } },
+                )
+            }
+        }
+        HorizontalPager(
+            count = state.featureList.size,
+            state = pagerState,
+        ) { page ->
+            state.featureList[page].composable()
+        }
+    }
 }
 
 @Preview

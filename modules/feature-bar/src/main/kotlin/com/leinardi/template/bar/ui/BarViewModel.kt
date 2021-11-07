@@ -31,11 +31,11 @@ class BarViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator,
     private val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<Event, State, Effect>() {
-    override fun provideInitialState() = State(savedStateHandle[BarDestination.TEXT_PARAM] ?: "")
+    override fun provideInitialState() = State(savedStateHandle.get<String>(BarDestination.TEXT_PARAM).orEmpty())
 
     override fun handleEvent(event: Event) {
         when (event) {
-            is Event.OnBackButtonClicked,
+            is Event.OnBackButtonClicked -> templateNavigator.navigateBack()
             is Event.OnUpButtonClicked -> templateNavigator.navigateUp()
         }
     }

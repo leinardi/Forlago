@@ -152,13 +152,13 @@ complexity:
 coroutines:
   active: true
   GlobalCoroutineUsage:
-    active: false
+    active: true # Custom
   RedundantSuspendModifier:
-    active: false
+    active: true # Custom
   SleepInsteadOfDelay:
-    active: false
+    active: true # Custom
   SuspendFunWithFlowReturnType:
-    active: false
+    active: true # Custom
 
 empty-blocks:
   active: true
@@ -715,7 +715,7 @@ style:
     active: false
   ReturnCount:
     active: true
-    max: 5 # Custom
+    max: 8 # Custom
     excludedFunctions: 'equals'
     excludeLabeled: false
     excludeReturnFromLambda: true

@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Checkbox
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Surface
@@ -39,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.leinardi.template.ui.theme.TemplateTheme
@@ -50,36 +52,35 @@ fun SettingsMenuLink(
     title: @Composable () -> Unit,
     subtitle: (@Composable () -> Unit)? = null,
     action: (@Composable () -> Unit)? = null,
-    onClick: () -> Unit,
+    enabled: Boolean = true,
+    onClick: () -> Unit = {},
 ) {
-    Surface {
+    Surface(modifier = modifier) {
+        val alpha = if (enabled) 1f else ContentAlpha.disabled
         Row(
-            modifier = modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = 64.dp)
+                .clickable(enabled = enabled) { onClick() }
+                .alpha(alpha),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            Row(
-                modifier = Modifier
-                    .defaultMinSize(minHeight = 64.dp)
-                    .weight(1f)
-                    .clickable(onClick = onClick),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                if (icon != null) {
-                    SettingsTileIcon(icon = icon)
-                } else {
-                    Spacer(modifier = Modifier.size(16.dp))
-                }
-                SettingsTileTexts(title = title, subtitle = subtitle)
+            if (icon != null) {
+                SettingsTileIcon(icon = icon)
+            } else {
+                Spacer(modifier = Modifier.size(16.dp))
             }
-            if (action != null) {
-                Divider(
-                    modifier = Modifier
-                        .padding(vertical = 4.dp)
-                        .height(56.dp)
-                        .width(1.dp),
-                )
-                SettingsTileAction {
-                    action.invoke()
-                }
+            SettingsTileTexts(title = title, subtitle = subtitle)
+        }
+        if (action != null) {
+            Divider(
+                modifier = Modifier
+                    .padding(vertical = 4.dp)
+                    .height(56.dp)
+                    .width(1.dp),
+            )
+            SettingsTileAction {
+                action.invoke()
             }
         }
     }

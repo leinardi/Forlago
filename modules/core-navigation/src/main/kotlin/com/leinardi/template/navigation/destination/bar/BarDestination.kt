@@ -36,8 +36,11 @@ object BarDestination : NavigationDestination {
 
     override val deepLinks = listOf(
         navDeepLink {
-            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$BAR_ROUTE/{$TEXT_PARAM}"
-        }
+            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$BAR_ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
+        },
+        navDeepLink {
+            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$BAR_ROUTE"
+        },
     )
 
     override fun route() = "$BAR_ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"

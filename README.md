@@ -12,3 +12,4 @@ Inspired by the following open source projects:
 - https://github.com/chrisbanes/tivi/
 - https://github.com/alorma/Compose-Settings
 - https://github.com/SamYStudiO/Beaver
+- https://github.com/mohodroid/android-custom-account-manager

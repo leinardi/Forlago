@@ -17,32 +17,32 @@
 package com.leinardi.template.foo.ui.debug
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.leinardi.template.ui.component.SettingsGroup
 import com.leinardi.template.ui.component.SettingsMenuLink
 
 @Composable
-fun FooDebugSection(
+fun FooDebugPage(
     modifier: Modifier = Modifier,
 ) {
-    SettingsGroup(
-        modifier = modifier,
-        title = { Text(text = "Foo settings") }
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
     ) {
-        Column {
-            SettingsMenuLink(
-                title = { Text(text = "TBD") },
-            ) {
-            }
-        }
+        SettingsMenuLink(
+            title = { Text(text = "TBD") },
+        )
     }
 }
 
 @Preview
 @Composable
 fun FooDebugPreview() {
-    FooDebugSection()
+    FooDebugPage()
 }

@@ -20,7 +20,7 @@ import com.leinardi.template.ui.base.ViewEffect
 import com.leinardi.template.ui.base.ViewEvent
 import com.leinardi.template.ui.base.ViewState
 
-class BarContract {
+object BarContract {
     data class State(
         val text: String,
     ) : ViewState

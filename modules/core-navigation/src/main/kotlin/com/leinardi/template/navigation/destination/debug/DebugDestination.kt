@@ -30,4 +30,6 @@ object DebugDestination : NavigationDestination {
     )
 
     override fun route() = DEBUG_ROUTE
+
+    fun createRoute() = route()
 }

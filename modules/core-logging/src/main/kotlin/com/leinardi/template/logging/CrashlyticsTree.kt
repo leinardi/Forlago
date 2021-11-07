@@ -28,7 +28,7 @@ class CrashlyticsTree : Timber.Tree() {
         }
         val crashlytics = FirebaseCrashlytics.getInstance()
         crashlytics.setCustomKey(CRASHLYTICS_KEY_PRIORITY, priority)
-        crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag ?: "")
+        crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag.orEmpty())
         crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message)
 
         if (t == null) {

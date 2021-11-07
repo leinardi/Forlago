@@ -21,11 +21,18 @@ import javax.inject.Singleton
 
 @Singleton
 class FeatureManager @Inject constructor() {
-    val features: List<Feature> get() = _features
+    private val _featureMap = mutableMapOf<Class<out Feature>, Feature>()
 
-    private val _features = mutableListOf<Feature>()
+    val features: List<Feature> get() = _featureMap.entries.map { it.value }
 
-    fun register(services: List<Feature>) = _features.addAll(services)
+    val featureMap: Map<Class<out Feature>, Feature> = _featureMap
+
+    inline fun <reified T : Feature> getFeature(clazz: Class<out Feature>): T =
+        featureMap.getOrElse(clazz, { throw IllegalArgumentException("No Feature with Class = $clazz found!") }) as T
+
+    fun register(features: List<Feature>) {
+        features.forEach { feature -> _featureMap[feature.javaClass] = feature }
+    }
 
     suspend fun onUserLogin() = features.map { it.serviceLifecycle.onLogin() }
 

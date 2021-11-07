@@ -23,6 +23,7 @@
         android:minSdkVersion="23"
         android:targetSdkVersion="31" />
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -46,7 +47,7 @@
             android:name="com.leinardi.template.ui.MainActivity"
             android:exported="true"
             android:label="@string/i18n_app_name"
-            android:launchMode="standard"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -74,6 +75,9 @@
                 android:name="com.leinardi.template.debug.initializer.DebugInitializer"
                 android:value="androidx.startup" />
             <meta-data
+                android:name="com.leinardi.template.android.initializer.ContextProvider"
+                android:value="androidx.startup" />
+            <meta-data
                 android:name="com.leinardi.template.logging.initializer.TimberInitializer"
                 android:value="androidx.startup" />
             <meta-data
@@ -83,6 +87,19 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <service
+            android:name="com.leinardi.template.account.authenticator.AuthenticatorService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/account_authenticator" />
+        </service>
 
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"

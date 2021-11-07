@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -46,7 +45,7 @@ import com.leinardi.template.foo.R
 import com.leinardi.template.foo.ui.FooContract.Effect
 import com.leinardi.template.foo.ui.FooContract.Event
 import com.leinardi.template.foo.ui.FooContract.State
-import com.leinardi.template.ui.component.AutoSizedCircularProgressIndicator
+import com.leinardi.template.ui.component.ProgressButton
 import com.leinardi.template.ui.component.TopAppBar
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -100,16 +99,12 @@ fun FooScreen(
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) }
                 )
-                Button(
+                ProgressButton(
                     onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
-                    enabled = !state.isLoading,
+                    loading = state.isLoading,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    if (state.isLoading) {
-                        AutoSizedCircularProgressIndicator(Modifier.size(20.dp))
-                    } else {
-                        Text(stringResource(R.string.i18n_foo_send_text_to_bar))
-                    }
+                    Text(stringResource(R.string.i18n_foo_send_text_to_bar))
                 }
                 Button(
                     onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },

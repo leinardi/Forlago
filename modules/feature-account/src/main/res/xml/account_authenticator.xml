@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<account-authenticator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accountType="@string/application_id"
+    android:customTokens="true"
+    android:icon="@mipmap/ui_ic_launcher"
+    android:label="@string/i18n_app_name"
+    android:smallIcon="@mipmap/ui_ic_launcher_round" />

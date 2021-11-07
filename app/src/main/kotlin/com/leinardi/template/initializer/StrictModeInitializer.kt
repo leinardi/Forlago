@@ -29,7 +29,6 @@ class StrictModeInitializer : Initializer<Unit> {
             val builderThread = StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .permitDiskReads()
-                .permitDiskWrites()
                 .permitCustomSlowCalls()
                 .penaltyLog()
                 .penaltyDeath()
@@ -38,14 +37,24 @@ class StrictModeInitializer : Initializer<Unit> {
 
             val builderVM = StrictMode.VmPolicy.Builder()
 //                .detectActivityLeaks() // https://issuetracker.google.com/issues/204905432
-                .detectFileUriExposure()
-                .detectLeakedRegistrationObjects()
                 .detectLeakedSqlLiteObjects()
+                .detectLeakedRegistrationObjects()
+                .detectFileUriExposure()
+                .detectCleartextNetwork()
                 .penaltyLog()
                 .penaltyDeath()
                 .apply {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         detectContentUriWithoutPermission()
+                        detectUntaggedSockets()
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        detectCredentialProtectedWhileLocked()
+                        detectImplicitDirectBoot()
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        detectIncorrectContextUse()
+                        detectUnsafeIntentLaunch()
                     }
                 }
 

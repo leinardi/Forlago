@@ -16,6 +16,7 @@
 plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'template.detekt-conventions'
 }
 
 kapt {
@@ -27,27 +28,27 @@ kapt {
 }
 
 android {
-    compileSdk libs.versions.compileSdk.get() as int
-    buildToolsVersion libs.versions.buildTools.get()
+    compileSdk androidConfig.compileSdk
+    buildToolsVersion androidConfig.buildTools
 
     defaultConfig {
-        minSdk libs.versions.minSdk.get() as int
-        targetSdk libs.versions.targetSdk.get() as int
+        minSdk androidConfig.minSdk
+        targetSdk androidConfig.targetSdk
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "DEEP_LINK_SCHEMA", "\"template\"")
+        buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${appConfig.deepLinkSchema}\"")
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility androidConfig.javaVersion
+        targetCompatibility androidConfig.javaVersion
     }
     kotlinOptions {
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
         freeCompilerArgs += '-Xsuppress-version-warnings' // Needed to suppress warning due to languageVersion = '1.6' on kotlin 1.5.x
-        jvmTarget = JavaVersion.VERSION_11
+        jvmTarget = androidConfig.javaVersion
         useIR = true
     }
     testOptions {
