@@ -12,6 +12,9 @@ import com.leinardi.template.account.BuildConfig
 import com.leinardi.template.account.feature.AccountFeature
 import com.leinardi.template.account.interactor.GetNewAccessTokenInteractor
 import com.leinardi.template.android.ext.toLongDateTimeString
+import com.leinardi.template.encryption.interactor.DecryptDeterministicallyInteractor
+import com.leinardi.template.encryption.interactor.DecryptInteractor
+import com.leinardi.template.encryption.interactor.EncryptDeterministicallyInteractor
 import com.leinardi.template.feature.FeatureManager
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
@@ -43,9 +46,12 @@ import javax.inject.Singleton
 
 @Singleton
 class AccountAuthenticator @Inject constructor(
-    private val application: Application,
-    private val featureManager: FeatureManager,
+    application: Application,
     private val accountManager: AccountManager,
+    private val decryptInteractor: DecryptInteractor,
+    private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
+    private val encryptDeterministicallyInteractor: EncryptDeterministicallyInteractor,
+    private val featureManager: FeatureManager,
     private val getNewAccessTokenInteractor: GetNewAccessTokenInteractor,
 ) : AbstractAccountAuthenticator(application) {
     /**
@@ -222,24 +228,25 @@ class AccountAuthenticator @Inject constructor(
         response: AccountAuthenticatorResponse,
         options: Bundle
     ): Bundle {
-        // TODO encrypt this stuff
         var expiryInMillis = accountManager.getUserData(account, KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull() ?: 0
-        var accessToken = accountManager.peekAuthToken(account, authTokenType)
+        var accessToken = accountManager.peekAuthToken(account, authTokenType)?.let { runBlocking { decryptDeterministicallyInteractor(it) } }
+        Timber.d(">>>> accessToken = $accessToken")
         val isTokenExpired = System.currentTimeMillis() - expiryInMillis > 0
 
         var errorBundle: Bundle? = null
         if (accessToken.isNullOrEmpty() || isTokenExpired) {
             Timber.d("Access token missing or expired")
             accessToken = null
-            accountManager.setAuthToken(account, authTokenType, accessToken)
-            val refreshToken: String? = accountManager.getPassword(account)
+            accountManager.invalidateAuthToken(account.type, authTokenType)
+            val refreshToken: String? = accountManager.getPassword(account)?.let { runBlocking { decryptInteractor(it) } }
             if (!refreshToken.isNullOrEmpty()) {
                 Timber.d("Refreshing the access token...")
                 when (val result = runBlocking { getNewAccessTokenInteractor(refreshToken) }) {
                     is GetNewAccessTokenInteractor.Result.Success -> {
                         Timber.d("Access token successfully refreshed")
-                        accessToken = result.accessToken
+                        accessToken = runBlocking { encryptDeterministicallyInteractor(result.accessToken) }
                         expiryInMillis = result.expiryInMillis
+                        Timber.d(">>>> authToken = $accessToken")
                         accountManager.setAuthToken(account, AUTHTOKEN_TYPE, accessToken)
                         accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
                     }

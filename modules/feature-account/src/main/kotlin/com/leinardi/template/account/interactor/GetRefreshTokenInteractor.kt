@@ -17,11 +17,31 @@
 package com.leinardi.template.account.interactor
 
 import android.accounts.AccountManager
+import com.leinardi.template.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.encryption.interactor.DecryptInteractor
+import kotlinx.coroutines.withContext
+import timber.log.Timber
+import java.security.GeneralSecurityException
 import javax.inject.Inject
 
 class GetRefreshTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
+    private val decryptInteractor: DecryptInteractor,
+    private val dispatchers: CoroutineDispatchers,
     private val getAccountInteractor: GetAccountInteractor,
+    private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
 ) {
-    operator fun invoke(): String? = getAccountInteractor()?.let { accountManager.getPassword(it) }
+    suspend operator fun invoke(): String? = withContext(dispatchers.io) {
+        getAccountInteractor()?.let { account ->
+            accountManager.getPassword(account)?.let { refreshToken ->
+                try {
+                    decryptInteractor(refreshToken)
+                } catch (e: GeneralSecurityException) {
+                    Timber.e(e, "Unable to decrypt the refreshToken. Invalidating it to trigger a new authentication")
+                    invalidateRefreshTokenInteractor()
+                    null
+                }
+            }
+        }
+    }
 }

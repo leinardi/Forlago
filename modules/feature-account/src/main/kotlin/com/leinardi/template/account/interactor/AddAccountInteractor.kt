@@ -20,6 +20,7 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import com.leinardi.template.account.authenticator.AccountAuthenticator
 import com.leinardi.template.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.encryption.interactor.EncryptInteractor
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,15 +28,19 @@ import javax.inject.Inject
 class AddAccountInteractor @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,
+    private val encryptInteractor: EncryptInteractor,
     private val getAccessTokenInteractor: GetAccessTokenInteractor,
 ) {
-    suspend operator fun invoke(name: String, refreshToken: String): Boolean =
-        withContext(dispatchers.io) {
-            val accountCreated = accountManager.addAccountExplicitly(Account(name, AccountAuthenticator.ACCOUNT_TYPE), refreshToken, null)
-            val result = getAccessTokenInteractor()
-            if (result is GetAccessTokenInteractor.Result.Failure) {
-                Timber.e("Unable to get accessToken: $result")
-            }
-            return@withContext accountCreated
+    suspend operator fun invoke(name: String, refreshToken: String): Boolean = withContext(dispatchers.io) {
+        val accountCreated = accountManager.addAccountExplicitly(
+            Account(name, AccountAuthenticator.ACCOUNT_TYPE),
+            encryptInteractor(refreshToken),
+            null
+        )
+        val result = getAccessTokenInteractor()
+        if (result is GetAccessTokenInteractor.Result.Failure) {
+            Timber.e("Unable to get accessToken: $result")
         }
+        accountCreated
+    }
 }

@@ -14,24 +14,24 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.account.interactor
+package com.leinardi.template.encryption.interactor
 
-import android.accounts.AccountManager
-import com.leinardi.template.account.authenticator.AccountAuthenticator
 import com.leinardi.template.android.coroutine.CoroutineDispatchers
-import com.leinardi.template.encryption.interactor.DecryptDeterministicallyInteractor
+import com.leinardi.template.encryption.CryptoHelper
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PeekAccessTokenInteractor @Inject constructor(
-    private val accountManager: AccountManager,
-    private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
+class EncryptInteractor @Inject constructor(
+    private val cryptoHelper: CryptoHelper,
     private val dispatchers: CoroutineDispatchers,
-    private val getAccountInteractor: GetAccountInteractor,
 ) {
-    suspend operator fun invoke(): String? = withContext(dispatchers.io) {
-        getAccountInteractor()?.let { account ->
-            accountManager.peekAuthToken(account, AccountAuthenticator.AUTHTOKEN_TYPE)?.let { decryptDeterministicallyInteractor(it) }
+    suspend operator fun invoke(plainText: String): String =
+        withContext(dispatchers.io) {
+            cryptoHelper.encrypt(plainText)
         }
-    }
+
+    suspend operator fun invoke(plainText: ByteArray): ByteArray =
+        withContext(dispatchers.io) {
+            cryptoHelper.encrypt(plainText)
+        }
 }

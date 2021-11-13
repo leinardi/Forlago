@@ -21,12 +21,14 @@ import android.content.Intent
 import android.os.Bundle
 import com.leinardi.template.account.authenticator.AccountAuthenticator
 import com.leinardi.template.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.encryption.interactor.DecryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
 class GetAccessTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
+    private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
     private val dispatchers: CoroutineDispatchers,
     private val getAccountInteractor: GetAccountInteractor,
 ) {
@@ -48,7 +50,7 @@ class GetAccessTokenInteractor @Inject constructor(
                 }
             }
 
-            val accessToken = bundle.getString(AccountManager.KEY_AUTHTOKEN)
+            val accessToken = bundle.getString(AccountManager.KEY_AUTHTOKEN)?.let { decryptDeterministicallyInteractor(it) }
             if (!accessToken.isNullOrEmpty()) {
                 return Result.Success(accessToken)
             }

@@ -53,6 +53,7 @@ androidx-palette = { module = "androidx.palette:palette", version = "1.0.0" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
+androidx-security = { module = "androidx.security:security-crypto", version = "1.0.0" }
 androidx-startup = { module = "androidx.startup:startup-runtime", version = "1.1.0" }
 androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test" }
 androidx-test-espresso-core = { module = "androidx.test.espresso:espresso-core", version = "3.4.0" }
@@ -76,6 +77,7 @@ kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.re
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.7" }
 seismic = { module = "com.squareup:seismic", version = "1.0.3" }
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
+tink = { module = "com.google.crypto.tink:tink-android", version = "1.6.1" }
 
 # plugins
 plugin-aboutlibraries = { module = "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin", version.ref = "aboutlibraries" }

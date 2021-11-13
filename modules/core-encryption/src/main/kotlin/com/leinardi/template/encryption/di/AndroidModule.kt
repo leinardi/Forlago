@@ -14,22 +14,30 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.account.interactor
+package com.leinardi.template.encryption.di
 
-import android.accounts.AbstractAccountAuthenticator
-import android.accounts.AccountManager
+import android.app.Application
 import com.leinardi.template.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.encryption.CryptoHelper
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
+import javax.inject.Singleton
 
-class GetAccessTokenExpiryInteractor @Inject constructor(
-    private val accountManager: AccountManager,
-    private val dispatchers: CoroutineDispatchers,
-    private val getAccountInteractor: GetAccountInteractor,
-) {
-    suspend operator fun invoke(): Long? = withContext(dispatchers.io) {
-        getAccountInteractor()?.let { account ->
-            accountManager.getUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull()
+@Module
+@InstallIn(SingletonComponent::class)
+object AndroidModule {
+    @Provides
+    @Singleton
+    fun provideCoroutineDispatchers(
+        dispatchers: CoroutineDispatchers,
+        application: Application,
+    ): CryptoHelper = runBlocking {
+        withContext(dispatchers.io) {
+            CryptoHelper.Builder(application).build()
         }
     }
 }

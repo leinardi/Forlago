@@ -15,19 +15,21 @@
  */
 
 plugins {
-    id 'template.android-feature-conventions'
+    id 'template.android-core-conventions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    resourcePrefix 'account_'
-
+    resourcePrefix 'encryption_'
     defaultConfig {
-        resValue 'string', 'application_id', androidConfig.accountType
-        buildConfigField "String", "ACCOUNT_TYPE", "\"${androidConfig.accountType}\""
-        consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
+        consumerProguardFiles "$projectDir/proguard-encryption-consumer-rules.pro"
     }
 }
-
 dependencies {
-    implementation project(':modules:core-encryption')
+    implementation project(':modules:core-android')
+    implementation libs.androidx.security
+    implementation libs.androidx.startup
+    implementation libs.hilt.android
+    implementation libs.tink
+    kapt libs.hilt.compiler
 }

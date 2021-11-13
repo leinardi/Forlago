@@ -17,19 +17,24 @@
 package com.leinardi.template.account.interactor
 
 import android.accounts.AccountManager
+import com.leinardi.template.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.encryption.interactor.EncryptInteractor
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SetRefreshTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
+    private val dispatchers: CoroutineDispatchers,
+    private val encryptInteractor: EncryptInteractor,
     private val getAccountInteractor: GetAccountInteractor,
 ) {
     /**
      * Setting the refresh token will also invalidate the current accessToken.
      */
-    operator fun invoke(refreshToken: String): Boolean {
+    suspend operator fun invoke(refreshToken: String): Boolean = withContext(dispatchers.io) {
         val account = getAccountInteractor()
-        return if (account != null) {
-            accountManager.setPassword(account, refreshToken)
+        if (account != null) {
+            accountManager.setPassword(account, encryptInteractor(refreshToken))
             true
         } else {
             false

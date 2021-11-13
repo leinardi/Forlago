@@ -56,7 +56,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnOpenSignInScreenClicked ->
                     templateNavigator.navigate(AccountAuthenticatorDestination.createRoute(viewState.value.accountName != null))
                 Event.OnRefreshAccessTokenClicked -> refreshAccessToken()
-                Event.OnViewAttached -> updateState { createState() }
+                Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }
         }
@@ -64,18 +64,18 @@ class AccountDebugViewModel @Inject constructor(
 
     private suspend fun invalidateAccessToken() {
         invalidateAccessTokenInteractor()
-        updateState { createState() }
+        updateState()
     }
 
     private suspend fun invalidateRefreshToken() {
         invalidateRefreshTokenInteractor()
-        updateState { createState() }
+        updateState()
     }
 
     private suspend fun refreshAccessToken() {
         val result = getAccessTokenInteractor()
         Timber.d("getAccessToken result = $result")
-        updateState { createState() }
+        updateState()
         when (result) {
             is GetAccessTokenInteractor.Result.Success ->
                 sendEffect { Effect.ShowSnackbar("Access token = ${result.accessToken}") }
@@ -92,11 +92,11 @@ class AccountDebugViewModel @Inject constructor(
         }
     }
 
-    private fun createState(): State {
+    private suspend fun updateState() {
         val account = getAccountInteractor()
         val refreshToken = getRefreshTokenInteractor()
         val accessToken = peekAccessTokenInteractor()
         val accessTokenExpiration = getAccessTokenExpiryInteractor()
-        return State(account?.name, refreshToken, accessToken, accessTokenExpiration)
+        updateState { State(account?.name, refreshToken, accessToken, accessTokenExpiration) }
     }
 }

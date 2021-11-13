@@ -20,12 +20,14 @@ import android.accounts.AbstractAccountAuthenticator
 import android.accounts.AccountManager
 import com.leinardi.template.account.authenticator.AccountAuthenticator
 import com.leinardi.template.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.encryption.interactor.EncryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class InvalidateAccessTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,
+    private val encryptDeterministicallyInteractor: EncryptDeterministicallyInteractor,
     private val getAccountInteractor: GetAccountInteractor,
     private val peekAccessTokenInteractor: PeekAccessTokenInteractor,
 ) {
@@ -33,7 +35,9 @@ class InvalidateAccessTokenInteractor @Inject constructor(
         withContext(dispatchers.io) {
             getAccountInteractor()?.let { account ->
                 val accessToken = peekAccessTokenInteractor()
-                accountManager.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE, accessToken)
+                if (accessToken != null) {
+                    accountManager.invalidateAuthToken(AccountAuthenticator.ACCOUNT_TYPE, encryptDeterministicallyInteractor(accessToken))
+                }
                 accountManager.setUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY, 0.toString())
             }
         }

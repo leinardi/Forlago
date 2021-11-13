@@ -19,6 +19,7 @@ package com.leinardi.template.account.ui
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.leinardi.template.account.interactor.AddAccountInteractor
+import com.leinardi.template.account.interactor.GetAccessTokenInteractor
 import com.leinardi.template.account.interactor.GetAccountInteractor
 import com.leinardi.template.account.interactor.SetRefreshTokenInteractor
 import com.leinardi.template.account.interactor.SignInInteractor
@@ -37,6 +38,7 @@ import javax.inject.Inject
 class AccountAuthenticatorViewModel @Inject constructor(
     private val addAccountInteractor: AddAccountInteractor,
     private val getAccountInteractor: GetAccountInteractor,
+    private val getAccessTokenInteractor: GetAccessTokenInteractor,
     private val setRefreshTokenInteractor: SetRefreshTokenInteractor,
     private val savedStateHandle: SavedStateHandle,
     private val signInInteractor: SignInInteractor,
@@ -71,7 +73,9 @@ class AccountAuthenticatorViewModel @Inject constructor(
         username: String
     ) {
         if (viewState.value.isRelogin) {
-            setRefreshTokenInteractor(refreshToken)
+            if (setRefreshTokenInteractor(refreshToken)) {
+                getAccessTokenInteractor()
+            }
         } else {
             addAccountInteractor(username, refreshToken)
         }
