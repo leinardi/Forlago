@@ -23,8 +23,7 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 class SignInInteractor @Inject constructor() {
-
-    @Suppress("MagicNumber") // We are faking the sign in with the back-end
+    @Suppress("MagicNumber")  // We are faking the sign in with the back-end
     suspend operator fun invoke(username: String, password: String): Result {
         // This simulates fetching a new refresh token. The access token won't be valid 20% of the time.
         delay(TimeUnit.SECONDS.toMillis(2))

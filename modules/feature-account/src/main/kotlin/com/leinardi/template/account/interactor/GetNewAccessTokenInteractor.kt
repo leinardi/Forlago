@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class GetNewAccessTokenInteractor @Inject constructor() {
-
     suspend operator fun invoke(refreshToken: String): Result {
         delay(TimeUnit.SECONDS.toMillis(1))
         return Result.Success(

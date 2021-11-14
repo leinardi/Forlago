@@ -85,7 +85,6 @@ fun AccountAuthenticatorScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 var username by rememberSaveable { mutableStateOf(state.username) }
-                var password by rememberSaveable { mutableStateOf(state.password) }
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     enabled = !state.isRelogin,
@@ -94,6 +93,7 @@ fun AccountAuthenticatorScreen(
                     label = { Text("Username") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
+                var password by rememberSaveable { mutableStateOf(state.password) }
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
                     value = password,

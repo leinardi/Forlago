@@ -33,11 +33,15 @@ interface TemplateNavigator {
      * link. In this case the current activity (determined by the context used to create this
      * NavController) will be finished and the user will be taken to an appropriate destination
      * in this app on its own task.
+     *
+     * @return true if the navigation request was successfully delivered to the View, false otherwise
      */
     fun navigateUp(): Boolean
 
     /**
      * Attempts to pop the navigation controller's back stack. Analogous to when the user presses the system Back button.
+     *
+     * @return true if the navigation request was successfully delivered to the View, false otherwise
      */
     fun navigateBack(): Boolean
 

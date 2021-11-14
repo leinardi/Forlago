@@ -23,7 +23,8 @@ spotless {
         target '**/*.kt'
         targetExclude("$buildDir/**/*.kt")
         targetExclude('bin/**/*.kt')
-        ktlint().userData(['disabled_rules': 'no-blank-line-before-rbrace'])
+        ktlint("0.43.0").userData(['disabled_rules': 'no-blank-line-before-rbrace'])
+        diktat("1.0.0-rc.4").configFile("${rootProject.rootDir}/config/diktat/diktat-analysis.yml")
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()

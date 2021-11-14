@@ -36,7 +36,6 @@ class DebugViewModel @Inject constructor(
     private val getFeaturesInteractor: GetFeaturesInteractor,
     private val templateNavigator: TemplateNavigator,
 ) : BaseViewModel<Event, State, Effect>() {
-
     override fun provideInitialState() = State(
         debugInfo = getDebugInfoInteractor(),
         featureList = getFeaturesInteractor()

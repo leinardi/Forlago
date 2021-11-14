@@ -44,7 +44,6 @@ class AccountAuthenticatorViewModel @Inject constructor(
     private val signInInteractor: SignInInteractor,
     private val templateNavigator: TemplateNavigator,
 ) : BaseViewModel<Event, State, Effect>() {
-
     override fun provideInitialState(): State {
         val account = getAccountInteractor()
         return State(savedStateHandle[AccountAuthenticatorDestination.RELOGIN_PARAM] ?: false, account?.name.orEmpty(), "")
@@ -61,8 +60,8 @@ class AccountAuthenticatorViewModel @Inject constructor(
             updateState { viewState.value.copy(isLoading = true) }
             when (val result = signInInteractor(username, password)) {
                 is SignInInteractor.Result.Success -> handleSuccessfulSignIn(result.refreshToken, username)
-                SignInInteractor.Result.Failure.BadAuthentication -> Timber.d("> SignInInteractor.Result.Failure.BadAuthentication") // TODO
-                SignInInteractor.Result.Failure.NetworkError -> Timber.d("> SignInInteractor.Result.Failure.NetworkError") // TODO
+                SignInInteractor.Result.Failure.BadAuthentication -> Timber.d("> SignInInteractor.Result.Failure.BadAuthentication")  // TODO
+                SignInInteractor.Result.Failure.NetworkError -> Timber.d("> SignInInteractor.Result.Failure.NetworkError")  // TODO
             }
             updateState { viewState.value.copy(isLoading = false) }
         }

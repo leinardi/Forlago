@@ -44,7 +44,6 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     @Inject lateinit var templateNavigator: TemplateNavigator
 
     private val viewModel: MainViewModel by viewModels()
@@ -101,7 +100,7 @@ fun TemplateScaffold(
         }
     }
 
-    NavHost( // check https://google.github.io/accompanist/navigation-animation/
+    NavHost(  // check https://google.github.io/accompanist/navigation-animation/
         navController = navHostController,
         startDestination = startDestination,
         builder = {

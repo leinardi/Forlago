@@ -17,6 +17,7 @@
 package com.leinardi.template.ui.component
 
 import androidx.compose.material.SnackbarHostState
+import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 
-val LocalSnackbarHostState = compositionLocalOf<SnackbarHostState> { error("No SnackbarHostState provided") }
+val LocalSnackbarHostState: ProvidableCompositionLocal<SnackbarHostState> = compositionLocalOf { error("No SnackbarHostState provided") }

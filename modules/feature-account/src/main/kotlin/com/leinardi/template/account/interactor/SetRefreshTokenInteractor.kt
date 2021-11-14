@@ -30,6 +30,8 @@ class SetRefreshTokenInteractor @Inject constructor(
 ) {
     /**
      * Setting the refresh token will also invalidate the current accessToken.
+     *
+     * @return true if the operation was successful, false otherwise
      */
     suspend operator fun invoke(refreshToken: String): Boolean = withContext(dispatchers.io) {
         val account = getAccountInteractor()

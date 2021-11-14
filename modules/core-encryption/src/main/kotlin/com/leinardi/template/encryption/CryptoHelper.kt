@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.leinardi.template.encryption
 
 import android.content.Context
@@ -54,7 +55,6 @@ class CryptoHelper(
     private val signer: PublicKeySign,
     private val verifier: PublicKeyVerify,
 ) {
-
     /**
      * Builder class to configure CryptoHelper
      */
@@ -209,8 +209,8 @@ class CryptoHelper(
         }
 
     companion object {
-        private const val KEYSTORE_PATH_URI = "android-keystore://"
-        private const val KEYSET_PREF_NAME = "__crypto_helper_pref__"
         private const val KEYSET_ALIAS = "__crypto_helper_keyset"
+        private const val KEYSET_PREF_NAME = "__crypto_helper_pref__"
+        private const val KEYSTORE_PATH_URI = "android-keystore://"
     }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2021 Roberto Leinardi.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.leinardi.template.account.authenticator
 
 import android.accounts.AbstractAccountAuthenticator
@@ -58,6 +74,7 @@ class AccountAuthenticator @Inject constructor(
      * Returns a Bundle that contains the Intent of the activity that can be used to edit the
      * properties. In order to indicate success the activity should call response.setResult()
      * with a non-null Bundle.
+     *
      * @param response used to set the result for the request. If the Constants.INTENT_KEY
      *   is set in the bundle then this response field is to be used for sending future
      *   results if and when the Intent is started.
@@ -75,6 +92,7 @@ class AccountAuthenticator @Inject constructor(
 
     /**
      * Adds an account of the specified accountType.
+     *
      * @param response to send the result back to the AccountManager, will never be null
      * @param accountType the type of account to add, will never be null
      * @param authTokenType the type of auth token to retrieve after adding the account, may be null
@@ -142,6 +160,7 @@ class AccountAuthenticator @Inject constructor(
      * the server).
      *
      * This method may be called from any thread, but the returned AccountManagerFuture must not be used on the main thread.
+     *
      * @param response to send the result back to the AccountManager, will never be null
      * @param account the account whose credentials are to be checked, will never be null
      * @param options a Bundle of authenticator-specific options, may be null
@@ -230,7 +249,6 @@ class AccountAuthenticator @Inject constructor(
     ): Bundle {
         var expiryInMillis = accountManager.getUserData(account, KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull() ?: 0
         var accessToken = accountManager.peekAuthToken(account, authTokenType)?.let { runBlocking { decryptDeterministicallyInteractor(it) } }
-        Timber.d(">>>> accessToken = $accessToken")
         val isTokenExpired = System.currentTimeMillis() - expiryInMillis > 0
 
         var errorBundle: Bundle? = null
@@ -246,11 +264,10 @@ class AccountAuthenticator @Inject constructor(
                         Timber.d("Access token successfully refreshed")
                         accessToken = runBlocking { encryptDeterministicallyInteractor(result.accessToken) }
                         expiryInMillis = result.expiryInMillis
-                        Timber.d(">>>> authToken = $accessToken")
                         accountManager.setAuthToken(account, AUTHTOKEN_TYPE, accessToken)
                         accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
                     }
-                    GetNewAccessTokenInteractor.Result.Failure.BadAuthentication -> // Invalid refresh token
+                    GetNewAccessTokenInteractor.Result.Failure.BadAuthentication ->  // Invalid refresh token
                         Timber.w("The refresh token is not valid")
                     GetNewAccessTokenInteractor.Result.Failure.NetworkError -> {
                         val error = "Network error while refreshing the token"
@@ -276,6 +293,7 @@ class AccountAuthenticator @Inject constructor(
 
     /**
      * Ask the authenticator for a localized label for the given authTokenType.
+     *
      * @param authTokenType the authTokenType whose label is to be returned, will never be null
      * @return the localized label of the auth token type, may be null if the type isn't known
      */
@@ -286,6 +304,7 @@ class AccountAuthenticator @Inject constructor(
 
     /**
      * Update the locally stored credentials for an account.
+     *
      * @param response to send the result back to the AccountManager, will never be null
      * @param account the account whose credentials are to be updated, will never be null
      * @param authTokenType the type of auth token to retrieve after updating the credentials,
@@ -315,6 +334,7 @@ class AccountAuthenticator @Inject constructor(
 
     /**
      * Checks if the account supports all the specified authenticator specific features.
+     *
      * @param response to send the result back to the AccountManager, will never be null
      * @param account the account to check, will never be null
      * @param features an array of features to check, will never be null
@@ -382,8 +402,8 @@ class AccountAuthenticator @Inject constructor(
     )
 
     companion object {
-        const val KEY_IS_NEW_ACCOUNT = "isNewAccount"
         const val ACCOUNT_TYPE = BuildConfig.ACCOUNT_TYPE
-        const val AUTHTOKEN_TYPE = "defaultAuthToken" // https://stackoverflow.com/q/25056112/293878
+        const val AUTHTOKEN_TYPE = "defaultAuthToken"  // https://stackoverflow.com/q/25056112/293878
+        const val KEY_IS_NEW_ACCOUNT = "isNewAccount"
     }
 }

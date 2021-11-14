@@ -23,7 +23,6 @@ import androidx.startup.Initializer
 import com.leinardi.template.BuildConfig
 
 class StrictModeInitializer : Initializer<Unit> {
-
     override fun create(context: Context) {
         if (BuildConfig.DEBUG) {
             val builderThread = StrictMode.ThreadPolicy.Builder()
@@ -36,7 +35,7 @@ class StrictModeInitializer : Initializer<Unit> {
             StrictMode.setThreadPolicy(builderThread.build())
 
             val builderVM = StrictMode.VmPolicy.Builder()
-//                .detectActivityLeaks() // https://issuetracker.google.com/issues/204905432
+                // .detectActivityLeaks() // https://issuetracker.google.com/issues/204905432
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedRegistrationObjects()
                 .detectFileUriExposure()

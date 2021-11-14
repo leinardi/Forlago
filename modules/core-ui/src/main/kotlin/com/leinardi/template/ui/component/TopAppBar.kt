@@ -54,7 +54,9 @@ fun TopAppBar(
                     )
                 }
             }
-        } else null,
+        } else {
+            null
+        },
         actions = actions
     )
 }

@@ -34,11 +34,9 @@ class MainViewModel @Inject constructor(
 
     override fun handleEvent(event: Event) {
         when (event) {
-            is Event.OnIntentReceived -> {
-                viewModelScope.launch {
-                    featuresInteractor().forEach { feature ->
-                        feature.handleIntent(event.intent)
-                    }
+            is Event.OnIntentReceived -> viewModelScope.launch {
+                featuresInteractor().forEach { feature ->
+                    feature.handleIntent(event.intent)
                 }
             }
         }

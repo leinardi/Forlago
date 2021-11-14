@@ -334,7 +334,7 @@ formatting:
     active: true
     autoCorrect: true
   NoMultipleSpaces:
-    active: true
+    active: false # Custom - Diktat does a better job
     autoCorrect: true
   NoSemicolons:
     active: true
