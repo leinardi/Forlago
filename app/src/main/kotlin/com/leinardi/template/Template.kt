@@ -18,16 +18,20 @@ package com.leinardi.template
 
 import android.app.Application
 import android.os.SystemClock
+import com.leinardi.template.account.feature.AccountFeature
 import com.leinardi.template.bar.feature.BarFeature
 import com.leinardi.template.debug.feature.DebugFeature
 import com.leinardi.template.feature.FeatureManager
 import com.leinardi.template.foo.feature.FooFeature
+import com.leinardi.template.navigation.TemplateNavigator
+import com.leinardi.template.ui.MainActivity
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
 @HiltAndroidApp
 class Template : Application() {
     @Inject lateinit var featureManager: FeatureManager
+    @Inject lateinit var navigator: TemplateNavigator
 
     override fun onCreate() {
         super.onCreate()
@@ -43,10 +47,11 @@ class Template : Application() {
     private fun registerFeatures() {
         featureManager.register(
             listOf(
+                AccountFeature(MainActivity.createIntent(this), navigator),
                 FooFeature(),
                 BarFeature(),
                 DebugFeature(),
-            )
+            ),
         )
     }
 }

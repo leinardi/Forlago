@@ -24,7 +24,6 @@ import com.leinardi.template.logging.DebugTree
 import timber.log.Timber
 
 class TimberInitializer : Initializer<Unit> {
-
     override fun create(context: Context) {
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())

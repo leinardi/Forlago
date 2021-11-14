@@ -24,11 +24,14 @@ import javax.inject.Singleton
 
 @Singleton
 internal class TemplateNavigatorImpl @Inject constructor() : TemplateNavigator {
-    private val navigationEvents = Channel<NavigatorEvent>()
+    // A capacity > 0 is required to not lose an event sent before the nav host starts collecting
+    private val navigationEvents = Channel<NavigatorEvent>(capacity = 1)
 
     override val destinations = navigationEvents.receiveAsFlow()
 
     override fun navigateUp(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateUp).isSuccess
+
+    override fun navigateBack(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateBack).isSuccess
 
     override fun navigate(route: String, builder: NavOptionsBuilder.() -> Unit): Boolean =
         navigationEvents.trySend(NavigatorEvent.Directions(route, builder)).isSuccess

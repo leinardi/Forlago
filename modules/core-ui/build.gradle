@@ -40,5 +40,7 @@ dependencies {
     api libs.androidx.core.splashscreen
     api libs.androidx.lifecycle.viewmodel
     api libs.androidx.material
+    api libs.accompanist.pager
+    api libs.accompanist.pager.indicators
     implementation rootProject.project(':modules:core-i18n')
 }

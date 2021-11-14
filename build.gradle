@@ -25,7 +25,7 @@ buildscript {
 }
 
 plugins {
-    id 'template.detekt-conventions'
+    id 'template.config-conventions'
     id 'template.generate-module-conventions'
     id 'template.spotless-conventions'
     id 'template.versions-conventions'
@@ -48,6 +48,6 @@ subprojects {
 }
 
 wrapper {
-    gradleVersion = '7.2'
+    gradleVersion = libs.versions.gradle.get()
     distributionType = Wrapper.DistributionType.ALL
 }

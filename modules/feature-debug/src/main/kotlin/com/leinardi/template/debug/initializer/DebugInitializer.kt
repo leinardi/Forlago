@@ -38,7 +38,7 @@ class DebugInitializer : Initializer<ShakeDetector?>, DefaultLifecycleObserver {
 
     private val shakeDetector by lazy {
         ShakeDetector {
-            navigator.navigate(DebugDestination.route())
+            navigator.navigate(DebugDestination.createRoute())
         }
     }
 

@@ -19,7 +19,7 @@ package com.leinardi.template.foo.feature
 import androidx.compose.runtime.Composable
 import com.leinardi.template.feature.Feature
 import com.leinardi.template.foo.ui.FooScreen
-import com.leinardi.template.foo.ui.debug.FooDebugSection
+import com.leinardi.template.foo.ui.debug.FooDebugPage
 import com.leinardi.template.navigation.NavigationDestination
 import com.leinardi.template.navigation.destination.foo.FooDestination
 
@@ -27,8 +27,8 @@ class FooFeature : Feature() {
     override val id = "Foo"
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-        FooDestination to { FooScreen() }
+        FooDestination to { FooScreen() },
     )
 
-    override val debugComposable: @Composable () -> Unit = { FooDebugSection() }
+    override val debugComposable: @Composable () -> Unit = { FooDebugPage() }
 }

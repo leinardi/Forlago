@@ -16,11 +16,16 @@
 
 package com.leinardi.template.ui
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -29,51 +34,78 @@ import com.leinardi.template.navigation.NavigatorEvent
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.navigation.addComposableDestinations
 import com.leinardi.template.navigation.addDialogDestinations
-import com.leinardi.template.navigation.destination.foo.FooDestination
+import com.leinardi.template.ui.MainContract.Event.OnIntentReceived
 import com.leinardi.template.ui.theme.TemplateTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     @Inject lateinit var templateNavigator: TemplateNavigator
+
+    private val viewModel: MainViewModel by viewModels()
+
+    lateinit var navHostController: NavHostController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
+            val navHostController: NavHostController = rememberNavController().also { this.navHostController = it }
             TemplateTheme {
                 TemplateScaffold(
+                    startDestination = viewModel.viewState.value.startDestination,
+                    navHostController = navHostController,
                     templateNavigator = templateNavigator,
                 )
             }
         }
+        viewModel.onUiEvent(OnIntentReceived(intent))
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        viewModel.onUiEvent(OnIntentReceived(intent))
+        navHostController.handleDeepLink(intent)
+    }
+
+    companion object {
+        fun createIntent(context: Context) = Intent(context, MainActivity::class.java)
     }
 }
 
 @Composable
-fun TemplateScaffold(templateNavigator: TemplateNavigator) {
-    val navHostController: NavHostController = rememberNavController()
+fun TemplateScaffold(
+    navHostController: NavHostController,
+    templateNavigator: TemplateNavigator,
+    startDestination: String,
+) {
+    val activity = LocalContext.current as Activity
     LaunchedEffect(navHostController) {
-        templateNavigator.destinations.collect {
-            when (val event = it) {
-                is NavigatorEvent.NavigateUp -> navHostController.navigateUp()
-                is NavigatorEvent.Directions -> navHostController.navigate(
-                    event.destination,
-                    event.builder
-                )
+        launch {
+            templateNavigator.destinations.collect {
+                when (val event = it) {
+                    is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
+                    is NavigatorEvent.NavigateBack -> activity.onBackPressed()
+                    is NavigatorEvent.Directions -> navHostController.navigate(
+                        event.destination,
+                        event.builder,
+                    )
+                }
             }
         }
     }
 
-    NavHost( // check https://google.github.io/accompanist/navigation-animation/
+    NavHost(  // check https://google.github.io/accompanist/navigation-animation/
         navController = navHostController,
-        startDestination = FooDestination.route(),
+        startDestination = startDestination,
         builder = {
             addComposableDestinations()
             addDialogDestinations()
-        }
+        },
     )
 }

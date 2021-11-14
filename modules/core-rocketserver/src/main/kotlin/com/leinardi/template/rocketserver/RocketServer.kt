@@ -15,3 +15,5 @@
  */
 
 package com.leinardi.template.rocketserver
+
+object RocketServer

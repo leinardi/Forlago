@@ -169,7 +169,6 @@ tasks.named("dependencyUpdates").configure {
                         }
                     }
                 }
-
             }
         }
         new File("${project.buildDir}/reports/dependencyUpdates").mkdirs()

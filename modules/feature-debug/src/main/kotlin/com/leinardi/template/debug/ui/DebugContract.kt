@@ -22,16 +22,21 @@ import com.leinardi.template.ui.base.ViewEffect
 import com.leinardi.template.ui.base.ViewEvent
 import com.leinardi.template.ui.base.ViewState
 
-class DebugContract {
+object DebugContract {
     data class State(
         val debugInfo: GetDebugInfoInteractor.DebugInfo,
-        val featureComposableList: List<@Composable () -> Unit>,
+        val featureList: List<Feature>,
         val bottomNavigationItems: List<DebugViewModel.BottomNavigationItem> = listOf(
             DebugViewModel.BottomNavigationItem.Info,
-            DebugViewModel.BottomNavigationItem.Features
+            DebugViewModel.BottomNavigationItem.Features,
         ),
-        val selectedNavigationItem: DebugViewModel.BottomNavigationItem = bottomNavigationItems[0]
-    ) : ViewState
+        val selectedNavigationItem: DebugViewModel.BottomNavigationItem = bottomNavigationItems[0],
+    ) : ViewState {
+        data class Feature(
+            val composable: @Composable () -> Unit,
+            val featureId: String,
+        )
+    }
 
     sealed class Event : ViewEvent {
         data class OnBottomNavigationItemSelected(val selectedNavigationItem: DebugViewModel.BottomNavigationItem) : Event()

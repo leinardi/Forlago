@@ -20,7 +20,7 @@ import com.leinardi.template.ui.base.ViewEffect
 import com.leinardi.template.ui.base.ViewEvent
 import com.leinardi.template.ui.base.ViewState
 
-class FooDebugContract {
+object FooDebugContract {
     object State : ViewState
 
     sealed class Event : ViewEvent

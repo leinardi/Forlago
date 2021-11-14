@@ -21,6 +21,9 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.leinardi.template.debug.interactor.GetDebugInfoInteractor
+import com.leinardi.template.debug.ui.DebugContract.Effect
+import com.leinardi.template.debug.ui.DebugContract.Event
+import com.leinardi.template.debug.ui.DebugContract.State
 import com.leinardi.template.feature.interactor.GetFeaturesInteractor
 import com.leinardi.template.navigation.TemplateNavigator
 import com.leinardi.template.ui.base.BaseViewModel
@@ -32,17 +35,18 @@ class DebugViewModel @Inject constructor(
     private val getDebugInfoInteractor: GetDebugInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
     private val templateNavigator: TemplateNavigator,
-) : BaseViewModel<DebugContract.Event, DebugContract.State, DebugContract.Effect>() {
-
-    override fun provideInitialState() = DebugContract.State(
+) : BaseViewModel<Event, State, Effect>() {
+    override fun provideInitialState() = State(
         debugInfo = getDebugInfoInteractor(),
-        featureComposableList = getFeaturesInteractor().map { it.debugComposable }
+        featureList = getFeaturesInteractor()
+            .filter { it.debugComposable != null }
+            .map { State.Feature(checkNotNull(it.debugComposable), it.id) },
     )
 
-    override fun handleEvent(event: DebugContract.Event) {
+    override fun handleEvent(event: Event) {
         when (event) {
-            is DebugContract.Event.OnUpButtonClicked -> templateNavigator.navigateUp()
-            is DebugContract.Event.OnBottomNavigationItemSelected ->
+            is Event.OnUpButtonClicked -> templateNavigator.navigateUp()
+            is Event.OnBottomNavigationItemSelected ->
                 updateState { viewState.value.copy(selectedNavigationItem = event.selectedNavigationItem) }
         }
     }

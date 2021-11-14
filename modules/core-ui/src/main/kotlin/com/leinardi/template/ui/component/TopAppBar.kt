@@ -34,28 +34,30 @@ import com.leinardi.template.ui.theme.TemplateTheme
 fun TopAppBar(
     title: String = stringResource(R.string.i18n_app_name),
     navigateUp: (() -> Unit)? = null,
-    actions: @Composable RowScope.() -> Unit = {}
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     androidx.compose.material.TopAppBar(
         elevation = 0.dp,
         title = {
             Text(
-                text = title
+                text = title,
             )
         },
         navigationIcon = if (navigateUp != null) {
             {
                 IconButton(
-                    onClick = navigateUp
+                    onClick = navigateUp,
                 ) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(R.string.i18n_navigate_up)
+                        contentDescription = stringResource(R.string.i18n_navigate_up),
                     )
                 }
             }
-        } else null,
-        actions = actions
+        } else {
+            null
+        },
+        actions = actions,
     )
 }
 
@@ -72,7 +74,7 @@ fun SimpleAppBarPreview() {
 fun SimpleAppBarWithNavigationIcon() {
     TemplateTheme {
         TopAppBar(
-            title = "Page title"
+            title = "Page title",
         ) { }
     }
 }
@@ -87,7 +89,7 @@ fun SimpleAppBarWithAction() {
                 IconButton(onClick = {}) {
                     Icon(Icons.Default.Share, contentDescription = "")
                 }
-            }
+            },
         )
     }
 }
@@ -103,7 +105,7 @@ fun SimpleAppBarWithNavigationIconAndAction() {
                     Icon(Icons.Default.Share, contentDescription = "")
                 }
             },
-            navigateUp = { }
+            navigateUp = { },
         )
     }
 }

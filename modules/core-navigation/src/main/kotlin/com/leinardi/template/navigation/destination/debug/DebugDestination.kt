@@ -26,8 +26,10 @@ object DebugDestination : NavigationDestination {
     override val deepLinks = listOf(
         navDeepLink {
             uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$DEBUG_ROUTE"
-        }
+        },
     )
 
     override fun route() = DEBUG_ROUTE
+
+    fun createRoute() = route()
 }

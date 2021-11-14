@@ -20,10 +20,10 @@ import com.leinardi.template.ui.base.ViewEffect
 import com.leinardi.template.ui.base.ViewEvent
 import com.leinardi.template.ui.base.ViewState
 
-class FooContract {
+object FooContract {
     data class State(
         val text: String,
-        val isLoading: Boolean = false
+        val isLoading: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {

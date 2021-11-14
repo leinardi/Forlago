@@ -43,6 +43,11 @@
       <option name="XML_KEEP_BLANK_LINES" value="1" />
       <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
     </XML>
+    <codeStyleSettings language="Groovy">
+      <indentOptions>
+        <option name="CONTINUATION_INDENT_SIZE" value="4" />
+      </indentOptions>
+    </codeStyleSettings>
     <codeStyleSettings language="JAVA">
       <option name="RIGHT_MARGIN" value="150" />
       <option name="KEEP_FIRST_COLUMN_COMMENT" value="false" />

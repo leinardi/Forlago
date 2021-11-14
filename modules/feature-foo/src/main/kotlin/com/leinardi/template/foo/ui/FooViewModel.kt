@@ -34,7 +34,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FooViewModel @Inject constructor(
     private val templateNavigator: TemplateNavigator,
-    private val app: Application
+    private val app: Application,
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState() = State(app.getString(R.string.i18n_foo_change_me))
 

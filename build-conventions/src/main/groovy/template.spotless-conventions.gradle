@@ -23,25 +23,40 @@ spotless {
         target '**/*.kt'
         targetExclude("$buildDir/**/*.kt")
         targetExclude('bin/**/*.kt')
-        ktlint().userData(['disabled_rules': 'no-blank-line-before-rbrace'])
+        diktat(libs.versions.diktat.get()).configFile("$rootDir/config/diktat/diktat-analysis.yml")
         trimTrailingWhitespace()
         indentWithSpaces()
         endWithNewline()
     }
 
-    format 'misc', {
-        // define the files to apply `misc` to
-        target '**/*.gradle', '**/*.md', '**/.gitignore'
+    groovyGradle {
+        target '**/*.gradle'
+        greclipse(libs.versions.greclipse.get()).configFile("$rootDir/config/greclipse/greclipse.properties")
+    }
 
-        // define the steps to apply to those files
-        indentWithSpaces()
-        trimTrailingWhitespace()
-        endWithNewline()
+    format 'graphql', {
+        target '**/*.graphql'
+        prettier(libs.versions.prettier.get()).configFile("$rootDir/config/prettier/prettierrc-graphql.yml")
+    }
+
+    format 'yml', {
+        target '**/*.yml', '**/*.yaml'
+        prettier(libs.versions.prettier.get()).configFile("$rootDir/config/prettier/prettierrc-yml.yml")
     }
 
     format 'androidXml', {
         target '**/AndroidManifest.xml', 'src/**/*.xml'
         targetExclude('**/mergedManifests/**/AndroidManifest.xml')
+        indentWithSpaces()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+
+    format 'misc', {
+        // define the files to apply `misc` to
+        target '**/*.md', '**/.gitignore'
+
+        // define the steps to apply to those files
         indentWithSpaces()
         trimTrailingWhitespace()
         endWithNewline()

@@ -21,14 +21,14 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
 class CrashlyticsTree : Timber.Tree() {
-
+    @Suppress("IDENTIFIER_LENGTH")  // The identifier name is coming from Timber
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.VERBOSE || priority == Log.DEBUG || priority == Log.INFO) {
             return
         }
         val crashlytics = FirebaseCrashlytics.getInstance()
         crashlytics.setCustomKey(CRASHLYTICS_KEY_PRIORITY, priority)
-        crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag ?: "")
+        crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag.orEmpty())
         crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message)
 
         if (t == null) {
@@ -39,8 +39,8 @@ class CrashlyticsTree : Timber.Tree() {
     }
 
     companion object {
+        private const val CRASHLYTICS_KEY_MESSAGE = "message"
         private const val CRASHLYTICS_KEY_PRIORITY = "priority"
         private const val CRASHLYTICS_KEY_TAG = "tag"
-        private const val CRASHLYTICS_KEY_MESSAGE = "message"
     }
 }
