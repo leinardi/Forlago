@@ -68,13 +68,13 @@
                 android:name="com.leinardi.template.initializer.StrictModeInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.template.debug.initializer.DebugInitializer"
+                android:name="com.leinardi.template.feature.debug.initializer.DebugInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.template.android.initializer.ContextProvider"
+                android:name="com.leinardi.template.core.android.initializer.ContextProvider"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.template.logging.initializer.TimberInitializer"
+                android:name="com.leinardi.template.core.logging.initializer.TimberInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"
@@ -85,7 +85,7 @@
         </provider>
 
         <service
-            android:name="com.leinardi.template.account.authenticator.AuthenticatorService"
+            android:name="com.leinardi.template.feature.account.authenticator.AuthenticatorService"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>

@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.leinardi.template.encryption">
+<manifest package="com.leinardi.template.core.encryption">
 
     <application />
 

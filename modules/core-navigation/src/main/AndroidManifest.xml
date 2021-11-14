@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.leinardi.template.navigation">
+<manifest package="com.leinardi.template.core.navigation">
 
     <application />
 

@@ -17,11 +17,11 @@
 package com.leinardi.template.ui
 
 import androidx.lifecycle.viewModelScope
-import com.leinardi.template.feature.interactor.GetFeaturesInteractor
+import com.leinardi.template.core.feature.interactor.GetFeaturesInteractor
+import com.leinardi.template.core.ui.base.BaseViewModel
 import com.leinardi.template.ui.MainContract.Effect
 import com.leinardi.template.ui.MainContract.Event
 import com.leinardi.template.ui.MainContract.State
-import com.leinardi.template.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

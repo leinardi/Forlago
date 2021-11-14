@@ -22,12 +22,12 @@ android {
     resourcePrefix 'account_'
 
     defaultConfig {
-        resValue 'string', 'application_id', androidConfig.accountType
-        buildConfigField "String", "ACCOUNT_TYPE", "\"${androidConfig.accountType}\""
+        resValue 'string', 'account_type', androidConfig.accountType
         consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
     }
 }
 
 dependencies {
+    implementation project(':modules:core-account')
     implementation project(':modules:core-encryption')
 }

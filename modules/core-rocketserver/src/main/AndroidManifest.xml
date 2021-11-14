@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2021 Roberto Leinardi.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.leinardi.template.rocketserver">
+<manifest package="com.leinardi.template.core.rocketserver">
 
     <application />
 

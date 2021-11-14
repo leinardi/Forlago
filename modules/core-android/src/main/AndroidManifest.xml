@@ -16,7 +16,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.leinardi.template.android">
+    package="com.leinardi.template.core.android">
 
     <application>
         <provider
@@ -25,7 +25,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.leinardi.template.android.initializer.ContextProvider"
+                android:name="com.leinardi.template.core.android.initializer.ContextProvider"
                 android:value="androidx.startup" />
 
         </provider>
