@@ -15,16 +15,16 @@
  */
 ext {
     androidConfig = [
-            'accountType'  : 'com.leinardi.template.auth',
-            'applicationId': 'com.leinardi.template',
-            'buildTools'   : '30.0.3',
-            'compileSdk'   : 31,
-            'javaVersion'  : JavaVersion.VERSION_11,
-            'minSdk'       : 23,
-            'targetSdk'    : 31,
+        'accountType'  : 'com.leinardi.template.auth',
+        'applicationId': 'com.leinardi.template',
+        'buildTools'   : '30.0.3',
+        'compileSdk'   : 31,
+        'javaVersion'  : JavaVersion.VERSION_11,
+        'minSdk'       : 23,
+        'targetSdk'    : 31,
     ]
 
     appConfig = [
-            'deepLinkSchema': "template",
+        'deepLinkSchema': "template",
     ]
 }

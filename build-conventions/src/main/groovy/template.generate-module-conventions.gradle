@@ -149,11 +149,11 @@ private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirP
 
 private LinkedHashMap<String, Object> generatePlaceholderTokens() {
     def tokens = [
-            PlaceholderName        : moduleName.capitalize(),
-            placeholderUncaptalized: moduleName.uncapitalize(),
-            PLACEHOLDER_UPPERCASE  : moduleName.toSnakeCase().toUpperCase(),
-            placeholderlowercase   : moduleName.toLowerCase(),
-            placeholder_snake_case : moduleName.toSnakeCase()
+        PlaceholderName        : moduleName.capitalize(),
+        placeholderUncaptalized: moduleName.uncapitalize(),
+        PLACEHOLDER_UPPERCASE  : moduleName.toSnakeCase().toUpperCase(),
+        placeholderlowercase   : moduleName.toLowerCase(),
+        placeholder_snake_case : moduleName.toSnakeCase()
     ]
     tokens
 }

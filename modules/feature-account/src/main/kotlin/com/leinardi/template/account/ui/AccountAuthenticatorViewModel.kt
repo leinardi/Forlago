@@ -60,8 +60,8 @@ class AccountAuthenticatorViewModel @Inject constructor(
             updateState { viewState.value.copy(isLoading = true) }
             when (val result = signInInteractor(username, password)) {
                 is SignInInteractor.Result.Success -> handleSuccessfulSignIn(result.refreshToken, username)
-                SignInInteractor.Result.Failure.BadAuthentication -> Timber.d("> SignInInteractor.Result.Failure.BadAuthentication")  // TODO
-                SignInInteractor.Result.Failure.NetworkError -> Timber.d("> SignInInteractor.Result.Failure.NetworkError")  // TODO
+                SignInInteractor.Result.Failure.BadAuthentication -> Timber.d("> SignInInteractor.Result.Failure.BadAuthentication")
+                SignInInteractor.Result.Failure.NetworkError -> Timber.d("> SignInInteractor.Result.Failure.NetworkError")
             }
             updateState { viewState.value.copy(isLoading = false) }
         }
