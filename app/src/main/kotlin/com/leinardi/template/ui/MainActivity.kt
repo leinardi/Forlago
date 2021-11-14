@@ -30,12 +30,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.leinardi.template.navigation.NavigatorEvent
-import com.leinardi.template.navigation.TemplateNavigator
+import com.leinardi.template.core.ui.theme.TemplateTheme
+import com.leinardi.template.core.navigation.NavigatorEvent
+import com.leinardi.template.core.navigation.TemplateNavigator
 import com.leinardi.template.navigation.addComposableDestinations
 import com.leinardi.template.navigation.addDialogDestinations
 import com.leinardi.template.ui.MainContract.Event.OnIntentReceived
-import com.leinardi.template.ui.theme.TemplateTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -100,7 +100,8 @@ fun TemplateScaffold(
         }
     }
 
-    NavHost(  // check https://google.github.io/accompanist/navigation-animation/
+    NavHost(
+        // check https://google.github.io/accompanist/navigation-animation/
         navController = navHostController,
         startDestination = startDestination,
         builder = {

@@ -18,12 +18,12 @@ package com.leinardi.template
 
 import android.app.Application
 import android.os.SystemClock
-import com.leinardi.template.account.feature.AccountFeature
-import com.leinardi.template.bar.feature.BarFeature
-import com.leinardi.template.debug.feature.DebugFeature
-import com.leinardi.template.feature.FeatureManager
-import com.leinardi.template.foo.feature.FooFeature
-import com.leinardi.template.navigation.TemplateNavigator
+import com.leinardi.template.core.feature.FeatureManager
+import com.leinardi.template.feature.account.AccountFeature
+import com.leinardi.template.feature.bar.BarFeature
+import com.leinardi.template.feature.debug.DebugFeature
+import com.leinardi.template.feature.foo.FooFeature
+import com.leinardi.template.core.navigation.TemplateNavigator
 import com.leinardi.template.ui.MainActivity
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject

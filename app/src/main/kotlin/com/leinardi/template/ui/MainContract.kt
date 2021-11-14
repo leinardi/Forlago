@@ -17,10 +17,10 @@
 package com.leinardi.template.ui
 
 import android.content.Intent
-import com.leinardi.template.navigation.destination.foo.FooDestination
-import com.leinardi.template.ui.base.ViewEffect
-import com.leinardi.template.ui.base.ViewEvent
-import com.leinardi.template.ui.base.ViewState
+import com.leinardi.template.core.ui.base.ViewEffect
+import com.leinardi.template.core.ui.base.ViewEvent
+import com.leinardi.template.core.ui.base.ViewState
+import com.leinardi.template.core.navigation.destination.foo.FooDestination
 
 object MainContract {
     data class State(

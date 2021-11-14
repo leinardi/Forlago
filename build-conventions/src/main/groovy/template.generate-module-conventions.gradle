@@ -26,7 +26,7 @@ tasks.register("generateFeatureDestinationObject") {
 
             def tokens = generatePlaceholderTokens()
             def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/destination")
-            def navigationDir = file("${rootProject.rootDir}/modules/core-navigation/src/main/kotlin/com/leinardi/template/navigation/destination/${tokens.placeholderlowercase}")
+            def navigationDir = file("${rootProject.rootDir}/modules/core-navigation/src/main/kotlin/com/leinardi/template/core/navigation/destination/${tokens.placeholderlowercase}")
 
             from templateDirPath
             into navigationDir

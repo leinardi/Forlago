@@ -26,7 +26,7 @@ android {
     }
     apollo {
         schemaFile = file("src/main/graphql/com/leinardi/template/rocketserver/schema.json")
-        rootPackageName = "com.leinardi.template.rocketserver"
+        rootPackageName = "com.leinardi.template.core.rocketserver"
         generateKotlinModels = true
     }
 }

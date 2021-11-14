@@ -16,7 +16,7 @@
 
 package com.leinardi.template.di
 
-import com.leinardi.template.feature.FeatureManager
+import com.leinardi.template.core.feature.FeatureManager
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
