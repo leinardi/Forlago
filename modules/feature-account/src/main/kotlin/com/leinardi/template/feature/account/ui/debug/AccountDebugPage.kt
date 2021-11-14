@@ -90,12 +90,12 @@ fun AccountDebugPage(
 @Composable
 private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit) {
     Button(
-        onClick = { sendEvent(AccountDebugContract.Event.OnRefreshAccessTokenClicked) },
+        onClick = { sendEvent(AccountDebugContract.Event.OnGetAccessTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp),
     ) {
-        Text("Refresh access token")
+        Text("Get access token")
     }
     Button(
         onClick = { sendEvent(AccountDebugContract.Event.OnInvalidateAccessTokenClicked) },

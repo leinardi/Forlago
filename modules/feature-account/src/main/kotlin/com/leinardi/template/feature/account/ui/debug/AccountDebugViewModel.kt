@@ -18,6 +18,8 @@ package com.leinardi.template.feature.account.ui.debug
 
 import androidx.lifecycle.viewModelScope
 import com.leinardi.template.core.account.interactor.GetAccountInteractor
+import com.leinardi.template.core.navigation.TemplateNavigator
+import com.leinardi.template.core.navigation.destination.account.AccountAuthenticatorDestination
 import com.leinardi.template.core.ui.base.BaseViewModel
 import com.leinardi.template.feature.account.interactor.GetAccessTokenExpiryInteractor
 import com.leinardi.template.feature.account.interactor.GetAccessTokenInteractor
@@ -28,8 +30,6 @@ import com.leinardi.template.feature.account.interactor.PeekAccessTokenInteracto
 import com.leinardi.template.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.template.feature.account.ui.debug.AccountDebugContract.Event
 import com.leinardi.template.feature.account.ui.debug.AccountDebugContract.State
-import com.leinardi.template.core.navigation.TemplateNavigator
-import com.leinardi.template.core.navigation.destination.account.AccountAuthenticatorDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -55,7 +55,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnInvalidateRefreshTokenClicked -> invalidateRefreshToken()
                 Event.OnOpenSignInScreenClicked ->
                     templateNavigator.navigate(AccountAuthenticatorDestination.createRoute(viewState.value.accountName != null))
-                Event.OnRefreshAccessTokenClicked -> refreshAccessToken()
+                Event.OnGetAccessTokenClicked -> getAccessToken()
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }
@@ -72,7 +72,7 @@ class AccountDebugViewModel @Inject constructor(
         updateState()
     }
 
-    private suspend fun refreshAccessToken() {
+    private suspend fun getAccessToken() {
         val result = getAccessTokenInteractor()
         Timber.d("getAccessToken result = $result")
         updateState()

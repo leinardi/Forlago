@@ -31,7 +31,7 @@ object AccountDebugContract {
     sealed class Event : ViewEvent {
         object OnInvalidateAccessTokenClicked : Event()
         object OnInvalidateRefreshTokenClicked : Event()
-        object OnRefreshAccessTokenClicked : Event()
+        object OnGetAccessTokenClicked : Event()
         object OnOpenSignInScreenClicked : Event()
         object OnViewAttached : Event()
         object OnViewDetached : Event()
