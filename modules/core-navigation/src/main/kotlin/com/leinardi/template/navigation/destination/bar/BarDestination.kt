@@ -31,7 +31,7 @@ object BarDestination : NavigationDestination {
             type = NavType.StringType
             nullable = true
             defaultValue = null
-        }
+        },
     )
 
     override val deepLinks = listOf(

@@ -23,7 +23,7 @@ import com.leinardi.template.ui.base.ViewState
 object FooContract {
     data class State(
         val text: String,
-        val isLoading: Boolean = false
+        val isLoading: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {

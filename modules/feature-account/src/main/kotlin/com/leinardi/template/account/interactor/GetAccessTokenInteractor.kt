@@ -45,7 +45,7 @@ class GetAccessTokenInteractor @Inject constructor(
                         null,
                         false,
                         { cont.resumeWith(kotlin.Result.success(it.result)) },
-                        null
+                        null,
                     )
                 }
             }

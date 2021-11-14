@@ -85,7 +85,7 @@ class AccountAuthenticator @Inject constructor(
      */
     override fun editProperties(
         response: AccountAuthenticatorResponse,
-        accountType: String
+        accountType: String,
     ): Bundle? {
         throw UnsupportedOperationException()
     }
@@ -118,7 +118,7 @@ class AccountAuthenticator @Inject constructor(
         accountType: String,
         authTokenType: String?,
         requiredFeatures: Array<out String>?,
-        options: Bundle
+        options: Bundle,
     ): Bundle {
         Timber.d("addAccount()")
         val accountsByType = accountManager.getAccountsByType(ACCOUNT_TYPE)
@@ -134,8 +134,8 @@ class AccountAuthenticator @Inject constructor(
                         AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE to response,
                         AccountManager.KEY_ACCOUNT_TYPE to accountType,
                         AccountManager.KEY_USERDATA to options,
-                        KEY_IS_NEW_ACCOUNT to true
-                    )
+                        KEY_IS_NEW_ACCOUNT to true,
+                    ),
                 )
             }
             bundleOf(AccountManager.KEY_INTENT to intent)
@@ -144,7 +144,7 @@ class AccountAuthenticator @Inject constructor(
 
     private fun getErrorBundle(code: Int, message: String) = bundleOf(
         AccountManager.KEY_ERROR_CODE to code,
-        AccountManager.KEY_ERROR_MESSAGE to message
+        AccountManager.KEY_ERROR_MESSAGE to message,
     )
 
     /**
@@ -178,7 +178,7 @@ class AccountAuthenticator @Inject constructor(
     override fun confirmCredentials(
         response: AccountAuthenticatorResponse,
         account: Account,
-        options: Bundle?
+        options: Bundle?,
     ): Bundle? {
         Timber.d("confirmCredentials()")
         return null
@@ -230,7 +230,7 @@ class AccountAuthenticator @Inject constructor(
         response: AccountAuthenticatorResponse,
         account: Account?,
         authTokenType: String,
-        options: Bundle
+        options: Bundle,
     ): Bundle {
         Timber.d("getAuthToken()")
         return when {
@@ -245,7 +245,7 @@ class AccountAuthenticator @Inject constructor(
         account: Account,
         authTokenType: String,
         response: AccountAuthenticatorResponse,
-        options: Bundle
+        options: Bundle,
     ): Bundle {
         var expiryInMillis = accountManager.getUserData(account, KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull() ?: 0
         var accessToken = accountManager.peekAuthToken(account, authTokenType)?.let { runBlocking { decryptDeterministicallyInteractor(it) } }
@@ -326,7 +326,7 @@ class AccountAuthenticator @Inject constructor(
         response: AccountAuthenticatorResponse,
         account: Account,
         authTokenType: String?,
-        options: Bundle?
+        options: Bundle?,
     ): Bundle? {
         Timber.d("updateCredentials()")
         return null
@@ -353,7 +353,7 @@ class AccountAuthenticator @Inject constructor(
     override fun hasFeatures(
         response: AccountAuthenticatorResponse,
         account: Account,
-        features: Array<out String>
+        features: Array<out String>,
     ): Bundle {
         Timber.d("hasFeatures()")
         // We do not support any additional features, so we return always false
@@ -371,8 +371,8 @@ class AccountAuthenticator @Inject constructor(
                 AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE to response,
                 AccountManager.KEY_ACCOUNT_TYPE to accountType,
                 AccountManager.KEY_USERDATA to options,
-                KEY_IS_NEW_ACCOUNT to isNewAccount
-            )
+                KEY_IS_NEW_ACCOUNT to isNewAccount,
+            ),
         )
     }
 
@@ -398,7 +398,7 @@ class AccountAuthenticator @Inject constructor(
         AccountManager.KEY_ACCOUNT_NAME to account.name,
         AccountManager.KEY_ACCOUNT_TYPE to account.type,
         AccountManager.KEY_AUTHTOKEN to accessToken,
-        KEY_CUSTOM_TOKEN_EXPIRY to expiryInMillis
+        KEY_CUSTOM_TOKEN_EXPIRY to expiryInMillis,
     )
 
     companion object {

@@ -82,7 +82,7 @@ fun AccountAuthenticatorScreen(
                     .fillMaxSize()
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 var username by rememberSaveable { mutableStateOf(state.username) }
                 OutlinedTextField(
@@ -91,7 +91,7 @@ fun AccountAuthenticatorScreen(
                     value = username,
                     onValueChange = { username = it },
                     label = { Text("Username") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 )
                 var password by rememberSaveable { mutableStateOf(state.password) }
                 OutlinedTextField(
@@ -100,17 +100,17 @@ fun AccountAuthenticatorScreen(
                     onValueChange = { password = it },
                     label = { Text("Password") },
                     visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 )
                 ProgressButton(
                     onClick = { sendEvent(Event.OnSignInButtonClicked(username, password)) },
                     loading = state.isLoading,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text("Sign in")
                 }
             }
-        }
+        },
     )
 }
 

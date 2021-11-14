@@ -75,7 +75,7 @@ fun FooScreen(
             when (effect) {
                 is Effect.ShowSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
                     message = effect.message,
-                    duration = SnackbarDuration.Short
+                    duration = SnackbarDuration.Short,
                 )
             }
         }.collect()
@@ -91,29 +91,29 @@ fun FooScreen(
                     .fillMaxSize()
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 OutlinedTextField(
                     value = textFieldValue,
                     onValueChange = { textFieldValue = it },
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) }
+                    label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
                 )
                 ProgressButton(
                     onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
                     loading = state.isLoading,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(stringResource(R.string.i18n_foo_send_text_to_bar))
                 }
                 Button(
                     onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(stringResource(R.string.i18n_foo_show_snackbar))
                 }
             }
-        }
+        },
     )
 }
 

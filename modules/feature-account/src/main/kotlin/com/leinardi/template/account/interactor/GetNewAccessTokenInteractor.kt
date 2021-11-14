@@ -26,7 +26,7 @@ class GetNewAccessTokenInteractor @Inject constructor() {
         delay(TimeUnit.SECONDS.toMillis(1))
         return Result.Success(
             UUID.randomUUID().toString(),
-            System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(refreshToken.length.toLong())
+            System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(refreshToken.length.toLong()),
         )
     }
 

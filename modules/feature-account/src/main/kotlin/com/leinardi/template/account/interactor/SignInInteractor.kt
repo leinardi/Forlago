@@ -31,7 +31,7 @@ class SignInInteractor @Inject constructor() {
             Result.Success(
                 UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),
-                System.currentTimeMillis() + TimeUnit.MINUTES.toMillis((username.length + password.length).toLong())
+                System.currentTimeMillis() + TimeUnit.MINUTES.toMillis((username.length + password.length).toLong()),
             )
         } else {
             Result.Failure.BadAuthentication

@@ -35,7 +35,7 @@ class AddAccountInteractor @Inject constructor(
         val accountCreated = accountManager.addAccountExplicitly(
             Account(name, AccountAuthenticator.ACCOUNT_TYPE),
             encryptInteractor(refreshToken),
-            null
+            null,
         )
         val result = getAccessTokenInteractor()
         if (result is GetAccessTokenInteractor.Result.Failure) {

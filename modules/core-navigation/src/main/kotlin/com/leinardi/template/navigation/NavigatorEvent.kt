@@ -25,6 +25,6 @@ sealed class NavigatorEvent {
 
     class Directions(
         val destination: String,
-        val builder: NavOptionsBuilder.() -> Unit
+        val builder: NavOptionsBuilder.() -> Unit,
     ) : NavigatorEvent()
 }

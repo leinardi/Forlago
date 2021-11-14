@@ -23,7 +23,7 @@ import androidx.core.content.pm.PackageInfoCompat
 import javax.inject.Inject
 
 class GetDebugInfoInteractor @Inject constructor(
-    private val context: Application
+    private val context: Application,
 ) {
     operator fun invoke(): DebugInfo {
         val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
@@ -48,13 +48,13 @@ class GetDebugInfoInteractor @Inject constructor(
                 resolutionPx = "${displayMetrics.widthPixels} x ${displayMetrics.heightPixels}",
                 resolutionDp = "%.2f x %.2f".format(
                     displayMetrics.widthPixels / displayMetrics.density,
-                    displayMetrics.heightPixels / displayMetrics.density
+                    displayMetrics.heightPixels / displayMetrics.density,
                 ),
                 density = displayMetrics.density,
                 scaledDensity = displayMetrics.scaledDensity,
                 densityDpi = displayMetrics.densityDpi,
                 apiLevel = Build.VERSION.SDK_INT,
-            )
+            ),
         )
     }
 

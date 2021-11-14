@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val featuresInteractor: GetFeaturesInteractor
+    private val featuresInteractor: GetFeaturesInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState() = State()
 

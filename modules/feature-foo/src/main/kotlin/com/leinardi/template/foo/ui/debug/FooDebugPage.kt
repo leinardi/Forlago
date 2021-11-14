@@ -33,7 +33,7 @@ fun FooDebugPage(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState()),
     ) {
         SettingsMenuLink(
             title = { Text(text = "TBD") },

@@ -29,12 +29,12 @@ import com.leinardi.template.navigation.destination.account.AccountAuthenticator
 
 class AccountFeature(
     val mainActivityIntent: Intent,
-    private val navigator: TemplateNavigator
+    private val navigator: TemplateNavigator,
 ) : Feature() {
     override val id = "Account"
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-        AccountAuthenticatorDestination to { AccountAuthenticatorScreen() }
+        AccountAuthenticatorDestination to { AccountAuthenticatorScreen() },
     )
 
     override val debugComposable: @Composable () -> Unit = { AccountDebugPage() }

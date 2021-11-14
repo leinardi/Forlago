@@ -20,7 +20,7 @@ import com.leinardi.template.feature.FeatureManager
 import javax.inject.Inject
 
 class GetFeaturesInteractor @Inject constructor(
-    private val featureManager: FeatureManager
+    private val featureManager: FeatureManager,
 ) {
     operator fun invoke() = featureManager.features
 }

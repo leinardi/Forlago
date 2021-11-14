@@ -71,7 +71,7 @@ fun AccountDebugPage(
             when (effect) {
                 is Effect.ShowSnackbar -> snackbarHostState.showSnackbar(
                     message = effect.message,
-                    duration = SnackbarDuration.Short
+                    duration = SnackbarDuration.Short,
                 )
             }
         }.collect()
@@ -80,7 +80,7 @@ fun AccountDebugPage(
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(bottom = 8.dp)
+            .padding(bottom = 8.dp),
     ) {
         AccountInfo(state)
         EventButtons(sendEvent)
@@ -93,7 +93,7 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
         onClick = { sendEvent(AccountDebugContract.Event.OnRefreshAccessTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
     ) {
         Text("Refresh access token")
     }
@@ -101,7 +101,7 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
         onClick = { sendEvent(AccountDebugContract.Event.OnInvalidateAccessTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
     ) {
         Text("Invalidate access token")
     }
@@ -109,7 +109,7 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
         onClick = { sendEvent(AccountDebugContract.Event.OnInvalidateRefreshTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
     ) {
         Text("Invalidate refresh token")
     }
@@ -117,7 +117,7 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
         onClick = { sendEvent(AccountDebugContract.Event.OnOpenSignInScreenClicked) },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
     ) {
         Text("Open Sign In screen")
     }
@@ -128,17 +128,17 @@ private fun AccountInfo(state: State) {
     SettingsMenuLink(
         title = { Text(text = "Account name") },
         subtitle = { Text(text = state.accountName.orEmpty()) },
-        enabled = state.accountName != null
+        enabled = state.accountName != null,
     )
     SettingsMenuLink(
         title = { Text(text = "Refresh token") },
         subtitle = { Text(text = state.refreshToken.orEmpty()) },
-        enabled = state.refreshToken != null
+        enabled = state.refreshToken != null,
     )
     SettingsMenuLink(
         title = { Text(text = "Access token") },
         subtitle = { Text(text = state.accessToken.orEmpty()) },
-        enabled = state.accessToken != null
+        enabled = state.accessToken != null,
     )
     val expiration = state.accessTokenExpiry?.toLongDateTimeString().orEmpty()
     val expiryColor = if (System.currentTimeMillis() - (state.accessTokenExpiry ?: 0) < 0) {
@@ -149,7 +149,7 @@ private fun AccountInfo(state: State) {
     SettingsMenuLink(
         title = { Text(text = "Access token expiration") },
         subtitle = { Text(text = expiration, color = expiryColor) },
-        enabled = state.accessTokenExpiry != null
+        enabled = state.accessTokenExpiry != null,
     )
 }
 
@@ -159,6 +159,6 @@ fun AccountDebugPreview() {
     AccountDebugPage(
         State("AccountName", "refreshToken", "accessToken", System.currentTimeMillis()),
         Channel<Effect>().receiveAsFlow(),
-        {}
+        {},
     )
 }

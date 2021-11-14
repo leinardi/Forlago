@@ -93,7 +93,7 @@ fun TemplateScaffold(
                     is NavigatorEvent.NavigateBack -> activity.onBackPressed()
                     is NavigatorEvent.Directions -> navHostController.navigate(
                         event.destination,
-                        event.builder
+                        event.builder,
                     )
                 }
             }
@@ -106,6 +106,6 @@ fun TemplateScaffold(
         builder = {
             addComposableDestinations()
             addDialogDestinations()
-        }
+        },
     )
 }

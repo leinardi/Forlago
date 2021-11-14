@@ -24,7 +24,7 @@ import com.leinardi.template.ui.base.ViewState
 
 object MainContract {
     data class State(
-        val startDestination: String = FooDestination.createRoute()
+        val startDestination: String = FooDestination.createRoute(),
     ) : ViewState
 
     sealed class Event : ViewEvent {

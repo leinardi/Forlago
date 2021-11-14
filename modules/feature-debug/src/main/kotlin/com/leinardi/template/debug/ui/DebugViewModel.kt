@@ -40,7 +40,7 @@ class DebugViewModel @Inject constructor(
         debugInfo = getDebugInfoInteractor(),
         featureList = getFeaturesInteractor()
             .filter { it.debugComposable != null }
-            .map { State.Feature(checkNotNull(it.debugComposable), it.id) }
+            .map { State.Feature(checkNotNull(it.debugComposable), it.id) },
     )
 
     override fun handleEvent(event: Event) {

@@ -44,7 +44,7 @@ fun ProgressButton(
     border: BorderStroke? = null,
     colors: ButtonColors = ButtonDefaults.buttonColors(),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-    content: @Composable RowScope.() -> Unit
+    content: @Composable RowScope.() -> Unit,
 ) {
     Button(
         onClick = onClick,
@@ -62,6 +62,6 @@ fun ProgressButton(
             } else {
                 content()
             }
-        }
+        },
     )
 }

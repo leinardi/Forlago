@@ -59,7 +59,7 @@ fun BarScreen(
         topBar = {
             TopAppBar(
                 title = stringResource(R.string.i18n_bar_screen_title),
-                navigateUp = { sendEvent(Event.OnUpButtonClicked) }
+                navigateUp = { sendEvent(Event.OnUpButtonClicked) },
             )
         },
         content = {
@@ -68,11 +68,11 @@ fun BarScreen(
                     .fillMaxSize()
                     .padding(16.dp)
                     .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 Box(
                     Modifier
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
                 ) {
                     Text(
                         stringResource(R.string.i18n_bar_text_received, state.text),
@@ -83,12 +83,12 @@ fun BarScreen(
                 }
                 Button(
                     onClick = { sendEvent(Event.OnBackButtonClicked) },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(stringResource(R.string.i18n_back))
                 }
             }
-        }
+        },
     )
 }
 

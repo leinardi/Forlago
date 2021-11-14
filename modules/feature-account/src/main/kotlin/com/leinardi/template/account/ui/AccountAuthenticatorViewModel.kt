@@ -69,7 +69,7 @@ class AccountAuthenticatorViewModel @Inject constructor(
 
     private suspend fun handleSuccessfulSignIn(
         refreshToken: String,
-        username: String
+        username: String,
     ) {
         if (viewState.value.isRelogin) {
             if (setRefreshTokenInteractor(refreshToken)) {

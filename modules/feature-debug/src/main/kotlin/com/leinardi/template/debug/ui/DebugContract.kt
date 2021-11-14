@@ -28,9 +28,9 @@ object DebugContract {
         val featureList: List<Feature>,
         val bottomNavigationItems: List<DebugViewModel.BottomNavigationItem> = listOf(
             DebugViewModel.BottomNavigationItem.Info,
-            DebugViewModel.BottomNavigationItem.Features
+            DebugViewModel.BottomNavigationItem.Features,
         ),
-        val selectedNavigationItem: DebugViewModel.BottomNavigationItem = bottomNavigationItems[0]
+        val selectedNavigationItem: DebugViewModel.BottomNavigationItem = bottomNavigationItems[0],
     ) : ViewState {
         data class Feature(
             val composable: @Composable () -> Unit,

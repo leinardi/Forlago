@@ -25,7 +25,7 @@ object AccountDebugContract {
         val accountName: String?,
         val refreshToken: String?,
         val accessToken: String?,
-        val accessTokenExpiry: Long?
+        val accessTokenExpiry: Long?,
     ) : ViewState
 
     sealed class Event : ViewEvent {

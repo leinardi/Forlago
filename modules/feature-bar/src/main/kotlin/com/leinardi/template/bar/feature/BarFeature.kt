@@ -27,7 +27,7 @@ class BarFeature : Feature() {
     override val id = "Bar"
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-        BarDestination to { BarScreen() }
+        BarDestination to { BarScreen() },
     )
 
     override val debugComposable: @Composable () -> Unit = { BarDebugPage() }

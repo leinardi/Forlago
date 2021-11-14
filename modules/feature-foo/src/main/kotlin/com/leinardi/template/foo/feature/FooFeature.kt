@@ -27,7 +27,7 @@ class FooFeature : Feature() {
     override val id = "Foo"
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-        FooDestination to { FooScreen() }
+        FooDestination to { FooScreen() },
     )
 
     override val debugComposable: @Composable () -> Unit = { FooDebugPage() }

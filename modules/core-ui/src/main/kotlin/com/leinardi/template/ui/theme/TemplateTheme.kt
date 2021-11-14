@@ -23,12 +23,12 @@ import androidx.compose.runtime.Composable
 @Composable
 fun TemplateTheme(
     useDarkColors: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     MaterialTheme(
         colors = if (useDarkColors) TemplateDarkColors else TemplateLightColors,
         typography = TemplateTypography,
         shapes = TemplateShapes,
-        content = content
+        content = content,
     )
 }

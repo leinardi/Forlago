@@ -241,21 +241,21 @@
   enabled: true
   configuration:
     # VALUE_ARGUMENT
-    valueArgument: false
+    valueArgument: true # Custom
     # VALUE_PARAMETER
-    valueParameter: false
+    valueParameter: true # Custom
     # REFERENCE_EXPRESSION
-    indices: false
+    indices: true # Custom
     # WHEN_CONDITION_WITH_EXPRESSION
     whenConditions: false
     # STRING_TEMPLATE
-    collectionLiteral: false
+    collectionLiteral: true # Custom
     # TYPE_PROJECTION
-    typeArgument: false
+    typeArgument: true # Custom
     # TYPE_PARAMETER
-    typeParameter: false
+    typeParameter: true # Custom
     # DESTRUCTURING_DECLARATION_ENTRY
-    destructuringDeclaration: false
+    destructuringDeclaration: true # Custom
 # Checks that there are not too many consecutive spaces in line
 - name: TOO_MANY_CONSECUTIVE_SPACES
   enabled: true

@@ -70,11 +70,11 @@ fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
 fun DebugScreen(
     state: State,
     sendEvent: (event: Event) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val scaffoldState = rememberScaffoldState()
     CompositionLocalProvider(
-        LocalSnackbarHostState provides scaffoldState.snackbarHostState
+        LocalSnackbarHostState provides scaffoldState.snackbarHostState,
     ) {
         Scaffold(
             modifier = modifier,
@@ -82,7 +82,7 @@ fun DebugScreen(
             topBar = {
                 TopAppBar(
                     title = stringResource(R.string.debug_screen),
-                    navigateUp = { sendEvent(Event.OnUpButtonClicked) }
+                    navigateUp = { sendEvent(Event.OnUpButtonClicked) },
                 )
             },
             content = { innerPadding ->
@@ -95,8 +95,8 @@ fun DebugScreen(
                                 start = 0.dp,
                                 end = 0.dp,
                                 bottom = innerPadding.calculateBottomPadding(),
-                                top = innerPadding.calculateTopPadding()
-                            )
+                                top = innerPadding.calculateTopPadding(),
+                            ),
                     )
                     DebugViewModel.BottomNavigationItem.Features -> Features(
                         state = state,
@@ -106,8 +106,8 @@ fun DebugScreen(
                                 start = 0.dp,
                                 end = 0.dp,
                                 bottom = innerPadding.calculateBottomPadding(),
-                                top = innerPadding.calculateTopPadding()
-                            )
+                                top = innerPadding.calculateTopPadding(),
+                            ),
                     )
                 }
             },
@@ -120,11 +120,11 @@ fun DebugScreen(
                             selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
                             onClick = {
                                 sendEvent(Event.OnBottomNavigationItemSelected(state.bottomNavigationItems[index]))
-                            }
+                            },
                         )
                     }
                 }
-            }
+            },
         )
     }
 }
@@ -132,19 +132,19 @@ fun DebugScreen(
 @Composable
 private fun Info(
     state: State,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.verticalScroll(rememberScrollState())
+        modifier = modifier.verticalScroll(rememberScrollState()),
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 16.dp),
         ) {
             Text(
                 modifier = Modifier.padding(bottom = 8.dp),
                 text = state.debugInfo.app.name,
                 color = MaterialTheme.colors.primary,
-                style = TemplateTypography.h4
+                style = TemplateTypography.h4,
             )
             ProvideTextStyle(value = MaterialTheme.typography.caption) {
                 CompositionLocalProvider(
@@ -153,7 +153,7 @@ private fun Info(
                         Text(text = "Version name: ${state.debugInfo.app.versionName}")
                         Text(text = "Version code: ${state.debugInfo.app.versionCode}")
                         Text(text = "Application ID: ${state.debugInfo.app.packageName}")
-                    }
+                    },
                 )
             }
         }
@@ -164,28 +164,28 @@ private fun Info(
 @Composable
 private fun DeviceInfo(
     state: State,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     SettingsGroup(
         title = { Text(text = stringResource(R.string.debug_device_info)) },
-        modifier = modifier
+        modifier = modifier,
     ) {
         Column {
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_manufacturer)) },
-                subtitle = { Text(text = state.debugInfo.device.manufacturer) }
+                subtitle = { Text(text = state.debugInfo.device.manufacturer) },
             )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_model)) },
-                subtitle = { Text(text = state.debugInfo.device.model) }
+                subtitle = { Text(text = state.debugInfo.device.model) },
             )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_resolution_px)) },
-                subtitle = { Text(text = state.debugInfo.device.resolutionPx) }
+                subtitle = { Text(text = state.debugInfo.device.resolutionPx) },
             )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_resolution_dp)) },
-                subtitle = { Text(text = state.debugInfo.device.resolutionDp) }
+                subtitle = { Text(text = state.debugInfo.device.resolutionDp) },
             )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_density)) },
@@ -194,14 +194,14 @@ private fun DeviceInfo(
                         text = "%sx / %sx / %s dpi".format(
                             state.debugInfo.device.density,
                             state.debugInfo.device.scaledDensity,
-                            state.debugInfo.device.densityDpi
-                        )
+                            state.debugInfo.device.densityDpi,
+                        ),
                     )
-                }
+                },
             )
             SettingsMenuLink(
                 title = { Text(text = stringResource(R.string.debug_api_level)) },
-                subtitle = { Text(text = state.debugInfo.device.apiLevel.toString()) }
+                subtitle = { Text(text = state.debugInfo.device.apiLevel.toString()) },
             )
         }
     }
@@ -211,20 +211,20 @@ private fun DeviceInfo(
 @Composable
 private fun Features(
     state: State,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState()
     val scope = rememberCoroutineScope()
     Column(
-        modifier = modifier
+        modifier = modifier,
     ) {
         ScrollableTabRow(
             selectedTabIndex = pagerState.currentPage,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+                    Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
                 )
-            }
+            },
         ) {
             state.featureList.forEachIndexed { index, feature ->
                 Tab(
@@ -262,7 +262,7 @@ fun DebugScreenPreview() {
             scaledDensity = 4f,
             densityDpi = 640,
             apiLevel = Build.VERSION.SDK_INT,
-        )
+        ),
     )
     DebugScreen(State(debugInfo, emptyList()), {})
 }

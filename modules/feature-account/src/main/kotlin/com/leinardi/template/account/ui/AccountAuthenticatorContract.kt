@@ -25,7 +25,7 @@ object AccountAuthenticatorContract {
         val isRelogin: Boolean,
         val username: String,
         val password: String,
-        val isLoading: Boolean = false
+        val isLoading: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {

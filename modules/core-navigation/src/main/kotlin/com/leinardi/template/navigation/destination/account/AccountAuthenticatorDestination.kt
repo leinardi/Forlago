@@ -29,7 +29,7 @@ object AccountAuthenticatorDestination : NavigationDestination {
         navArgument(RELOGIN_PARAM) {
             type = NavType.BoolType
             defaultValue = false
-        }
+        },
     )
 
     override fun route() = "$ACCOUNT_AUTHENTICATOR_ROUTE/?$RELOGIN_PARAM={$RELOGIN_PARAM}"

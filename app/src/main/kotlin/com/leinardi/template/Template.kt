@@ -51,7 +51,7 @@ class Template : Application() {
                 FooFeature(),
                 BarFeature(),
                 DebugFeature(),
-            )
+            ),
         )
     }
 }

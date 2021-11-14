@@ -57,7 +57,7 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 16.dp, top = 24.dp, end = 16.dp, bottom = 8.dp),
-        contentAlignment = Alignment.CenterStart
+        contentAlignment = Alignment.CenterStart,
     ) {
         val primary = MaterialTheme.colors.primary
         val titleStyle = MaterialTheme.typography.overline.copy(color = primary)
@@ -70,7 +70,7 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
 internal fun SettingsGroupPreview() {
     TemplateTheme {
         SettingsGroup(
-            title = { Text(text = "Title") }
+            title = { Text(text = "Title") },
         ) {
             Box(
                 modifier = Modifier
