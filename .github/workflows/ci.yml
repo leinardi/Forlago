@@ -221,7 +221,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       ## Actual task
-      - name: Run Android tests on ${{ matrix.api-level }} / ${{ matrix.arch }} / ${{ matrix.target }}
+      - name: Run Android tests on API ${{ matrix.api-level }} / ${{ matrix.arch }} / ${{ matrix.target }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
