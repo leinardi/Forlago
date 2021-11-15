@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
+import android.accounts.AbstractAccountAuthenticator
 import android.accounts.AccountManager
-import com.leinardi.template.core.account.AccountAuthenticatorConfig
-import com.leinardi.template.core.account.interactor.GetAccountInteractor
 import com.leinardi.template.core.android.coroutine.CoroutineDispatchers
-import com.leinardi.template.core.encryption.interactor.DecryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PeekAccessTokenInteractor @Inject constructor(
+class GetAccessTokenExpiryInteractor @Inject constructor(
     private val accountManager: AccountManager,
-    private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
     private val dispatchers: CoroutineDispatchers,
     private val getAccountInteractor: GetAccountInteractor,
 ) {
-    suspend operator fun invoke(): String? = withContext(dispatchers.io) {
+    suspend operator fun invoke(): Long? = withContext(dispatchers.io) {
         getAccountInteractor()?.let { account ->
-            accountManager.peekAuthToken(account, AccountAuthenticatorConfig.AUTHTOKEN_TYPE)?.let { decryptDeterministicallyInteractor(it) }
+            accountManager.getUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull()
         }
     }
 }

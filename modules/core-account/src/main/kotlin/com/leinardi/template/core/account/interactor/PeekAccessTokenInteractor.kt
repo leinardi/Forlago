@@ -14,33 +14,24 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
-import android.accounts.AbstractAccountAuthenticator
 import android.accounts.AccountManager
 import com.leinardi.template.core.account.AccountAuthenticatorConfig
-import com.leinardi.template.core.account.interactor.GetAccountInteractor
 import com.leinardi.template.core.android.coroutine.CoroutineDispatchers
-import com.leinardi.template.core.encryption.interactor.EncryptDeterministicallyInteractor
+import com.leinardi.template.core.encryption.interactor.DecryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class InvalidateAccessTokenInteractor @Inject constructor(
+class PeekAccessTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
+    private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
     private val dispatchers: CoroutineDispatchers,
-    private val encryptDeterministicallyInteractor: EncryptDeterministicallyInteractor,
     private val getAccountInteractor: GetAccountInteractor,
-    private val peekAccessTokenInteractor: PeekAccessTokenInteractor,
 ) {
-    suspend operator fun invoke() {
-        withContext(dispatchers.io) {
-            getAccountInteractor()?.let { account ->
-                val accessToken = peekAccessTokenInteractor()
-                if (accessToken != null) {
-                    accountManager.invalidateAuthToken(AccountAuthenticatorConfig.ACCOUNT_TYPE, encryptDeterministicallyInteractor(accessToken))
-                }
-                accountManager.setUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY, 0.toString())
-            }
+    suspend operator fun invoke(): String? = withContext(dispatchers.io) {
+        getAccountInteractor()?.let { account ->
+            accountManager.peekAuthToken(account, AccountAuthenticatorConfig.AUTHTOKEN_TYPE)?.let { decryptDeterministicallyInteractor(it) }
         }
     }
 }

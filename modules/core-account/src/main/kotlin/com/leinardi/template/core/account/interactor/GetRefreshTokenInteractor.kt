@@ -14,23 +14,33 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
 import android.accounts.AccountManager
-import com.leinardi.template.core.account.interactor.GetAccountInteractor
 import com.leinardi.template.core.android.coroutine.CoroutineDispatchers
+import com.leinardi.template.core.encryption.interactor.DecryptInteractor
 import kotlinx.coroutines.withContext
+import timber.log.Timber
+import java.security.GeneralSecurityException
 import javax.inject.Inject
 
-class InvalidateRefreshTokenInteractor @Inject constructor(
+class GetRefreshTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
+    private val decryptInteractor: DecryptInteractor,
     private val dispatchers: CoroutineDispatchers,
     private val getAccountInteractor: GetAccountInteractor,
+    private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
 ) {
-    suspend operator fun invoke() {
-        withContext(dispatchers.io) {
-            getAccountInteractor()?.let { account ->
-                accountManager.clearPassword(account)
+    suspend operator fun invoke(): String? = withContext(dispatchers.io) {
+        getAccountInteractor()?.let { account ->
+            accountManager.getPassword(account)?.let { refreshToken ->
+                try {
+                    decryptInteractor(refreshToken)
+                } catch (e: GeneralSecurityException) {
+                    Timber.e(e, "Unable to decrypt the refreshToken. Invalidating it to trigger a new authentication")
+                    invalidateRefreshTokenInteractor()
+                    null
+                }
             }
         }
     }

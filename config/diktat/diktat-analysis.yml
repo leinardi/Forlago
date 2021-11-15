@@ -174,9 +174,9 @@
     useRecommendedImportsOrder: true
 # Checks unused imports
 - name: UNUSED_IMPORT
-  enabled: false # Custom
+  enabled: true
   configuration:
-    deleteUnusedImport: false # Custom
+    deleteUnusedImport: true
 # Checks that braces are used in if, else, when, for, do, and while statements. Exception: single line if statement
 - name: NO_BRACES_IN_CONDITIONALS_AND_LOOPS
   enabled: true

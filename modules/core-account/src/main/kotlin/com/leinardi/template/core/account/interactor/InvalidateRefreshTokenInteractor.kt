@@ -14,23 +14,23 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
-import android.accounts.AbstractAccountAuthenticator
 import android.accounts.AccountManager
-import com.leinardi.template.core.account.interactor.GetAccountInteractor
 import com.leinardi.template.core.android.coroutine.CoroutineDispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class GetAccessTokenExpiryInteractor @Inject constructor(
+class InvalidateRefreshTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,
     private val getAccountInteractor: GetAccountInteractor,
 ) {
-    suspend operator fun invoke(): Long? = withContext(dispatchers.io) {
-        getAccountInteractor()?.let { account ->
-            accountManager.getUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull()
+    suspend operator fun invoke() {
+        withContext(dispatchers.io) {
+            getAccountInteractor()?.let { account ->
+                accountManager.clearPassword(account)
+            }
         }
     }
 }

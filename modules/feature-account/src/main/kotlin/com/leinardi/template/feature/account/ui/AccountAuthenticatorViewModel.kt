@@ -20,10 +20,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.leinardi.template.core.account.interactor.GetAccountInteractor
 import com.leinardi.template.core.ui.base.BaseViewModel
-import com.leinardi.template.feature.account.interactor.AddAccountInteractor
-import com.leinardi.template.feature.account.interactor.GetAccessTokenInteractor
-import com.leinardi.template.feature.account.interactor.SetRefreshTokenInteractor
-import com.leinardi.template.feature.account.interactor.SignInInteractor
+import com.leinardi.template.core.account.interactor.AddAccountInteractor
+import com.leinardi.template.core.account.interactor.GetAccessTokenInteractor
+import com.leinardi.template.core.account.interactor.SetRefreshTokenInteractor
+import com.leinardi.template.core.account.interactor.SignInInteractor
 import com.leinardi.template.feature.account.ui.AccountAuthenticatorContract.Effect
 import com.leinardi.template.feature.account.ui.AccountAuthenticatorContract.Event
 import com.leinardi.template.feature.account.ui.AccountAuthenticatorContract.State

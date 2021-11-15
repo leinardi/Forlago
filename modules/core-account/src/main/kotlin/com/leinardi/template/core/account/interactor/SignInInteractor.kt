@@ -14,26 +14,35 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
 import kotlinx.coroutines.delay
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.random.Random
 
-class GetNewAccessTokenInteractor @Inject constructor() {
-    suspend operator fun invoke(refreshToken: String): Result {
-        delay(TimeUnit.SECONDS.toMillis(1))
-        return Result.Success(
-            UUID.randomUUID().toString(),
-            System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(refreshToken.length.toLong()),
-        )
+class SignInInteractor @Inject constructor() {
+    @Suppress("MagicNumber")  // We are faking the sign in with the back-end
+    suspend operator fun invoke(username: String, password: String): Result {
+        // This simulates fetching a new refresh token. The access token won't be valid 20% of the time.
+        delay(TimeUnit.SECONDS.toMillis(2))
+        return if (Random.nextInt(5) != 0) {
+            Result.Success(
+                UUID.randomUUID().toString(),
+                UUID.randomUUID().toString(),
+                System.currentTimeMillis() + TimeUnit.MINUTES.toMillis((username.length + password.length).toLong()),
+            )
+        } else {
+            Result.Failure.BadAuthentication
+        }
     }
 
     sealed class Result {
         data class Success(
             val accessToken: String,
-            val expiryInMillis: Long,
+            val refreshToken: String,
+            val expireAtInMillis: Long,
         ) : Result()
 
         sealed class Failure : Result() {

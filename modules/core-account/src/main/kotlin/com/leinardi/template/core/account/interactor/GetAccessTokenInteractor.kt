@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
 import android.accounts.AccountManager
 import android.content.Intent
 import android.os.Bundle
 import com.leinardi.template.core.account.AccountAuthenticatorConfig
-import com.leinardi.template.core.account.interactor.GetAccountInteractor
 import com.leinardi.template.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.template.core.encryption.interactor.DecryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext

@@ -14,33 +14,32 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.account.interactor
+package com.leinardi.template.core.account.interactor
 
-import android.accounts.Account
 import android.accounts.AccountManager
-import com.leinardi.template.core.account.AccountAuthenticatorConfig
 import com.leinardi.template.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.template.core.encryption.interactor.EncryptInteractor
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 import javax.inject.Inject
 
-class AddAccountInteractor @Inject constructor(
+class SetRefreshTokenInteractor @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,
     private val encryptInteractor: EncryptInteractor,
-    private val getAccessTokenInteractor: GetAccessTokenInteractor,
+    private val getAccountInteractor: GetAccountInteractor,
 ) {
-    suspend operator fun invoke(name: String, refreshToken: String): Boolean = withContext(dispatchers.io) {
-        val accountCreated = accountManager.addAccountExplicitly(
-            Account(name, AccountAuthenticatorConfig.ACCOUNT_TYPE),
-            encryptInteractor(refreshToken),
-            null,
-        )
-        val result = getAccessTokenInteractor()
-        if (result is GetAccessTokenInteractor.Result.Failure) {
-            Timber.e("Unable to get accessToken: $result")
+    /**
+     * Setting the refresh token will also invalidate the current accessToken.
+     *
+     * @return true if the operation was successful, false otherwise
+     */
+    suspend operator fun invoke(refreshToken: String): Boolean = withContext(dispatchers.io) {
+        val account = getAccountInteractor()
+        if (account != null) {
+            accountManager.setPassword(account, encryptInteractor(refreshToken))
+            true
+        } else {
+            false
         }
-        accountCreated
     }
 }
