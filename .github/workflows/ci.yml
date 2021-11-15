@@ -82,6 +82,11 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
+      - name: Build
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: assembleDebug
+
       ## Actual tasks
       - name: Detekt
         uses: gradle/gradle-build-action@v2
@@ -147,7 +152,7 @@ jobs:
     # Android emulators require hardware acceleration (HAXM on Mac & Windows, QEMU on Linux) from the host to run fast.
     # The macOS VM provided by GitHub Actions is the only one that currently provides it.
     runs-on: macos-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     env:
       JAVA_TOOL_OPTIONS: -Xmx4g
       TERM: dumb
@@ -170,7 +175,7 @@ jobs:
         uses: gradle/wrapper-validation-action@v1
 
       - name: Setup JDK 11.0.10
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
           java-version: 11.0.10
@@ -191,7 +196,7 @@ jobs:
             ~/.android/avd/*
             ~/.android/adb*
             ~/.android/debug.keystore
-          key: avd-${{ matrix.api-level }}-${{ matrix.os }}-${{ matrix.target }}
+          key: avd-${{ matrix.api-level }}-${{ matrix.arch }}-${{ matrix.target }}
 
       - name: Assemble Android tests
         uses: gradle/gradle-build-action@v2
@@ -216,7 +221,7 @@ jobs:
           script: echo "Generated AVD snapshot for caching."
 
       ## Actual task
-      - name: Run Android tests on ${{ matrix.api-level }} / ${{ matrix.os }} / ${{ matrix.target }}
+      - name: Run Android tests on ${{ matrix.api-level }} / ${{ matrix.arch }} / ${{ matrix.target }}
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ matrix.api-level }}
@@ -240,7 +245,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: instrumentation-test-results-${{ matrix.api-level }}-${{ matrix.os }}-${{ matrix.target }}
+          name: instrumentation-test-results-${{ matrix.api-level }}-${{ matrix.arch }}-${{ matrix.target }}
           path: |
             **/build/reports/*
             **/build/outputs/*/connected/*
