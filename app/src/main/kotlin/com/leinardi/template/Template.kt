@@ -17,13 +17,15 @@
 package com.leinardi.template
 
 import android.app.Application
+import android.os.Build
+import android.os.StrictMode
 import android.os.SystemClock
 import com.leinardi.template.core.feature.FeatureManager
+import com.leinardi.template.core.navigation.TemplateNavigator
 import com.leinardi.template.feature.account.AccountFeature
 import com.leinardi.template.feature.bar.BarFeature
 import com.leinardi.template.feature.debug.DebugFeature
 import com.leinardi.template.feature.foo.FooFeature
-import com.leinardi.template.core.navigation.TemplateNavigator
 import com.leinardi.template.ui.MainActivity
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
@@ -35,8 +37,47 @@ class Template : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        configureStrictMode()
         registerFeatures()
         simulateHeavyLoad()
+    }
+
+    private fun configureStrictMode() {
+        // This can't be initialized using `androidx.startup.Initializer` or it will cause crashes in 3rd party libs using Content Providers
+        // and writing data on the main thread (e.g. LeakCanary and AndroidTestRunner).
+        if (BuildConfig.DEBUG) {
+            val builderThread = StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .permitCustomSlowCalls()
+                .penaltyLog()
+                .penaltyDeath()
+                .detectResourceMismatches()
+            StrictMode.setThreadPolicy(builderThread.build())
+
+            val builderVM = StrictMode.VmPolicy.Builder()
+                // .detectActivityLeaks() // https://issuetracker.google.com/issues/204905432
+                .detectLeakedSqlLiteObjects()
+                .detectLeakedRegistrationObjects()
+                .detectFileUriExposure()
+                .detectCleartextNetwork()
+                .penaltyLog()
+                .penaltyDeath()
+                .apply {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        detectContentUriWithoutPermission()
+                        detectUntaggedSockets()
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        detectCredentialProtectedWhileLocked()
+                        detectImplicitDirectBoot()
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        detectIncorrectContextUse()
+                        detectUnsafeIntentLaunch()
+                    }
+                }
+            StrictMode.setVmPolicy(builderVM.build())
+        }
     }
 
     @Suppress("MagicNumber")

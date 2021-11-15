@@ -339,5 +339,8 @@
       <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
       <option name="FIELD_ANNOTATION_WRAP" value="0" />
     </codeStyleSettings>
+    <codeStyleSettings language="yaml">
+      <option name="SPACE_WITHIN_BRACKETS" value="false" />
+    </codeStyleSettings>
   </code_scheme>
 </component>

@@ -64,13 +64,23 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.leinardi.template.feature.account.authenticator.AuthenticatorService"
+            android:enabled="true"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/account_authenticator" />
+        </service>
+
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.leinardi.template.androidx-startup"
             android:exported="false" >
-            <meta-data
-                android:name="com.leinardi.template.initializer.StrictModeInitializer"
-                android:value="androidx.startup" />
             <meta-data
                 android:name="com.leinardi.template.feature.debug.initializer.DebugInitializer"
                 android:value="androidx.startup" />
@@ -87,19 +97,6 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
-
-        <service
-            android:name="com.leinardi.template.feature.account.authenticator.AuthenticatorService"
-            android:enabled="true"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/account_authenticator" />
-        </service>
 
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"

@@ -45,9 +45,6 @@ dependencies {
     implementation libs.androidx.navigation.compose
     implementation libs.androidx.startup
 
-    testImplementation libs.junit
-    androidTestImplementation libs.androidx.test.ext.junit
-    androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.compose.ui
 
     debugImplementation libs.androidx.compose.tooling
