@@ -6,9 +6,12 @@ on:
       - '**.md'
   push:
     branches:
-      - main
+      - master
     paths-ignore:
       - '**.md'
+  workflow_dispatch:
+    branches:
+      - master
 
 jobs:
   build-release:
