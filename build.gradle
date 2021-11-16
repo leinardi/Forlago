@@ -26,6 +26,7 @@ buildscript {
 
 plugins {
     id 'template.config-conventions'
+    id 'template.buildlog-conventions'
     id 'template.generate-module-conventions'
     id 'template.spotless-conventions'
     id 'template.versions-conventions'

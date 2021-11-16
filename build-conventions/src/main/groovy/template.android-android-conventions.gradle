@@ -28,12 +28,12 @@ kapt {
 }
 
 android {
-    compileSdk androidConfig.compileSdk
-    buildToolsVersion androidConfig.buildTools
+    compileSdk config.android.compileSdk
+    buildToolsVersion config.android.buildTools
 
     defaultConfig {
-        minSdk androidConfig.minSdk
-        targetSdk androidConfig.targetSdk
+        minSdk config.android.minSdk
+        targetSdk config.android.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -43,16 +43,16 @@ android {
         // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
-        buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${appConfig.deepLinkSchema}\"")
+        buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${config.app.deepLinkSchema}\"")
     }
     compileOptions {
-        sourceCompatibility androidConfig.javaVersion
-        targetCompatibility androidConfig.javaVersion
+        sourceCompatibility config.android.javaVersion
+        targetCompatibility config.android.javaVersion
     }
     kotlinOptions {
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
         freeCompilerArgs += '-Xsuppress-version-warnings' // Needed to suppress warning due to languageVersion = '1.6' on kotlin 1.5.x
-        jvmTarget = androidConfig.javaVersion
+        jvmTarget = config.android.javaVersion
         useIR = true
     }
     testOptions {

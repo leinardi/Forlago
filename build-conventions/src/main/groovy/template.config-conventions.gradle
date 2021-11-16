@@ -13,8 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-ext {
-    androidConfig = [
+ext.config = [
+    android : [
         'accountType'  : 'com.leinardi.template.auth',
         'applicationId': 'com.leinardi.template',
         'buildTools'   : '30.0.3',
@@ -22,9 +22,13 @@ ext {
         'javaVersion'  : JavaVersion.VERSION_11,
         'minSdk'       : 23,
         'targetSdk'    : 31,
-    ]
+    ],
 
-    appConfig = [
+    app : [
         'deepLinkSchema': "template",
-    ]
-}
+    ],
+
+    params : [
+        saveBuildLogToFile: project.properties['saveBuildLogToFile'] ?: false
+    ],
+]

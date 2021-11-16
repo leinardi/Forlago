@@ -22,7 +22,7 @@ android {
     resourcePrefix 'account_'
 
     defaultConfig {
-        resValue 'string', 'account_type', androidConfig.accountType
+        resValue 'string', 'account_type', config.android.accountType
         consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
     }
 }

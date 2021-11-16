@@ -121,7 +121,7 @@ jobs:
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: assembleDebug
+          arguments: assembleDebug -PsaveBuildLogToFile=true
 
       ## Actual tasks
       - name: Detekt
