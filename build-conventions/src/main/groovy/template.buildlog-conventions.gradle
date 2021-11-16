@@ -23,15 +23,11 @@ if (config.params.saveBuildLogToFile) {
 
     System.setProperty('org.gradle.color.error', 'RED')
 
-    gradle.services.get(LoggingOutputInternal).addStandardOutputListener(new StandardOutputListener() {
-        void onOutput(CharSequence output) {
-            buildLog << output
-        }
-    })
-
-    gradle.services.get(LoggingOutputInternal).addStandardErrorListener(new StandardOutputListener() {
-        void onOutput(CharSequence output) {
-            buildLog << output
-        }
-    })
+    def outputListener = new StandardOutputListener() {
+                void onOutput(CharSequence output) {
+                    buildLog << output
+                }
+            }
+    gradle.services.get(LoggingOutputInternal).addStandardOutputListener(outputListener)
+    gradle.services.get(LoggingOutputInternal).addStandardErrorListener(outputListener)
 }

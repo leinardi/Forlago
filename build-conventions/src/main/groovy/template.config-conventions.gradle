@@ -29,6 +29,6 @@ ext.config = [
     ],
 
     params : [
-        saveBuildLogToFile: project.properties['saveBuildLogToFile'] ?: false
+        saveBuildLogToFile: Boolean.parseBoolean(project.properties['saveBuildLogToFile']) ?: false
     ],
 ]

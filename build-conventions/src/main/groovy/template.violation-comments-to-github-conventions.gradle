@@ -30,9 +30,29 @@ tasks.register('violationCommentsToGitHub', ViolationCommentsToGitHubTask) {
     commentOnlyChangedContent = true
     keepOldComments = false
     violations = [
-        ["KOTLINGRADLE", ".", ".*/build/logs/buildlog.*\\.txt\$", "Gradle"],
-        ["CHECKSTYLE", ".", ".*/reports/detekt/.*\\.xml\$", "Detekt"],
-        ["ANDROIDLINT", ".", ".*/reports/lint-results.*\\.xml\$", "Android Lint"],
-        ["JUNIT", ".", ".*/build/test-results/test.*/.*\\.xml\$", "Unit"],
+        [
+            "KOTLINGRADLE",
+            ".",
+            ".*/build/logs/buildlog.*\\.txt\$",
+            "Gradle"
+        ],
+        [
+            "CHECKSTYLE",
+            ".",
+            ".*/reports/detekt/.*\\.xml\$",
+            "Detekt"
+        ],
+        [
+            "ANDROIDLINT",
+            ".",
+            ".*/reports/lint-results.*\\.xml\$",
+            "Android Lint"
+        ],
+        [
+            "JUNIT",
+            ".",
+            ".*/build/test-results/test.*/.*\\.xml\$",
+            "Unit"
+        ],
     ]
 }
