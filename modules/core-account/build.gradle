@@ -23,7 +23,7 @@ android {
     resourcePrefix 'account_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
-        buildConfigField "String", "ACCOUNT_TYPE", "\"${androidConfig.accountType}\""
+        buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}\""
     }
 }
 
