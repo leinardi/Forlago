@@ -32,4 +32,5 @@ dependencies {
     implementation libs.plugin.kotlin
     implementation libs.plugin.spotless
     implementation libs.plugin.versionsgradle
+    implementation libs.plugin.violation
 }
