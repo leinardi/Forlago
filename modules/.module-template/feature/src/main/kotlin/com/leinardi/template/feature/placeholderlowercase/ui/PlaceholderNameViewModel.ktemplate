@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.@placeholderlowercase@.ui
+package com.leinardi.forlago.feature.@placeholderlowercase@.ui
 
 import androidx.lifecycle.SavedStateHandle
-import com.leinardi.template.core.ui.base.BaseViewModel
-import com.leinardi.template.core.navigation.TemplateNavigator
-import com.leinardi.template.core.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
+import com.leinardi.forlago.core.ui.base.BaseViewModel
+import com.leinardi.forlago.core.navigation.ForlagoNavigator
+import com.leinardi.forlago.core.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class @PlaceholderName@ViewModel @Inject constructor(
-    private val templateNavigator: TemplateNavigator,
+    private val forlagoNavigator: ForlagoNavigator,
     private val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<@PlaceholderName@Contract.Event, @PlaceholderName@Contract.State, @PlaceholderName@Contract.Effect>() {
 
@@ -33,7 +33,7 @@ class @PlaceholderName@ViewModel @Inject constructor(
 
     override fun handleEvent(event: @PlaceholderName@Contract.Event) {
         when (event) {
-            is @PlaceholderName@Contract.Event.OnBackButtonClicked -> templateNavigator.navigateUp()
+            is @PlaceholderName@Contract.Event.OnBackButtonClicked -> forlagoNavigator.navigateUp()
             @PlaceholderName@Contract.Event.OnShowSnackbarButtonClicked -> sendEffect { @PlaceholderName@Contract.Effect.ShowSnackbar("Lorem ipsum dolor sit amet...") }
         }
     }

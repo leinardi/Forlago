@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.leinardi.template.core.ui">
+<manifest package="com.leinardi.forlago.core.ui">
 
     <application />
 

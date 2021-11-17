@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'template.android-core-conventions'
+    id 'forlago.android-core-conventions'
     id 'dagger.hilt.android.plugin'
 }
 

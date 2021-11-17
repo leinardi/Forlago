@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<manifest package="com.leinardi.template.feature.@placeholderlowercase@">
+<manifest package="com.leinardi.forlago.feature.@placeholderlowercase@">
 
     <application />
 

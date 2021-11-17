@@ -15,7 +15,7 @@
   ~ limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.leinardi.template"
+    package="com.leinardi.forlago"
     
      >
 
@@ -33,7 +33,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name="com.leinardi.template.Template"
+        android:name="com.leinardi.forlago.Forlago"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
@@ -44,7 +44,7 @@
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen" >
         <activity
-            android:name="com.leinardi.template.ui.MainActivity"
+            android:name="com.leinardi.forlago.ui.MainActivity"
             android:exported="true"
             android:label="@string/i18n_app_name"
             android:launchMode="singleInstance"
@@ -60,12 +60,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="template" />
+                <data android:scheme="forlago" />
             </intent-filter>
         </activity>
 
         <service
-            android:name="com.leinardi.template.feature.account.authenticator.AuthenticatorService"
+            android:name="com.leinardi.forlago.feature.account.authenticator.AuthenticatorService"
             android:enabled="true"
             android:exported="false" >
             <intent-filter>
@@ -79,16 +79,16 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.leinardi.template.androidx-startup"
+            android:authorities="com.leinardi.forlago.androidx-startup"
             android:exported="false" >
             <meta-data
-                android:name="com.leinardi.template.feature.debug.initializer.DebugInitializer"
+                android:name="com.leinardi.forlago.feature.debug.initializer.DebugInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.template.core.android.initializer.ContextProvider"
+                android:name="com.leinardi.forlago.core.android.initializer.ContextProvider"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.template.core.logging.initializer.TimberInitializer"
+                android:name="com.leinardi.forlago.core.logging.initializer.TimberInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"
@@ -138,7 +138,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.leinardi.template.firebaseinitprovider"
+            android:authorities="com.leinardi.forlago.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
@@ -176,7 +176,7 @@
 
         <provider
             android:name="leakcanary.internal.LeakCanaryFileProvider"
-            android:authorities="com.squareup.leakcanary.fileprovider.com.leinardi.template"
+            android:authorities="com.squareup.leakcanary.fileprovider.com.leinardi.forlago"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -188,7 +188,7 @@
             android:name="leakcanary.internal.activity.LeakActivity"
             android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_display_activity_label"
-            android:taskAffinity="com.squareup.leakcanary.com.leinardi.template"
+            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago"
             android:theme="@style/leak_canary_LeakCanary.Base" />
 
         <activity-alias
@@ -199,7 +199,7 @@
             android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_display_activity_label"
             android:targetActivity="leakcanary.internal.activity.LeakActivity"
-            android:taskAffinity="com.squareup.leakcanary.com.leinardi.template"
+            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago"
             android:theme="@style/leak_canary_LeakCanary.Base" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -215,19 +215,19 @@
             android:excludeFromRecents="true"
             android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_storage_permission_activity_label"
-            android:taskAffinity="com.squareup.leakcanary.com.leinardi.template"
+            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago"
             android:theme="@style/leak_canary_Theme.Transparent" />
 
         <receiver android:name="leakcanary.internal.NotificationReceiver" />
 
         <provider
             android:name="leakcanary.internal.AppWatcherInstaller$MainProcess"
-            android:authorities="com.leinardi.template.leakcanary-installer"
+            android:authorities="com.leinardi.forlago.leakcanary-installer"
             android:enabled="@bool/leak_canary_watcher_auto_install"
             android:exported="false" />
         <provider
             android:name="leakcanary.internal.PlumberInstaller"
-            android:authorities="com.leinardi.template.plumber-installer"
+            android:authorities="com.leinardi.forlago.plumber-installer"
             android:enabled="@bool/leak_canary_plumber_auto_install"
             android:exported="false" />
 

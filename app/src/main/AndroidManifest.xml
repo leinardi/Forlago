@@ -16,10 +16,10 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.leinardi.template">
+    package="com.leinardi.forlago">
 
     <application
-        android:name=".Template"
+        android:name=".Forlago"
         android:allowBackup="true"
         android:icon="@mipmap/ui_ic_launcher"
         android:label="@string/i18n_app_name"
@@ -44,7 +44,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="template" />
+                <data android:scheme="forlago" />
             </intent-filter>
         </activity>
 

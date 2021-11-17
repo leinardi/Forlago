@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="i18n_app_name">Template</string>
+    <string name="i18n_app_name">Forlago</string>
     <string name="i18n_back">Back</string>
     <string name="i18n_bar_screen_title">Bar screen</string>
     <string name="i18n_bar_text_received">Text = %1$s</string>

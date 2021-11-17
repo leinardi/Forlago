@@ -2,7 +2,7 @@
 - name: DIKTAT_COMMON
   configuration:
     # put your package name here - it will be autofixed and checked
-    domainName: com.leinardi.template
+    domainName: com.leinardi.forlago
     testDirs: test
     # expected values:  disabledChapters: "Naming, Comments, General, Variables, Functions, Classes"
     # or: "1, 2, 3, 4, 5, 6"

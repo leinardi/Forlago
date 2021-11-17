@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'template.android-core-conventions'
+    id 'forlago.android-core-conventions'
     alias(libs.plugins.apollo)
 }
 
@@ -25,8 +25,8 @@ android {
         consumerProguardFiles "$projectDir/proguard-rocketserver-consumer-rules.pro"
     }
     apollo {
-        schemaFile = file("src/main/graphql/com/leinardi/template/rocketserver/schema.json")
-        rootPackageName = "com.leinardi.template.core.rocketserver"
+        schemaFile = file("src/main/graphql/com/leinardi/forlago/rocketserver/schema.json")
+        rootPackageName = "com.leinardi.forlago.core.rocketserver"
         generateKotlinModels = true
     }
 }

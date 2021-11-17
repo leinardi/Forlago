@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'template.android-feature-conventions'
+    id 'forlago.android-feature-conventions'
 }
 
 android {

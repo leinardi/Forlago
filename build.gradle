@@ -25,13 +25,13 @@ buildscript {
 }
 
 plugins {
-    id 'template.config-conventions'
-    id 'template.buildlog-conventions'
-    id 'template.generate-module-conventions'
-    id 'template.spotless-conventions'
-    id 'template.versions-conventions'
-    id 'template.dependency-graph-conventions'
-    id 'template.violation-comments-to-github-conventions'
+    id 'forlago.config-conventions'
+    id 'forlago.buildlog-conventions'
+    id 'forlago.generate-module-conventions'
+    id 'forlago.spotless-conventions'
+    id 'forlago.versions-conventions'
+    id 'forlago.dependency-graph-conventions'
+    id 'forlago.violation-comments-to-github-conventions'
 }
 
 

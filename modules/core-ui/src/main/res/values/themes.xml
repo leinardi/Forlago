@@ -17,20 +17,20 @@
 <resources>
 
     <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen">
-        <item name="postSplashScreenTheme">@style/Ui.Theme.Template.NoActionBar</item>
+        <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago.NoActionBar</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ui_ic_launcher</item>
         <item name="windowSplashScreenBackground">@color/ui_window_background</item>
     </style>
 
-    <style name="Ui.Theme.Platform.Template" parent="android:Theme.Material.Light" />
+    <style name="Ui.Theme.Platform.Forlago" parent="android:Theme.Material.Light" />
 
-    <style name="Ui.Theme.Base.Template" parent="Ui.Theme.Platform.Template">
+    <style name="Ui.Theme.Base.Forlago" parent="Ui.Theme.Platform.Forlago">
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 
-    <style name="Ui.Theme.Template" parent="Ui.Theme.Base.Template" />
+    <style name="Ui.Theme.Forlago" parent="Ui.Theme.Base.Forlago" />
 
-    <style name="Ui.Theme.Template.NoActionBar">
+    <style name="Ui.Theme.Forlago.NoActionBar">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>

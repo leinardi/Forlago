@@ -16,6 +16,6 @@
 
 <resources>
 
-    <style name="Ui.Theme.Platform.Template" parent="android:Theme.Material" />
+    <style name="Ui.Theme.Platform.Forlago" parent="android:Theme.Material" />
 
 </resources>

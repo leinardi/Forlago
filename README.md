@@ -1,7 +1,7 @@
 WIP
 
-adb shell am start -d "template://bar/FooText" -a android.intent.action.VIEW
-adb shell am start -d "template://debug" -a android.intent.action.VIEW
+adb shell am start -d "forlago://bar/FooText" -a android.intent.action.VIEW
+adb shell am start -d "forlago://debug" -a android.intent.action.VIEW
 
 Inspired by the following open source projects:
 

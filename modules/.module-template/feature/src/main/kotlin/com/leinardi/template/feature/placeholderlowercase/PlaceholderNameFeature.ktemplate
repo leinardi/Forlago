@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.@placeholderlowercase@
+package com.leinardi.forlago.feature.@placeholderlowercase@
 
 import androidx.compose.runtime.Composable
-import com.leinardi.template.core.feature.Feature
-import com.leinardi.template.feature.@placeholderlowercase@.ui.@PlaceholderName@Screen
-import com.leinardi.template.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugPage
-import com.leinardi.template.core.navigation.NavigationDestination
-import com.leinardi.template.core.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
+import com.leinardi.forlago.core.feature.Feature
+import com.leinardi.forlago.feature.@placeholderlowercase@.ui.@PlaceholderName@Screen
+import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugPage
+import com.leinardi.forlago.core.navigation.NavigationDestination
+import com.leinardi.forlago.core.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
 
 class @PlaceholderName@Feature : Feature() {
     override val id = "@PlaceholderName@"

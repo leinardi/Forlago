@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.@placeholderlowercase@.ui.debug
+package com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug
 
-import com.leinardi.template.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.Effect
-import com.leinardi.template.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.Event
-import com.leinardi.template.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.State
-import com.leinardi.template.core.ui.base.BaseViewModel
+import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.Effect
+import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.Event
+import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.State
+import com.leinardi.forlago.core.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -16,7 +16,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.leinardi.template.core.logging">
+    package="com.leinardi.forlago.core.logging">
 
     <application>
 
@@ -26,7 +26,7 @@
             android:exported="false"
             tools:node="merge">
             <meta-data
-                android:name="com.leinardi.template.core.logging.initializer.TimberInitializer"
+                android:name="com.leinardi.forlago.core.logging.initializer.TimberInitializer"
                 android:value="androidx.startup" />
 
         </provider>

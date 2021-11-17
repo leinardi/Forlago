@@ -1,6 +1,6 @@
 {
   "name": "RocketServer GraphQL Schema",
-  "schemaPath": "src/main/graphql/com/leinardi/template/rocketserver/schema.json",
+  "schemaPath": "src/main/graphql/com/leinardi/forlago/rocketserver/schema.json",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {

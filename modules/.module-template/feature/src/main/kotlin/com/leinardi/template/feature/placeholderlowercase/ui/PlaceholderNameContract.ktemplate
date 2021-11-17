@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.feature.@placeholderlowercase@.ui
+package com.leinardi.forlago.feature.@placeholderlowercase@.ui
 
-import com.leinardi.template.core.ui.base.ViewEffect
-import com.leinardi.template.core.ui.base.ViewEvent
-import com.leinardi.template.core.ui.base.ViewState
+import com.leinardi.forlago.core.ui.base.ViewEffect
+import com.leinardi.forlago.core.ui.base.ViewEvent
+import com.leinardi.forlago.core.ui.base.ViewState
 
 object @PlaceholderName@Contract {
     data class State(
