@@ -19,7 +19,7 @@
     <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen">
         <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago.NoActionBar</item>
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ui_ic_launcher</item>
-        <item name="windowSplashScreenBackground">@color/ui_window_background</item>
+        <item name="windowSplashScreenBackground">@android:color/white</item>
     </style>
 
     <style name="Ui.Theme.Platform.Forlago" parent="android:Theme.Material.Light" />
