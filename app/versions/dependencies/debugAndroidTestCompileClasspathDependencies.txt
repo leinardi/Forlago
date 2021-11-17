@@ -236,12 +236,12 @@ debugAndroidTestCompileClasspath - Compile classpath for compilation 'debugAndro
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- androidx.annotation:annotation-experimental:1.1.0
 |    \--- androidx.navigation:navigation-runtime-ktx:2.4.0-beta02 (*)
-+--- com.google.dagger:hilt-android:2.40
-|    +--- com.google.dagger:dagger:2.40
++--- com.google.dagger:hilt-android:2.40.1
+|    +--- com.google.dagger:dagger:2.40.1
 |    |    \--- javax.inject:javax.inject:1
-|    +--- com.google.dagger:dagger-lint-aar:2.40
-|    +--- com.google.dagger:hilt-core:2.40
-|    |    +--- com.google.dagger:dagger:2.40 (*)
+|    +--- com.google.dagger:dagger-lint-aar:2.40.1
+|    +--- com.google.dagger:hilt-core:2.40.1
+|    |    +--- com.google.dagger:dagger:2.40.1 (*)
 |    |    +--- com.google.code.findbugs:jsr305:3.0.1
 |    |    \--- javax.inject:javax.inject:1
 |    +--- com.google.code.findbugs:jsr305:3.0.1
@@ -258,7 +258,7 @@ debugAndroidTestCompileClasspath - Compile classpath for compilation 'debugAndro
 |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.4.32 -> 1.5.31 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    +--- androidx.navigation:navigation-runtime:2.3.2 -> 2.4.0-beta02 (*)
-|    |    \--- com.google.dagger:hilt-android:2.35 -> 2.40 (*)
+|    |    \--- com.google.dagger:hilt-android:2.35 -> 2.40.1 (*)
 |    +--- androidx.compose.runtime:runtime:1.0.0-beta09 -> 1.1.0-beta02 (*)
 |    +--- androidx.compose.ui:ui:1.0.0-beta09 -> 1.1.0-beta02 (*)
 |    +--- androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07 -> 2.4.0-rc01
