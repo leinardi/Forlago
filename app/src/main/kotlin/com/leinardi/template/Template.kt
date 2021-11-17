@@ -48,6 +48,7 @@ class Template : Application() {
         if (BuildConfig.DEBUG) {
             val builderThread = StrictMode.ThreadPolicy.Builder()
                 .detectAll()
+                .permitDiskReads()
                 .permitCustomSlowCalls()
                 .penaltyLog()
                 .penaltyDeath()
