@@ -17,16 +17,16 @@
 package com.leinardi.forlago.feature.account.ui.debug
 
 import androidx.lifecycle.viewModelScope
-import com.leinardi.forlago.core.account.interactor.GetAccountInteractor
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
-import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.core.account.interactor.GetAccessTokenExpiryInteractor
 import com.leinardi.forlago.core.account.interactor.GetAccessTokenInteractor
+import com.leinardi.forlago.core.account.interactor.GetAccountInteractor
 import com.leinardi.forlago.core.account.interactor.GetRefreshTokenInteractor
 import com.leinardi.forlago.core.account.interactor.InvalidateAccessTokenInteractor
 import com.leinardi.forlago.core.account.interactor.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.core.account.interactor.PeekAccessTokenInteractor
+import com.leinardi.forlago.core.navigation.ForlagoNavigator
+import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
+import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Event
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.State

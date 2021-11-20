@@ -18,17 +18,17 @@ package com.leinardi.forlago.feature.account.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.leinardi.forlago.core.account.interactor.GetAccountInteractor
-import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.core.account.interactor.AddAccountInteractor
 import com.leinardi.forlago.core.account.interactor.GetAccessTokenInteractor
+import com.leinardi.forlago.core.account.interactor.GetAccountInteractor
 import com.leinardi.forlago.core.account.interactor.SetRefreshTokenInteractor
 import com.leinardi.forlago.core.account.interactor.SignInInteractor
+import com.leinardi.forlago.core.navigation.ForlagoNavigator
+import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
+import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Effect
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Event
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.State
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber

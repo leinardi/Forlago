@@ -18,10 +18,10 @@ package com.leinardi.forlago.feature.bar
 
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.core.feature.Feature
-import com.leinardi.forlago.feature.bar.ui.BarScreen
-import com.leinardi.forlago.feature.bar.ui.debug.BarDebugPage
 import com.leinardi.forlago.core.navigation.NavigationDestination
 import com.leinardi.forlago.core.navigation.destination.bar.BarDestination
+import com.leinardi.forlago.feature.bar.ui.BarScreen
+import com.leinardi.forlago.feature.bar.ui.debug.BarDebugPage
 
 class BarFeature : Feature() {
     override val id = "Bar"

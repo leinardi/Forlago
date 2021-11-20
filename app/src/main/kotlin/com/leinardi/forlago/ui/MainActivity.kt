@@ -30,9 +30,9 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.leinardi.forlago.core.ui.theme.ForlagoTheme
-import com.leinardi.forlago.core.navigation.NavigatorEvent
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
+import com.leinardi.forlago.core.navigation.NavigatorEvent
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 import com.leinardi.forlago.navigation.addComposableDestinations
 import com.leinardi.forlago.navigation.addDialogDestinations
 import com.leinardi.forlago.ui.MainContract.Event.OnIntentReceived

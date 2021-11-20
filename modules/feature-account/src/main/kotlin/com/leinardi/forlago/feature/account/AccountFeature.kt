@@ -21,8 +21,8 @@ import android.content.Intent
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.core.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.core.feature.Feature
-import com.leinardi.forlago.core.navigation.NavigationDestination
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
+import com.leinardi.forlago.core.navigation.NavigationDestination
 import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorScreen
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugPage

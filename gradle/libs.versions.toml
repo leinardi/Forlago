@@ -4,7 +4,7 @@
 [versions]
 aboutlibraries = "10.0.0-a04"
 accompanist = "0.21.2-beta"
-androidx-compose = "1.1.0-beta02"
+androidx-compose = "1.1.0-beta03"
 androidx-lifecycle = "2.4.0"
 androidx-material = "1.4.0"
 androidx-navigation = "2.4.0-beta02"
@@ -76,7 +76,7 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", ve
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.2.4" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0-alpha03" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0-beta01" }
 junit = { module = "junit:junit", version = "4.13.2" }
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }

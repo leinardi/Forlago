@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 ext.config = [
-    android : [
+    android: [
         'accountType'  : 'com.leinardi.forlago.auth',
         'applicationId': 'com.leinardi.forlago',
         'buildTools'   : '30.0.3',
@@ -24,7 +24,7 @@ ext.config = [
         'targetSdk'    : 31,
     ],
 
-    app : [
+    app    : [
         'deepLinkSchema': "forlago",
     ],
 

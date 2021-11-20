@@ -21,12 +21,12 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.leinardi.forlago.core.feature.interactor.GetFeaturesInteractor
+import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Effect
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

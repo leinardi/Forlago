@@ -44,9 +44,10 @@ captures/
 /projectFilesBackup
 release_notes_*.txt
 
-# Keystore files
-*.keystore
-*.jks
+# Release keys
+app-release.jks
+play-account.p12
+play-account.json
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json

@@ -17,10 +17,10 @@
 package com.leinardi.forlago.ui
 
 import android.content.Intent
+import com.leinardi.forlago.core.navigation.destination.foo.FooDestination
 import com.leinardi.forlago.core.ui.base.ViewEffect
 import com.leinardi.forlago.core.ui.base.ViewEvent
 import com.leinardi.forlago.core.ui.base.ViewState
-import com.leinardi.forlago.core.navigation.destination.foo.FooDestination
 
 object MainContract {
     data class State(
