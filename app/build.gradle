@@ -16,22 +16,58 @@
 
 plugins {
     id 'forlago.android-app-conventions'
+    id 'forlago.app-versioning-conventions'
+    id 'forlago.triplet-play-conventions'
 }
+
+def useReleaseKeystore = rootProject.file("release/app-release.jks").exists()
+println "Release keystore ${if (useReleaseKeystore) "" else "NOT "}found!"
 
 android {
 
     defaultConfig {
         applicationId config.android.applicationId
+        archivesBaseName = "forlago"
 
         vectorDrawables {
             useSupportLibrary true
         }
     }
 
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile rootProject.file("release/app-debug.jks")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (useReleaseKeystore) {
+                storeFile rootProject.file("release/app-release.jks")
+                storePassword project.properties['RELEASE_KEYSTORE_PWD']
+                keyAlias "release"
+                keyPassword project.properties['RELEASE_KEYSTORE_PWD']
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+        }
+
+        release {
+            if (useReleaseKeystore) {
+                signingConfig signingConfigs.release
+            } else {
+                // Otherwise just use the debug keystore (this is mainly for PR CI builds)
+                signingConfig signingConfigs.debug
+            }
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles 'proguard-rules.pro'
         }
     }
 }

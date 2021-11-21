@@ -15,9 +15,7 @@
   ~ limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.leinardi.forlago"
-    
-     >
+    package="com.leinardi.forlago.debug" >
 
     <uses-sdk
         android:minSdkVersion="23"
@@ -79,7 +77,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.leinardi.forlago.androidx-startup"
+            android:authorities="com.leinardi.forlago.debug.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="com.leinardi.forlago.feature.debug.initializer.DebugInitializer"
@@ -138,7 +136,7 @@
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"
-            android:authorities="com.leinardi.forlago.firebaseinitprovider"
+            android:authorities="com.leinardi.forlago.debug.firebaseinitprovider"
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
@@ -176,7 +174,7 @@
 
         <provider
             android:name="leakcanary.internal.LeakCanaryFileProvider"
-            android:authorities="com.squareup.leakcanary.fileprovider.com.leinardi.forlago"
+            android:authorities="com.squareup.leakcanary.fileprovider.com.leinardi.forlago.debug"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -188,7 +186,7 @@
             android:name="leakcanary.internal.activity.LeakActivity"
             android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_display_activity_label"
-            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago"
+            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago.debug"
             android:theme="@style/leak_canary_LeakCanary.Base" />
 
         <activity-alias
@@ -199,7 +197,7 @@
             android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_display_activity_label"
             android:targetActivity="leakcanary.internal.activity.LeakActivity"
-            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago"
+            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago.debug"
             android:theme="@style/leak_canary_LeakCanary.Base" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -215,19 +213,19 @@
             android:excludeFromRecents="true"
             android:icon="@mipmap/leak_canary_icon"
             android:label="@string/leak_canary_storage_permission_activity_label"
-            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago"
+            android:taskAffinity="com.squareup.leakcanary.com.leinardi.forlago.debug"
             android:theme="@style/leak_canary_Theme.Transparent" />
 
         <receiver android:name="leakcanary.internal.NotificationReceiver" />
 
         <provider
             android:name="leakcanary.internal.AppWatcherInstaller$MainProcess"
-            android:authorities="com.leinardi.forlago.leakcanary-installer"
+            android:authorities="com.leinardi.forlago.debug.leakcanary-installer"
             android:enabled="@bool/leak_canary_watcher_auto_install"
             android:exported="false" />
         <provider
             android:name="leakcanary.internal.PlumberInstaller"
-            android:authorities="com.leinardi.forlago.plumber-installer"
+            android:authorities="com.leinardi.forlago.debug.plumber-installer"
             android:enabled="@bool/leak_canary_plumber_auto_install"
             android:exported="false" />
 

@@ -41,6 +41,7 @@ object DebugContract {
     sealed class Event : ViewEvent {
         data class OnBottomNavigationItemSelected(val selectedNavigationItem: DebugViewModel.BottomNavigationItem) : Event()
         object OnUpButtonClicked : Event()
+        object OnForceCrashClicked : Event()
     }
 
     sealed class Effect : ViewEffect

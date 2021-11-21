@@ -34,8 +34,6 @@ android {
     defaultConfig {
         minSdk config.android.minSdk
         targetSdk config.android.targetSdk
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // The following argument makes the Android Test Orchestrator run its
@@ -105,7 +103,7 @@ android {
 kotlin {
     sourceSets.all {
         languageSettings {
-            languageVersion = '1.6' // Needed to have exhaustive when on kotlin 1.5.x
+            languageVersion = '1.6' // Needed to have exhaustive when with kotlin 1.5.x
             progressiveMode = true
         }
     }

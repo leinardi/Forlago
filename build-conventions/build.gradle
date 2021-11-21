@@ -26,11 +26,14 @@ dependencies {
     implementation libs.plugin.aboutlibraries
     implementation libs.plugin.android
     implementation libs.plugin.androidx.navigation.safeargs
+    implementation libs.plugin.appversioning
     implementation libs.plugin.detekt
     implementation libs.plugin.firebase.crashlytics
+    implementation libs.plugin.google.services
     implementation libs.plugin.hilt
     implementation libs.plugin.kotlin
     implementation libs.plugin.spotless
+    implementation libs.plugin.triplet.play
     implementation libs.plugin.versionsgradle
     implementation libs.plugin.violation
 }

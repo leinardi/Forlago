@@ -60,13 +60,13 @@ class Forlago : Application() {
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedRegistrationObjects()
                 .detectFileUriExposure()
-                .detectCleartextNetwork()
+                // .detectCleartextNetwork() // https://github.com/firebase/firebase-android-sdk/issues/3158
                 .penaltyLog()
                 .penaltyDeath()
                 .apply {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         detectContentUriWithoutPermission()
-                        detectUntaggedSockets()
+                        // detectUntaggedSockets() // https://github.com/square/okhttp/issues/3537#issuecomment-974861679
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         detectCredentialProtectedWhileLocked()

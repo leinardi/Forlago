@@ -19,11 +19,14 @@ package com.leinardi.forlago.feature.debug.ui
 import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
@@ -89,6 +92,7 @@ fun DebugScreen(
                 when (state.selectedNavigationItem) {
                     DebugViewModel.BottomNavigationItem.Info -> Info(
                         state = state,
+                        sendEvent = sendEvent,
                         modifier = modifier
                             .fillMaxSize()
                             .padding(
@@ -132,6 +136,7 @@ fun DebugScreen(
 @Composable
 private fun Info(
     state: State,
+    sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -158,6 +163,15 @@ private fun Info(
             }
         }
         DeviceInfo(state)
+        Button(
+            onClick = { sendEvent(Event.OnForceCrashClicked) },
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.error),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+        ) {
+            Text("Force Crash")
+        }
     }
 }
 

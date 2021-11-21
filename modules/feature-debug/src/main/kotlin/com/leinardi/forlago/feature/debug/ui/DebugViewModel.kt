@@ -28,6 +28,7 @@ import com.leinardi.forlago.feature.debug.ui.DebugContract.Effect
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -45,9 +46,10 @@ class DebugViewModel @Inject constructor(
 
     override fun handleEvent(event: Event) {
         when (event) {
-            is Event.OnUpButtonClicked -> forlagoNavigator.navigateUp()
             is Event.OnBottomNavigationItemSelected ->
                 updateState { viewState.value.copy(selectedNavigationItem = event.selectedNavigationItem) }
+            is Event.OnUpButtonClicked -> forlagoNavigator.navigateUp()
+            is Event.OnForceCrashClicked -> throw IllegalStateException("Debug screen test crash")
         }
     }
 
