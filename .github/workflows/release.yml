@@ -85,6 +85,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           draft: true
+          tag_name: ${{ github.event.inputs.semver }}
+          fail_on_unmatched_files: true
           files: |
             app/build/outputs/apk/debug/forlago-debug.apk
             app/build/outputs/apk/release/forlago-release.apk
