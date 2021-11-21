@@ -1,5 +1,9 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
+# This is a configuration file for R8
+
+-verbose
+-allowaccessmodification
+-repackageclasses
+
 # For native methods, see http://proguard.sourceforge.net/manual/examples.html#native
 -keepclasseswithmembernames class * {
     native <methods>;

@@ -25,8 +25,8 @@ tasks.register("generateFeatureDestinationObject") {
             moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
 
             def tokens = generatePlaceholderTokens()
-            def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/destination")
-            def navigationDir = file("${rootProject.rootDir}/modules/core-navigation/src/main/kotlin/com/leinardi/forlago/core/navigation/destination/${tokens.placeholderlowercase}")
+            def templateDirPath = rootProject.file("modules/.module-template/destination")
+            def navigationDir = rootProject.file("modules/core-navigation/src/main/kotlin/com/leinardi/forlago/core/navigation/destination/${tokens.placeholderlowercase}")
 
             from templateDirPath
             into navigationDir
@@ -58,8 +58,8 @@ tasks.register("generateFeatureModule") {
             moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
 
             def tokens = generatePlaceholderTokens()
-            def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/feature")
-            def featureDir = file("${rootProject.rootDir}/modules/feature-${tokens.placeholderlowercase}")
+            def templateDirPath = rootProject.file("modules/.module-template/feature")
+            def featureDir = rootProject.file("modules/feature-${tokens.placeholderlowercase}")
 
             from templateDirPath
             into featureDir
@@ -95,8 +95,8 @@ tasks.register("generateCoreModule") {
             moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
 
             def tokens = generatePlaceholderTokens()
-            def templateDirPath = file("${rootProject.rootDir}/modules/.module-template/core")
-            def coreDirPath = file("${rootProject.rootDir}/modules/core-${tokens.placeholderlowercase}")
+            def templateDirPath = rootProject.file("modules/.module-template/core")
+            def coreDirPath = rootProject.file("modules/core-${tokens.placeholderlowercase}")
 
             from templateDirPath
             into coreDirPath
