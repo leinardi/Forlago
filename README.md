@@ -1,4 +1,4 @@
-# Forlago 🍷
+# Forlago 🍷 (work-in-progress 👷🔧️👷‍♀️⛏)
 
 <img src="/art/play_store_feature_graphic.png" width="300" align="right" hspace="0" />
 
@@ -60,8 +60,6 @@ keytool -genkeypair -dname "cn=First Last Name, ou=Mobile, o=My Company, c=US" -
 keytool -genkeypair -dname "cn=First Last Name, ou=Mobile, o=My Company, c=US" -alias release -keypass <STRONG PASSWORD GOES HERE> -keystore release/app-release.jks -storepass <STRONG PASSWORD GOES HERE> -keyalg RSA -sigalg SHA256withRSA -keysize 2048 -validity 9999
 ```
 
-Once the `release/app-release.jks` is generated, use the `release/encrypt-secrets.sh` to generate the `app-release.gpg`
-
 Add the release keystore and the encrypt secret passwords to
 the [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) as `RELEASE_KEYSTORE_PWD` and `ENCRYPT_KEY`.
 
@@ -71,7 +69,7 @@ the [GitHub Actions secrets](https://docs.github.com/en/actions/security-guides/
 
 To publish your app on the Play Store you need to create a service account with access to the Play Developer API and generate a new `play-account.gpg`
 file. You can find instructions on how to generate a new service account [here](https://github.com/Triple-T/gradle-play-publisher#service-account).
-Once you have the JSON key, place it in `release/play-account.json` and use the `release/encrypt-secrets.sh` to generate the `play-account.gpg`
+Once you have the JSON key, place it in `release/play-account.json`.
 
 #### Managing Play Store metadata
 
@@ -84,6 +82,24 @@ to learn more about managing Play Store metadata.
 
 Once everything is properly configured, you can run the [release.yml](.github/workflows/release.yml) workflow to create a new release and upload the
 bundle to the Play Store.
+
+### Enabling Firebase Crashlytics
+
+The first step is to [register your new app with Firebase](https://firebase.google.com/docs/android/setup?hl=en) (don't forget to add [both release and
+debug packages](https://firebase.googleblog.com/2016/08/organizing-your-firebase-enabled-android-app-builds.html) to the same Firebase project).
+After that, you should put the `google-services.json`, containing both release and debug applications, inside the `app/` directory.
+Now you have to [Enable Crashlytics in the Firebase console](https://firebase.google.com/docs/crashlytics/get-started?hl=en&platform=android#enable-in-console)
+and, finally, open the Debug menu and trigger a crash using the Force Crash button.
+
+### Encrypting your secrets
+
+Once you have these 3 files in the following paths:
+
+- `release/app-release.jks`
+- `release/play-account.json`
+- `app/google-services.json`
+
+you can use the `release/encrypt-secrets.sh` to safely encrypt them (it's recommended to use a very strong passphrase).
 
 ## Contributing 🤝
 

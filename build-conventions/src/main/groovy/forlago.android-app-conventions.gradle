@@ -27,8 +27,8 @@ plugins {
 
 def applyGsmServicesPlugins = rootProject.file("app/google-services.json").exists()
 if (applyGsmServicesPlugins) {
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'com.google.firebase.crashlytics'
+    project.plugins.apply('com.google.gms.google-services')
+    project.plugins.apply('com.google.firebase.crashlytics')
 }
 println "google-services.json ${if (applyGsmServicesPlugins) "" else "NOT "}found!"
 
