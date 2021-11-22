@@ -3,7 +3,7 @@
 
 [versions]
 aboutlibraries = "10.0.0-a04"
-accompanist = "0.21.2-beta"
+accompanist = "0.21.3-beta"
 androidx-compose = "1.1.0-beta03"
 androidx-lifecycle = "2.4.0"
 androidx-material = "1.4.0"
