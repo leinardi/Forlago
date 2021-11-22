@@ -60,7 +60,7 @@ class Forlago : Application() {
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedRegistrationObjects()
                 .detectFileUriExposure()
-                // .detectCleartextNetwork() // https://github.com/firebase/firebase-android-sdk/issues/3158
+                .detectCleartextNetwork()
                 .penaltyLog()
                 .penaltyDeath()
                 .apply {
