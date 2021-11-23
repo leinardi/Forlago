@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.feature.foo.ui
+package com.leinardi.forlago.feature.foo.ui.foo
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.destination.bar.BarDestination
+import com.leinardi.forlago.core.navigation.destination.foo.FooDialogDestination
 import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.foo.R
-import com.leinardi.forlago.feature.foo.ui.FooContract.Effect
-import com.leinardi.forlago.feature.foo.ui.FooContract.Event
-import com.leinardi.forlago.feature.foo.ui.FooContract.State
+import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
+import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
+import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -41,8 +42,8 @@ class FooViewModel @Inject constructor(
     override fun handleEvent(event: Event) {
         when (event) {
             is Event.OnBarButtonClicked -> sendText(event.text)
-            Event.OnShowSnackbarButtonClicked ->
-                sendEffect { Effect.ShowSnackbar(app.getString(R.string.i18n_foo_snackbar_text)) }
+            Event.OnShowSnackbarButtonClicked -> sendEffect { Effect.ShowSnackbar(app.getString(R.string.i18n_foo_snackbar_text)) }
+            Event.OnShowMoreFooButtonClicked -> forlagoNavigator.navigate(FooDialogDestination.createRoute())
         }
     }
 

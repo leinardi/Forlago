@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.feature.foo.ui
+package com.leinardi.forlago.core.navigation.destination.foo
 
-import com.leinardi.forlago.core.ui.base.ViewEffect
-import com.leinardi.forlago.core.ui.base.ViewEvent
-import com.leinardi.forlago.core.ui.base.ViewState
+import com.leinardi.forlago.core.navigation.NavigationDestination
 
-object FooContract {
-    data class State(
-        val text: String,
-        val isLoading: Boolean = false,
-    ) : ViewState
+object FooDialogDestination : NavigationDestination {
+    private const val FOO_DIALOG_ROUTE = "fooDialog"
 
-    sealed class Event : ViewEvent {
-        data class OnBarButtonClicked(val text: String) : Event()
-        object OnShowSnackbarButtonClicked : Event()
-    }
+    override fun route() = FOO_DIALOG_ROUTE
 
-    sealed class Effect : ViewEffect {
-        data class ShowSnackbar(val message: String) : Effect()
-    }
+    fun createRoute() = route()
 }

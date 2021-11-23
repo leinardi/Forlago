@@ -20,14 +20,20 @@ import androidx.compose.runtime.Composable
 import com.leinardi.forlago.core.feature.Feature
 import com.leinardi.forlago.core.navigation.NavigationDestination
 import com.leinardi.forlago.core.navigation.destination.foo.FooDestination
-import com.leinardi.forlago.feature.foo.ui.FooScreen
+import com.leinardi.forlago.core.navigation.destination.foo.FooDialogDestination
 import com.leinardi.forlago.feature.foo.ui.debug.FooDebugPage
+import com.leinardi.forlago.feature.foo.ui.foo.FooScreen
+import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogScreen
 
 class FooFeature : Feature() {
     override val id = "Foo"
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
         FooDestination to { FooScreen() },
+    )
+
+    override val dialogDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
+        FooDialogDestination to { FooDialogScreen() },
     )
 
     override val debugComposable: @Composable () -> Unit = { FooDebugPage() }

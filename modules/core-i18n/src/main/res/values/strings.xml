@@ -22,6 +22,7 @@
     <string name="i18n_foo_change_me">Change me</string>
     <string name="i18n_foo_screen_title">Foo screen</string>
     <string name="i18n_foo_send_text_to_bar">Send text to Bar screen</string>
+    <string name="i18n_foo_show_dialog">Show Dialog</string>
     <string name="i18n_foo_show_snackbar">Show Snackbar</string>
     <string name="i18n_foo_snackbar_text">Lorem ipsum dolor sit amet…</string>
     <string name="i18n_foo_text_field_hint">Type something here plz…</string>

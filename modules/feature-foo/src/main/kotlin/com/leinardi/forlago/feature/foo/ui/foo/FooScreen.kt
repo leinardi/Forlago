@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.feature.foo.ui
+package com.leinardi.forlago.feature.foo.ui.foo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,9 +44,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.core.ui.component.ProgressButton
 import com.leinardi.forlago.core.ui.component.TopAppBar
 import com.leinardi.forlago.feature.foo.R
-import com.leinardi.forlago.feature.foo.ui.FooContract.Effect
-import com.leinardi.forlago.feature.foo.ui.FooContract.Event
-import com.leinardi.forlago.feature.foo.ui.FooContract.State
+import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
+import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
+import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -111,6 +111,12 @@ fun FooScreen(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(stringResource(R.string.i18n_foo_show_snackbar))
+                }
+                Button(
+                    onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.i18n_foo_show_dialog))
                 }
             }
         },
