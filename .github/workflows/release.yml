@@ -5,10 +5,6 @@ on:
     branches:
       - master
     inputs:
-      branch:
-        description: 'Release branch'
-        required: true
-        default: 'master'
       semver:
         description: 'Release Semantic Versioning (e.g. 4.15.2)'
         required: true
@@ -24,8 +20,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Create release tag
+        uses: actions/github-script@v5
         with:
-          ref: github.event.inputs.branch
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.createRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "refs/tags/${{ github.event.inputs.semver }}",
+              sha: context.sha
+            })
+
+      - name: Workaround to fetch the tag # Is there a better way to do it?
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Setup JDK 11.0.10
         uses: actions/setup-java@v2
@@ -45,24 +56,19 @@ jobs:
           ENCRYPT_KEY: ${{ secrets.ENCRYPT_KEY }}
 
       ## Actual task
-      - name: Create release tag
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.git.createRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "refs/tags/${{ github.event.inputs.semver }}",
-              sha: context.sha
-            })
-
-      - name: Build and publish to Play Store
+      - name: Build
         uses: gradle/gradle-build-action@v2
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: ./gradlew publishBundle
+          arguments: assemble bundle
+
+      - name: Publish to Play Store
+        uses: gradle/gradle-build-action@v2
+        env:
+          ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
+        with:
+          arguments: publishBundle
 
       - name: Clean secrets
         if: always()
@@ -74,3 +80,30 @@ jobs:
         with:
           name: build-outputs
           path: app/build/outputs
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          tag_name: ${{ github.event.inputs.semver }}
+          fail_on_unmatched_files: true
+          files: |
+            app/build/outputs/apk/debug/forlago-debug.apk
+            app/build/outputs/apk/release/forlago-release.apk
+            app/build/outputs/bundle/debug/forlago-debug.aab
+            app/build/outputs/bundle/release/forlago-release.aab
+            app/build/outputs/mapping/release/mapping.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete release tag
+        if: failure()
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "tags/${{ github.event.inputs.semver }}"
+            })

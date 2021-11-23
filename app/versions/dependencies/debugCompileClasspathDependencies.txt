@@ -285,15 +285,15 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    +--- androidx.core:core-splashscreen:1.0.0-alpha02
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.5.31 (*)
 |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0 (*)
-|    +--- com.google.accompanist:accompanist-pager:0.21.2-beta
-|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta02 -> 1.1.0-beta03 (*)
+|    +--- com.google.accompanist:accompanist-pager:0.21.3-beta
+|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta03 (*)
 |    |    +--- dev.chrisbanes.snapper:snapper:0.1.0
 |    |    |    +--- androidx.compose.foundation:foundation:1.0.3 -> 1.1.0-beta03 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.5.31 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
-|    +--- com.google.accompanist:accompanist-pager-indicators:0.21.2-beta
-|    |    +--- com.google.accompanist:accompanist-pager:0.21.2-beta (*)
-|    |    +--- androidx.compose.material:material:1.1.0-beta02 -> 1.1.0-beta03 (*)
+|    +--- com.google.accompanist:accompanist-pager-indicators:0.21.3-beta
+|    |    +--- com.google.accompanist:accompanist-pager:0.21.3-beta (*)
+|    |    +--- androidx.compose.material:material:1.1.0-beta03 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
 +--- androidx.navigation:navigation-compose:2.4.0-beta02 (*)
@@ -341,8 +341,8 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.compose.ui:ui:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
 +--- androidx.core:core-splashscreen:{strictly 1.0.0-alpha02} -> 1.0.0-alpha02 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.4.0} -> 2.4.0 (c)
-+--- com.google.accompanist:accompanist-pager:{strictly 0.21.2-beta} -> 0.21.2-beta (c)
-+--- com.google.accompanist:accompanist-pager-indicators:{strictly 0.21.2-beta} -> 0.21.2-beta (c)
++--- com.google.accompanist:accompanist-pager:{strictly 0.21.3-beta} -> 0.21.3-beta (c)
++--- com.google.accompanist:accompanist-pager-indicators:{strictly 0.21.3-beta} -> 0.21.3-beta (c)
 +--- com.squareup.leakcanary:leakcanary-android-core:{strictly 2.7} -> 2.7 (c)
 +--- androidx.annotation:annotation:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.compose.ui:ui-tooling-preview:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
