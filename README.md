@@ -25,11 +25,43 @@ After successfully forking the template you have to:
 - Compose only - Single Activity application
 - Multi Module project structure
 - CI Setup with GitHub Actions
-- Dependency versions managed via `libs.versions.toml`
+- Dependency versions managed via [`libs.versions.toml`](/gradle/libs.versions.toml)
 
 ## Gradle Setup 🐘
 
-TBD
+This template uses the Gradle's suggested way to [share build logic](https://docs.gradle.org/current/samples/sample_convention_plugins.html) and
+to [share dependency versions](https://docs.gradle.org/current/userguide/platforms.html) between projects.
+
+<details>
+  <summary>Click here to see the list of all the template's convention plugins.</summary>
+
+### Convention plugins
+
+There are many convention plugins available inside the [`build-conventions`](/build-conventions) module:
+
+| Convention plugin | Description |
+|---|---|
+| [`forlago.android-android-conventions.gradle`](build-conventions/src/main/groovy/forlago.android-android-conventions.gradle) | Contains the common configuration for all the Android gradle modules |
+| [`forlago.android-app-conventions.gradle`](build-conventions/src/main/groovy/forlago.android-app-conventions.gradle) | Contains the common configuration for the Application gradle module |
+| [`forlago.android-core-conventions.gradle`](build-conventions/src/main/groovy/forlago.android-core-conventions.gradle) | Contains the common configuration for all the Core gradle modules |
+| [`forlago.android-feature-conventions.gradle`](build-conventions/src/main/groovy/forlago.android-feature-conventions.gradle) | Contains the common configuration for all the Feature gradle modules |
+| [`forlago.app-versioning-conventions.gradle`](build-conventions/src/main/groovy/forlago.app-versioning-conventions.gradle) | Adds and configures [`app-versioning`](https://github.com/ReactiveCircus/app-versioning/), a Plugin for lazily generating Android app's `versionCode` and  `versionName` from Git tags. |
+| [`forlago.buildlog-conventions.gradle`](build-conventions/src/main/groovy/forlago.buildlog-conventions.gradle) | a little snippet that allows to save the Gradle build log to a file (useful for CI verifications) |
+| [`forlago.config-conventions.gradle`](build-conventions/src/main/groovy/forlago.config-conventions.gradle) | It contains some configuration values like `applicationId`, `mindSdk` and `deepLinkSchema` |
+| [`forlago.dependencies-conventions.gradle`](build-conventions/src/main/groovy/forlago.dependencies-conventions.gradle) | Adds a task that generates a text file containing the Compile classpath dependencies (useful for CI verifications) |
+| [`forlago.dependency-graph-conventions.gradle`](build-conventions/src/main/groovy/forlago.dependency-graph-conventions.gradle) | Adds a task that generates an image showing the project dependency graph |
+| [`forlago.detekt-conventions.gradle`](build-conventions/src/main/groovy/forlago.detekt-conventions.gradle) | Adds and configures [`detekt`](https://detekt.github.io/detekt/) Plugin, a static code analysis tool for the Kotlin programming language |
+| [`forlago.generate-module-conventions.gradle`](build-conventions/src/main/groovy/forlago.generate-module-conventions.gradle) | Adds tasks to generate new Core and Feature modules |
+| [`forlago.merged-manifests-conventions.gradle`](build-conventions/src/main/groovy/forlago.merged-manifests-conventions.gradle) | Adds a task to copy the merged Android Manifests (useful for CI verifications) |
+| [`forlago.spotless-conventions.gradle`](build-conventions/src/main/groovy/forlago.spotless-conventions.gradle) | Adds and configures [`spotless`](https://github.com/diffplug/spotless) Plugin, a code formatter |
+| [`forlago.triplet-play-conventions.gradle`](build-conventions/src/main/groovy/forlago.triplet-play-conventions.gradle) | Adds and configures [`gradle-play-publisher`](https://github.com/Triple-T/gradle-play-publisher), a Plugin that helps automating the release of the app to the Play Store |
+| [`forlago.versions-conventions.gradle`](build-conventions/src/main/groovy/forlago.versions-conventions.gradle) | Adds and configures [`gradle-versions-plugin`](https://github.com/ben-manes/gradle-versions-plugin), a Plugin that helps determine which dependencies have updates |
+| [`forlago.violation-comments-to-github-conventions.gradle`](build-conventions/src/main/groovy/forlago.violation-comments-to-github-conventions.gradle) | Adds and configures [`violation-comments-to-github-gradle-plugin`](https://github.com/tomasbjerre/violation-comments-to-github-gradle-plugin), a Plugin that will find report files from static code analysis and create comments for them on GitHub's Pull Requests |
+
+</details>
+
+### Useful tasks
+
 
 ## Static Analysis 🔍
 
@@ -85,10 +117,11 @@ bundle to the Play Store.
 
 ### Enabling Firebase Crashlytics
 
-The first step is to [register your new app with Firebase](https://firebase.google.com/docs/android/setup?hl=en) (don't forget to add [both release and
-debug packages](https://firebase.googleblog.com/2016/08/organizing-your-firebase-enabled-android-app-builds.html) to the same Firebase project).
-After that, you should put the `google-services.json`, containing both release and debug applications, inside the `app/` directory.
-Now you have to [Enable Crashlytics in the Firebase console](https://firebase.google.com/docs/crashlytics/get-started?hl=en&platform=android#enable-in-console)
+The first step is to [register your new app with Firebase](https://firebase.google.com/docs/android/setup?hl=en) (don't forget to
+add [both release and debug packages](https://firebase.googleblog.com/2016/08/organizing-your-firebase-enabled-android-app-builds.html) to the same
+Firebase project). After that, you should put the `google-services.json`, containing both release and debug applications, inside the `app/` directory.
+Now you have
+to [Enable Crashlytics in the Firebase console](https://firebase.google.com/docs/crashlytics/get-started?hl=en&platform=android#enable-in-console)
 and, finally, open the Debug menu and trigger a crash using the Force Crash button.
 
 ### Encrypting your secrets
