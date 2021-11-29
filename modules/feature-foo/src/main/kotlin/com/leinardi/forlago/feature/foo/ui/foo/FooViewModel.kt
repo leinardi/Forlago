@@ -49,9 +49,9 @@ class FooViewModel @Inject constructor(
 
     private fun sendText(text: String) {
         viewModelScope.launch {
-            updateState { viewState.value.copy(isLoading = true) }
+            updateState { copy(isLoading = true) }
             delay(TimeUnit.SECONDS.toMillis(2))
-            updateState { viewState.value.copy(isLoading = false) }
+            updateState { copy(isLoading = false) }
             forlagoNavigator.navigate(BarDestination.createRoute(text))
         }
     }

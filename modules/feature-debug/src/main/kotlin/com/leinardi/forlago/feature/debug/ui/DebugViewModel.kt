@@ -47,7 +47,7 @@ class DebugViewModel @Inject constructor(
     override fun handleEvent(event: Event) {
         when (event) {
             is Event.OnBottomNavigationItemSelected ->
-                updateState { viewState.value.copy(selectedNavigationItem = event.selectedNavigationItem) }
+                updateState { copy(selectedNavigationItem = event.selectedNavigationItem) }
             is Event.OnUpButtonClicked -> forlagoNavigator.navigateUp()
             is Event.OnForceCrashClicked -> throw IllegalStateException("Debug screen test crash")
         }
