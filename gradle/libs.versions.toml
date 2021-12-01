@@ -66,6 +66,7 @@ androidx-test-orchestrator = { module = "androidx.test:orchestrator", version.re
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
 apollo = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo" }
+apollo-cache = { module = "com.apollographql.apollo:apollo-normalized-cache-sqlite", version.ref = "apollo" }
 apollo-coroutines = { module = "com.apollographql.apollo:apollo-coroutines-support", version.ref = "apollo" }
 coil-compose = { module = "io.coil-kt:coil-compose", version = "1.3.0" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
@@ -103,3 +104,4 @@ plugin-violation = { module = "se.bjurr.violations:violation-comments-to-github-
 
 [plugins]
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
+gradledoctor = { id = "com.osacky.doctor", version = "0.7.3" }

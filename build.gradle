@@ -32,6 +32,7 @@ plugins {
     id 'forlago.versions-conventions'
     id 'forlago.dependency-graph-conventions'
     id 'forlago.violation-comments-to-github-conventions'
+    alias(libs.plugins.gradledoctor)
 }
 
 
