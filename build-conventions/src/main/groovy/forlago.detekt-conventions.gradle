@@ -28,11 +28,6 @@ dependencies {
     detektPlugins libs.detekt
 }
 
-tasks.named('detekt') {
-    exclude("**/.module-template/**")
-    exclude("**/build/generated/**")
-}
-
 afterEvaluate {
     check.dependsOn tasks.named("detektMain")
     check.dependsOn tasks.named("detektTest")
