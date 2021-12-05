@@ -3,8 +3,8 @@
 
 [versions]
 aboutlibraries = "10.0.0-a04"
-accompanist = "0.21.3-beta"
-androidx-compose = "1.1.0-beta03"
+accompanist = "0.21.4-beta"
+androidx-compose = "1.1.0-beta04"
 androidx-lifecycle = "2.4.0"
 androidx-material = "1.4.0"
 androidx-navigation = "2.4.0-beta02"
@@ -16,8 +16,8 @@ detekt = "1.18.1"
 diktat = "1.0.0-rc.4"
 gradle = "7.3"
 greclipse = "4.19.0"
-hilt = "2.40.1"
-kotlin = "1.5.31"
+hilt = "2.40.4"
+kotlin = "1.6.0"
 ktlint = "0.43.0"
 prettier = "2.4.1"
 
@@ -74,7 +74,7 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version = "20.0.0" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.2.4" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.2.5" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0-beta01" }

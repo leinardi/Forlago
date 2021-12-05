@@ -49,7 +49,6 @@ android {
     }
     kotlinOptions {
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
-        freeCompilerArgs += '-Xsuppress-version-warnings' // Needed to suppress warning due to languageVersion = '1.6' on kotlin 1.5.x
         jvmTarget = config.android.javaVersion
         useIR = true
     }
@@ -103,8 +102,7 @@ android {
 kotlin {
     sourceSets.all {
         languageSettings {
-            languageVersion = '1.6' // Needed to have exhaustive when with kotlin 1.5.x
-            progressiveMode = true
+            progressiveMode = true // deprecations and bug fixes for unstable code take effect immediately
         }
     }
 }

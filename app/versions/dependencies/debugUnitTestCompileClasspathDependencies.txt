@@ -4,12 +4,12 @@ Project ':app'
 ------------------------------------------------------------
 
 debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest' (target  (androidJvm)).
-+--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31
-|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31
++--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0
+|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0
 |    |    +--- org.jetbrains:annotations:13.0 -> 20.1.0
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31
-|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.6.0
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.0
+|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0 (*)
 +--- com.squareup.leakcanary:leakcanary-android:2.7
 |    +--- com.squareup.leakcanary:leakcanary-android-core:2.7
 |    |    +--- com.squareup.leakcanary:shark-android:2.7
@@ -22,67 +22,67 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    |    \--- com.squareup.leakcanary:shark-log:2.7
 |    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.7
 |    |    |    |    +--- com.squareup.leakcanary:shark-log:2.7
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
 |    |    |    +--- com.squareup.curtains:curtains:1.0.1
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.5.31 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.6.0 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
 |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:2.7
 |    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android:2.7 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
 |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:2.7
 |    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android:2.7 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
 |    |    +--- com.squareup.leakcanary:plumber-android:2.7
 |    |    |    +--- com.squareup.leakcanary:shark-log:2.7
 |    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.7 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.5.31 (*)
-+--- androidx.compose.ui:ui-tooling:1.1.0-beta03
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.6.0 (*)
++--- androidx.compose.ui:ui-tooling:1.1.0-beta04
 |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    +--- androidx.compose.runtime:runtime:1.1.0-beta03
+|    +--- androidx.compose.runtime:runtime:1.1.0-beta04
 |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2
 |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2
 |    |         |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.5.2
-|    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.5.31 (*)
-|    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.30 -> 1.5.31
-|    |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.5.31 (*)
-|    +--- androidx.compose.ui:ui:1.1.0-beta03
-|    |    +--- androidx.compose.runtime:runtime-saveable:1.1.0-beta03
-|    |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
+|    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.6.0 (*)
+|    |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.30 -> 1.6.0
+|    |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.6.0 (*)
+|    +--- androidx.compose.ui:ui:1.1.0-beta04
+|    |    +--- androidx.compose.runtime:runtime-saveable:1.1.0-beta04
+|    |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
 |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.compose.ui:ui-geometry:1.1.0-beta03
+|    |    +--- androidx.compose.ui:ui-geometry:1.1.0-beta04
 |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.compose.ui:ui-graphics:1.1.0-beta03
+|    |    +--- androidx.compose.ui:ui-graphics:1.1.0-beta04
 |    |    |    +--- androidx.annotation:annotation:1.2.0
-|    |    |    \--- androidx.compose.ui:ui-unit:1.1.0-beta03
-|    |    |         +--- androidx.compose.ui:ui-geometry:1.1.0-beta03 (*)
+|    |    |    \--- androidx.compose.ui:ui-unit:1.1.0-beta04
+|    |    |         +--- androidx.compose.ui:ui-geometry:1.1.0-beta04 (*)
 |    |    |         \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.compose.ui:ui-text:1.1.0-beta03
-|    |    |    +--- androidx.compose.ui:ui-graphics:1.1.0-beta03 (*)
-|    |    |    +--- androidx.compose.ui:ui-unit:1.1.0-beta03 (*)
+|    |    +--- androidx.compose.ui:ui-text:1.1.0-beta04
+|    |    |    +--- androidx.compose.ui:ui-graphics:1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.ui:ui-unit:1.1.0-beta04 (*)
 |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    +--- androidx.compose.ui:ui-unit:1.1.0-beta03 (*)
+|    |    +--- androidx.compose.ui:ui-unit:1.1.0-beta04 (*)
 |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    +--- androidx.compose.ui:ui-tooling-preview:1.1.0-beta03
+|    +--- androidx.compose.ui:ui-tooling-preview:1.1.0-beta04
 |    |    +--- androidx.annotation:annotation:1.2.0
-|    |    \--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|    \--- androidx.compose.ui:ui-tooling-data:1.1.0-beta03
+|    |    \--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|    \--- androidx.compose.ui:ui-tooling-data:1.1.0-beta04
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|         +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|         \--- androidx.compose.ui:ui:1.1.0-beta03 (*)
+|         +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|         \--- androidx.compose.ui:ui:1.1.0-beta04 (*)
 +--- project :app (*)
-+--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.5.31
-|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
-|    \--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.5.31
-|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
-+--- org.jetbrains.kotlin:kotlin-parcelize-runtime:{strictly 1.5.31} -> 1.5.31 (c)
-+--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.5.31} -> 1.5.31 (c)
++--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.6.0
+|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0 (*)
+|    \--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.6.0
+|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0 (*)
++--- org.jetbrains.kotlin:kotlin-parcelize-runtime:{strictly 1.6.0} -> 1.6.0 (c)
++--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.6.0} -> 1.6.0 (c)
 +--- com.squareup.leakcanary:leakcanary-android:{strictly 2.7} -> 2.7 (c)
-+--- androidx.compose.ui:ui-tooling:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- androidx.compose.ui:ui-tooling:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.activity:activity-compose:1.4.0
-|    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta03 (*)
-|    +--- androidx.compose.runtime:runtime-saveable:1.0.1 -> 1.1.0-beta03 (*)
+|    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta04 (*)
+|    +--- androidx.compose.runtime:runtime-saveable:1.0.1 -> 1.1.0-beta04 (*)
 |    +--- androidx.activity:activity-ktx:1.4.0
 |    |    +--- androidx.activity:activity:1.4.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
@@ -102,7 +102,7 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.5.31 (*)
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.0 (*)
 |    |    |    +--- androidx.savedstate:savedstate:1.1.0
 |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1
@@ -111,25 +111,25 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.3.1
 |    |    |    |    |    \--- androidx.lifecycle:lifecycle-common:2.3.1 -> 2.4.0 (*)
 |    |    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    |    +--- androidx.core:core-ktx:1.1.0 -> 1.7.0
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |    \--- androidx.core:core:1.7.0 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.3.1 -> 2.4.0
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.4.0 (*)
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.5.31 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.0 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0 -> 1.5.2 (*)
 |    |    |    \--- androidx.annotation:annotation:1.0.0 -> 1.2.0
 |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1 -> 2.4.0
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.4.0 (*)
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.5.31 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.0 (*)
 |    |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0 -> 1.5.2 (*)
 |    |    +--- androidx.savedstate:savedstate-ktx:1.1.0
 |    |    |    +--- androidx.savedstate:savedstate:1.1.0 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.5.31 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
-|    \--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta03 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.6.0 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
+|    \--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta04 (*)
 +--- androidx.core:core-ktx:1.7.0 (*)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:2.4.0 (*)
 +--- androidx.navigation:navigation-fragment-ktx:2.4.0-beta02
@@ -161,18 +161,18 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1 (*)
 |    |    |    |    +--- androidx.savedstate:savedstate:1.1.0 (*)
 |    |    |    |    +--- androidx.annotation:annotation-experimental:1.0.0 -> 1.1.0
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    |    |    +--- androidx.activity:activity-ktx:1.2.3 -> 1.4.0 (*)
 |    |    |    +--- androidx.core:core-ktx:1.2.0 -> 1.7.0 (*)
 |    |    |    +--- androidx.collection:collection-ktx:1.1.0
-|    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.5.31 (*)
+|    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.20 -> 1.6.0 (*)
 |    |    |    |    \--- androidx.collection:collection:1.1.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.1
 |    |    |    |    +--- androidx.lifecycle:lifecycle-livedata-core:2.3.1 (*)
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.5.31 (*)
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.6.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1 -> 2.4.0 (*)
 |    |    |    +--- androidx.savedstate:savedstate-ktx:1.1.0 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    |    +--- androidx.navigation:navigation-runtime:2.4.0-beta02
 |    |    |    +--- androidx.navigation:navigation-common:2.4.0-beta02
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
@@ -180,16 +180,16 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1 -> 2.4.0 (*)
 |    |    |    |    +--- androidx.savedstate:savedstate:1.0.0 -> 1.1.0 (*)
 |    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.1 (*)
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    |    |    +--- androidx.activity:activity-ktx:1.2.3 -> 1.4.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.3.1 -> 2.4.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1 -> 2.4.0 (*)
 |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    |    +--- androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.0 (*)
 |    \--- androidx.navigation:navigation-runtime-ktx:2.4.0-beta02
 |         +--- androidx.navigation:navigation-runtime:2.4.0-beta02 (*)
 |         \--- androidx.navigation:navigation-common-ktx:2.4.0-beta02
@@ -204,15 +204,15 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    \--- androidx.customview:customview:1.1.0 (*)
 |    |    \--- androidx.annotation:annotation-experimental:1.1.0
 |    \--- androidx.navigation:navigation-runtime-ktx:2.4.0-beta02 (*)
-+--- com.google.dagger:hilt-android:2.40.1
-|    +--- com.google.dagger:dagger:2.40.1
++--- com.google.dagger:hilt-android:2.40.4
+|    +--- com.google.dagger:dagger:2.40.4
 |    |    \--- javax.inject:javax.inject:1
-|    +--- com.google.dagger:dagger-lint-aar:2.40.1
-|    +--- com.google.dagger:hilt-core:2.40.1
-|    |    +--- com.google.dagger:dagger:2.40.1 (*)
-|    |    +--- com.google.code.findbugs:jsr305:3.0.1
+|    +--- com.google.dagger:dagger-lint-aar:2.40.4
+|    +--- com.google.dagger:hilt-core:2.40.4
+|    |    +--- com.google.dagger:dagger:2.40.4 (*)
+|    |    +--- com.google.code.findbugs:jsr305:3.0.2
 |    |    \--- javax.inject:javax.inject:1
-|    +--- com.google.code.findbugs:jsr305:3.0.1
+|    +--- com.google.code.findbugs:jsr305:3.0.2
 |    +--- androidx.activity:activity:1.3.1 -> 1.4.0 (*)
 |    +--- androidx.annotation:annotation:1.2.0
 |    +--- androidx.fragment:fragment:1.3.6 -> 1.4.0-rc01 (*)
@@ -223,82 +223,82 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    \--- javax.inject:javax.inject:1
 +--- androidx.hilt:hilt-navigation-compose:1.0.0-beta01
 |    +--- androidx.hilt:hilt-navigation:1.0.0
-|    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.4.32 -> 1.5.31 (*)
+|    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.4.32 -> 1.6.0 (*)
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    +--- androidx.navigation:navigation-runtime:2.3.2 -> 2.4.0-beta02 (*)
-|    |    \--- com.google.dagger:hilt-android:2.35 -> 2.40.1 (*)
-|    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta03 (*)
-|    +--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta03 (*)
+|    |    \--- com.google.dagger:hilt-android:2.35 -> 2.40.4 (*)
+|    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta04 (*)
+|    +--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta04 (*)
 |    +--- androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0
 |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0 -> 2.4.0 (*)
-|    |    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta03 (*)
-|    |    \--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta03 (*)
+|    |    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta04 (*)
+|    |    \--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta04 (*)
 |    \--- androidx.navigation:navigation-compose:2.4.0-beta02
 |         +--- androidx.activity:activity-compose:1.3.1 -> 1.4.0 (*)
-|         +--- androidx.compose.animation:animation:1.0.1 -> 1.1.0-beta03
+|         +--- androidx.compose.animation:animation:1.0.1 -> 1.1.0-beta04
 |         |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|         |    +--- androidx.compose.animation:animation-core:1.1.0-beta03
+|         |    +--- androidx.compose.animation:animation-core:1.1.0-beta04
 |         |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |         |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2 (*)
-|         |    +--- androidx.compose.foundation:foundation-layout:1.0.0 -> 1.1.0-beta03
+|         |    +--- androidx.compose.foundation:foundation-layout:1.0.0 -> 1.1.0-beta04
 |         |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|         |    |    +--- androidx.compose.ui:ui:1.1.0-beta03 (*)
-|         |    |    \--- androidx.compose.ui:ui-unit:1.1.0-beta03 (*)
-|         |    +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|         |    +--- androidx.compose.ui:ui:1.0.0 -> 1.1.0-beta03 (*)
-|         |    \--- androidx.compose.ui:ui-geometry:1.0.0 -> 1.1.0-beta03 (*)
-|         +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta03 (*)
-|         +--- androidx.compose.runtime:runtime-saveable:1.0.1 -> 1.1.0-beta03 (*)
-|         +--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta03 (*)
+|         |    |    +--- androidx.compose.ui:ui:1.1.0-beta04 (*)
+|         |    |    \--- androidx.compose.ui:ui-unit:1.1.0-beta04 (*)
+|         |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|         |    +--- androidx.compose.ui:ui:1.0.0 -> 1.1.0-beta04 (*)
+|         |    \--- androidx.compose.ui:ui-geometry:1.0.0 -> 1.1.0-beta04 (*)
+|         +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta04 (*)
+|         +--- androidx.compose.runtime:runtime-saveable:1.0.1 -> 1.1.0-beta04 (*)
+|         +--- androidx.compose.ui:ui:1.0.1 -> 1.1.0-beta04 (*)
 |         +--- androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-rc01 -> 2.4.0 (*)
 |         \--- androidx.navigation:navigation-runtime-ktx:2.4.0-beta02 (*)
 +--- com.jakewharton.timber:timber:5.0.1
-|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.21 -> 1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.21 -> 1.6.0 (*)
 +--- project :modules:core-android
 |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:core-i18n
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:core-logging
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:core-ui
-|    +--- androidx.compose.material:material:1.1.0-beta03
-|    |    +--- androidx.compose.animation:animation-core:1.0.0 -> 1.1.0-beta03 (*)
-|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta03
+|    +--- androidx.compose.material:material:1.1.0-beta04
+|    |    +--- androidx.compose.animation:animation-core:1.0.0 -> 1.1.0-beta04 (*)
+|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta04
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    +--- androidx.compose.animation:animation:1.1.0-beta03 (*)
-|    |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|    |    |    \--- androidx.compose.ui:ui:1.1.0-beta03 (*)
-|    |    +--- androidx.compose.material:material-icons-core:1.1.0-beta03
-|    |    |    \--- androidx.compose.ui:ui:1.0.0 -> 1.1.0-beta03 (*)
-|    |    +--- androidx.compose.material:material-ripple:1.1.0-beta03
-|    |    |    +--- androidx.compose.foundation:foundation:1.1.0-beta03 (*)
-|    |    |    \--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|    |    +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|    |    +--- androidx.compose.ui:ui:1.1.0-beta03 (*)
-|    |    \--- androidx.compose.ui:ui-text:1.0.0 -> 1.1.0-beta03 (*)
-|    +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
-|    +--- androidx.compose.runtime:runtime-livedata:1.1.0-beta03
-|    |    +--- androidx.compose.runtime:runtime:1.1.0-beta03 (*)
+|    |    |    +--- androidx.compose.animation:animation:1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|    |    |    \--- androidx.compose.ui:ui:1.1.0-beta04 (*)
+|    |    +--- androidx.compose.material:material-icons-core:1.1.0-beta04
+|    |    |    \--- androidx.compose.ui:ui:1.0.0 -> 1.1.0-beta04 (*)
+|    |    +--- androidx.compose.material:material-ripple:1.1.0-beta04
+|    |    |    +--- androidx.compose.foundation:foundation:1.1.0-beta04 (*)
+|    |    |    \--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|    |    +--- androidx.compose.ui:ui:1.1.0-beta04 (*)
+|    |    \--- androidx.compose.ui:ui-text:1.0.0 -> 1.1.0-beta04 (*)
+|    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|    +--- androidx.compose.runtime:runtime-livedata:1.1.0-beta04
+|    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
 |    |    \--- androidx.lifecycle:lifecycle-livedata:2.2.0 (*)
-|    +--- androidx.compose.ui:ui-tooling:1.1.0-beta03 (*)
-|    +--- androidx.compose.ui:ui:1.1.0-beta03 (*)
+|    +--- androidx.compose.ui:ui-tooling:1.1.0-beta04 (*)
+|    +--- androidx.compose.ui:ui:1.1.0-beta04 (*)
 |    +--- androidx.core:core-splashscreen:1.0.0-alpha02
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.5.31 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.0 (*)
 |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0 (*)
-|    +--- com.google.accompanist:accompanist-pager:0.21.3-beta
-|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta03 (*)
+|    +--- com.google.accompanist:accompanist-pager:0.21.4-beta
+|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta04 (*)
 |    |    +--- dev.chrisbanes.snapper:snapper:0.1.0
-|    |    |    +--- androidx.compose.foundation:foundation:1.0.3 -> 1.1.0-beta03 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.5.31 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
-|    +--- com.google.accompanist:accompanist-pager-indicators:0.21.3-beta
-|    |    +--- com.google.accompanist:accompanist-pager:0.21.3-beta (*)
-|    |    +--- androidx.compose.material:material:1.1.0-beta03 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    |    |    +--- androidx.compose.foundation:foundation:1.0.3 -> 1.1.0-beta04 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.6.0 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
+|    +--- com.google.accompanist:accompanist-pager-indicators:0.21.4-beta
+|    |    +--- com.google.accompanist:accompanist-pager:0.21.4-beta (*)
+|    |    +--- androidx.compose.material:material:1.1.0-beta04 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- androidx.navigation:navigation-compose:2.4.0-beta02 (*)
 +--- androidx.startup:startup-runtime:1.1.0
 +--- project :modules:feature-account
@@ -307,20 +307,20 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 |    |    |    +--- androidx.navigation:navigation-compose:2.4.0-beta02 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:feature-bar
 |    +--- project :modules:core-feature (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:feature-debug
 |    +--- project :modules:core-feature (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:feature-foo
 |    +--- project :modules:core-feature (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- junit:junit:4.13.2
 |    \--- org.hamcrest:hamcrest-core:1.3
 +--- androidx.activity:activity-compose:{strictly 1.4.0} -> 1.4.0 (c)
@@ -328,40 +328,40 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.navigation:navigation-fragment-ktx:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
 +--- androidx.navigation:navigation-ui-ktx:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
-+--- com.google.dagger:hilt-android:{strictly 2.40.1} -> 2.40.1 (c)
++--- com.google.dagger:hilt-android:{strictly 2.40.4} -> 2.40.4 (c)
 +--- androidx.hilt:hilt-navigation-compose:{strictly 1.0.0-beta01} -> 1.0.0-beta01 (c)
 +--- com.jakewharton.timber:timber:{strictly 5.0.1} -> 5.0.1 (c)
 +--- androidx.navigation:navigation-compose:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
 +--- androidx.startup:startup-runtime:{strictly 1.1.0} -> 1.1.0 (c)
 +--- junit:junit:{strictly 4.13.2} -> 4.13.2 (c)
-+--- org.jetbrains.kotlin:kotlin-stdlib:{strictly 1.5.31} -> 1.5.31 (c)
-+--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:{strictly 1.5.31} -> 1.5.31 (c)
++--- org.jetbrains.kotlin:kotlin-stdlib:{strictly 1.6.0} -> 1.6.0 (c)
++--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:{strictly 1.6.0} -> 1.6.0 (c)
 +--- com.squareup.leakcanary:leakcanary-android-core:{strictly 2.7} -> 2.7 (c)
 +--- androidx.annotation:annotation:{strictly 1.2.0} -> 1.2.0 (c)
-+--- androidx.compose.runtime:runtime:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.ui:ui:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.ui:ui-tooling-preview:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.ui:ui-tooling-data:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:{strictly 1.5.31} -> 1.5.31 (c)
++--- androidx.compose.runtime:runtime:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui-tooling-preview:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui-tooling-data:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:{strictly 1.6.0} -> 1.6.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.5.2} -> 1.5.2 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.compose.material:material:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.runtime:runtime-livedata:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- androidx.compose.material:material:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.runtime:runtime-livedata:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.core:core-splashscreen:{strictly 1.0.0-alpha02} -> 1.0.0-alpha02 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.4.0} -> 2.4.0 (c)
-+--- com.google.accompanist:accompanist-pager:{strictly 0.21.3-beta} -> 0.21.3-beta (c)
-+--- com.google.accompanist:accompanist-pager-indicators:{strictly 0.21.3-beta} -> 0.21.3-beta (c)
-+--- androidx.compose.runtime:runtime-saveable:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- com.google.accompanist:accompanist-pager:{strictly 0.21.4-beta} -> 0.21.4-beta (c)
++--- com.google.accompanist:accompanist-pager-indicators:{strictly 0.21.4-beta} -> 0.21.4-beta (c)
++--- androidx.compose.runtime:runtime-saveable:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.activity:activity-ktx:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.core:core:{strictly 1.7.0} -> 1.7.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.navigation:navigation-fragment:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
 +--- androidx.navigation:navigation-runtime-ktx:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
 +--- androidx.navigation:navigation-ui:{strictly 2.4.0-beta02} -> 2.4.0-beta02 (c)
-+--- com.google.dagger:dagger:{strictly 2.40.1} -> 2.40.1 (c)
-+--- com.google.dagger:dagger-lint-aar:{strictly 2.40.1} -> 2.40.1 (c)
-+--- com.google.dagger:hilt-core:{strictly 2.40.1} -> 2.40.1 (c)
-+--- com.google.code.findbugs:jsr305:{strictly 3.0.1} -> 3.0.1 (c)
++--- com.google.dagger:dagger:{strictly 2.40.4} -> 2.40.4 (c)
++--- com.google.dagger:dagger-lint-aar:{strictly 2.40.4} -> 2.40.4 (c)
++--- com.google.dagger:hilt-core:{strictly 2.40.4} -> 2.40.4 (c)
++--- com.google.code.findbugs:jsr305:{strictly 3.0.2} -> 3.0.2 (c)
 +--- androidx.activity:activity:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.fragment:fragment:{strictly 1.4.0-rc01} -> 1.4.0-rc01 (c)
 +--- androidx.lifecycle:lifecycle-common:{strictly 2.4.0} -> 2.4.0 (c)
@@ -371,24 +371,24 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 +--- javax.inject:javax.inject:{strictly 1} -> 1 (c)
 +--- androidx.hilt:hilt-navigation:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-compose:{strictly 2.4.0} -> 2.4.0 (c)
-+--- androidx.compose.animation:animation:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- androidx.compose.animation:animation:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- org.hamcrest:hamcrest-core:{strictly 1.3} -> 1.3 (c)
 +--- org.jetbrains:annotations:{strictly 20.1.0} -> 20.1.0 (c)
-+--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.5.31} -> 1.5.31 (c)
++--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.6.0} -> 1.6.0 (c)
 +--- com.squareup.leakcanary:shark-android:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:plumber-android:{strictly 2.7} -> 2.7 (c)
-+--- androidx.compose.ui:ui-geometry:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.ui:ui-graphics:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.ui:ui-text:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.ui:ui-unit:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- androidx.compose.ui:ui-geometry:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui-graphics:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui-text:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui-unit:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.compose.animation:animation-core:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.foundation:foundation:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.material:material-icons-core:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
-+--- androidx.compose.material:material-ripple:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- androidx.compose.animation:animation-core:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.foundation:foundation:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.material:material-icons-core:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.material:material-ripple:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.2.0} -> 2.2.0 (c)
 +--- dev.chrisbanes.snapper:snapper:{strictly 0.1.0} -> 0.1.0 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.1.0} -> 1.1.0 (c)
@@ -405,7 +405,7 @@ debugUnitTestCompileClasspath - Compile classpath for compilation 'debugUnitTest
 +--- androidx.viewpager:viewpager:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.loader:loader:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core:{strictly 2.3.1} -> 2.3.1 (c)
-+--- androidx.compose.foundation:foundation-layout:{strictly 1.1.0-beta03} -> 1.1.0-beta03 (c)
++--- androidx.compose.foundation:foundation-layout:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- com.squareup.leakcanary:shark:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-android-utils:{strictly 2.7} -> 2.7 (c)
