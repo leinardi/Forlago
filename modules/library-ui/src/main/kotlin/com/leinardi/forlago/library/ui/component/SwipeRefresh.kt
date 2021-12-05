@@ -17,15 +17,16 @@
 package com.leinardi.forlago.library.ui.component
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.SwipeRefreshState
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -38,7 +39,15 @@ fun SwipeRefresh(
     indicatorAlignment: Alignment = Alignment.TopCenter,
     indicatorPadding: PaddingValues = PaddingValues(0.dp),
     indicator: @Composable (state: SwipeRefreshState, refreshTrigger: Dp) -> Unit = { swipeRefreshState, trigger ->
-        SwipeRefreshIndicator(swipeRefreshState, trigger, contentColor = MaterialTheme.colors.primary)
+        // Drop backgroundColor and shape customizations once it will support Material 3
+        // https://github.com/google/accompanist/issues/1151
+        SwipeRefreshIndicator(
+            state = swipeRefreshState,
+            refreshTriggerDistance = trigger,
+            backgroundColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.primary,
+            shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
+        )
     },
     clipIndicatorToPadding: Boolean = true,
     content: @Composable () -> Unit,
@@ -57,9 +66,9 @@ fun SwipeRefresh(
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewSwipeRefresh() {
+private fun PreviewSwipeRefresh() {
     ForlagoTheme {
         SwipeRefresh(SwipeRefreshState(true), {}) {}
     }

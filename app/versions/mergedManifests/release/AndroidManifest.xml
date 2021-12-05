@@ -21,14 +21,20 @@
 
     <uses-sdk
         android:minSdkVersion="23"
-        android:targetSdkVersion="32" />
+        android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Permission will be merged into the manifest of the hosting app. -->
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+
+    <permission
+        android:name="com.leinardi.forlago.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.leinardi.forlago.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Permission will be merged into the manifest of the hosting app. -->
     <!-- Is required to launch foreground extraction service for targetSdkVersion 28+. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 

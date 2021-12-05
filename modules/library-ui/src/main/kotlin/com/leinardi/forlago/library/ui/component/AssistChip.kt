@@ -16,75 +16,67 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SelectableChipColors
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.ChipBorder
+import androidx.compose.material3.ChipColors
+import androidx.compose.material3.ChipElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
-@ExperimentalMaterialApi
 @Composable
-fun ActionChip(
+fun AssistChip(
     onClick: () -> Unit,
+    label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    shape: Shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
-    border: BorderStroke? = null,
-    colors: SelectableChipColors = ChipDefaults.filterChipColors(),
-    placeholder: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
-    selectedIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    content: @Composable RowScope.() -> Unit,
+    shape: Shape = AssistChipDefaults.shape,
+    colors: ChipColors = AssistChipDefaults.assistChipColors(),
+    elevation: ChipElevation? = AssistChipDefaults.assistChipElevation(),
+    border: ChipBorder? = AssistChipDefaults.assistChipBorder(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    placeholder: Boolean = false,
 ) {
-    FilterChip(
-        selected = false,
+    androidx.compose.material3.AssistChip(
         onClick = onClick,
-        modifier = modifier,
+        label = label,
+        modifier = modifier.placeholder(placeholder),
         enabled = enabled,
-        interactionSource = interactionSource,
-        shape = shape,
-        border = border,
-        colors = colors,
-        placeholder = placeholder,
         leadingIcon = leadingIcon,
-        selectedIcon = selectedIcon,
         trailingIcon = trailingIcon,
-        content = content,
+        shape = shape,
+        colors = colors,
+        elevation = elevation,
+        border = border,
+        interactionSource = interactionSource,
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewActionChipEnabled() {
+private fun PreviewActionChipEnabled() {
     ForlagoTheme {
-        ActionChip(
+        AssistChip(
             onClick = {},
-        ) {
-            Text("Enabled")
-        }
+            label = { Text("Enabled") },
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewActionChipDisabled() {
+private fun PreviewActionChipDisabled() {
     ForlagoTheme {
-        ActionChip(
+        AssistChip(
             onClick = {},
+            label = { Text("Disabled") },
             enabled = false,
-        ) {
-            Text("Disabled")
-        }
+        )
     }
 }

@@ -29,7 +29,7 @@ appVersioning {
         def epoch = Instant.now().epochSecond.intValue()
         epoch -= epoch % Math.pow(10, versionLength).intValue()
         // Adding the epoch to the semantic version should help releasing hot fixes for older versions when a new version is already uploaded to the
-        // to some Play Store track (e.g. the hot fix is needed for 1.04.0 on the production track but 1.05.0 was already uploaded to the beta track).
+        // Play Console (e.g. the hot fix is needed for 1.04.0 on the production track but 1.05.0 was already uploaded to the beta track).
         version + epoch
     }
     overrideVersionName { gitTag, providers, variantInfo ->

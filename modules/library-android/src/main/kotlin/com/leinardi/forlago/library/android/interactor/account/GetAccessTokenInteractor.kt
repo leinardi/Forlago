@@ -75,7 +75,7 @@ class GetAccessTokenInteractor @Inject constructor(
                 if (intent != null) {
                     return@withContext Result.Failure.ReAuthenticationRequired
                 }
-                throw IllegalStateException("Unknown bundle value: $bundle")
+                error("Unknown bundle value: $bundle")
             } catch (e: IOException) {
                 return@withContext Result.Failure.NetworkError(e.message)
             } catch (e: IllegalArgumentException) {

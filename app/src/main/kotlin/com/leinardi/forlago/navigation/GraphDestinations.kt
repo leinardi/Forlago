@@ -42,4 +42,5 @@ fun NavGraphBuilder.addDialogDestinations() {
 }
 
 private fun getFeatures() = EntryPoints.get(ContextProvider.applicationContext, AppEntryPoints.FeatureManagerInterface::class.java)
-    .getFeatureManager().features
+    .getFeatureManager()
+    .features

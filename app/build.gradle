@@ -91,6 +91,10 @@ dependencies {
     implementation projects.modules.featureBar
     implementation projects.modules.featureDebug
     implementation projects.modules.featureFoo
+    implementation projects.modules.libraryAndroid
+    implementation projects.modules.libraryI18n
+    implementation projects.modules.libraryLogging
+    implementation projects.modules.libraryUi
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.lifecycle.runtime

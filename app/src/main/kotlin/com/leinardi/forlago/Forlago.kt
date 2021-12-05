@@ -35,7 +35,9 @@ import javax.inject.Inject
 @HiltAndroidApp
 class Forlago : Application(), ImageLoaderFactory {
     @Inject lateinit var featureManager: FeatureManager
+
     @Inject lateinit var featureSet: Set<@JvmSuppressWildcards Feature>
+
     @Inject lateinit var okHttpClient: OkHttpClient
 
     override fun onCreate() {

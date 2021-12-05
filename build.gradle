@@ -32,11 +32,6 @@ subprojects {
             options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
         }
     }
-    configurations.configureEach {
-        // We forcefully exclude MDC from any transitive dependencies.
-        // This is a Compose app, so there's no need for that.
-        exclude group: 'com.google.android.material', module: 'material'
-    }
 }
 
 wrapper {

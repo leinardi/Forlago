@@ -24,12 +24,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,12 +56,14 @@ private fun BarScreen(
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = stringResource(R.string.i18n_bar_screen_title),
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
+                scrollBehavior = scrollBehavior,
             )
         },
     ) { scaffoldPadding ->
@@ -83,7 +87,7 @@ private fun BarScreen(
                     stringResource(R.string.i18n_bar_text_received, state.text),
                     Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
-                    style = typography.h4,
+                    style = typography.headlineSmall,
                 )
             }
             Button(
@@ -98,6 +102,6 @@ private fun BarScreen(
 
 @Preview
 @Composable
-fun PreviewBarScreen() {
+private fun PreviewBarScreen() {
     BarScreen(State("Preview"), {})
 }

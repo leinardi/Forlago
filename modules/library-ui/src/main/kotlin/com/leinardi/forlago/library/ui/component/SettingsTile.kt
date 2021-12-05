@@ -21,26 +21,32 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
-internal fun SettingsTileAction(content: @Composable () -> Unit) {
+internal fun SettingsTileAction(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
     Box(
-        modifier = Modifier.size(64.dp),
+        modifier = Modifier
+            .size(64.dp)
+            .then(modifier),
         contentAlignment = Alignment.Center,
     ) {
         content()
@@ -57,7 +63,7 @@ internal fun SettingsTileIcon(
         contentAlignment = Alignment.Center,
     ) {
         if (icon != null) {
-            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+            CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
                 icon()
             }
         }
@@ -66,7 +72,7 @@ internal fun SettingsTileIcon(
 
 @Composable
 internal fun SettingsTileTitle(title: @Composable () -> Unit) {
-    ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
+    ProvideTextStyle(value = MaterialTheme.typography.titleMedium) {
         title()
     }
 }
@@ -77,7 +83,9 @@ internal fun RowScope.SettingsTileTexts(
     subtitle: @Composable (() -> Unit)?,
 ) {
     Column(
-        modifier = Modifier.Companion.weight(1f),
+        modifier = Modifier
+            .weight(1f)
+            .padding(top = 12.dp, end = Spacing.x01, bottom = 12.dp),
         verticalArrangement = Arrangement.Center,
     ) {
         SettingsTileTitle(title)
@@ -90,17 +98,16 @@ internal fun RowScope.SettingsTileTexts(
 
 @Composable
 internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
-    ProvideTextStyle(value = MaterialTheme.typography.caption) {
-        CompositionLocalProvider(
-            LocalContentAlpha provides ContentAlpha.medium,
-            content = subtitle,
-        )
+    ProvideTextStyle(value = MaterialTheme.typography.bodyMedium) {
+        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
+            subtitle()
+        }
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewSettingsIcon() {
+private fun PreviewSettingsIcon() {
     ForlagoTheme {
         SettingsTileIcon {
             Icon(imageVector = Icons.Default.Star, contentDescription = "")
@@ -108,9 +115,9 @@ fun PreviewSettingsIcon() {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewSettingsIconEmpty() {
+private fun PreviewSettingsIconPreviewEmpty() {
     ForlagoTheme {
         SettingsTileIcon()
     }

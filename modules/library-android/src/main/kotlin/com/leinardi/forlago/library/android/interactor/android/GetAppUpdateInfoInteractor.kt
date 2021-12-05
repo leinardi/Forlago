@@ -51,7 +51,7 @@ class GetAppUpdateInfoInteractor @Inject constructor(
                     priority in 0..1 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.LowPriorityUpdateAvailable(appUpdateInfo)
                     priority in 2..3 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.FlexibleUpdateAvailable(appUpdateInfo)
                     priority in 4..5 && appUpdateInfo.isImmediateUpdateAllowed -> Result.ImmediateUpdateAvailable(appUpdateInfo)
-                    else -> throw IllegalStateException("Priority must be between 0 and 5 inclusive: $priority")
+                    else -> error("Priority must be between 0 and 5 inclusive: $priority")
                 }
                 else -> Result.UpdateNotAvailable
             }

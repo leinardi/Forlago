@@ -20,17 +20,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
 fun SettingsGroup(
@@ -38,10 +39,8 @@ fun SettingsGroup(
     title: @Composable (() -> Unit)? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Surface {
-        Column(
-            modifier = modifier.fillMaxWidth(),
-        ) {
+    Surface(modifier = modifier.fillMaxWidth()) {
+        Column {
             if (title != null) {
                 SettingsGroupTitle(title)
             }
@@ -51,29 +50,31 @@ fun SettingsGroup(
 }
 
 @Composable
-internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
+internal fun SettingsGroupTitle(
+    title: @Composable () -> Unit,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, top = 24.dp, end = 16.dp, bottom = 8.dp),
+            .padding(start = Spacing.x02, top = Spacing.x03, end = Spacing.x02, bottom = Spacing.x01),
         contentAlignment = Alignment.CenterStart,
     ) {
-        val primary = MaterialTheme.colors.primary
-        val titleStyle = MaterialTheme.typography.overline.copy(color = primary)
+        val primary = MaterialTheme.colorScheme.primary
+        val titleStyle = MaterialTheme.typography.titleSmall.copy(color = primary)
         ProvideTextStyle(value = titleStyle) { title() }
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-internal fun PreviewSettingsGroup() {
+private fun PreviewSettingsGroup() {
     ForlagoTheme {
         SettingsGroup(
             title = { Text(text = "Title") },
         ) {
             Box(
                 modifier = Modifier
-                    .height(64.dp)
+                    .heightIn(64.dp)
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center,
             ) {

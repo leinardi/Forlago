@@ -21,17 +21,16 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ButtonElevation
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -40,12 +39,12 @@ fun ProgressButton(
     modifier: Modifier = Modifier,
     loading: Boolean = false,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    elevation: ButtonElevation? = null,
-    shape: Shape = MaterialTheme.shapes.small,
-    border: BorderStroke? = null,
+    shape: Shape = ButtonDefaults.shape,
     colors: ButtonColors = ButtonDefaults.buttonColors(),
+    elevation: ButtonElevation? = ButtonDefaults.buttonElevation(),
+    border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     content: @Composable RowScope.() -> Unit,
 ) {
     Button(
@@ -67,17 +66,17 @@ fun ProgressButton(
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewProgressButton() {
+private fun PreviewProgressButton() {
     ForlagoTheme {
         ProgressButton({}) { Text(text = "Progress button") }
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewProgressButtonLoading() {
+private fun PreviewProgressButtonLoading() {
     ForlagoTheme {
         ProgressButton({}, loading = true) { Text(text = "Progress button") }
     }

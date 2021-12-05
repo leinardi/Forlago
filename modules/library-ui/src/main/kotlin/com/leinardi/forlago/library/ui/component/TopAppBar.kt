@@ -16,30 +16,25 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.AppBarDefaults
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -48,97 +43,94 @@ fun TopAppBar(
     modifier: Modifier = Modifier,
     subtitle: String? = null,
     onNavigateUp: (() -> Unit)? = null,
-    titleCentered: Boolean = false,
-    elevation: Dp = AppBarDefaults.TopAppBarElevation,
     actions: @Composable RowScope.() -> Unit = {},
-) {
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(MaterialTheme.colors.surface)
-    Box {
-        androidx.compose.material.TopAppBar(
-            backgroundColor = MaterialTheme.colors.surface,
-            contentColor = MaterialTheme.colors.primary,
-            title = {
-                if (!titleCentered) {
-                    Column {
-                        Text(
-                            text = title,
-                            overflow = TextOverflow.Ellipsis,
-                            maxLines = 2,
-                        )
-                        if (!subtitle.isNullOrEmpty()) {
-                            Text(
-                                text = subtitle,
-                                modifier = Modifier.alpha(ContentAlpha.medium),
-                                overflow = TextOverflow.Ellipsis,
-                                maxLines = 2,
-                                style = MaterialTheme.typography.subtitle1,
-                            )
-                        }
-                    }
-                }
-            },
-            modifier = modifier,
-            navigationIcon = onNavigateUp?.let {
-                {
-                    IconButton(
-                        onClick = it,
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowBack,
-                            contentDescription = null,
-                        )
-                    }
-                }
-            },
-            actions = actions,
-            elevation = elevation,
-        )
-        if (titleCentered) {
-            ProvideTextStyle(value = MaterialTheme.typography.h5) {
-                CompositionLocalProvider(
-                    LocalContentAlpha provides ContentAlpha.high,
-                ) {
+    windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
+    colors: TopAppBarColors = TopAppBarDefaults.smallTopAppBarColors(),
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    contextual: Boolean = false,
+    contextualTitle: String = "",
+    contextualSubtitle: String = "",
+    contextualColors: TopAppBarColors = TopAppBarDefaults.contextualTopAppBarColors(),
+    contextualActions: @Composable RowScope.() -> Unit = {},
+
+    ) {
+    androidx.compose.material3.TopAppBar(
+        title = {
+            Column {
+                Text(
+                    text = if (contextual) contextualTitle else title,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 2,
+                )
+                if (!subtitle.isNullOrEmpty()) {
                     Text(
-                        text = title,
-                        color = MaterialTheme.colors.primary,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.Center),
-                        textAlign = TextAlign.Center,
+                        text = if (contextual) contextualSubtitle else subtitle,
+                        modifier = Modifier.alpha(ContentAlpha.medium),
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 2,
+                        style = MaterialTheme.typography.titleMedium,
                     )
                 }
             }
-        }
-    }
+        },
+        modifier = modifier,
+        navigationIcon = onNavigateUp?.let {
+            {
+                IconButton(
+                    onClick = it,
+                ) {
+                    Icon(
+                        imageVector = if (contextual) {
+                            Icons.Default.Clear
+                        } else {
+                            Icons.Default.ArrowBack
+                        },
+                        contentDescription = null,
+                    )
+                }
+            }
+        } ?: {},
+        actions = if (contextual) contextualActions else actions,
+        windowInsets = windowInsets,
+        colors = if (contextual) contextualColors else colors,
+        scrollBehavior = scrollBehavior,
+    )
 }
 
-@Preview(showBackground = true)
 @Composable
-fun PreviewTopAppBarWithNavigationIcon() {
+fun TopAppBarDefaults.contextualTopAppBarColors(): TopAppBarColors =
+    TopAppBarDefaults.smallTopAppBarColors(
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        scrolledContainerColor = MaterialTheme.colorScheme.primaryContainer,
+        navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+    )
+
+@ThemePreviews
+@Composable
+private fun PreviewTopAppBarWithNavigationIcon() {
     ForlagoTheme {
         TopAppBar(
             title = "Page title",
-        ) { }
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewTopAppBarWithSubtitle() {
+private fun PreviewTopAppBarWithSubtitle() {
     ForlagoTheme {
         TopAppBar(
             title = "Page title",
             subtitle = "Page subtitle",
-        ) { }
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewTopAppBarWithAction() {
+private fun PreviewTopAppBarWithAction() {
     ForlagoTheme {
         TopAppBar(
             title = "Page title",
@@ -151,9 +143,9 @@ fun PreviewTopAppBarWithAction() {
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewTopAppBarWithNavigationIconAndAction() {
+private fun PreviewTopAppBarWithNavigationIconAndAction() {
     ForlagoTheme {
         TopAppBar(
             title = "Page title",
@@ -163,6 +155,24 @@ fun PreviewTopAppBarWithNavigationIconAndAction() {
                 }
             },
             onNavigateUp = { },
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun PreviewTopAppBarWithContextualModeAndAction() {
+    ForlagoTheme {
+        TopAppBar(
+            title = "",
+            onNavigateUp = { },
+            contextualTitle = "Contextual title",
+            contextualActions = {
+                IconButton(onClick = {}) {
+                    Icon(Icons.Default.Share, contentDescription = "")
+                }
+            },
+            contextual = true,
         )
     }
 }

@@ -26,32 +26,30 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.placeholder
-import com.leinardi.forlago.library.ui.ext.default
 
+@Suppress("ModifierReused")
 @Composable
 fun CoilImage(
     url: String?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
-    placeholder: Boolean = false,
     crossfade: Boolean = true,
     error: @Composable (() -> Unit)? = null,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Crop,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
+    placeholder: Boolean = false,
 ) {
     if (placeholder) {
-        Box(modifier = modifier.placeholder(true, highlight = PlaceholderHighlight.default())) {}
+        Box(modifier = modifier.placeholder(true)) {}
     } else {
         SubcomposeAsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(url)
                 .crossfade(crossfade)
                 .build(),
-            loading = { Box(modifier = modifier.placeholder(true, highlight = PlaceholderHighlight.default())) {} },
+            loading = { Box(modifier = modifier.placeholder(true)) {} },
             error = { error?.invoke() },
             contentDescription = contentDescription,
             modifier = modifier,

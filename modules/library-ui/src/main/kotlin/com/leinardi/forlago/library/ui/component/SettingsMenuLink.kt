@@ -25,13 +25,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Checkbox
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,15 +41,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
 fun SettingsMenuLink(
+    title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     icon: (@Composable () -> Unit)? = null,
-    title: @Composable () -> Unit,
     subtitle: (@Composable () -> Unit)? = null,
     action: (@Composable () -> Unit)? = null,
     enabled: Boolean = true,
@@ -59,47 +61,89 @@ fun SettingsMenuLink(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .defaultMinSize(minHeight = 64.dp)
+                .defaultMinSize(minHeight = 48.dp)
                 .clickable(enabled = enabled, onClick = onClick)
+                .padding(vertical = Spacing.x01)
                 .alpha(alpha),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             if (icon != null) {
                 SettingsTileIcon(icon = icon)
             } else {
-                Spacer(modifier = Modifier.size(16.dp))
+                Spacer(modifier = Modifier.size(Spacing.x02))
             }
             SettingsTileTexts(title = title, subtitle = subtitle)
-        }
-        if (action != null) {
-            Divider(
-                modifier = Modifier
-                    .padding(vertical = 4.dp)
-                    .height(56.dp)
-                    .width(1.dp),
-            )
-            SettingsTileAction {
-                action.invoke()
+            if (action != null) {
+                Divider(
+                    modifier = Modifier
+                        .padding(vertical = Spacing.half)
+                        .height(56.dp)
+                        .width(1.dp),
+                )
+                SettingsTileAction {
+                    action.invoke()
+                }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-internal fun PreviewSettingsMenuLink() {
+private fun PreviewSettingsMenuLink() {
+    ForlagoTheme {
+        SettingsMenuLink(
+            title = { Text(text = "Hello") },
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun PreviewSettingsMenuLinkSubtitle() {
+    ForlagoTheme {
+        SettingsMenuLink(
+            title = { Text(text = "Hello") },
+            subtitle = { Text(text = "This is a longer text") },
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun PreviewSettingsMenuLinkAction() {
+    var rememberCheckBoxState by remember { mutableStateOf(true) }
+    ForlagoTheme {
+        SettingsMenuLink(
+            title = { Text(text = "Hello") },
+            subtitle = { Text(text = "This is a longer text") },
+            action = {
+                Checkbox(
+                    checked = rememberCheckBoxState,
+                    onCheckedChange = { newState ->
+                        rememberCheckBoxState = newState
+                    },
+                )
+            },
+        )
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun PreviewSettingsMenuLinkIcon() {
     ForlagoTheme {
         SettingsMenuLink(
             icon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock") },
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
-        ) { }
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-internal fun PreviewSettingsMenuLinkAction() {
+private fun PreviewSettingsMenuLinkIconAction() {
     var rememberCheckBoxState by remember { mutableStateOf(true) }
     ForlagoTheme {
         SettingsMenuLink(
@@ -114,6 +158,6 @@ internal fun PreviewSettingsMenuLinkAction() {
                     },
                 )
             },
-        ) { }
+        )
     }
 }

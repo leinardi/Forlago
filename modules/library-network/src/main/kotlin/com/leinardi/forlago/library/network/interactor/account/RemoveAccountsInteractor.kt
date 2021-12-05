@@ -30,6 +30,6 @@ class RemoveAccountsInteractor @Inject constructor(
 ) {
     suspend operator fun invoke(): Boolean = withContext(dispatchers.io) {
         Timber.d("Remove account")
-        getAccountInteractor()?.let { accountManager.removeAccountExplicitly(it) } ?: false
+        getAccountInteractor()?.let { accountManager.removeAccountExplicitly(it) } == true
     }
 }

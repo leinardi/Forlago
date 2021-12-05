@@ -16,6 +16,6 @@
 
 package com.leinardi.forlago.library.ui.theme
 
-import androidx.compose.material.Shapes
+import androidx.compose.material3.Shapes
 
 val ForlagoShapes = Shapes()

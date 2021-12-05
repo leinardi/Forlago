@@ -16,10 +16,11 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TabPosition
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.material.TabRowDefaults.ScrollableTabRowPadding
+import androidx.compose.material3.Divider
+import androidx.compose.material3.TabPosition
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,23 +30,23 @@ import androidx.compose.ui.unit.Dp
 fun ScrollableTabRow(
     selectedTabIndex: Int,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.surface,
-    contentColor: Color = MaterialTheme.colors.primary,
-    edgePadding: Dp = TabRowDefaults.ScrollableTabRowPadding,
+    containerColor: Color = TabRowDefaults.containerColor,
+    contentColor: Color = TabRowDefaults.contentColor,
+    edgePadding: Dp = ScrollableTabRowPadding,
     indicator: @Composable (tabPositions: List<TabPosition>) -> Unit = @Composable { tabPositions ->
         TabRowDefaults.Indicator(
             Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
         )
     },
     divider: @Composable () -> Unit = @Composable {
-        TabRowDefaults.Divider()
+        Divider()
     },
     tabs: @Composable () -> Unit,
 ) {
-    androidx.compose.material.ScrollableTabRow(
+    androidx.compose.material3.ScrollableTabRow(
         selectedTabIndex = selectedTabIndex,
         modifier = modifier,
-        backgroundColor = backgroundColor,
+        containerColor = containerColor,
         contentColor = contentColor,
         edgePadding = edgePadding,
         indicator = indicator,

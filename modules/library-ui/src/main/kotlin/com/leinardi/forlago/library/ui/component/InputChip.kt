@@ -16,129 +16,114 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SelectableChipColors
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cancel
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.InputChipDefaults
+import androidx.compose.material3.SelectableChipBorder
+import androidx.compose.material3.SelectableChipColors
+import androidx.compose.material3.SelectableChipElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
-@ExperimentalMaterialApi
 @Composable
 fun InputChip(
     selected: Boolean,
     onClick: () -> Unit,
+    label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     onRemoveClick: (() -> Unit)? = null,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    shape: Shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
-    border: BorderStroke? = null,
-    colors: SelectableChipColors = ChipDefaults.filterChipColors(),
-    placeholder: Boolean = false,
     leadingIcon: @Composable (() -> Unit)? = null,
-    selectedIcon: @Composable (() -> Unit)? = null,
-    content: @Composable RowScope.() -> Unit,
+    avatar: @Composable (() -> Unit)? = null,
+    shape: Shape = InputChipDefaults.shape,
+    colors: SelectableChipColors = InputChipDefaults.inputChipColors(),
+    elevation: SelectableChipElevation? = InputChipDefaults.inputChipElevation(),
+    border: SelectableChipBorder? = InputChipDefaults.inputChipBorder(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    placeholder: Boolean = false,
 ) {
-    FilterChip(
+    androidx.compose.material3.InputChip(
         selected = selected,
         onClick = onClick,
-        modifier = modifier,
+        label = label,
+        modifier = modifier.placeholder(placeholder),
         enabled = enabled,
-        interactionSource = interactionSource,
-        shape = shape,
-        border = border,
-        colors = colors,
-        placeholder = placeholder,
         leadingIcon = leadingIcon,
-        selectedIcon = selectedIcon,
+        avatar = avatar,
         trailingIcon = if (onRemoveClick != null) {
             {
-                val trailingIconColor = colors.leadingIconColor(enabled, selected)
-                CompositionLocalProvider(
-                    LocalContentColor provides trailingIconColor.value,
-                    LocalContentAlpha provides trailingIconColor.value.alpha,
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Cancel,
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(18.dp)
-                            .clickable(
-                                onClick = onRemoveClick,
-                                enabled = enabled,
-                                role = Role.Button,
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = rememberRipple(bounded = false, radius = 16.dp),
-                            ),
-                    )
-                }
+                Icon(
+                    imageVector = Icons.Default.Clear,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(18.dp)
+                        .clickable(
+                            onClick = onRemoveClick,
+                            enabled = enabled,
+                            role = Role.Button,
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = rememberRipple(bounded = false, radius = 16.dp),
+                        ),
+                )
             }
         } else {
             null
         },
-        content = content,
-    )
+        shape = shape,
+        colors = colors,
+        elevation = elevation,
+        border = border,
+        interactionSource = interactionSource,
+
+        )
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewInputChipEnabled() {
+private fun PreviewInputChipEnabled() {
     ForlagoTheme {
         InputChip(
             selected = false,
             onClick = {},
+            label = { Text("Enabled") },
             onRemoveClick = {},
-        ) {
-            Text("Enabled")
-        }
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewInputChipDisabled() {
+private fun PreviewInputChipDisabled() {
     ForlagoTheme {
         InputChip(
             selected = false,
             onClick = {},
+            label = { Text("Disabled") },
             onRemoveClick = {},
             enabled = false,
-        ) {
-            Text("Disabled")
-        }
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewInputChipSelected() {
+private fun PreviewInputChipSelected() {
     ForlagoTheme {
         InputChip(
             selected = true,
             onClick = {},
+            label = { Text("Selected") },
             onRemoveClick = {},
-        ) {
-            Text("Selected")
-        }
+        )
     }
 }

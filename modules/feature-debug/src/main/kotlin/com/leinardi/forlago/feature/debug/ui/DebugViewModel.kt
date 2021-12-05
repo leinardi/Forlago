@@ -87,7 +87,7 @@ class DebugViewModel @Inject constructor(
             is Event.OnBottomNavigationItemSelected -> updateState { copy(selectedNavigationItem = event.selectedNavigationItem) }
             is Event.OnClearApolloCacheClicked -> viewModelScope.launch { clearApolloCacheInteractor() }
             is Event.OnEnvironmentSelected -> handleOnEnvironmentSelected(event.environment)
-            is Event.OnForceCrashClicked -> throw IllegalStateException("Debug screen test crash")
+            is Event.OnForceCrashClicked -> error("Debug screen test crash")
             is Event.OnUpButtonClicked -> forlagoNavigator.navigateUp()
             is Event.OnViewAttached -> Unit  // logEventScreenViewInteractor("debug_screen", "Debug screen")
         }

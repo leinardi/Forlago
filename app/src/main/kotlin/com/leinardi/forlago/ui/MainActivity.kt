@@ -24,15 +24,15 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.SnackbarHostState
-import androidx.compose.material.SnackbarResult
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -65,6 +65,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be able to toggle Day/Night programmatically
     @Inject lateinit var forlagoNavigator: ForlagoNavigator
+
     @Inject lateinit var appUpdateManager: AppUpdateManager
 
     private val viewModel: MainViewModel by viewModels()
@@ -114,7 +115,10 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     ) {
         try {
             appUpdateManager.startUpdateFlowForResult(
-                appUpdateInfo, appUpdateType, this, REQUEST_IN_APP_UPDATE,
+                appUpdateInfo,
+                appUpdateType,
+                this,
+                REQUEST_IN_APP_UPDATE,
             )
         } catch (e: IntentSender.SendIntentException) {
             Timber.e(e)
@@ -131,17 +135,18 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
+@Suppress("ReusedModifierInstance")
 @Composable
 fun ForlagoMainScreen(
     effectFlow: Flow<Effect>,
     navHostController: NavHostController,
     forlagoNavigator: ForlagoNavigator,
     startDestination: String,
+    modifier: Modifier = Modifier,
 ) {
     val activity = LocalContext.current.getActivity() as MainActivity
     val keyboardController = LocalSoftwareKeyboardController.current
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(navHostController) {
         forlagoNavigator.destinations.onEach { event ->
             Timber.d("backQueue = ${navHostController.backQueue.map { "route = ${it.destination.route}" }}")
@@ -162,14 +167,14 @@ fun ForlagoMainScreen(
             when (effect) {
                 is Effect.FinishActivity -> activity.finish()
                 is Effect.StartUpdateFlowForResult -> activity.startUpdateFlowForResult(effect.appUpdateInfo, effect.appUpdateType)
-                is Effect.ShowSnackbarForCompleteUpdate -> showSnackbarForCompleteUpdate(scaffoldState.snackbarHostState, activity)
-                is Effect.ShowErrorSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
+                is Effect.ShowSnackbarForCompleteUpdate -> showSnackbarForCompleteUpdate(snackbarHostState, activity)
+                is Effect.ShowErrorSnackbar -> snackbarHostState.showSnackbar(
                     message = effect.message,
                     duration = SnackbarDuration.Indefinite,
                     actionLabel = activity.getString(effect.actionLabel),
                 ).also { snackbarResult ->
                     if (snackbarResult == SnackbarResult.ActionPerformed) {
-                        scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+                        snackbarHostState.currentSnackbarData?.dismiss()
                     }
                 }
             }
@@ -177,10 +182,11 @@ fun ForlagoMainScreen(
     }
     CompositionLocalProvider(
         LocalNavHostController provides navHostController,
-        LocalSnackbarHostState provides scaffoldState.snackbarHostState,
+        LocalSnackbarHostState provides snackbarHostState,
     ) {
         Scaffold(
-            scaffoldState = scaffoldState,
+            snackbarHost = { SnackbarHost(snackbarHostState) },
+            modifier = modifier,
         ) { scaffoldPadding ->
             NavHost(
                 // check https://google.github.io/accompanist/navigation-animation/

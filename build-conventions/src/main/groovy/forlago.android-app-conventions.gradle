@@ -17,6 +17,7 @@
 plugins {
     id 'com.android.application'
     id 'forlago.android-conventions'
+    id 'kotlin-parcelize'
     id 'com.google.dagger.hilt.android'
     id 'com.mikepenz.aboutlibraries.plugin'
     id 'forlago.merged-manifests-conventions'
@@ -41,6 +42,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion libs.versions.androidx.compose.compiler.get()
     }
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/${name}/kotlin")
+            }
+        }
+    }
+    kotlinOptions {
+        freeCompilerArgs += '-opt-in=androidx.compose.material.ExperimentalMaterialApi'
+        freeCompilerArgs += '-opt-in=androidx.compose.material3.ExperimentalMaterial3Api'
+        freeCompilerArgs += '-opt-in=androidx.compose.ui.ExperimentalComposeUiApi'
+    }
 }
 
 easylauncher {
@@ -54,13 +67,6 @@ easylauncher {
 }
 
 dependencies {
-
-    // Modules
-    implementation projects.modules.libraryAndroid
-    implementation projects.modules.libraryI18n
-    implementation projects.modules.libraryLogging
-    implementation projects.modules.libraryUi
-
     // Android
     implementation libs.androidx.activity.compose
     implementation libs.androidx.core.ktx
@@ -74,7 +80,6 @@ dependencies {
     kapt libs.hilt.compiler
     implementation libs.timber
     debugImplementation libs.leakcanary
-
 }
 
 tasks.register("installGitHooks", Copy) {

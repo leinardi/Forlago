@@ -27,24 +27,17 @@ android {
         kotlinCompilerExtensionVersion libs.versions.androidx.compose.compiler.get()
     }
     kotlinOptions {
+        freeCompilerArgs += '-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi'
         freeCompilerArgs += '-opt-in=androidx.compose.material.ExperimentalMaterialApi'
+        freeCompilerArgs += '-opt-in=androidx.compose.material3.ExperimentalMaterial3Api'
         freeCompilerArgs += '-opt-in=androidx.compose.ui.ExperimentalComposeUiApi'
         freeCompilerArgs += '-opt-in=com.google.accompanist.pager.ExperimentalPagerApi'
     }
 }
 
 dependencies {
-
-    // Modules
-    api projects.modules.libraryFeature
-    implementation projects.modules.libraryAndroid
-    implementation projects.modules.libraryI18n
-    implementation projects.modules.libraryLogging
-    implementation projects.modules.libraryUi
-
     // Android
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.appcompat
     implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.viewmodel.compose
@@ -56,5 +49,12 @@ dependencies {
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.compiler
     implementation libs.timber
+
+    // Modules
+    api projects.modules.libraryFeature
+    implementation projects.modules.libraryAndroid
+    implementation projects.modules.libraryI18n
+    implementation projects.modules.libraryLogging
+    implementation projects.modules.libraryUi
 
 }

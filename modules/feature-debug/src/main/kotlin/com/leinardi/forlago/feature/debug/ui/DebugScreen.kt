@@ -24,23 +24,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.AppBarDefaults
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.ExposedDropdownMenuBox
-import androidx.compose.material.ExposedDropdownMenuDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.ProvideTextStyle
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -50,12 +50,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.leinardi.forlago.feature.debug.R
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
@@ -65,13 +65,13 @@ import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigatio
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
 import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.library.ui.component.BottomNavigation
 import com.leinardi.forlago.library.ui.component.ScrollableTabRow
 import com.leinardi.forlago.library.ui.component.SettingsGroup
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.component.pagerTabIndicatorOffset
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
-import com.leinardi.forlago.library.ui.theme.ForlagoTypography
+import com.leinardi.forlago.library.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
 @Composable
@@ -85,25 +85,27 @@ fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
     )
 }
 
+@Suppress("ReusedModifierInstance")
 @Composable
 private fun DebugScreen(
     state: State,
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        modifier = modifier,
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = stringResource(R.string.debug_screen),
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
-                elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
+                scrollBehavior = if (state.selectedNavigationItem == Features) null else scrollBehavior,
             )
         },
         bottomBar = {
-            BottomNavigation {
+            NavigationBar {
                 state.bottomNavigationItems.forEachIndexed { index, screen ->
-                    BottomNavigationItem(
+                    NavigationBarItem(
                         icon = { Icon(screen.icon, screen.label) },
                         label = { Text(screen.label) },
                         selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
@@ -118,8 +120,8 @@ private fun DebugScreen(
         when (state.selectedNavigationItem) {
             Info -> Info(
                 state = state,
-                modifier = modifier
-                    .background(MaterialTheme.colors.surface)
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surface)
                     .fillMaxSize()
                     .padding(
                         top = scaffoldPadding.calculateTopPadding(),
@@ -129,8 +131,8 @@ private fun DebugScreen(
             Options -> Options(
                 state = state,
                 sendEvent = sendEvent,
-                modifier = modifier
-                    .background(MaterialTheme.colors.surface)
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surface)
                     .fillMaxSize()
                     .padding(
                         start = 0.dp,
@@ -141,8 +143,8 @@ private fun DebugScreen(
             )
             Features -> Features(
                 state = state,
-                modifier = modifier
-                    .background(MaterialTheme.colors.surface)
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.surface)
                     .fillMaxSize()
                     .padding(
                         start = 0.dp,
@@ -164,24 +166,21 @@ private fun Info(
         modifier = modifier.verticalScroll(rememberScrollState()),
     ) {
         Column(
-            modifier = Modifier.padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = Spacing.x02),
         ) {
             Text(
-                modifier = Modifier.padding(bottom = 8.dp),
+                modifier = Modifier.padding(bottom = Spacing.x01),
                 text = state.debugInfo.app.name,
-                color = MaterialTheme.colors.primary,
-                style = ForlagoTypography.h4,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.headlineSmall,
             )
-            ProvideTextStyle(value = MaterialTheme.typography.caption) {
-                CompositionLocalProvider(
-                    LocalContentAlpha provides ContentAlpha.medium,
-                    content = {
-                        Text(text = "Version name: ${state.debugInfo.app.versionName}")
-                        Text(text = "Version code: ${state.debugInfo.app.versionCode}")
-                        Text(text = "Application ID: ${state.debugInfo.app.packageName}")
-                        Text(text = "AppUpdateInfo: ${state.appUpdateInfo}")
-                    },
-                )
+            ProvideTextStyle(value = MaterialTheme.typography.bodySmall) {
+                CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.outline) {
+                    Text(text = "Version name: ${state.debugInfo.app.versionName}")
+                    Text(text = "Version code: ${state.debugInfo.app.versionCode}")
+                    Text(text = "Application ID: ${state.debugInfo.app.packageName}")
+                    Text(text = "AppUpdateInfo: ${state.appUpdateInfo}")
+                }
             }
         }
         DeviceInfo(state)
@@ -207,11 +206,12 @@ private fun Options(
                 onExpandedChange = {
                     expanded = !expanded
                 },
+                modifier = Modifier.padding(horizontal = Spacing.x02),
             ) {
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
+                        .menuAnchor(),
                     readOnly = true,
                     value = state.selectedEnvironment.name,
                     onValueChange = { },
@@ -231,13 +231,12 @@ private fun Options(
                 ) {
                     state.environments.forEach { selectionOption ->
                         DropdownMenuItem(
+                            text = { Text(selectionOption.name) },
                             onClick = {
                                 sendEvent(Event.OnEnvironmentSelected(selectionOption))
                                 expanded = false
                             },
-                        ) {
-                            Text(text = selectionOption.name)
-                        }
+                        )
                     }
                 }
             }
@@ -249,7 +248,7 @@ private fun Options(
                 onClick = { sendEvent(Event.OnClearApolloCacheClicked) },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = Spacing.x02),
             ) {
                 Text("Clear Apollo cache")
             }
@@ -259,10 +258,10 @@ private fun Options(
         ) {
             Button(
                 onClick = { sendEvent(Event.OnForceCrashClicked) },
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.error),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = Spacing.x02),
             ) {
                 Text("Force App crash")
             }
@@ -353,7 +352,7 @@ private fun Features(
 
 @Preview
 @Composable
-fun PreviewDebugScreen() {
+private fun PreviewDebugScreen() {
     ForlagoTheme {
         val debugInfo = GetDebugInfoInteractor.DebugInfo(
             GetDebugInfoInteractor.DebugInfo.App(

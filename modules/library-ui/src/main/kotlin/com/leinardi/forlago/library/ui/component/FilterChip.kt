@@ -16,93 +16,99 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.ChipDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.SelectableChipColors
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.SelectableChipBorder
+import androidx.compose.material3.SelectableChipColors
+import androidx.compose.material3.SelectableChipElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.tooling.preview.Preview
-import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.placeholder
-import com.leinardi.forlago.library.ui.ext.default
+import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
-@ExperimentalMaterialApi
 @Composable
 fun FilterChip(
     selected: Boolean,
     onClick: () -> Unit,
+    label: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    shape: Shape = MaterialTheme.shapes.small.copy(CornerSize(percent = 50)),
-    border: BorderStroke? = null,
-    colors: SelectableChipColors = ChipDefaults.filterChipColors(),
-    placeholder: Boolean = false,
-    leadingIcon: @Composable (() -> Unit)? = null,
-    selectedIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? =
+        if (selected) {
+            {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp),
+                )
+            }
+        } else {
+            null
+        },
     trailingIcon: @Composable (() -> Unit)? = null,
-    content: @Composable RowScope.() -> Unit,
+    shape: Shape = FilterChipDefaults.shape,
+    colors: SelectableChipColors = FilterChipDefaults.filterChipColors(),
+    elevation: SelectableChipElevation? = FilterChipDefaults.filterChipElevation(),
+    border: SelectableChipBorder? = FilterChipDefaults.filterChipBorder(),
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    placeholder: Boolean = false,
 ) {
-    androidx.compose.material.FilterChip(
+    androidx.compose.material3.FilterChip(
         selected = selected,
         onClick = onClick,
-        modifier = modifier.placeholder(visible = placeholder, highlight = PlaceholderHighlight.default()),
+        label = label,
+        modifier = modifier.placeholder(placeholder),
         enabled = enabled,
-        interactionSource = interactionSource,
-        shape = shape,
-        border = border,
-        colors = colors,
         leadingIcon = leadingIcon,
-        selectedIcon = selectedIcon,
         trailingIcon = trailingIcon,
-        content = content,
+        shape = shape,
+        colors = colors,
+        elevation = elevation,
+        border = border,
+        interactionSource = interactionSource,
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewFilterChipEnabled() {
+private fun PreviewFilterChipEnabled() {
     ForlagoTheme {
         FilterChip(
             selected = false,
             onClick = {},
-        ) {
-            Text("Enabled")
-        }
+            label = { Text("Enabled") },
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewFilterChipDisabled() {
+private fun PreviewFilterChipDisabled() {
     ForlagoTheme {
         FilterChip(
             selected = false,
             onClick = {},
+            label = { Text("Disabled") },
             enabled = false,
-        ) {
-            Text("Disabled")
-        }
+        )
     }
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewFilterChipSelected() {
+private fun PreviewFilterChipSelected() {
     ForlagoTheme {
         FilterChip(
             selected = true,
             onClick = {},
-        ) {
-            Text("Selected")
-        }
+            label = { Text("Selected") },
+        )
     }
 }

@@ -16,7 +16,7 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.material.LocalTextStyle
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,11 +28,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
-import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
-import com.leinardi.forlago.library.ui.ext.default
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -56,9 +54,9 @@ fun Text(
     style: TextStyle = LocalTextStyle.current,
     placeholder: Boolean = false,
 ) {
-    androidx.compose.material.Text(
+    androidx.compose.material3.Text(
         text = text.addEmptyLines(minLines),  // Workaround for https://issuetracker.google.com/issues/122476634
-        modifier = modifier.placeholder(visible = placeholder, highlight = PlaceholderHighlight.default()),
+        modifier = modifier.placeholder(placeholder),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,
@@ -78,9 +76,9 @@ fun Text(
 
 private fun String.addEmptyLines(lines: Int) = this + "\n".repeat(lines)
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewText() {
+private fun PreviewText() {
     ForlagoTheme {
         Text("Lorem ipsum")
     }

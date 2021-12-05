@@ -21,7 +21,7 @@
 
     <uses-sdk
         android:minSdkVersion="23"
-        android:targetSdkVersion="32" />
+        android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,6 +32,12 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- To allow starting foreground services on Android P+ - https://developer.android.com/preview/behavior-changes#fg-svc -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <permission
+        android:name="com.leinardi.forlago.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.leinardi.forlago.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
         android:name="com.leinardi.forlago.Forlago"
@@ -111,13 +117,13 @@
                 android:value="androidx.startup" />
         </provider>
 
-        <meta-data
-            android:name="google_analytics_automatic_screen_reporting_enabled"
-            android:value="false" />
-
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"
             android:exported="true" />
+
+        <meta-data
+            android:name="google_analytics_automatic_screen_reporting_enabled"
+            android:value="false" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
