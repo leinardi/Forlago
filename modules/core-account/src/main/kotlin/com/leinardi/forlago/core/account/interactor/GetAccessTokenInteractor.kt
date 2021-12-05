@@ -55,7 +55,7 @@ class GetAccessTokenInteractor @Inject constructor(
                 return Result.Success(accessToken)
             }
 
-            val intent = bundle.get(AccountManager.KEY_INTENT) as? Intent
+            val intent = bundle[AccountManager.KEY_INTENT] as? Intent
             if (intent != null) {
                 return Result.Failure.AuthenticationRequired(intent)
             }

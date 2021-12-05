@@ -52,15 +52,13 @@ fun FooDialogScreen(
         },
         confirmButton = {
             TextButton(
-                onClick = { sendEvent(Event.OnConfirmButtonClicked) }) {
-                Text("Confirm Button")
-            }
+                onClick = { sendEvent(Event.OnConfirmButtonClicked) },
+            ) { Text("Confirm Button") }
         },
         dismissButton = {
             TextButton(
-                onClick = { sendEvent(Event.OnDismissButtonClicked) }) {
-                Text("Dismiss Button")
-            }
+                onClick = { sendEvent(Event.OnDismissButtonClicked) },
+            ) { Text("Dismiss Button") }
         },
         modifier = modifier,
     )
