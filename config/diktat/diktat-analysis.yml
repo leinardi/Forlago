@@ -291,7 +291,7 @@
   enabled: true
 # Checks that value on integer or float constant is not too big
 - name: LONG_NUMERICAL_VALUES_SEPARATED
-  enabled: true
+  enabled: false # Custom
   configuration:
     # Maximum number of digits which are not split
     maxNumberLength: '5'

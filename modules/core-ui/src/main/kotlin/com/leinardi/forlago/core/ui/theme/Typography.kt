@@ -16,6 +16,21 @@
 
 package com.leinardi.forlago.core.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 
 val ForlagoTypography = Typography()
+
+val ForlagoM2Typography = androidx.compose.material.Typography(
+    h1 = ForlagoTypography.displaySmall,
+    h2 = ForlagoTypography.headlineLarge,
+    h3 = ForlagoTypography.headlineMedium,
+    h4 = ForlagoTypography.headlineSmall,
+    h5 = ForlagoTypography.titleLarge,
+    subtitle1 = ForlagoTypography.titleMedium,
+    subtitle2 = ForlagoTypography.titleSmall,
+    body1 = ForlagoTypography.bodyLarge,
+    body2 = ForlagoTypography.bodyMedium,
+    button = ForlagoTypography.labelLarge,
+    caption = ForlagoTypography.bodySmall,
+    overline = ForlagoTypography.labelMedium,
+)

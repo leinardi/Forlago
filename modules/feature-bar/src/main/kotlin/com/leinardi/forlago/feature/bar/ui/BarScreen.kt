@@ -24,10 +24,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -78,7 +78,7 @@ fun BarScreen(
                         stringResource(R.string.i18n_bar_text_received, state.text),
                         Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center,
-                        style = typography.h4,
+                        style = typography.headlineSmall,
                     )
                 }
                 Button(

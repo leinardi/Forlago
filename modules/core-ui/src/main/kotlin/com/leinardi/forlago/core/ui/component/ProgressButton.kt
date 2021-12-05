@@ -21,15 +21,13 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ButtonElevation
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -40,7 +38,6 @@ fun ProgressButton(
     enabled: Boolean = !loading,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = null,
-    shape: Shape = MaterialTheme.shapes.small,
     border: BorderStroke? = null,
     colors: ButtonColors = ButtonDefaults.buttonColors(),
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
@@ -52,7 +49,6 @@ fun ProgressButton(
         enabled = enabled,
         interactionSource = interactionSource,
         elevation = elevation,
-        shape = shape,
         border = border,
         colors = colors,
         contentPadding = contentPadding,

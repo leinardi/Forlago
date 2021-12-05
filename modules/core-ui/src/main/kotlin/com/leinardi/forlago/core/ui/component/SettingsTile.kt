@@ -23,12 +23,12 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -66,7 +66,7 @@ internal fun SettingsTileIcon(
 
 @Composable
 internal fun SettingsTileTitle(title: @Composable () -> Unit) {
-    ProvideTextStyle(value = MaterialTheme.typography.subtitle1) {
+    ProvideTextStyle(value = MaterialTheme.typography.titleMedium) {
         title()
     }
 }
@@ -90,7 +90,7 @@ internal fun RowScope.SettingsTileTexts(
 
 @Composable
 internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
-    ProvideTextStyle(value = MaterialTheme.typography.caption) {
+    ProvideTextStyle(value = MaterialTheme.typography.bodySmall) {
         CompositionLocalProvider(
             LocalContentAlpha provides ContentAlpha.medium,
             content = subtitle,

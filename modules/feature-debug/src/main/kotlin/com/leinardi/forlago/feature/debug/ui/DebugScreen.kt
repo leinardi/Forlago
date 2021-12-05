@@ -23,21 +23,22 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRowDefaults
-import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
@@ -69,6 +70,7 @@ fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DebugScreen(
     state: State,
@@ -116,9 +118,9 @@ fun DebugScreen(
                 }
             },
             bottomBar = {
-                BottomNavigation {
+                NavigationBar {
                     state.bottomNavigationItems.forEachIndexed { index, screen ->
-                        BottomNavigationItem(
+                        NavigationBarItem(
                             icon = { Icon(screen.icon, screen.label) },
                             label = { Text(screen.label) },
                             selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
@@ -148,10 +150,10 @@ private fun Info(
             Text(
                 modifier = Modifier.padding(bottom = 8.dp),
                 text = state.debugInfo.app.name,
-                color = MaterialTheme.colors.primary,
-                style = ForlagoTypography.h4,
+                color = MaterialTheme.colorScheme.primary,
+                style = ForlagoTypography.headlineSmall,
             )
-            ProvideTextStyle(value = MaterialTheme.typography.caption) {
+            ProvideTextStyle(value = MaterialTheme.typography.bodySmall) {
                 CompositionLocalProvider(
                     LocalContentAlpha provides ContentAlpha.medium,
                     content = {
@@ -165,7 +167,7 @@ private fun Info(
         DeviceInfo(state)
         Button(
             onClick = { sendEvent(Event.OnForceCrashClicked) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.error),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),

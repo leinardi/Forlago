@@ -22,10 +22,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -144,7 +144,7 @@ private fun AccountInfo(state: State) {
     val expiryColor = if (System.currentTimeMillis() - (state.accessTokenExpiry ?: 0) < 0) {
         Color.Unspecified
     } else {
-        MaterialTheme.colors.error
+        MaterialTheme.colorScheme.error
     }
     SettingsMenuLink(
         title = { Text(text = "Access token expiration") },

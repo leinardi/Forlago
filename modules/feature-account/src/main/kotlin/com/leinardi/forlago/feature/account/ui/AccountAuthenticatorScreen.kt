@@ -26,9 +26,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.core.ui.component.ProgressButton
+import com.leinardi.forlago.core.ui.component.TopAppBar
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Effect
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Event
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.State
@@ -75,7 +75,7 @@ fun AccountAuthenticatorScreen(
     }
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { TopAppBar(title = { Text("Account screen") }) },
+        topBar = { TopAppBar(title = "Account screen") },
         content = {
             Column(
                 modifier = Modifier

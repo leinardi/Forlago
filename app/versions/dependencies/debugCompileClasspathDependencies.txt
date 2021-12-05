@@ -261,21 +261,21 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- project :modules:core-ui
-|    +--- androidx.compose.material:material:1.1.0-beta04
-|    |    +--- androidx.compose.animation:animation-core:1.0.0 -> 1.1.0-beta04 (*)
-|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta04
+|    +--- androidx.compose.material3:material3:1.0.0-alpha02
+|    |    +--- androidx.compose.foundation:foundation:1.1.0-beta01 -> 1.1.0-beta04
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |    +--- androidx.compose.animation:animation:1.1.0-beta04 (*)
 |    |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
 |    |    |    \--- androidx.compose.ui:ui:1.1.0-beta04 (*)
-|    |    +--- androidx.compose.material:material-icons-core:1.1.0-beta04
+|    |    +--- androidx.compose.material:material-icons-core:1.0.2 -> 1.1.0-beta04
 |    |    |    \--- androidx.compose.ui:ui:1.0.0 -> 1.1.0-beta04 (*)
-|    |    +--- androidx.compose.material:material-ripple:1.1.0-beta04
+|    |    +--- androidx.compose.material:material-ripple:1.0.0 -> 1.1.0-beta04
 |    |    |    +--- androidx.compose.foundation:foundation:1.1.0-beta04 (*)
 |    |    |    \--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
-|    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
-|    |    +--- androidx.compose.ui:ui:1.1.0-beta04 (*)
-|    |    \--- androidx.compose.ui:ui-text:1.0.0 -> 1.1.0-beta04 (*)
+|    |    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.1.0-beta04 (*)
+|    |    +--- androidx.compose.ui:ui-graphics:1.0.1 -> 1.1.0-beta04 (*)
+|    |    +--- androidx.compose.ui:ui:1.1.0-beta01 -> 1.1.0-beta04 (*)
+|    |    \--- androidx.compose.ui:ui-text:1.0.1 -> 1.1.0-beta04 (*)
 |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
 |    +--- androidx.compose.runtime:runtime-livedata:1.1.0-beta04
 |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
@@ -293,7 +293,14 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 |    +--- com.google.accompanist:accompanist-pager-indicators:0.21.4-beta
 |    |    +--- com.google.accompanist:accompanist-pager:0.21.4-beta (*)
-|    |    +--- androidx.compose.material:material:1.1.0-beta04 (*)
+|    |    +--- androidx.compose.material:material:1.1.0-beta04
+|    |    |    +--- androidx.compose.animation:animation-core:1.0.0 -> 1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.foundation:foundation:1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.material:material-icons-core:1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.material:material-ripple:1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.runtime:runtime:1.1.0-beta04 (*)
+|    |    |    +--- androidx.compose.ui:ui:1.1.0-beta04 (*)
+|    |    |    \--- androidx.compose.ui:ui-text:1.0.0 -> 1.1.0-beta04 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.0 (*)
 +--- androidx.navigation:navigation-compose:2.4.0-beta02 (*)
@@ -335,7 +342,7 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:{strictly 1.6.0} -> 1.6.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:{strictly 1.5.2} -> 1.5.2 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.compose.material:material:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.material3:material3:{strictly 1.0.0-alpha02} -> 1.0.0-alpha02 (c)
 +--- androidx.compose.runtime:runtime:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.runtime:runtime-livedata:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.ui:ui:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
@@ -371,16 +378,16 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- org.jetbrains:annotations:{strictly 20.1.0} -> 20.1.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.6.0} -> 1.6.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.5.2} -> 1.5.2 (c)
-+--- androidx.compose.animation:animation-core:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.foundation:foundation:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.material:material-icons-core:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.material:material-ripple:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
++--- androidx.compose.ui:ui-graphics:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.ui:ui-text:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.2.0} -> 2.2.0 (c)
 +--- androidx.compose.ui:ui-geometry:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
-+--- androidx.compose.ui:ui-graphics:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.ui:ui-unit:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- dev.chrisbanes.snapper:snapper:{strictly 0.1.0} -> 0.1.0 (c)
++--- androidx.compose.material:material:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- com.squareup.leakcanary:shark-android:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android:{strictly 2.7} -> 2.7 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:{strictly 2.7} -> 2.7 (c)
@@ -400,6 +407,7 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.viewpager:viewpager:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.loader:loader:{strictly 1.0.0} -> 1.0.0 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core:{strictly 2.3.1} -> 2.3.1 (c)
++--- androidx.compose.animation:animation-core:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.compose.foundation:foundation-layout:{strictly 1.1.0-beta04} -> 1.1.0-beta04 (c)
 +--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
 +--- com.squareup.leakcanary:shark:{strictly 2.7} -> 2.7 (c)

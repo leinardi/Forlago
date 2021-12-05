@@ -17,16 +17,16 @@
 package com.leinardi.forlago.core.ui.component
 
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SmallTopAppBar
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.leinardi.forlago.core.ui.R
 import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 
@@ -36,15 +36,14 @@ fun TopAppBar(
     navigateUp: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-    androidx.compose.material.TopAppBar(
-        elevation = 0.dp,
+    SmallTopAppBar(
         title = {
             Text(
                 text = title,
             )
         },
-        navigationIcon = if (navigateUp != null) {
-            {
+        navigationIcon = {
+            if (navigateUp != null) {
                 IconButton(
                     onClick = navigateUp,
                 ) {
@@ -54,8 +53,6 @@ fun TopAppBar(
                     )
                 }
             }
-        } else {
-            null
         },
         actions = actions,
     )
