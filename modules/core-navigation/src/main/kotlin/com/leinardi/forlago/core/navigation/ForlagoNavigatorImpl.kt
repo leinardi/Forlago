@@ -24,8 +24,8 @@ import javax.inject.Singleton
 
 @Singleton
 internal class ForlagoNavigatorImpl @Inject constructor() : ForlagoNavigator {
-    // A capacity > 0 is required to not lose an event sent before the nav host starts collecting
-    private val navigationEvents = Channel<NavigatorEvent>(capacity = 1)
+    // A capacity > 0 is required to not lose an event sent before the nav host starts collecting (e.g. Add account from System settings)
+    private val navigationEvents = Channel<NavigatorEvent>(capacity = Channel.CONFLATED)
 
     override val destinations = navigationEvents.receiveAsFlow()
 
