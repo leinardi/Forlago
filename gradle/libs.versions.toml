@@ -82,7 +82,10 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 junit = { module = "junit:junit", version = "4.13.2" }
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.7" }
+mockk = { module = "io.mockk:mockk-android", version = "1.12.1" }
 seismic = { module = "com.squareup:seismic", version = "1.0.3" }
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 tink = { module = "com.google.crypto.tink:tink-android", version = "1.6.1" }

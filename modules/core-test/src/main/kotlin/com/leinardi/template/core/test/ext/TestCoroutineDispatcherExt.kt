@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.account
+package com.leinardi.template.core.test.ext
 
-object AccountAuthenticatorConfig {
-    const val ACCOUNT_TYPE: String = BuildConfig.ACCOUNT_TYPE
-    const val AUTHTOKEN_TYPE = "defaultAuthToken"  // https://stackoverflow.com/q/25056112/293878
-    const val KEY_IS_NEW_ACCOUNT = "isNewAccount"
-}
+import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+
+@ExperimentalCoroutinesApi
+fun TestCoroutineDispatcher.asCoroutineDispatchers() = CoroutineDispatchers(
+    main = this,
+    default = this,
+    io = this,
+    unconfined = this,
+)

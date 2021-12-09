@@ -37,8 +37,8 @@ import com.leinardi.forlago.navigation.addComposableDestinations
 import com.leinardi.forlago.navigation.addDialogDestinations
 import com.leinardi.forlago.ui.MainContract.Event.OnIntentReceived
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -86,18 +86,16 @@ fun ForlagoScaffold(
 ) {
     val activity = LocalContext.current as Activity
     LaunchedEffect(navHostController) {
-        launch {
-            forlagoNavigator.destinations.collect {
-                when (val event = it) {
-                    is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
-                    is NavigatorEvent.NavigateBack -> activity.onBackPressed()
-                    is NavigatorEvent.Directions -> navHostController.navigate(
-                        event.destination,
-                        event.builder,
-                    )
-                }
+        forlagoNavigator.destinations.onEach {
+            when (val event = it) {
+                is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
+                is NavigatorEvent.NavigateBack -> activity.onBackPressed()
+                is NavigatorEvent.Directions -> navHostController.navigate(
+                    event.destination,
+                    event.builder,
+                )
             }
-        }
+        }.launchIn(this)
     }
 
     NavHost(
