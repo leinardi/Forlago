@@ -29,7 +29,7 @@ kapt {
 
 android {
     compileSdk config.android.compileSdk
-    buildToolsVersion config.android.buildTools
+    buildToolsVersion libs.versions.buildtools.get()
 
     defaultConfig {
         minSdk config.android.minSdk
