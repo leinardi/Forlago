@@ -11,12 +11,13 @@ androidx-navigation = "2.4.0-beta02"
 androidx-room = "2.3.0"
 androidx-test = "1.4.0"
 apollo = "2.5.11"
+buildtools = "30.0.3"
 coroutines = "1.5.2"
 detekt = "1.19.0"
 diktat = "1.0.0"
-gradle = "7.3"
+gradle = "7.3.1"
 greclipse = "4.19.0"
-hilt = "2.40.4"
+hilt = "2.40.5"
 kotlin = "1.6.0"
 ktlint = "0.43.0"
 prettier = "2.4.1"
@@ -81,14 +82,17 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 junit = { module = "junit:junit", version = "4.13.2" }
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.7" }
+mockk = { module = "io.mockk:mockk-android", version = "1.12.1" }
 seismic = { module = "com.squareup:seismic", version = "1.0.3" }
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 tink = { module = "com.google.crypto.tink:tink-android", version = "1.6.1" }
 
 # plugins
 plugin-aboutlibraries = { module = "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin", version.ref = "aboutlibraries" }
-plugin-android = { module = "com.android.tools.build:gradle", version = "7.0.3" }
+plugin-android = { module = "com.android.tools.build:gradle", version = "7.0.4" }
 plugin-androidcachefix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.4.5" }
 plugin-androidx-navigation-safeargs = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 plugin-appversioning = { module = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin", version = "1.0.0" }

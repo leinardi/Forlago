@@ -13,21 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-ext.config = [
-    android: [
-        'accountType'  : 'com.leinardi.forlago.auth',
-        'applicationId': 'com.leinardi.forlago',
-        'compileSdk'   : 31,
-        'javaVersion'  : JavaVersion.VERSION_11,
-        'minSdk'       : 23,
-        'targetSdk'    : 31,
-    ],
 
-    app    : [
-        'deepLinkSchema': "forlago",
-    ],
+package com.leinardi.template.core.test.ext
 
-    params : [
-        saveBuildLogToFile: Boolean.parseBoolean(project.properties['saveBuildLogToFile']) ?: false
-    ],
-]
+import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+
+@ExperimentalCoroutinesApi
+fun TestCoroutineDispatcher.asCoroutineDispatchers() = CoroutineDispatchers(
+    main = this,
+    default = this,
+    io = this,
+    unconfined = this,
+)

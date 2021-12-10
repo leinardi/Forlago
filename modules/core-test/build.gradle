@@ -13,21 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-ext.config = [
-    android: [
-        'accountType'  : 'com.leinardi.forlago.auth',
-        'applicationId': 'com.leinardi.forlago',
-        'compileSdk'   : 31,
-        'javaVersion'  : JavaVersion.VERSION_11,
-        'minSdk'       : 23,
-        'targetSdk'    : 31,
-    ],
 
-    app    : [
-        'deepLinkSchema': "forlago",
-    ],
+plugins {
+    id 'forlago.android-core-conventions'
+}
 
-    params : [
-        saveBuildLogToFile: Boolean.parseBoolean(project.properties['saveBuildLogToFile']) ?: false
-    ],
-]
+android {
+    resourcePrefix 'test_'
+    defaultConfig {
+        consumerProguardFiles "$projectDir/proguard-test-consumer-rules.pro"
+    }
+}
+
+dependencies {
+    api project(':modules:core-android')
+    api libs.coroutines.test
+    api libs.junit
+    api libs.kotlin.test
+    api libs.kotlin.test.junit
+    api libs.mockk
+}

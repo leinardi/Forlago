@@ -29,7 +29,7 @@ kapt {
 
 android {
     compileSdk config.android.compileSdk
-    buildToolsVersion config.android.buildTools
+    buildToolsVersion libs.versions.buildtools.get()
 
     defaultConfig {
         minSdk config.android.minSdk
@@ -88,9 +88,15 @@ android {
             exclude 'META-INF/LICENSE.txt'
             exclude 'META-INF/MANIFEST.MF'
             exclude 'META-INF/NOTICE.txt'
+            exclude "META-INF/AL2.0"
+            exclude "META-INF/LGPL2.1"
             exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
             exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
             exclude 'META-INF/*.kotlin_module'
+            // for byte-buddy
+            exclude "META-INF/licenses/ASM"
+            pickFirst "win32-x86-64/attach_hotspot_windows.dll"
+            pickFirst "win32-x86/attach_hotspot_windows.dll"
         }
     }
     sourceSets {
@@ -114,7 +120,7 @@ tasks.withType(Test) {
 }
 
 dependencies {
-    testImplementation libs.junit
+    testImplementation project(':modules:core-test')
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.androidx.test.runner
