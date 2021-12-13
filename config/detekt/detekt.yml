@@ -140,6 +140,8 @@ complexity:
     active: true
     threshold: 60
     excludes: ['**/src/test*/**', '**/src/androidTest*/**', '**/*Test.kt'] # Custom
+    ignoreAnnotated: # Custom
+      - 'Composable'
   LongParameterList:
     active: true
     functionThreshold: 6
