@@ -151,4 +151,15 @@ tasks.register("projectDependencyGraph") {
     }
 }
 
-check.dependsOn tasks.named("projectDependencyGraph")
+// Add the task as check dependency only if dot is available
+try {
+    def p = 'dot -V'.execute([])
+    p.waitFor()
+    if (p.exitValue() == 0) {
+        check.dependsOn tasks.named("projectDependencyGraph")
+    } else {
+        logger.warn("w: {}", p.errorStream.text)
+    }
+} catch (Exception e) {
+    logger.warn("w: {}", e.message)
+}
