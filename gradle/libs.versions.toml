@@ -3,22 +3,22 @@
 
 [versions]
 aboutlibraries = "10.0.0-a04"
-accompanist = "0.21.4-beta"
-androidx-compose = "1.1.0-beta04"
+accompanist = "0.22.0-rc"
+androidx-compose = "1.2.0-alpha01"
 androidx-lifecycle = "2.4.0"
 androidx-material = "1.4.0"
-androidx-navigation = "2.4.0-beta02"
+androidx-navigation = "2.4.0-rc01"
 androidx-room = "2.3.0"
 androidx-test = "1.4.0"
 apollo = "2.5.11"
 buildtools = "30.0.3"
-coroutines = "1.5.2"
+coroutines = "1.6.0"
 detekt = "1.19.0"
 diktat = "1.0.0"
-gradle = "7.3.1"
+gradle = "7.3.3"
 greclipse = "4.19.0"
 hilt = "2.40.5"
-kotlin = "1.6.0"
+kotlin = "1.6.10"
 ktlint = "0.43.0"
 prettier = "2.4.1"
 
@@ -43,7 +43,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androi
 androidx-compose-uiTest = { module = "androidx.compose.ui:ui-test", version.ref = "androidx-compose" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.0.0-beta02" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.7.0" }
-androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version = "1.0.0-alpha02" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version = "1.0.0-beta01" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
@@ -74,18 +74,18 @@ coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-androi
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version = "20.0.0" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.2.5" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version = "20.0.2" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.2.6" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0-beta01" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0-rc01" }
 junit = { module = "junit:junit", version = "4.13.2" }
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.7" }
-mockk = { module = "io.mockk:mockk-android", version = "1.12.1" }
+leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.8.1" }
+mockk = { module = "io.mockk:mockk-android", version = "1.12.2" }
 seismic = { module = "com.squareup:seismic", version = "1.0.3" }
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 tink = { module = "com.google.crypto.tink:tink-android", version = "1.6.1" }
@@ -93,7 +93,7 @@ tink = { module = "com.google.crypto.tink:tink-android", version = "1.6.1" }
 # plugins
 plugin-aboutlibraries = { module = "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin", version.ref = "aboutlibraries" }
 plugin-android = { module = "com.android.tools.build:gradle", version = "7.0.4" }
-plugin-androidcachefix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.4.5" }
+plugin-androidcachefix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.4.6" }
 plugin-androidx-navigation-safeargs = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 plugin-appversioning = { module = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin", version = "1.0.0" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
