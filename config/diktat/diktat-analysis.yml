@@ -138,7 +138,7 @@
   enabled: true
   configuration:
     isCopyrightMandatory: false
-    copyrightText: 'Copyright (c) Your Company Name Here. 2010-2021'
+    copyrightText: 'Copyright 2022 Roberto Leinardi'
 # Checks that header kdoc is located before package directive
 - name: HEADER_NOT_BEFORE_PACKAGE
   enabled: true
