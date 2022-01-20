@@ -4,7 +4,7 @@
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {
-        "url": "https://apollo-fullstack-tutorial.herokuapp.com",
+        "url": "https://apollo-fullstack-tutorial.herokuapp.com/graphql",
         "headers": {
           "user-agent": "JS GraphQL"
         },
