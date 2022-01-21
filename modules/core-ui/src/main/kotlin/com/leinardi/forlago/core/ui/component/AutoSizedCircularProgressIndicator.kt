@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-/*
- * Taken from https://github.com/chrisbanes/tivi/blob/main/common-ui-compose/src/main/java/app/tivi/common/compose/ui/AutoSizedCircularProgressIndicator.kt
- */
-
+// Taken from https://github.com/chrisbanes/tivi/blob/main/common-ui-compose/src/main/java/app/tivi/common/compose/ui/AutoSizedCircularProgressIndicator.kt
 package com.leinardi.forlago.core.ui.component
 
 import androidx.compose.foundation.layout.BoxWithConstraints
