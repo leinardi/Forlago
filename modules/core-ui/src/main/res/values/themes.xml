@@ -16,10 +16,10 @@
 
 <resources>
 
-    <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen">
+    <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen.IconBackground">
         <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago.NoActionBar</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ui_ic_launcher</item>
-        <item name="windowSplashScreenBackground">@android:color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ui_ic_launcher_foreground</item>
+        <item name="windowSplashScreenBackground">@color/ui_ic_launcher_background</item>
     </style>
 
     <style name="Ui.Theme.Platform.Forlago" parent="android:Theme.Material.Light" />
