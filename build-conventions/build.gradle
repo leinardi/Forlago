@@ -26,7 +26,6 @@ dependencies {
     implementation libs.plugin.aboutlibraries
     implementation libs.plugin.android
     implementation libs.plugin.androidcachefix
-    implementation libs.plugin.androidx.navigation.safeargs
     implementation libs.plugin.appversioning
     implementation libs.plugin.detekt
     implementation libs.plugin.firebase.crashlytics
