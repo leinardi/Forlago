@@ -28,6 +28,7 @@ dependencies {
     implementation libs.plugin.androidcachefix
     implementation libs.plugin.appversioning
     implementation libs.plugin.detekt
+    implementation libs.plugin.easylauncher
     implementation libs.plugin.firebase.crashlytics
     implementation libs.plugin.google.services
     implementation libs.plugin.hilt

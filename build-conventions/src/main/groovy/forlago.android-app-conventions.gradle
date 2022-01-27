@@ -23,6 +23,7 @@ plugins {
     id 'com.mikepenz.aboutlibraries.plugin'
     id 'forlago.merged-manifests-conventions'
     id 'forlago.dependencies-conventions'
+    id 'com.starter.easylauncher'
 }
 
 def applyGsmServicesPlugins = rootProject.file("app/google-services.json").exists()
@@ -38,6 +39,16 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
+    }
+}
+
+easylauncher {
+    buildTypes {
+        debug {
+            filters = [
+                chromeLike(label: "DEBUG", overlayHeight: 0.4, textSizeRatio: 0.22),
+            ]
+        }
     }
 }
 
