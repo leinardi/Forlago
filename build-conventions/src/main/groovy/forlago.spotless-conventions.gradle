@@ -22,7 +22,6 @@ spotless {
     kotlin {
         target '**/*.kt'
         targetExclude("$buildDir/**/*.kt")
-        targetExclude('bin/**/*.kt')
         diktat(libs.versions.diktat.get()).configFile("$rootDir/config/diktat/diktat-analysis.yml")
         trimTrailingWhitespace()
         indentWithSpaces()
@@ -46,7 +45,7 @@ spotless {
 
     format 'androidXml', {
         target '**/AndroidManifest.xml', 'src/**/*.xml'
-        targetExclude('**/mergedManifests/**/AndroidManifest.xml')
+        targetExclude '**/mergedManifests/**/AndroidManifest.xml', "**/build/**/*.xml"
         indentWithSpaces()
         trimTrailingWhitespace()
         endWithNewline()
