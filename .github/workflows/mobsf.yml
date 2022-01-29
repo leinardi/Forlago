@@ -54,7 +54,7 @@ jobs:
 
       ## Actual task
       - name: Run MobSF Analysis
-        uses: fundacaocerti/mobsf-action@e7c50fba26eb56db069da51a7af80fbf7c423baa #v1.5
+        uses: fundacaocerti/mobsf-action@b89ab6fa7564a502d690eed2acc0875d3108a878 #v1.6
         env:
           INPUT_FILE_NAME: app/build/outputs/apk/release/forlago-release.apk
           SCAN_TYPE: apk
