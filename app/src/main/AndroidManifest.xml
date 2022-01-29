@@ -19,7 +19,7 @@
 
     <application
         android:name=".Forlago"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ui_ic_launcher"
         android:label="@string/i18n_app_name"
         android:roundIcon="@mipmap/ui_ic_launcher_round"
@@ -29,7 +29,6 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/i18n_app_name"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
