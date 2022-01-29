@@ -31,6 +31,11 @@ internal class ForlagoNavigatorImpl @Inject constructor() : ForlagoNavigator {
 
     override fun navigateUp(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateUp).isSuccess
 
+    override fun navigateHome(): Boolean = navigate(ForlagoNavigator.HOME_DESTINATION_ROUTE) {
+        launchSingleTop = true
+        popUpTo(0) { inclusive = true }
+    }
+
     override fun navigateBack(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateBack).isSuccess
 
     override fun navigate(route: String, builder: NavOptionsBuilder.() -> Unit): Boolean =

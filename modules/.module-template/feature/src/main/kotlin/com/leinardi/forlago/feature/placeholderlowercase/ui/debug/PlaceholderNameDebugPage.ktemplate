@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.forlago.core.ui.theme.@PlaceholderName@Theme
 import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.Effect
 import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.State
 import com.leinardi.forlago.core.ui.component.SettingsMenuLink
@@ -62,5 +63,7 @@ fun @PlaceholderName@DebugPage(
 @Preview
 @Composable
 fun @PlaceholderName@DebugPreview() {
-    @PlaceholderName@DebugPage(State, Channel<Effect>().receiveAsFlow(), {})
+    @PlaceholderName@Theme {
+        @PlaceholderName@DebugPage(State, Channel<Effect>().receiveAsFlow(), {})
+    }
 }

@@ -35,7 +35,7 @@ android {
         minSdk config.android.minSdk
         targetSdk config.android.targetSdk
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.leinardi.forlago.core.test.runner.HiltTestRunner"
         // The following argument makes the Android Test Orchestrator run its
         // "pm clear" command after each test invocation. This command ensures
         // that the app's state is completely cleared between tests.
@@ -44,11 +44,15 @@ android {
         buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${config.app.deepLinkSchema}\"")
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true // https://developer.android.com/studio/write/java8-support#library-desugaring
         sourceCompatibility config.android.javaVersion
         targetCompatibility config.android.javaVersion
     }
     kotlinOptions {
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
+        freeCompilerArgs += '-Xopt-in=com.google.accompanist.pager.ExperimentalPagerApi'
+        freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+        freeCompilerArgs += '-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi'
         jvmTarget = config.android.javaVersion
         useIR = true
     }
@@ -120,9 +124,13 @@ tasks.withType(Test) {
 }
 
 dependencies {
+    coreLibraryDesugaring libs.desugar
     testImplementation project(':modules:core-test')
+    testImplementation libs.mockk
+    androidTestImplementation project(':modules:core-test')
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.mockk.android
     androidTestUtil libs.androidx.test.orchestrator
 }

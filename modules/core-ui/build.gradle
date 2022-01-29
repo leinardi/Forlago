@@ -42,5 +42,7 @@ dependencies {
     api libs.androidx.material
     api libs.accompanist.pager
     api libs.accompanist.pager.indicators
+    api libs.accompanist.systemuicontroller
+    api libs.coil.compose
     implementation rootProject.project(':modules:core-i18n')
 }

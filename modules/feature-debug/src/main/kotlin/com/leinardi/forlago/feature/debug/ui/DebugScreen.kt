@@ -17,13 +17,14 @@
 package com.leinardi.forlago.feature.debug.ui
 
 import android.os.Build
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.BottomNavigation
+import androidx.compose.material.AppBarDefaults
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -33,7 +34,6 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Scaffold
-import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
@@ -46,11 +46,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import com.leinardi.forlago.core.ui.component.BottomNavigation
 import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.core.ui.component.ScrollableTabRow
 import com.leinardi.forlago.core.ui.component.SettingsGroup
 import com.leinardi.forlago.core.ui.component.SettingsMenuLink
 import com.leinardi.forlago.core.ui.component.TopAppBar
@@ -59,6 +60,8 @@ import com.leinardi.forlago.feature.debug.R
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.BottomNavigationItem.Features
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.BottomNavigationItem.Info
 import kotlinx.coroutines.launch
 
 @Composable
@@ -86,11 +89,12 @@ fun DebugScreen(
                 TopAppBar(
                     title = stringResource(R.string.debug_screen),
                     navigateUp = { sendEvent(Event.OnUpButtonClicked) },
+                    elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
                 )
             },
             content = { innerPadding ->
                 when (state.selectedNavigationItem) {
-                    DebugViewModel.BottomNavigationItem.Info -> Info(
+                    Info -> Info(
                         state = state,
                         sendEvent = sendEvent,
                         modifier = modifier
@@ -102,9 +106,10 @@ fun DebugScreen(
                                 top = innerPadding.calculateTopPadding(),
                             ),
                     )
-                    DebugViewModel.BottomNavigationItem.Features -> Features(
+                    Features -> Features(
                         state = state,
                         modifier = modifier
+                            .background(MaterialTheme.colors.surface)
                             .fillMaxSize()
                             .padding(
                                 start = 0.dp,
@@ -221,7 +226,6 @@ private fun DeviceInfo(
     }
 }
 
-@OptIn(ExperimentalPagerApi::class)
 @Composable
 private fun Features(
     state: State,

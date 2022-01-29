@@ -382,7 +382,7 @@ formatting:
     autoCorrect: true
     layout: '*,java.**,javax.**,kotlin.**,^'
   Indentation:
-    active: true
+    active: false # Custom
     autoCorrect: true
     indentSize: 4
     continuationIndentSize: 4
@@ -787,8 +787,8 @@ style:
   ExplicitItLambdaParameter:
     active: true # Custom
   ExpressionBodySyntax:
-    active: false
-    includeLineWrapping: false
+    active: true # Custom
+    includeLineWrapping: true # Custom
   ForbiddenComment:
     active: true
     values:
@@ -939,7 +939,7 @@ style:
   UntilInsteadOfRangeTo:
     active: false
   UnusedImports:
-    active: true # Custom
+    active: false
   UnusedPrivateClass:
     active: true
   UnusedPrivateMember:

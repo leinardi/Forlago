@@ -17,13 +17,22 @@
 plugins {
     id 'forlago.android-core-conventions'
     id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
     resourcePrefix 'account_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
-        buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}\""
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}.debug\""
+        }
+        release {
+            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}\""
+        }
     }
 }
 
@@ -31,9 +40,12 @@ dependencies {
     implementation project(':modules:core-android')
     implementation project(':modules:core-encryption')
     implementation project(':modules:core-network')
+    implementation project(':modules:core-preferences')
     api libs.coroutines.android
     api libs.coroutines.core
     implementation libs.hilt.android
     implementation libs.timber
     kapt libs.hilt.compiler
+    kaptTest libs.hilt.android.compiler
+    kaptAndroidTest libs.hilt.android.compiler
 }

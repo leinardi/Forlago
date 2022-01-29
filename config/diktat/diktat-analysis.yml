@@ -135,7 +135,7 @@
   enabled: false # Custom
 # Checks that copyright exists on top of file and is properly formatted (as a block comment)
 - name: HEADER_MISSING_OR_WRONG_COPYRIGHT
-  enabled: true
+  enabled: false # Custom
   configuration:
     isCopyrightMandatory: false
     copyrightText: 'Copyright 2022 Roberto Leinardi'
@@ -288,10 +288,10 @@
   enabled: true
 # Checks that enum structure is correct: enum entries should be separated by comma and line break and last entry should have semicolon in the end.
 - name: ENUMS_SEPARATED
-  enabled: true
+  enabled: false # Custom
 # Checks that value on integer or float constant is not too big
 - name: LONG_NUMERICAL_VALUES_SEPARATED
-  enabled: true
+  enabled: false # Custom (it fails for compose Colors, e.g.: Color(0xFF006397))
   configuration:
     # Maximum number of digits which are not split
     maxNumberLength: '5'

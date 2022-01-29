@@ -35,7 +35,7 @@
 
     <application
         android:name="com.leinardi.forlago.Forlago"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:extractNativeLibs="false"
@@ -47,7 +47,6 @@
         <activity
             android:name="com.leinardi.forlago.ui.MainActivity"
             android:exported="true"
-            android:label="@string/i18n_app_name"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>

@@ -31,7 +31,6 @@ import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Even
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -60,8 +59,24 @@ class AccountAuthenticatorViewModel @Inject constructor(
             updateState { copy(isLoading = true) }
             when (val result = signInInteractor(username, password)) {
                 is SignInInteractor.Result.Success -> handleSuccessfulSignIn(result.refreshToken, username)
-                SignInInteractor.Result.Failure.BadAuthentication -> Timber.d("> SignInInteractor.Result.Failure.BadAuthentication")
-                SignInInteractor.Result.Failure.NetworkError -> Timber.d("> SignInInteractor.Result.Failure.NetworkError")
+                is SignInInteractor.Result.Failure.BadAuthentication -> sendEffect {
+                    Effect.ShowErrorSnackbar(
+                        "SignInInteractor.Result.Failure.BadAuthentication",
+                        "OK",
+                    )
+                }
+                is SignInInteractor.Result.Failure.NetworkError -> sendEffect {
+                    Effect.ShowErrorSnackbar(
+                        "SignInInteractor.Result.Failure.NetworkError",
+                        "OK",
+                    )
+                }
+                is SignInInteractor.Result.Failure.UnexpectedError -> sendEffect {
+                    Effect.ShowErrorSnackbar(
+                        "SignInInteractor.Result.Failure.UnexpectedError",
+                        "OK",
+                    )
+                }
             }
             updateState { copy(isLoading = false) }
         }
@@ -78,6 +93,6 @@ class AccountAuthenticatorViewModel @Inject constructor(
         } else {
             addAccountInteractor(username, refreshToken)
         }
-        forlagoNavigator.navigateBack()
+        forlagoNavigator.navigateHome()
     }
 }

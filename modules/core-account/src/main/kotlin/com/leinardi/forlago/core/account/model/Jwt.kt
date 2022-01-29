@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.core.test.ext
+package com.leinardi.forlago.core.account.model
 
-import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@ExperimentalCoroutinesApi
-fun TestCoroutineDispatcher.asCoroutineDispatchers() = CoroutineDispatchers(
-    main = this,
-    default = this,
-    io = this,
-    unconfined = this,
-)
+object Jwt {
+    @Serializable
+    data class Header(
+        val alg: String,
+        val typ: String,
+    )
+
+    @Serializable
+    data class Payload(
+        val exp: Long,
+        @SerialName("token_type")
+        val tokenType: String,
+        @SerialName("user_id")
+        val userId: Int,
+    )
+}

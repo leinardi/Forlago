@@ -24,7 +24,9 @@ import android.app.Application
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.leinardi.forlago.core.account.AccountAuthenticatorConfig
-import com.leinardi.forlago.core.account.interactor.GetNewAccessTokenInteractor
+import com.leinardi.forlago.core.account.interactor.GetJwtExpiresAtInMillisInteractor
+import com.leinardi.forlago.core.account.interactor.IsJwtExpiredInteractor
+import com.leinardi.forlago.core.account.interactor.RefreshAccessTokenInteractor
 import com.leinardi.forlago.core.android.ext.toLongDateTimeString
 import com.leinardi.forlago.core.encryption.interactor.DecryptDeterministicallyInteractor
 import com.leinardi.forlago.core.encryption.interactor.DecryptInteractor
@@ -63,11 +65,13 @@ import javax.inject.Singleton
 class AccountAuthenticator @Inject constructor(
     application: Application,
     private val accountManager: AccountManager,
-    private val decryptInteractor: DecryptInteractor,
     private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
+    private val decryptInteractor: DecryptInteractor,
     private val encryptDeterministicallyInteractor: EncryptDeterministicallyInteractor,
     private val featureManager: FeatureManager,
-    private val getNewAccessTokenInteractor: GetNewAccessTokenInteractor,
+    private val getJwtExpiresAtInMillisInteractor: GetJwtExpiresAtInMillisInteractor,
+    private val refreshAccessTokenInteractor: RefreshAccessTokenInteractor,
+    private val isJwtExpiredInteractor: IsJwtExpiredInteractor,
 ) : AbstractAccountAuthenticator(application) {
     /**
      * Returns a Bundle that contains the Intent of the activity that can be used to edit the
@@ -248,30 +252,33 @@ class AccountAuthenticator @Inject constructor(
     ): Bundle {
         var expiryInMillis = accountManager.getUserData(account, KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull() ?: 0
         var accessToken = accountManager.peekAuthToken(account, authTokenType)?.let { runBlocking { decryptDeterministicallyInteractor(it) } }
-        val isTokenExpired = System.currentTimeMillis() - expiryInMillis > 0
 
         var errorBundle: Bundle? = null
-        if (accessToken.isNullOrEmpty() || isTokenExpired) {
+        if (accessToken.isNullOrEmpty() || isJwtExpiredInteractor(accessToken)) {
             Timber.d("Access token missing or expired")
             accessToken = null
             accountManager.invalidateAuthToken(account.type, authTokenType)
             val refreshToken: String? = accountManager.getPassword(account)?.let { runBlocking { decryptInteractor(it) } }
-            if (!refreshToken.isNullOrEmpty()) {
+            if (!refreshToken.isNullOrEmpty() && !isJwtExpiredInteractor(refreshToken)) {
                 Timber.d("Refreshing the access token...")
-                when (val result = runBlocking { getNewAccessTokenInteractor(refreshToken) }) {
-                    is GetNewAccessTokenInteractor.Result.Success -> {
+                when (val result = runBlocking { refreshAccessTokenInteractor(refreshToken) }) {
+                    is RefreshAccessTokenInteractor.Result.Success -> {
                         Timber.d("Access token successfully refreshed")
                         accessToken = runBlocking { encryptDeterministicallyInteractor(result.accessToken) }
-                        expiryInMillis = result.expiryInMillis
+                        expiryInMillis = getJwtExpiresAtInMillisInteractor(result.accessToken)
                         accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTHTOKEN_TYPE, accessToken)
                         accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
                     }
-                    GetNewAccessTokenInteractor.Result.Failure.BadAuthentication ->  // Invalid refresh token
-                        Timber.w("The refresh token is not valid")
-                    GetNewAccessTokenInteractor.Result.Failure.NetworkError -> {
+                    is RefreshAccessTokenInteractor.Result.Failure.BadAuthentication -> Timber.w("The refresh token is not valid")
+                    is RefreshAccessTokenInteractor.Result.Failure.NetworkError -> {
                         val error = "Network error while refreshing the token"
                         Timber.e(error)
                         errorBundle = getErrorBundle(AccountManager.ERROR_CODE_NETWORK_ERROR, error)
+                    }
+                    is RefreshAccessTokenInteractor.Result.Failure.UnexpectedError -> {
+                        val error = "Unexpected error while refreshing the token"
+                        Timber.e(error)
+                        errorBundle = getErrorBundle(AccountManager.ERROR_CODE_REMOTE_EXCEPTION, error)
                     }
                 }
             }

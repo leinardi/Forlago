@@ -18,3 +18,7 @@ plugins {
     id 'forlago.android-android-conventions'
     id 'org.gradle.android.cache-fix'
 }
+
+dependencies {
+    implementation libs.timber
+}
