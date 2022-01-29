@@ -39,7 +39,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: assemble
+          arguments: assembleRelease
 
       - name: Clean secrets
         if: always()
@@ -56,7 +56,7 @@ jobs:
       - name: Run MobSF Analysis
         uses: fundacaocerti/mobsf-action@96f53daa4d68a2caaeb5caf23ded96a10ebaf87b
         env:
-          INPUT_FILE_NAME: build/outputs/apk/release/forlago-release.apk
+          INPUT_FILE_NAME: app/build/outputs/apk/release/forlago-release.apk
           SCAN_TYPE: apk
           OUTPUT_FILE_NAME: mobsf-report
 
