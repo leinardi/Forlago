@@ -46,7 +46,7 @@ easylauncher {
     buildTypes {
         debug {
             filters = [
-                chromeLike(label: "DEBUG", overlayHeight: 0.4, textSizeRatio: 0.22),
+                chromeLike(label: "DEBUG", overlayHeight: 0.35, textSizeRatio: 0.20),
             ]
         }
     }
@@ -75,4 +75,14 @@ dependencies {
     implementation project(':modules:core-logging')
     implementation project(':modules:core-ui')
 
+}
+
+tasks.register("installGitHooks", Copy) {
+    from file("$rootDir/.githooks")
+    into file("$rootDir/.git/hooks")
+    fileMode 0775
+}
+
+afterEvaluate {
+    preBuild.dependsOn installGitHooks
 }

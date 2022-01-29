@@ -32,7 +32,7 @@
 
     <application
         android:name="com.leinardi.forlago.Forlago"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:extractNativeLibs="false"
         android:icon="@mipmap/ui_ic_launcher"
@@ -40,10 +40,14 @@
         android:roundIcon="@mipmap/ui_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen" >
+
+        <!-- Needed to avoid a High MobSF finding for this activity -->
+        <activity
+            android:name="androidx.compose.ui.tooling.PreviewActivity"
+            android:exported="false" />
         <activity
             android:name="com.leinardi.forlago.ui.MainActivity"
             android:exported="true"
-            android:label="@string/i18n_app_name"
             android:launchMode="singleInstance"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
@@ -94,10 +98,6 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
-
-        <activity
-            android:name="androidx.compose.ui.tooling.PreviewActivity"
-            android:exported="true" />
 
         <uses-library
             android:name="androidx.window.extensions"

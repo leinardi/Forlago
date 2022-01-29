@@ -88,6 +88,36 @@ fun AccountDebugPage(
 }
 
 @Composable
+private fun AccountInfo(state: State) {
+    SettingsMenuLink(
+        title = { Text(text = "Account name") },
+        subtitle = { Text(text = state.accountName.orEmpty()) },
+        enabled = state.accountName != null,
+    )
+    SettingsMenuLink(
+        title = { Text(text = "Refresh token") },
+        subtitle = { Text(text = state.refreshToken.orEmpty()) },
+        enabled = state.refreshToken != null,
+    )
+    SettingsMenuLink(
+        title = { Text(text = "Access token") },
+        subtitle = { Text(text = state.accessToken.orEmpty()) },
+        enabled = state.accessToken != null,
+    )
+    val expiration = state.accessTokenExpiry?.toLongDateTimeString().orEmpty()
+    val expiryColor = if (System.currentTimeMillis() - (state.accessTokenExpiry ?: 0) < 0) {
+        Color.Unspecified
+    } else {
+        MaterialTheme.colors.error
+    }
+    SettingsMenuLink(
+        title = { Text(text = "Access token expiration") },
+        subtitle = { Text(text = expiration, color = expiryColor) },
+        enabled = state.accessTokenExpiry != null,
+    )
+}
+
+@Composable
 private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit) {
     Button(
         onClick = { sendEvent(AccountDebugContract.Event.OnGetAccessTokenClicked) },
@@ -121,36 +151,14 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
     ) {
         Text("Open Sign In screen")
     }
-}
-
-@Composable
-private fun AccountInfo(state: State) {
-    SettingsMenuLink(
-        title = { Text(text = "Account name") },
-        subtitle = { Text(text = state.accountName.orEmpty()) },
-        enabled = state.accountName != null,
-    )
-    SettingsMenuLink(
-        title = { Text(text = "Refresh token") },
-        subtitle = { Text(text = state.refreshToken.orEmpty()) },
-        enabled = state.refreshToken != null,
-    )
-    SettingsMenuLink(
-        title = { Text(text = "Access token") },
-        subtitle = { Text(text = state.accessToken.orEmpty()) },
-        enabled = state.accessToken != null,
-    )
-    val expiration = state.accessTokenExpiry?.toLongDateTimeString().orEmpty()
-    val expiryColor = if (System.currentTimeMillis() - (state.accessTokenExpiry ?: 0) < 0) {
-        Color.Unspecified
-    } else {
-        MaterialTheme.colors.error
+    Button(
+        onClick = { sendEvent(AccountDebugContract.Event.OnLogOutClicked) },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+    ) {
+        Text("Log Out")
     }
-    SettingsMenuLink(
-        title = { Text(text = "Access token expiration") },
-        subtitle = { Text(text = expiration, color = expiryColor) },
-        enabled = state.accessTokenExpiry != null,
-    )
 }
 
 @Preview

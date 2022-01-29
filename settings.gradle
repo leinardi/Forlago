@@ -43,6 +43,7 @@ include(
         ':modules:core-logging',
         ':modules:core-navigation',
         ':modules:core-network',
+        ':modules:core-preferences',
         ':modules:core-rocketserver',
         ':modules:core-test',
         ':modules:core-ui',

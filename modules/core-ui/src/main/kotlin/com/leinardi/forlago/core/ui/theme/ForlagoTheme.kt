@@ -22,11 +22,11 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun ForlagoTheme(
-    useDarkColors: Boolean = isSystemInDarkTheme(),
+    isDarkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
-        colors = if (useDarkColors) ForlagoDarkColors else ForlagoLightColors,
+        colors = if (isDarkTheme) ForlagoDarkColors else ForlagoLightColors,
         typography = ForlagoTypography,
         shapes = ForlagoShapes,
         content = content,

@@ -197,7 +197,7 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |         |    +--- androidx.compose.animation:animation-core:1.1.0-rc01
 |         |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |         |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2 -> 1.6.0 (*)
-|         |    +--- androidx.compose.foundation:foundation-layout:1.0.0 -> 1.1.0-rc01
+|         |    +--- androidx.compose.foundation:foundation-layout:1.0.0 -> 1.2.0-alpha01
 |         |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |         |    |    +--- androidx.compose.ui:ui:1.1.0-rc01 -> 1.2.0-alpha01 (*)
 |         |    |    \--- androidx.compose.ui:ui-unit:1.1.0-rc01 -> 1.2.0-alpha01 (*)
@@ -223,7 +223,7 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 +--- project :modules:core-ui
 |    +--- androidx.compose.material:material:1.2.0-alpha01
 |    |    +--- androidx.compose.animation:animation-core:1.0.0 -> 1.1.0-rc01 (*)
-|    |    +--- androidx.compose.foundation:foundation:1.1.0-rc01
+|    |    +--- androidx.compose.foundation:foundation:1.1.0-rc01 -> 1.2.0-alpha01
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |    |    |    +--- androidx.compose.animation:animation:1.1.0-rc01 (*)
 |    |    |    +--- androidx.compose.runtime:runtime:1.1.0-rc01 -> 1.2.0-alpha01 (*)
@@ -231,7 +231,7 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    |    +--- androidx.compose.material:material-icons-core:1.2.0-alpha01
 |    |    |    \--- androidx.compose.ui:ui:1.0.0 -> 1.2.0-alpha01 (*)
 |    |    +--- androidx.compose.material:material-ripple:1.2.0-alpha01
-|    |    |    +--- androidx.compose.foundation:foundation:1.1.0-rc01 (*)
+|    |    |    +--- androidx.compose.foundation:foundation:1.1.0-rc01 -> 1.2.0-alpha01 (*)
 |    |    |    \--- androidx.compose.runtime:runtime:1.1.0-rc01 -> 1.2.0-alpha01 (*)
 |    |    +--- androidx.compose.runtime:runtime:1.1.0-rc01 -> 1.2.0-alpha01 (*)
 |    |    +--- androidx.compose.ui:ui:1.1.0-rc01 -> 1.2.0-alpha01 (*)
@@ -255,19 +255,34 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    +--- androidx.core:core-splashscreen:1.0.0-beta01
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.10 (*)
 |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0 (*)
-|    +--- com.google.accompanist:accompanist-pager:0.22.0-rc
-|    |    +--- androidx.compose.foundation:foundation:1.1.0-rc01 (*)
-|    |    +--- dev.chrisbanes.snapper:snapper:0.1.0
-|    |    |    +--- androidx.compose.foundation:foundation:1.0.3 -> 1.1.0-rc01 (*)
-|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.6.10 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
-|    +--- com.google.accompanist:accompanist-pager-indicators:0.22.0-rc
-|    |    +--- com.google.accompanist:accompanist-pager:0.22.0-rc (*)
-|    |    +--- androidx.compose.material:material:1.1.0-rc01 -> 1.2.0-alpha01 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
+|    +--- com.google.accompanist:accompanist-pager:0.24.0-alpha
+|    |    +--- androidx.compose.foundation:foundation:1.2.0-alpha01 (*)
+|    |    \--- dev.chrisbanes.snapper:snapper:0.1.0
+|    |         +--- androidx.compose.foundation:foundation:1.0.3 -> 1.2.0-alpha01 (*)
+|    |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.6.10 (*)
+|    +--- com.google.accompanist:accompanist-pager-indicators:0.24.0-alpha
+|    |    +--- com.google.accompanist:accompanist-pager:0.24.0-alpha (*)
+|    |    \--- androidx.compose.material:material:1.2.0-alpha01 (*)
+|    +--- com.google.accompanist:accompanist-systemuicontroller:0.24.0-alpha
+|    +--- io.coil-kt:coil-compose:1.4.0
+|    |    +--- io.coil-kt:coil:1.4.0
+|    |    |    \--- io.coil-kt:coil-base:1.4.0
+|    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.10 (*)
+|    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 -> 1.6.0 (*)
+|    |    |         +--- androidx.lifecycle:lifecycle-common-java8:2.3.1 -> 2.4.0
+|    |    |         |    +--- androidx.lifecycle:lifecycle-common:2.4.0 (*)
+|    |    |         |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |         +--- com.squareup.okhttp3:okhttp:3.12.13 -> 4.9.3
+|    |    |         |    +--- com.squareup.okio:okio:2.8.0 -> 2.10.0
+|    |    |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.6.10 (*)
+|    |    |         |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.4.20 -> 1.6.10
+|    |    |         |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.10 -> 1.6.10 (*)
+|    |    |         \--- com.squareup.okio:okio:2.10.0 (*)
+|    |    +--- io.coil-kt:coil-compose-base:1.4.0
+|    |    |    +--- io.coil-kt:coil-base:1.4.0 (*)
+|    |    |    \--- androidx.compose.ui:ui:1.0.3 -> 1.2.0-alpha01 (*)
+|    |    \--- androidx.compose.ui:ui:1.0.3 -> 1.2.0-alpha01 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
-+--- androidx.navigation:navigation-compose:2.4.0-rc01 (*)
-+--- androidx.startup:startup-runtime:1.1.0
 +--- project :modules:feature-account
 |    +--- project :modules:core-feature
 |    |    +--- project :modules:core-navigation
@@ -277,6 +292,10 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
+|    +--- project :modules:core-account
+|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
 +--- project :modules:feature-bar
@@ -288,6 +307,8 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 +--- project :modules:feature-foo
 |    +--- project :modules:core-feature (*)
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 (*)
++--- androidx.navigation:navigation-compose:2.4.0-rc01 (*)
++--- androidx.startup:startup-runtime:1.1.0
 +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.6.10
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.10 (*)
 |    \--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.6.10
@@ -336,8 +357,10 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 +--- androidx.compose.ui:ui-tooling:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.core:core-splashscreen:{strictly 1.0.0-beta01} -> 1.0.0-beta01 (c)
 +--- androidx.lifecycle:lifecycle-viewmodel-ktx:{strictly 2.4.0} -> 2.4.0 (c)
-+--- com.google.accompanist:accompanist-pager:{strictly 0.22.0-rc} -> 0.22.0-rc (c)
-+--- com.google.accompanist:accompanist-pager-indicators:{strictly 0.22.0-rc} -> 0.22.0-rc (c)
++--- com.google.accompanist:accompanist-pager:{strictly 0.24.0-alpha} -> 0.24.0-alpha (c)
++--- com.google.accompanist:accompanist-pager-indicators:{strictly 0.24.0-alpha} -> 0.24.0-alpha (c)
++--- com.google.accompanist:accompanist-systemuicontroller:{strictly 0.24.0-alpha} -> 0.24.0-alpha (c)
++--- io.coil-kt:coil-compose:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.compose.animation:animation:{strictly 1.1.0-rc01} -> 1.1.0-rc01 (c)
 +--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:{strictly 1.6.10} -> 1.6.10 (c)
 +--- org.jetbrains:annotations:{strictly 20.1.0} -> 20.1.0 (c)
@@ -363,18 +386,24 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 +--- androidx.lifecycle:lifecycle-livedata-core:{strictly 2.3.1} -> 2.3.1 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:{strictly 1.6.0} -> 1.6.0 (c)
 +--- androidx.compose.animation:animation-core:{strictly 1.1.0-rc01} -> 1.1.0-rc01 (c)
-+--- androidx.compose.foundation:foundation:{strictly 1.1.0-rc01} -> 1.1.0-rc01 (c)
++--- androidx.compose.foundation:foundation:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.material:material-icons-core:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.material:material-ripple:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.lifecycle:lifecycle-livedata:{strictly 2.2.0} -> 2.2.0 (c)
 +--- androidx.compose.ui:ui-tooling-preview:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.ui:ui-tooling-data:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- dev.chrisbanes.snapper:snapper:{strictly 0.1.0} -> 0.1.0 (c)
-+--- androidx.compose.foundation:foundation-layout:{strictly 1.1.0-rc01} -> 1.1.0-rc01 (c)
++--- io.coil-kt:coil:{strictly 1.4.0} -> 1.4.0 (c)
++--- io.coil-kt:coil-compose-base:{strictly 1.4.0} -> 1.4.0 (c)
++--- androidx.compose.foundation:foundation-layout:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.collection:collection-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.lifecycle:lifecycle-livedata-core-ktx:{strictly 2.3.1} -> 2.3.1 (c)
 +--- androidx.navigation:navigation-common:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
-\--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
++--- androidx.arch.core:core-runtime:{strictly 2.1.0} -> 2.1.0 (c)
++--- io.coil-kt:coil-base:{strictly 1.4.0} -> 1.4.0 (c)
++--- androidx.lifecycle:lifecycle-common-java8:{strictly 2.4.0} -> 2.4.0 (c)
++--- com.squareup.okhttp3:okhttp:{strictly 4.9.3} -> 4.9.3 (c)
+\--- com.squareup.okio:okio:{strictly 2.10.0} -> 2.10.0 (c)
 
 (c) - dependency constraint
 (*) - dependencies omitted (listed previously)

@@ -16,29 +16,20 @@
 
 package com.leinardi.forlago.core.account.interactor
 
-import kotlinx.coroutines.delay
-import java.util.UUID
+import com.google.crypto.tink.subtle.Base64
+import com.leinardi.forlago.core.account.model.Jwt
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class GetNewAccessTokenInteractor @Inject constructor() {
-    suspend operator fun invoke(refreshToken: String): Result {
-        delay(TimeUnit.SECONDS.toMillis(1))
-        return Result.Success(
-            UUID.randomUUID().toString(),
-            System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(refreshToken.length.toLong()),
-        )
-    }
-
-    sealed class Result {
-        data class Success(
-            val accessToken: String,
-            val expiryInMillis: Long,
-        ) : Result()
-
-        sealed class Failure : Result() {
-            object BadAuthentication : Failure()
-            object NetworkError : Failure()
-        }
+class GetJwtExpiresAtInMillisInteractor @Inject constructor(
+    private val json: Json,
+) {
+    operator fun invoke(jwt: String): Long {
+        val payloadEncoded = jwt.split('.')[1]
+        val payloadJson = String(Base64.decode(payloadEncoded, Base64.DEFAULT))
+        val jwtPayload = json.decodeFromString<Jwt.Payload>(payloadJson)
+        return TimeUnit.SECONDS.toMillis(jwtPayload.exp)
     }
 }

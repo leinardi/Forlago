@@ -32,5 +32,7 @@ object AccountAuthenticatorContract {
         data class OnSignInButtonClicked(val username: String, val password: String) : Event()
     }
 
-    sealed class Effect : ViewEffect
+    sealed class Effect : ViewEffect {
+        data class ShowErrorSnackbar(val message: String, val actionLabel: String) : Effect()
+    }
 }

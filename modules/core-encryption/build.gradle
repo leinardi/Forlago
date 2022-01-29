@@ -26,10 +26,10 @@ android {
     }
 }
 dependencies {
+    api libs.tink
     implementation project(':modules:core-android')
     implementation libs.androidx.security
     implementation libs.androidx.startup
     implementation libs.hilt.android
-    implementation libs.tink
     kapt libs.hilt.compiler
 }

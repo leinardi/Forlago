@@ -19,19 +19,31 @@ package com.leinardi.forlago.core.encryption.interactor
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.core.encryption.CryptoHelper
 import kotlinx.coroutines.withContext
+import timber.log.Timber
+import java.security.GeneralSecurityException
 import javax.inject.Inject
 
 class DecryptDeterministicallyInteractor @Inject constructor(
     private val cryptoHelper: CryptoHelper,
     private val dispatchers: CoroutineDispatchers,
 ) {
-    suspend operator fun invoke(plainText: String): String =
+    suspend operator fun invoke(plainText: String): String? =
         withContext(dispatchers.io) {
-            cryptoHelper.decryptDeterministically(plainText)
+            try {
+                cryptoHelper.decryptDeterministically(plainText)
+            } catch (e: GeneralSecurityException) {
+                Timber.e(e)
+                null
+            }
         }
 
-    suspend operator fun invoke(plainText: ByteArray): ByteArray =
+    suspend operator fun invoke(plainText: ByteArray): ByteArray? =
         withContext(dispatchers.io) {
-            cryptoHelper.decryptDeterministically(plainText)
+            try {
+                cryptoHelper.decryptDeterministically(plainText)
+            } catch (e: GeneralSecurityException) {
+                Timber.e(e)
+                null
+            }
         }
 }

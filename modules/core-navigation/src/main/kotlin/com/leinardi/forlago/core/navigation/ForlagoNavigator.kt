@@ -17,6 +17,7 @@
 package com.leinardi.forlago.core.navigation
 
 import androidx.navigation.NavOptionsBuilder
+import com.leinardi.forlago.core.navigation.destination.foo.FooDestination
 import kotlinx.coroutines.flow.Flow
 
 interface ForlagoNavigator {
@@ -38,6 +39,8 @@ interface ForlagoNavigator {
      */
     fun navigateUp(): Boolean
 
+    fun navigateHome(): Boolean
+
     /**
      * Attempts to pop the navigation controller's back stack. Analogous to when the user presses the system Back button.
      *
@@ -46,4 +49,8 @@ interface ForlagoNavigator {
     fun navigateBack(): Boolean
 
     fun navigate(route: String, builder: NavOptionsBuilder.() -> Unit = { launchSingleTop = true }): Boolean
+
+    companion object {
+        val HOME_DESTINATION_ROUTE = FooDestination.createRoute()
+    }
 }

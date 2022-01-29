@@ -29,9 +29,10 @@ object AccountDebugContract {
     ) : ViewState
 
     sealed class Event : ViewEvent {
+        object OnGetAccessTokenClicked : Event()
         object OnInvalidateAccessTokenClicked : Event()
         object OnInvalidateRefreshTokenClicked : Event()
-        object OnGetAccessTokenClicked : Event()
+        object OnLogOutClicked : Event()
         object OnOpenSignInScreenClicked : Event()
         object OnViewAttached : Event()
         object OnViewDetached : Event()

@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.core.account.interactor
 
+import android.accounts.AbstractAccountAuthenticator
 import android.accounts.AccountManager
 import android.content.Intent
 import android.os.Bundle
@@ -23,6 +24,7 @@ import com.leinardi.forlago.core.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.core.encryption.interactor.DecryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
@@ -31,6 +33,7 @@ class GetAccessTokenInteractor @Inject constructor(
     private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,
     private val dispatchers: CoroutineDispatchers,
     private val getAccountInteractor: GetAccountInteractor,
+    private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
 ) {
     suspend operator fun invoke(): Result {
         val account = getAccountInteractor()
@@ -53,11 +56,17 @@ class GetAccessTokenInteractor @Inject constructor(
             val accessToken = bundle.getString(AccountManager.KEY_AUTHTOKEN)?.let { decryptDeterministicallyInteractor(it) }
             if (!accessToken.isNullOrEmpty()) {
                 return Result.Success(accessToken)
+            } else if (bundle.containsKey(AccountManager.KEY_AUTHTOKEN)) {
+                Timber.w("Unable to decrypt the access token. Was the app data wiped? Re-authentication required.")
+                accountManager.invalidateAuthToken(account.type, AccountAuthenticatorConfig.AUTHTOKEN_TYPE)
+                accountManager.setUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY, 0.toString())
+                invalidateRefreshTokenInteractor()
+                return Result.Failure.AuthenticationRequired
             }
 
             val intent = bundle[AccountManager.KEY_INTENT] as? Intent
             if (intent != null) {
-                return Result.Failure.AuthenticationRequired(intent)
+                return Result.Failure.AuthenticationRequired
             }
 
             val message = bundle.getString(AccountManager.KEY_ERROR_MESSAGE)
@@ -74,7 +83,7 @@ class GetAccessTokenInteractor @Inject constructor(
         data class Success(val accessToken: String) : Result()
         sealed class Failure : Result() {
             object AccountNotFound : Failure()
-            data class AuthenticationRequired(val intent: Intent) : Failure()
+            object AuthenticationRequired : Failure()
             data class BadArguments(val errorMessage: String?) : Failure()
             data class BadRequest(val errorMessage: String?) : Failure()
             data class NetworkError(val errorMessage: String?) : Failure()

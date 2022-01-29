@@ -24,6 +24,7 @@ import com.leinardi.forlago.core.account.interactor.GetRefreshTokenInteractor
 import com.leinardi.forlago.core.account.interactor.InvalidateAccessTokenInteractor
 import com.leinardi.forlago.core.account.interactor.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.core.account.interactor.PeekAccessTokenInteractor
+import com.leinardi.forlago.core.account.interactor.RemoveAccountsInteractor
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
 import com.leinardi.forlago.core.ui.base.BaseViewModel
@@ -37,6 +38,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AccountDebugViewModel @Inject constructor(
+    private val forlagoNavigator: ForlagoNavigator,
     private val getAccessTokenExpiryInteractor: GetAccessTokenExpiryInteractor,
     private val getAccessTokenInteractor: GetAccessTokenInteractor,
     private val getAccountInteractor: GetAccountInteractor,
@@ -44,18 +46,19 @@ class AccountDebugViewModel @Inject constructor(
     private val invalidateAccessTokenInteractor: InvalidateAccessTokenInteractor,
     private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
     private val peekAccessTokenInteractor: PeekAccessTokenInteractor,
-    private val forlagoNavigator: ForlagoNavigator,
+    private val removeAccountsInteractor: RemoveAccountsInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState() = State(null, null, null, null)
 
     override fun handleEvent(event: Event) {
         viewModelScope.launch {
             when (event) {
+                Event.OnGetAccessTokenClicked -> getAccessToken()
                 Event.OnInvalidateAccessTokenClicked -> invalidateAccessToken()
                 Event.OnInvalidateRefreshTokenClicked -> invalidateRefreshToken()
+                Event.OnLogOutClicked -> logOut()
                 Event.OnOpenSignInScreenClicked ->
                     forlagoNavigator.navigate(AccountAuthenticatorDestination.createRoute(viewState.value.accountName != null))
-                Event.OnGetAccessTokenClicked -> getAccessToken()
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }
@@ -90,6 +93,16 @@ class AccountDebugViewModel @Inject constructor(
             is GetAccessTokenInteractor.Result.Failure.NetworkError ->
                 sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }
         }
+    }
+
+    private suspend fun logOut() {
+        val message = if (removeAccountsInteractor()) {
+            "Account removed"
+        } else {
+            "Unable to remove account!"
+        }
+        sendEffect { Effect.ShowSnackbar(message) }
+        updateState()
     }
 
     private suspend fun updateState() {

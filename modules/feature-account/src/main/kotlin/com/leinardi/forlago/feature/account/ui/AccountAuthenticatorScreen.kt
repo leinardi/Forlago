@@ -22,10 +22,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
@@ -36,12 +38,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.forlago.core.ui.component.OutlinedTextField
 import com.leinardi.forlago.core.ui.component.ProgressButton
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Effect
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Event
 import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.State
@@ -70,7 +76,19 @@ fun AccountAuthenticatorScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     LaunchedEffect(effectFlow) {
-        effectFlow.onEach { _ ->
+        effectFlow.onEach { effect ->
+            when (effect) {
+                is Effect.ShowErrorSnackbar -> {
+                    val snackbarResult = scaffoldState.snackbarHostState.showSnackbar(
+                        message = effect.message,
+                        duration = SnackbarDuration.Indefinite,
+                        actionLabel = effect.actionLabel,
+                    )
+                    if (snackbarResult == SnackbarResult.ActionPerformed) {
+                        scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+                    }
+                }
+            }
         }.collect()
     }
     Scaffold(
@@ -80,10 +98,11 @@ fun AccountAuthenticatorScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState()),
+                    .verticalScroll(rememberScrollState())
+                    .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
+                val localFocusManager = LocalFocusManager.current
                 var username by rememberSaveable { mutableStateOf(state.username) }
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -91,7 +110,13 @@ fun AccountAuthenticatorScreen(
                     value = username,
                     onValueChange = { username = it },
                     label = { Text("Username") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Email,
+                        imeAction = ImeAction.Next,
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onNext = { localFocusManager.moveFocus(FocusDirection.Down) },
+                    ),
                 )
                 var password by rememberSaveable { mutableStateOf(state.password) }
                 OutlinedTextField(
@@ -99,11 +124,23 @@ fun AccountAuthenticatorScreen(
                     value = password,
                     onValueChange = { password = it },
                     label = { Text("Password") },
-                    visualTransformation = PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    passwordToggleEnabled = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done,
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            localFocusManager.clearFocus()
+                            sendEvent(Event.OnSignInButtonClicked(username, password))
+                        },
+                    ),
                 )
                 ProgressButton(
-                    onClick = { sendEvent(Event.OnSignInButtonClicked(username, password)) },
+                    onClick = {
+                        localFocusManager.clearFocus()
+                        sendEvent(Event.OnSignInButtonClicked(username, password))
+                    },
                     loading = state.isLoading,
                     modifier = Modifier.fillMaxWidth(),
                 ) {
@@ -117,5 +154,7 @@ fun AccountAuthenticatorScreen(
 @Preview
 @Composable
 fun AccountScreenPreview() {
-    AccountAuthenticatorScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
+    ForlagoTheme {
+        AccountAuthenticatorScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
+    }
 }

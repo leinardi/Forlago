@@ -17,6 +17,7 @@
 package com.leinardi.forlago.core.account.interactor
 
 import kotlinx.coroutines.delay
+import java.net.HttpURLConnection
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -34,7 +35,7 @@ class SignInInteractor @Inject constructor() {
                 System.currentTimeMillis() + TimeUnit.MINUTES.toMillis((username.length + password.length).toLong()),
             )
         } else {
-            Result.Failure.BadAuthentication
+            Result.Failure.BadAuthentication(HttpURLConnection.HTTP_FORBIDDEN)
         }
     }
 
@@ -46,8 +47,9 @@ class SignInInteractor @Inject constructor() {
         ) : Result()
 
         sealed class Failure : Result() {
-            object BadAuthentication : Failure()
-            object NetworkError : Failure()
+            data class BadAuthentication(val code: Int) : Failure()
+            data class NetworkError(val throwable: Throwable) : Failure()
+            data class UnexpectedError(val throwable: Throwable, val code: Int? = null) : Failure()
         }
     }
 }

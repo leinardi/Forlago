@@ -29,6 +29,8 @@ android {
         applicationId config.android.applicationId
         archivesBaseName = "forlago"
 
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner" // https://github.com/google/dagger/issues/2033
+
         vectorDrawables {
             useSupportLibrary true
         }
@@ -67,12 +69,17 @@ android {
             }
             shrinkResources true
             minifyEnabled true
-            proguardFiles 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
+    // Modules
+    implementation project(':modules:feature-account')
+    implementation project(':modules:feature-bar')
+    implementation project(':modules:feature-debug')
+    implementation project(':modules:feature-foo')
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.appcompat
@@ -82,13 +89,7 @@ dependencies {
     implementation libs.androidx.startup
 
     androidTestImplementation libs.androidx.compose.ui
+    kaptAndroidTest libs.hilt.android.compiler
 
     debugImplementation libs.androidx.compose.tooling
-
-    // Modules
-    implementation project(':modules:feature-account')
-    implementation project(':modules:feature-bar')
-    implementation project(':modules:feature-debug')
-    implementation project(':modules:feature-foo')
-
 }
