@@ -26,12 +26,10 @@ android {
     }
     apollo {
         schemaFile = file("src/main/graphql/com/leinardi/forlago/rocketserver/schema.json")
-        rootPackageName = "com.leinardi.forlago.core.rocketserver"
-        generateKotlinModels = true
+        packageName = "com.leinardi.forlago.core.rocketserver"
     }
 }
 
 dependencies {
     implementation libs.apollo
-    implementation libs.apollo.coroutines
 }

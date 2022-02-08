@@ -11,7 +11,7 @@ androidx-material = "1.4.0"
 androidx-navigation = "2.4.0-rc01"
 androidx-room = "2.3.0"
 androidx-test = "1.4.0"
-apollo = "2.5.11"
+apollo = "3.0.0"
 buildtools = "30.0.3"
 coroutines = "1.6.0"
 detekt = "1.19.0"
@@ -73,9 +73,8 @@ androidx-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version = "1
 androidx-test-orchestrator = { module = "androidx.test:orchestrator", version.ref = "androidx-test" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
-apollo = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo" }
-apollo-cache = { module = "com.apollographql.apollo:apollo-normalized-cache-sqlite", version.ref = "apollo" }
-apollo-coroutines = { module = "com.apollographql.apollo:apollo-coroutines-support", version.ref = "apollo" }
+apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo" }
+apollo-cache = { module = "com.apollographql.apollo3:apollo-normalized-cache-sqlite", version.ref = "apollo" }
 coil-compose = { module = "io.coil-kt:coil-compose", version = "1.4.0" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -127,6 +126,6 @@ plugin-versionsgradle = { module = "com.github.ben-manes:gradle-versions-plugin"
 plugin-violation = { module = "se.bjurr.violations:violation-comments-to-github-gradle-plugin", version = "1.68.3" }
 
 [plugins]
-apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
+apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 gradledoctor = { id = "com.osacky.doctor", version = "0.7.3" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
