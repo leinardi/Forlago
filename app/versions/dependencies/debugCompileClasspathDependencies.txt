@@ -74,25 +74,29 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |         +--- androidx.compose.runtime:runtime:1.2.0-alpha01 (*)
 |         \--- androidx.compose.ui:ui:1.2.0-alpha01 (*)
++--- androidx.core:core-ktx:1.7.0
+|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
+|    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    \--- androidx.core:core:1.7.0
+|         +--- androidx.annotation:annotation:1.2.0
+|         +--- androidx.annotation:annotation-experimental:1.1.0
+|         +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0
+|         |    +--- androidx.lifecycle:lifecycle-common:2.4.0
+|         |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|         |    +--- androidx.arch.core:core-common:2.1.0
+|         |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|         |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|         \--- androidx.versionedparcelable:versionedparcelable:1.1.1
+|              +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|              \--- androidx.collection:collection:1.0.0 -> 1.1.0
+|                   \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 +--- androidx.activity:activity-compose:1.4.0
 |    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.2.0-alpha01 (*)
 |    +--- androidx.compose.runtime:runtime-saveable:1.0.1 -> 1.1.0-rc01 (*)
 |    +--- androidx.activity:activity-ktx:1.4.0
 |    |    +--- androidx.activity:activity:1.4.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    +--- androidx.core:core:1.7.0
-|    |    |    |    +--- androidx.annotation:annotation:1.2.0
-|    |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0
-|    |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0
-|    |    |    |    |    +--- androidx.lifecycle:lifecycle-common:2.4.0
-|    |    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    |    +--- androidx.arch.core:core-common:2.1.0
-|    |    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    \--- androidx.versionedparcelable:versionedparcelable:1.1.1
-|    |    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |         \--- androidx.collection:collection:1.0.0 -> 1.1.0
-|    |    |    |              \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    +--- androidx.core:core:1.7.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
@@ -106,10 +110,7 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    |    |    |    |    \--- androidx.lifecycle:lifecycle-common:2.3.1 -> 2.4.0 (*)
 |    |    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
-|    |    +--- androidx.core:core-ktx:1.1.0 -> 1.7.0
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
-|    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    \--- androidx.core:core:1.7.0 (*)
+|    |    +--- androidx.core:core-ktx:1.1.0 -> 1.7.0 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.3.1 -> 2.4.0
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.4.0 (*)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.10 (*)
@@ -124,7 +125,6 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.20 -> 1.6.10 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
 |    \--- androidx.compose.ui:ui:1.0.1 -> 1.2.0-alpha01 (*)
-+--- androidx.core:core-ktx:1.7.0 (*)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:2.4.0 (*)
 +--- androidx.navigation:navigation-fragment-ktx:2.4.0-rc01
 |    +--- androidx.navigation:navigation-fragment:2.4.0-rc01
@@ -338,8 +338,8 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.startup:startup-runtime:1.1.0
 +--- com.squareup.leakcanary:leakcanary-android:{strictly 2.8.1} -> 2.8.1 (c)
 +--- androidx.compose.ui:ui-tooling:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
-+--- androidx.activity:activity-compose:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.core:core-ktx:{strictly 1.7.0} -> 1.7.0 (c)
++--- androidx.activity:activity-compose:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.navigation:navigation-fragment-ktx:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
 +--- androidx.navigation:navigation-ui-ktx:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
@@ -368,9 +368,9 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- androidx.annotation:annotation:{strictly 1.2.0} -> 1.2.0 (c)
 +--- androidx.compose.ui:ui-tooling-preview:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.ui:ui-tooling-data:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
++--- androidx.core:core:{strictly 1.7.0} -> 1.7.0 (c)
 +--- androidx.compose.runtime:runtime-saveable:{strictly 1.1.0-rc01} -> 1.1.0-rc01 (c)
 +--- androidx.activity:activity-ktx:{strictly 1.4.0} -> 1.4.0 (c)
-+--- androidx.core:core:{strictly 1.7.0} -> 1.7.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.navigation:navigation-fragment:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
 +--- androidx.navigation:navigation-runtime-ktx:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
@@ -409,9 +409,9 @@ debugCompileClasspath - Compile classpath for compilation 'debug' (target  (andr
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:{strictly 2.8.1} -> 2.8.1 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:{strictly 2.8.1} -> 2.8.1 (c)
 +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:{strictly 2.8.1} -> 2.8.1 (c)
-+--- androidx.savedstate:savedstate-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.annotation:annotation-experimental:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.versionedparcelable:versionedparcelable:{strictly 1.1.1} -> 1.1.1 (c)
++--- androidx.savedstate:savedstate-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- androidx.fragment:fragment-ktx:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.navigation:navigation-runtime:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)

@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'forlago.android-core-conventions'
-    id 'dagger.hilt.android.plugin'
-}
+package com.leinardi.forlago.core.logging.di
 
-android {
-    resourcePrefix 'logging_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-logging-consumer-rules.pro"
-    }
-}
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-dependencies {
-    api libs.timber
-    implementation libs.androidx.startup
-    implementation libs.firebase.analytics
-    implementation libs.firebase.crashlytics
-    if (rootProject.file("app/google-services.json").exists()) {
-        implementation libs.firebase.perf
-    }
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+@Module
+@InstallIn(SingletonComponent::class)
+object LoggingModule {
+    @Singleton
+    @Provides
+    fun provideAnalytics(): FirebaseAnalytics = Firebase.analytics
 }

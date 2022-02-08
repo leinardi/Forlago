@@ -10,6 +10,22 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.6.10
 |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.10 (*)
++--- androidx.core:core-ktx:1.7.0
+|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
+|    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    \--- androidx.core:core:1.7.0
+|         +--- androidx.annotation:annotation:1.2.0
+|         +--- androidx.annotation:annotation-experimental:1.1.0
+|         +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0
+|         |    +--- androidx.lifecycle:lifecycle-common:2.4.0
+|         |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|         |    +--- androidx.arch.core:core-common:2.1.0
+|         |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|         |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|         \--- androidx.versionedparcelable:versionedparcelable:1.1.1
+|              +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|              \--- androidx.collection:collection:1.0.0 -> 1.1.0
+|                   \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 +--- androidx.activity:activity-compose:1.4.0
 |    +--- androidx.compose.runtime:runtime:1.0.1 -> 1.2.0-alpha01
 |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2 -> 1.6.0
@@ -29,19 +45,7 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    +--- androidx.activity:activity-ktx:1.4.0
 |    |    +--- androidx.activity:activity:1.4.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    +--- androidx.core:core:1.7.0
-|    |    |    |    +--- androidx.annotation:annotation:1.2.0
-|    |    |    |    +--- androidx.annotation:annotation-experimental:1.1.0
-|    |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0
-|    |    |    |    |    +--- androidx.lifecycle:lifecycle-common:2.4.0
-|    |    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    |    +--- androidx.arch.core:core-common:2.1.0
-|    |    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |    \--- androidx.versionedparcelable:versionedparcelable:1.1.1
-|    |    |    |         +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    |         \--- androidx.collection:collection:1.0.0 -> 1.1.0
-|    |    |    |              \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
+|    |    |    +--- androidx.core:core:1.7.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.3.1 -> 2.4.0 (*)
 |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0
 |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
@@ -55,10 +59,7 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    |    |    |    |    \--- androidx.lifecycle:lifecycle-common:2.3.1 -> 2.4.0 (*)
 |    |    |    |    \--- androidx.lifecycle:lifecycle-viewmodel:2.3.1 -> 2.4.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
-|    |    +--- androidx.core:core-ktx:1.1.0 -> 1.7.0
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.31 -> 1.6.10 (*)
-|    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-|    |    |    \--- androidx.core:core:1.7.0 (*)
+|    |    +--- androidx.core:core-ktx:1.1.0 -> 1.7.0 (*)
 |    |    +--- androidx.lifecycle:lifecycle-runtime-ktx:2.3.1 -> 2.4.0
 |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.4.0 (*)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.30 -> 1.6.10 (*)
@@ -87,7 +88,6 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |         |    \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
 |         +--- androidx.compose.ui:ui-unit:1.2.0-alpha01 (*)
 |         \--- androidx.annotation:annotation:1.1.0 -> 1.2.0
-+--- androidx.core:core-ktx:1.7.0 (*)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:2.4.0 (*)
 +--- androidx.navigation:navigation-fragment-ktx:2.4.0-rc01
 |    +--- androidx.navigation:navigation-fragment:2.4.0-rc01
@@ -314,8 +314,8 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 |    \--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.6.10
 |         \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.10 (*)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:{strictly 1.6.10} -> 1.6.10 (c)
-+--- androidx.activity:activity-compose:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.core:core-ktx:{strictly 1.7.0} -> 1.7.0 (c)
++--- androidx.activity:activity-compose:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime-ktx:{strictly 2.4.0} -> 2.4.0 (c)
 +--- androidx.startup:startup-runtime:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.navigation:navigation-fragment-ktx:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
@@ -327,12 +327,12 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:{strictly 1.6.10} -> 1.6.10 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib:{strictly 1.6.10} -> 1.6.10 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:{strictly 1.6.10} -> 1.6.10 (c)
++--- androidx.annotation:annotation:{strictly 1.2.0} -> 1.2.0 (c)
++--- androidx.core:core:{strictly 1.7.0} -> 1.7.0 (c)
 +--- androidx.compose.runtime:runtime:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.runtime:runtime-saveable:{strictly 1.1.0-rc01} -> 1.1.0-rc01 (c)
 +--- androidx.activity:activity-ktx:{strictly 1.4.0} -> 1.4.0 (c)
 +--- androidx.compose.ui:ui:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
-+--- androidx.annotation:annotation:{strictly 1.2.0} -> 1.2.0 (c)
-+--- androidx.core:core:{strictly 1.7.0} -> 1.7.0 (c)
 +--- androidx.lifecycle:lifecycle-runtime:{strictly 2.4.0} -> 2.4.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:{strictly 1.6.0} -> 1.6.0 (c)
 +--- androidx.navigation:navigation-fragment:{strictly 2.4.0-rc01} -> 2.4.0-rc01 (c)
@@ -365,13 +365,13 @@ releaseCompileClasspath - Compile classpath for compilation 'release' (target  (
 +--- org.jetbrains.kotlin:kotlin-android-extensions-runtime:{strictly 1.6.10} -> 1.6.10 (c)
 +--- org.jetbrains:annotations:{strictly 20.1.0} -> 20.1.0 (c)
 +--- org.jetbrains.kotlin:kotlin-stdlib-common:{strictly 1.6.10} -> 1.6.10 (c)
++--- androidx.annotation:annotation-experimental:{strictly 1.1.0} -> 1.1.0 (c)
++--- androidx.versionedparcelable:versionedparcelable:{strictly 1.1.1} -> 1.1.1 (c)
 +--- androidx.savedstate:savedstate-ktx:{strictly 1.1.0} -> 1.1.0 (c)
 +--- androidx.compose.ui:ui-geometry:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.ui:ui-graphics:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.ui:ui-text:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
 +--- androidx.compose.ui:ui-unit:{strictly 1.2.0-alpha01} -> 1.2.0-alpha01 (c)
-+--- androidx.annotation:annotation-experimental:{strictly 1.1.0} -> 1.1.0 (c)
-+--- androidx.versionedparcelable:versionedparcelable:{strictly 1.1.1} -> 1.1.1 (c)
 +--- androidx.arch.core:core-common:{strictly 2.1.0} -> 2.1.0 (c)
 +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:{strictly 1.6.0} -> 1.6.0 (c)
 +--- androidx.fragment:fragment-ktx:{strictly 1.4.0} -> 1.4.0 (c)

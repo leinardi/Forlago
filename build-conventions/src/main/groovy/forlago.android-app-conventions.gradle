@@ -24,12 +24,14 @@ plugins {
     id 'forlago.merged-manifests-conventions'
     id 'forlago.dependencies-conventions'
     id 'com.starter.easylauncher'
+    id 'com.google.firebase.firebase-perf'
 }
 
 def applyGsmServicesPlugins = rootProject.file("app/google-services.json").exists()
 if (applyGsmServicesPlugins) {
     project.plugins.apply('com.google.gms.google-services')
     project.plugins.apply('com.google.firebase.crashlytics')
+    //    project.plugins.apply('com.google.firebase.firebase-perf')
 }
 println "google-services.json ${if (applyGsmServicesPlugins) "" else "NOT "}found!"
 

@@ -124,6 +124,7 @@ tasks.withType(Test) {
 }
 
 dependencies {
+    implementation libs.androidx.core.ktx
     coreLibraryDesugaring libs.desugar
     testImplementation project(':modules:core-test')
     testImplementation libs.mockk
