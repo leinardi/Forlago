@@ -38,4 +38,5 @@ dependencies {
     implementation libs.plugin.triplet.play
     implementation libs.plugin.versionsgradle
     implementation libs.plugin.violation
+    implementation libs.plugin.ruler
 }

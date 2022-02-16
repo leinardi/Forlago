@@ -25,6 +25,7 @@ plugins {
     id 'forlago.dependencies-conventions'
     id 'com.starter.easylauncher'
     id 'com.google.firebase.firebase-perf'
+    id 'forlago.ruler-conventions'
 }
 
 def applyGsmServicesPlugins = rootProject.file("app/google-services.json").exists()
