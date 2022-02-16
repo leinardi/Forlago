@@ -23,4 +23,6 @@ ruler {
     locale = "en"
     screenDensity = 480
     sdkVersion = 30
+    ownershipFile.set(rootProject.file("config/ruler/ownership.yaml"))
+    defaultOwner.set("others")
 }
