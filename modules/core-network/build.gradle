@@ -18,6 +18,7 @@ plugins {
     id 'forlago.android-core-conventions'
     id 'dagger.hilt.android.plugin'
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.apollo)
 }
 
 android {
@@ -25,17 +26,37 @@ android {
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-network-consumer-rules.pro"
     }
+    kotlinOptions {
+        freeCompilerArgs += '-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi'
+    }
+}
+
+apollo {
+    packageName = "com.leinardi.forlago.core.network.graphql"
+    generateApolloMetadata = true
 }
 
 dependencies {
     implementation project(':modules:core-android')
+    implementation project(':modules:core-preferences')
     api libs.coroutines.android
     api libs.coroutines.core
     api libs.kotlinx.serialization
     api libs.retrofit
+    implementation libs.apollo
+    implementation libs.apollo.cache
+    implementation libs.apollo.cache.sqlite
     implementation libs.hilt.android
     implementation libs.okhttp3.logging.interceptor
     implementation libs.retrofit.kotlinx.serialization
     implementation libs.timber
     kapt libs.hilt.compiler
+    kaptAndroidTest libs.hilt.android.compiler
+}
+
+tasks.register("refreshGraphQlSchema", Exec) {
+    def endpoint = 'https://apollo-fullstack-tutorial.herokuapp.com/graphql'
+    def schemaPath = 'modules/core-network/src/main/graphql/schema.graphqls'
+    workingDir rootDir
+    commandLine './gradlew', 'downloadApolloSchema', "--endpoint=$endpoint", "--schema=$schemaPath"
 }

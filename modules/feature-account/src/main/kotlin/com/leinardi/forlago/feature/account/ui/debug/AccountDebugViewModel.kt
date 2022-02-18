@@ -17,16 +17,16 @@
 package com.leinardi.forlago.feature.account.ui.debug
 
 import androidx.lifecycle.viewModelScope
-import com.leinardi.forlago.core.account.interactor.GetAccessTokenExpiryInteractor
-import com.leinardi.forlago.core.account.interactor.GetAccessTokenInteractor
-import com.leinardi.forlago.core.account.interactor.GetAccountInteractor
-import com.leinardi.forlago.core.account.interactor.GetRefreshTokenInteractor
-import com.leinardi.forlago.core.account.interactor.InvalidateAccessTokenInteractor
-import com.leinardi.forlago.core.account.interactor.InvalidateRefreshTokenInteractor
-import com.leinardi.forlago.core.account.interactor.PeekAccessTokenInteractor
-import com.leinardi.forlago.core.account.interactor.RemoveAccountsInteractor
+import com.leinardi.forlago.core.android.interactor.account.GetAccessTokenExpiryInteractor
+import com.leinardi.forlago.core.android.interactor.account.GetAccessTokenInteractor
+import com.leinardi.forlago.core.android.interactor.account.GetAccountInteractor
+import com.leinardi.forlago.core.android.interactor.account.GetRefreshTokenInteractor
+import com.leinardi.forlago.core.android.interactor.account.InvalidateAccessTokenInteractor
+import com.leinardi.forlago.core.android.interactor.account.InvalidateRefreshTokenInteractor
+import com.leinardi.forlago.core.android.interactor.account.PeekAccessTokenInteractor
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
+import com.leinardi.forlago.core.network.interactor.account.RemoveAccountsInteractor
 import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Event
@@ -84,11 +84,11 @@ class AccountDebugViewModel @Inject constructor(
                 sendEffect { Effect.ShowSnackbar("Access token = ${result.accessToken}") }
             is GetAccessTokenInteractor.Result.Failure.AccountNotFound ->
                 sendEffect { Effect.ShowSnackbar("Account not found") }
-            is GetAccessTokenInteractor.Result.Failure.AuthenticationRequired ->
+            is GetAccessTokenInteractor.Result.Failure.ReAuthenticationRequired ->
                 sendEffect { Effect.ShowSnackbar("Authentication required") }
-            is GetAccessTokenInteractor.Result.Failure.BadArguments ->
+            is GetAccessTokenInteractor.Result.Failure.BadArgumentsError ->
                 sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }
-            is GetAccessTokenInteractor.Result.Failure.BadRequest ->
+            is GetAccessTokenInteractor.Result.Failure.AccountAuthenticatorError ->
                 sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }
             is GetAccessTokenInteractor.Result.Failure.NetworkError ->
                 sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }

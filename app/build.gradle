@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 
 plugins {
     id 'forlago.android-app-conventions'
     id 'forlago.app-versioning-conventions'
-    id 'forlago.triplet-play-conventions'
+    alias(libs.plugins.tripletplay)
 }
 
 def useReleaseKeystore = rootProject.file("release/app-release.jks").exists()
@@ -74,6 +75,16 @@ android {
     }
 }
 
+def serviceAccountCredentialsFile = rootProject.file("release/play-account.json")
+if (serviceAccountCredentialsFile.exists()) {
+    play {
+        serviceAccountCredentials = serviceAccountCredentialsFile
+        releaseStatus = (track.get() == "internal") ? ReleaseStatus.COMPLETED : ReleaseStatus.DRAFT
+        defaultToAppBundles = true
+    }
+}
+println "play-account.json ${if (serviceAccountCredentialsFile.exists()) "" else "NOT "}found!"
+
 dependencies {
     // Modules
     implementation project(':modules:feature-account')
@@ -82,7 +93,6 @@ dependencies {
     implementation project(':modules:feature-foo')
 
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.appcompat
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.navigation.compose
     implementation libs.androidx.startup

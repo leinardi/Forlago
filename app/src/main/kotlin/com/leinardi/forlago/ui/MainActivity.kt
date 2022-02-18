@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navHostController: NavHostController = rememberNavController().also { this.navHostController = it }
             ForlagoTheme {
-                ForlagoScaffold(
+                ForlagoMainScreen(
                     startDestination = viewModel.viewState.value.startDestination,
                     navHostController = navHostController,
                     forlagoNavigator = forlagoNavigator,
@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ForlagoScaffold(
+fun ForlagoMainScreen(
     navHostController: NavHostController,
     forlagoNavigator: ForlagoNavigator,
     startDestination: String,

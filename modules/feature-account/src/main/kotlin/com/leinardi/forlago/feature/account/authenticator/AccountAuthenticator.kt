@@ -23,15 +23,15 @@ import android.accounts.AccountManager
 import android.app.Application
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import com.leinardi.forlago.core.account.AccountAuthenticatorConfig
-import com.leinardi.forlago.core.account.interactor.GetJwtExpiresAtInMillisInteractor
-import com.leinardi.forlago.core.account.interactor.IsJwtExpiredInteractor
-import com.leinardi.forlago.core.account.interactor.RefreshAccessTokenInteractor
+import com.leinardi.forlago.core.android.AccountAuthenticatorConfig
 import com.leinardi.forlago.core.android.ext.toLongDateTimeString
-import com.leinardi.forlago.core.encryption.interactor.DecryptDeterministicallyInteractor
-import com.leinardi.forlago.core.encryption.interactor.DecryptInteractor
-import com.leinardi.forlago.core.encryption.interactor.EncryptDeterministicallyInteractor
+import com.leinardi.forlago.core.android.interactor.encryption.DecryptDeterministicallyInteractor
+import com.leinardi.forlago.core.android.interactor.encryption.DecryptInteractor
+import com.leinardi.forlago.core.android.interactor.encryption.EncryptDeterministicallyInteractor
 import com.leinardi.forlago.core.feature.FeatureManager
+import com.leinardi.forlago.core.network.interactor.account.GetJwtExpiresAtInMillisInteractor
+import com.leinardi.forlago.core.network.interactor.account.IsJwtExpiredInteractor
+import com.leinardi.forlago.core.network.interactor.account.RefreshAccessTokenInteractor
 import com.leinardi.forlago.feature.account.AccountFeature
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
@@ -278,7 +278,7 @@ class AccountAuthenticator @Inject constructor(
                     is RefreshAccessTokenInteractor.Result.Failure.UnexpectedError -> {
                         val error = "Unexpected error while refreshing the token"
                         Timber.e(error)
-                        errorBundle = getErrorBundle(AccountManager.ERROR_CODE_REMOTE_EXCEPTION, error)
+                        errorBundle = getErrorBundle(AccountManager.ERROR_CODE_INVALID_RESPONSE, error)
                     }
                 }
             }

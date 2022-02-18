@@ -109,7 +109,7 @@ fun AccountAuthenticatorScreen(
                     enabled = !state.isRelogin,
                     value = username,
                     onValueChange = { username = it },
-                    label = { Text("Username") },
+                    label = "Username",
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Email,
                         imeAction = ImeAction.Next,
@@ -123,7 +123,7 @@ fun AccountAuthenticatorScreen(
                     modifier = Modifier.fillMaxWidth(),
                     value = password,
                     onValueChange = { password = it },
-                    label = { Text("Password") },
+                    label = "Password",
                     passwordToggleEnabled = true,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,

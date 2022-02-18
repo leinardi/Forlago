@@ -52,12 +52,13 @@ jobs:
         if: steps.merged_manifests.outputs.changed == 1
         run: |
           echo '::error::Uncommitted changes to the merged manifests!'
+          git diff
           exit 1
 
       - name: Check compile dependencies report
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: generateCompileDependenciesReport
+          arguments: generateRuntimeDependenciesReport
 
       - uses: UnicornGlobal/has-changes-action@ea00e6f831a9e785271645729fa251907b314707
         id: compile_dependencies_report
@@ -180,7 +181,7 @@ jobs:
       # Allow tests to continue on other devices if they fail on one device.
       fail-fast: false
       matrix:
-        api-level: [23, 29]
+        api-level: [23, 30]
         target: [google_apis]
         arch: [x86_64]
 

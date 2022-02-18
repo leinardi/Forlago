@@ -56,7 +56,7 @@ class Forlago : Application() {
             StrictMode.setThreadPolicy(builderThread.build())
 
             val builderVM = StrictMode.VmPolicy.Builder()
-                // .detectActivityLeaks() // https://issuetracker.google.com/issues/204905432
+                 .detectActivityLeaks()
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedRegistrationObjects()
                 .detectFileUriExposure()

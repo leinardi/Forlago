@@ -70,7 +70,6 @@ jobs:
           OUTPUT_FILE_NAME: mobsf-report
 
       - run: |
-          set -e
           sudo chown -R runner:docker /home/runner/work/_temp/_github_home
           sudo chown -R runner:docker /home/runner/work/$REPO_NAME/$REPO_NAME
         env:

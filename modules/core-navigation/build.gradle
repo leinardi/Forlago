@@ -28,8 +28,6 @@ android {
 
 dependencies {
     api libs.androidx.navigation.compose
-    api libs.coroutines.core
-    api libs.coroutines.android
     implementation libs.hilt.android
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.compiler
