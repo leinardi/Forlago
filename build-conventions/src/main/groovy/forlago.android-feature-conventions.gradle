@@ -17,7 +17,7 @@
 plugins {
     id 'forlago.android-core-conventions'
     id 'kotlin-parcelize'
-    id 'dagger.hilt.android.plugin'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
