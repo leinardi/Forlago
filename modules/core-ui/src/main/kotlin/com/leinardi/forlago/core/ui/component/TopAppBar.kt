@@ -46,7 +46,7 @@ fun TopAppBar(
     title: String,
     modifier: Modifier = Modifier,
     subtitle: String? = null,
-    navigateUp: (() -> Unit)? = null,
+    onNavigateUp: (() -> Unit)? = null,
     titleCentered: Boolean = false,
     elevation: Dp = AppBarDefaults.TopAppBarElevation,
     actions: @Composable RowScope.() -> Unit = {},
@@ -72,10 +72,10 @@ fun TopAppBar(
                 }
             },
             modifier = modifier,
-            navigationIcon = if (navigateUp != null) {
+            navigationIcon = if (onNavigateUp != null) {
                 {
                     IconButton(
-                        onClick = navigateUp,
+                        onClick = onNavigateUp,
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,

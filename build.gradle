@@ -45,7 +45,7 @@ subprojects {
     configurations.configureEach {
         // We forcefully exclude AppCompat + MDC from any transitive dependencies.
         // This is a Compose app, so there's no need for these
-        exclude group: 'androidx.appcompat'
+        // exclude group: 'androidx.appcompat' // Needed by Coil
         exclude group: 'com.google.android.material', module: 'material'
     }
 }

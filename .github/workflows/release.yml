@@ -8,6 +8,16 @@ on:
       semver:
         description: 'Release Semantic Versioning (e.g. 4.15.2)'
         required: true
+      track:
+        description: 'Track'
+        required: true
+        default: internal
+        type: choice
+        options:
+          - internal
+          - alpha
+          - beta
+          - production
 
 jobs:
   build-release:
@@ -38,11 +48,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup JDK 11.0.10
+      - name: Setup JDK 11.0.11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: 11.0.10
+          java-version: 11.0.11
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -68,7 +78,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: publishBundle
+          arguments: publishBundle --track ${{ github.event.inputs.track }}
 
       - name: Clean secrets
         if: always()

@@ -36,15 +36,12 @@ include(
 
         // Modules
         ':modules:core-android',
-        ':modules:core-account',
-        ':modules:core-encryption',
         ':modules:core-feature',
         ':modules:core-i18n',
         ':modules:core-logging',
         ':modules:core-navigation',
         ':modules:core-network',
         ':modules:core-preferences',
-        ':modules:core-rocketserver',
         ':modules:core-test',
         ':modules:core-ui',
         ':modules:feature-account',

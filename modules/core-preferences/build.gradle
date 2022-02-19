@@ -16,6 +16,7 @@
 
 plugins {
     id 'forlago.android-core-conventions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -27,8 +28,6 @@ android {
 
 dependencies {
     implementation project(':modules:core-android')
-    api libs.coroutines.android
-    api libs.coroutines.core
     api libs.androidx.datastore.preferences
     implementation libs.androidx.datastore
     implementation libs.hilt.android

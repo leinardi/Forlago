@@ -59,7 +59,7 @@ fun BarScreen(
         topBar = {
             TopAppBar(
                 title = stringResource(R.string.i18n_bar_screen_title),
-                navigateUp = { sendEvent(Event.OnUpButtonClicked) },
+                onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
             )
         },
         content = {

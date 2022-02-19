@@ -17,11 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup JDK 11.0.10
+      - name: Setup JDK 11.0.11
         uses: actions/setup-java@v2
         with:
           distribution: 'adopt'
-          java-version: 11.0.10
+          java-version: 11.0.11
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -70,7 +70,6 @@ jobs:
           OUTPUT_FILE_NAME: mobsf-report
 
       - run: |
-          set -e
           sudo chown -R runner:docker /home/runner/work/_temp/_github_home
           sudo chown -R runner:docker /home/runner/work/$REPO_NAME/$REPO_NAME
         env:

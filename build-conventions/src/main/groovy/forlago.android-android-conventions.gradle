@@ -44,15 +44,14 @@ android {
         buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${config.app.deepLinkSchema}\"")
     }
     compileOptions {
-        coreLibraryDesugaringEnabled true // https://developer.android.com/studio/write/java8-support#library-desugaring
+        coreLibraryDesugaringEnabled true  // https://developer.android.com/studio/write/java8-support#library-desugaring
         sourceCompatibility config.android.javaVersion
         targetCompatibility config.android.javaVersion
     }
     kotlinOptions {
         freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
-        freeCompilerArgs += '-Xopt-in=com.google.accompanist.pager.ExperimentalPagerApi'
         freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
-        freeCompilerArgs += '-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi'
+        freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.FlowPreview'
         jvmTarget = config.android.javaVersion
         useIR = true
     }
@@ -125,6 +124,8 @@ tasks.withType(Test) {
 
 dependencies {
     implementation libs.androidx.core.ktx
+    implementation libs.coroutines.android
+    implementation libs.coroutines.core
     coreLibraryDesugaring libs.desugar
     testImplementation project(':modules:core-test')
     testImplementation libs.mockk

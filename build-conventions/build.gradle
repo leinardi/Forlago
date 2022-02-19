@@ -34,9 +34,8 @@ dependencies {
     implementation libs.plugin.google.services
     implementation libs.plugin.hilt
     implementation libs.plugin.kotlin
+    implementation libs.plugin.ruler
     implementation libs.plugin.spotless
-    implementation libs.plugin.triplet.play
     implementation libs.plugin.versionsgradle
     implementation libs.plugin.violation
-    implementation libs.plugin.ruler
 }

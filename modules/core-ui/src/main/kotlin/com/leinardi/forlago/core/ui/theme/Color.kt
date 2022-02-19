@@ -16,8 +16,11 @@
 
 package com.leinardi.forlago.core.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 val ForlagoLightColors = lightColors(
@@ -48,3 +51,11 @@ val ForlagoDarkColors = darkColors(
     onSurface = Color(0xFFe1e3e1),
     onError = Color(0xFF680003),
 )
+
+val Colors.textPrimary: Color
+    @Composable
+    get() = MaterialTheme.colors.onSurface.copy(alpha = 0.87f)
+
+val Colors.textSecondary: Color
+    @Composable
+    get() = MaterialTheme.colors.onSurface.copy(alpha = 0.60f)

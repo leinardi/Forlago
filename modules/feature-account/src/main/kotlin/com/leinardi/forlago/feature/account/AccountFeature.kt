@@ -19,7 +19,7 @@ package com.leinardi.forlago.feature.account
 import android.accounts.AccountManager
 import android.content.Intent
 import androidx.compose.runtime.Composable
-import com.leinardi.forlago.core.account.AccountAuthenticatorConfig
+import com.leinardi.forlago.core.android.AccountAuthenticatorConfig
 import com.leinardi.forlago.core.feature.Feature
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.NavigationDestination

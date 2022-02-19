@@ -21,16 +21,20 @@ import com.leinardi.forlago.core.ui.base.ViewEffect
 import com.leinardi.forlago.core.ui.base.ViewEvent
 import com.leinardi.forlago.core.ui.base.ViewState
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Features
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Info
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
 
 object DebugContract {
     data class State(
         val debugInfo: GetDebugInfoInteractor.DebugInfo,
         val featureList: List<Feature>,
-        val bottomNavigationItems: List<DebugViewModel.BottomNavigationItem> = listOf(
-            DebugViewModel.BottomNavigationItem.Info,
-            DebugViewModel.BottomNavigationItem.Features,
+        val bottomNavigationItems: List<DebugViewModel.DebugBottomNavigationItem> = listOf(
+            Info,
+            Options,
+            Features,
         ),
-        val selectedNavigationItem: DebugViewModel.BottomNavigationItem = bottomNavigationItems[0],
+        val selectedNavigationItem: DebugViewModel.DebugBottomNavigationItem = bottomNavigationItems[0],
     ) : ViewState {
         data class Feature(
             val composable: @Composable () -> Unit,
@@ -39,9 +43,11 @@ object DebugContract {
     }
 
     sealed class Event : ViewEvent {
-        data class OnBottomNavigationItemSelected(val selectedNavigationItem: DebugViewModel.BottomNavigationItem) : Event()
-        object OnUpButtonClicked : Event()
+        data class OnBottomNavigationItemSelected(val selectedNavigationItem: DebugViewModel.DebugBottomNavigationItem) : Event()
+        object OnClearApolloCacheClicked : Event()
         object OnForceCrashClicked : Event()
+        object OnUpButtonClicked : Event()
+        object OnViewAttached : Event()
     }
 
     sealed class Effect : ViewEffect

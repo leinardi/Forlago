@@ -40,6 +40,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -60,12 +61,16 @@ import com.leinardi.forlago.feature.debug.R
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
-import com.leinardi.forlago.feature.debug.ui.DebugViewModel.BottomNavigationItem.Features
-import com.leinardi.forlago.feature.debug.ui.DebugViewModel.BottomNavigationItem.Info
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Features
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Info
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
 import kotlinx.coroutines.launch
 
 @Composable
 fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
+    LaunchedEffect(viewModel) {
+        viewModel.onUiEvent(Event.OnViewAttached)
+    }
     DebugScreen(
         state = viewModel.viewState.value,
         sendEvent = { viewModel.onUiEvent(it) },
@@ -88,7 +93,7 @@ fun DebugScreen(
             topBar = {
                 TopAppBar(
                     title = stringResource(R.string.debug_screen),
-                    navigateUp = { sendEvent(Event.OnUpButtonClicked) },
+                    onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
                     elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
                 )
             },
@@ -96,8 +101,20 @@ fun DebugScreen(
                 when (state.selectedNavigationItem) {
                     Info -> Info(
                         state = state,
+                        modifier = modifier
+                            .background(MaterialTheme.colors.surface)
+                            .fillMaxSize()
+                            .padding(
+                                start = 0.dp,
+                                end = 0.dp,
+                                bottom = innerPadding.calculateBottomPadding(),
+                                top = innerPadding.calculateTopPadding(),
+                            ),
+                    )
+                    Options -> Options(
                         sendEvent = sendEvent,
                         modifier = modifier
+                            .background(MaterialTheme.colors.surface)
                             .fillMaxSize()
                             .padding(
                                 start = 0.dp,
@@ -141,7 +158,6 @@ fun DebugScreen(
 @Composable
 private fun Info(
     state: State,
-    sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -168,14 +184,41 @@ private fun Info(
             }
         }
         DeviceInfo(state)
-        Button(
-            onClick = { sendEvent(Event.OnForceCrashClicked) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.error),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+    }
+}
+
+@Composable
+private fun Options(
+    sendEvent: (event: Event) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier.verticalScroll(rememberScrollState()),
+    ) {
+        SettingsGroup(
+            title = { Text(text = "GraphQL") },
         ) {
-            Text("Force Crash")
+            Button(
+                onClick = { sendEvent(Event.OnClearApolloCacheClicked) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text("Clear Apollo cache")
+            }
+        }
+        SettingsGroup(
+            title = { Text(text = "Crashlytics") },
+        ) {
+            Button(
+                onClick = { sendEvent(Event.OnForceCrashClicked) },
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.error),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text("Force App crash")
+            }
         }
     }
 }

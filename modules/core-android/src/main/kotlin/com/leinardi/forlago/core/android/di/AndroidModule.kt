@@ -16,11 +16,16 @@
 
 package com.leinardi.forlago.core.android.di
 
+import android.accounts.AccountManager
+import android.app.Application
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
+import com.leinardi.forlago.core.android.encryption.CryptoHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import javax.inject.Singleton
 
 @Module
@@ -28,5 +33,20 @@ import javax.inject.Singleton
 object AndroidModule {
     @Provides
     @Singleton
+    fun provideAccountManager(application: Application): AccountManager = AccountManager.get(application)
+
+    @Provides
+    @Singleton
     fun provideCoroutineDispatchers(): CoroutineDispatchers = CoroutineDispatchers()
+
+    @Provides
+    @Singleton
+    fun provideCryptoHelper(
+        dispatchers: CoroutineDispatchers,
+        application: Application,
+    ): CryptoHelper = runBlocking {
+        withContext(dispatchers.io) {
+            CryptoHelper.Builder(application).build()
+        }
+    }
 }

@@ -32,7 +32,7 @@ def applyGsmServicesPlugins = rootProject.file("app/google-services.json").exist
 if (applyGsmServicesPlugins) {
     project.plugins.apply('com.google.gms.google-services')
     project.plugins.apply('com.google.firebase.crashlytics')
-    //    project.plugins.apply('com.google.firebase.firebase-perf')
+    project.plugins.apply('com.google.firebase.firebase-perf')
 }
 println "google-services.json ${if (applyGsmServicesPlugins) "" else "NOT "}found!"
 
@@ -59,7 +59,6 @@ dependencies {
 
     // Android
     implementation libs.androidx.activity.compose
-    implementation libs.androidx.appcompat
     implementation libs.androidx.core.ktx
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.navigation.fragment

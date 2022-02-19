@@ -387,8 +387,8 @@ formatting:
     indentSize: 4
     continuationIndentSize: 4
   MaximumLineLength:
-    active: true
-    maxLineLength: 150 # Custom
+    active: false # Custom
+    maxLineLength: 120
     ignoreBackTickedIdentifier: false
   ModifierOrdering:
     active: true

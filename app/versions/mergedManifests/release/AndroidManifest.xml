@@ -92,12 +92,19 @@
                 android:name="com.leinardi.forlago.core.logging.initializer.TimberInitializer"
                 android:value="androidx.startup" />
             <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <meta-data
+            android:name="google_analytics_automatic_screen_reporting_enabled"
+            android:value="false" />
 
         <uses-library
             android:name="androidx.window.extensions"

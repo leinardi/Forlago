@@ -17,27 +17,38 @@
 package com.leinardi.forlago.core.ui.component
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import com.leinardi.forlago.core.ui.R
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun OutlinedTextField(
@@ -47,11 +58,13 @@ fun OutlinedTextField(
     enabled: Boolean = true,
     readOnly: Boolean = false,
     textStyle: TextStyle = LocalTextStyle.current,
-    label: @Composable (() -> Unit)? = null,
+    label: String? = null,
     placeholder: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
-    isError: Boolean = false,
+    helperMessage: String? = null,
+    errorMessage: String? = null,
+    isError: Boolean = errorMessage != null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     passwordToggleEnabled: Boolean = false,
     keyboardOptions: KeyboardOptions = if (passwordToggleEnabled) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
@@ -69,42 +82,70 @@ fun OutlinedTextField(
         visualTransformation
     }
 
-    val image = if (passwordVisibility) {
-        painterResource(id = R.drawable.ui_ic_baseline_visibility)
+    val passwordToggleIcon = if (passwordVisibility) {
+        Icons.Filled.Visibility
     } else {
-        painterResource(id = R.drawable.ui_ic_baseline_visibility_off)
+        Icons.Filled.VisibilityOff
     }
 
-    val passwordToggleTrailingIcon: @Composable (() -> Unit)? = if (passwordToggleEnabled) {
-        {
-            IconButton(onClick = {
+    val textFieldTrailingIcon: @Composable (() -> Unit) = {
+        when {
+            isError -> Icon(Icons.Filled.Error, null)
+            passwordToggleEnabled -> IconButton(onClick = {
                 passwordVisibility = !passwordVisibility
             }) {
-                Icon(painter = image, null)
+                Icon(passwordToggleIcon, null)
+            }
+            else -> trailingIcon?.invoke()
+        }
+    }
+    Column {
+        androidx.compose.material.OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = modifier,
+            enabled = enabled,
+            readOnly = readOnly,
+            textStyle = textStyle,
+            label = { label?.let { Text(text = it) } },
+            placeholder = placeholder,
+            leadingIcon = leadingIcon,
+            trailingIcon = textFieldTrailingIcon,
+            isError = isError,
+            visualTransformation = passwordToggleVisualTransformation,
+            keyboardOptions = keyboardOptions,
+            keyboardActions = keyboardActions,
+            singleLine = singleLine,
+            maxLines = maxLines,
+            interactionSource = interactionSource,
+            shape = shape,
+            colors = colors,
+        )
+        Box(
+            modifier = Modifier
+                .defaultMinSize(minHeight = 16.dp)
+                .padding(start = 16.dp, end = 12.dp),
+        ) {
+            if (isError) {
+                if (errorMessage != null) {
+                    Text(
+                        text = errorMessage,
+                        color = MaterialTheme.colors.error,
+                        style = MaterialTheme.typography.caption,
+                    )
+                }
+            } else {
+                if (helperMessage != null) {
+                    CompositionLocalProvider(
+                        LocalContentAlpha provides ContentAlpha.medium,
+                    ) {
+                        Text(
+                            text = helperMessage,
+                            style = MaterialTheme.typography.caption,
+                        )
+                    }
+                }
             }
         }
-    } else {
-        trailingIcon
     }
-    androidx.compose.material.OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        enabled = enabled,
-        readOnly = readOnly,
-        textStyle = textStyle,
-        label = label,
-        placeholder = placeholder,
-        leadingIcon = leadingIcon,
-        trailingIcon = passwordToggleTrailingIcon,
-        isError = isError,
-        visualTransformation = passwordToggleVisualTransformation,
-        keyboardOptions = keyboardOptions,
-        keyboardActions = keyboardActions,
-        singleLine = singleLine,
-        maxLines = maxLines,
-        interactionSource = interactionSource,
-        shape = shape,
-        colors = colors,
-    )
 }
