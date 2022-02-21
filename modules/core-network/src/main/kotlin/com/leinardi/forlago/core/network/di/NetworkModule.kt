@@ -111,7 +111,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApolloBuilder(
+    fun provideApolloClient(
         httpClient: OkHttpClient,
         environment: GetEnvironmentInteractor.Environment,
         cacheFactorySet: Set<@JvmSuppressWildcards NormalizedCacheFactory>,
