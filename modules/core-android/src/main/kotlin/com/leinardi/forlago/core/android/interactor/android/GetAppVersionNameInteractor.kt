@@ -14,28 +14,22 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'forlago.android-core-conventions'
-    id 'com.google.dagger.hilt.android'
-}
+package com.leinardi.forlago.core.android.interactor.android
 
-android {
-    resourcePrefix 'feature_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-feature-consumer-rules.pro"
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
-    }
-}
+import android.app.Application
+import android.content.pm.PackageManager
+import timber.log.Timber
+import javax.inject.Inject
+import javax.inject.Singleton
 
-dependencies {
-    api project(':modules:core-navigation')
-    api libs.coroutines.core
-    api libs.coroutines.android
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+@Singleton
+class GetAppVersionNameInteractor @Inject constructor(
+    private val application: Application,
+) {
+    operator fun invoke(): String? = try {
+        application.packageManager.getPackageInfo(application.packageName, 0).versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        Timber.e(e)
+        null
+    }
 }

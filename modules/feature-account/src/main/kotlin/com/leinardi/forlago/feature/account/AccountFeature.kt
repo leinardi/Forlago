@@ -23,8 +23,8 @@ import com.leinardi.forlago.core.android.AccountAuthenticatorConfig
 import com.leinardi.forlago.core.feature.Feature
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.NavigationDestination
-import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorScreen
+import com.leinardi.forlago.core.navigation.destination.account.SignInDestination
+import com.leinardi.forlago.feature.account.ui.SignInScreen
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugPage
 
 class AccountFeature(
@@ -34,7 +34,7 @@ class AccountFeature(
     override val id = "Account"
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-        AccountAuthenticatorDestination to { AccountAuthenticatorScreen() },
+        SignInDestination to { SignInScreen() },
     )
 
     override val debugComposable: @Composable () -> Unit = { AccountDebugPage() }
@@ -42,7 +42,7 @@ class AccountFeature(
     override val handleIntent: suspend (Intent) -> Unit = { intent ->
         if (intent.hasExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE)) {
             val isNewAccount = intent.getBooleanExtra(AccountAuthenticatorConfig.KEY_IS_NEW_ACCOUNT, false)
-            navigator.navigate(AccountAuthenticatorDestination.createRoute(!isNewAccount)) {
+            navigator.navigate(SignInDestination.createRoute(!isNewAccount)) {
                 launchSingleTop = true
                 popUpTo(0) { inclusive = true }
             }

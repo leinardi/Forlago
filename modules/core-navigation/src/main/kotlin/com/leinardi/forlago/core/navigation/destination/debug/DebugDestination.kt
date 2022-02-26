@@ -21,15 +21,15 @@ import com.leinardi.forlago.core.navigation.BuildConfig
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
 object DebugDestination : NavigationDestination {
-    private const val DEBUG_ROUTE = "debug"
+    private const val ROUTE = "debug"
 
     override val deepLinks = listOf(
         navDeepLink {
-            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$DEBUG_ROUTE"
+            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$ROUTE"
         },
     )
 
-    override fun route() = DEBUG_ROUTE
+    override fun route() = ROUTE
 
     fun createRoute() = route()
 }

@@ -17,7 +17,6 @@
 plugins {
     id 'com.android.application'
     id 'forlago.android-android-conventions'
-    id 'org.gradle.android.cache-fix'
     id 'kotlin-parcelize'
     id 'com.google.dagger.hilt.android'
     id 'com.mikepenz.aboutlibraries.plugin'

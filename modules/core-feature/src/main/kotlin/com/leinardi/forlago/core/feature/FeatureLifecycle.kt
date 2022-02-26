@@ -17,7 +17,7 @@
 package com.leinardi.forlago.core.feature
 
 data class FeatureLifecycle(
-    val onLogin: suspend () -> Unit = {},
+    val onSignIn: suspend () -> Unit = {},
 
-    val onLogout: suspend () -> Unit = {},
+    val onSignOut: suspend () -> Unit = {},
 )

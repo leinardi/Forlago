@@ -14,28 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'forlago.android-core-conventions'
-    id 'com.google.dagger.hilt.android'
-}
+package com.leinardi.forlago.core.ui.ext
 
-android {
-    resourcePrefix 'feature_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-feature-consumer-rules.pro"
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
-    }
-}
+import androidx.compose.runtime.Composable
+import com.google.accompanist.placeholder.PlaceholderHighlight
+import com.google.accompanist.placeholder.material.fade
 
-dependencies {
-    api project(':modules:core-navigation')
-    api libs.coroutines.core
-    api libs.coroutines.android
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
-}
+@Composable
+fun PlaceholderHighlight.Companion.default() = PlaceholderHighlight.fade()

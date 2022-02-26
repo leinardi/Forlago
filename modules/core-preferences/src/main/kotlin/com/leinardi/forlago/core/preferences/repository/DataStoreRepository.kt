@@ -22,7 +22,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStore
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
@@ -30,14 +29,37 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import java.io.IOException
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class AppDataStoreRepository @Inject constructor(
-    @ApplicationContext private val context: Context,
+class DataStoreRepository constructor(
+    private val context: Context,
+    private val preferenceName: String,
 ) {
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "app_preference_storage")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = preferenceName)
+
+    suspend fun <T> storeValue(key: Preferences.Key<T>, value: T) {
+        context.dataStore.edit {
+            it[key] = value
+        }
+    }
+
+    suspend fun <T> removeKey(key: Preferences.Key<T>) {
+        context.dataStore.edit {
+            it.remove(key)
+        }
+    }
+
+    suspend fun <T> readValue(key: Preferences.Key<T>): T? =
+        context.dataStore.getFromLocalStorage(key).firstOrNull()
+
+    suspend fun <T> readValue(key: Preferences.Key<T>, defaultValue: T): T =
+        context.dataStore.getFromLocalStorage(key).map { it ?: defaultValue }.first()
+
+    suspend fun clearPreferencesStorage() {
+        Timber.d("Clear $preferenceName data store")
+        context.dataStore.edit {
+            it.clear()
+        }
+    }
 
     private fun <T> DataStore<Preferences>.getFromLocalStorage(
         preferencesKey: Preferences.Key<T>,
@@ -52,22 +74,4 @@ class AppDataStoreRepository @Inject constructor(
         }.map {
             it[preferencesKey]
         }
-
-    suspend fun <T> storeValue(key: Preferences.Key<T>, value: T) {
-        context.dataStore.edit {
-            it[key] = value
-        }
-    }
-
-    suspend fun <T> readValue(key: Preferences.Key<T>): T? =
-        context.dataStore.getFromLocalStorage(key).firstOrNull()
-
-    suspend fun <T> readValue(key: Preferences.Key<T>, defaultValue: T): T =
-        context.dataStore.getFromLocalStorage(key).map { it ?: defaultValue }.first()
-
-    suspend fun clearPreferencesStorage() {
-        context.dataStore.edit {
-            it.clear()
-        }
-    }
 }

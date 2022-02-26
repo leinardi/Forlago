@@ -16,7 +16,6 @@
 plugins {
     id 'com.android.library'
     id 'forlago.android-android-conventions'
-    id 'org.gradle.android.cache-fix'
 }
 
 dependencies {

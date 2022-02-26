@@ -24,7 +24,7 @@ import com.leinardi.forlago.core.navigation.NavigationDestination
 
 object BarDestination : NavigationDestination {
     const val TEXT_PARAM = "text"
-    private const val BAR_ROUTE = "bar"
+    private const val ROUTE = "bar"
 
     override val arguments = listOf(
         navArgument(TEXT_PARAM) {
@@ -36,14 +36,14 @@ object BarDestination : NavigationDestination {
 
     override val deepLinks = listOf(
         navDeepLink {
-            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$BAR_ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
+            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
         },
         navDeepLink {
-            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$BAR_ROUTE"
+            uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$ROUTE"
         },
     )
 
-    override fun route() = "$BAR_ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
+    override fun route() = "$ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
 
-    fun createRoute(text: String) = "$BAR_ROUTE/?$TEXT_PARAM=$text"
+    fun createRoute(text: String) = "$ROUTE/?$TEXT_PARAM=$text"
 }

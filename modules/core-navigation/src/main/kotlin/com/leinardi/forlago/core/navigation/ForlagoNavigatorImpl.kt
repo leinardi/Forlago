@@ -17,6 +17,7 @@
 package com.leinardi.forlago.core.navigation
 
 import androidx.navigation.NavOptionsBuilder
+import com.leinardi.forlago.core.navigation.destination.account.SignInDestination
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
@@ -35,6 +36,8 @@ internal class ForlagoNavigatorImpl @Inject constructor() : ForlagoNavigator {
         launchSingleTop = true
         popUpTo(0) { inclusive = true }
     }
+
+    override fun navigateToSignIn(reauthenticate: Boolean): Boolean = navigate(SignInDestination.createRoute(reauthenticate))
 
     override fun navigateBack(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateBack).isSuccess
 

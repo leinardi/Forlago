@@ -14,27 +14,17 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'forlago.android-feature-conventions'
-}
+package com.leinardi.forlago.core.preferences.interactor
 
-android {
-    resourcePrefix 'account_'
+import com.leinardi.forlago.core.android.di.App
+import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor.Companion.ENVIRONMENT_PREF_KEY
+import com.leinardi.forlago.core.preferences.repository.DataStoreRepository
+import javax.inject.Inject
 
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
+class StoreEnvironmentInteractor @Inject constructor(
+    @App private val dataStoreRepository: DataStoreRepository,
+) {
+    suspend operator fun invoke(environment: ReadEnvironmentInteractor.Environment) {
+        dataStoreRepository.storeValue(ENVIRONMENT_PREF_KEY, environment.name)
     }
-
-    buildTypes {
-        debug {
-            resValue 'string', 'account_type', "${config.android.accountType}.debug"
-        }
-        release {
-            resValue 'string', 'account_type', config.android.accountType
-        }
-    }
-}
-
-dependencies {
-    implementation project(':modules:core-network')
 }

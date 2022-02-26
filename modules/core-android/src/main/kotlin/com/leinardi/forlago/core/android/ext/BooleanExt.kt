@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.preferences.interactor
+package com.leinardi.forlago.core.android.ext
 
-import com.leinardi.forlago.core.preferences.interactor.GetEnvironmentInteractor.Companion.ENVIRONMENT_PREF_KEY
-import com.leinardi.forlago.core.preferences.repository.AppDataStoreRepository
-import javax.inject.Inject
-
-class SetEnvironmentInteractor @Inject constructor(
-    private val appDataStoreRepository: AppDataStoreRepository,
-) {
-    suspend operator fun invoke(environment: GetEnvironmentInteractor.Environment) {
-        appDataStoreRepository.storeValue(ENVIRONMENT_PREF_KEY, environment.name)
+fun Boolean.ifTrue(action: () -> Unit): Boolean {
+    if (this) {
+        action.invoke()
     }
+    return this
+}
+
+fun Boolean.ifFalse(action: () -> Unit): Boolean {
+    if (!this) {
+        action.invoke()
+    }
+    return this
 }

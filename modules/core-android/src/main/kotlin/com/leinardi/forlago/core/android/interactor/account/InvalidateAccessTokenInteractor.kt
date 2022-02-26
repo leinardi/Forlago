@@ -22,6 +22,7 @@ import com.leinardi.forlago.core.android.AccountAuthenticatorConfig
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.core.android.interactor.encryption.EncryptDeterministicallyInteractor
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class InvalidateAccessTokenInteractor @Inject constructor(
@@ -33,6 +34,7 @@ class InvalidateAccessTokenInteractor @Inject constructor(
 ) {
     suspend operator fun invoke() {
         withContext(dispatchers.io) {
+            Timber.d("Invalidate access token")
             getAccountInteractor()?.let { account ->
                 val accessToken = peekAccessTokenInteractor()
                 if (accessToken != null) {

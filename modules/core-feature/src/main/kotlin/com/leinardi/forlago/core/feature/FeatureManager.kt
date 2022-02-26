@@ -34,7 +34,7 @@ class FeatureManager @Inject constructor() {
         features.forEach { feature -> _featureMap[feature.javaClass] = feature }
     }
 
-    suspend fun onUserLogin() = features.map { it.serviceLifecycle.onLogin() }
+    suspend fun onUserSignIn() = features.map { it.serviceLifecycle.onSignIn() }
 
-    suspend fun onUserLogout() = features.reversed().map { it.serviceLifecycle.onLogout() }
+    suspend fun onUserSignOut() = features.reversed().map { it.serviceLifecycle.onSignOut() }
 }

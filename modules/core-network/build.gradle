@@ -38,6 +38,7 @@ apollo {
 
 dependencies {
     implementation project(':modules:core-android')
+    implementation project(':modules:core-navigation')
     implementation project(':modules:core-preferences')
     api libs.coroutines.android
     api libs.coroutines.core

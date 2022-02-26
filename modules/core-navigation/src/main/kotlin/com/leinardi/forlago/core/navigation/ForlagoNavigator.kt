@@ -41,6 +41,8 @@ interface ForlagoNavigator {
 
     fun navigateHome(): Boolean
 
+    fun navigateToSignIn(reauthenticate: Boolean): Boolean
+
     /**
      * Attempts to pop the navigation controller's back stack. Analogous to when the user presses the system Back button.
      *

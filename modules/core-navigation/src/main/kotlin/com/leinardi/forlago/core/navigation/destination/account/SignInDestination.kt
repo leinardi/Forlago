@@ -20,19 +20,19 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
-object AccountAuthenticatorDestination : NavigationDestination {
-    const val RELOGIN_PARAM = "relogin"
+object SignInDestination : NavigationDestination {
+    const val REAUTHENTICATE_PARAM = "reauthenticate"
 
-    private const val ACCOUNT_AUTHENTICATOR_ROUTE = "authenticator"
+    private const val ROUTE = "signin"
 
     override val arguments = listOf(
-        navArgument(RELOGIN_PARAM) {
+        navArgument(REAUTHENTICATE_PARAM) {
             type = NavType.BoolType
             defaultValue = false
         },
     )
 
-    override fun route() = "$ACCOUNT_AUTHENTICATOR_ROUTE/?$RELOGIN_PARAM={$RELOGIN_PARAM}"
+    override fun route() = "$ROUTE/?$REAUTHENTICATE_PARAM={$REAUTHENTICATE_PARAM}"
 
-    fun createRoute(relogin: Boolean = false) = "$ACCOUNT_AUTHENTICATOR_ROUTE/?$RELOGIN_PARAM=$relogin"
+    fun createRoute(reauthenticate: Boolean = false) = "$ROUTE/?$REAUTHENTICATE_PARAM=$reauthenticate"
 }

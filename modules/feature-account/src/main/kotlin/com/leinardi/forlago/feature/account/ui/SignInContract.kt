@@ -20,9 +20,9 @@ import com.leinardi.forlago.core.ui.base.ViewEffect
 import com.leinardi.forlago.core.ui.base.ViewEvent
 import com.leinardi.forlago.core.ui.base.ViewState
 
-object AccountAuthenticatorContract {
+object SignInContract {
     data class State(
-        val isRelogin: Boolean,
+        val isReauthenticate: Boolean,
         val username: String,
         val password: String,
         val isLoading: Boolean = false,
