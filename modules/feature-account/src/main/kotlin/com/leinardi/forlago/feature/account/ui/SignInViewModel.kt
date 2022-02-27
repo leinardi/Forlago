@@ -23,18 +23,18 @@ import com.leinardi.forlago.core.android.interactor.account.GetAccessTokenIntera
 import com.leinardi.forlago.core.android.interactor.account.GetAccountInteractor
 import com.leinardi.forlago.core.android.interactor.account.SetRefreshTokenInteractor
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
+import com.leinardi.forlago.core.navigation.destination.account.SignInDestination
 import com.leinardi.forlago.core.network.interactor.account.SignInInteractor
 import com.leinardi.forlago.core.ui.base.BaseViewModel
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Effect
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Event
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.State
+import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
+import com.leinardi.forlago.feature.account.ui.SignInContract.Event
+import com.leinardi.forlago.feature.account.ui.SignInContract.State
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountAuthenticatorViewModel @Inject constructor(
+class SignInViewModel @Inject constructor(
     private val addAccountInteractor: AddAccountInteractor,
     private val getAccountInteractor: GetAccountInteractor,
     private val getAccessTokenInteractor: GetAccessTokenInteractor,
@@ -44,8 +44,13 @@ class AccountAuthenticatorViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState(): State {
-        val account = getAccountInteractor()
-        return State(savedStateHandle[AccountAuthenticatorDestination.RELOGIN_PARAM] ?: false, account?.name.orEmpty(), "")
+        val username = getAccountInteractor()?.name
+        val reauthenticate: Boolean = checkNotNull(savedStateHandle[SignInDestination.REAUTHENTICATE_PARAM])
+        return State(
+            isReauthenticate = reauthenticate && username != null,
+            username = username.orEmpty(),
+            password = "",
+        )
     }
 
     override fun handleEvent(event: Event) {
@@ -86,13 +91,14 @@ class AccountAuthenticatorViewModel @Inject constructor(
         refreshToken: String,
         username: String,
     ) {
-        if (viewState.value.isRelogin) {
+        if (viewState.value.isReauthenticate) {
             if (setRefreshTokenInteractor(refreshToken)) {
                 getAccessTokenInteractor()
+                forlagoNavigator.navigateBack()
             }
         } else {
             addAccountInteractor(username, refreshToken)
+            forlagoNavigator.navigateHome()
         }
-        forlagoNavigator.navigateHome()
     }
 }

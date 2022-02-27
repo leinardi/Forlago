@@ -17,13 +17,14 @@
 package com.leinardi.forlago.core.preferences.interactor
 
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.leinardi.forlago.core.preferences.repository.AppDataStoreRepository
+import com.leinardi.forlago.core.android.di.App
+import com.leinardi.forlago.core.preferences.repository.DataStoreRepository
 import javax.inject.Inject
 
-class GetEnvironmentInteractor @Inject constructor(
-    private val appDataStoreRepository: AppDataStoreRepository,
+class ReadEnvironmentInteractor @Inject constructor(
+    @App private val dataStoreRepository: DataStoreRepository,
 ) {
-    suspend operator fun invoke(): Environment = Environment.valueOf(appDataStoreRepository.readValue(ENVIRONMENT_PREF_KEY, Environment.STAGE.name))
+    suspend operator fun invoke(): Environment = Environment.valueOf(dataStoreRepository.readValue(ENVIRONMENT_PREF_KEY, Environment.STAGE.name))
 
     enum class Environment(val restUrl: String, val graphQlUrl: String) {
         DEV("https://api.dev.example.com", "https://apollo-fullstack-tutorial.herokuapp.com/graphql"),

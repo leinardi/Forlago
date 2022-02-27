@@ -25,7 +25,7 @@ import com.apollographql.apollo3.network.okHttpClient
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.leinardi.forlago.core.android.BuildConfig
 import com.leinardi.forlago.core.android.interactor.android.GetConnectivityInteractor
-import com.leinardi.forlago.core.preferences.interactor.GetEnvironmentInteractor
+import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,7 +46,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private const val NETWORK_TIMEOUT_IN_SECONDS = 15L
+    private const val NETWORK_TIMEOUT_IN_SECONDS = 30L
     private const val MEMORY_CACHE_SIZE_IN_BYTES = 10 * 1024 * 1024
     private val CACHE_EXPIRES_IN_MILLIS = TimeUnit.HOURS.toMillis(1)
 
@@ -113,7 +113,7 @@ object NetworkModule {
     @Singleton
     fun provideApolloClient(
         httpClient: OkHttpClient,
-        environment: GetEnvironmentInteractor.Environment,
+        environment: ReadEnvironmentInteractor.Environment,
         cacheFactorySet: Set<@JvmSuppressWildcards NormalizedCacheFactory>,
     ): ApolloClient {
         var chainedCacheFactory = cacheFactorySet.firstOrNull()

@@ -254,6 +254,9 @@ jobs:
             adb devices
             ./gradlew connectedCheck
 
+      - name: Make file path compatible with upload-artifact
+        run: find . -path '*/build/*' -name '*:*' -exec bash -c 'mv "$0" "${0//:/_}"' {} \;
+
       - name: Upload results
         if: always()
         uses: actions/upload-artifact@v2

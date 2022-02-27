@@ -25,7 +25,7 @@ import com.leinardi.forlago.core.android.interactor.account.InvalidateAccessToke
 import com.leinardi.forlago.core.android.interactor.account.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.core.android.interactor.account.PeekAccessTokenInteractor
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.navigation.destination.account.AccountAuthenticatorDestination
+import com.leinardi.forlago.core.navigation.destination.account.SignInDestination
 import com.leinardi.forlago.core.network.interactor.account.RemoveAccountsInteractor
 import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
@@ -58,7 +58,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnInvalidateRefreshTokenClicked -> invalidateRefreshToken()
                 Event.OnLogOutClicked -> logOut()
                 Event.OnOpenSignInScreenClicked ->
-                    forlagoNavigator.navigate(AccountAuthenticatorDestination.createRoute(viewState.value.accountName != null))
+                    forlagoNavigator.navigate(SignInDestination.createRoute(viewState.value.accountName != null))
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }

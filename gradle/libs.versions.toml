@@ -2,9 +2,9 @@
 # https://docs.gradle.org/current/userguide/platforms.html
 
 [versions]
-aboutlibraries = "10.0.0-a04"
+aboutlibraries = "10.0.0-rc01"
 accompanist = "0.24.2-alpha"
-androidx-compose = "1.2.0-alpha03"
+androidx-compose = "1.2.0-alpha04"
 androidx-datastore = "1.0.0"
 androidx-lifecycle = "2.4.1"
 androidx-material = "1.4.0"
@@ -29,7 +29,9 @@ retrofit = "2.9.0"
 [libraries]
 aboutlibraries = { module = "com.mikepenz:aboutlibraries-compose", version.ref = "aboutlibraries" }
 aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutlibraries" }
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist" }
+accompanist-insets-ui = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanist" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
@@ -94,6 +96,7 @@ hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", vers
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version = "1.0.0" }
 junit = { module = "junit:junit", version = "4.13.2" }
+konfetti = { module = "nl.dionsegijn:konfetti-compose", version = "2.0.2" }
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

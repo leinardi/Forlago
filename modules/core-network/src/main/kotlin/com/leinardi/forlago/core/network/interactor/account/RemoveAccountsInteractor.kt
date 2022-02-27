@@ -20,6 +20,7 @@ import android.accounts.AccountManager
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.core.android.interactor.account.GetAccountInteractor
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class RemoveAccountsInteractor @Inject constructor(
@@ -28,6 +29,7 @@ class RemoveAccountsInteractor @Inject constructor(
     private val getAccountInteractor: GetAccountInteractor,
 ) {
     suspend operator fun invoke(): Boolean = withContext(dispatchers.io) {
+        Timber.d("Remove account")
         getAccountInteractor()?.let { accountManager.removeAccountExplicitly(it) } ?: false
     }
 }

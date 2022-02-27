@@ -19,9 +19,9 @@ package com.leinardi.forlago.core.navigation.destination.foo
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
 object FooDestination : NavigationDestination {
-    private const val FOO_ROUTE = "foo"
+    private const val ROUTE = "foo"
 
-    override fun route() = FOO_ROUTE
+    override fun route() = ROUTE
 
     fun createRoute() = route()
 }

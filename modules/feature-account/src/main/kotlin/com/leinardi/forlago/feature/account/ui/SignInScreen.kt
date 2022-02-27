@@ -48,9 +48,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.core.ui.component.OutlinedTextField
 import com.leinardi.forlago.core.ui.component.ProgressButton
 import com.leinardi.forlago.core.ui.theme.ForlagoTheme
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Effect
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.Event
-import com.leinardi.forlago.feature.account.ui.AccountAuthenticatorContract.State
+import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
+import com.leinardi.forlago.feature.account.ui.SignInContract.Event
+import com.leinardi.forlago.feature.account.ui.SignInContract.State
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -58,10 +58,10 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
-fun AccountAuthenticatorScreen() {
-    val viewModel = hiltViewModel<AccountAuthenticatorViewModel>()
+fun SignInScreen() {
+    val viewModel = hiltViewModel<SignInViewModel>()
 
-    AccountAuthenticatorScreen(
+    SignInScreen(
         state = viewModel.viewState.value,
         sendEvent = { viewModel.onUiEvent(it) },
         effectFlow = viewModel.effect,
@@ -69,7 +69,7 @@ fun AccountAuthenticatorScreen() {
 }
 
 @Composable
-fun AccountAuthenticatorScreen(
+fun SignInScreen(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,
@@ -106,7 +106,7 @@ fun AccountAuthenticatorScreen(
                 var username by rememberSaveable { mutableStateOf(state.username) }
                 OutlinedTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = !state.isRelogin,
+                    enabled = !state.isReauthenticate,
                     value = username,
                     onValueChange = { username = it },
                     label = "Username",
@@ -155,6 +155,6 @@ fun AccountAuthenticatorScreen(
 @Composable
 fun AccountScreenPreview() {
     ForlagoTheme {
-        AccountAuthenticatorScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
+        SignInScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
     }
 }

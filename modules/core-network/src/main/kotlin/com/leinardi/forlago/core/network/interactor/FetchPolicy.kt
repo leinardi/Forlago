@@ -16,22 +16,12 @@
 
 package com.leinardi.forlago.core.network.interactor
 
-import com.apollographql.apollo3.cache.normalized.FetchPolicy.CacheAndNetwork
 import com.apollographql.apollo3.cache.normalized.FetchPolicy.CacheFirst
 import com.apollographql.apollo3.cache.normalized.FetchPolicy.CacheOnly
 import com.apollographql.apollo3.cache.normalized.FetchPolicy.NetworkFirst
 import com.apollographql.apollo3.cache.normalized.FetchPolicy.NetworkOnly
 
 enum class FetchPolicy(val apollo: com.apollographql.apollo3.cache.normalized.FetchPolicy) {
-    /**
-     * Try the cache, then also try the network.
-     *
-     * If the data is in the cache, it is emitted, if not, no exception is thrown at that point. Then the network call is made, and if
-     * successful, the value is emitted, if not, either an [ApolloCompositeException] (both cache miss and network failed) or an
-     * [ApolloException] (only network failed) is thrown.
-     */
-    CACHE_AND_NETWORK(CacheAndNetwork),
-
     /**
      * Try the cache, if that failed, try the network.
      *

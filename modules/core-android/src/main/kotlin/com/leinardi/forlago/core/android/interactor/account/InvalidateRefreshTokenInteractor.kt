@@ -19,6 +19,7 @@ package com.leinardi.forlago.core.android.interactor.account
 import android.accounts.AccountManager
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 class InvalidateRefreshTokenInteractor @Inject constructor(
@@ -28,6 +29,7 @@ class InvalidateRefreshTokenInteractor @Inject constructor(
 ) {
     suspend operator fun invoke() {
         withContext(dispatchers.io) {
+            Timber.d("Invalidate refresh token")
             getAccountInteractor()?.let { account ->
                 accountManager.clearPassword(account)
             }

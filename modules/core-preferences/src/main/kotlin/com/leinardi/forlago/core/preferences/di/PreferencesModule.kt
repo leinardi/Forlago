@@ -16,9 +16,13 @@
 
 package com.leinardi.forlago.core.preferences.di
 
+import android.app.Application
 import androidx.annotation.VisibleForTesting
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
-import com.leinardi.forlago.core.preferences.interactor.GetEnvironmentInteractor
+import com.leinardi.forlago.core.android.di.App
+import com.leinardi.forlago.core.android.di.User
+import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.core.preferences.repository.DataStoreRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,14 +35,24 @@ import javax.inject.Singleton
 open class PreferencesModule {
     @Provides
     @Singleton
-    fun provideGetEnvironmentInteractorEnvironment(
+    @App
+    fun provideAppDataStoreRepository(application: Application) = DataStoreRepository(application, "app_preference_storage")
+
+    @Provides
+    @Singleton
+    @User
+    fun provideUserDataStoreRepository(application: Application) = DataStoreRepository(application, "user_preference_storage")
+
+    @Provides
+    @Singleton
+    fun provideReadEnvironmentInteractorEnvironment(
         coroutineDispatchers: CoroutineDispatchers,
-        getEnvironmentInteractor: GetEnvironmentInteractor,
-    ): GetEnvironmentInteractor.Environment = getEnvironment(coroutineDispatchers, getEnvironmentInteractor)
+        readEnvironmentInteractor: ReadEnvironmentInteractor,
+    ): ReadEnvironmentInteractor.Environment = readEnvironment(coroutineDispatchers, readEnvironmentInteractor)
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    protected open fun getEnvironment(
+    protected open fun readEnvironment(
         coroutineDispatchers: CoroutineDispatchers,
-        getEnvironmentInteractor: GetEnvironmentInteractor,
-    ): GetEnvironmentInteractor.Environment = runBlocking(coroutineDispatchers.io) { getEnvironmentInteractor() }
+        readEnvironmentInteractor: ReadEnvironmentInteractor,
+    ): ReadEnvironmentInteractor.Environment = runBlocking(coroutineDispatchers.io) { readEnvironmentInteractor() }
 }
