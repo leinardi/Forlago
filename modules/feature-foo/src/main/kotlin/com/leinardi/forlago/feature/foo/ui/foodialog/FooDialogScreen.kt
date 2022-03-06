@@ -66,6 +66,6 @@ fun FooDialogScreen(
 
 @Preview
 @Composable
-fun FooScreenPreview() {
+fun PreviewFooDialogScreen() {
     FooDialogScreen({})
 }

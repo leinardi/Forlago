@@ -21,10 +21,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
 import com.google.accompanist.swiperefresh.SwipeRefreshState
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 
 @Composable
 fun SwipeRefresh(
@@ -53,4 +55,12 @@ fun SwipeRefresh(
         clipIndicatorToPadding = clipIndicatorToPadding,
         content = content,
     )
+}
+
+@Preview
+@Composable
+fun PreviewSwipeRefresh() {
+    ForlagoTheme() {
+        SwipeRefresh(SwipeRefreshState(true), {}) {}
+    }
 }

@@ -31,6 +31,9 @@ After successfully forking the template you have to:
 
 TBD
 
+### Gradle modules' dependency graph
+<img src="/art/project.dot.png" width="800" align="middle"/>
+
 ## Static Analysis 🔍
 
 TBD

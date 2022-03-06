@@ -62,7 +62,7 @@ fun @PlaceholderName@DebugPage(
 
 @Preview
 @Composable
-fun @PlaceholderName@DebugPreview() {
+fun Preview@PlaceholderName@Debug() {
     @PlaceholderName@Theme {
         @PlaceholderName@DebugPage(State, Channel<Effect>().receiveAsFlow(), {})
     }

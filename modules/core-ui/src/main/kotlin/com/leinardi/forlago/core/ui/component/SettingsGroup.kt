@@ -66,7 +66,7 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
 
 @Preview
 @Composable
-internal fun SettingsGroupPreview() {
+internal fun PreviewSettingsGroup() {
     ForlagoTheme {
         SettingsGroup(
             title = { Text(text = "Title") },

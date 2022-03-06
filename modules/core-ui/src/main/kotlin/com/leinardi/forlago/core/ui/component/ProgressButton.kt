@@ -30,7 +30,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 
 @Composable
 fun ProgressButton(
@@ -64,4 +66,20 @@ fun ProgressButton(
             }
         },
     )
+}
+
+@Preview
+@Composable
+fun PreviewProgressButton() {
+    ForlagoTheme {
+        ProgressButton({}) { Text(text = "Progress button") }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewProgressButtonLoading() {
+    ForlagoTheme {
+        ProgressButton({}, loading = true) { Text(text = "Progress button") }
+    }
 }

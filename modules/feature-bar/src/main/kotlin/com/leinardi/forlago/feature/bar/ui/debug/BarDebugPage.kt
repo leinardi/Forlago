@@ -43,6 +43,6 @@ fun BarDebugPage(
 
 @Preview
 @Composable
-fun BarDebugPreview() {
+fun PreviewBarDebug() {
     BarDebugPage()
 }

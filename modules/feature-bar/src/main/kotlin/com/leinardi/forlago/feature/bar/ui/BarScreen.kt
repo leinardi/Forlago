@@ -94,6 +94,6 @@ fun BarScreen(
 
 @Preview
 @Composable
-fun BarScreenPreview() {
+fun PreviewBarScreen() {
     BarScreen(State("Preview"), {})
 }

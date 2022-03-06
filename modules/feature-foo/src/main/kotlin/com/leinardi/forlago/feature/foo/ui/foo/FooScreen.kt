@@ -125,6 +125,6 @@ fun FooScreen(
 
 @Preview
 @Composable
-fun FooScreenPreview() {
+fun PreviewFooScreen() {
     FooScreen(State("Preview", true), Channel<Effect>().receiveAsFlow(), {})
 }

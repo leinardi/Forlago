@@ -14,7 +14,7 @@
   enabled: true
 # Checks that CONSTANT (treated as const val from companion object or class level) is in non UPPER_SNAKE_CASE
 - name: CONSTANT_UPPERCASE
-  enabled: true
+  enabled: false # Detekt is already checking it
 # Checks that enum value is in non UPPER_SNAKE_CASE or non PascalCase depending on the config, UPPER_SNAKE_CASE by default
 - name: ENUM_VALUE
   enabled: true
@@ -424,7 +424,7 @@
 - name: TOO_MANY_LINES_IN_LAMBDA
   enabled: true
   configuration:
-    maxLambdaLength: 10 # max length of lambda without parameters
+    maxLambdaLength: 15 # max length of lambda without parameters # Custom
 # Checks that using unnecessary, custom label
 - name: CUSTOM_LABEL
   enabled: true

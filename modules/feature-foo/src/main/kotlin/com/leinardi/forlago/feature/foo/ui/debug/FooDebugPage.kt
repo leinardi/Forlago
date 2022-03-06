@@ -43,6 +43,6 @@ fun FooDebugPage(
 
 @Preview
 @Composable
-fun FooDebugPreview() {
+fun PreviewFooDebug() {
     FooDebugPage()
 }

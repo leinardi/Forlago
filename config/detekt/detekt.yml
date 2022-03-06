@@ -848,6 +848,8 @@ style:
       - '0'
       - '1'
       - '2'
+    ignoreAnnotated: # Custom
+      - 'Composable'
     ignoreHashCodeFunction: false # Custom
     ignorePropertyDeclaration: true # Custom
     ignoreLocalVariableDeclaration: false

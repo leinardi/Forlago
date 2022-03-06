@@ -100,7 +100,7 @@ internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
 
 @Preview
 @Composable
-fun SettingsIconPreview() {
+fun PreviewSettingsIcon() {
     ForlagoTheme {
         SettingsTileIcon {
             Icon(imageVector = Icons.Default.Star, contentDescription = "")
@@ -110,7 +110,7 @@ fun SettingsIconPreview() {
 
 @Preview
 @Composable
-fun SettingsIconPreviewEmpty() {
+fun PreviewSettingsIconEmpty() {
     ForlagoTheme {
         SettingsTileIcon()
     }
