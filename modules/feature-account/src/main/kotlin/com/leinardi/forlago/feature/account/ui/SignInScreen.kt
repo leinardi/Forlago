@@ -29,7 +29,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarResult
 import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -47,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.core.ui.component.OutlinedTextField
 import com.leinardi.forlago.core.ui.component.ProgressButton
+import com.leinardi.forlago.core.ui.component.TopAppBar
 import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
 import com.leinardi.forlago.feature.account.ui.SignInContract.Event
@@ -93,7 +93,7 @@ fun SignInScreen(
     }
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar = { TopAppBar(title = { Text("Account screen") }) },
+        topBar = { TopAppBar(title = "Account screen") },
         content = {
             Column(
                 modifier = Modifier
@@ -153,7 +153,7 @@ fun SignInScreen(
 
 @Preview
 @Composable
-fun AccountScreenPreview() {
+fun PreviewAccountScreen() {
     ForlagoTheme {
         SignInScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
     }

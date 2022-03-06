@@ -163,7 +163,7 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
 
 @Preview
 @Composable
-fun AccountDebugPreview() {
+fun PreviewAccountDebug() {
     AccountDebugPage(
         State("AccountName", "refreshToken", "accessToken", System.currentTimeMillis()),
         Channel<Effect>().receiveAsFlow(),

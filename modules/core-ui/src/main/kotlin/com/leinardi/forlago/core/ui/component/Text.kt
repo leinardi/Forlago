@@ -28,10 +28,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material.fade
 import com.google.accompanist.placeholder.material.placeholder
+import com.leinardi.forlago.core.ui.ext.default
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 
 @Composable
 fun Text(
@@ -55,9 +57,10 @@ fun Text(
 ) {
     androidx.compose.material.Text(
         text = text,
-        modifier = Modifier
-            .placeholder(visible = placeholder, highlight = PlaceholderHighlight.fade())
-            .then(modifier),
+        modifier = modifier.placeholder(
+            visible = placeholder,
+            highlight = PlaceholderHighlight.default(),
+        ),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,
@@ -73,4 +76,12 @@ fun Text(
         onTextLayout = onTextLayout,
         style = style,
     )
+}
+
+@Preview
+@Composable
+fun PreviewText() {
+    ForlagoTheme {
+        Text("Lorem ipsum")
+    }
 }

@@ -306,7 +306,7 @@ private fun Features(
 
 @Preview
 @Composable
-fun DebugScreenPreview() {
+fun PreviewDebugScreen() {
     val debugInfo = GetDebugInfoInteractor.DebugInfo(
         GetDebugInfoInteractor.DebugInfo.App(
             name = "App name",

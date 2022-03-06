@@ -148,6 +148,11 @@ tasks.register("projectDependencyGraph") {
         }
 
         println("Project module dependency graph created at ${dot.absolutePath}.png")
+
+        copy {
+            from "${dot.absolutePath}.png"
+            into rootProject.file("art")
+        }
     }
 }
 

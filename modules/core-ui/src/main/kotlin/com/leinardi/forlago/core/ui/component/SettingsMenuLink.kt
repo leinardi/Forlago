@@ -60,7 +60,7 @@ fun SettingsMenuLink(
             modifier = Modifier
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 64.dp)
-                .clickable(enabled = enabled) { onClick() }
+                .clickable(enabled = enabled, onClick = onClick)
                 .alpha(alpha),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -87,7 +87,7 @@ fun SettingsMenuLink(
 
 @Preview
 @Composable
-internal fun SettingsMenuLinkPreview() {
+internal fun PreviewSettingsMenuLink() {
     ForlagoTheme {
         SettingsMenuLink(
             icon = { Icon(imageVector = Icons.Default.Lock, contentDescription = "Lock") },
@@ -99,7 +99,7 @@ internal fun SettingsMenuLinkPreview() {
 
 @Preview
 @Composable
-internal fun SettingsMenuLinkActionPreview() {
+internal fun PreviewSettingsMenuLinkAction() {
     var rememberCheckBoxState by remember { mutableStateOf(true) }
     ForlagoTheme {
         SettingsMenuLink(

@@ -47,7 +47,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 
 @Composable
 fun OutlinedTextField(
@@ -63,7 +65,7 @@ fun OutlinedTextField(
     trailingIcon: @Composable (() -> Unit)? = null,
     helperMessage: String? = null,
     errorMessage: String? = null,
-    isError: Boolean = errorMessage != null,
+    error: Boolean = errorMessage != null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     passwordToggleEnabled: Boolean = false,
     keyboardOptions: KeyboardOptions = if (passwordToggleEnabled) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
@@ -89,7 +91,7 @@ fun OutlinedTextField(
 
     val textFieldTrailingIcon: @Composable (() -> Unit) = {
         when {
-            isError -> Icon(Icons.Filled.Error, null)
+            error -> Icon(Icons.Filled.Error, null)
             passwordToggleEnabled -> IconButton(onClick = {
                 passwordVisibility = !passwordVisibility
             }) {
@@ -110,7 +112,7 @@ fun OutlinedTextField(
             placeholder = placeholder,
             leadingIcon = leadingIcon,
             trailingIcon = textFieldTrailingIcon,
-            isError = isError,
+            isError = error,
             visualTransformation = passwordToggleVisualTransformation,
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
@@ -125,7 +127,7 @@ fun OutlinedTextField(
                 .defaultMinSize(minHeight = 16.dp)
                 .padding(start = 16.dp, end = 12.dp),
         ) {
-            if (isError) {
+            if (error) {
                 if (errorMessage != null) {
                     Text(
                         text = errorMessage,
@@ -146,5 +148,29 @@ fun OutlinedTextField(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewOutlinedTextField() {
+    ForlagoTheme {
+        OutlinedTextField(value = "input", onValueChange = {}, label = "Label")
+    }
+}
+
+@Preview
+@Composable
+fun PreviewOutlinedTextFieldEmpty() {
+    ForlagoTheme {
+        OutlinedTextField(value = "", onValueChange = {}, label = "Label")
+    }
+}
+
+@Preview
+@Composable
+fun PreviewOutlinedTextFieldErrorMessage() {
+    ForlagoTheme {
+        OutlinedTextField(value = "input", onValueChange = {}, label = "Label", errorMessage = "Error message")
     }
 }

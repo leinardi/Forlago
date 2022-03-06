@@ -29,6 +29,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -71,19 +72,17 @@ fun TopAppBar(
                 }
             },
             modifier = modifier,
-            navigationIcon = if (onNavigateUp != null) {
+            navigationIcon = onNavigateUp?.let {
                 {
                     IconButton(
-                        onClick = onNavigateUp,
+                        onClick = it,
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = "",
+                            contentDescription = null,
                         )
                     }
                 }
-            } else {
-                null
             },
             actions = actions,
             elevation = elevation,
@@ -108,8 +107,8 @@ fun TopAppBar(
 }
 
 @Composable
-@Preview(showBackground = false)
-fun SimpleAppBarWithNavigationIcon() {
+@Preview
+fun PreviewTopAppBarWithNavigationIcon() {
     ForlagoTheme {
         TopAppBar(
             title = "Page title",
@@ -118,12 +117,43 @@ fun SimpleAppBarWithNavigationIcon() {
 }
 
 @Composable
-@Preview(showBackground = false)
-fun SimpleAppBarWithSubtitle() {
+@Preview
+fun PreviewTopAppBarWithSubtitle() {
     ForlagoTheme {
         TopAppBar(
             title = "Page title",
             subtitle = "Page subtitle",
         ) { }
+    }
+}
+
+@Composable
+@Preview
+fun PreviewTopAppBarWithAction() {
+    ForlagoTheme {
+        TopAppBar(
+            title = "Page title",
+            actions = {
+                IconButton(onClick = {}) {
+                    Icon(Icons.Default.Share, contentDescription = "")
+                }
+            },
+        )
+    }
+}
+
+@Composable
+@Preview
+fun PreviewTopAppBarWithNavigationIconAndAction() {
+    ForlagoTheme {
+        TopAppBar(
+            title = "Page title",
+            actions = {
+                IconButton(onClick = {}) {
+                    Icon(Icons.Default.Share, contentDescription = "")
+                }
+            },
+            onNavigateUp = { },
+        )
     }
 }

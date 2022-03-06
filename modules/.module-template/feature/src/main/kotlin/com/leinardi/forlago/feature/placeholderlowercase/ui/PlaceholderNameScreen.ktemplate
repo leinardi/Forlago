@@ -120,7 +120,7 @@ fun @PlaceholderName@Screen(
 
 @Preview
 @Composable
-fun @PlaceholderName@ScreenPreview() {
+fun Preview@PlaceholderName@Screen() {
     @PlaceholderName@Theme {
         @PlaceholderName@Screen(@PlaceholderName@Contract.State("Preview"), Channel<@PlaceholderName@Contract.Effect>().receiveAsFlow()) {}
     }
