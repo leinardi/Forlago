@@ -58,9 +58,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
-fun SignInScreen() {
-    val viewModel = hiltViewModel<SignInViewModel>()
-
+fun SignInScreen(viewModel: SignInViewModel = hiltViewModel()) {
     SignInScreen(
         state = viewModel.viewState.value,
         sendEvent = { viewModel.onUiEvent(it) },

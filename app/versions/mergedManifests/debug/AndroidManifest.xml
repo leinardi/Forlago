@@ -281,6 +281,12 @@
         <receiver
             android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
             android:exported="false" />
+
+        <activity
+            android:name="com.jakewharton.processphoenix.ProcessPhoenix"
+            android:exported="false"
+            android:process=":phoenix"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 
 </manifest>

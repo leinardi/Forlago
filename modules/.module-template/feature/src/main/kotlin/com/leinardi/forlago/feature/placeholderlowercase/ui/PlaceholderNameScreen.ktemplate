@@ -50,9 +50,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
-fun @PlaceholderName@Screen() {
-    val viewModel = hiltViewModel<@PlaceholderName@ViewModel>()
-
+fun @PlaceholderName@Screen(viewModel: @PlaceholderName@ViewModel = hiltViewModel()) {
     @PlaceholderName@Screen(
         state = viewModel.viewState.value,
         sendEvent = { viewModel.onUiEvent(it) },

@@ -29,9 +29,13 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.ExposedDropdownMenuBox
+import androidx.compose.material.ExposedDropdownMenuDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Tab
@@ -41,7 +45,11 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -50,12 +58,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
+import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.core.ui.component.BottomNavigation
 import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.core.ui.component.ScrollableTabRow
 import com.leinardi.forlago.core.ui.component.SettingsGroup
 import com.leinardi.forlago.core.ui.component.SettingsMenuLink
 import com.leinardi.forlago.core.ui.component.TopAppBar
+import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 import com.leinardi.forlago.core.ui.theme.ForlagoTypography
 import com.leinardi.forlago.feature.debug.R
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
@@ -112,6 +122,7 @@ fun DebugScreen(
                             ),
                     )
                     Options -> Options(
+                        state = state,
                         sendEvent = sendEvent,
                         modifier = modifier
                             .background(MaterialTheme.colors.surface)
@@ -189,12 +200,58 @@ private fun Info(
 
 @Composable
 private fun Options(
+    state: State,
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.verticalScroll(rememberScrollState()),
     ) {
+        SettingsGroup(
+            title = { Text(text = "Environment") },
+        ) {
+            var expanded by remember { mutableStateOf(false) }
+            // We want to react on tap/press on TextField to show menu
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                },
+            ) {
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    readOnly = true,
+                    value = state.selectedEnvironment.name,
+                    onValueChange = { },
+                    label = { Text("Select an environment") },
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(
+                            expanded = expanded,
+                        )
+                    },
+                    colors = ExposedDropdownMenuDefaults.outlinedTextFieldColors(),
+                )
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = {
+                        expanded = false
+                    },
+                ) {
+                    state.environments.forEach { selectionOption ->
+                        DropdownMenuItem(
+                            onClick = {
+                                sendEvent(Event.OnEnvironmentSelected(selectionOption))
+                                expanded = false
+                            },
+                        ) {
+                            Text(text = selectionOption.name)
+                        }
+                    }
+                }
+            }
+        }
         SettingsGroup(
             title = { Text(text = "GraphQL") },
         ) {
@@ -307,23 +364,25 @@ private fun Features(
 @Preview
 @Composable
 fun PreviewDebugScreen() {
-    val debugInfo = GetDebugInfoInteractor.DebugInfo(
-        GetDebugInfoInteractor.DebugInfo.App(
-            name = "App name",
-            versionName = "versionName",
-            versionCode = 123L,
-            packageName = "packageName",
-        ),
-        GetDebugInfoInteractor.DebugInfo.Device(
-            manufacturer = Build.MANUFACTURER,
-            model = Build.MODEL,
-            resolutionPx = "resolutionPx",
-            resolutionDp = "resolutionDp",
-            density = 4f,
-            scaledDensity = 4f,
-            densityDpi = 640,
-            apiLevel = Build.VERSION.SDK_INT,
-        ),
-    )
-    DebugScreen(State(debugInfo, emptyList()), {})
+    ForlagoTheme {
+        val debugInfo = GetDebugInfoInteractor.DebugInfo(
+            GetDebugInfoInteractor.DebugInfo.App(
+                name = "App name",
+                versionName = "versionName",
+                versionCode = 123L,
+                packageName = "packageName",
+            ),
+            GetDebugInfoInteractor.DebugInfo.Device(
+                manufacturer = Build.MANUFACTURER,
+                model = Build.MODEL,
+                resolutionPx = "resolutionPx",
+                resolutionDp = "resolutionDp",
+                density = 4f,
+                scaledDensity = 4f,
+                densityDpi = 640,
+                apiLevel = Build.VERSION.SDK_INT,
+            ),
+        )
+        DebugScreen(State(debugInfo, emptyList(), ReadEnvironmentInteractor.DEFAULT_ENVIRONMENT), {})
+    }
 }

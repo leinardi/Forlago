@@ -17,17 +17,27 @@
 package com.leinardi.forlago.core.android.interactor.android
 
 import android.app.Application
-import android.content.pm.PackageManager
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class GetAppVersionNameInteractor @Inject constructor(
+@Singleton
+class CopyToClipboardInteractor @Inject constructor(
     private val application: Application,
+    private val dispatchers: CoroutineDispatchers,
 ) {
-    operator fun invoke(): String? = try {
-        application.packageManager.getPackageInfo(application.packageName, 0).versionName
-    } catch (e: PackageManager.NameNotFoundException) {
-        Timber.e(e)
-        null
+    private val clipboardManager by lazy { application.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
+
+    suspend operator fun invoke(text: String, description: String = "") {
+        withContext(dispatchers.io) {
+            val clipData = ClipData.newPlainText(description, text)
+            Timber.d("Copying ${clipData.getItemAt(0).text} to clipboard")
+            clipboardManager.setPrimaryClip(clipData)
+        }
     }
 }

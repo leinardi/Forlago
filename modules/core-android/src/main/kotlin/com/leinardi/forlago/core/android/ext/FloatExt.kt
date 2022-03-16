@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-    versionCatalogs {
-        libs {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
+package com.leinardi.forlago.core.android.ext
+
+import android.content.res.Resources
+import kotlin.math.roundToInt
+
+val Float.toDp: Float
+    get() = this / Resources.getSystem().displayMetrics.density
+
+val Float.toPx: Float
+    get() = this * Resources.getSystem().displayMetrics.density
+
+val Float.toPxSize: Int
+    get() = this.toPx.roundToInt()

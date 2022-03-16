@@ -39,5 +39,6 @@ dependencies {
     implementation libs.androidx.security
     implementation libs.androidx.startup
     implementation libs.hilt.android
+    implementation libs.process.phoenix
     kapt libs.hilt.compiler
 }

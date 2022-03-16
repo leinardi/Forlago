@@ -30,7 +30,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.NavigatorEvent
 import com.leinardi.forlago.core.ui.theme.ForlagoTheme
@@ -57,13 +56,11 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         setContent {
             val navHostController: NavHostController = rememberNavController().also { this.navHostController = it }
             ForlagoTheme {
-                ProvideWindowInsets {
-                    ForlagoMainScreen(
-                        startDestination = viewModel.viewState.value.startDestination,
-                        navHostController = navHostController,
-                        forlagoNavigator = forlagoNavigator,
-                    )
-                }
+                ForlagoMainScreen(
+                    startDestination = viewModel.viewState.value.startDestination,
+                    navHostController = navHostController,
+                    forlagoNavigator = forlagoNavigator,
+                )
             }
         }
         viewModel.onUiEvent(OnIntentReceived(intent))
@@ -89,14 +86,15 @@ fun ForlagoMainScreen(
 ) {
     val activity = LocalContext.current as Activity
     LaunchedEffect(navHostController) {
-        forlagoNavigator.destinations.onEach {
-            when (val event = it) {
+        forlagoNavigator.destinations.onEach { event ->
+            Timber.d("backQueue = ${navHostController.backQueue.map { "route = ${it.destination.route}" }}")
+            when (event) {
                 is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
-                is NavigatorEvent.NavigateBack -> activity.onBackPressed()
+                is NavigatorEvent.NavigateBack -> activity.onBackPressed().also { Timber.d("NavigateBack") }
                 is NavigatorEvent.Directions -> navHostController.navigate(
                     event.destination,
                     event.builder,
-                )
+                ).also { Timber.d("Navigate to ${event.destination}") }
             }
         }.launchIn(this)
     }

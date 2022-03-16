@@ -41,7 +41,6 @@ dependencies {
     implementation project(':modules:core-android')
     implementation project(':modules:core-i18n')
     api libs.accompanist.flowlayout
-    api libs.accompanist.insets
     api libs.accompanist.pager
     api libs.accompanist.pager.indicators
     api libs.accompanist.placeholder
