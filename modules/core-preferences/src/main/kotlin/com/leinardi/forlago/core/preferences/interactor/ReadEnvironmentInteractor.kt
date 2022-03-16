@@ -24,7 +24,7 @@ import javax.inject.Inject
 class ReadEnvironmentInteractor @Inject constructor(
     @App private val dataStoreRepository: DataStoreRepository,
 ) {
-    suspend operator fun invoke(): Environment = Environment.valueOf(dataStoreRepository.readValue(ENVIRONMENT_PREF_KEY, Environment.STAGE.name))
+    suspend operator fun invoke(): Environment = Environment.valueOf(dataStoreRepository.readValue(ENVIRONMENT_PREF_KEY, DEFAULT_ENVIRONMENT.name))
 
     enum class Environment(val restUrl: String, val graphQlUrl: String) {
         DEV("https://api.dev.example.com", "https://apollo-fullstack-tutorial.herokuapp.com/graphql"),
@@ -34,6 +34,7 @@ class ReadEnvironmentInteractor @Inject constructor(
     }
 
     companion object {
+        val DEFAULT_ENVIRONMENT = Environment.STAGE
         val ENVIRONMENT_PREF_KEY = stringPreferencesKey("environment")
     }
 }

@@ -347,7 +347,7 @@ exceptions:
       - 'RuntimeException'
       - 'Throwable'
 
-formatting:
+formatting: # KtLint
   active: true
   android: true # Custom
   autoCorrect: true
@@ -430,7 +430,7 @@ formatting:
     active: true
     autoCorrect: true
   NoWildcardImports:
-    active: true
+    active: false # Custom duplicate of WildcardImport
   PackageName:
     active: false
     autoCorrect: true

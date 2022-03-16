@@ -33,21 +33,39 @@ class IsJwtExpiredInteractorTest {
     private val isJwtExpiredInteractor = IsJwtExpiredInteractor(clock, getJwtExpiresAtInteractor)
 
     @Test
-    fun `should return false when current time is before the expires at`() {
+    fun `GIVEN current time is before the expires at WHEN call isJwtExpiredInteractor THEN return false`() {
+        // Given
         every { clock.millis() } returns TimeUnit.SECONDS.toMillis(EXPIRES_AT) - 1
-        assertFalse(isJwtExpiredInteractor(VALID_JWT))
+
+        // When
+        val isExpired = isJwtExpiredInteractor(VALID_JWT)
+
+        // Then
+        assertFalse(isExpired)
     }
 
     @Test
-    fun `should return true when current time is equal the expires at`() {
+    fun `GIVEN current time is equal the expires at WHEN call isJwtExpiredInteractor THEN return true`() {
+        // Given
         every { clock.millis() } returns TimeUnit.SECONDS.toMillis(EXPIRES_AT)
-        assertTrue(isJwtExpiredInteractor(VALID_JWT))
+
+        // When
+        val isExpired = isJwtExpiredInteractor(VALID_JWT)
+
+        // Then
+        assertTrue(isExpired)
     }
 
     @Test
-    fun `should return true when current time is after the expires at`() {
+    fun `GIVEN current time is after the expires at WHEN call isJwtExpiredInteractor THEN return true`() {
+        // Given
         every { clock.millis() } returns TimeUnit.SECONDS.toMillis(EXPIRES_AT) + 1
-        assertTrue(isJwtExpiredInteractor(VALID_JWT))
+
+        // When
+        val isExpired = isJwtExpiredInteractor(VALID_JWT)
+
+        // Then
+        assertTrue(isExpired)
     }
 
     companion object {

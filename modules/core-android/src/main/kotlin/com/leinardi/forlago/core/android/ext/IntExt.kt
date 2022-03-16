@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-dependencyResolutionManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-    versionCatalogs {
-        libs {
-            from(files("../gradle/libs.versions.toml"))
-        }
-    }
-}
+package com.leinardi.forlago.core.android.ext
+
+val Int.toDp: Float
+    get() = this.toFloat().toDp
+
+val Int.toPx: Float
+    get() = this.toFloat().toPx
+
+val Int.toPxSize: Int
+    get() = this.toFloat().toPxSize
+
+val Int.toCoercedPercentageFloat: Float
+    get() = (this.toFloat() / 100).coerceIn(0f, 1f)
+
+val Int.getPercentageString: String
+    get() = "$this%"

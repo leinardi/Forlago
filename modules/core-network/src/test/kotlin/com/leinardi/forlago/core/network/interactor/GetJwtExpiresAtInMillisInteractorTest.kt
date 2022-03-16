@@ -26,9 +26,16 @@ class GetJwtExpiresAtInMillisInteractorTest {
     private val getJwtExpiresAtInteractor = GetJwtExpiresAtInMillisInteractor(NetworkModule.provideJson())
 
     @Test
-    fun `should provide the expected JWT expires at time in millis`() {
+    fun `GIVEN valid JWT WHEN call getJwtExpiresAtInteractor THEN returns JWT expires at time in millis`() {
+        // Given
+        val jwt = VALID_JWT
         val expected = TimeUnit.SECONDS.toMillis(EXPIRES_AT)
-        assertEquals(expected, getJwtExpiresAtInteractor(VALID_JWT))
+
+        // When
+        val expiresAt = getJwtExpiresAtInteractor(jwt)
+
+        // Then
+        assertEquals(expected, expiresAt)
     }
 
     companion object {

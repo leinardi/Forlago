@@ -27,6 +27,7 @@ android {
 }
 
 dependencies {
+    implementation project(':modules:core-android')
     api libs.androidx.navigation.compose
     implementation libs.hilt.android
     implementation libs.hilt.navigation.compose

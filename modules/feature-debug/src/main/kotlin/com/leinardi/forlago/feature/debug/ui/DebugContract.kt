@@ -17,6 +17,7 @@
 package com.leinardi.forlago.feature.debug.ui
 
 import androidx.compose.runtime.Composable
+import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.core.ui.base.ViewEffect
 import com.leinardi.forlago.core.ui.base.ViewEvent
 import com.leinardi.forlago.core.ui.base.ViewState
@@ -29,6 +30,8 @@ object DebugContract {
     data class State(
         val debugInfo: GetDebugInfoInteractor.DebugInfo,
         val featureList: List<Feature>,
+        val selectedEnvironment: ReadEnvironmentInteractor.Environment,
+        val environments: Array<ReadEnvironmentInteractor.Environment> = ReadEnvironmentInteractor.Environment.values(),
         val bottomNavigationItems: List<DebugViewModel.DebugBottomNavigationItem> = listOf(
             Info,
             Options,
@@ -44,6 +47,7 @@ object DebugContract {
 
     sealed class Event : ViewEvent {
         data class OnBottomNavigationItemSelected(val selectedNavigationItem: DebugViewModel.DebugBottomNavigationItem) : Event()
+        data class OnEnvironmentSelected(val environment: ReadEnvironmentInteractor.Environment) : Event()
         object OnClearApolloCacheClicked : Event()
         object OnForceCrashClicked : Event()
         object OnUpButtonClicked : Event()

@@ -39,7 +39,7 @@ fun ProgressButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     loading: Boolean = false,
-    enabled: Boolean = !loading,
+    enabled: Boolean = true,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     elevation: ButtonElevation? = null,
     shape: Shape = MaterialTheme.shapes.small,
@@ -51,7 +51,7 @@ fun ProgressButton(
     Button(
         onClick = onClick,
         modifier = modifier,
-        enabled = enabled,
+        enabled = enabled && !loading,
         interactionSource = interactionSource,
         elevation = elevation,
         shape = shape,
