@@ -20,6 +20,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.feature'
     resourcePrefix 'feature_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-feature-consumer-rules.pro"

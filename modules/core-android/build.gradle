@@ -20,6 +20,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.android'
     resourcePrefix 'android_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-android-consumer-rules.pro"

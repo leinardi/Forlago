@@ -15,8 +15,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.leinardi.forlago">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application tools:ignore="AllowBackup,MissingApplicationIcon">
         <meta-data

@@ -22,6 +22,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.network'
     resourcePrefix 'network_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-network-consumer-rules.pro"
@@ -38,13 +39,14 @@ apollo {
 
 dependencies {
     implementation project(':modules:core-android')
+    implementation project(':modules:core-i18n')
     implementation project(':modules:core-navigation')
     implementation project(':modules:core-preferences')
     api libs.coroutines.android
     api libs.coroutines.core
     api libs.kotlinx.serialization
     api libs.retrofit
-    implementation libs.apollo
+    api libs.apollo
     implementation libs.apollo.cache
     implementation libs.apollo.cache.sqlite
     implementation libs.hilt.android

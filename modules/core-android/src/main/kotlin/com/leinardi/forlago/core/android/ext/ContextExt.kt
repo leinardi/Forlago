@@ -14,24 +14,12 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'forlago.android-core-conventions'
-    id 'com.google.dagger.hilt.android'
-}
+package com.leinardi.forlago.core.android.ext
 
-android {
-    namespace 'com.leinardi.forlago.core.preferences'
-    resourcePrefix 'preferences_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-preferences-consumer-rules.pro"
-    }
-}
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 
-dependencies {
-    implementation project(':modules:core-android')
-    api libs.androidx.datastore.preferences
-    implementation libs.androidx.datastore
-    implementation libs.hilt.android
-    implementation libs.timber
-    kapt libs.hilt.compiler
+fun Context.openUriInBrowser(uri: Uri) {
+    startActivity(Intent(Intent.ACTION_VIEW, uri))
 }

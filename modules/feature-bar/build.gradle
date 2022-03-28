@@ -19,6 +19,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.feature.bar'
     resourcePrefix 'bar_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-bar-consumer-rules.pro"

@@ -19,6 +19,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.i18n'
     resourcePrefix 'i18n_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-i18n-consumer-rules.pro"

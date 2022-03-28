@@ -19,6 +19,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.feature.debug'
     resourcePrefix 'debug_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-debug-consumer-rules.pro"
