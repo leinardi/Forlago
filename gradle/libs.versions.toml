@@ -2,9 +2,9 @@
 # https://docs.gradle.org/current/userguide/platforms.html
 
 [versions]
-aboutlibraries = "10.0.0"
-accompanist = "0.24.4-alpha"
-androidx-compose = "1.2.0-alpha05"
+aboutlibraries = "10.0.1"
+accompanist = "0.24.5-alpha"
+androidx-compose = "1.2.0-alpha06"
 androidx-datastore = "1.0.0"
 androidx-lifecycle = "2.4.1"
 androidx-material = "1.4.0"
@@ -51,7 +51,7 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androi
 androidx-compose-uiTest = { module = "androidx.compose.ui:ui-test", version.ref = "androidx-compose" }
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version = "1.0.0" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version = "1.7.0" }
-androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version = "1.0.0-beta01" }
+androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version = "1.0.0-beta02" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx-datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
@@ -86,9 +86,9 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 desugar = { module = "com.android.tools:desugar_jdk_libs", version = "1.1.5" }
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version = "20.1.0" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version = "20.1.2" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.2.9" }
-firebase-perf = { module = "com.google.firebase:firebase-perf-ktx", version = "20.0.4" }
+firebase-perf = { module = "com.google.firebase:firebase-perf-ktx", version = "20.0.6" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
@@ -121,14 +121,14 @@ plugin-androidcachefix = { module = "gradle.plugin.org.gradle.android:android-ca
 plugin-androidx-navigation-safeargs = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 plugin-appversioning = { module = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin", version = "1.0.0" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-plugin-easylauncher = { module = "com.project.starter:easylauncher", version = "5.0.0" }
+plugin-easylauncher = { module = "com.project.starter:easylauncher", version = "5.0.1" }
 plugin-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "2.8.0" }
 plugin-firebase-perf = { module = "com.google.firebase:perf-plugin", version = "1.4.1" }
 plugin-google-services = { module = "com.google.gms:google-services", version = "4.3.10" }
 plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 plugin-jdkdesugar = { module = "com.android.tools:desugar_jdk_libs", version = "1.1.5" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-ruler = { module = "com.spotify.ruler:ruler-gradle-plugin", version = "1.1.1" }
+plugin-ruler = { module = "com.spotify.ruler:ruler-gradle-plugin", version = "1.2.0" }
 plugin-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "5.15.0" }
 plugin-versionsgradle = { module = "com.github.ben-manes:gradle-versions-plugin", version = "0.39.0" }
 plugin-violation = { module = "se.bjurr.violations:violation-comments-to-github-gradle-plugin", version = "1.68.3" }

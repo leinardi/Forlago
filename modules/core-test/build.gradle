@@ -19,6 +19,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.test'
     resourcePrefix 'test_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-test-consumer-rules.pro"

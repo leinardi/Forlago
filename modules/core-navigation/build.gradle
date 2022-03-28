@@ -20,6 +20,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.navigation'
     resourcePrefix 'navigation_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-navigation-consumer-rules.pro"

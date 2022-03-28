@@ -20,6 +20,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.logging'
     resourcePrefix 'logging_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-logging-consumer-rules.pro"

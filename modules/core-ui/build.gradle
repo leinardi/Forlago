@@ -20,6 +20,7 @@ plugins {
 }
 
 android {
+    namespace 'com.leinardi.forlago.core.ui'
     resourcePrefix 'ui_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-ui-consumer-rules.pro"
