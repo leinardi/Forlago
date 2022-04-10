@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            val navHostController: NavHostController = rememberNavController().also { this.navHostController = it }
+            navHostController = rememberNavController()
             ForlagoTheme {
                 ForlagoMainScreen(
                     startDestination = viewModel.viewState.value.startDestination,

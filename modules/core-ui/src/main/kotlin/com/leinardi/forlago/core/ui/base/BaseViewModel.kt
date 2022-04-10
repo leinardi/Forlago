@@ -23,7 +23,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
@@ -42,11 +43,9 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
     val effect = _effect.receiveAsFlow()
 
     init {
-        viewModelScope.launch {
-            _event.collect {
-                handleEvent(it)
-            }
-        }
+        _event.onEach {
+            handleEvent(it)
+        }.launchIn(viewModelScope)
     }
 
     abstract fun provideInitialState(): UiState

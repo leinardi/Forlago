@@ -18,4 +18,4 @@ package com.leinardi.forlago.core.network.ext
 
 import com.apollographql.apollo3.api.Optional
 
-fun <T> T?.toOptional(): Optional<T> = if (this != null) Optional.Present(this) else Optional.Absent
+fun <T> T?.toOptional(): Optional<T> = Optional.presentIfNotNull(this)

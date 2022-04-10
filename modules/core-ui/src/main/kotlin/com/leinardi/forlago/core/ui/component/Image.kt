@@ -56,8 +56,7 @@ fun Image(
     androidx.compose.foundation.Image(
         painter = painter,
         contentDescription = contentDescription,
-        modifier = Modifier
-            .then(modifier)  // The placeholder modifier must be added after the clip one to be rendered correctly
+        modifier = modifier  // The placeholder modifier must be added after the clip one to be rendered correctly
             .placeholder(
                 visible = placeholder || painter.state is ImagePainter.State.Loading,
                 highlight = PlaceholderHighlight.default(),
