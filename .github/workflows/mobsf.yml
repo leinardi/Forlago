@@ -17,11 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup JDK 11.0.11
-        uses: actions/setup-java@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
-          java-version: 11.0.11
+          java-version: 11.0.14
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload build outputs
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build-outputs
           path: app/build/outputs
@@ -76,13 +76,13 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
 
       - name: Upload MobSF Analysis PDF Result
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mobsf-report.pdf
           path: mobsf-report.pdf
 
       - name: Upload MobSF Analysis JSON Result
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: mobsf-report.json
           path: mobsf-report.json
