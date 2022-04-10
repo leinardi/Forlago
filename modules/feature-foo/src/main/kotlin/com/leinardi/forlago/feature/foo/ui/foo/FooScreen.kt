@@ -85,11 +85,16 @@ fun FooScreen(
         modifier = modifier,
         scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = stringResource(R.string.i18n_foo_screen_title)) },
-        content = {
+        content = { scaffoldPadding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(
+                        start = 16.dp,
+                        top = scaffoldPadding.calculateTopPadding() + 16.dp,
+                        end = 16.dp,
+                        bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
+                    )
                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {

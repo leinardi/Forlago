@@ -49,9 +49,9 @@ android {
         targetCompatibility config.android.javaVersion
     }
     kotlinOptions {
-        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
-        freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
-        freeCompilerArgs += '-Xopt-in=kotlinx.coroutines.FlowPreview'
+        freeCompilerArgs += '-opt-in=kotlin.RequiresOptIn'
+        freeCompilerArgs += '-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi'
+        freeCompilerArgs += '-opt-in=kotlinx.coroutines.FlowPreview'
         jvmTarget = config.android.javaVersion
         useIR = true
     }

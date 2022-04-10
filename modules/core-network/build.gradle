@@ -28,7 +28,7 @@ android {
         consumerProguardFiles "$projectDir/proguard-network-consumer-rules.pro"
     }
     kotlinOptions {
-        freeCompilerArgs += '-Xopt-in=kotlinx.serialization.ExperimentalSerializationApi'
+        freeCompilerArgs += '-opt-in=kotlinx.serialization.ExperimentalSerializationApi'
     }
 }
 
