@@ -61,6 +61,8 @@ dependencies {
     api libs.androidx.paging
     api libs.coil.compose
     api libs.material
+    debugApi libs.androidx.customview  // Workaround for https://issuetracker.google.com/issues/227767363
+    debugApi libs.androidx.customview.poolingcontainer  // Workaround for https://issuetracker.google.com/issues/227767363
     implementation libs.hilt.android
     kapt libs.hilt.compiler
 }
