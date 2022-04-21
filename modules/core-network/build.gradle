@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 /*
  * Copyright 2022 Roberto Leinardi.
  *
@@ -55,6 +57,11 @@ dependencies {
     implementation libs.timber
     kapt libs.hilt.compiler
     kaptAndroidTest libs.hilt.android.compiler
+}
+
+// Workaround for https://github.com/detekt/detekt/issues/4743
+tasks.withType(Detekt).configureEach {
+    exclude("com/leinardi/forlago/core/network/graphql/**/*.kt")
 }
 
 tasks.register("refreshGraphQlSchema", Exec) {

@@ -60,7 +60,7 @@ fun SwipeRefresh(
 @Preview
 @Composable
 fun PreviewSwipeRefresh() {
-    ForlagoTheme() {
+    ForlagoTheme {
         SwipeRefresh(SwipeRefreshState(true), {}) {}
     }
 }

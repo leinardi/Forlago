@@ -49,11 +49,11 @@ class GetAppUpdateInfoInteractor @Inject constructor(
                         .also { message = "DeveloperTriggeredUpdateInProgress" }
                     UpdateAvailability.UPDATE_AVAILABLE -> when {
                         /*
-                     * To determine priority, Google Play uses an integer value between 0 and 5, with 0 being the default and 5 being the highest
-                     * priority. To set the priority for an update, use the inAppUpdatePriority field under Edits.tracks.releases in the Google Play
-                     * Developer API. All newly-added versions in the release are considered to be the same priority as the release. Priority can
-                     * only be set when rolling out a new release and cannot be changed later.
-                     */
+                         * To determine priority, Google Play uses an integer value between 0 and 5, with 0 being the default and 5 being the highest
+                         * priority. To set the priority for an update, use the inAppUpdatePriority field under Edits.tracks.releases in the
+                         * Google Play Developer API. All newly-added versions in the release are considered to be the same priority as the release.
+                         * Priority can only be set when rolling out a new release and cannot be changed later.
+                         */
                         priority in 0..1 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.LowPriorityUpdateAvailable(appUpdateInfo)
                             .also { message = "LowPriorityUpdateAvailable" }
                         priority in 2..3 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.FlexibleUpdateAvailable(appUpdateInfo)
