@@ -16,7 +16,7 @@
 
 <resources>
 
-    <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen.IconBackground">
+    <style name="Ui.Theme.SplashScreen" parent="Theme.AppCompat.DayNight">
         <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago.NoActionBar</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ui_ic_launcher_foreground</item>
         <item name="windowSplashScreenBackground">@color/ui_ic_launcher_background</item>

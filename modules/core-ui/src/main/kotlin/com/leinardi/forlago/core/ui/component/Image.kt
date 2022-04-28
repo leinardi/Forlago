@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
 import coil.annotation.ExperimentalCoilApi
-import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
@@ -58,7 +57,7 @@ fun Image(
         contentDescription = contentDescription,
         modifier = modifier  // The placeholder modifier must be added after the clip one to be rendered correctly
             .placeholder(
-                visible = placeholder || painter.state is ImagePainter.State.Loading,
+                visible = placeholder,
                 highlight = PlaceholderHighlight.default(),
             ),
         alignment = alignment,
