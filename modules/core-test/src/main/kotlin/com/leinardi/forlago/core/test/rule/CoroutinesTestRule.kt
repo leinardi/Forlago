@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.core.test.runner
+package com.leinardi.forlago.core.test.rule
 
-import android.app.Application
-import android.content.Context
-import androidx.test.runner.AndroidJUnitRunner
-import dagger.hilt.android.testing.HiltTestApplication
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 
-class HiltTestRunner : AndroidJUnitRunner() {
-    override fun newApplication(
-        cl: ClassLoader?,
-        className: String?,
-        context: Context?,
-    ): Application = super.newApplication(cl, HiltTestApplication::class.java.name, context)
+class CoroutinesTestRule : TestWatcher() {
+    override fun starting(description: Description?) {
+        Dispatchers.setMain(StandardTestDispatcher())
+    }
+
+    override fun finished(description: Description) {
+        Dispatchers.resetMain()
+    }
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.core.test.rule
+package com.leinardi.forlago.core.test.rule
 
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockResponse
