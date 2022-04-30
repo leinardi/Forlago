@@ -41,7 +41,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRowDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -60,7 +59,6 @@ import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
 import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.core.ui.component.BottomNavigation
-import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.core.ui.component.ScrollableTabRow
 import com.leinardi.forlago.core.ui.component.SettingsGroup
 import com.leinardi.forlago.core.ui.component.SettingsMenuLink
@@ -93,77 +91,69 @@ fun DebugScreen(
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val scaffoldState = rememberScaffoldState()
-    CompositionLocalProvider(
-        LocalSnackbarHostState provides scaffoldState.snackbarHostState,
-    ) {
-        Scaffold(
-            modifier = modifier,
-            scaffoldState = scaffoldState,
-            topBar = {
-                TopAppBar(
-                    title = stringResource(R.string.debug_screen),
-                    onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
-                    elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBar(
+                title = stringResource(R.string.debug_screen),
+                onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
+                elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
+            )
+        },
+        content = { scaffoldPadding ->
+            when (state.selectedNavigationItem) {
+                Info -> Info(
+                    state = state,
+                    modifier = modifier
+                        .background(MaterialTheme.colors.surface)
+                        .fillMaxSize()
+                        .padding(
+                            top = scaffoldPadding.calculateTopPadding(),
+                            bottom = scaffoldPadding.calculateBottomPadding(),
+                        ),
                 )
-            },
-            content = { innerPadding ->
-                when (state.selectedNavigationItem) {
-                    Info -> Info(
-                        state = state,
-                        modifier = modifier
-                            .background(MaterialTheme.colors.surface)
-                            .fillMaxSize()
-                            .padding(
-                                start = 0.dp,
-                                end = 0.dp,
-                                bottom = innerPadding.calculateBottomPadding(),
-                                top = innerPadding.calculateTopPadding(),
-                            ),
-                    )
-                    Options -> Options(
-                        state = state,
-                        sendEvent = sendEvent,
-                        modifier = modifier
-                            .background(MaterialTheme.colors.surface)
-                            .fillMaxSize()
-                            .padding(
-                                start = 0.dp,
-                                end = 0.dp,
-                                bottom = innerPadding.calculateBottomPadding(),
-                                top = innerPadding.calculateTopPadding(),
-                            ),
-                    )
-                    Features -> Features(
-                        state = state,
-                        modifier = modifier
-                            .background(MaterialTheme.colors.surface)
-                            .fillMaxSize()
-                            .padding(
-                                start = 0.dp,
-                                end = 0.dp,
-                                bottom = innerPadding.calculateBottomPadding(),
-                                top = innerPadding.calculateTopPadding(),
-                            ),
+                Options -> Options(
+                    state = state,
+                    sendEvent = sendEvent,
+                    modifier = modifier
+                        .background(MaterialTheme.colors.surface)
+                        .fillMaxSize()
+                        .padding(
+                            start = 0.dp,
+                            end = 0.dp,
+                            bottom = scaffoldPadding.calculateBottomPadding(),
+                            top = scaffoldPadding.calculateTopPadding(),
+                        ),
+                )
+                Features -> Features(
+                    state = state,
+                    modifier = modifier
+                        .background(MaterialTheme.colors.surface)
+                        .fillMaxSize()
+                        .padding(
+                            start = 0.dp,
+                            end = 0.dp,
+                            bottom = scaffoldPadding.calculateBottomPadding(),
+                            top = scaffoldPadding.calculateTopPadding(),
+                        ),
+                )
+            }
+        },
+        bottomBar = {
+            BottomNavigation {
+                state.bottomNavigationItems.forEachIndexed { index, screen ->
+                    BottomNavigationItem(
+                        icon = { Icon(screen.icon, screen.label) },
+                        label = { Text(screen.label) },
+                        selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
+                        onClick = {
+                            sendEvent(Event.OnBottomNavigationItemSelected(state.bottomNavigationItems[index]))
+                        },
                     )
                 }
-            },
-            bottomBar = {
-                BottomNavigation {
-                    state.bottomNavigationItems.forEachIndexed { index, screen ->
-                        BottomNavigationItem(
-                            icon = { Icon(screen.icon, screen.label) },
-                            label = { Text(screen.label) },
-                            selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
-                            onClick = {
-                                sendEvent(Event.OnBottomNavigationItemSelected(state.bottomNavigationItems[index]))
-                            },
-                        )
-                    }
-                }
-            },
-        )
-    }
+            }
+        },
+    )
 }
 
 @Composable

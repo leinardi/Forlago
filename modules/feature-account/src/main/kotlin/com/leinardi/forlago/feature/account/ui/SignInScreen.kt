@@ -29,7 +29,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarResult
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -44,6 +43,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.core.ui.component.OutlinedTextField
 import com.leinardi.forlago.core.ui.component.ProgressButton
 import com.leinardi.forlago.core.ui.component.TopAppBar
@@ -72,32 +72,36 @@ fun SignInScreen(
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = LocalSnackbarHostState.current
     LaunchedEffect(effectFlow) {
         effectFlow.onEach { effect ->
             when (effect) {
                 is Effect.ShowErrorSnackbar -> {
-                    val snackbarResult = scaffoldState.snackbarHostState.showSnackbar(
+                    val snackbarResult = snackbarHostState.showSnackbar(
                         message = effect.message,
                         duration = SnackbarDuration.Indefinite,
                         actionLabel = effect.actionLabel,
                     )
                     if (snackbarResult == SnackbarResult.ActionPerformed) {
-                        scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+                        snackbarHostState.currentSnackbarData?.dismiss()
                     }
                 }
             }
         }.collect()
     }
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = "Account screen") },
-        content = {
+        content = { scaffoldPadding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
-                    .padding(16.dp),
+                    .padding(
+                        start = 16.dp,
+                        top = scaffoldPadding.calculateTopPadding() + 16.dp,
+                        end = 16.dp,
+                        bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
+                    ),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 val localFocusManager = LocalFocusManager.current

@@ -41,5 +41,9 @@ dependencies {
     implementation libs.androidx.startup
     implementation libs.hilt.android
     implementation libs.process.phoenix
+    implementation libs.play.core
+    implementation libs.play.core.ktx
     kapt libs.hilt.compiler
+    kaptTest libs.hilt.android.compiler
+    kaptAndroidTest libs.hilt.android.compiler
 }

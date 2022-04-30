@@ -64,11 +64,11 @@ fun @PlaceholderName@Screen(
     effectFlow: Flow<@PlaceholderName@Contract.Effect>,
     sendEvent: (event: @PlaceholderName@Contract.Event) -> Unit,
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = LocalSnackbarHostState.current
     LaunchedEffect(effectFlow) {
         effectFlow.onEach { effect ->
             when (effect) {
-                is @PlaceholderName@Contract.Effect.ShowSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
+                is @PlaceholderName@Contract.Effect.ShowSnackbar -> snackbarHostState.showSnackbar(
                     message = effect.message,
                     duration = SnackbarDuration.Short
                 )
@@ -76,7 +76,6 @@ fun @PlaceholderName@Screen(
         }.collect()
     }
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = { Text("@PlaceholderName@ screen") }) },
         content = {
             Column(

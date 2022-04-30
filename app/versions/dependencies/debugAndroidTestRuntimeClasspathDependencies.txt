@@ -127,7 +127,14 @@ debugAndroidTestRuntimeClasspath - Runtime classpath of compilation 'debugAndroi
 |    |    |    +--- androidx.savedstate:savedstate:1.1.0 -> 1.2.0-alpha02 (*)
 |    |    |    +--- javax.inject:javax.inject:1
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.5.32 -> 1.6.10 (*)
-|    |    \--- com.jakewharton:process-phoenix:2.1.2
+|    |    +--- com.jakewharton:process-phoenix:2.1.2
+|    |    +--- com.google.android.play:core:1.10.3
+|    |    \--- com.google.android.play:core-ktx:1.8.1
+|    |         +--- com.google.android.play:core:1.8.0 -> 1.10.3
+|    |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72 -> 1.6.10 (*)
+|    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6 -> 1.6.1 (*)
+|    |         +--- androidx.core:core:1.1.0 -> 1.8.0-alpha06 (*)
+|    |         \--- androidx.fragment:fragment:1.1.0 -> 1.4.1 (*)
 |    +--- androidx.test:runner:1.4.0
 |    |    +--- androidx.annotation:annotation:1.0.0 -> 1.3.0
 |    |    +--- androidx.test:monitor:1.4.0
@@ -326,6 +333,8 @@ debugAndroidTestRuntimeClasspath - Runtime classpath of compilation 'debugAndroi
 +--- androidx.startup:startup-runtime:{strictly 1.1.1} -> 1.1.1 (c)
 +--- com.google.dagger:hilt-android:{strictly 2.41} -> 2.41 (c)
 +--- com.jakewharton:process-phoenix:{strictly 2.1.2} -> 2.1.2 (c)
++--- com.google.android.play:core:{strictly 1.10.3} -> 1.10.3 (c)
++--- com.google.android.play:core-ktx:{strictly 1.8.1} -> 1.8.1 (c)
 +--- com.google.dagger:dagger:{strictly 2.41} -> 2.41 (c)
 +--- com.google.dagger:dagger-lint-aar:{strictly 2.41} -> 2.41 (c)
 +--- com.google.dagger:hilt-core:{strictly 2.41} -> 2.41 (c)

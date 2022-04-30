@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.android.ext
+package com.leinardi.forlago.core.android.interactor.android
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
+import android.app.Application
+import android.content.Intent
+import android.net.Uri
+import javax.inject.Inject
 
-fun Context.getActivity(): Activity? = when (this) {
-    is Activity -> this
-    is ContextWrapper -> this.baseContext.getActivity()
-    else -> null
+class OpenUrlInWebBrowserInteractor @Inject constructor(
+    private val application: Application,
+) {
+    operator fun invoke(url: String) {
+        application.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+    }
 }
