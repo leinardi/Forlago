@@ -2,8 +2,6 @@ name: Release
 
 on:
   workflow_dispatch:
-    branches:
-      - master
     inputs:
       semver:
         description: 'Release Semantic Versioning (e.g. 4.15.2)'
@@ -18,6 +16,18 @@ on:
           - alpha
           - beta
           - production
+      updatePriority:
+        description: 'Update priority (5 for immediate, a.k.a force update)'
+        required: true
+        default: '0'
+        type: choice
+        options:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
 
 jobs:
   build-release:
@@ -60,6 +70,10 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
       - name: Decrypt secrets
         run: ./release/decrypt-secrets.sh
         env:
@@ -78,7 +92,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: publishBundle --track ${{ github.event.inputs.track }}
+          arguments: publishBundle --track ${{ github.event.inputs.track }} --update-priority ${{ github.event.inputs.updatePriority }} --debug
 
       - name: Clean secrets
         if: always()

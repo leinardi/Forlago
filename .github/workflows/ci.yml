@@ -6,8 +6,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-    branches:
-      - master
 
 jobs:
   checks:
@@ -34,6 +32,10 @@ jobs:
 
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
 
       ## Actual task
       - name: Check merged manifests
@@ -90,6 +92,10 @@ jobs:
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
       - name: Decrypt secrets
         run: ./release/decrypt-secrets.sh
         env:
@@ -135,6 +141,10 @@ jobs:
 
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
 
       - name: Build
         uses: gradle/gradle-build-action@v2
@@ -207,6 +217,10 @@ jobs:
 
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
 
       - name: AVD cache
         uses: actions/cache@v2
