@@ -1,12 +1,15 @@
 # Common configuration
 - name: DIKTAT_COMMON
+  enabled: true
   configuration:
     # put your package name here - it will be autofixed and checked
     domainName: com.leinardi.forlago
-    testDirs: test
+    # testDirs: test
+    # can also use chapter names here (not only numbers)
     # expected values:  disabledChapters: "Naming, Comments, General, Variables, Functions, Classes"
     # or: "1, 2, 3, 4, 5, 6"
     disabledChapters: ''
+    testDirs: test
     kotlinVersion: 1.6
     srcDirectories: 'main'
 # Checks that the Class/Enum/Interface name does not match Pascal case
@@ -17,7 +20,7 @@
   enabled: false # Detekt is already checking it
 # Checks that enum value is in non UPPER_SNAKE_CASE or non PascalCase depending on the config, UPPER_SNAKE_CASE by default
 - name: ENUM_VALUE
-  enabled: true
+  enabled: false # Custom
   configuration:
     # Two options: snakeCase(default), PascalCase
     enumStyle: snakeCase
@@ -29,7 +32,7 @@
   enabled: true
 # Checks that file name matches class name, if it is only one class in file
 - name: FILE_NAME_MATCH_CLASS
-  enabled: true
+  enabled: false # Custom - Can't use enum classes in composable files...
 # Checks that functions/methods which return boolean have special prefix like "is/should/e.t.c"
 - name: FUNCTION_BOOLEAN_PREFIX
   enabled: false # Custom - I really disagree with this rule
@@ -55,22 +58,22 @@
   enabled: true
 # Checks that package name starts with the company's domain
 - name: PACKAGE_NAME_INCORRECT_PREFIX
-  enabled: false
+  enabled: true
 # Checks that package name does not have incorrect symbols like underscore or non-ASCII letters/digits
 - name: PACKAGE_NAME_INCORRECT_SYMBOLS
   enabled: true
 # Checks that the path for a file matches with a package name
 - name: PACKAGE_NAME_INCORRECT_PATH
-  enabled: false
+  enabled: true
 # Checks that package name is in the file
 - name: PACKAGE_NAME_MISSING
   enabled: true
 # Checks that variable does not have prefix (like mVariable or M_VARIABLE)
 - name: VARIABLE_HAS_PREFIX
-  enabled: true
+  enabled: false # Custom - False positive for zIndex
 # Checks that variable does not contain one single letter, only exceptions are fixed names that used in industry like {i, j}
 - name: VARIABLE_NAME_INCORRECT
-  enabled: true
+  enabled: false # Custom - Some custom Compose variables are single letter, like Spacer.x1
 # Checks that the name of variable is in lowerCamelCase and contains only ASCII letters
 - name: VARIABLE_NAME_INCORRECT_FORMAT
   enabled: false # Custom - Can't be disable for Composable and Detekt is already checking it
@@ -119,14 +122,14 @@
 # Checks that special tags `@apiNote`, `@implNote`, `@implSpec` have exactly one empty line after
 - name: KDOC_NO_NEWLINE_AFTER_SPECIAL_TAGS
   enabled: true
+# Checks that KDoc does not contain single line with words 'return', 'get' or 'set'
+- name: KDOC_TRIVIAL_KDOC_ON_FUNCTION
+  enabled: true
 # Checks that kdoc does not contain @author tag or date
 - name: KDOC_CONTAINS_DATE_OR_AUTHOR
   enabled: false # Custom
   configuration:
     versionRegex: \d+\.\d+\.\d+[-.\w\d]*
-# Checks that KDoc does not contain single line with words 'return', 'get' or 'set'
-- name: KDOC_TRIVIAL_KDOC_ON_FUNCTION
-  enabled: true
 # Checks that there is newline after header KDoc
 - name: HEADER_WRONG_FORMAT
   enabled: true
@@ -202,11 +205,13 @@
     # Is newline at the end of a file needed
     newlineAtEnd: true
     # If true: in parameter list when parameters are split by newline they are indented with two indentations instead of one
-    extendedIndentOfParameters: true
+    extendedIndentOfParameters: false
     # If true: if first parameter in parameter list is on the same line as opening parenthesis, then other parameters can be aligned with it
     alignedParameters: true
     # If true: if expression is split by newline after operator like +/-/`*`, then the next line is indented with two indentations instead of one
     extendedIndentAfterOperators: true
+    # If true: when dot qualified expression starts on a new line, this line will be indented with two indentations instead of one
+    extendedIndentBeforeDot: false
     # The indentation size for each file
     indentationSize: 4
 # Checks that there is no empty blocks in a file.
@@ -224,7 +229,7 @@
 - name: LONG_LINE
   enabled: false # Custom - Detekt is already checking it
   configuration:
-    lineLength: '120'
+    lineLength: '180'
 # Checks that semicolons are not used at the end of a line
 - name: REDUNDANT_SEMICOLON
   enabled: true
@@ -256,6 +261,9 @@
     typeParameter: true # Custom
     # DESTRUCTURING_DECLARATION_ENTRY
     destructuringDeclaration: true # Custom
+# Inspection that checks if a long dot qualified expression is used in condition or as an argument
+- name: COMPLEX_EXPRESSION
+  enabled: false # Custom
 # Checks that there are not too many consecutive spaces in line
 - name: TOO_MANY_CONSECUTIVE_SPACES
   enabled: true
@@ -264,9 +272,6 @@
     maxSpaces: '1'
     # Whether formatting for enums should be kept without checking
     saveInitialFormattingForEnums: false
-# Inspection that checks if a long dot qualified expression is used in condition or as an argument
-- name: COMPLEX_EXPRESSION
-  enabled: false # Custom
 # Checks that blank lines are used correctly.
 # For example: triggers when there are too many blank lines between function declaration
 - name: TOO_MANY_BLANK_LINES
@@ -311,6 +316,8 @@
     ignorePropertyDeclaration: 'false'
     # Is ignore local variable
     ignoreLocalVariableDeclaration: 'false'
+    # Is ignore value parameter
+    ignoreValueParameter: 'true'
     # Is ignore constant
     ignoreConstantDeclaration: 'true'
     # Is ignore property in companion object
@@ -337,7 +344,7 @@
   enabled: true
 # Checks year in the copyright
 - name: WRONG_COPYRIGHT_YEAR
-  enabled: true
+  enabled: false # Custom
 # Inspection that checks if local variables are declared close to the first usage site
 - name: LOCAL_VARIABLE_EARLY_DECLARATION
   enabled: true
@@ -393,8 +400,8 @@
 - name: TOO_LONG_FUNCTION
   enabled: false # Custom - Detekt is already checking it
   configuration:
-    maxFunctionLength: '30' # max length of function
-    isIncludeHeader: 'false' # count function's header
+    maxFunctionLength: 35 # max length of function
+    isIncludeHeader: false # count function's header
 # Warns if there are nested functions
 - name: AVOID_NESTED_FUNCTIONS
   enabled: true
@@ -417,9 +424,6 @@
 # Checks that using runBlocking inside async block code
 - name: RUN_BLOCKING_INSIDE_ASYNC
   enabled: true
-# Checks that property in constructor doesn't contain comment
-- name: KDOC_NO_CONSTRUCTOR_PROPERTY
-  enabled: false # Custom
 # Checks that the long lambda has parameters
 - name: TOO_MANY_LINES_IN_LAMBDA
   enabled: true
@@ -428,6 +432,12 @@
 # Checks that using unnecessary, custom label
 - name: CUSTOM_LABEL
   enabled: true
+# Checks that outer lambda has explicit parameter name
+- name: PARAMETER_NAME_IN_OUTER_LAMBDA
+  enabled: false
+# Checks that property in constructor doesn't contain comment
+- name: KDOC_NO_CONSTRUCTOR_PROPERTY
+  enabled: false # Custom
 # Checks that property in KDoc present in class
 - name: KDOC_EXTRA_PROPERTY
   enabled: false # Custom
@@ -503,4 +513,18 @@
   enabled: true
 # Check if boolean expression can be simplified
 - name: COMPLEX_BOOLEAN_EXPRESSION
+  enabled: true
+# Check if range can replace with until or `rangeTo` function with range
+- name: CONVENTIONAL_RANGE
+  enabled: true
+  configuration:
+    isRangeToIgnore: false
+# Check that typealias name is in PascalCase
+- name: TYPEALIAS_NAME_INCORRECT_CASE
+  enabled: true
+# Should change property length - 1 to property lastIndex
+- name: USE_LAST_INDEX
+  enabled: true
+# Only properties from the primary constructor should be documented in a @property tag in class KDoc
+- name: KDOC_NO_CLASS_BODY_PROPERTIES_IN_HEADER
   enabled: true
