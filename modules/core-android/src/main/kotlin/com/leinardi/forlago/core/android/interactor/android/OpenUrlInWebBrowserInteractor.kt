@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.core.test.rule
+package com.leinardi.forlago.core.android.interactor.android
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
+import android.app.Application
+import android.content.Intent
+import android.net.Uri
+import javax.inject.Inject
 
-class CoroutinesTestRule : TestWatcher() {
-    override fun starting(description: Description?) {
-        Dispatchers.setMain(StandardTestDispatcher())
-    }
-
-    override fun finished(description: Description) {
-        Dispatchers.resetMain()
+class OpenUrlInWebBrowserInteractor @Inject constructor(
+    private val application: Application,
+) {
+    operator fun invoke(url: String) {
+        application.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
     }
 }

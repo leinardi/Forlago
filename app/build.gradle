@@ -96,6 +96,8 @@ dependencies {
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.navigation.compose
     implementation libs.androidx.startup
+    implementation libs.play.core
+    implementation libs.play.core.ktx
 
     androidTestImplementation libs.androidx.compose.ui
     kaptAndroidTest libs.hilt.android.compiler

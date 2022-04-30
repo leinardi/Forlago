@@ -18,6 +18,9 @@ package com.leinardi.forlago.core.android.di
 
 import android.accounts.AccountManager
 import android.app.Application
+import androidx.annotation.VisibleForTesting
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.core.android.encryption.CryptoHelper
 import dagger.Module
@@ -30,10 +33,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AndroidModule {
+open class AndroidModule {
     @Provides
     @Singleton
     fun provideAccountManager(application: Application): AccountManager = AccountManager.get(application)
+
+    @Provides
+    @Singleton
+    fun provideAppUpdateManager(application: Application): AppUpdateManager = getAppUpdateManager(application)
 
     @Provides
     @Singleton
@@ -49,4 +56,9 @@ object AndroidModule {
             CryptoHelper.Builder(application).build()
         }
     }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected open fun getAppUpdateManager(
+        application: Application,
+    ): AppUpdateManager = AppUpdateManagerFactory.create(application)
 }

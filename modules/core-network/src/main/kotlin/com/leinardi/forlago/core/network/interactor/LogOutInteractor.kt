@@ -17,7 +17,6 @@
 package com.leinardi.forlago.core.network.interactor
 
 import com.leinardi.forlago.core.android.di.User
-import com.leinardi.forlago.core.android.ext.ifFalse
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.destination.account.SignInDestination
 import com.leinardi.forlago.core.network.interactor.account.RemoveAccountsInteractor
@@ -26,16 +25,16 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class LogOutInteractor @Inject constructor(
-    private val linkNavigator: ForlagoNavigator,
+    private val forlagoNavigator: ForlagoNavigator,
     private val removeAccountsInteractor: RemoveAccountsInteractor,
     @User private val userDataStoreRepository: DataStoreRepository,
 ) {
     suspend operator fun invoke(navigateToLogin: Boolean = true) {
         Timber.d("LogOut")
-        removeAccountsInteractor().ifFalse { Timber.e("Unable to remove Account!") }
+        removeAccountsInteractor()
         userDataStoreRepository.clearPreferencesStorage()
         if (navigateToLogin) {
-            linkNavigator.navigate(SignInDestination.createRoute()) {
+            forlagoNavigator.navigate(SignInDestination.createRoute()) {
                 launchSingleTop = true
                 popUpTo(0) { inclusive = true }
             }

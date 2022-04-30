@@ -16,54 +16,49 @@
 
 package com.leinardi.forlago.core.ui.component
 
-import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
-import coil.annotation.ExperimentalCoilApi
-import coil.compose.ImagePainter
-import coil.compose.rememberImagePainter
+import androidx.compose.ui.platform.LocalContext
+import coil.compose.SubcomposeAsyncImage
+import coil.request.ImageRequest
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.leinardi.forlago.core.ui.ext.default
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
-fun Image(
+fun CoilImage(
     url: String?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
     placeholder: Boolean = false,
     crossfade: Boolean = true,
-    @DrawableRes fallbackRes: Int? = null,
-    @DrawableRes errorRes: Int? = null,
+    error: @Composable (() -> Unit)? = null,
     alignment: Alignment = Alignment.Center,
-    contentScale: ContentScale = ContentScale.Fit,
+    contentScale: ContentScale = ContentScale.Crop,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
 ) {
-    val painter = rememberImagePainter(
-        data = url,
-        builder = {
-            crossfade(crossfade)
-            fallbackRes?.let { fallback(it) }
-            errorRes?.let { error(it) }
-        },
-    )
-    androidx.compose.foundation.Image(
-        painter = painter,
-        contentDescription = contentDescription,
-        modifier = modifier  // The placeholder modifier must be added after the clip one to be rendered correctly
-            .placeholder(
-                visible = placeholder || painter.state is ImagePainter.State.Loading,
-                highlight = PlaceholderHighlight.default(),
-            ),
-        alignment = alignment,
-        contentScale = contentScale,
-        alpha = alpha,
-        colorFilter = colorFilter,
-    )
+    if (placeholder) {
+        Box(modifier = modifier.placeholder(true, highlight = PlaceholderHighlight.default())) {}
+    } else {
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(url)
+                .crossfade(crossfade)
+                .build(),
+            loading = { Box(modifier = modifier.placeholder(true, highlight = PlaceholderHighlight.default())) {} },
+            error = { error?.invoke() },
+            contentDescription = contentDescription,
+            modifier = modifier,
+            alignment = alignment,
+            contentScale = contentScale,
+            alpha = alpha,
+            colorFilter = colorFilter,
+        )
+    }
 }

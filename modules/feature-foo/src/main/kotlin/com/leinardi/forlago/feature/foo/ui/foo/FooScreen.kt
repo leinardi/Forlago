@@ -28,7 +28,6 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
 import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -41,6 +40,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.core.ui.component.ProgressButton
 import com.leinardi.forlago.core.ui.component.TopAppBar
 import com.leinardi.forlago.feature.foo.R
@@ -69,11 +69,11 @@ fun FooScreen(
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val snackbarHostState = LocalSnackbarHostState.current
     LaunchedEffect(effectFlow) {
         effectFlow.onEach { effect ->
             when (effect) {
-                is Effect.ShowSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
+                is Effect.ShowSnackbar -> snackbarHostState.showSnackbar(
                     message = effect.message,
                     duration = SnackbarDuration.Short,
                 )
@@ -83,7 +83,6 @@ fun FooScreen(
     var textFieldValue by rememberSaveable(stateSaver = TextFieldValue.Saver) { mutableStateOf(TextFieldValue(state.text)) }
     Scaffold(
         modifier = modifier,
-        scaffoldState = scaffoldState,
         topBar = { TopAppBar(title = stringResource(R.string.i18n_foo_screen_title)) },
         content = { scaffoldPadding ->
             Column(

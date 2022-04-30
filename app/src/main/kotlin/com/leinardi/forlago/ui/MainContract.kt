@@ -17,6 +17,10 @@
 package com.leinardi.forlago.ui
 
 import android.content.Intent
+import androidx.annotation.StringRes
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.install.model.AppUpdateType
+import com.leinardi.forlago.R
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.ui.base.ViewEffect
 import com.leinardi.forlago.core.ui.base.ViewEvent
@@ -29,7 +33,15 @@ object MainContract {
 
     sealed class Event : ViewEvent {
         data class OnIntentReceived(val intent: Intent) : Event()
+        object OnInAppUpdateCancelled : Event()
+        object OnInAppUpdateFailed : Event()
+        object OnShown : Event()
     }
 
-    sealed class Effect : ViewEffect
+    sealed class Effect : ViewEffect {
+        data class ShowErrorSnackbar(val message: String, @StringRes val actionLabel: Int = R.string.i18n_generic_snackbar_dismissal) : Effect()
+        data class StartUpdateFlowForResult(val appUpdateInfo: AppUpdateInfo, @AppUpdateType val appUpdateType: Int) : Effect()
+        object FinishActivity : Effect()
+        object ShowSnackbarForCompleteUpdate : Effect()
+    }
 }

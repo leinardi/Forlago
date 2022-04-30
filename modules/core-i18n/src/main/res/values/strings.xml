@@ -16,6 +16,9 @@
 
 <resources>
     <string name="i18n_app_name">Forlago</string>
+    <string name="i18n_app_update_error">An error occurred that prevented the update of the application</string>
+    <string name="i18n_app_update_snackbar_download_ready_button">Install</string>
+    <string name="i18n_app_update_snackbar_download_ready_label">An update has been downloaded and is ready to be installed</string>
     <string name="i18n_back">Back</string>
     <string name="i18n_bar_screen_title">Bar screen</string>
     <string name="i18n_bar_text_received">Text = %1$s</string>
@@ -26,5 +29,6 @@
     <string name="i18n_foo_show_snackbar">Show Snackbar</string>
     <string name="i18n_foo_snackbar_text">Lorem ipsum dolor sit amet…</string>
     <string name="i18n_foo_text_field_hint">Type something here plz…</string>
+    <string name="i18n_generic_snackbar_dismissal">Dismiss</string>
     <string name="i18n_navigate_up">Go up</string>
 </resources>

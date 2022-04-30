@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.leinardi.template.core.test.runner
+package com.leinardi.forlago.core.test.runner
 
 import android.app.Application
 import android.content.Context

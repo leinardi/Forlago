@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.android.ext
+package com.leinardi.forlago.core.test.rule
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.setMain
+import org.junit.rules.TestWatcher
+import org.junit.runner.Description
 
-fun Context.getActivity(): Activity? = when (this) {
-    is Activity -> this
-    is ContextWrapper -> this.baseContext.getActivity()
-    else -> null
+class CoroutinesTestRule : TestWatcher() {
+    override fun starting(description: Description?) {
+        Dispatchers.setMain(StandardTestDispatcher())
+    }
+
+    override fun finished(description: Description) {
+        Dispatchers.resetMain()
+    }
 }
