@@ -87,10 +87,10 @@ println "play-account.json ${if (serviceAccountCredentialsFile.exists()) "" else
 
 dependencies {
     // Modules
-    implementation project(':modules:feature-account')
-    implementation project(':modules:feature-bar')
-    implementation project(':modules:feature-debug')
-    implementation project(':modules:feature-foo')
+    implementation projects.modules.featureAccount
+    implementation projects.modules.featureBar
+    implementation projects.modules.featureDebug
+    implementation projects.modules.featureFoo
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.lifecycle.runtime

@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
-    implementation project(':modules:core-android')
-    implementation project(':modules:core-i18n')
+    implementation projects.modules.coreAndroid
+    implementation projects.modules.coreI18n
     api libs.accompanist.flowlayout
     api libs.accompanist.pager
     api libs.accompanist.pager.indicators

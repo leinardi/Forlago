@@ -140,7 +140,7 @@ private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirP
     2. Declare the dependency of the module on build.gradle that requires it (alphabetically ordered):
         // Modules
         [...]
-        implementation project(':modules:$moduleDirPath.name')
+        implementation projects.modules.${$moduleDirPath.name.replace(tokens.placeholderlowercase, tokens.PlaceholderUncaptalized)}')
         [...]
 
     3. Synchronize the project for the new module to be available.

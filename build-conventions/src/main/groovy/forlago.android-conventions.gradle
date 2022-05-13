@@ -126,9 +126,9 @@ dependencies {
     implementation libs.coroutines.android
     implementation libs.coroutines.core
     coreLibraryDesugaring libs.desugar
-    testImplementation project(':modules:core-test')
+    testImplementation projects.modules.coreTest
     testImplementation libs.mockk
-    androidTestImplementation project(':modules:core-test')
+    androidTestImplementation projects.modules.coreTest
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.androidx.test.runner

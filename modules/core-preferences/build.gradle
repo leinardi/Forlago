@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation project(':modules:core-android')
+    implementation projects.modules.coreAndroid
     api libs.androidx.datastore.preferences
     implementation libs.androidx.datastore
     implementation libs.hilt.android

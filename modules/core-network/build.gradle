@@ -40,10 +40,10 @@ apollo {
 }
 
 dependencies {
-    implementation project(':modules:core-android')
-    implementation project(':modules:core-i18n')
-    implementation project(':modules:core-navigation')
-    implementation project(':modules:core-preferences')
+    implementation projects.modules.coreAndroid
+    implementation projects.modules.coreI18n
+    implementation projects.modules.coreNavigation
+    implementation projects.modules.corePreferences
     api libs.coroutines.android
     api libs.coroutines.core
     api libs.kotlinx.serialization

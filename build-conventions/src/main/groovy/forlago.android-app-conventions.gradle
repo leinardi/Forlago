@@ -71,10 +71,10 @@ dependencies {
     debugImplementation libs.leakcanary
 
     // Modules
-    implementation project(':modules:core-android')
-    implementation project(':modules:core-i18n')
-    implementation project(':modules:core-logging')
-    implementation project(':modules:core-ui')
+    implementation projects.modules.coreAndroid
+    implementation projects.modules.coreI18n
+    implementation projects.modules.coreLogging
+    implementation projects.modules.coreUi
 
 }
 
