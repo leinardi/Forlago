@@ -16,7 +16,7 @@
 
 plugins {
     id 'com.android.application'
-    id 'forlago.android-android-conventions'
+    id 'forlago.android-conventions'
     id 'kotlin-parcelize'
     id 'com.google.dagger.hilt.android'
     id 'com.mikepenz.aboutlibraries.plugin'
@@ -71,10 +71,10 @@ dependencies {
     debugImplementation libs.leakcanary
 
     // Modules
-    implementation project(':modules:core-android')
-    implementation project(':modules:core-i18n')
-    implementation project(':modules:core-logging')
-    implementation project(':modules:core-ui')
+    implementation projects.modules.coreAndroid
+    implementation projects.modules.coreI18n
+    implementation projects.modules.coreLogging
+    implementation projects.modules.coreUi
 
 }
 

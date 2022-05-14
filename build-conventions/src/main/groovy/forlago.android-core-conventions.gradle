@@ -15,7 +15,7 @@
  */
 plugins {
     id 'com.android.library'
-    id 'forlago.android-android-conventions'
+    id 'forlago.android-conventions'
 }
 
 dependencies {
