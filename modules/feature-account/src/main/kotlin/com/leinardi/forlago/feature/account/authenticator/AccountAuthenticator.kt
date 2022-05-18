@@ -252,11 +252,11 @@ class AccountAuthenticator @Inject constructor(
     ): Bundle {
         var expiryInMillis = accountManager.getUserData(account, KEY_CUSTOM_TOKEN_EXPIRY)?.toLongOrNull() ?: 0
         val peekAuthToken = accountManager.peekAuthToken(account, authTokenType)
-        var accessToken = peekAuthToken?.let { runBlocking { decryptDeterministicallyInteractor(it) } }
+        val accessToken = peekAuthToken?.let { runBlocking { decryptDeterministicallyInteractor(it) } }
 
         if (!accessToken.isNullOrEmpty() && !isJwtExpiredInteractor(accessToken)) {
             Timber.d("Access token is still valid, returning it (expiry = ${expiryInMillis.toLongDateTimeString()}")
-            return getValidAccessTokenBundle(account, accessToken, expiryInMillis)
+            return getValidAccessTokenBundle(account, peekAuthToken, expiryInMillis)
         } else {
             Timber.d("Access token missing or expired")
             accountManager.invalidateAuthToken(account.type, peekAuthToken)
@@ -266,12 +266,12 @@ class AccountAuthenticator @Inject constructor(
                 return when (val result = runBlocking { refreshAccessTokenInteractor(refreshToken) }) {
                     is RefreshAccessTokenInteractor.Result.Success -> {
                         Timber.d("Access token successfully refreshed")
-                        accessToken = runBlocking { encryptDeterministicallyInteractor(result.accessToken) }
+                        val encryptedAccessToken = runBlocking { encryptDeterministicallyInteractor(result.accessToken) }
                         expiryInMillis = getJwtExpiresAtInMillisInteractor(result.accessToken)
-                        accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTHTOKEN_TYPE, accessToken)
+                        accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTHTOKEN_TYPE, encryptedAccessToken)
                         accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
                         Timber.d("Returning a valid access token (expiry = ${expiryInMillis.toLongDateTimeString()}")
-                        getValidAccessTokenBundle(account, accessToken, expiryInMillis)
+                        getValidAccessTokenBundle(account, encryptedAccessToken, expiryInMillis)
                     }
                     is RefreshAccessTokenInteractor.Result.Failure.BadAuthentication -> {
                         Timber.w("Unable to get a new access token: the user must re-enter the credentials")

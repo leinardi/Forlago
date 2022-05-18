@@ -33,7 +33,7 @@ jobs:
   build-release:
     name: Build release
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     env:
       TERM: dumb
 
