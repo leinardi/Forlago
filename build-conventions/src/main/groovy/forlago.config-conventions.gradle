@@ -17,10 +17,10 @@ ext.config = [
     android: [
         'accountType'  : 'com.leinardi.forlago.auth',
         'applicationId': 'com.leinardi.forlago',
-        'compileSdk'   : 31,
+        'compileSdk'   : 32,
         'javaVersion'  : JavaVersion.VERSION_11,
         'minSdk'       : 23,
-        'targetSdk'    : 31,
+        'targetSdk'    : 32,
     ],
 
     app    : [

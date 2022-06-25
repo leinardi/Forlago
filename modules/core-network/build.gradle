@@ -56,7 +56,10 @@ dependencies {
     implementation libs.retrofit.kotlinx.serialization
     implementation libs.timber
     kapt libs.hilt.compiler
+
+    kaptTest libs.hilt.android.compiler
     kaptAndroidTest libs.hilt.android.compiler
+    testImplementation(libs.apollo.testing.support)
 }
 
 // Workaround for https://github.com/detekt/detekt/issues/4743
