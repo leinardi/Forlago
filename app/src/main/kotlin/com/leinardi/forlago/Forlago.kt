@@ -20,6 +20,12 @@ import android.app.Application
 import android.os.Build
 import android.os.StrictMode
 import android.os.SystemClock
+import android.util.Log
+import coil.ImageLoader
+import coil.ImageLoaderFactory
+import coil.disk.DiskCache
+import coil.memory.MemoryCache
+import coil.util.DebugLogger
 import com.leinardi.forlago.core.feature.FeatureManager
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.feature.account.AccountFeature
@@ -28,12 +34,14 @@ import com.leinardi.forlago.feature.debug.DebugFeature
 import com.leinardi.forlago.feature.foo.FooFeature
 import com.leinardi.forlago.ui.MainActivity
 import dagger.hilt.android.HiltAndroidApp
+import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 @HiltAndroidApp
-class Forlago : Application() {
+class Forlago : Application(), ImageLoaderFactory {
     @Inject lateinit var featureManager: FeatureManager
     @Inject lateinit var navigator: ForlagoNavigator
+    @Inject lateinit var okHttpClient: OkHttpClient
 
     override fun onCreate() {
         super.onCreate()
@@ -56,7 +64,7 @@ class Forlago : Application() {
             StrictMode.setThreadPolicy(builderThread.build())
 
             val builderVM = StrictMode.VmPolicy.Builder()
-                 .detectActivityLeaks()
+                .detectActivityLeaks()
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedRegistrationObjects()
                 .detectFileUriExposure()
@@ -95,5 +103,35 @@ class Forlago : Application() {
                 DebugFeature(),
             ),
         )
+    }
+
+    override fun newImageLoader(): ImageLoader = ImageLoader.Builder(this)
+        .memoryCache {
+            MemoryCache.Builder(this)
+                .maxSizePercent(COIL_MEMORY_CACHE_SIZE_PERCENT)
+                .build()
+        }
+        .diskCache {
+            DiskCache.Builder()
+                .directory(filesDir.resolve(COIL_DISK_CACHE_DIRECTORY_NAME))
+                .maxSizeBytes(COIL_DISK_CACHE_SIZE)
+                .build()
+        }
+        .okHttpClient { okHttpClient }
+        .crossfade(true)
+        // Ignore the network cache headers and always read from/write to the disk cache.
+        .respectCacheHeaders(false)
+        // Enable logging to the standard Android log if this is a debug build.
+        .apply {
+            if (BuildConfig.DEBUG) {
+                logger(DebugLogger(Log.VERBOSE))
+            }
+        }
+        .build()
+
+    companion object {
+        private const val COIL_DISK_CACHE_DIRECTORY_NAME = "image_cache"
+        private const val COIL_DISK_CACHE_SIZE = 512L * 1024 * 1024  // 512MB
+        private const val COIL_MEMORY_CACHE_SIZE_PERCENT = 0.25  // Set the max size to 25% of the app's available memory.
     }
 }
