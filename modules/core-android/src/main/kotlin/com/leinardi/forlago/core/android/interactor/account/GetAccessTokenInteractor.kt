@@ -38,52 +38,50 @@ class GetAccessTokenInteractor @Inject constructor(
     private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
 ) {
     @Suppress("TooGenericExceptionCaught")
-    suspend operator fun invoke(): Result {
+    suspend operator fun invoke(): Result = withContext(dispatchers.io) {
         val account = getAccountInteractor()
         if (account == null) {
-            return Result.Failure.AccountNotFound
+            return@withContext Result.Failure.AccountNotFound
         } else {
             try {
-                val bundle: Bundle = withContext(dispatchers.io) {
-                    suspendCoroutine { cont ->
-                        accountManager.getAuthToken(
-                            account,
-                            AccountAuthenticatorConfig.AUTHTOKEN_TYPE,
-                            null,
-                            false,
-                            {
-                                try {
-                                    cont.resumeWith(kotlin.Result.success(it.result))
-                                } catch (e: Exception) {
-                                    cont.resumeWith(kotlin.Result.failure(e))
-                                }
-                            },
-                            null,
-                        )
-                    }
+                val bundle: Bundle = suspendCoroutine { cont ->
+                    accountManager.getAuthToken(
+                        account,
+                        AccountAuthenticatorConfig.AUTHTOKEN_TYPE,
+                        null,
+                        false,
+                        {
+                            try {
+                                cont.resumeWith(kotlin.Result.success(it.result))
+                            } catch (e: Exception) {
+                                cont.resumeWith(kotlin.Result.failure(e))
+                            }
+                        },
+                        null,
+                    )
                 }
                 val accessToken = bundle.getString(AccountManager.KEY_AUTHTOKEN)?.let { decryptDeterministicallyInteractor(it) }
                 if (!accessToken.isNullOrEmpty()) {
-                    return Result.Success(accessToken)
+                    return@withContext Result.Success(accessToken)
                 } else if (bundle.containsKey(AccountManager.KEY_AUTHTOKEN)) {
                     Timber.w("Unable to decrypt the access token. Was the app data wiped? Re-authentication required.")
                     accountManager.invalidateAuthToken(account.type, AccountAuthenticatorConfig.AUTHTOKEN_TYPE)
                     accountManager.setUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY, 0.toString())
                     invalidateRefreshTokenInteractor()
-                    return Result.Failure.ReAuthenticationRequired
+                    return@withContext Result.Failure.ReAuthenticationRequired
                 }
 
                 val intent = bundle[AccountManager.KEY_INTENT] as? Intent
                 if (intent != null) {
-                    return Result.Failure.ReAuthenticationRequired
+                    return@withContext Result.Failure.ReAuthenticationRequired
                 }
                 throw IllegalStateException("Unknown bundle value: $bundle")
             } catch (e: IOException) {
-                return Result.Failure.NetworkError(e.message)
+                return@withContext Result.Failure.NetworkError(e.message)
             } catch (e: IllegalArgumentException) {
-                return Result.Failure.BadArgumentsError(e.message)
+                return@withContext Result.Failure.BadArgumentsError(e.message)
             } catch (e: AuthenticatorException) {
-                return Result.Failure.AccountAuthenticatorError(e.message)
+                return@withContext Result.Failure.AccountAuthenticatorError(e.message)
             }
         }
     }

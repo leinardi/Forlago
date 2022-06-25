@@ -57,7 +57,7 @@ fun SwipeRefresh(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewSwipeRefresh() {
     ForlagoTheme {

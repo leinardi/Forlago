@@ -50,17 +50,15 @@ fun Text(
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
+    minLines: Int = 0,
     maxLines: Int = Int.MAX_VALUE,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
     placeholder: Boolean = false,
 ) {
     androidx.compose.material.Text(
-        text = text,
-        modifier = modifier.placeholder(
-            visible = placeholder,
-            highlight = PlaceholderHighlight.default(),
-        ),
+        text = text.addEmptyLines(minLines),  // Workaround for https://issuetracker.google.com/issues/122476634
+        modifier = modifier.placeholder(visible = placeholder, highlight = PlaceholderHighlight.default()),
         color = color,
         fontSize = fontSize,
         fontStyle = fontStyle,
@@ -78,7 +76,9 @@ fun Text(
     )
 }
 
-@Preview
+private fun String.addEmptyLines(lines: Int) = this + "\n".repeat(lines)
+
+@Preview(showBackground = true)
 @Composable
 fun PreviewText() {
     ForlagoTheme {

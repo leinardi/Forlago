@@ -85,7 +85,7 @@ fun SettingsMenuLink(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 internal fun PreviewSettingsMenuLink() {
     ForlagoTheme {
@@ -97,7 +97,7 @@ internal fun PreviewSettingsMenuLink() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 internal fun PreviewSettingsMenuLinkAction() {
     var rememberCheckBoxState by remember { mutableStateOf(true) }

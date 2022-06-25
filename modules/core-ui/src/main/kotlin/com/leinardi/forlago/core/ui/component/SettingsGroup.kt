@@ -64,7 +64,7 @@ internal fun SettingsGroupTitle(title: @Composable () -> Unit) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 internal fun PreviewSettingsGroup() {
     ForlagoTheme {

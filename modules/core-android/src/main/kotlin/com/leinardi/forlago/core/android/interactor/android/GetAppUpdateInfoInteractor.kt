@@ -23,7 +23,6 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.ktx.isFlexibleUpdateAllowed
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import com.google.android.play.core.ktx.requestAppUpdateInfo
-import com.leinardi.forlago.core.android.BuildConfig
 import com.leinardi.forlago.core.android.coroutine.CoroutineDispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -34,47 +33,31 @@ import javax.inject.Singleton
 class GetAppUpdateInfoInteractor @Inject constructor(
     private val appUpdateManager: AppUpdateManager,
     private val dispatchers: CoroutineDispatchers,
-    private val showToastInteractor: ShowToastInteractor,
 ) {
     @Suppress("TooGenericExceptionCaught", "MagicNumber", "ComplexMethod")
-    suspend operator fun invoke(): Result {
-        var message = ""
-        var prio: String? = null
-        val result = withContext(dispatchers.io) {
-            try {
-                val appUpdateInfo: AppUpdateInfo = appUpdateManager.requestAppUpdateInfo()
-                val priority = appUpdateInfo.updatePriority().also { prio = "In-App Update priority = $it" }
-                when (appUpdateInfo.updateAvailability()) {
-                    UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> Result.DeveloperTriggeredUpdateInProgress(appUpdateInfo)
-                        .also { message = "DeveloperTriggeredUpdateInProgress" }
-                    UpdateAvailability.UPDATE_AVAILABLE -> when {
-                        /*
-                         * To determine priority, Google Play uses an integer value between 0 and 5, with 0 being the default and 5 being the highest
-                         * priority. To set the priority for an update, use the inAppUpdatePriority field under Edits.tracks.releases in the
-                         * Google Play Developer API. All newly-added versions in the release are considered to be the same priority as the release.
-                         * Priority can only be set when rolling out a new release and cannot be changed later.
-                         */
-                        priority in 0..1 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.LowPriorityUpdateAvailable(appUpdateInfo)
-                            .also { message = "LowPriorityUpdateAvailable" }
-                        priority in 2..3 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.FlexibleUpdateAvailable(appUpdateInfo)
-                            .also { message = "FlexibleUpdateAvailable" }
-                        priority in 4..5 && appUpdateInfo.isImmediateUpdateAllowed -> Result.ImmediateUpdateAvailable(appUpdateInfo)
-                            .also { message = "ImmediateUpdateAvailable" }
-                        else -> throw IllegalStateException("Priority must be between 0 and 5 inclusive: $priority")
-                    }
-                    else -> Result.UpdateNotAvailable.also { message = "UpdateNotAvailable" }
+    suspend operator fun invoke(): Result = withContext(dispatchers.io) {
+        try {
+            val appUpdateInfo: AppUpdateInfo = appUpdateManager.requestAppUpdateInfo()
+            val priority = appUpdateInfo.updatePriority()
+            when (appUpdateInfo.updateAvailability()) {
+                UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS -> Result.DeveloperTriggeredUpdateInProgress(appUpdateInfo)
+                UpdateAvailability.UPDATE_AVAILABLE -> when {
+                    /*
+                     * To determine priority, Google Play uses an integer value between 0 and 5, with 0 being the default and 5 being the highest
+                     * priority. To set the priority for an update, use the inAppUpdatePriority field under Edits.tracks.releases in the
+                     * Google Play Developer API. All newly-added versions in the release are considered to be the same priority as the release.
+                     * Priority can only be set when rolling out a new release and cannot be changed later.
+                     */
+                    priority in 0..1 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.LowPriorityUpdateAvailable(appUpdateInfo)
+                    priority in 2..3 && appUpdateInfo.isFlexibleUpdateAllowed -> Result.FlexibleUpdateAvailable(appUpdateInfo)
+                    priority in 4..5 && appUpdateInfo.isImmediateUpdateAllowed -> Result.ImmediateUpdateAvailable(appUpdateInfo)
+                    else -> throw IllegalStateException("Priority must be between 0 and 5 inclusive: $priority")
                 }
-            } catch (e: Exception) {
-                Timber.e(e)
-                Result.UpdateNotAvailable.also { message = "Exception: ${e.message}" }
+                else -> Result.UpdateNotAvailable
             }
-        }
-        return result.also {
-            if (!BuildConfig.DEBUG) {
-                // Some debug toast due to https://issuetracker.google.com/issues/229013698
-                showToastInteractor(prio.toString(), cancelPrevious = false)
-                showToastInteractor(message, cancelPrevious = false)
-            }
+        } catch (e: Exception) {
+            Timber.e(e)
+            Result.UpdateNotAvailable
         }
     }
 

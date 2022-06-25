@@ -151,7 +151,7 @@ fun OutlinedTextField(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewOutlinedTextField() {
     ForlagoTheme {
@@ -159,7 +159,7 @@ fun PreviewOutlinedTextField() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewOutlinedTextFieldEmpty() {
     ForlagoTheme {
@@ -167,7 +167,7 @@ fun PreviewOutlinedTextFieldEmpty() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewOutlinedTextFieldErrorMessage() {
     ForlagoTheme {
