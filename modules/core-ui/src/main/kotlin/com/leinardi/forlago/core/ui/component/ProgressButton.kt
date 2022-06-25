@@ -68,7 +68,7 @@ fun ProgressButton(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewProgressButton() {
     ForlagoTheme {
@@ -76,7 +76,7 @@ fun PreviewProgressButton() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewProgressButtonLoading() {
     ForlagoTheme {

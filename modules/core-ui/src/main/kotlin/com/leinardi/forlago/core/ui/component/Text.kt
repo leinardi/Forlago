@@ -78,7 +78,7 @@ fun Text(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewText() {
     ForlagoTheme {

@@ -50,7 +50,7 @@ fun Scrim(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewScrim() {
     ForlagoTheme {

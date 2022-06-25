@@ -98,7 +98,7 @@ internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewSettingsIcon() {
     ForlagoTheme {
@@ -108,7 +108,7 @@ fun PreviewSettingsIcon() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewSettingsIconEmpty() {
     ForlagoTheme {

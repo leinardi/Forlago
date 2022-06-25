@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -60,12 +61,18 @@ fun TopAppBar(
             title = {
                 if (!titleCentered) {
                     Column {
-                        Text(text = title)
+                        Text(
+                            text = title,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 2,
+                        )
                         if (!subtitle.isNullOrEmpty()) {
                             Text(
                                 text = subtitle,
-                                style = MaterialTheme.typography.subtitle1,
                                 modifier = Modifier.alpha(ContentAlpha.medium),
+                                overflow = TextOverflow.Ellipsis,
+                                maxLines = 2,
+                                style = MaterialTheme.typography.subtitle1,
                             )
                         }
                     }
@@ -95,10 +102,12 @@ fun TopAppBar(
                     Text(
                         text = title,
                         color = MaterialTheme.colors.primary,
-                        textAlign = TextAlign.Center,
                         modifier = Modifier
                             .fillMaxWidth()
                             .align(Alignment.Center),
+                        textAlign = TextAlign.Center,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 2,
                     )
                 }
             }
@@ -106,8 +115,8 @@ fun TopAppBar(
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-@Preview
 fun PreviewTopAppBarWithNavigationIcon() {
     ForlagoTheme {
         TopAppBar(
@@ -116,8 +125,8 @@ fun PreviewTopAppBarWithNavigationIcon() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-@Preview
 fun PreviewTopAppBarWithSubtitle() {
     ForlagoTheme {
         TopAppBar(
@@ -127,8 +136,8 @@ fun PreviewTopAppBarWithSubtitle() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-@Preview
 fun PreviewTopAppBarWithAction() {
     ForlagoTheme {
         TopAppBar(
@@ -142,8 +151,8 @@ fun PreviewTopAppBarWithAction() {
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-@Preview
 fun PreviewTopAppBarWithNavigationIconAndAction() {
     ForlagoTheme {
         TopAppBar(

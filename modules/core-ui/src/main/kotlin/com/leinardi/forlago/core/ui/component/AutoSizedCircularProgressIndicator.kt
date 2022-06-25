@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -61,30 +60,28 @@ private val InternalPadding = 4.dp
 
 private val StrokeDiameterFraction = DefaultStrokeWidth / DefaultDiameter
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewAutoSizedCircularProgressIndicator() {
-    Surface {
-        Column {
-            AutoSizedCircularProgressIndicator(
-                modifier = Modifier.size(16.dp),
-            )
+    Column {
+        AutoSizedCircularProgressIndicator(
+            modifier = Modifier.size(16.dp),
+        )
 
-            AutoSizedCircularProgressIndicator(
-                modifier = Modifier.size(24.dp),
-            )
+        AutoSizedCircularProgressIndicator(
+            modifier = Modifier.size(24.dp),
+        )
 
-            AutoSizedCircularProgressIndicator(
-                modifier = Modifier.size(48.dp),
-            )
+        AutoSizedCircularProgressIndicator(
+            modifier = Modifier.size(48.dp),
+        )
 
-            AutoSizedCircularProgressIndicator(
-                modifier = Modifier.size(64.dp),
-            )
+        AutoSizedCircularProgressIndicator(
+            modifier = Modifier.size(64.dp),
+        )
 
-            AutoSizedCircularProgressIndicator(
-                modifier = Modifier.size(128.dp),
-            )
-        }
+        AutoSizedCircularProgressIndicator(
+            modifier = Modifier.size(128.dp),
+        )
     }
 }
