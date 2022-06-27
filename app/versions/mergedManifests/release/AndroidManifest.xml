@@ -47,10 +47,14 @@
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"
             android:exported="false" />
+        <!--
+         singleTask is used instead of singleInstance because the latter breaks Espresso tests:
+         https://github.com/android/android-test/issues/1115
+        -->
         <activity
             android:name="com.leinardi.forlago.ui.MainActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
