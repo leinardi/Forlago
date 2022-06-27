@@ -24,12 +24,8 @@ abstract class Feature {
     abstract val id: String
 
     open val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
-
     open val debugComposable: @Composable (() -> Unit)? = null
-
     open val dialogDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
-
-    open val serviceLifecycle: FeatureLifecycle = FeatureLifecycle()
-
-    open val handleIntent: (suspend (intent: Intent) -> Unit) = {}
+    open val handleIntent: (suspend (intent: Intent) -> Boolean) = { false }
+    open val featureLifecycle: FeatureLifecycle = FeatureLifecycle()
 }

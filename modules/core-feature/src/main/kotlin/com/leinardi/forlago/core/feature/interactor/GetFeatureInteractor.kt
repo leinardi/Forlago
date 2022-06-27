@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.test.rule
+package com.leinardi.forlago.core.feature.interactor
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
+import com.leinardi.forlago.core.feature.Feature
+import com.leinardi.forlago.core.feature.FeatureManager
+import javax.inject.Inject
 
-class CoroutinesTestRule : TestWatcher() {
-    override fun starting(description: Description?) {
-        Dispatchers.setMain(StandardTestDispatcher())
-    }
-
-    override fun finished(description: Description) {
-        Dispatchers.resetMain()
-    }
+@Suppress("UNCHECKED_CAST")
+class GetFeatureInteractor @Inject constructor(
+    private val featureManager: FeatureManager,
+) {
+    operator fun <T : Feature> invoke(clazz: Class<out Feature>) = featureManager.featureMap.getValue(clazz) as T
 }

@@ -28,6 +28,10 @@ android {
 
 dependencies {
     api project(':modules:core-android')
+    api libs.androidx.compose.ui
+    api libs.androidx.compose.ui.test.junit4
+    api libs.androidx.compose.ui.test.manifest
+    api libs.androidx.test.core
     api libs.androidx.test.runner
     api libs.coroutines.test
     api libs.hilt.android.testing
