@@ -21,6 +21,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.R
+import com.leinardi.forlago.core.android.ext.ifTrue
 import com.leinardi.forlago.core.android.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.core.android.interactor.android.GetAppUpdateInfoInteractor.Result
 import com.leinardi.forlago.core.android.interactor.android.GetInstallStateUpdateInteractor
@@ -73,8 +74,11 @@ class MainViewModel @Inject constructor(
 
     private fun handleOnIntentReceived(event: Event.OnIntentReceived) {
         viewModelScope.launch {
-            getFeaturesInteractor().forEach { feature ->
-                feature.handleIntent(event.intent)
+            var handled = false
+            getFeaturesInteractor().forEach {
+                if (!handled) {
+                    it.handleIntent(event.intent).ifTrue { handled = true }
+                }
             }
         }
     }

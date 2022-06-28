@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewModelScope
+import com.leinardi.forlago.core.android.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.core.android.interactor.android.RestartApplicationInteractor
 import com.leinardi.forlago.core.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
@@ -42,6 +43,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DebugViewModel @Inject constructor(
     private val clearApolloCacheInteractor: ClearApolloCacheInteractor,
+    private val getAppUpdateInfoInteractor: GetAppUpdateInfoInteractor,
     private val forlagoNavigator: ForlagoNavigator,
     private val getDebugInfoInteractor: GetDebugInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
@@ -50,6 +52,28 @@ class DebugViewModel @Inject constructor(
     private val restartApplicationInteractor: RestartApplicationInteractor,
     private val storeEnvironmentInteractor: StoreEnvironmentInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
+    init {
+        viewModelScope.launch {
+            val result = getAppUpdateInfoInteractor()
+            updateState {
+                copy(
+                    appUpdateInfo = when (result) {
+                        is GetAppUpdateInfoInteractor.Result.DeveloperTriggeredUpdateInProgress ->
+                            "Developer triggered update in progress (priority ${result.appUpdateInfo.updatePriority()})"
+                        is GetAppUpdateInfoInteractor.Result.FlexibleUpdateAvailable ->
+                            "Flexible update available (priority ${result.appUpdateInfo.updatePriority()})"
+                        is GetAppUpdateInfoInteractor.Result.ImmediateUpdateAvailable ->
+                            "Immediate update available (priority ${result.appUpdateInfo.updatePriority()})"
+                        is GetAppUpdateInfoInteractor.Result.LowPriorityUpdateAvailable ->
+                            "Low priority update available (priority ${result.appUpdateInfo.updatePriority()})"
+                        is GetAppUpdateInfoInteractor.Result.UpdateNotAvailable ->
+                            "Update not available"
+                    },
+                )
+            }
+        }
+    }
+
     override fun provideInitialState() = State(
         debugInfo = getDebugInfoInteractor(),
         featureList = getFeaturesInteractor()

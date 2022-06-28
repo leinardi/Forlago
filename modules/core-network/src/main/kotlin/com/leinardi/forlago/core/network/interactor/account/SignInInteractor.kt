@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.core.network.interactor.account
 
+import com.leinardi.forlago.core.feature.interactor.GetFeaturesInteractor
 import kotlinx.coroutines.delay
 import java.net.HttpURLConnection
 import java.util.UUID
@@ -23,12 +24,15 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.random.Random
 
-class SignInInteractor @Inject constructor() {
+class SignInInteractor @Inject constructor(
+    private val getFeaturesInteractor: GetFeaturesInteractor,
+) {
     @Suppress("MagicNumber")  // We are faking the sign in with the back-end
     suspend operator fun invoke(username: String, password: String): Result {
         // This simulates fetching a new refresh token. The access token won't be valid 20% of the time.
         delay(TimeUnit.SECONDS.toMillis(2))
         return if (Random.nextInt(5) != 0) {
+            getFeaturesInteractor().forEach { it.featureLifecycle.onSignIn() }
             Result.Success(
                 UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),

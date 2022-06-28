@@ -28,13 +28,13 @@ class FeatureManager @Inject constructor() {
     val featureMap: Map<Class<out Feature>, Feature> = _featureMap
 
     inline fun <reified T : Feature> getFeature(clazz: Class<out Feature>): T =
-        featureMap.getOrElse(clazz, { throw IllegalArgumentException("No Feature with Class = $clazz found!") }) as T
+        featureMap.getOrElse(clazz) { throw IllegalArgumentException("No Feature with Class = $clazz found!") } as T
 
     fun register(features: List<Feature>) {
         features.forEach { feature -> _featureMap[feature.javaClass] = feature }
     }
 
-    suspend fun onUserSignIn() = features.map { it.serviceLifecycle.onSignIn() }
+    suspend fun onUserSignIn() = features.map { it.featureLifecycle.onSignIn() }
 
-    suspend fun onUserSignOut() = features.reversed().map { it.serviceLifecycle.onSignOut() }
+    suspend fun onUserSignOut() = features.reversed().map { it.featureLifecycle.onSignOut() }
 }

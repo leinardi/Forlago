@@ -26,10 +26,12 @@
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen">
 
+        <!-- singleTask is used instead of singleInstance because the latter breaks Espresso tests:
+         https://github.com/android/android-test/issues/1115 -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

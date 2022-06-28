@@ -31,12 +31,13 @@ object DebugContract {
         val debugInfo: GetDebugInfoInteractor.DebugInfo,
         val featureList: List<Feature>,
         val selectedEnvironment: ReadEnvironmentInteractor.Environment,
-        val environments: Array<ReadEnvironmentInteractor.Environment> = ReadEnvironmentInteractor.Environment.values(),
+        val appUpdateInfo: String = "...",
         val bottomNavigationItems: List<DebugViewModel.DebugBottomNavigationItem> = listOf(
             Info,
             Options,
             Features,
         ),
+        val environments: Array<ReadEnvironmentInteractor.Environment> = ReadEnvironmentInteractor.Environment.values(),
         val selectedNavigationItem: DebugViewModel.DebugBottomNavigationItem = bottomNavigationItems[0],
     ) : ViewState {
         data class Feature(

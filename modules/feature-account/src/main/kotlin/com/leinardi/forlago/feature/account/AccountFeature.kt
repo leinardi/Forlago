@@ -39,13 +39,16 @@ class AccountFeature(
 
     override val debugComposable: @Composable () -> Unit = { AccountDebugPage() }
 
-    override val handleIntent: suspend (Intent) -> Unit = { intent ->
+    override val handleIntent: suspend (Intent) -> Boolean = { intent ->
         if (intent.hasExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE)) {
             val isNewAccount = intent.getBooleanExtra(AccountAuthenticatorConfig.KEY_IS_NEW_ACCOUNT, false)
             navigator.navigate(SignInDestination.createRoute(!isNewAccount)) {
                 launchSingleTop = true
                 popUpTo(0) { inclusive = true }
             }
+            true
+        } else {
+            false
         }
     }
 }

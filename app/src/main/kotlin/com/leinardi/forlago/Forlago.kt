@@ -26,13 +26,8 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.util.DebugLogger
+import com.leinardi.forlago.core.feature.Feature
 import com.leinardi.forlago.core.feature.FeatureManager
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.feature.account.AccountFeature
-import com.leinardi.forlago.feature.bar.BarFeature
-import com.leinardi.forlago.feature.debug.DebugFeature
-import com.leinardi.forlago.feature.foo.FooFeature
-import com.leinardi.forlago.ui.MainActivity
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import javax.inject.Inject
@@ -40,7 +35,7 @@ import javax.inject.Inject
 @HiltAndroidApp
 class Forlago : Application(), ImageLoaderFactory {
     @Inject lateinit var featureManager: FeatureManager
-    @Inject lateinit var navigator: ForlagoNavigator
+    @Inject lateinit var featureSet: Set<@JvmSuppressWildcards Feature>
     @Inject lateinit var okHttpClient: OkHttpClient
 
     override fun onCreate() {
@@ -95,14 +90,7 @@ class Forlago : Application(), ImageLoaderFactory {
     }
 
     private fun registerFeatures() {
-        featureManager.register(
-            listOf(
-                AccountFeature(MainActivity.createIntent(this), navigator),
-                FooFeature(),
-                BarFeature(),
-                DebugFeature(),
-            ),
-        )
+        featureManager.register(featureSet.toList())
     }
 
     override fun newImageLoader(): ImageLoader = ImageLoader.Builder(this)

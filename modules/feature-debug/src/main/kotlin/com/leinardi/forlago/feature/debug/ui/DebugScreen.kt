@@ -180,6 +180,7 @@ private fun Info(
                         Text(text = "Version name: ${state.debugInfo.app.versionName}")
                         Text(text = "Version code: ${state.debugInfo.app.versionCode}")
                         Text(text = "Application ID: ${state.debugInfo.app.packageName}")
+                        Text(text = "AppUpdateInfo: ${state.appUpdateInfo}")
                     },
                 )
             }

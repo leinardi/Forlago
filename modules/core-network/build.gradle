@@ -41,6 +41,7 @@ apollo {
 
 dependencies {
     implementation projects.modules.coreAndroid
+    implementation projects.modules.coreFeature
     implementation projects.modules.coreI18n
     implementation projects.modules.coreNavigation
     implementation projects.modules.corePreferences
