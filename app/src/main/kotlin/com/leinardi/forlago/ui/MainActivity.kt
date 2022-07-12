@@ -48,6 +48,7 @@ import com.leinardi.forlago.R
 import com.leinardi.forlago.core.android.ext.getActivity
 import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.navigation.NavigatorEvent
+import com.leinardi.forlago.core.ui.component.LocalNavHostController
 import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 import com.leinardi.forlago.navigation.addComposableDestinations
@@ -68,18 +69,15 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
 
     private val viewModel: MainViewModel by viewModels()
 
-    private lateinit var navHostController: NavHostController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            navHostController = rememberNavController()
             ForlagoTheme {
                 ForlagoMainScreen(
                     effectFlow = viewModel.effect,
                     startDestination = viewModel.viewState.value.startDestination,
-                    navHostController = navHostController,
+                    navHostController = rememberNavController(),
                     forlagoNavigator = forlagoNavigator,
                 )
             }
@@ -90,8 +88,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        viewModel.onUiEvent(Event.OnIntentReceived(intent))
-        navHostController.handleDeepLink(intent)
+        viewModel.onUiEvent(Event.OnIntentReceived(intent, true))
     }
 
     override fun onResume() {
@@ -150,12 +147,13 @@ fun ForlagoMainScreen(
             Timber.d("backQueue = ${navHostController.backQueue.map { "route = ${it.destination.route}" }}")
             keyboardController?.hide()
             when (event) {
-                is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
-                is NavigatorEvent.NavigateBack -> activity.onBackPressed().also { Timber.d("NavigateBack") }
                 is NavigatorEvent.Directions -> navHostController.navigate(
                     event.destination,
                     event.builder,
                 ).also { Timber.d("Navigate to ${event.destination}") }
+                is NavigatorEvent.HandleDeepLink -> navHostController.handleDeepLink(event.intent)
+                is NavigatorEvent.NavigateBack -> activity.onBackPressed().also { Timber.d("NavigateBack") }
+                is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
             }
         }.launchIn(this)
     }
@@ -178,6 +176,7 @@ fun ForlagoMainScreen(
         }.launchIn(this)
     }
     CompositionLocalProvider(
+        LocalNavHostController provides navHostController,
         LocalSnackbarHostState provides scaffoldState.snackbarHostState,
     ) {
         Scaffold(

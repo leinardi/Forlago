@@ -20,7 +20,7 @@ import androidx.navigation.navDeepLink
 import com.leinardi.forlago.core.navigation.BuildConfig
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
-object DebugDestination : NavigationDestination {
+object DebugDestination : NavigationDestination() {
     private const val ROUTE = "debug"
 
     override val deepLinks = if (BuildConfig.DEBUG) {
@@ -33,7 +33,7 @@ object DebugDestination : NavigationDestination {
         emptyList()
     }
 
-    override fun route() = ROUTE
+    override val route = ROUTE
 
-    fun createRoute() = route()
+    fun createRoute() = route
 }

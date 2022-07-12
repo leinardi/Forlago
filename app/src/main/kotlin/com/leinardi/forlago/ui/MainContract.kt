@@ -32,7 +32,7 @@ object MainContract {
     ) : ViewState
 
     sealed class Event : ViewEvent {
-        data class OnIntentReceived(val intent: Intent) : Event()
+        data class OnIntentReceived(val intent: Intent, val isNewIntent: Boolean = false) : Event()
         object OnInAppUpdateCancelled : Event()
         object OnInAppUpdateFailed : Event()
         object OnShown : Event()

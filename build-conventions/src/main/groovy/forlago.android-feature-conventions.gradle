@@ -16,7 +16,6 @@
 
 plugins {
     id 'forlago.android-core-conventions'
-    id 'kotlin-parcelize'
     id 'com.google.dagger.hilt.android'
 }
 
@@ -25,7 +24,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
+        kotlinCompilerExtensionVersion libs.versions.androidx.compose.compiler.get()
     }
     kotlinOptions {
         freeCompilerArgs += '-opt-in=androidx.compose.material.ExperimentalMaterialApi'

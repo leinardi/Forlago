@@ -26,6 +26,7 @@ import com.leinardi.forlago.core.android.interactor.android.GetAppUpdateInfoInte
 import com.leinardi.forlago.core.android.interactor.android.GetAppUpdateInfoInteractor.Result
 import com.leinardi.forlago.core.android.interactor.android.GetInstallStateUpdateInteractor
 import com.leinardi.forlago.core.feature.interactor.GetFeaturesInteractor
+import com.leinardi.forlago.core.navigation.ForlagoNavigator
 import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.ui.MainContract.Effect
 import com.leinardi.forlago.ui.MainContract.Event
@@ -43,6 +44,7 @@ class MainViewModel @Inject constructor(
     private val app: Application,
     private val getFeaturesInteractor: GetFeaturesInteractor,
     private val getAppUpdateInfoInteractor: GetAppUpdateInfoInteractor,
+    private val forlagoNavigator: ForlagoNavigator,
 ) : BaseViewModel<Event, State, Effect>() {
     @AppUpdateType private var appUpdateType: Int? = null
 
@@ -79,6 +81,9 @@ class MainViewModel @Inject constructor(
                 if (!handled) {
                     it.handleIntent(event.intent).ifTrue { handled = true }
                 }
+            }
+            if (!handled && event.isNewIntent) {
+                forlagoNavigator.handleDeepLink(event.intent)
             }
         }
     }

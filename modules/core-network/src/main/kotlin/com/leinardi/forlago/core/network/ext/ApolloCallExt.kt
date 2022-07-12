@@ -14,14 +14,9 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.navigation
+package com.leinardi.forlago.core.network.ext
 
-import android.content.Intent
-import androidx.navigation.NavOptionsBuilder
+import com.apollographql.apollo3.ApolloCall
+import com.apollographql.apollo3.api.Operation
 
-sealed class NavigatorEvent {
-    data class Directions(val destination: String, val builder: NavOptionsBuilder.() -> Unit) : NavigatorEvent()
-    data class HandleDeepLink(val intent: Intent) : NavigatorEvent()
-    object NavigateBack : NavigatorEvent()
-    object NavigateUp : NavigatorEvent()
-}
+fun <D : Operation.Data> ApolloCall<D>.addAuthorizationHeader(accessToken: String) = this.addHttpHeader("Authorization", "JWT $accessToken")

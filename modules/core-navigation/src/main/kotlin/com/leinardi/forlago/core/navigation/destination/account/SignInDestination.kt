@@ -20,7 +20,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
-object SignInDestination : NavigationDestination {
+object SignInDestination : NavigationDestination() {
     const val REAUTHENTICATE_PARAM = "reauthenticate"
 
     private const val ROUTE = "signin"
@@ -32,7 +32,7 @@ object SignInDestination : NavigationDestination {
         },
     )
 
-    override fun route() = "$ROUTE/?$REAUTHENTICATE_PARAM={$REAUTHENTICATE_PARAM}"
+    override val route = "$ROUTE/?$REAUTHENTICATE_PARAM={$REAUTHENTICATE_PARAM}"
 
     fun createRoute(reauthenticate: Boolean = false) = "$ROUTE/?$REAUTHENTICATE_PARAM=$reauthenticate"
 }

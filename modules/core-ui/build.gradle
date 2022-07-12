@@ -29,7 +29,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidx.compose.get()
+        kotlinCompilerExtensionVersion libs.versions.androidx.compose.compiler.get()
     }
     kotlinOptions {
         freeCompilerArgs += '-opt-in=androidx.compose.material.ExperimentalMaterialApi'
@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation projects.modules.coreAndroid
     implementation projects.modules.coreI18n
+    implementation projects.modules.coreNavigation
     api libs.accompanist.flowlayout
     api libs.accompanist.pager
     api libs.accompanist.pager.indicators

@@ -18,10 +18,10 @@ package com.leinardi.forlago.core.navigation.destination.foo
 
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
-object FooDestination : NavigationDestination {
+object FooDestination : NavigationDestination() {
     private const val ROUTE = "foo"
 
-    override fun route() = ROUTE
+    override val route = ROUTE
 
-    fun createRoute() = route()
+    fun createRoute() = route
 }

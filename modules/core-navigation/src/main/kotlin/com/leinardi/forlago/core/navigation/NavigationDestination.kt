@@ -19,12 +19,22 @@ package com.leinardi.forlago.core.navigation
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavDeepLink
 
-fun interface NavigationDestination {
-    val arguments: List<NamedNavArgument>
+abstract class NavigationDestination {
+    open val arguments: List<NamedNavArgument>
         get() = emptyList()
 
-    val deepLinks: List<NavDeepLink>
+    open val deepLinks: List<NavDeepLink>
         get() = emptyList()
 
-    fun route(): String
+    abstract val route: String
+
+    abstract class Result {
+        abstract val id: Long
+        var consumed: Boolean = false
+
+        companion object {
+            val ID
+                get() = System.currentTimeMillis()
+        }
+    }
 }
