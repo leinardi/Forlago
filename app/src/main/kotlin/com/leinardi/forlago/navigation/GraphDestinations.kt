@@ -27,7 +27,7 @@ fun NavGraphBuilder.addComposableDestinations() {
     getFeatures().forEach { feature ->
         feature.composableDestinations.forEach { entry ->
             val destination = entry.key
-            composable(destination.route(), destination.arguments, destination.deepLinks) { entry.value() }
+            composable(destination.route, destination.arguments, destination.deepLinks) { entry.value() }
         }
     }
 }
@@ -36,7 +36,7 @@ fun NavGraphBuilder.addDialogDestinations() {
     getFeatures().forEach { feature ->
         feature.dialogDestinations.forEach { entry ->
             val destination = entry.key
-            dialog(destination.route(), destination.arguments, destination.deepLinks) { entry.value() }
+            dialog(destination.route, destination.arguments, destination.deepLinks) { entry.value() }
         }
     }
 }

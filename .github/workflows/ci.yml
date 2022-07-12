@@ -11,7 +11,7 @@ jobs:
   checks:
     name: Checking manifest and deps
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 15
     env:
       TERM: dumb
 
@@ -70,7 +70,7 @@ jobs:
   build-release:
     name: Build release
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       TERM: dumb
 
@@ -119,10 +119,10 @@ jobs:
           name: ruler
           path: app/build/reports/ruler
 
-  static-analysis:
-    name: Static analysis and Unit tests
+  build-debug:
+    name: Build debug
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     env:
       TERM: dumb
 
@@ -146,10 +146,45 @@ jobs:
       - name: Create Local Properties File
         run: touch local.properties
 
+      ## Actual tasks
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
           arguments: assembleDebug -PsaveBuildLogToFile=true
+
+      - name: Archiving violations report
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: violations-build-debug
+          path: ./**/build/logs/buildlog*.txt
+
+  detekt:
+    name: Detekt
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11.0.14
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
 
       ## Actual tasks
       - name: Detekt
@@ -157,11 +192,74 @@ jobs:
         with:
           arguments: detektMain detektTest
 
+      - name: Archiving violations report
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: violations-detekt
+          path: ./**/reports/detekt/*.xml
+
+  spotless:
+    name: Spotless
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11.0.14
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
+      ## Actual tasks
       - name: Spotless
         uses: gradle/gradle-build-action@v2
         with:
           arguments: spotlessCheck
 
+  android-lint:
+    name: Android Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11.0.14
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
+      ## Actual tasks
       - name: Lint
         uses: gradle/gradle-build-action@v2
         with:
@@ -171,22 +269,58 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: static-analysis-list-results
+          name: android-lint-html-report
           path: ./**/build/reports/lint-results-*.html
 
+      - name: Archiving violations report
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: violations-android-lint
+          path: ./**/reports/lint-results*.xml
+
+  unit-tests:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11.0.14
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
+      ## Actual tasks
       - name: Unit tests
         uses: gradle/gradle-build-action@v2
         with:
           arguments: testDebugUnitTest
 
-      - name: Publishing violation comments to PR
+      - name: Archiving violations report
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: gradle/gradle-build-action@v2
+        uses: actions/upload-artifact@v3
         with:
-          arguments: violationCommentsToGitHub -DGITHUB_PULLREQUESTID=${{ github.event.number }} -DGITHUB_OAUTH2TOKEN=${{ secrets.GITHUB_TOKEN }} --info
+          name: violations-unit-tests
+          path: ./**/build/test-results/test*/*.xml
 
-  instrumentation-tests:
-    name: Instrumentation tests
+  espresso-tests:
+    name: Espresso tests
     # Android emulators require hardware acceleration (HAXM on Mac & Windows, QEMU on Linux) from the host to run fast.
     # The macOS VM provided by GitHub Actions is the only one that currently supports it.
     runs-on: macos-latest
@@ -286,3 +420,60 @@ jobs:
           path: |
             **/build/reports/*
             **/build/outputs/*/connected/*
+
+  publishing-violation:
+    name: Publishing violations to PR
+    if: ${{ always() && github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: [build-debug, detekt, android-lint, unit-tests]
+    timeout-minutes: 40
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11.0.14
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
+      - name: Fetching build-debug result
+        uses: actions/download-artifact@v3
+        with:
+          name: violations-build-debug
+
+      - name: Fetching detekt result
+        uses: actions/download-artifact@v3
+        with:
+          name: violations-detekt
+
+      - name: Fetching android-lint result
+        uses: actions/download-artifact@v3
+        with:
+          name: violations-android-lint
+
+      - name: Fetching unit-tests result
+        uses: actions/download-artifact@v3
+        with:
+          name: violations-unit-tests
+
+      ## Actual tasks
+      - name: Publishing violation comments to PR
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: violationCommentsToGitHub -DGITHUB_PULLREQUESTID=${{ github.event.number }} -DGITHUB_OAUTH2TOKEN=${{ secrets.GITHUB_TOKEN }} --info

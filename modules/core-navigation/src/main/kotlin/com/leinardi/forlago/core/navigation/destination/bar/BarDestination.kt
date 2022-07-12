@@ -22,7 +22,7 @@ import androidx.navigation.navDeepLink
 import com.leinardi.forlago.core.navigation.BuildConfig
 import com.leinardi.forlago.core.navigation.NavigationDestination
 
-object BarDestination : NavigationDestination {
+object BarDestination : NavigationDestination() {
     const val TEXT_PARAM = "text"
     private const val ROUTE = "bar"
 
@@ -43,7 +43,7 @@ object BarDestination : NavigationDestination {
         },
     )
 
-    override fun route() = "$ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
+    override val route = "$ROUTE/?$TEXT_PARAM={$TEXT_PARAM}"
 
     fun createRoute(text: String) = "$ROUTE/?$TEXT_PARAM=$text"
 }
