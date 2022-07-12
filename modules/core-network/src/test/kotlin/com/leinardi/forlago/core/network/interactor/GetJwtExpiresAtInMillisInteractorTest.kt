@@ -41,6 +41,6 @@ class GetJwtExpiresAtInMillisInteractorTest {
     companion object {
         private const val EXPIRES_AT = 1_643_025_283L
         private const val VALID_JWT = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQzMDI1Mjgz" +
-                "LCJvcmlnX2lhdCI6IjdmYTJjNDg3NjNiYTQwM2RhOWJhZWIxN2Y5M2JlNWQ2IiwidXNlcl9pZCI6MjA4Mn0.TMf-gUxhmnbm_MkDozvSoT60TuAwPtd4fHmj4YIcjMY"
+            "LCJvcmlnX2lhdCI6IjdmYTJjNDg3NjNiYTQwM2RhOWJhZWIxN2Y5M2JlNWQ2IiwidXNlcl9pZCI6MjA4Mn0.TMf-gUxhmnbm_MkDozvSoT60TuAwPtd4fHmj4YIcjMY"
     }
 }

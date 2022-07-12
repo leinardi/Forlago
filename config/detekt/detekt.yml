@@ -337,6 +337,8 @@ complexity:
   NestedBlockDepth:
     active: true
     threshold: 5 # Custom
+    ignoreAnnotated: # Custom
+      - 'Composable'
   ReplaceSafeCallChainWithRun:
     active: true # Custom
   StringLiteralDuplication:

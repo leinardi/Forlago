@@ -107,9 +107,12 @@ internal fun PreviewSettingsMenuLinkAction() {
             title = { Text(text = "Hello") },
             subtitle = { Text(text = "This is a longer text") },
             action = {
-                Checkbox(checked = rememberCheckBoxState, onCheckedChange = { newState ->
-                    rememberCheckBoxState = newState
-                })
+                Checkbox(
+                    checked = rememberCheckBoxState,
+                    onCheckedChange = { newState ->
+                        rememberCheckBoxState = newState
+                    },
+                )
             },
         ) { }
     }

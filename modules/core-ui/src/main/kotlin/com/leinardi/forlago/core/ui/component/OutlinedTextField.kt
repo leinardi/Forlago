@@ -92,9 +92,11 @@ fun OutlinedTextField(
     val textFieldTrailingIcon: @Composable (() -> Unit) = {
         when {
             error -> Icon(Icons.Filled.Error, null)
-            passwordToggleEnabled -> IconButton(onClick = {
-                passwordVisibility = !passwordVisibility
-            }) {
+            passwordToggleEnabled -> IconButton(
+                onClick = {
+                    passwordVisibility = !passwordVisibility
+                },
+            ) {
                 Icon(passwordToggleIcon, null)
             }
             else -> trailingIcon?.invoke()
