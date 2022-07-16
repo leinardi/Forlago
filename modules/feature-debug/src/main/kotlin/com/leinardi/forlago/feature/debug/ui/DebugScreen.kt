@@ -86,7 +86,7 @@ fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun DebugScreen(
+private fun DebugScreen(
     state: State,
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,

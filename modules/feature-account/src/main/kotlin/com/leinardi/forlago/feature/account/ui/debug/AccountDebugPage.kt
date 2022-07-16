@@ -59,7 +59,7 @@ fun AccountDebugPage(viewModel: AccountDebugViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun AccountDebugPage(
+private fun AccountDebugPage(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: AccountDebugContract.Event) -> Unit,

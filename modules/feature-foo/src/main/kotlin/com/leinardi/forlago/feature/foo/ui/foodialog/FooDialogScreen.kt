@@ -33,7 +33,7 @@ fun FooDialogScreen(viewModel: FooDialogViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun FooDialogScreen(
+private fun FooDialogScreen(
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {

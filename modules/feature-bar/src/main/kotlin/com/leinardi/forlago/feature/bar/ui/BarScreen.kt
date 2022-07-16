@@ -49,7 +49,7 @@ fun BarScreen(viewModel: BarViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun BarScreen(
+private fun BarScreen(
     state: State,
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,

@@ -63,7 +63,7 @@ fun FooScreen(viewModel: FooViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun FooScreen(
+private fun FooScreen(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,

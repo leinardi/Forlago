@@ -43,7 +43,7 @@ fun @PlaceholderName@DebugPage(viewModel: @PlaceholderName@DebugViewModel = hilt
 }
 
 @Composable
-fun @PlaceholderName@DebugPage(
+private fun @PlaceholderName@DebugPage(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: @PlaceholderName@DebugContract.Event) -> Unit,

@@ -67,7 +67,7 @@ fun SignInScreen(viewModel: SignInViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun SignInScreen(
+private fun SignInScreen(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,

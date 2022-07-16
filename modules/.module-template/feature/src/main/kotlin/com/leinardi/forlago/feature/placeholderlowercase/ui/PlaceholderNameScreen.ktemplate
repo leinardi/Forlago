@@ -59,7 +59,7 @@ fun @PlaceholderName@Screen(viewModel: @PlaceholderName@ViewModel = hiltViewMode
 }
 
 @Composable
-fun @PlaceholderName@Screen(
+private fun @PlaceholderName@Screen(
     state: @PlaceholderName@Contract.State,
     effectFlow: Flow<@PlaceholderName@Contract.Effect>,
     sendEvent: (event: @PlaceholderName@Contract.Event) -> Unit,
