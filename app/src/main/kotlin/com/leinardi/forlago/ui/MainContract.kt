@@ -21,10 +21,10 @@ import androidx.annotation.StringRes
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.R
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.ui.base.ViewEffect
-import com.leinardi.forlago.core.ui.base.ViewEvent
-import com.leinardi.forlago.core.ui.base.ViewState
+import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.ui.base.ViewEffect
+import com.leinardi.forlago.library.ui.base.ViewEvent
+import com.leinardi.forlago.library.ui.base.ViewState
 
 object MainContract {
     data class State(

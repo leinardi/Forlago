@@ -40,13 +40,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
-import com.leinardi.forlago.core.ui.component.ProgressButton
-import com.leinardi.forlago.core.ui.component.TopAppBar
 import com.leinardi.forlago.feature.foo.R
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
+import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.component.ProgressButton
+import com.leinardi.forlago.library.ui.component.TopAppBar
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect

@@ -19,13 +19,13 @@ package com.leinardi.forlago.feature.account
 import android.accounts.AccountManager
 import android.content.Intent
 import androidx.compose.runtime.Composable
-import com.leinardi.forlago.core.android.AccountAuthenticatorConfig
-import com.leinardi.forlago.core.feature.Feature
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.navigation.NavigationDestination
-import com.leinardi.forlago.core.navigation.destination.account.SignInDestination
 import com.leinardi.forlago.feature.account.ui.SignInScreen
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugPage
+import com.leinardi.forlago.library.android.AccountAuthenticatorConfig
+import com.leinardi.forlago.library.feature.Feature
+import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.NavigationDestination
+import com.leinardi.forlago.library.navigation.destination.account.SignInDestination
 
 class AccountFeature(
     val mainActivityIntent: Intent,

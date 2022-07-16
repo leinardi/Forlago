@@ -16,9 +16,9 @@
 
 package com.leinardi.forlago.feature.foo.ui.foodialog
 
-import com.leinardi.forlago.core.ui.base.ViewEffect
-import com.leinardi.forlago.core.ui.base.ViewEvent
-import com.leinardi.forlago.core.ui.base.ViewState
+import com.leinardi.forlago.library.ui.base.ViewEffect
+import com.leinardi.forlago.library.ui.base.ViewEvent
+import com.leinardi.forlago.library.ui.base.ViewState
 
 object FooDialogContract {
     object State : ViewState

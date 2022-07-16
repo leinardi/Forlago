@@ -4,8 +4,8 @@ Project ':app'
 ------------------------------------------------------------
 
 debugAndroidTestRuntimeClasspath - Runtime classpath of compilation 'debugAndroidTest' (target  (androidJvm)).
-+--- project :modules:core-test
-|    +--- project :modules:core-android
++--- project :modules:library-test
+|    +--- project :modules:library-android
 |    |    +--- com.google.android.play:core:1.10.3
 |    |    +--- com.google.android.play:core-ktx:1.8.1
 |    |    |    +--- com.google.android.play:core:1.8.0 -> 1.10.3

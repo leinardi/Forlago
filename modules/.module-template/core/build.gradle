@@ -15,11 +15,11 @@
  */
 
 plugins {
-    id 'forlago.android-core-conventions'
+    id 'forlago.android-library-conventions'
 }
 
 android {
-    namespace "com.leinardi.forlago.core.@placeholderlowercase@"
+    namespace "com.leinardi.forlago.library.@placeholderlowercase@"
     resourcePrefix '@placeholder_snake_case@_'
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-@placeholderlowercase@-consumer-rules.pro"

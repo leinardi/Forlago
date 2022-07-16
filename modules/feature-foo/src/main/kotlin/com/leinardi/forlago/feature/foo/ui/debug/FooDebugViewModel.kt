@@ -16,10 +16,10 @@
 
 package com.leinardi.forlago.feature.foo.ui.debug
 
-import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.foo.ui.debug.FooDebugContract.Effect
 import com.leinardi.forlago.feature.foo.ui.debug.FooDebugContract.Event
 import com.leinardi.forlago.feature.foo.ui.debug.FooDebugContract.State
+import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

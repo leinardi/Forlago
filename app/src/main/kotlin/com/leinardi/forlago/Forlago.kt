@@ -26,8 +26,8 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.util.DebugLogger
-import com.leinardi.forlago.core.feature.Feature
-import com.leinardi.forlago.core.feature.FeatureManager
+import com.leinardi.forlago.library.feature.Feature
+import com.leinardi.forlago.library.feature.FeatureManager
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import javax.inject.Inject

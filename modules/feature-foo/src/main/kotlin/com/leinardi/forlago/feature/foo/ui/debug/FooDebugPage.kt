@@ -24,7 +24,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.leinardi.forlago.core.ui.component.SettingsMenuLink
+import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 
 @Composable
 fun FooDebugPage(

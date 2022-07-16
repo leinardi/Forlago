@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.core.navigation.destination.@placeholderlowercase@
+package com.leinardi.forlago.library.navigation.destination.@placeholderlowercase@
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
-import com.leinardi.forlago.core.navigation.BuildConfig
-import com.leinardi.forlago.core.navigation.NavigationDestination
+import com.leinardi.forlago.library.navigation.BuildConfig
+import com.leinardi.forlago.library.navigation.NavigationDestination
 
 object @PlaceholderName@Destination : NavigationDestination {
     const val TEXT_PARAM = "text"

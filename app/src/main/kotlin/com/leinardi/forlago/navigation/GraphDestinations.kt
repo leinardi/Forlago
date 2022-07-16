@@ -19,8 +19,8 @@ package com.leinardi.forlago.navigation
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
-import com.leinardi.forlago.core.android.initializer.ContextProvider
 import com.leinardi.forlago.di.AppEntryPoints
+import com.leinardi.forlago.library.android.initializer.ContextProvider
 import dagger.hilt.EntryPoints
 
 fun NavGraphBuilder.addComposableDestinations() {

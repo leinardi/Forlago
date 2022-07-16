@@ -16,11 +16,11 @@
 
 package com.leinardi.forlago.feature.foo.ui.foodialog
 
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogContract.Event
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogContract.State
+import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

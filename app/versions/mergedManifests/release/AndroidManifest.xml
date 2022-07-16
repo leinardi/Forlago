@@ -92,10 +92,10 @@
                 android:name="com.leinardi.forlago.feature.debug.initializer.DebugInitializer"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.forlago.core.android.initializer.ContextProvider"
+                android:name="com.leinardi.forlago.library.android.initializer.ContextProvider"
                 android:value="androidx.startup" />
             <meta-data
-                android:name="com.leinardi.forlago.core.logging.initializer.TimberInitializer"
+                android:name="com.leinardi.forlago.library.logging.initializer.TimberInitializer"
                 android:value="androidx.startup" /> <!-- This entry makes ApolloInitializer discoverable. -->
             <meta-data
                 android:name="com.apollographql.apollo3.cache.normalized.sql.ApolloInitializer"
