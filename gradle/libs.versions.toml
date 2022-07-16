@@ -11,14 +11,16 @@ androidx-lifecycle = "2.5.0"
 androidx-navigation = "2.5.0"
 androidx-room = "2.4.2"
 androidx-test = "1.4.0"
-apollo = "3.3.2"
-coroutines = "1.6.3"
+apollo = "3.4.0"
+coroutines = "1.6.4"
 detekt = "1.20.0"
 diktat = "1.2.1"
-gradle = "7.4.2"
+gradle = "7.5"
 greclipse = "4.19.0"
 hilt = "2.42"
 kotlin = "1.7.0"
+kotlinpoet = "1.12.0"
+ksp = "1.7.0-1.0.6"
 ktlint = "0.43.0"
 material = "1.6.1"
 mockk = "1.12.4"
@@ -31,6 +33,7 @@ aboutlibraries = { module = "com.mikepenz:aboutlibraries-compose", version.ref =
 aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutlibraries" }
 accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 accompanist-insets-ui = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanist" }
+accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanist" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanist" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
@@ -106,10 +109,13 @@ kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions",
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+kotlinpoet = { module = "com.squareup:kotlinpoet", version = "kotlinpoet" }
+kotlinpoet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlinpoet" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version = "1.3.3" }
+ksp-symbol-processing-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.9.1" }
 maps = { module = "com.google.maps.android:maps-ktx", version = "3.4.0" }
-maps-compose = { module = "com.google.maps.android:maps-compose", version = "2.5.0" }
+maps-compose = { module = "com.google.maps.android:maps-compose", version = "2.5.2" }
 maps-utils-ktx = { module = "com.google.maps.android:maps-utils-ktx", version = "3.4.0" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
@@ -132,25 +138,27 @@ tink = { module = "com.google.crypto.tink:tink-android", version = "1.6.1" }
 # plugins
 plugin-aboutlibraries = { module = "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin", version.ref = "aboutlibraries" }
 plugin-android = { module = "com.android.tools.build:gradle", version = "7.2.1" }
-plugin-androidcachefix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.4.6" }
+plugin-androidcachefix = { module = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin", version = "2.5.5" }
 plugin-androidx-navigation-safeargs = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
-plugin-appversioning = { module = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin", version = "1.0.0" }
+plugin-appversioning = { module = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin", version = "1.1.2" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-plugin-easylauncher = { module = "com.project.starter:easylauncher", version = "5.0.1" }
+plugin-easylauncher = { module = "com.project.starter:easylauncher", version = "5.1.2" }
 plugin-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "2.8.0" }
 plugin-firebase-perf = { module = "com.google.firebase:perf-plugin", version = "1.4.1" }
 plugin-google-services = { module = "com.google.gms:google-services", version = "4.3.10" }
 plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 plugin-jdkdesugar = { module = "com.android.tools:desugar_jdk_libs", version = "1.1.5" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-plugin-ruler = { module = "com.spotify.ruler:ruler-gradle-plugin", version = "1.2.0" }
+plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+plugin-ruler = { module = "com.spotify.ruler:ruler-gradle-plugin", version = "1.2.1" }
 plugin-spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.8.0" }
-plugin-versionsgradle = { module = "com.github.ben-manes:gradle-versions-plugin", version = "0.39.0" }
-plugin-violation = { module = "se.bjurr.violations:violation-comments-to-github-gradle-plugin", version = "1.68.3" }
+plugin-versionsgradle = { module = "com.github.ben-manes:gradle-versions-plugin", version = "0.42.0" }
+plugin-violation = { module = "se.bjurr.violations:violation-comments-to-github-gradle-plugin", version = "1.69.0" }
 
 [plugins]
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
 google-secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version = "2.0.1" }
 gradledoctor = { id = "com.osacky.doctor", version = "0.8.1" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 tripletplay = { id = "com.github.triplet.play", version = "3.7.0" }
