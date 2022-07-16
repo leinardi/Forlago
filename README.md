@@ -32,6 +32,7 @@ After successfully forking the template you have to:
 TBD
 
 ### Gradle modules' dependency graph
+
 <img src="/art/project.dot.png" width="800" align="middle"/>
 
 ## Static Analysis 🔍
@@ -88,10 +89,11 @@ bundle to the Play Store.
 
 ### Enabling Firebase Crashlytics
 
-The first step is to [register your new app with Firebase](https://firebase.google.com/docs/android/setup?hl=en) (don't forget to add [both release and
-debug packages](https://firebase.googleblog.com/2016/08/organizing-your-firebase-enabled-android-app-builds.html) to the same Firebase project).
-After that, you should put the `google-services.json`, containing both release and debug applications, inside the `app/` directory.
-Now you have to [Enable Crashlytics in the Firebase console](https://firebase.google.com/docs/crashlytics/get-started?hl=en&platform=android#enable-in-console)
+The first step is to [register your new app with Firebase](https://firebase.google.com/docs/android/setup?hl=en) (don't forget to
+add [both release and debug packages](https://firebase.googleblog.com/2016/08/organizing-your-firebase-enabled-android-app-builds.html) to the same
+Firebase project). After that, you should put the `google-services.json`, containing both release and debug applications, inside the `app/` directory.
+Now you have
+to [Enable Crashlytics in the Firebase console](https://firebase.google.com/docs/crashlytics/get-started?hl=en&platform=android#enable-in-console)
 and, finally, open the Debug menu and trigger a crash using the Force Crash button.
 
 ### Encrypting your secrets

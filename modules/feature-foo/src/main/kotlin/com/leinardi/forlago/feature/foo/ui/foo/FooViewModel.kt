@@ -18,14 +18,14 @@ package com.leinardi.forlago.feature.foo.ui.foo
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import com.leinardi.forlago.core.navigation.ForlagoNavigator
-import com.leinardi.forlago.core.navigation.destination.bar.BarDestination
-import com.leinardi.forlago.core.navigation.destination.foo.FooDialogDestination
-import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.foo.R
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
+import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.destination.bar.BarDestination
+import com.leinardi.forlago.library.navigation.destination.foo.FooDialogDestination
+import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

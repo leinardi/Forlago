@@ -42,7 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.core.ui.theme.@PlaceholderName@Theme
+import com.leinardi.forlago.library.ui.theme.@PlaceholderName@Theme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -59,7 +59,7 @@ fun @PlaceholderName@Screen(viewModel: @PlaceholderName@ViewModel = hiltViewMode
 }
 
 @Composable
-fun @PlaceholderName@Screen(
+private fun @PlaceholderName@Screen(
     state: @PlaceholderName@Contract.State,
     effectFlow: Flow<@PlaceholderName@Contract.Effect>,
     sendEvent: (event: @PlaceholderName@Contract.Event) -> Unit,
@@ -77,42 +77,41 @@ fun @PlaceholderName@Screen(
     }
     Scaffold(
         topBar = { TopAppBar(title = { Text("@PlaceholderName@ screen") }) },
-        content = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
-                    .semantics { contentDescription = "@PlaceholderName@" },
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) { scaffoldPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+                .semantics { contentDescription = "@PlaceholderName@" },
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .background(Color.LightGray)
             ) {
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .background(Color.LightGray)
-                ) {
-                    Text(
-                        "Text = ${state.text}",
-                        Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        style = typography.h4,
-                    )
-                }
-                Button(
-                    onClick = { sendEvent(@PlaceholderName@Contract.Event.OnBackButtonClicked) },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Back")
-                }
-                Button(
-                    onClick = { sendEvent(@PlaceholderName@Contract.Event.OnShowSnackbarButtonClicked) },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Show Snackbar")
-                }
+                Text(
+                    "Text = ${state.text}",
+                    Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = typography.h4,
+                )
+            }
+            Button(
+                onClick = { sendEvent(@PlaceholderName@Contract.Event.OnBackButtonClicked) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Back")
+            }
+            Button(
+                onClick = { sendEvent(@PlaceholderName@Contract.Event.OnShowSnackbarButtonClicked) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Show Snackbar")
             }
         }
-    )
+    }
 }
 
 @Preview

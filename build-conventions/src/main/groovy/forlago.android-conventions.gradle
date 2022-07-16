@@ -35,7 +35,7 @@ android {
         minSdk config.android.minSdk
         targetSdk config.android.targetSdk
 
-        testInstrumentationRunner "com.leinardi.forlago.core.test.runner.HiltTestRunner"
+        testInstrumentationRunner "com.leinardi.forlago.library.test.runner.HiltTestRunner"
         // The following argument makes the Android Test Orchestrator run its
         // "pm clear" command after each test invocation. This command ensures
         // that the app's state is completely cleared between tests.
@@ -106,9 +106,9 @@ dependencies {
     implementation libs.coroutines.android
     implementation libs.coroutines.core
     coreLibraryDesugaring libs.desugar
-    testImplementation projects.modules.coreTest
+    testImplementation projects.modules.libraryTest
     testImplementation libs.mockk
-    androidTestImplementation projects.modules.coreTest
+    androidTestImplementation projects.modules.libraryTest
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.androidx.test.runner

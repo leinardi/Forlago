@@ -57,14 +57,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.accompanist.pager.rememberPagerState
-import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.core.ui.component.BottomNavigation
-import com.leinardi.forlago.core.ui.component.ScrollableTabRow
-import com.leinardi.forlago.core.ui.component.SettingsGroup
-import com.leinardi.forlago.core.ui.component.SettingsMenuLink
-import com.leinardi.forlago.core.ui.component.TopAppBar
-import com.leinardi.forlago.core.ui.theme.ForlagoTheme
-import com.leinardi.forlago.core.ui.theme.ForlagoTypography
 import com.leinardi.forlago.feature.debug.R
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
@@ -72,6 +64,14 @@ import com.leinardi.forlago.feature.debug.ui.DebugContract.State
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Features
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
+import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.ui.component.BottomNavigation
+import com.leinardi.forlago.library.ui.component.ScrollableTabRow
+import com.leinardi.forlago.library.ui.component.SettingsGroup
+import com.leinardi.forlago.library.ui.component.SettingsMenuLink
+import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.library.ui.theme.ForlagoTypography
 import kotlinx.coroutines.launch
 
 @Composable
@@ -86,7 +86,7 @@ fun DebugScreen(viewModel: DebugViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun DebugScreen(
+private fun DebugScreen(
     state: State,
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
@@ -99,45 +99,6 @@ fun DebugScreen(
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
                 elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
             )
-        },
-        content = { scaffoldPadding ->
-            when (state.selectedNavigationItem) {
-                Info -> Info(
-                    state = state,
-                    modifier = modifier
-                        .background(MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(
-                            top = scaffoldPadding.calculateTopPadding(),
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                        ),
-                )
-                Options -> Options(
-                    state = state,
-                    sendEvent = sendEvent,
-                    modifier = modifier
-                        .background(MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(
-                            start = 0.dp,
-                            end = 0.dp,
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                            top = scaffoldPadding.calculateTopPadding(),
-                        ),
-                )
-                Features -> Features(
-                    state = state,
-                    modifier = modifier
-                        .background(MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(
-                            start = 0.dp,
-                            end = 0.dp,
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                            top = scaffoldPadding.calculateTopPadding(),
-                        ),
-                )
-            }
         },
         bottomBar = {
             BottomNavigation {
@@ -153,7 +114,45 @@ fun DebugScreen(
                 }
             }
         },
-    )
+    ) { scaffoldPadding ->
+        when (state.selectedNavigationItem) {
+            Info -> Info(
+                state = state,
+                modifier = modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(
+                        top = scaffoldPadding.calculateTopPadding(),
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                    ),
+            )
+            Options -> Options(
+                state = state,
+                sendEvent = sendEvent,
+                modifier = modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(
+                        start = 0.dp,
+                        end = 0.dp,
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                        top = scaffoldPadding.calculateTopPadding(),
+                    ),
+            )
+            Features -> Features(
+                state = state,
+                modifier = modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(
+                        start = 0.dp,
+                        end = 0.dp,
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                        top = scaffoldPadding.calculateTopPadding(),
+                    ),
+            )
+        }
+    }
 }
 
 @Composable

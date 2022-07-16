@@ -40,13 +40,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
-import com.leinardi.forlago.core.ui.component.ProgressButton
-import com.leinardi.forlago.core.ui.component.TopAppBar
 import com.leinardi.forlago.feature.foo.R
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
+import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.component.ProgressButton
+import com.leinardi.forlago.library.ui.component.TopAppBar
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -63,7 +63,7 @@ fun FooScreen(viewModel: FooViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun FooScreen(
+private fun FooScreen(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,
@@ -84,47 +84,46 @@ fun FooScreen(
     Scaffold(
         modifier = modifier,
         topBar = { TopAppBar(title = stringResource(R.string.i18n_foo_screen_title)) },
-        content = { scaffoldPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        start = 16.dp,
-                        top = scaffoldPadding.calculateTopPadding() + 16.dp,
-                        end = 16.dp,
-                        bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
-                    )
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                OutlinedTextField(
-                    value = textFieldValue,
-                    onValueChange = { textFieldValue = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
+    ) { scaffoldPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    start = 16.dp,
+                    top = scaffoldPadding.calculateTopPadding() + 16.dp,
+                    end = 16.dp,
+                    bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
                 )
-                ProgressButton(
-                    onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
-                    loading = state.isLoading,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_foo_send_text_to_bar))
-                }
-                Button(
-                    onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_foo_show_snackbar))
-                }
-                Button(
-                    onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_foo_show_dialog))
-                }
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            OutlinedTextField(
+                value = textFieldValue,
+                onValueChange = { textFieldValue = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
+            )
+            ProgressButton(
+                onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
+                loading = state.isLoading,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_foo_send_text_to_bar))
             }
-        },
-    )
+            Button(
+                onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_foo_show_snackbar))
+            }
+            Button(
+                onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_foo_show_dialog))
+            }
+        }
+    }
 }
 
 @Preview

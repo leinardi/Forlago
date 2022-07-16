@@ -43,14 +43,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
-import com.leinardi.forlago.core.ui.component.OutlinedTextField
-import com.leinardi.forlago.core.ui.component.ProgressButton
-import com.leinardi.forlago.core.ui.component.TopAppBar
-import com.leinardi.forlago.core.ui.theme.ForlagoTheme
 import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
 import com.leinardi.forlago.feature.account.ui.SignInContract.Event
 import com.leinardi.forlago.feature.account.ui.SignInContract.State
+import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.component.OutlinedTextField
+import com.leinardi.forlago.library.ui.component.ProgressButton
+import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -67,7 +67,7 @@ fun SignInScreen(viewModel: SignInViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun SignInScreen(
+private fun SignInScreen(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,
@@ -91,66 +91,65 @@ fun SignInScreen(
     }
     Scaffold(
         topBar = { TopAppBar(title = "Account screen") },
-        content = { scaffoldPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .padding(
-                        start = 16.dp,
-                        top = scaffoldPadding.calculateTopPadding() + 16.dp,
-                        end = 16.dp,
-                        bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
-                    ),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                val localFocusManager = LocalFocusManager.current
-                var username by rememberSaveable { mutableStateOf(state.username) }
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    enabled = !state.isReauthenticate,
-                    value = username,
-                    onValueChange = { username = it },
-                    label = "Username",
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
-                        imeAction = ImeAction.Next,
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onNext = { localFocusManager.moveFocus(FocusDirection.Down) },
-                    ),
-                )
-                var password by rememberSaveable { mutableStateOf(state.password) }
-                OutlinedTextField(
-                    modifier = Modifier.fillMaxWidth(),
-                    value = password,
-                    onValueChange = { password = it },
-                    label = "Password",
-                    passwordToggleEnabled = true,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Password,
-                        imeAction = ImeAction.Done,
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            localFocusManager.clearFocus()
-                            sendEvent(Event.OnSignInButtonClicked(username, password))
-                        },
-                    ),
-                )
-                ProgressButton(
-                    onClick = {
+    ) { scaffoldPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(
+                    start = 16.dp,
+                    top = scaffoldPadding.calculateTopPadding() + 16.dp,
+                    end = 16.dp,
+                    bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
+                ),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            val localFocusManager = LocalFocusManager.current
+            var username by rememberSaveable { mutableStateOf(state.username) }
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !state.isReauthenticate,
+                value = username,
+                onValueChange = { username = it },
+                label = "Username",
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next,
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = { localFocusManager.moveFocus(FocusDirection.Down) },
+                ),
+            )
+            var password by rememberSaveable { mutableStateOf(state.password) }
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = password,
+                onValueChange = { password = it },
+                label = "Password",
+                passwordToggleEnabled = true,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done,
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
                         localFocusManager.clearFocus()
                         sendEvent(Event.OnSignInButtonClicked(username, password))
                     },
-                    loading = state.isLoading,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text("Sign in")
-                }
+                ),
+            )
+            ProgressButton(
+                onClick = {
+                    localFocusManager.clearFocus()
+                    sendEvent(Event.OnSignInButtonClicked(username, password))
+                },
+                loading = state.isLoading,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text("Sign in")
             }
-        },
-    )
+        }
+    }
 }
 
 @Preview

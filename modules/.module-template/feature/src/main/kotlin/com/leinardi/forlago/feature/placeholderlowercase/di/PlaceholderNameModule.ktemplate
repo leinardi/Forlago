@@ -16,7 +16,7 @@
 
 package com.leinardi.forlago.feature.@placeholderlowercase@.di
 
-import com.leinardi.forlago.core.feature.Feature
+import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.feature.@placeholderlowercase@.@PlaceholderName@Feature
 import dagger.Module
 import dagger.Provides

@@ -26,7 +26,7 @@ tasks.register("generateFeatureDestinationObject") {
 
             def tokens = generatePlaceholderTokens()
             def templateDirPath = rootProject.file("modules/.module-template/destination")
-            def navigationDir = rootProject.file("modules/core-navigation/src/main/kotlin/com/leinardi/forlago/core/navigation/destination/${tokens.placeholderlowercase}")
+            def navigationDir = rootProject.file("modules/library-navigation/src/main/kotlin/com/leinardi/forlago/library/navigation/destination/${tokens.placeholderlowercase}")
 
             from templateDirPath
             into navigationDir
@@ -59,7 +59,7 @@ tasks.register("generateFeatureModule") {
 
             def tokens = generatePlaceholderTokens()
             def templateDirPath = rootProject.file("modules/.module-template/feature")
-            def featureDir = rootProject.file("modules/feature-${tokens.placeholderlowercase}")
+            def featureDir = rootProject.file("modules/feature-${tokens.placeholderKebabCase}")
 
             from templateDirPath
             into featureDir
@@ -83,7 +83,7 @@ tasks.register("generateFeatureModule") {
     }
 }
 
-tasks.register("generateCoreModule") {
+tasks.register("generateLibraryModule") {
     doLast {
         copy {
             includeEmptyDirs = false
@@ -92,11 +92,11 @@ tasks.register("generateCoreModule") {
             moduleName.metaClass.toSnakeCase = { replaceAll(/([A-Z])/, /_$1/).toLowerCase().replaceAll(/^_/, '') }
 
             def tokens = generatePlaceholderTokens()
-            def templateDirPath = rootProject.file("modules/.module-template/core")
-            def coreDirPath = rootProject.file("modules/core-${tokens.placeholderlowercase}")
+            def templateDirPath = rootProject.file("modules/.module-template/library")
+            def libraryDirPath = rootProject.file("modules/library-${tokens.placeholderKebabCase}")
 
             from templateDirPath
-            into coreDirPath
+            into libraryDirPath
 
             // Directory and file name replacement
             tokens.each { placeholderKey, placeholderValue ->
@@ -112,7 +112,7 @@ tasks.register("generateCoreModule") {
             // Content replacement
             filter(ReplaceTokens, tokens: tokens)
 
-            printAddModuleHelp(tokens, coreDirPath)
+            printAddModuleHelp(tokens, libraryDirPath)
         }
     }
 }
@@ -131,13 +131,13 @@ private void printAddModuleHelp(LinkedHashMap<String, Object> tokens, moduleDirP
     1. Declare the module in settings.gradle (alphabetically ordered):
         // Modules
         [...]
-        ':modules:$moduleDirPath.name',
+        ':modules:${moduleDirPath.name}',
         [...]
 
     2. Declare the dependency of the module on build.gradle that requires it (alphabetically ordered):
         // Modules
         [...]
-        implementation projects.modules.${$moduleDirPath.name.replace(tokens.placeholderlowercase, tokens.PlaceholderUncaptalized)}')
+        implementation projects.modules.${moduleDirPath.name.replace("-" + tokens.placeholderKebabCase, tokens.PlaceholderName)}
         [...]
 
     3. Synchronize the project for the new module to be available.
@@ -150,7 +150,8 @@ private LinkedHashMap<String, Object> generatePlaceholderTokens() {
         placeholderUncaptalized: moduleName.uncapitalize(),
         PLACEHOLDER_UPPERCASE  : moduleName.toSnakeCase().toUpperCase(),
         placeholderlowercase   : moduleName.toLowerCase(),
-        placeholder_snake_case : moduleName.toSnakeCase()
+        placeholder_snake_case : moduleName.toSnakeCase(),
+        placeholderKebabCase   : moduleName.toSnakeCase().replace("_", "-"),
     ]
     tokens
 }

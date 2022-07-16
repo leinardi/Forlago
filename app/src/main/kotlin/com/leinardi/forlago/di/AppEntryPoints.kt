@@ -16,7 +16,7 @@
 
 package com.leinardi.forlago.di
 
-import com.leinardi.forlago.core.feature.FeatureManager
+import com.leinardi.forlago.library.feature.FeatureManager
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

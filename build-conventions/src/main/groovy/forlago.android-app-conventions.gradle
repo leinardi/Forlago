@@ -55,6 +55,12 @@ easylauncher {
 
 dependencies {
 
+    // Modules
+    implementation projects.modules.libraryAndroid
+    implementation projects.modules.libraryI18n
+    implementation projects.modules.libraryLogging
+    implementation projects.modules.libraryUi
+
     // Android
     implementation libs.androidx.activity.compose
     implementation libs.androidx.core.ktx
@@ -68,12 +74,6 @@ dependencies {
     kapt libs.hilt.compiler
     implementation libs.timber
     debugImplementation libs.leakcanary
-
-    // Modules
-    implementation projects.modules.coreAndroid
-    implementation projects.modules.coreI18n
-    implementation projects.modules.coreLogging
-    implementation projects.modules.coreUi
 
 }
 

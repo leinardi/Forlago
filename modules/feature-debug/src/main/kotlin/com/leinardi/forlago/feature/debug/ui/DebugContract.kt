@@ -17,14 +17,14 @@
 package com.leinardi.forlago.feature.debug.ui
 
 import androidx.compose.runtime.Composable
-import com.leinardi.forlago.core.preferences.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.core.ui.base.ViewEffect
-import com.leinardi.forlago.core.ui.base.ViewEvent
-import com.leinardi.forlago.core.ui.base.ViewState
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Features
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
+import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.ui.base.ViewEffect
+import com.leinardi.forlago.library.ui.base.ViewEvent
+import com.leinardi.forlago.library.ui.base.ViewState
 
 object DebugContract {
     data class State(

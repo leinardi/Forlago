@@ -34,11 +34,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.core.android.ext.toLongDateTimeString
-import com.leinardi.forlago.core.ui.component.LocalSnackbarHostState
-import com.leinardi.forlago.core.ui.component.SettingsMenuLink
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.State
+import com.leinardi.forlago.library.android.ext.toLongDateTimeString
+import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -59,7 +59,7 @@ fun AccountDebugPage(viewModel: AccountDebugViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun AccountDebugPage(
+private fun AccountDebugPage(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: AccountDebugContract.Event) -> Unit,

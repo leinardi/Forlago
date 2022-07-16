@@ -337,6 +337,8 @@ complexity:
   NestedBlockDepth:
     active: true
     threshold: 5 # Custom
+    ignoreAnnotated: # Custom
+      - 'Composable'
   ReplaceSafeCallChainWithRun:
     active: true # Custom
   StringLiteralDuplication:
@@ -600,7 +602,7 @@ naming:
   TopLevelPropertyNaming:
     active: true
     excludes: [
-        '**/modules/core-ui/src/main/kotlin/com/leinardi/forlago/core/ui/component/**',
+        '**/modules/library-ui/src/main/kotlin/com/leinardi/forlago/library/ui/component/**',
       ] # Custom
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'

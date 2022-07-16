@@ -16,8 +16,8 @@
 
 package com.leinardi.forlago.feature.debug.di
 
-import com.leinardi.forlago.core.feature.Feature
 import com.leinardi.forlago.feature.debug.DebugFeature
+import com.leinardi.forlago.library.feature.Feature
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

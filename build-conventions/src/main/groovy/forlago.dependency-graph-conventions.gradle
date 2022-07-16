@@ -43,7 +43,7 @@ tasks.register("projectDependencyGraph") {
         def projects = new LinkedHashSet<Project>()
         def dependencies = new LinkedHashMap<Tuple2<Project, Project>, List<String>>()
         def featureProjects = []
-        def coreProjects = []
+        def libraryProjects = []
         def multiplatformProjects = []
         def jsProjects = []
         def androidProjects = []
@@ -57,8 +57,8 @@ tasks.register("projectDependencyGraph") {
             if (project.plugins.hasPlugin('forlago.android-feature-conventions')) {
                 featureProjects.add(project)
             }
-            if (project.plugins.hasPlugin('forlago.android-core-conventions')) {
-                coreProjects.add(project)
+            if (project.plugins.hasPlugin('forlago.android-library-conventions')) {
+                libraryProjects.add(project)
             }
             if (project.plugins.hasPlugin('org.jetbrains.kotlin.multiplatform')) {
                 multiplatformProjects.add(project)
@@ -105,7 +105,7 @@ tasks.register("projectDependencyGraph") {
 
             if (featureProjects.contains(project)) {
                 traits.add('fillcolor="#729500"')
-            } else if (coreProjects.contains(project)) {
+            } else if (libraryProjects.contains(project)) {
                 traits.add('fillcolor="#d8f96b"')
             } else if (multiplatformProjects.contains(project)) {
                 traits.add('fillcolor="#a69be4"')

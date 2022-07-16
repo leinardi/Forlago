@@ -15,7 +15,7 @@
  */
 
 plugins {
-    id 'forlago.android-core-conventions'
+    id 'forlago.android-library-conventions'
     id 'com.google.dagger.hilt.android'
 }
 
@@ -35,6 +35,13 @@ android {
 
 dependencies {
 
+    // Modules
+    api projects.modules.libraryFeature
+    implementation projects.modules.libraryAndroid
+    implementation projects.modules.libraryI18n
+    implementation projects.modules.libraryLogging
+    implementation projects.modules.libraryUi
+
     // Android
     implementation libs.androidx.activity.compose
     implementation libs.androidx.appcompat
@@ -49,12 +56,5 @@ dependencies {
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.compiler
     implementation libs.timber
-
-    // Modules
-    api projects.modules.coreFeature
-    implementation projects.modules.coreAndroid
-    implementation projects.modules.coreI18n
-    implementation projects.modules.coreLogging
-    implementation projects.modules.coreUi
 
 }

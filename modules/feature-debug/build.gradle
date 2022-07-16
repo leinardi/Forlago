@@ -27,8 +27,8 @@ android {
 }
 
 dependencies {
-    implementation projects.modules.coreNetwork
-    implementation projects.modules.corePreferences
+    implementation projects.modules.libraryNetwork
+    implementation projects.modules.libraryPreferences
     implementation libs.androidx.lifecycle.process
     implementation libs.androidx.startup
     implementation libs.seismic

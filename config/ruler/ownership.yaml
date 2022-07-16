@@ -1,8 +1,8 @@
 - identifier: :app
   owner: app
 
-- identifier: :modules:core*
-  owner: core
+- identifier: :modules:library*
+  owner: library
 
 - identifier: :modules:feature*
   owner: feature

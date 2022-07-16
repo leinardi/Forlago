@@ -16,10 +16,10 @@
 
 package com.leinardi.forlago.feature.bar.ui.debug
 
-import com.leinardi.forlago.core.ui.base.BaseViewModel
 import com.leinardi.forlago.feature.bar.ui.debug.BarDebugContract.Effect
 import com.leinardi.forlago.feature.bar.ui.debug.BarDebugContract.Event
 import com.leinardi.forlago.feature.bar.ui.debug.BarDebugContract.State
+import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
