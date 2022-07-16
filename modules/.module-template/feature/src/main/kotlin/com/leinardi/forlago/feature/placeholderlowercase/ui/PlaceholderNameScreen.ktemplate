@@ -77,42 +77,41 @@ private fun @PlaceholderName@Screen(
     }
     Scaffold(
         topBar = { TopAppBar(title = { Text("@PlaceholderName@ screen") }) },
-        content = {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
-                    .semantics { contentDescription = "@PlaceholderName@" },
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) { scaffoldPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+                .semantics { contentDescription = "@PlaceholderName@" },
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .background(Color.LightGray)
             ) {
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .background(Color.LightGray)
-                ) {
-                    Text(
-                        "Text = ${state.text}",
-                        Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        style = typography.h4,
-                    )
-                }
-                Button(
-                    onClick = { sendEvent(@PlaceholderName@Contract.Event.OnBackButtonClicked) },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Back")
-                }
-                Button(
-                    onClick = { sendEvent(@PlaceholderName@Contract.Event.OnShowSnackbarButtonClicked) },
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Show Snackbar")
-                }
+                Text(
+                    "Text = ${state.text}",
+                    Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = typography.h4,
+                )
+            }
+            Button(
+                onClick = { sendEvent(@PlaceholderName@Contract.Event.OnBackButtonClicked) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Back")
+            }
+            Button(
+                onClick = { sendEvent(@PlaceholderName@Contract.Event.OnShowSnackbarButtonClicked) },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Show Snackbar")
             }
         }
-    )
+    }
 }
 
 @Preview

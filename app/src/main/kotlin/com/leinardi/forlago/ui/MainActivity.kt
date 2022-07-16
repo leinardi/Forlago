@@ -181,23 +181,22 @@ fun ForlagoMainScreen(
     ) {
         Scaffold(
             scaffoldState = scaffoldState,
-            content = { scaffoldPadding ->
-                NavHost(
-                    // check https://google.github.io/accompanist/navigation-animation/
-                    navController = navHostController,
-                    startDestination = startDestination,
-                    modifier = Modifier
-                        .padding(
-                            top = scaffoldPadding.calculateTopPadding(),
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                        ),
-                    builder = {
-                        addComposableDestinations()
-                        addDialogDestinations()
-                    },
-                )
-            },
-        )
+        ) { scaffoldPadding ->
+            NavHost(
+                // check https://google.github.io/accompanist/navigation-animation/
+                navController = navHostController,
+                startDestination = startDestination,
+                modifier = Modifier
+                    .padding(
+                        top = scaffoldPadding.calculateTopPadding(),
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                    ),
+                builder = {
+                    addComposableDestinations()
+                    addDialogDestinations()
+                },
+            )
+        }
     }
 }
 

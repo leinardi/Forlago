@@ -84,47 +84,46 @@ private fun FooScreen(
     Scaffold(
         modifier = modifier,
         topBar = { TopAppBar(title = stringResource(R.string.i18n_foo_screen_title)) },
-        content = { scaffoldPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        start = 16.dp,
-                        top = scaffoldPadding.calculateTopPadding() + 16.dp,
-                        end = 16.dp,
-                        bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
-                    )
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
-                OutlinedTextField(
-                    value = textFieldValue,
-                    onValueChange = { textFieldValue = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
+    ) { scaffoldPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    start = 16.dp,
+                    top = scaffoldPadding.calculateTopPadding() + 16.dp,
+                    end = 16.dp,
+                    bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
                 )
-                ProgressButton(
-                    onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
-                    loading = state.isLoading,
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_foo_send_text_to_bar))
-                }
-                Button(
-                    onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_foo_show_snackbar))
-                }
-                Button(
-                    onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_foo_show_dialog))
-                }
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            OutlinedTextField(
+                value = textFieldValue,
+                onValueChange = { textFieldValue = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
+            )
+            ProgressButton(
+                onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
+                loading = state.isLoading,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_foo_send_text_to_bar))
             }
-        },
-    )
+            Button(
+                onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_foo_show_snackbar))
+            }
+            Button(
+                onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_foo_show_dialog))
+            }
+        }
+    }
 }
 
 @Preview

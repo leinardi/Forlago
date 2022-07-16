@@ -100,45 +100,6 @@ private fun DebugScreen(
                 elevation = if (state.selectedNavigationItem == Features) 0.dp else AppBarDefaults.TopAppBarElevation,
             )
         },
-        content = { scaffoldPadding ->
-            when (state.selectedNavigationItem) {
-                Info -> Info(
-                    state = state,
-                    modifier = modifier
-                        .background(MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(
-                            top = scaffoldPadding.calculateTopPadding(),
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                        ),
-                )
-                Options -> Options(
-                    state = state,
-                    sendEvent = sendEvent,
-                    modifier = modifier
-                        .background(MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(
-                            start = 0.dp,
-                            end = 0.dp,
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                            top = scaffoldPadding.calculateTopPadding(),
-                        ),
-                )
-                Features -> Features(
-                    state = state,
-                    modifier = modifier
-                        .background(MaterialTheme.colors.surface)
-                        .fillMaxSize()
-                        .padding(
-                            start = 0.dp,
-                            end = 0.dp,
-                            bottom = scaffoldPadding.calculateBottomPadding(),
-                            top = scaffoldPadding.calculateTopPadding(),
-                        ),
-                )
-            }
-        },
         bottomBar = {
             BottomNavigation {
                 state.bottomNavigationItems.forEachIndexed { index, screen ->
@@ -153,7 +114,45 @@ private fun DebugScreen(
                 }
             }
         },
-    )
+    ) { scaffoldPadding ->
+        when (state.selectedNavigationItem) {
+            Info -> Info(
+                state = state,
+                modifier = modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(
+                        top = scaffoldPadding.calculateTopPadding(),
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                    ),
+            )
+            Options -> Options(
+                state = state,
+                sendEvent = sendEvent,
+                modifier = modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(
+                        start = 0.dp,
+                        end = 0.dp,
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                        top = scaffoldPadding.calculateTopPadding(),
+                    ),
+            )
+            Features -> Features(
+                state = state,
+                modifier = modifier
+                    .background(MaterialTheme.colors.surface)
+                    .fillMaxSize()
+                    .padding(
+                        start = 0.dp,
+                        end = 0.dp,
+                        bottom = scaffoldPadding.calculateBottomPadding(),
+                        top = scaffoldPadding.calculateTopPadding(),
+                    ),
+            )
+        }
+    }
 }
 
 @Composable

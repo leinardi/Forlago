@@ -58,14 +58,13 @@ fun ProgressButton(
         border = border,
         colors = colors,
         contentPadding = contentPadding,
-        content = {
-            if (loading) {
-                AutoSizedCircularProgressIndicator(Modifier.size(20.dp))
-            } else {
-                content()
-            }
-        },
-    )
+    ) {
+        if (loading) {
+            AutoSizedCircularProgressIndicator(Modifier.size(20.dp))
+        } else {
+            content()
+        }
+    }
 }
 
 @Preview(showBackground = true)

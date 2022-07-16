@@ -62,39 +62,38 @@ private fun BarScreen(
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
             )
         },
-        content = { scaffoldPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        start = 16.dp,
-                        top = scaffoldPadding.calculateTopPadding() + 16.dp,
-                        end = 16.dp,
-                        bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
-                    )
-                    .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) { scaffoldPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    start = 16.dp,
+                    top = scaffoldPadding.calculateTopPadding() + 16.dp,
+                    end = 16.dp,
+                    bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
+                )
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Box(
+                Modifier
+                    .fillMaxWidth(),
             ) {
-                Box(
-                    Modifier
-                        .fillMaxWidth(),
-                ) {
-                    Text(
-                        stringResource(R.string.i18n_bar_text_received, state.text),
-                        Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        style = typography.h4,
-                    )
-                }
-                Button(
-                    onClick = { sendEvent(Event.OnBackButtonClicked) },
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Text(stringResource(R.string.i18n_back))
-                }
+                Text(
+                    stringResource(R.string.i18n_bar_text_received, state.text),
+                    Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                    style = typography.h4,
+                )
             }
-        },
-    )
+            Button(
+                onClick = { sendEvent(Event.OnBackButtonClicked) },
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(stringResource(R.string.i18n_back))
+            }
+        }
+    }
 }
 
 @Preview
