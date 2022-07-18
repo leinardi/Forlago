@@ -66,11 +66,11 @@ import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigatio
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
 import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.library.ui.component.BottomNavigation
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.ScrollableTabRow
 import com.leinardi.forlago.library.ui.component.SettingsGroup
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 import com.leinardi.forlago.library.ui.component.TopAppBar
-import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.ForlagoTypography
 import kotlinx.coroutines.launch
 
@@ -351,10 +351,10 @@ private fun Features(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewDebugScreen() {
-    ForlagoTheme {
+    PreviewFeature {
         val debugInfo = GetDebugInfoInteractor.DebugInfo(
             GetDebugInfoInteractor.DebugInfo.App(
                 name = "App name",

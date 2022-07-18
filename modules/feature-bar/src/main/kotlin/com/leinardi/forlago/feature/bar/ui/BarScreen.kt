@@ -38,6 +38,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.bar.R
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.TopAppBar
 
 @Composable
@@ -96,8 +97,10 @@ private fun BarScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewBarScreen() {
-    BarScreen(State("Preview"), {})
+    PreviewFeature {
+        BarScreen(State("Preview"), {})
+    }
 }

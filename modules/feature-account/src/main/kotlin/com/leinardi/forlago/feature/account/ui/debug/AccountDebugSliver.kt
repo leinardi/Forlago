@@ -161,7 +161,7 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewAccountDebugSliver() {
     AccountDebugSliver(

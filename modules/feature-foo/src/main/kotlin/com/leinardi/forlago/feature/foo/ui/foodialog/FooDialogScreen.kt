@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogContract.Event
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 
 @Composable
 fun FooDialogScreen(viewModel: FooDialogViewModel = hiltViewModel()) {
@@ -64,8 +65,10 @@ private fun FooDialogScreen(
     )
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewFooDialogScreen() {
-    FooDialogScreen({})
+    PreviewFeature {
+        FooDialogScreen({})
+    }
 }

@@ -45,6 +45,7 @@ import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.ProgressButton
 import com.leinardi.forlago.library.ui.component.TopAppBar
 import kotlinx.coroutines.channels.Channel
@@ -126,8 +127,10 @@ private fun FooScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewFooScreen() {
-    FooScreen(State("Preview", true), Channel<Effect>().receiveAsFlow(), {})
+    PreviewFeature {
+        FooScreen(State("Preview", true), Channel<Effect>().receiveAsFlow(), {})
+    }
 }

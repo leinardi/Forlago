@@ -41,7 +41,7 @@ fun FooDebugSliver(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewFooDebugSliver() {
     FooDebugSliver()

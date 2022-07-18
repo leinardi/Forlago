@@ -48,9 +48,9 @@ import com.leinardi.forlago.feature.account.ui.SignInContract.Event
 import com.leinardi.forlago.feature.account.ui.SignInContract.State
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.library.ui.component.OutlinedTextField
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.ProgressButton
 import com.leinardi.forlago.library.ui.component.TopAppBar
-import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -152,10 +152,10 @@ private fun SignInScreen(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun PreviewAccountScreen() {
-    ForlagoTheme {
+    PreviewFeature {
         SignInScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
     }
 }
