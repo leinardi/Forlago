@@ -17,7 +17,7 @@
 package com.leinardi.forlago.feature.foo
 
 import androidx.compose.runtime.Composable
-import com.leinardi.forlago.feature.foo.ui.debug.FooDebugPage
+import com.leinardi.forlago.feature.foo.ui.debug.FooDebugSliver
 import com.leinardi.forlago.feature.foo.ui.foo.FooScreen
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogScreen
 import com.leinardi.forlago.library.feature.Feature
@@ -36,5 +36,5 @@ class FooFeature : Feature() {
         FooDialogDestination to { FooDialogScreen() },
     )
 
-    override val debugComposable: @Composable () -> Unit = { FooDebugPage() }
+    override val debugComposable: @Composable () -> Unit = { FooDebugSliver() }
 }

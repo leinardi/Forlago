@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.feature.bar.ui.debug
+package com.leinardi.forlago.feature.foo.ui.debug
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 
 @Composable
-fun BarDebugPage(
+fun FooDebugSliver(
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -43,6 +43,6 @@ fun BarDebugPage(
 
 @Preview
 @Composable
-fun PreviewBarDebug() {
-    BarDebugPage()
+fun PreviewFooDebugSliver() {
+    FooDebugSliver()
 }

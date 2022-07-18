@@ -46,12 +46,12 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
-fun AccountDebugPage(viewModel: AccountDebugViewModel = hiltViewModel()) {
+fun AccountDebugSliver(viewModel: AccountDebugViewModel = hiltViewModel()) {
     DisposableEffect(viewModel) {
         viewModel.onUiEvent(AccountDebugContract.Event.OnViewAttached)
         onDispose { viewModel.onUiEvent(AccountDebugContract.Event.OnViewDetached) }
     }
-    AccountDebugPage(
+    AccountDebugSliver(
         state = viewModel.viewState.value,
         effectFlow = viewModel.effect,
         sendEvent = { viewModel.onUiEvent(it) },
@@ -59,7 +59,7 @@ fun AccountDebugPage(viewModel: AccountDebugViewModel = hiltViewModel()) {
 }
 
 @Composable
-private fun AccountDebugPage(
+private fun AccountDebugSliver(
     state: State,
     effectFlow: Flow<Effect>,
     sendEvent: (event: AccountDebugContract.Event) -> Unit,
@@ -163,8 +163,8 @@ private fun EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit)
 
 @Preview
 @Composable
-fun PreviewAccountDebug() {
-    AccountDebugPage(
+fun PreviewAccountDebugSliver() {
+    AccountDebugSliver(
         State("AccountName", "refreshToken", "accessToken", System.currentTimeMillis()),
         Channel<Effect>().receiveAsFlow(),
         {},

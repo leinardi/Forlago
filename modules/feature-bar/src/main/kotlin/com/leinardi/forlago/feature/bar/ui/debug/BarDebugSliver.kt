@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Roberto Leinardi.
+ * Copyright 2022 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug
+package com.leinardi.forlago.feature.bar.ui.debug
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,35 +24,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.library.ui.theme.@PlaceholderName@Theme
-import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.Effect
-import com.leinardi.forlago.feature.@placeholderlowercase@.ui.debug.@PlaceholderName@DebugContract.State
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
-fun @PlaceholderName@DebugPage(viewModel: @PlaceholderName@DebugViewModel = hiltViewModel()) {
-    @PlaceholderName@DebugPage(
-        state = viewModel.viewState.value,
-        effectFlow = viewModel.effect,
-        sendEvent = { viewModel.onUiEvent(it) },
-    )
-}
-
-@Composable
-private fun @PlaceholderName@DebugPage(
-    state: State,
-    effectFlow: Flow<Effect>,
-    sendEvent: (event: @PlaceholderName@DebugContract.Event) -> Unit,
+fun BarDebugSliver(
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(rememberScrollState()),
     ) {
         SettingsMenuLink(
             title = { Text(text = "TBD") },
@@ -62,8 +43,6 @@ private fun @PlaceholderName@DebugPage(
 
 @Preview
 @Composable
-fun Preview@PlaceholderName@Debug() {
-    @PlaceholderName@Theme {
-        @PlaceholderName@DebugPage(State, Channel<Effect>().receiveAsFlow(), {})
-    }
+fun PreviewBarDebugSliver() {
+    BarDebugSliver()
 }

@@ -18,7 +18,7 @@ package com.leinardi.forlago.feature.bar
 
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.feature.bar.ui.BarScreen
-import com.leinardi.forlago.feature.bar.ui.debug.BarDebugPage
+import com.leinardi.forlago.feature.bar.ui.debug.BarDebugSliver
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.navigation.NavigationDestination
 import com.leinardi.forlago.library.navigation.destination.bar.BarDestination
@@ -30,5 +30,5 @@ class BarFeature : Feature() {
         BarDestination to { BarScreen() },
     )
 
-    override val debugComposable: @Composable () -> Unit = { BarDebugPage() }
+    override val debugComposable: @Composable () -> Unit = { BarDebugSliver() }
 }

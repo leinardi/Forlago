@@ -20,7 +20,7 @@ import android.accounts.AccountManager
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.feature.account.ui.SignInScreen
-import com.leinardi.forlago.feature.account.ui.debug.AccountDebugPage
+import com.leinardi.forlago.feature.account.ui.debug.AccountDebugSliver
 import com.leinardi.forlago.library.android.AccountAuthenticatorConfig
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.navigation.ForlagoNavigator
@@ -37,7 +37,7 @@ class AccountFeature(
         SignInDestination to { SignInScreen() },
     )
 
-    override val debugComposable: @Composable () -> Unit = { AccountDebugPage() }
+    override val debugComposable: @Composable () -> Unit = { AccountDebugSliver() }
 
     override val handleIntent: suspend (Intent) -> Boolean = { intent ->
         if (intent.hasExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE)) {
