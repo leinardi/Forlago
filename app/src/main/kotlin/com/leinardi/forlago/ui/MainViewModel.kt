@@ -26,7 +26,7 @@ import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoI
 import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoInteractor.Result
 import com.leinardi.forlago.library.android.interactor.android.GetInstallStateUpdateInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import com.leinardi.forlago.ui.MainContract.Effect
 import com.leinardi.forlago.ui.MainContract.Event
@@ -57,7 +57,7 @@ class MainViewModel @Inject constructor(
         checkForUpdates()
     }
 
-    override fun provideInitialState() = State()
+    override fun provideInitialState() = State(forlagoNavigator.homeDestination)
 
     override fun handleEvent(event: Event) {
         when (event) {

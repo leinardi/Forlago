@@ -42,18 +42,21 @@ include(
         ':app',
 
         // Modules
+        ':modules:feature-account',
+        ':modules:feature-bar',
+        ':modules:feature-debug',
+        ':modules:feature-foo',
         ':modules:library-android',
         ':modules:library-feature',
         ':modules:library-i18n',
         ':modules:library-logging',
         ':modules:library-navigation',
+        ':modules:library-navigation-annotation',
+        ':modules:library-navigation-api',
+        ':modules:library-navigation-ksp',
         ':modules:library-network',
         ':modules:library-preferences',
         ':modules:library-test',
         ':modules:library-ui',
-        ':modules:feature-account',
-        ':modules:feature-bar',
-        ':modules:feature-debug',
-        ':modules:feature-foo',
 
         )

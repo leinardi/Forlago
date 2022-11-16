@@ -27,8 +27,8 @@ import com.leinardi.forlago.library.android.interactor.account.GetRefreshTokenIn
 import com.leinardi.forlago.library.android.interactor.account.InvalidateAccessTokenInteractor
 import com.leinardi.forlago.library.android.interactor.account.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.library.android.interactor.account.PeekAccessTokenInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.account.SignInDestination
+import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.network.interactor.account.RemoveAccountsInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -58,7 +58,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnInvalidateRefreshTokenClicked -> invalidateRefreshToken()
                 Event.OnLogOutClicked -> logOut()
                 Event.OnOpenSignInScreenClicked ->
-                    forlagoNavigator.navigate(SignInDestination.createRoute(viewState.value.accountName != null))
+                    forlagoNavigator.navigate(SignInDestination.get(viewState.value.accountName != null))
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }

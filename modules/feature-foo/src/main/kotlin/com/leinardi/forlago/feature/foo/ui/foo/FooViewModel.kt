@@ -22,9 +22,9 @@ import com.leinardi.forlago.feature.foo.R
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.bar.BarDestination
-import com.leinardi.forlago.library.navigation.destination.foo.FooDialogDestination
+import com.leinardi.forlago.library.navigation.api.destination.bar.BarDestination
+import com.leinardi.forlago.library.navigation.api.destination.foo.FooDialogDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -43,7 +43,7 @@ class FooViewModel @Inject constructor(
         when (event) {
             is Event.OnBarButtonClicked -> sendText(event.text)
             Event.OnShowSnackbarButtonClicked -> sendEffect { Effect.ShowSnackbar(app.getString(R.string.i18n_foo_snackbar_text)) }
-            Event.OnShowMoreFooButtonClicked -> forlagoNavigator.navigate(FooDialogDestination.createRoute())
+            Event.OnShowMoreFooButtonClicked -> forlagoNavigator.navigate(FooDialogDestination.get())
         }
     }
 
@@ -52,7 +52,7 @@ class FooViewModel @Inject constructor(
             updateState { copy(isLoading = true) }
             delay(TimeUnit.SECONDS.toMillis(2))
             updateState { copy(isLoading = false) }
-            forlagoNavigator.navigate(BarDestination.createRoute(text))
+            forlagoNavigator.navigate(BarDestination.get(text))
         }
     }
 }

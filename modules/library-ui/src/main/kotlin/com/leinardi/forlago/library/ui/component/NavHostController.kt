@@ -21,7 +21,7 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.navigation.NavHostController
-import com.leinardi.forlago.library.navigation.NavigationDestination
+import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
 
 val LocalNavHostController: ProvidableCompositionLocal<NavHostController> = compositionLocalOf { error("No NavHostController provided") }
 

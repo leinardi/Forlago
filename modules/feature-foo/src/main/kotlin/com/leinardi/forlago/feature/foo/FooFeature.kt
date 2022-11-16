@@ -21,9 +21,9 @@ import com.leinardi.forlago.feature.foo.ui.debug.FooDebugPage
 import com.leinardi.forlago.feature.foo.ui.foo.FooScreen
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogScreen
 import com.leinardi.forlago.library.feature.Feature
-import com.leinardi.forlago.library.navigation.NavigationDestination
-import com.leinardi.forlago.library.navigation.destination.foo.FooDestination
-import com.leinardi.forlago.library.navigation.destination.foo.FooDialogDestination
+import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
+import com.leinardi.forlago.library.navigation.api.destination.foo.FooDestination
+import com.leinardi.forlago.library.navigation.api.destination.foo.FooDialogDestination
 
 class FooFeature : Feature() {
     override val id = "Foo"

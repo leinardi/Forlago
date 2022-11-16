@@ -29,7 +29,7 @@ import com.leinardi.forlago.feature.debug.ui.DebugContract.State
 import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.library.android.interactor.android.RestartApplicationInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.network.interactor.ClearApolloCacheInteractor
 import com.leinardi.forlago.library.network.interactor.LogOutInteractor
 import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor

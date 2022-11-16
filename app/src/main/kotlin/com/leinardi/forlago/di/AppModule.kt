@@ -19,7 +19,7 @@ package com.leinardi.forlago.di
 import android.app.Application
 import com.leinardi.forlago.feature.account.AccountFeature
 import com.leinardi.forlago.library.feature.Feature
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.ui.MainActivity
 import dagger.Module
 import dagger.Provides

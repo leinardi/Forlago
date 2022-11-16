@@ -17,8 +17,8 @@
 package com.leinardi.forlago.library.network.interactor
 
 import com.leinardi.forlago.library.android.di.User
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.account.SignInDestination
+import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.network.interactor.account.RemoveAccountsInteractor
 import com.leinardi.forlago.library.preferences.repository.DataStoreRepository
 import timber.log.Timber
@@ -34,7 +34,7 @@ class LogOutInteractor @Inject constructor(
         removeAccountsInteractor()
         userDataStoreRepository.clearPreferencesStorage()
         if (navigateToLogin) {
-            forlagoNavigator.navigate(SignInDestination.createRoute()) {
+            forlagoNavigator.navigate(SignInDestination.get()) {
                 launchSingleTop = true
                 popUpTo(0) { inclusive = true }
             }

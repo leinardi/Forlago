@@ -673,7 +673,17 @@ debugUnitTestRuntimeClasspath - Runtime classpath of compilation 'debugUnitTest'
 +--- project :modules:feature-account
 |    +--- project :modules:library-feature
 |    |    +--- project :modules:library-navigation
-|    |    |    +--- androidx.navigation:navigation-compose:2.5.3 (*)
+|    |    |    +--- project :modules:library-navigation-api
+|    |    |    |    +--- androidx.navigation:navigation-compose:2.5.3 (*)
+|    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    |    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    |    |    \--- project :modules:library-navigation-annotation
+|    |    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
 |    |    |    +--- androidx.core:core-ktx:1.9.0 (*)
@@ -681,7 +691,6 @@ debugUnitTestRuntimeClasspath - Runtime classpath of compilation 'debugUnitTest'
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
-|    |    |    +--- project :modules:library-android (*)
 |    |    |    +--- com.google.dagger:hilt-android:2.44 (*)
 |    |    |    \--- androidx.hilt:hilt-navigation-compose:1.0.0 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)

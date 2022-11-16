@@ -46,8 +46,8 @@ import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_U
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.R
 import com.leinardi.forlago.library.android.ext.getActivity
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.NavigatorEvent
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.api.navigator.NavigatorEvent
 import com.leinardi.forlago.library.ui.component.LocalNavHostController
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme

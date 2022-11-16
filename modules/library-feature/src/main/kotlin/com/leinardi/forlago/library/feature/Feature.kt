@@ -18,7 +18,7 @@ package com.leinardi.forlago.library.feature
 
 import android.content.Intent
 import androidx.compose.runtime.Composable
-import com.leinardi.forlago.library.navigation.NavigationDestination
+import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
 
 abstract class Feature {
     abstract val id: String
