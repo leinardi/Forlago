@@ -17,28 +17,31 @@
 package com.leinardi.forlago.feature.debug.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
-import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Features
-import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Info
-import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugBottomNavigationItem.Options
-import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Features
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Info
+import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Options
+import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object DebugContract {
     data class State(
         val debugInfo: GetDebugInfoInteractor.DebugInfo,
         val featureList: List<Feature>,
         val selectedEnvironment: ReadEnvironmentInteractor.Environment,
         val appUpdateInfo: String = "...",
-        val bottomNavigationItems: List<DebugViewModel.DebugBottomNavigationItem> = listOf(
+        val bottomNavigationItems: List<DebugViewModel.DebugNavigationBarItem> = listOf(
             Info,
             Options,
             Features,
         ),
         val environments: Array<ReadEnvironmentInteractor.Environment> = ReadEnvironmentInteractor.Environment.values(),
-        val selectedNavigationItem: DebugViewModel.DebugBottomNavigationItem = bottomNavigationItems[0],
+        val selectedNavigationItem: DebugViewModel.DebugNavigationBarItem = bottomNavigationItems[0],
+        val certificatePinningEnabled: Boolean = true,
     ) : ViewState {
         data class Feature(
             val composable: @Composable () -> Unit,
@@ -47,12 +50,12 @@ object DebugContract {
     }
 
     sealed class Event : ViewEvent {
-        data class OnBottomNavigationItemSelected(val selectedNavigationItem: DebugViewModel.DebugBottomNavigationItem) : Event()
+        data class OnNavigationBarItemSelected(val selectedNavigationItem: DebugViewModel.DebugNavigationBarItem) : Event()
         data class OnEnvironmentSelected(val environment: ReadEnvironmentInteractor.Environment) : Event()
+        data class OnEnableCertificatePinning(val boolean: Boolean) : Event()
         object OnClearApolloCacheClicked : Event()
         object OnForceCrashClicked : Event()
         object OnUpButtonClicked : Event()
-        object OnViewAttached : Event()
     }
 
     sealed class Effect : ViewEffect

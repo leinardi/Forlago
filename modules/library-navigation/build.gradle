@@ -28,8 +28,8 @@ android {
 }
 
 dependencies {
-    implementation projects.modules.libraryAndroid
-    api libs.androidx.navigation.compose
+    api projects.modules.libraryNavigationApi
+
     implementation libs.hilt.android
     implementation libs.hilt.navigation.compose
     kapt libs.hilt.compiler

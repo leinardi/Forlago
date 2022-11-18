@@ -20,20 +20,21 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Surface
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
 fun Scrim(
     modifier: Modifier = Modifier,
-    startColor: Color = Color.Black.copy(alpha = 0.3f),
+    startColor: Color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.3f),
     endColor: Color = Color.Transparent,
     minHeight: Dp = 96.dp,
 ) {
@@ -50,12 +51,16 @@ fun Scrim(
     )
 }
 
-@Preview(showBackground = true)
+@ThemePreviews
 @Composable
-fun PreviewScrim() {
+private fun PreviewScrim() {
     ForlagoTheme {
-        Surface {
-            Scrim()
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(128.dp),
+        ) {
+            Scrim(minHeight = 48.dp)
         }
     }
 }

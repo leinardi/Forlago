@@ -21,14 +21,14 @@ import androidx.annotation.StringRes
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.R
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
 object MainContract {
     data class State(
-        val startDestination: String = ForlagoNavigator.HOME_DESTINATION_ROUTE,
+        val startDestination: String,
+        val dynamicColors: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {

@@ -101,6 +101,9 @@
 # Checks that underscore is correctly used to split package naming
 - name: INCORRECT_PACKAGE_SEPARATOR
   enabled: true
+# Checks that code block doesn't contain kdoc comments
+- name: COMMENTED_BY_KDOC
+  enabled: true
 # Checks that there is no @deprecated tag in kdoc
 - name: KDOC_NO_DEPRECATED_TAG
   enabled: false # Custom
@@ -208,6 +211,12 @@
     extendedIndentOfParameters: false
     # If true: if first parameter in parameter list is on the same line as opening parenthesis, then other parameters can be aligned with it
     alignedParameters: true
+    # If true, expression bodies which begin on a separate line are indented
+    # using a continuation indent. The default is false.
+    #
+    # This flag is called CONTINUATION_INDENT_FOR_EXPRESSION_BODIES in IDEA and
+    # ij_kotlin_continuation_indent_for_expression_bodies in .editorconfig.
+    extendedIndentForExpressionBodies: false
     # If true: if expression is split by newline after operator like +/-/`*`, then the next line is indented with two indentations instead of one
     extendedIndentAfterOperators: true
     # If true: when dot qualified expression starts on a new line, this line will be indented with two indentations instead of one
@@ -282,6 +291,9 @@
 # Checks that backticks (``) are not used in the identifier name, except the case when it is test method (marked with @Test annotation)
 - name: BACKTICKS_PROHIBITED
   enabled: true
+  # all code blocks annotated with  @Nested, @ParameterizedTest (JUnit 5) will
+  # be ignored and not checked.
+  ignoreAnnotated: [Nested, ParameterizedTest]
 # Checks that a single line concatenation of strings is not used
 - name: STRING_CONCATENATION
   enabled: true
@@ -395,7 +407,7 @@
     startCollapseFromNestedLevel: 2
 # Checks that floating-point values are not used in arithmetic expressions
 - name: FLOAT_IN_ACCURATE_CALCULATIONS
-  enabled: true
+  enabled: false # Custom - We want to be able to check, for example, if a float in the range from 0 to 1 is < than 0.5
 # Checks that function length isn't too long
 - name: TOO_LONG_FUNCTION
   enabled: false # Custom - Detekt is already checking it
@@ -519,6 +531,9 @@
   enabled: true
   configuration:
     isRangeToIgnore: false
+# Check if there is a call of print()\println() or console.log(). Assumption that it's a debug print
+- name: DEBUG_PRINT
+  enabled: true
 # Check that typealias name is in PascalCase
 - name: TYPEALIAS_NAME_INCORRECT_CASE
   enabled: true

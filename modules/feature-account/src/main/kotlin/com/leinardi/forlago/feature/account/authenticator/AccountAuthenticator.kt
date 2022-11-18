@@ -23,16 +23,16 @@ import android.accounts.AccountManager
 import android.app.Application
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import com.leinardi.forlago.feature.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.feature.account.AccountFeature
-import com.leinardi.forlago.library.android.AccountAuthenticatorConfig
-import com.leinardi.forlago.library.android.ext.toLongDateTimeString
-import com.leinardi.forlago.library.android.interactor.encryption.DecryptDeterministicallyInteractor
-import com.leinardi.forlago.library.android.interactor.encryption.DecryptInteractor
-import com.leinardi.forlago.library.android.interactor.encryption.EncryptDeterministicallyInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.GetJwtExpiresAtInMillisInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.IsJwtExpiredInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.RefreshAccessTokenInteractor
+import com.leinardi.forlago.library.android.api.ext.toLongDateTimeString
+import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptDeterministicallyInteractor
+import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptInteractor
+import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptDeterministicallyInteractor
 import com.leinardi.forlago.library.feature.FeatureManager
-import com.leinardi.forlago.library.network.interactor.account.GetJwtExpiresAtInMillisInteractor
-import com.leinardi.forlago.library.network.interactor.account.IsJwtExpiredInteractor
-import com.leinardi.forlago.library.network.interactor.account.RefreshAccessTokenInteractor
 import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import javax.inject.Inject
@@ -239,7 +239,7 @@ class AccountAuthenticator @Inject constructor(
         return when {
             account == null -> getAccountParameterMissingBundle()
             account !in accountManager.getAccountsByType(AccountAuthenticatorConfig.ACCOUNT_TYPE) -> getAccountNotFoundBundle()
-            authTokenType != AccountAuthenticatorConfig.AUTHTOKEN_TYPE -> getWrongAuthTokenTypeBundle(authTokenType)
+            authTokenType != AccountAuthenticatorConfig.AUTH_TOKEN_TYPE -> getWrongAuthTokenTypeBundle(authTokenType)
             else -> getAuthToken(account, authTokenType, response, options)
         }
     }
@@ -268,7 +268,7 @@ class AccountAuthenticator @Inject constructor(
                         Timber.d("Access token successfully refreshed")
                         val encryptedAccessToken = runBlocking { encryptDeterministicallyInteractor(result.accessToken) }
                         expiryInMillis = getJwtExpiresAtInMillisInteractor(result.accessToken)
-                        accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTHTOKEN_TYPE, encryptedAccessToken)
+                        accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTH_TOKEN_TYPE, encryptedAccessToken)
                         accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
                         Timber.d("Returning a valid access token (expiry = ${expiryInMillis.toLongDateTimeString()}")
                         getValidAccessTokenBundle(account, encryptedAccessToken, expiryInMillis)
@@ -303,7 +303,7 @@ class AccountAuthenticator @Inject constructor(
      */
     override fun getAuthTokenLabel(authTokenType: String): String? {
         Timber.d("getAuthTokenLabel()")
-        return if (authTokenType == AccountAuthenticatorConfig.AUTHTOKEN_TYPE) authTokenType else null
+        return if (authTokenType == AccountAuthenticatorConfig.AUTH_TOKEN_TYPE) authTokenType else null
     }
 
     /**

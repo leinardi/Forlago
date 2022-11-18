@@ -20,8 +20,8 @@ import androidx.lifecycle.SavedStateHandle
 import com.leinardi.forlago.feature.bar.ui.BarContract.Effect
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.bar.BarDestination
+import com.leinardi.forlago.library.navigation.api.destination.bar.BarDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -31,7 +31,7 @@ class BarViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
     private val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<Event, State, Effect>() {
-    override fun provideInitialState() = State(savedStateHandle.get<String>(BarDestination.TEXT_PARAM).orEmpty())
+    override fun provideInitialState() = State(BarDestination.Arguments.getText(savedStateHandle).orEmpty())
 
     override fun handleEvent(event: Event) {
         when (event) {

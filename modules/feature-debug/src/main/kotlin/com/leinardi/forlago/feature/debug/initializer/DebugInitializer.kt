@@ -24,8 +24,8 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.startup.Initializer
 import com.leinardi.forlago.feature.debug.BuildConfig
 import com.leinardi.forlago.feature.debug.di.DebugInitializerEntryPoint
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.debug.DebugDestination
+import com.leinardi.forlago.library.navigation.api.destination.debug.DebugDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.squareup.seismic.ShakeDetector
 import javax.inject.Inject
 
@@ -38,7 +38,7 @@ class DebugInitializer : Initializer<ShakeDetector?>, DefaultLifecycleObserver {
 
     private val shakeDetector by lazy {
         ShakeDetector {
-            navigator.navigate(DebugDestination.createRoute())
+            navigator.navigate(DebugDestination.get())
         }
     }
 

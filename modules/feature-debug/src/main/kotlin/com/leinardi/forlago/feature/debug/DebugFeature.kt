@@ -19,8 +19,8 @@ package com.leinardi.forlago.feature.debug
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.feature.debug.ui.DebugScreen
 import com.leinardi.forlago.library.feature.Feature
-import com.leinardi.forlago.library.navigation.NavigationDestination
-import com.leinardi.forlago.library.navigation.destination.debug.DebugDestination
+import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
+import com.leinardi.forlago.library.navigation.api.destination.debug.DebugDestination
 
 class DebugFeature : Feature() {
     override val id = "Debug"

@@ -143,19 +143,22 @@ class CryptoHelper(
                 .withKeyTemplate(aeadKeyTemplate)
                 .withSharedPref(context, keysetAlias + "_aead__", keysetPrefName)
                 .withMasterKeyUri(KEYSTORE_PATH_URI + masterKeyAlias)
-                .build().keysetHandle
+                .build()
+                .keysetHandle
 
             val deterministicAeadKeysetHandle = AndroidKeysetManager.Builder()
                 .withKeyTemplate(deterministicAeadKeyTemplate)
                 .withSharedPref(context, keysetAlias + "_daead__", keysetPrefName)
                 .withMasterKeyUri(KEYSTORE_PATH_URI + masterKeyAlias)
-                .build().keysetHandle
+                .build()
+                .keysetHandle
 
             val signKeysetHandle = AndroidKeysetManager.Builder()
                 .withKeyTemplate(signKeyTemplate)
                 .withSharedPref(context, keysetAlias + "_sign__", keysetPrefName)
                 .withMasterKeyUri(KEYSTORE_PATH_URI + masterKeyAlias)
-                .build().keysetHandle
+                .build()
+                .keysetHandle
 
             val aead = aeadKeysetHandle.getPrimitive(Aead::class.java)
             val deterministicAead = deterministicAeadKeysetHandle.getPrimitive(DeterministicAead::class.java)

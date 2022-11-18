@@ -332,7 +332,7 @@ jobs:
       # Allow tests to continue on other devices if they fail on one device.
       fail-fast: false
       matrix:
-        api-level: [23, 30]
+        api-level: [24, 30]
         target: [google_apis]
         arch: [x86_64]
 

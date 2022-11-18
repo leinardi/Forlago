@@ -52,7 +52,13 @@ tasks.register('violationCommentsToGitHub', ViolationCommentsToGitHubTask) {
             "JUNIT",
             ".",
             ".*/build/test-results/test.*/.*\\.xml\$",
-            "Unit"
+            "JUnit"
+        ],
+        [
+            "JUNIT",
+            ".",
+            ".*/build/sauce/saucectl-report\\.xml\$",
+            "Espresso"
         ],
     ]
 }

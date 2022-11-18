@@ -31,7 +31,7 @@ interface DebugInitializerEntryPoint {
     companion object {
         // a helper method to resolve the InitializerEntryPoint from the context
         fun resolve(context: Context): DebugInitializerEntryPoint {
-            val appContext = context.applicationContext ?: throw IllegalStateException("Application context is null")
+            val appContext = context.applicationContext ?: error("Application context is null")
             return EntryPointAccessors.fromApplication(appContext, DebugInitializerEntryPoint::class.java)
         }
     }

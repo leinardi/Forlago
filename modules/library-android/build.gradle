@@ -25,25 +25,20 @@ android {
     defaultConfig {
         consumerProguardFiles "$projectDir/proguard-android-consumer-rules.pro"
     }
-    buildTypes {
-        debug {
-            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}.debug\""
-        }
-        release {
-            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}\""
-        }
-    }
 }
 
 dependencies {
-    api libs.play.core
-    api libs.play.core.ktx
-    api libs.tink
+    api projects.modules.libraryAndroidApi
+    implementation projects.modules.libraryI18n
+
+    implementation libs.play.core
+    implementation libs.play.core.ktx
     implementation libs.androidx.security
     implementation libs.androidx.startup
     implementation libs.hilt.android
     implementation libs.process.phoenix
+    implementation libs.tink
     kapt libs.hilt.compiler
+
     kaptTest libs.hilt.android.compiler
-    kaptAndroidTest libs.hilt.android.compiler
 }

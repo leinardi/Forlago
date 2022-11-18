@@ -16,8 +16,11 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.material.SnackbarHostState
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 
 val LocalSnackbarHostState: ProvidableCompositionLocal<SnackbarHostState> = compositionLocalOf { error("No SnackbarHostState provided") }
+val LocalMainScaffoldPadding: ProvidableCompositionLocal<MutableState<PaddingValues>> = compositionLocalOf { error("No PaddingValues provided") }

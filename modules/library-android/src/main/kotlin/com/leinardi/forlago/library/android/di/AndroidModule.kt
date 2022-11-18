@@ -21,8 +21,39 @@ import android.app.Application
 import androidx.annotation.VisibleForTesting
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.leinardi.forlago.library.android.coroutine.CoroutineDispatchers
+import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
+import com.leinardi.forlago.library.android.api.interactor.android.CopyToClipboardInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.DeleteWebViewDataInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppVersionNameInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetDefaultLanguageCodeInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateFlowInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.OpenUrlInWebBrowserInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.RestartApplicationInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.ShareUrlInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.ShowToastInteractor
+import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptDeterministicallyInteractor
+import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptInteractor
+import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptDeterministicallyInteractor
+import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptInteractor
 import com.leinardi.forlago.library.android.encryption.CryptoHelper
+import com.leinardi.forlago.library.android.interactor.android.CopyToClipboardInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.DeleteWebViewDataInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.GetAppVersionNameInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.GetConnectivityInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.GetDefaultLanguageCodeInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.GetInstallStateUpdateFlowInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.OpenUrlInWebBrowserInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.RestartApplicationInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.ShareUrlInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.ShowToastInteractorImpl
+import com.leinardi.forlago.library.android.interactor.encryption.DecryptDeterministicallyInteractorImpl
+import com.leinardi.forlago.library.android.interactor.encryption.DecryptInteractorImpl
+import com.leinardi.forlago.library.android.interactor.encryption.EncryptDeterministicallyInteractorImpl
+import com.leinardi.forlago.library.android.interactor.encryption.EncryptInteractorImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,7 +62,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [AndroidModule.BindModule::class])
 @InstallIn(SingletonComponent::class)
 open class AndroidModule {
     @Provides
@@ -61,4 +92,55 @@ open class AndroidModule {
     protected open fun getAppUpdateManager(
         application: Application,
     ): AppUpdateManager = AppUpdateManagerFactory.create(application)
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    internal interface BindModule {
+        // Android Interactors
+        @Binds
+        fun bindCopyToClipboardInteractor(bind: CopyToClipboardInteractorImpl): CopyToClipboardInteractor
+
+        @Binds
+        fun bindDeleteWebViewDataInteractor(bind: DeleteWebViewDataInteractorImpl): DeleteWebViewDataInteractor
+
+        @Binds
+        fun bindGetAppUpdateInfoInteractor(bind: GetAppUpdateInfoInteractorImpl): GetAppUpdateInfoInteractor
+
+        @Binds
+        fun bindGetAppVersionNameInteractor(bind: GetAppVersionNameInteractorImpl): GetAppVersionNameInteractor
+
+        @Binds
+        fun bindGetConnectivityInteractor(bind: GetConnectivityInteractorImpl): GetConnectivityInteractor
+
+        @Binds
+        fun bindGetDefaultLanguageCodeInteractor(bind: GetDefaultLanguageCodeInteractorImpl): GetDefaultLanguageCodeInteractor
+
+        @Binds
+        fun bindGetInstallStateUpdateInteractor(bind: GetInstallStateUpdateFlowInteractorImpl): GetInstallStateUpdateFlowInteractor
+
+        @Binds
+        fun bindOpenUrlInWebBrowserInteractor(bind: OpenUrlInWebBrowserInteractorImpl): OpenUrlInWebBrowserInteractor
+
+        @Binds
+        fun bindRestartApplicationInteractor(bind: RestartApplicationInteractorImpl): RestartApplicationInteractor
+
+        @Binds
+        fun bindShareUrlInteractor(bind: ShareUrlInteractorImpl): ShareUrlInteractor
+
+        @Binds
+        fun bindShowToastInteractor(bind: ShowToastInteractorImpl): ShowToastInteractor
+
+        // Encryption interactors
+        @Binds
+        fun bindDecryptDeterministicallyInteractor(bind: DecryptDeterministicallyInteractorImpl): DecryptDeterministicallyInteractor
+
+        @Binds
+        fun bindDecryptInteractor(bind: DecryptInteractorImpl): DecryptInteractor
+
+        @Binds
+        fun bindEncryptDeterministicallyInteractor(bind: EncryptDeterministicallyInteractorImpl): EncryptDeterministicallyInteractor
+
+        @Binds
+        fun bindEncryptInteractor(bind: EncryptInteractorImpl): EncryptInteractor
+    }
 }

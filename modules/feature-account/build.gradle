@@ -16,6 +16,8 @@
 
 plugins {
     id 'forlago.android-feature-conventions'
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.apollo)
 }
 
 android {
@@ -28,14 +30,30 @@ android {
 
     buildTypes {
         debug {
+            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}.debug\""
             resValue 'string', 'account_type', "${config.android.accountType}.debug"
         }
         release {
+            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}\""
             resValue 'string', 'account_type', config.android.accountType
         }
     }
 }
 
+apollo {
+    packageNamesFromFilePaths()
+}
+
 dependencies {
-    implementation projects.modules.libraryNetwork
+    api projects.modules.featureAccountApi
+    apolloMetadata projects.modules.libraryNetworkApi
+    implementation projects.modules.libraryNetworkApi
+    implementation projects.modules.libraryPreferencesApi
+
+    implementation libs.aboutlibraries
+    implementation libs.aboutlibraries.core
+    implementation libs.kotlinx.serialization
+    implementation libs.tink
+
+    testImplementation projects.modules.libraryNetworkApi
 }

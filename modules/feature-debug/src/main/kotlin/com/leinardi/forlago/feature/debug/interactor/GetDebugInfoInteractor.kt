@@ -25,12 +25,22 @@ import javax.inject.Inject
 class GetDebugInfoInteractor @Inject constructor(
     private val context: Application,
 ) {
+    @Suppress("DEPRECATION")
     operator fun invoke(): DebugInfo {
-        val packageInfo = context.packageManager.getPackageInfo(context.packageName, 0)
-        val appName: String = context.packageManager.run {
-            return@run getApplicationLabel(getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)).toString()
+        val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            context.packageManager.getPackageInfo(context.packageName, PackageManager.PackageInfoFlags.of(0))
+        } else {
+            context.packageManager.getPackageInfo(context.packageName, 0)
         }
-
+        val appName: String = context.packageManager.run {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                return@run getApplicationLabel(
+                    getApplicationInfo(context.packageName, PackageManager.ApplicationInfoFlags.of(PackageManager.GET_META_DATA.toLong())),
+                ).toString()
+            } else {
+                return@run getApplicationLabel(getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)).toString()
+            }
+        }
         val versionName = packageInfo?.versionName ?: "Undefined"
         val versionCode: Long = PackageInfoCompat.getLongVersionCode(packageInfo)
         val displayMetrics = context.resources.displayMetrics

@@ -28,15 +28,21 @@ import coil.memory.MemoryCache
 import coil.util.DebugLogger
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.feature.FeatureManager
+import com.leinardi.forlago.library.preferences.api.interactor.ReadCertificatePinningIsEnabledInteractor
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 @HiltAndroidApp
 class Forlago : Application(), ImageLoaderFactory {
     @Inject lateinit var featureManager: FeatureManager
+
     @Inject lateinit var featureSet: Set<@JvmSuppressWildcards Feature>
+
     @Inject lateinit var okHttpClient: OkHttpClient
+
+    @Inject lateinit var readCertificatePinningIsEnabledInteractor: ReadCertificatePinningIsEnabledInteractor
 
     override fun onCreate() {
         super.onCreate()
@@ -63,7 +69,6 @@ class Forlago : Application(), ImageLoaderFactory {
                 .detectLeakedSqlLiteObjects()
                 .detectLeakedRegistrationObjects()
                 .detectFileUriExposure()
-                .detectCleartextNetwork()
                 .penaltyLog()
                 .penaltyDeath()
                 .apply {
@@ -78,6 +83,11 @@ class Forlago : Application(), ImageLoaderFactory {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         detectIncorrectContextUse()
                         detectUnsafeIntentLaunch()
+                    }
+                    runBlocking {
+                        if (readCertificatePinningIsEnabledInteractor()) {
+                            detectCleartextNetwork()
+                        }
                     }
                 }
             StrictMode.setVmPolicy(builderVM.build())

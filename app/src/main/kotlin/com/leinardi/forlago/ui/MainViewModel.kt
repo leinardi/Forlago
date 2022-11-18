@@ -21,13 +21,20 @@ import androidx.lifecycle.viewModelScope
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.R
-import com.leinardi.forlago.library.android.ext.ifTrue
-import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoInteractor
-import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoInteractor.Result
-import com.leinardi.forlago.library.android.interactor.android.GetInstallStateUpdateInteractor
+import com.leinardi.forlago.library.android.api.ext.ifTrue
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.DeveloperTriggeredUpdateInProgress
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.FlexibleUpdateAvailable
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.ImmediateUpdateAvailable
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.LowPriorityUpdateAvailable
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.UpdateNotAvailable
+import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateFlowInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
+import com.leinardi.forlago.library.preferences.api.interactor.GetMaterialYouFlowInteractor
+import com.leinardi.forlago.library.preferences.api.interactor.GetThemeFlowInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
+import com.leinardi.forlago.library.ui.interactor.SetNightModeInteractor
 import com.leinardi.forlago.ui.MainContract.Effect
 import com.leinardi.forlago.ui.MainContract.Event
 import com.leinardi.forlago.ui.MainContract.State
@@ -40,24 +47,35 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    getInstallStateUpdateInteractor: GetInstallStateUpdateInteractor,
+    getInstallStateUpdateFlowInteractor: GetInstallStateUpdateFlowInteractor,
+    getMaterialYouFlowInteractor: GetMaterialYouFlowInteractor,
+    getThemeFlowInteractor: GetThemeFlowInteractor,
     private val app: Application,
-    private val getFeaturesInteractor: GetFeaturesInteractor,
     private val getAppUpdateInfoInteractor: GetAppUpdateInfoInteractor,
+    private val getFeaturesInteractor: GetFeaturesInteractor,
     private val forlagoNavigator: ForlagoNavigator,
+    setNightModeInteractor: SetNightModeInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
     @AppUpdateType private var appUpdateType: Int? = null
 
     init {
-        getInstallStateUpdateInteractor().onEach { result ->
-            if (result is GetInstallStateUpdateInteractor.Result.Downloaded) {
-                sendEffect { Effect.ShowSnackbarForCompleteUpdate }
+        getThemeFlowInteractor()
+            .onEach { setNightModeInteractor(it) }
+            .launchIn(viewModelScope)
+        getMaterialYouFlowInteractor()
+            .onEach { updateState { copy(dynamicColors = it) } }
+            .launchIn(viewModelScope)
+        getInstallStateUpdateFlowInteractor()
+            .onEach { result ->
+                if (result is GetInstallStateUpdateFlowInteractor.Result.Downloaded) {
+                    sendEffect { Effect.ShowSnackbarForCompleteUpdate }
+                }
             }
-        }.launchIn(viewModelScope)
+            .launchIn(viewModelScope)
         checkForUpdates()
     }
 
-    override fun provideInitialState() = State()
+    override fun provideInitialState() = State(forlagoNavigator.homeDestination)
 
     override fun handleEvent(event: Event) {
         when (event) {
@@ -92,20 +110,20 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             val result = getAppUpdateInfoInteractor()
             when {
-                result is Result.LowPriorityUpdateAvailable && !checkOnlyInProgress -> Timber.d("App update available but low priority. Ignoring it.")
-                result is Result.FlexibleUpdateAvailable && !checkOnlyInProgress -> {
+                result is LowPriorityUpdateAvailable && !checkOnlyInProgress -> Timber.d("App update available but low priority. Ignoring it.")
+                result is FlexibleUpdateAvailable && !checkOnlyInProgress -> {
                     Timber.d("MediumPriorityUpdateAvailable")
                     sendEffectStartUpdateFlowForResult(result.appUpdateInfo, result.appUpdateType)
                 }
-                result is Result.ImmediateUpdateAvailable && !checkOnlyInProgress -> {
+                result is ImmediateUpdateAvailable && !checkOnlyInProgress -> {
                     Timber.d("HighPriorityUpdateAvailable")
                     sendEffectStartUpdateFlowForResult(result.appUpdateInfo, result.appUpdateType)
                 }
-                result is Result.DeveloperTriggeredUpdateInProgress -> {
+                result is DeveloperTriggeredUpdateInProgress -> {
                     Timber.d("DeveloperTriggeredUpdateInProgress")
                     sendEffectStartUpdateFlowForResult(result.appUpdateInfo, result.appUpdateType)
                 }
-                result is Result.UpdateNotAvailable && !checkOnlyInProgress -> Timber.d("In-App update not available")
+                result is UpdateNotAvailable && !checkOnlyInProgress -> Timber.d("In-App update not available")
             }
         }
     }

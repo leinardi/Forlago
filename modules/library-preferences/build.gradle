@@ -28,9 +28,10 @@ android {
 }
 
 dependencies {
-    implementation projects.modules.libraryAndroid
-    api libs.androidx.datastore.preferences
-    implementation libs.androidx.datastore
+    api projects.modules.libraryPreferencesApi
+    implementation projects.modules.libraryAndroidApi
+    implementation projects.modules.libraryUiApi
+
     implementation libs.hilt.android
     implementation libs.timber
     kapt libs.hilt.compiler

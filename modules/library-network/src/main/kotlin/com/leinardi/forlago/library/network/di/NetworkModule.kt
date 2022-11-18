@@ -23,27 +23,34 @@ import com.apollographql.apollo3.cache.normalized.logCacheMisses
 import com.apollographql.apollo3.cache.normalized.normalizedCache
 import com.apollographql.apollo3.network.okHttpClient
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.leinardi.forlago.library.android.BuildConfig
-import com.leinardi.forlago.library.android.interactor.android.GetConnectivityInteractor
-import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
+import com.leinardi.forlago.library.network.BuildConfig
+import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
+import com.leinardi.forlago.library.network.interactor.ClearApolloCacheInteractorImpl
+import com.leinardi.forlago.library.preferences.api.interactor.ReadCertificatePinningIsEnabledInteractor
+import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
+import okhttp3.CertificatePinner
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import timber.log.Timber
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [NetworkModule.BindModule::class])
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val NETWORK_TIMEOUT_IN_SECONDS = 30L
@@ -73,10 +80,41 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideAddStageCertificatePinning(
+        environment: ReadEnvironmentInteractor.Environment,
+        readCertificatePinningIsEnabledInteractor: ReadCertificatePinningIsEnabledInteractor,
+    ): CertificatePinner = CertificatePinner.Builder().apply {
+        environment.certificatePinningConfigs.forEach { certificate ->
+            if (certificate.isExpiring()) {
+                val message = "Certificates for domain '${certificate.domain}' have less than 1 month until expiration date!"
+                if (BuildConfig.DEBUG) {
+                    throw CertificateExpiringException(message)
+                } else {
+                    Timber.e(message)
+                }
+            }
+            runBlocking {
+                if (readCertificatePinningIsEnabledInteractor()) {
+                    Timber.d("Certificate Pinning Enabled: $certificate")
+                    certificate.hashes.forEach { add(certificate.domain, it.hash) }
+                } else {
+                    Timber.d("Certificate Pinning Disabled")
+                }
+            }
+        }
+    }.build()
+
+    @Provides
+    @Singleton
     fun provideJson() = Json {
         ignoreUnknownKeys = true
         encodeDefaults = true
     }
+
+    @Provides
+    @Singleton
+    @IntoSet
+    fun provideScalarsConverterFactory(): Converter.Factory = ScalarsConverterFactory.create()
 
     @Provides
     @Singleton
@@ -87,8 +125,10 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         interceptorSet: Set<@JvmSuppressWildcards Interceptor>,
+        certificatePinner: CertificatePinner,
     ): OkHttpClient = OkHttpClient.Builder().apply {
         interceptorSet.forEach { addInterceptor(it) }
+        certificatePinner(certificatePinner)
         retryOnConnectionFailure(false)
         callTimeout(NETWORK_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS)
     }.build()
@@ -98,7 +138,9 @@ object NetworkModule {
     fun provideRetrofitBuilder(
         converterFactorySet: Set<@JvmSuppressWildcards Converter.Factory>,
     ): Retrofit.Builder = Retrofit.Builder().apply {
-        converterFactorySet.forEach { addConverterFactory(it) }
+        converterFactorySet
+            .sortedBy { if (it is ScalarsConverterFactory) 0 else 1 }  // ScalarsConverterFactory must be the first
+            .forEach { addConverterFactory(it) }
     }
 
     @Provides
@@ -129,4 +171,13 @@ object NetworkModule {
             .apply { chainedCacheFactory?.let { normalizedCache(it) } }
             .build()
     }
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    internal interface BindModule {
+        @Binds
+        fun bindClearApolloCacheInteractor(bind: ClearApolloCacheInteractorImpl): ClearApolloCacheInteractor
+    }
 }
+
+private class CertificateExpiringException(msg: String) : Exception(msg)

@@ -19,26 +19,36 @@ package com.leinardi.forlago.feature.bar.ui
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.bar.R
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
+import com.leinardi.forlago.library.ui.annotation.DevicePreviews
+import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
+import com.leinardi.forlago.library.ui.component.PreviewFeature
+import com.leinardi.forlago.library.ui.component.Scaffold
 import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
 fun BarScreen(viewModel: BarViewModel = hiltViewModel()) {
@@ -52,14 +62,20 @@ fun BarScreen(viewModel: BarViewModel = hiltViewModel()) {
 private fun BarScreen(
     state: State,
     sendEvent: (event: Event) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        modifier = modifier,
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .padding(LocalMainScaffoldPadding.current.value)
+            .consumedWindowInsets(LocalMainScaffoldPadding.current.value)
+            .navigationBarsPadding(),
         topBar = {
             TopAppBar(
                 title = stringResource(R.string.i18n_bar_screen_title),
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+                scrollBehavior = scrollBehavior,
             )
         },
     ) { scaffoldPadding ->
@@ -67,23 +83,20 @@ private fun BarScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    start = 16.dp,
-                    top = scaffoldPadding.calculateTopPadding() + 16.dp,
-                    end = 16.dp,
-                    bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
+                    start = scaffoldPadding.calculateStartPadding(LocalLayoutDirection.current) + Spacing.x02,
+                    top = scaffoldPadding.calculateTopPadding() + Spacing.x02,
+                    end = scaffoldPadding.calculateEndPadding(LocalLayoutDirection.current) + Spacing.x02,
+                    bottom = scaffoldPadding.calculateBottomPadding() + Spacing.x02,
                 )
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            Box(
-                Modifier
-                    .fillMaxWidth(),
-            ) {
+            Box(Modifier.fillMaxWidth()) {
                 Text(
                     stringResource(R.string.i18n_bar_text_received, state.text),
                     Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
-                    style = typography.h4,
+                    style = typography.headlineSmall,
                 )
             }
             Button(
@@ -96,8 +109,10 @@ private fun BarScreen(
     }
 }
 
-@Preview
+@DevicePreviews
 @Composable
-fun PreviewBarScreen() {
-    BarScreen(State("Preview"), {})
+private fun PreviewBarScreen() {
+    PreviewFeature {
+        BarScreen(State("Preview")) {}
+    }
 }

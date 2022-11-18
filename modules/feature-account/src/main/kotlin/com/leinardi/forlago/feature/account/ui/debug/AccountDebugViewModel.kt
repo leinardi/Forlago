@@ -17,19 +17,19 @@
 package com.leinardi.forlago.feature.account.ui.debug
 
 import androidx.lifecycle.viewModelScope
+import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
+import com.leinardi.forlago.feature.account.api.interactor.account.RemoveAccountsInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenExpiryInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.GetRefreshTokenInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateAccessTokenInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.PeekAccessTokenInteractor
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Event
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.State
-import com.leinardi.forlago.library.android.interactor.account.GetAccessTokenExpiryInteractor
-import com.leinardi.forlago.library.android.interactor.account.GetAccessTokenInteractor
-import com.leinardi.forlago.library.android.interactor.account.GetAccountInteractor
-import com.leinardi.forlago.library.android.interactor.account.GetRefreshTokenInteractor
-import com.leinardi.forlago.library.android.interactor.account.InvalidateAccessTokenInteractor
-import com.leinardi.forlago.library.android.interactor.account.InvalidateRefreshTokenInteractor
-import com.leinardi.forlago.library.android.interactor.account.PeekAccessTokenInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.account.SignInDestination
-import com.leinardi.forlago.library.network.interactor.account.RemoveAccountsInteractor
+import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -58,7 +58,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnInvalidateRefreshTokenClicked -> invalidateRefreshToken()
                 Event.OnLogOutClicked -> logOut()
                 Event.OnOpenSignInScreenClicked ->
-                    forlagoNavigator.navigate(SignInDestination.createRoute(viewState.value.accountName != null))
+                    forlagoNavigator.navigate(SignInDestination.get(viewState.value.accountName != null))
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }

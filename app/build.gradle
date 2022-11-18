@@ -30,7 +30,7 @@ android {
         applicationId config.android.applicationId
         archivesBaseName = "forlago"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner" // https://github.com/google/dagger/issues/2033
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"  // https://github.com/google/dagger/issues/2033
 
         vectorDrawables {
             useSupportLibrary true
@@ -91,10 +91,16 @@ dependencies {
     implementation projects.modules.featureBar
     implementation projects.modules.featureDebug
     implementation projects.modules.featureFoo
+    implementation projects.modules.libraryAndroid
+    implementation projects.modules.libraryI18n
+    implementation projects.modules.libraryLogging
+    implementation projects.modules.libraryNavigation
+    implementation projects.modules.libraryNetwork
+    implementation projects.modules.libraryPreferences
+    implementation projects.modules.libraryUi
 
     implementation libs.androidx.activity.compose
     implementation libs.androidx.lifecycle.runtime
-    implementation libs.androidx.navigation.compose
     implementation libs.androidx.startup
     implementation libs.play.core
     implementation libs.play.core.ktx

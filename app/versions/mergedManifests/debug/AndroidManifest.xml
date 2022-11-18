@@ -20,8 +20,8 @@
      >
 
     <uses-sdk
-        android:minSdkVersion="23"
-        android:targetSdkVersion="32" />
+        android:minSdkVersion="24"
+        android:targetSdkVersion="33" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -33,6 +33,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- To allow starting foreground services on Android P+ - https://developer.android.com/preview/behavior-changes#fg-svc -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <permission
+        android:name="com.leinardi.forlago.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.leinardi.forlago.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+
     <application
         android:name="com.leinardi.forlago.Forlago"
         android:allowBackup="false"
@@ -41,6 +47,7 @@
         android:extractNativeLibs="false"
         android:icon="@mipmap/ui_ic_launcher"
         android:label="@string/i18n_app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ui_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen" >
@@ -111,13 +118,13 @@
                 android:value="androidx.startup" />
         </provider>
 
-        <meta-data
-            android:name="google_analytics_automatic_screen_reporting_enabled"
-            android:value="false" />
-
         <activity
             android:name="androidx.compose.ui.tooling.PreviewActivity"
             android:exported="true" />
+
+        <meta-data
+            android:name="google_analytics_automatic_screen_reporting_enabled"
+            android:value="false" />
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
@@ -297,6 +304,10 @@
             android:enabled="@bool/leak_canary_plumber_auto_install"
             android:exported="false" />
 
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:directBootAware="true"
+            android:exported="false" />
         <service
             android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
             android:exported="false" >

@@ -48,6 +48,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 @Composable
 fun @PlaceholderName@Screen(viewModel: @PlaceholderName@ViewModel = hiltViewModel()) {
@@ -68,10 +69,12 @@ private fun @PlaceholderName@Screen(
     LaunchedEffect(effectFlow) {
         effectFlow.onEach { effect ->
             when (effect) {
-                is @PlaceholderName@Contract.Effect.ShowSnackbar -> snackbarHostState.showSnackbar(
-                    message = effect.message,
-                    duration = SnackbarDuration.Short
-                )
+                is @PlaceholderName@Contract.Effect.ShowSnackbar -> launch {
+                    snackbarHostState.showSnackbar(
+                        message = effect.message,
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
         }.collect()
     }

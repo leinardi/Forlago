@@ -16,11 +16,15 @@
 
 package com.leinardi.forlago.navigation
 
+import androidx.compose.material3.Surface
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import com.google.accompanist.navigation.material.bottomSheet
 import com.leinardi.forlago.di.AppEntryPoints
 import com.leinardi.forlago.library.android.initializer.ContextProvider
+import com.leinardi.forlago.library.ui.component.BottomSheetDefaults
 import dagger.hilt.EntryPoints
 
 fun NavGraphBuilder.addComposableDestinations() {
@@ -41,5 +45,23 @@ fun NavGraphBuilder.addDialogDestinations() {
     }
 }
 
+@ExperimentalMaterialNavigationApi
+fun NavGraphBuilder.addBottomSheetDestinations() {
+    getFeatures().forEach { feature ->
+        feature.bottomSheetDestinations.forEach { entry ->
+            val destination = entry.key
+            bottomSheet(destination.route, destination.arguments, destination.deepLinks) {
+                // LMOB-285: Remove once ModalBottomSheetLayout will support tonal elevation
+                Surface(
+                    tonalElevation = BottomSheetDefaults.tonalElevation,
+                ) {
+                    entry.value()
+                }
+            }
+        }
+    }
+}
+
 private fun getFeatures() = EntryPoints.get(ContextProvider.applicationContext, AppEntryPoints.FeatureManagerInterface::class.java)
-    .getFeatureManager().features
+    .getFeatureManager()
+    .features

@@ -1,0 +1,22 @@
+plugins {
+    id 'forlago.android-library-conventions'
+    alias(libs.plugins.apollo)
+}
+
+android {
+    namespace 'com.leinardi.forlago.feature.account.api'
+    resourcePrefix 'account_api_'
+    defaultConfig {
+        consumerProguardFiles "$projectDir/proguard-account-api-consumer-rules.pro"
+    }
+}
+
+apollo {
+    packageNamesFromFilePaths()
+}
+
+dependencies {
+    apolloMetadata projects.modules.libraryNetworkApi
+    implementation projects.modules.libraryNavigationApi
+    implementation projects.modules.libraryNetworkApi
+}

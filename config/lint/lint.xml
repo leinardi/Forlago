@@ -14,14 +14,4 @@
   ~ limitations under the License.
   -->
 
-<lint>
-
-    <!-- Disable the check for `list.forEach {}` in Kotlin files  -->
-    <!-- Android's lint gets confused and thinks that Kotlin is using Java's forEach (minSdk 24) -->
-    <!-- This can be safely removed when we define Android minSdk to 24 -->
-    <!-- We can also check this once Kotlin 1.5.0 is officially released together with the new AS 4.2+ -->
-    <issue id="NewApi">
-        <ignore path="*.kt" regexp="forEach" />
-    </issue>
-
-</lint>
+<lint />

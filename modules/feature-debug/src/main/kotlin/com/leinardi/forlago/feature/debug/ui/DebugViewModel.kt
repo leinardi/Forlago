@@ -22,18 +22,21 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewModelScope
+import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInteractor
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Effect
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
-import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoInteractor
-import com.leinardi.forlago.library.android.interactor.android.RestartApplicationInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result
+import com.leinardi.forlago.library.android.api.interactor.android.RestartApplicationInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.network.interactor.ClearApolloCacheInteractor
-import com.leinardi.forlago.library.network.interactor.LogOutInteractor
-import com.leinardi.forlago.library.preferences.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.library.preferences.interactor.StoreEnvironmentInteractor
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
+import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
+import com.leinardi.forlago.library.preferences.api.interactor.ReadCertificatePinningIsEnabledInteractor
+import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.preferences.api.interactor.StoreCertificatePinningIsEnabledInteractor
+import com.leinardi.forlago.library.preferences.api.interactor.StoreEnvironmentInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -48,8 +51,10 @@ class DebugViewModel @Inject constructor(
     private val getDebugInfoInteractor: GetDebugInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
     private val logOutInteractor: LogOutInteractor,
+    private val readCertificatePinningIsEnabledInteractor: ReadCertificatePinningIsEnabledInteractor,
     private val readEnvironmentInteractor: ReadEnvironmentInteractor,
     private val restartApplicationInteractor: RestartApplicationInteractor,
+    private val storeCertificatePinningIsEnabledInteractor: StoreCertificatePinningIsEnabledInteractor,
     private val storeEnvironmentInteractor: StoreEnvironmentInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
     init {
@@ -58,15 +63,15 @@ class DebugViewModel @Inject constructor(
             updateState {
                 copy(
                     appUpdateInfo = when (result) {
-                        is GetAppUpdateInfoInteractor.Result.DeveloperTriggeredUpdateInProgress ->
+                        is Result.DeveloperTriggeredUpdateInProgress ->
                             "Developer triggered update in progress (priority ${result.appUpdateInfo.updatePriority()})"
-                        is GetAppUpdateInfoInteractor.Result.FlexibleUpdateAvailable ->
+                        is Result.FlexibleUpdateAvailable ->
                             "Flexible update available (priority ${result.appUpdateInfo.updatePriority()})"
-                        is GetAppUpdateInfoInteractor.Result.ImmediateUpdateAvailable ->
+                        is Result.ImmediateUpdateAvailable ->
                             "Immediate update available (priority ${result.appUpdateInfo.updatePriority()})"
-                        is GetAppUpdateInfoInteractor.Result.LowPriorityUpdateAvailable ->
+                        is Result.LowPriorityUpdateAvailable ->
                             "Low priority update available (priority ${result.appUpdateInfo.updatePriority()})"
-                        is GetAppUpdateInfoInteractor.Result.UpdateNotAvailable ->
+                        is Result.UpdateNotAvailable ->
                             "Update not available"
                     },
                 )
@@ -80,16 +85,27 @@ class DebugViewModel @Inject constructor(
             .filter { it.debugComposable != null }
             .map { State.Feature(checkNotNull(it.debugComposable), it.id) },
         selectedEnvironment = runBlocking { readEnvironmentInteractor() },  // This runBlocking is acceptable only because it's the debug screen
+        certificatePinningEnabled = runBlocking { // This runBlocking is acceptable only because it's the debug screen
+            readCertificatePinningIsEnabledInteractor()
+        },
     )
 
     override fun handleEvent(event: Event) {
         when (event) {
-            is Event.OnBottomNavigationItemSelected -> updateState { copy(selectedNavigationItem = event.selectedNavigationItem) }
+            is Event.OnNavigationBarItemSelected -> updateState { copy(selectedNavigationItem = event.selectedNavigationItem) }
             is Event.OnClearApolloCacheClicked -> viewModelScope.launch { clearApolloCacheInteractor() }
             is Event.OnEnvironmentSelected -> handleOnEnvironmentSelected(event.environment)
-            is Event.OnForceCrashClicked -> throw IllegalStateException("Debug screen test crash")
+            is Event.OnEnableCertificatePinning -> handleOnEnableCertificatePinning(event.boolean)
+            is Event.OnForceCrashClicked -> throw DebugScreenTestCrashException()
             is Event.OnUpButtonClicked -> forlagoNavigator.navigateUp()
-            is Event.OnViewAttached -> Unit  // logEventScreenViewInteractor("debug_screen", "Debug screen")
+        }
+    }
+
+    private fun handleOnEnableCertificatePinning(isEnableCertificatePinning: Boolean) {
+        viewModelScope.launch {
+            storeCertificatePinningIsEnabledInteractor(isEnableCertificatePinning)
+            updateState { copy(certificatePinningEnabled = isEnableCertificatePinning) }
+            restartApplicationInteractor()
         }
     }
 
@@ -104,9 +120,11 @@ class DebugViewModel @Inject constructor(
         }
     }
 
-    sealed class DebugBottomNavigationItem(val label: String, val icon: ImageVector) {
-        object Info : DebugBottomNavigationItem("Info", Icons.Filled.Info)
-        object Options : DebugBottomNavigationItem("Options", Icons.Filled.BugReport)
-        object Features : DebugBottomNavigationItem("Features", Icons.Filled.Star)
+    sealed class DebugNavigationBarItem(val label: String, val icon: ImageVector) {
+        object Info : DebugNavigationBarItem("Info", Icons.Filled.Info)
+        object Options : DebugNavigationBarItem("Options", Icons.Filled.BugReport)
+        object Features : DebugNavigationBarItem("Features", Icons.Filled.Star)
     }
 }
+
+private class DebugScreenTestCrashException : Exception("Debug screen test crash")

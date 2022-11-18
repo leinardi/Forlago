@@ -18,44 +18,56 @@ package com.leinardi.forlago.feature.account.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarDuration
-import androidx.compose.material.SnackbarResult
-import androidx.compose.material.Text
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
 import com.leinardi.forlago.feature.account.ui.SignInContract.Event
 import com.leinardi.forlago.feature.account.ui.SignInContract.State
-import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.annotation.DevicePreviews
+import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.OutlinedTextField
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.ProgressButton
+import com.leinardi.forlago.library.ui.component.Scaffold
 import com.leinardi.forlago.library.ui.component.TopAppBar
-import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.library.ui.theme.Spacing
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 @Composable
 fun SignInScreen(viewModel: SignInViewModel = hiltViewModel()) {
@@ -72,11 +84,11 @@ private fun SignInScreen(
     effectFlow: Flow<Effect>,
     sendEvent: (event: Event) -> Unit,
 ) {
-    val snackbarHostState = LocalSnackbarHostState.current
+    val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(effectFlow) {
         effectFlow.onEach { effect ->
             when (effect) {
-                is Effect.ShowErrorSnackbar -> {
+                is Effect.ShowErrorSnackbar -> launch {
                     val snackbarResult = snackbarHostState.showSnackbar(
                         message = effect.message,
                         duration = SnackbarDuration.Indefinite,
@@ -89,18 +101,31 @@ private fun SignInScreen(
             }
         }.collect()
     }
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
-        topBar = { TopAppBar(title = "Account screen") },
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .padding(LocalMainScaffoldPadding.current.value)
+            .consumedWindowInsets(LocalMainScaffoldPadding.current.value)
+            .navigationBarsPadding(),
+        topBar = {
+            TopAppBar(
+                title = "Account screen",
+                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+                scrollBehavior = scrollBehavior,
+            )
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { scaffoldPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(
-                    start = 16.dp,
-                    top = scaffoldPadding.calculateTopPadding() + 16.dp,
-                    end = 16.dp,
-                    bottom = scaffoldPadding.calculateBottomPadding() + 16.dp,
+                    start = scaffoldPadding.calculateStartPadding(LocalLayoutDirection.current) + Spacing.x02,
+                    top = scaffoldPadding.calculateTopPadding() + Spacing.x02,
+                    end = scaffoldPadding.calculateEndPadding(LocalLayoutDirection.current) + Spacing.x02,
+                    bottom = scaffoldPadding.calculateBottomPadding() + Spacing.x02,
                 ),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
@@ -152,10 +177,10 @@ private fun SignInScreen(
     }
 }
 
-@Preview
+@DevicePreviews
 @Composable
-fun PreviewAccountScreen() {
-    ForlagoTheme {
+private fun PreviewAccountScreen() {
+    PreviewFeature {
         SignInScreen(State(false, "", ""), Channel<Effect>().receiveAsFlow()) {}
     }
 }

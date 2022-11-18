@@ -16,6 +16,6 @@
 
 package com.leinardi.forlago.library.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 
 val ForlagoTypography = Typography()

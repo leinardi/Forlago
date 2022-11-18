@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    api projects.modules.libraryLoggingApi
     api libs.timber
     implementation libs.androidx.startup
     implementation libs.firebase.analytics

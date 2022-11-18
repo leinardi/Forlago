@@ -18,16 +18,16 @@ package com.leinardi.forlago.feature.account.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.leinardi.forlago.feature.account.api.interactor.account.AddAccountInteractor
+import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
+import com.leinardi.forlago.feature.account.api.interactor.account.SignInInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.SetRefreshTokenInteractor
 import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
 import com.leinardi.forlago.feature.account.ui.SignInContract.Event
 import com.leinardi.forlago.feature.account.ui.SignInContract.State
-import com.leinardi.forlago.library.android.interactor.account.AddAccountInteractor
-import com.leinardi.forlago.library.android.interactor.account.GetAccessTokenInteractor
-import com.leinardi.forlago.library.android.interactor.account.GetAccountInteractor
-import com.leinardi.forlago.library.android.interactor.account.SetRefreshTokenInteractor
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.account.SignInDestination
-import com.leinardi.forlago.library.network.interactor.account.SignInInteractor
+import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -45,7 +45,7 @@ class SignInViewModel @Inject constructor(
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState(): State {
         val username = getAccountInteractor()?.name
-        val reauthenticate: Boolean = checkNotNull(savedStateHandle[SignInDestination.REAUTHENTICATE_PARAM])
+        val reauthenticate: Boolean = SignInDestination.Arguments.getReauthenticate(savedStateHandle)
         return State(
             isReauthenticate = reauthenticate && username != null,
             username = username.orEmpty(),
