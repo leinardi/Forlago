@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -53,9 +52,9 @@ import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
 import com.leinardi.forlago.library.ui.annotation.DevicePreviews
+import com.leinardi.forlago.library.ui.component.DatePicker
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.PreviewFeature
-import com.leinardi.forlago.library.ui.component.ProgressButton
 import com.leinardi.forlago.library.ui.component.Scaffold
 import com.leinardi.forlago.library.ui.component.TopAppBar
 import com.leinardi.forlago.library.ui.theme.Spacing
@@ -111,6 +110,7 @@ private fun FooScreen(
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
     ) { scaffoldPadding ->
+        var dueDatePickerVisible by rememberSaveable { mutableStateOf(false) }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -123,32 +123,19 @@ private fun FooScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            OutlinedTextField(
-                value = textFieldValue,
-                onValueChange = { textFieldValue = it },
-                modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
-            )
-            ProgressButton(
-                onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
-                loading = state.isLoading,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(stringResource(R.string.i18n_foo_send_text_to_bar))
-            }
             Button(
-                onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
+                onClick = { dueDatePickerVisible = true },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.i18n_foo_show_snackbar))
-            }
-            Button(
-                onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-                Text(stringResource(R.string.i18n_foo_show_dialog))
+                Text("Show Date Picker dialog")
             }
         }
+        DatePicker(
+            show = dueDatePickerVisible,
+            onPositiveButtonClick = { dueDatePickerVisible = false },
+            onNegativeButtonClick = { dueDatePickerVisible = false },
+            onCancel = { dueDatePickerVisible = false },
+        )
     }
 }
 
