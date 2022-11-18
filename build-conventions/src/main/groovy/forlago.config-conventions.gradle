@@ -19,7 +19,7 @@ ext.config = [
         'applicationId': 'com.leinardi.forlago',
         'compileSdk'   : 33,
         'javaVersion'  : JavaVersion.VERSION_11,
-        'minSdk'       : 23,
+        'minSdk'       : 24,
         'targetSdk'    : 33,
     ],
 

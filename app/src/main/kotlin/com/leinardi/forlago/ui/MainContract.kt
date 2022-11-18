@@ -28,6 +28,7 @@ import com.leinardi.forlago.library.ui.base.ViewState
 object MainContract {
     data class State(
         val startDestination: String,
+        val dynamicColors: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {

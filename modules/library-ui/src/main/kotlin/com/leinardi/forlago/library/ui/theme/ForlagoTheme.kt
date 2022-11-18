@@ -89,7 +89,7 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun ForlagoTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
-    isDynamicColor: Boolean = true,
+    isDynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val myColorScheme = when {

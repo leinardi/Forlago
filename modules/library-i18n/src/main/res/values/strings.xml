@@ -31,4 +31,5 @@
     <string name="i18n_foo_text_field_hint">Type something here plz…</string>
     <string name="i18n_generic_snackbar_dismissal">Dismiss</string>
     <string name="i18n_navigate_up">Go up</string>
+    <string name="i18n_generic_error_no_browser_installed">No browser available on the device</string>
 </resources>

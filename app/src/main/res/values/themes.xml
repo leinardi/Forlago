@@ -14,12 +14,21 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Ui.Theme.SplashScreen" parent="Theme.SplashScreen.IconBackground">
-        <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago.NoActionBar</item>
+    <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+    <style name="Ui.Theme.Platform.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">true</item>
+    </style>
+
+    <style name="Ui.Theme.SplashScreen" parent="Ui.Theme.Platform.SplashScreen">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/ui_navigationBarColor</item>
+        <item name="postSplashScreenTheme">@style/Ui.Theme.Forlago</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ui_ic_launcher_foreground</item>
         <item name="windowSplashScreenBackground">@color/ui_ic_launcher_background</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="S">1000</item>
     </style>
 
 </resources>

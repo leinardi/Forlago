@@ -40,9 +40,10 @@ android {
 }
 
 dependencies {
-    implementation projects.modules.libraryAndroid
+    api projects.modules.libraryUiApi
+    implementation projects.modules.libraryAndroidApi
     implementation projects.modules.libraryI18n
-    implementation projects.modules.libraryNavigation
+    implementation projects.modules.libraryNavigationApi
     api libs.accompanist.flowlayout
     api libs.accompanist.navigation.material
     api libs.accompanist.pager
@@ -51,6 +52,7 @@ dependencies {
     api libs.accompanist.swiperefresh
     api libs.accompanist.systemuicontroller
     api libs.androidx.appcompat
+    api libs.androidx.compose.material // Still needed for stuff missing in M3, like ModalBottomSheetLayout
     api libs.androidx.compose.material.icons.extended
     api libs.androidx.compose.material3
     api libs.androidx.compose.runtime
@@ -64,6 +66,7 @@ dependencies {
     api libs.androidx.paging
     api libs.coil.compose
     api libs.material
+    implementation libs.hilt.android
     debugApi libs.androidx.customview  // Workaround for https://issuetracker.google.com/issues/227767363
     debugApi libs.androidx.customview.poolingcontainer  // Workaround for https://issuetracker.google.com/issues/227767363
     implementation libs.hilt.android

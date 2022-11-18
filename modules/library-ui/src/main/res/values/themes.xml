@@ -14,19 +14,26 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Ui.Theme.Platform.Forlago" parent="Theme.AppCompat.DayNight.NoActionBar" />
+    <!-- Allows us to override platform level specific attributes in their respective values-vXX folder. -->
+    <style name="Ui.Theme.Platform.Forlago" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- MaterialComponents theme is currently needed because there are no Compose DatePicker and have to fallback to the MC one. -->
+    </style>
 
     <style name="Ui.Theme.Base.Forlago" parent="Ui.Theme.Platform.Forlago">
         <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="android:navigationBarColor">@color/ui_navigationBarColor</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="O_MR1">?attr/isLightTheme</item>
     </style>
 
-    <style name="Ui.Theme.Forlago" parent="Ui.Theme.Base.Forlago" />
-
-    <style name="Ui.Theme.Forlago.NoActionBar">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+    <!-- The actual theme we use. This varies for light theme (here), and values-night for dark theme. -->
+    <style name="Ui.Theme.Forlago" parent="Ui.Theme.Base.Forlago">
+        <!-- These color attributes are needed only due to the use of non compose components like the Material Date Picker -->
+        <item name="colorPrimary">#FFb4262d</item>
+        <item name="colorPrimaryDark">#FF410004</item>
+        <item name="colorAccent">#FF98470b</item>
     </style>
-
 </resources>

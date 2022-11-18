@@ -16,7 +16,7 @@
 
 package com.leinardi.forlago.library.test.coroutine
 
-import com.leinardi.forlago.library.android.coroutine.CoroutineDispatchers
+import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 
 val coroutineTestDispatchers = CoroutineDispatchers(

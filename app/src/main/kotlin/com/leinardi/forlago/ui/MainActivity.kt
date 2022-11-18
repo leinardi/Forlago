@@ -23,8 +23,8 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -32,25 +32,33 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.R
-import com.leinardi.forlago.library.android.ext.getActivity
+import com.leinardi.forlago.library.android.api.ext.getActivity
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.navigation.api.navigator.NavigatorEvent
+import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.LocalNavHostController
-import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
+import com.leinardi.forlago.library.ui.component.ModalBottomSheetLayout
+import com.leinardi.forlago.library.ui.component.Scaffold
+import com.leinardi.forlago.library.ui.component.rememberBottomSheetNavigator
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.navigation.addBottomSheetDestinations
 import com.leinardi.forlago.navigation.addComposableDestinations
 import com.leinardi.forlago.navigation.addDialogDestinations
 import com.leinardi.forlago.ui.MainContract.Effect
@@ -59,6 +67,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -72,13 +81,13 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen()
         setContent {
-            ForlagoTheme {
+            ForlagoTheme(isDynamicColor = viewModel.viewState.value.dynamicColors) {
                 ForlagoMainScreen(
                     effectFlow = viewModel.effect,
                     startDestination = viewModel.viewState.value.startDestination,
-                    navHostController = rememberNavController(),
                     forlagoNavigator = forlagoNavigator,
                 )
             }
@@ -135,15 +144,17 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialNavigationApi::class)
 @Suppress("ReusedModifierInstance")
 @Composable
 fun ForlagoMainScreen(
     effectFlow: Flow<Effect>,
-    navHostController: NavHostController,
     forlagoNavigator: ForlagoNavigator,
     startDestination: String,
     modifier: Modifier = Modifier,
 ) {
+    val bottomSheetNavigator = rememberBottomSheetNavigator(skipHalfExpanded = true)
+    val navHostController = rememberNavController(bottomSheetNavigator)
     val activity = LocalContext.current.getActivity() as MainActivity
     val keyboardController = LocalSoftwareKeyboardController.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -157,8 +168,8 @@ fun ForlagoMainScreen(
                     event.builder,
                 ).also { Timber.d("Navigate to ${event.destination}") }
                 is NavigatorEvent.HandleDeepLink -> navHostController.handleDeepLink(event.intent)
-                is NavigatorEvent.NavigateBack -> activity.onBackPressed().also { Timber.d("NavigateBack") }
-                is NavigatorEvent.NavigateUp -> Timber.d("NavigateUp successful = ${navHostController.navigateUp()}")
+                is NavigatorEvent.NavigateUp -> navHostController.navigateUp().also { Timber.d("Navigate Up successful = $it") }
+                is NavigatorEvent.NavigateBack -> navHostController.popBackStack().also { Timber.d("NavigateBack successful = $it") }
             }
         }.launchIn(this)
     }
@@ -167,41 +178,44 @@ fun ForlagoMainScreen(
             when (effect) {
                 is Effect.FinishActivity -> activity.finish()
                 is Effect.StartUpdateFlowForResult -> activity.startUpdateFlowForResult(effect.appUpdateInfo, effect.appUpdateType)
-                is Effect.ShowSnackbarForCompleteUpdate -> showSnackbarForCompleteUpdate(snackbarHostState, activity)
-                is Effect.ShowErrorSnackbar -> snackbarHostState.showSnackbar(
-                    message = effect.message,
-                    duration = SnackbarDuration.Indefinite,
-                    actionLabel = activity.getString(effect.actionLabel),
-                ).also { snackbarResult ->
-                    if (snackbarResult == SnackbarResult.ActionPerformed) {
-                        snackbarHostState.currentSnackbarData?.dismiss()
+                is Effect.ShowSnackbarForCompleteUpdate -> launch { showSnackbarForCompleteUpdate(snackbarHostState, activity) }
+                is Effect.ShowErrorSnackbar -> launch {
+                    snackbarHostState.showSnackbar(
+                        message = effect.message,
+                        duration = SnackbarDuration.Indefinite,
+                        actionLabel = activity.getString(effect.actionLabel),
+                    ).also { snackbarResult ->
+                        if (snackbarResult == SnackbarResult.ActionPerformed) {
+                            snackbarHostState.currentSnackbarData?.dismiss()
+                        }
                     }
                 }
             }
         }.launchIn(this)
     }
+    val mainScaffoldPadding: MutableState<PaddingValues> = remember { mutableStateOf(PaddingValues()) }
     CompositionLocalProvider(
+        LocalMainScaffoldPadding provides mainScaffoldPadding,
         LocalNavHostController provides navHostController,
-        LocalSnackbarHostState provides snackbarHostState,
     ) {
-        Scaffold(
-            snackbarHost = { SnackbarHost(snackbarHostState) },
-            modifier = modifier,
-        ) { scaffoldPadding ->
-            NavHost(
-                // check https://google.github.io/accompanist/navigation-animation/
-                navController = navHostController,
-                startDestination = startDestination,
-                modifier = Modifier
-                    .padding(
-                        top = scaffoldPadding.calculateTopPadding(),
-                        bottom = scaffoldPadding.calculateBottomPadding(),
-                    ),
-                builder = {
-                    addComposableDestinations()
-                    addDialogDestinations()
-                },
-            )
+        ModalBottomSheetLayout(
+            bottomSheetNavigator = bottomSheetNavigator,
+            modifier = modifier.imePadding(),
+        ) {
+            Scaffold(
+                snackbarHost = { SnackbarHost(snackbarHostState) },
+            ) { scaffoldPadding: PaddingValues ->
+                mainScaffoldPadding.value = scaffoldPadding
+                NavHost(
+                    navController = navHostController,
+                    startDestination = startDestination,
+                    builder = {
+                        addBottomSheetDestinations()
+                        addComposableDestinations()
+                        addDialogDestinations()
+                    },
+                )
+            }
         }
     }
 }

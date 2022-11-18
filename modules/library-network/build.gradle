@@ -19,8 +19,8 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     id 'forlago.android-library-conventions'
     id 'com.google.dagger.hilt.android'
-    alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.apollo)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -35,37 +35,34 @@ android {
 }
 
 apollo {
-    packageName = "com.leinardi.forlago.library.network.graphql"
-    generateApolloMetadata = true
+    packageNamesFromFilePaths()
 }
 
 dependencies {
-    implementation projects.modules.libraryAndroid
+    api projects.modules.libraryNetworkApi
+    apolloMetadata projects.modules.libraryNetworkApi
+    implementation projects.modules.libraryAndroidApi
     implementation projects.modules.libraryFeature
     implementation projects.modules.libraryI18n
-    implementation projects.modules.libraryNavigation
-    implementation projects.modules.libraryPreferences
-    api libs.coroutines.android
-    api libs.coroutines.core
-    api libs.kotlinx.serialization
-    api libs.retrofit
-    api libs.apollo
-    implementation libs.apollo.cache
+    implementation projects.modules.libraryNavigationApi
+    implementation projects.modules.libraryPreferencesApi
+    implementation projects.modules.libraryUiApi
+
     implementation libs.apollo.cache.sqlite
     implementation libs.hilt.android
+    implementation libs.kotlinx.serialization
     implementation libs.okhttp3.logging.interceptor
+    implementation libs.retrofit
+    implementation libs.retrofit.converter.scalars
     implementation libs.retrofit.kotlinx.serialization
     implementation libs.timber
+    implementation libs.tink
     kapt libs.hilt.compiler
 
     kaptTest libs.hilt.android.compiler
+    testImplementation libs.apollo.testing.support
+    testImplementation libs.robolectric
     kaptAndroidTest libs.hilt.android.compiler
-    testImplementation(libs.apollo.testing.support)
-}
-
-// Workaround for https://github.com/detekt/detekt/issues/4743
-tasks.withType(Detekt).configureEach {
-    exclude("com/leinardi/forlago/library/network/graphql/**/*.kt")
 }
 
 tasks.register("refreshGraphQlSchema", Exec) {

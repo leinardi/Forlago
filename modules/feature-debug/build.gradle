@@ -27,8 +27,10 @@ android {
 }
 
 dependencies {
-    implementation projects.modules.libraryNetwork
-    implementation projects.modules.libraryPreferences
+    implementation projects.modules.featureAccountApi
+    implementation projects.modules.libraryNetworkApi
+    implementation projects.modules.libraryPreferencesApi
+
     implementation libs.androidx.lifecycle.process
     implementation libs.androidx.startup
     implementation libs.seismic

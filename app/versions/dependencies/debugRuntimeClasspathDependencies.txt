@@ -544,6 +544,97 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    |    \--- com.google.dagger:hilt-android:2.44 (*)
+|    +--- project :modules:feature-account-api
+|    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    +--- project :modules:library-navigation-api (*)
+|    |    \--- project :modules:library-network-api
+|    |         +--- com.apollographql.apollo3:apollo-runtime:3.6.2
+|    |         |    \--- com.apollographql.apollo3:apollo-runtime-jvm:3.6.2
+|    |         |         +--- com.squareup.okhttp3:okhttp:4.9.3 -> 4.10.0
+|    |         |         |    +--- com.squareup.okio:okio:3.0.0 -> 3.2.0 (*)
+|    |         |         |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.20 -> 1.7.20 (*)
+|    |         |         +--- com.apollographql.apollo3:apollo-api:3.6.2
+|    |         |         |    \--- com.apollographql.apollo3:apollo-api-jvm:3.6.2
+|    |         |         |         +--- com.squareup.okio:okio:3.2.0 (*)
+|    |         |         |         +--- com.benasher44:uuid:0.3.1
+|    |         |         |         |    \--- com.benasher44:uuid-jvm:0.3.1
+|    |         |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.7.20 (*)
+|    |         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.30 -> 1.7.20
+|    |         |         |         \--- com.apollographql.apollo3:apollo-annotations:3.6.2
+|    |         |         |              \--- com.apollographql.apollo3:apollo-annotations-jvm:3.6.2
+|    |         |         |                   \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.7.20 (*)
+|    |         |         +--- com.apollographql.apollo3:apollo-mpp-utils:3.6.2
+|    |         |         |    \--- com.apollographql.apollo3:apollo-mpp-utils-jvm:3.6.2
+|    |         |         |         \--- com.apollographql.apollo3:apollo-annotations:3.6.2 (*)
+|    |         |         +--- com.squareup.okio:okio:3.2.0 (*)
+|    |         |         +--- com.benasher44:uuid:0.3.1 (*)
+|    |         |         \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |         +--- com.apollographql.apollo3:apollo-adapters:3.6.2
+|    |         |    \--- com.apollographql.apollo3:apollo-adapters-jvm:3.6.2
+|    |         |         +--- com.apollographql.apollo3:apollo-api:3.6.2 (*)
+|    |         |         \--- org.jetbrains.kotlinx:kotlinx-datetime:0.4.0
+|    |         |              \--- org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.4.0
+|    |         |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.0 -> 1.7.20 (*)
+|    |         |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.0 -> 1.7.20
+|    |         +--- com.apollographql.apollo3:apollo-normalized-cache:3.6.2
+|    |         |    \--- com.apollographql.apollo3:apollo-normalized-cache-jvm:3.6.2
+|    |         |         +--- com.apollographql.apollo3:apollo-runtime:3.6.2 (*)
+|    |         |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:3.6.2
+|    |         |         |    \--- com.apollographql.apollo3:apollo-normalized-cache-api-jvm:3.6.2
+|    |         |         |         +--- com.apollographql.apollo3:apollo-api:3.6.2 (*)
+|    |         |         |         +--- com.apollographql.apollo3:apollo-mpp-utils:3.6.2 (*)
+|    |         |         |         +--- com.benasher44:uuid:0.3.1 (*)
+|    |         |         |         \--- com.squareup.okio:okio:3.2.0 (*)
+|    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |         |         \--- org.jetbrains.kotlinx:atomicfu:0.17.0
+|    |         |              \--- org.jetbrains.kotlinx:atomicfu-jvm:0.17.0
+|    |         |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0 -> 1.7.20 (*)
+|    |         |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.6.0 -> 1.7.20
+|    |         +--- com.squareup.retrofit2:retrofit:2.9.0
+|    |         |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.10.0 (*)
+|    |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |         +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |         +--- androidx.core:core-ktx:1.9.0 (*)
+|    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |         +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |         +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |         +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.6.2
+|    |         |    \--- com.apollographql.apollo3:apollo-normalized-cache-sqlite-android-debug:3.6.2
+|    |         |         +--- androidx.sqlite:sqlite:2.1.0 -> 2.2.0
+|    |         |         |    \--- androidx.annotation:annotation:1.0.0 -> 1.5.0 (*)
+|    |         |         +--- com.apollographql.apollo3:apollo-api:3.6.2 (*)
+|    |         |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:3.6.2 (*)
+|    |         |         +--- com.apollographql.apollo3:apollo-normalized-cache:3.6.2 (*)
+|    |         |         +--- com.squareup.sqldelight:runtime:1.5.3
+|    |         |         |    \--- com.squareup.sqldelight:runtime-jvm:1.5.3
+|    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 -> 1.7.20 (*)
+|    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31 -> 1.7.20
+|    |         |         +--- com.squareup.sqldelight:android-driver:1.5.3
+|    |         |         |    +--- com.squareup.sqldelight:runtime-jvm:1.5.3 (*)
+|    |         |         |    +--- androidx.sqlite:sqlite:2.1.0 -> 2.2.0 (*)
+|    |         |         |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 -> 1.7.20 (*)
+|    |         |         |    \--- androidx.sqlite:sqlite-framework:2.1.0 -> 2.2.0
+|    |         |         |         +--- androidx.annotation:annotation:1.0.0 -> 1.5.0 (*)
+|    |         |         |         \--- androidx.sqlite:sqlite:2.2.0 (*)
+|    |         |         +--- androidx.sqlite:sqlite-framework:2.1.0 -> 2.2.0 (*)
+|    |         |         \--- androidx.startup:startup-runtime:1.1.1 (*)
+|    |         \--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1
+|    |              \--- org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.1
+|    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.20 (*)
+|    |                   +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.20
+|    |                   +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1
+|    |                   |    \--- org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.4.1
+|    |                   |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.20 (*)
+|    |                   |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.20
+|    |                   |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |                   \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
 |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
 |    +--- androidx.core:core-ktx:1.9.0 (*)
@@ -559,15 +650,24 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    +--- com.google.dagger:hilt-android:2.44 (*)
 |    +--- androidx.hilt:hilt-navigation-compose:1.0.0 (*)
 |    +--- project :modules:library-android
-|    |    +--- com.google.android.play:core:1.10.3
-|    |    +--- com.google.android.play:core-ktx:1.8.1
-|    |    |    +--- com.google.android.play:core:1.8.0 -> 1.10.3
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72 -> 1.7.20 (*)
-|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6 -> 1.6.4 (*)
-|    |    |    +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
-|    |    |    \--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
-|    |    +--- com.google.crypto.tink:tink-android:1.7.0
-|    |    |    \--- com.google.code.gson:gson:2.8.9
+|    |    +--- project :modules:library-android-api
+|    |    |    +--- com.google.android.play:core:1.10.3
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    |    +--- androidx.room:room-runtime:2.4.3
+|    |    |    |    +--- androidx.room:room-common:2.4.3
+|    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.5.0 (*)
+|    |    |    |    +--- androidx.sqlite:sqlite-framework:2.2.0 (*)
+|    |    |    |    +--- androidx.sqlite:sqlite:2.2.0 (*)
+|    |    |    |    +--- androidx.arch.core:core-runtime:2.0.1 -> 2.1.0 (*)
+|    |    |    |    \--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
+|    |    |    +--- com.google.dagger:hilt-android:2.44 (*)
+|    |    |    \--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1 (*)
 |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
 |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
 |    |    +--- androidx.core:core-ktx:1.9.0 (*)
@@ -575,21 +675,40 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    +--- project :modules:library-i18n
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    |    \--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    +--- com.google.android.play:core:1.10.3
+|    |    +--- com.google.android.play:core-ktx:1.8.1
+|    |    |    +--- com.google.android.play:core:1.8.0 -> 1.10.3
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72 -> 1.7.20 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6 -> 1.6.4 (*)
+|    |    |    +--- androidx.core:core:1.1.0 -> 1.9.0 (*)
+|    |    |    \--- androidx.fragment:fragment:1.1.0 -> 1.5.4 (*)
 |    |    +--- androidx.security:security-crypto:1.0.0
 |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.5.0 (*)
-|    |    |    \--- com.google.crypto.tink:tink-android:1.5.0 -> 1.7.0 (*)
+|    |    |    \--- com.google.crypto.tink:tink-android:1.5.0 -> 1.7.0
+|    |    |         \--- com.google.code.gson:gson:2.8.9
 |    |    +--- androidx.startup:startup-runtime:1.1.1 (*)
 |    |    +--- com.google.dagger:hilt-android:2.44 (*)
-|    |    \--- com.jakewharton:process-phoenix:2.1.2
-|    +--- project :modules:library-i18n
-|    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
-|    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
-|    |    +--- androidx.core:core-ktx:1.9.0 (*)
-|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
-|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
-|    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
-|    |    \--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    +--- com.jakewharton:process-phoenix:2.1.2
+|    |    \--- com.google.crypto.tink:tink-android:1.7.0 (*)
+|    +--- project :modules:library-i18n (*)
 |    +--- project :modules:library-logging
+|    |    +--- project :modules:library-logging-api
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    |    \--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1 (*)
 |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
 |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
@@ -699,6 +818,15 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.7.20 (*)
 |    |    \--- com.google.dagger:hilt-android:2.44 (*)
 |    +--- project :modules:library-ui
+|    |    +--- project :modules:library-ui-api
+|    |    |    +--- androidx.appcompat:appcompat:1.5.1 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    |    \--- com.jakewharton.timber:timber:5.0.1 (*)
 |    |    +--- com.google.accompanist:accompanist-flowlayout:0.27.0
 |    |    |    +--- androidx.compose.foundation:foundation:1.3.0 (*)
 |    |    |    +--- androidx.compose.ui:ui-util:1.3.0 (*)
@@ -740,6 +868,7 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    |    |    +--- androidx.compose.ui:ui:1.3.0 (*)
 |    |    |    \--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
 |    |    +--- androidx.appcompat:appcompat:1.5.1 (*)
+|    |    +--- androidx.compose.material:material:1.3.0 (*)
 |    |    +--- androidx.compose.material:material-icons-extended:1.3.0
 |    |    |    +--- androidx.compose.material:material-icons-core:1.3.0 (*)
 |    |    |    +--- androidx.compose.runtime:runtime:1.3.0 (*)
@@ -798,9 +927,7 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    |    |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.4.1 -> 2.5.1 (*)
 |    |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
 |    |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.10 -> 1.7.20 (*)
-|    |    |    |    |    +--- com.squareup.okhttp3:okhttp:4.10.0
-|    |    |    |    |    |    +--- com.squareup.okio:okio:3.0.0 -> 3.2.0 (*)
-|    |    |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.20 -> 1.7.20 (*)
+|    |    |    |    |    +--- com.squareup.okhttp3:okhttp:4.10.0 (*)
 |    |    |    |    |    +--- com.squareup.okio:okio:3.2.0 (*)
 |    |    |    |    |    +--- androidx.annotation:annotation:1.5.0 (*)
 |    |    |    |    |    +--- androidx.appcompat:appcompat-resources:1.4.2 -> 1.5.1 (*)
@@ -824,119 +951,45 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
-|    |    +--- project :modules:library-android (*)
+|    |    +--- project :modules:library-android-api (*)
 |    |    +--- project :modules:library-i18n (*)
-|    |    +--- project :modules:library-navigation (*)
+|    |    +--- project :modules:library-navigation-api (*)
 |    |    \--- com.google.dagger:hilt-android:2.44 (*)
-|    \--- project :modules:library-network
-|         +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
-|         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
-|         +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1
-|         |    \--- org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.4.1
-|         |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.20 (*)
-|         |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.20
-|         |         +--- org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1
-|         |         |    \--- org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.4.1
-|         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.20 (*)
-|         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.20
-|         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
-|         |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
-|         +--- com.squareup.retrofit2:retrofit:2.9.0
-|         |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.10.0 (*)
-|         +--- com.apollographql.apollo3:apollo-runtime:3.6.2
-|         |    \--- com.apollographql.apollo3:apollo-runtime-jvm:3.6.2
-|         |         +--- com.squareup.okhttp3:okhttp:4.9.3 -> 4.10.0 (*)
-|         |         +--- com.apollographql.apollo3:apollo-api:3.6.2
-|         |         |    \--- com.apollographql.apollo3:apollo-api-jvm:3.6.2
-|         |         |         +--- com.squareup.okio:okio:3.2.0 (*)
-|         |         |         +--- com.benasher44:uuid:0.3.1
-|         |         |         |    \--- com.benasher44:uuid-jvm:0.3.1
-|         |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.7.20 (*)
-|         |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.30 -> 1.7.20
-|         |         |         \--- com.apollographql.apollo3:apollo-annotations:3.6.2
-|         |         |              \--- com.apollographql.apollo3:apollo-annotations-jvm:3.6.2
-|         |         |                   \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.7.20 (*)
-|         |         +--- com.apollographql.apollo3:apollo-mpp-utils:3.6.2
-|         |         |    \--- com.apollographql.apollo3:apollo-mpp-utils-jvm:3.6.2
-|         |         |         \--- com.apollographql.apollo3:apollo-annotations:3.6.2 (*)
-|         |         +--- com.squareup.okio:okio:3.2.0 (*)
-|         |         +--- com.benasher44:uuid:0.3.1 (*)
-|         |         \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
-|         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
-|         +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
-|         +--- androidx.core:core-ktx:1.9.0 (*)
-|         +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
-|         +--- com.jakewharton.timber:timber:5.0.1 (*)
-|         +--- project :modules:library-android (*)
-|         +--- project :modules:library-feature (*)
-|         +--- project :modules:library-i18n (*)
-|         +--- project :modules:library-navigation (*)
-|         +--- project :modules:library-preferences
-|         |    +--- androidx.datastore:datastore-preferences:1.0.0
-|         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
-|         |    |    +--- androidx.datastore:datastore:1.0.0
-|         |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
-|         |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.4 (*)
-|         |    |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.5.0 (*)
-|         |    |    |    \--- androidx.datastore:datastore-core:1.0.0
-|         |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
-|         |    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.4 (*)
-|         |    |    |         \--- androidx.annotation:annotation:1.1.0 -> 1.5.0 (*)
-|         |    |    \--- androidx.datastore:datastore-preferences-core:1.0.0
-|         |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
-|         |    |         \--- androidx.datastore:datastore-core:1.0.0 (*)
-|         |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
-|         |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
-|         |    +--- androidx.core:core-ktx:1.9.0 (*)
-|         |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
-|         |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
-|         |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
-|         |    +--- com.jakewharton.timber:timber:5.0.1 (*)
-|         |    +--- project :modules:library-android (*)
-|         |    +--- androidx.datastore:datastore:1.0.0 (*)
-|         |    \--- com.google.dagger:hilt-android:2.44 (*)
-|         +--- com.apollographql.apollo3:apollo-normalized-cache:3.6.2
-|         |    \--- com.apollographql.apollo3:apollo-normalized-cache-jvm:3.6.2
-|         |         +--- com.apollographql.apollo3:apollo-runtime:3.6.2 (*)
-|         |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:3.6.2
-|         |         |    \--- com.apollographql.apollo3:apollo-normalized-cache-api-jvm:3.6.2
-|         |         |         +--- com.apollographql.apollo3:apollo-api:3.6.2 (*)
-|         |         |         +--- com.apollographql.apollo3:apollo-mpp-utils:3.6.2 (*)
-|         |         |         +--- com.benasher44:uuid:0.3.1 (*)
-|         |         |         \--- com.squareup.okio:okio:3.2.0 (*)
-|         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
-|         |         \--- org.jetbrains.kotlinx:atomicfu:0.17.0
-|         |              \--- org.jetbrains.kotlinx:atomicfu-jvm:0.17.0
-|         |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0 -> 1.7.20 (*)
-|         |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.6.0 -> 1.7.20
-|         +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.6.2
-|         |    \--- com.apollographql.apollo3:apollo-normalized-cache-sqlite-android-debug:3.6.2
-|         |         +--- androidx.sqlite:sqlite:2.1.0
-|         |         |    \--- androidx.annotation:annotation:1.0.0 -> 1.5.0 (*)
-|         |         +--- com.apollographql.apollo3:apollo-api:3.6.2 (*)
-|         |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:3.6.2 (*)
-|         |         +--- com.apollographql.apollo3:apollo-normalized-cache:3.6.2 (*)
-|         |         +--- com.squareup.sqldelight:runtime:1.5.3
-|         |         |    \--- com.squareup.sqldelight:runtime-jvm:1.5.3
-|         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 -> 1.7.20 (*)
-|         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31 -> 1.7.20
-|         |         +--- com.squareup.sqldelight:android-driver:1.5.3
-|         |         |    +--- com.squareup.sqldelight:runtime-jvm:1.5.3 (*)
-|         |         |    +--- androidx.sqlite:sqlite:2.1.0 (*)
-|         |         |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 -> 1.7.20 (*)
-|         |         |    \--- androidx.sqlite:sqlite-framework:2.1.0
-|         |         |         +--- androidx.annotation:annotation:1.0.0 -> 1.5.0 (*)
-|         |         |         \--- androidx.sqlite:sqlite:2.1.0 (*)
-|         |         +--- androidx.sqlite:sqlite-framework:2.1.0 (*)
-|         |         \--- androidx.startup:startup-runtime:1.1.1 (*)
-|         +--- com.google.dagger:hilt-android:2.44 (*)
-|         +--- com.squareup.okhttp3:logging-interceptor:4.10.0
-|         |    +--- com.squareup.okhttp3:okhttp:4.10.0 (*)
-|         |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 -> 1.7.20 (*)
-|         \--- com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0
-|              +--- com.squareup.retrofit2:retrofit:2.6.4 -> 2.9.0 (*)
-|              +--- org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.0.0 -> 1.4.1 (*)
-|              \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.10 -> 1.7.20 (*)
+|    +--- project :modules:library-network-api (*)
+|    +--- project :modules:library-preferences-api
+|    |    +--- project :modules:library-ui-api (*)
+|    |    +--- androidx.datastore:datastore-preferences:1.0.0
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
+|    |    |    +--- androidx.datastore:datastore:1.0.0
+|    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
+|    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.4 (*)
+|    |    |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.5.0 (*)
+|    |    |    |    \--- androidx.datastore:datastore-core:1.0.0
+|    |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
+|    |    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0 -> 1.6.4 (*)
+|    |    |    |         \--- androidx.annotation:annotation:1.1.0 -> 1.5.0 (*)
+|    |    |    \--- androidx.datastore:datastore-preferences-core:1.0.0
+|    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.5.10 -> 1.7.20 (*)
+|    |    |         \--- androidx.datastore:datastore-core:1.0.0 (*)
+|    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    |    +--- androidx.core:core-ktx:1.9.0 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    \--- com.google.dagger:hilt-android:2.44 (*)
+|    +--- com.mikepenz:aboutlibraries-compose:10.5.1
+|    |    \--- com.mikepenz:aboutlibraries-compose-android:10.5.1
+|    |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |         +--- androidx.core:core-ktx:1.9.0 (*)
+|    |         \--- com.mikepenz:aboutlibraries-core:10.5.1
+|    |              \--- com.mikepenz:aboutlibraries-core-android-debug:10.5.1
+|    |                   +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.20
+|    +--- com.mikepenz:aboutlibraries-core:10.5.1 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1 (*)
+|    \--- com.google.crypto.tink:tink-android:1.7.0 (*)
 +--- project :modules:feature-bar
 |    +--- project :modules:library-feature (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
@@ -977,8 +1030,9 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 |    +--- project :modules:library-i18n (*)
 |    +--- project :modules:library-logging (*)
 |    +--- project :modules:library-ui (*)
-|    +--- project :modules:library-network (*)
-|    +--- project :modules:library-preferences (*)
+|    +--- project :modules:feature-account-api (*)
+|    +--- project :modules:library-network-api (*)
+|    +--- project :modules:library-preferences-api (*)
 |    +--- androidx.lifecycle:lifecycle-process:2.5.1 (*)
 |    +--- androidx.startup:startup-runtime:1.1.1 (*)
 |    \--- com.squareup:seismic:1.0.3
@@ -1005,8 +1059,49 @@ debugRuntimeClasspath - Runtime classpath of compilation 'debug' (target  (andro
 +--- project :modules:library-android (*)
 +--- project :modules:library-i18n (*)
 +--- project :modules:library-logging (*)
++--- project :modules:library-navigation (*)
++--- project :modules:library-network
+|    +--- project :modules:library-network-api (*)
+|    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    +--- androidx.core:core-ktx:1.9.0 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    +--- project :modules:library-android-api (*)
+|    +--- project :modules:library-feature (*)
+|    +--- project :modules:library-i18n (*)
+|    +--- project :modules:library-navigation-api (*)
+|    +--- project :modules:library-preferences-api (*)
+|    +--- project :modules:library-ui-api (*)
+|    +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.6.2 (*)
+|    +--- com.google.dagger:hilt-android:2.44 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1 (*)
+|    +--- com.squareup.okhttp3:logging-interceptor:4.10.0
+|    |    +--- com.squareup.okhttp3:okhttp:4.10.0 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 -> 1.7.20 (*)
+|    +--- com.squareup.retrofit2:retrofit:2.9.0 (*)
+|    +--- com.squareup.retrofit2:converter-scalars:2.9.0
+|    |    \--- com.squareup.retrofit2:retrofit:2.9.0 (*)
+|    +--- com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0
+|    |    +--- com.squareup.retrofit2:retrofit:2.6.4 -> 2.9.0 (*)
+|    |    +--- org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.0.0 -> 1.4.1 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.10 -> 1.7.20 (*)
+|    \--- com.google.crypto.tink:tink-android:1.7.0 (*)
++--- project :modules:library-preferences
+|    +--- project :modules:library-preferences-api (*)
+|    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20 (*)
+|    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.7.20 (*)
+|    +--- androidx.core:core-ktx:1.9.0 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 (*)
+|    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
+|    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    +--- project :modules:library-android-api (*)
+|    +--- project :modules:library-ui-api (*)
+|    \--- com.google.dagger:hilt-android:2.44 (*)
 +--- project :modules:library-ui (*)
-+--- androidx.navigation:navigation-compose:2.5.3 (*)
 +--- androidx.startup:startup-runtime:1.1.1 (*)
 +--- com.google.android.play:core:1.10.3
 \--- com.google.android.play:core-ktx:1.8.1 (*)
