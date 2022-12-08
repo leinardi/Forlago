@@ -80,9 +80,9 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen() // must be called before super.onCreate()
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        installSplashScreen()
         setContent {
             ForlagoTheme(isDynamicColor = viewModel.viewState.value.dynamicColors) {
                 ForlagoMainScreen(
