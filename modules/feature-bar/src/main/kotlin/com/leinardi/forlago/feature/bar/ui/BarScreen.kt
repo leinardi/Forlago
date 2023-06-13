@@ -72,7 +72,7 @@ private fun BarScreen(
             .navigationBarsPadding(),
         topBar = {
             TopAppBar(
-                title = stringResource(R.string.i18n_bar_screen_title),
+                title = stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_bar_screen_title),
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 scrollBehavior = scrollBehavior,
@@ -93,7 +93,7 @@ private fun BarScreen(
         ) {
             Box(Modifier.fillMaxWidth()) {
                 Text(
-                    stringResource(R.string.i18n_bar_text_received, state.text),
+                    stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_bar_text_received, state.text),
                     Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = typography.headlineSmall,
@@ -103,7 +103,7 @@ private fun BarScreen(
                 onClick = { sendEvent(Event.OnBackButtonClicked) },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.i18n_back))
+                Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_back))
             }
         }
     }

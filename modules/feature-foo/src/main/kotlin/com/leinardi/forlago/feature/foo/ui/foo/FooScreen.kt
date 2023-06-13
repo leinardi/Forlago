@@ -104,7 +104,7 @@ private fun FooScreen(
             .navigationBarsPadding(),
         topBar = {
             TopAppBar(
-                title = stringResource(R.string.i18n_foo_screen_title),
+                title = stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_screen_title),
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 scrollBehavior = scrollBehavior,
             )
@@ -127,26 +127,26 @@ private fun FooScreen(
                 value = textFieldValue,
                 onValueChange = { textFieldValue = it },
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text(stringResource(R.string.i18n_foo_text_field_hint)) },
+                label = { Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_text_field_hint)) },
             )
             ProgressButton(
                 onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
                 loading = state.isLoading,
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.i18n_foo_send_text_to_bar))
+                Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_send_text_to_bar))
             }
             Button(
                 onClick = { sendEvent(Event.OnShowSnackbarButtonClicked) },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.i18n_foo_show_snackbar))
+                Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_show_snackbar))
             }
             Button(
                 onClick = { sendEvent(Event.OnShowMoreFooButtonClicked) },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.i18n_foo_show_dialog))
+                Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_show_dialog))
             }
         }
     }

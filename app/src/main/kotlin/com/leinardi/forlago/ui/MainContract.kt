@@ -39,7 +39,7 @@ object MainContract {
     }
 
     sealed class Effect : ViewEffect {
-        data class ShowErrorSnackbar(val message: String, @StringRes val actionLabel: Int = R.string.i18n_generic_snackbar_dismissal) : Effect()
+        data class ShowErrorSnackbar(val message: String, @StringRes val actionLabel: Int = com.leinardi.forlago.library.i18n.R.string.i18n_generic_snackbar_dismissal) : Effect()
         data class StartUpdateFlowForResult(val appUpdateInfo: AppUpdateInfo, @AppUpdateType val appUpdateType: Int) : Effect()
         object FinishActivity : Effect()
         object ShowSnackbarForCompleteUpdate : Effect()

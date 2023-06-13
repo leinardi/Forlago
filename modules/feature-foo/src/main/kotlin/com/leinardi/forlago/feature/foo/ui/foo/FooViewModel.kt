@@ -37,12 +37,12 @@ class FooViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
     private val app: Application,
 ) : BaseViewModel<Event, State, Effect>() {
-    override fun provideInitialState() = State(app.getString(R.string.i18n_foo_change_me))
+    override fun provideInitialState() = State(app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_foo_change_me))
 
     override fun handleEvent(event: Event) {
         when (event) {
             is Event.OnBarButtonClicked -> sendText(event.text)
-            Event.OnShowSnackbarButtonClicked -> sendEffect { Effect.ShowSnackbar(app.getString(R.string.i18n_foo_snackbar_text)) }
+            Event.OnShowSnackbarButtonClicked -> sendEffect { Effect.ShowSnackbar(app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_foo_snackbar_text)) }
             Event.OnShowMoreFooButtonClicked -> forlagoNavigator.navigate(FooDialogDestination.get())
         }
     }

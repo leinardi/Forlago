@@ -78,7 +78,7 @@ private fun PreviewMainNavigationBarSelected() {
                 selected = true,
                 onClick = {},
                 icon = Icons.Default.Inbox,
-                label = stringResource(R.string.i18n_app_name),
+                label = stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_app_name),
                 badgeCount = 12,
             )
         }
@@ -94,7 +94,7 @@ private fun PreviewMainNavigationBarUnselected() {
                 selected = false,
                 onClick = {},
                 icon = Icons.Default.Inbox,
-                label = stringResource(R.string.i18n_app_name),
+                label = stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_app_name),
                 badgeCount = 12,
             )
         }

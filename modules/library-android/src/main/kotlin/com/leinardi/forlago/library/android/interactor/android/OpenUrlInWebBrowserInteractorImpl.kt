@@ -35,7 +35,7 @@ internal class OpenUrlInWebBrowserInteractorImpl @Inject constructor(
             application.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         } catch (exception: ActivityNotFoundException) {
             Timber.i(exception)
-            showToastInteractor(application.getString(R.string.i18n_generic_error_no_browser_installed))
+            showToastInteractor(application.getString(com.leinardi.forlago.library.i18n.R.string.i18n_generic_error_no_browser_installed))
         }
     }
 }

@@ -57,11 +57,13 @@ android {
 
     buildTypes {
         debug {
+            namespace config.android.applicationId + '.debug'
             signingConfig signingConfigs.debug
             applicationIdSuffix ".debug"
         }
 
         release {
+            namespace config.android.applicationId
             if (useReleaseKeystore) {
                 signingConfig signingConfigs.release
             } else {

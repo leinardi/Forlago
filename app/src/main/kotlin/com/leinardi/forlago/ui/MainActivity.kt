@@ -156,12 +156,9 @@ fun ForlagoMainScreen(
     val bottomSheetNavigator = rememberBottomSheetNavigator(skipHalfExpanded = true)
     val navHostController = rememberNavController(bottomSheetNavigator)
     val activity = LocalContext.current.getActivity() as MainActivity
-    val keyboardController = LocalSoftwareKeyboardController.current
     val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(navHostController) {
         forlagoNavigator.destinations.onEach { event ->
-            Timber.d("backQueue = ${navHostController.backQueue.map { "route = ${it.destination.route}" }}")
-            keyboardController?.hide()
             when (event) {
                 is NavigatorEvent.Directions -> navHostController.navigate(
                     event.destination,
@@ -225,9 +222,9 @@ private suspend fun showSnackbarForCompleteUpdate(
     activity: MainActivity,
 ) {
     snackbarHostState.showSnackbar(
-        message = activity.getString(R.string.i18n_app_update_snackbar_download_ready_label),
+        message = activity.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_snackbar_download_ready_label),
         duration = SnackbarDuration.Indefinite,
-        actionLabel = activity.getString(R.string.i18n_app_update_snackbar_download_ready_button),
+        actionLabel = activity.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_snackbar_download_ready_button),
     ).also { snackbarResult ->
         if (snackbarResult == SnackbarResult.ActionPerformed) {
             activity.completeAppUpdate()
