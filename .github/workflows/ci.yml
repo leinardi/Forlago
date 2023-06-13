@@ -24,8 +24,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -83,8 +83,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -107,17 +107,18 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: bundleRelease analyzeReleaseBundle
+          arguments: bundleRelease # analyzeReleaseBundle <- Disable due to https://github.com/spotify/ruler/issues/116
 
       - name: Clean secrets
         if: always()
         run: ./release/clean-secrets.sh
 
-      - name: Upload Ruler report
-        uses: actions/upload-artifact@v3
-        with:
-          name: ruler
-          path: app/build/reports/ruler
+      # Disable due to https://github.com/spotify/ruler/issues/116
+      # - name: Upload Ruler report
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ruler
+      #     path: app/build/reports/ruler
 
   build-debug:
     name: Build debug
@@ -133,8 +134,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -173,8 +174,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -213,8 +214,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -246,8 +247,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -293,8 +294,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -343,8 +344,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
@@ -437,8 +438,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties

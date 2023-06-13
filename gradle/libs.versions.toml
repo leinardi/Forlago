@@ -1,6 +1,5 @@
 # Sharing dependency versions between projects
 # https://docs.gradle.org/current/userguide/platforms.html
-
 [versions]
 aboutlibraries = "10.7.0"
 accompanist = "0.31.3-beta"

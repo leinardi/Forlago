@@ -18,8 +18,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: 11.0.14
+          distribution: 'temurin'
+          java-version: 17.0.6
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
