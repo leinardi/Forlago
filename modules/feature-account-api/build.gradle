@@ -12,7 +12,9 @@ android {
 }
 
 apollo {
-    packageNamesFromFilePaths()
+    service("forlago") {
+        packageNamesFromFilePaths()
+    }
 }
 
 dependencies {

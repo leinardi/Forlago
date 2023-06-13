@@ -42,7 +42,12 @@ class FooViewModel @Inject constructor(
     override fun handleEvent(event: Event) {
         when (event) {
             is Event.OnBarButtonClicked -> sendText(event.text)
-            Event.OnShowSnackbarButtonClicked -> sendEffect { Effect.ShowSnackbar(app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_foo_snackbar_text)) }
+            Event.OnShowSnackbarButtonClicked -> sendEffect {
+                Effect.ShowSnackbar(
+                    app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_foo_snackbar_text),
+                )
+            }
+
             Event.OnShowMoreFooButtonClicked -> forlagoNavigator.navigate(FooDialogDestination.get())
         }
     }

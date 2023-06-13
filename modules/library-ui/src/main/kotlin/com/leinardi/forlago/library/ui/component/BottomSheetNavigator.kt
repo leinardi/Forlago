@@ -17,8 +17,6 @@
 package com.leinardi.forlago.library.ui.component
 
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.material.BottomSheetScaffoldState
-import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.SwipeableDefaults

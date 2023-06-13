@@ -45,7 +45,7 @@ fun TopAppBar(
     onNavigateUp: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
-    colors: TopAppBarColors = TopAppBarDefaults.smallTopAppBarColors(),
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
     contextual: Boolean = false,
     contextualTitle: String = "",
@@ -99,7 +99,7 @@ fun TopAppBar(
 
 @Composable
 fun TopAppBarDefaults.contextualTopAppBarColors(): TopAppBarColors =
-    TopAppBarDefaults.smallTopAppBarColors(
+    TopAppBarDefaults.topAppBarColors(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         scrolledContainerColor = MaterialTheme.colorScheme.primaryContainer,
         navigationIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,

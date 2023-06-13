@@ -20,7 +20,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -106,7 +106,7 @@ private fun SignInScreen(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection)
             .padding(LocalMainScaffoldPadding.current.value)
-            .consumedWindowInsets(LocalMainScaffoldPadding.current.value)
+            .consumeWindowInsets(LocalMainScaffoldPadding.current.value)
             .navigationBarsPadding(),
         topBar = {
             TopAppBar(

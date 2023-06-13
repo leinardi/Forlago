@@ -173,11 +173,14 @@ formatting: # KtLint
   StringTemplate:
     active: true
     autoCorrect: true
-  TrailingComma:
+  TrailingCommaOnCallSite:
     active: false
     autoCorrect: true
-    allowTrailingComma: false
-    allowTrailingCommaOnCallSite: false
+    useTrailingCommaOnCallSite: true
+  TrailingCommaOnDeclarationSite:
+    active: false
+    autoCorrect: true
+    useTrailingCommaOnDeclarationSite: true
   TypeArgumentListSpacing:
     active: true # Custom
     autoCorrect: true
@@ -303,7 +306,10 @@ complexity:
     threshold: 10
     includeStaticDeclarations: false
     includePrivateDeclarations: false
-  ComplexMethod:
+  CognitiveComplexMethod:
+    active: false
+    threshold: 15
+  CyclomaticComplexMethod:
     active: true
     threshold: 20 # Custom
     ignoreSingleWhenExpression: true # Custom
@@ -319,6 +325,8 @@ complexity:
       - 'run'
       - 'use'
       - 'with'
+    ignoreAnnotated: # Custom
+      - 'Composable'
   LabeledExpression:
     active: false
     ignoredLabels: []
@@ -555,7 +563,6 @@ naming:
   BooleanPropertyNaming:
     active: false
     allowedPattern: '^(is|has|are)'
-    ignoreOverridden: true
   ClassNaming:
     active: true
     classPattern: '[A-Z][a-zA-Z0-9]*'
@@ -565,7 +572,6 @@ naming:
     parameterPattern: '([a-ln-z]|m[a-z])[A-Za-z0-9]*' # Custom
     privateParameterPattern: '([a-ln-z]|m[a-z])[A-Za-z0-9]*' # Custom
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   EnumNaming:
     active: true
     enumEntryPattern: '[A-Z][_A-Z0-9]*' # Custom
@@ -591,14 +597,12 @@ naming:
       ]
     functionPattern: '[a-z][a-zA-Z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
     ignoreAnnotated: # Custom
       - 'Composable'
   FunctionParameterNaming:
     active: true
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
   InvalidPackageDeclaration:
     active: true
     rootPackage: ''
@@ -643,7 +647,6 @@ naming:
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverridden: true
 
 performance:
   active: true
@@ -700,10 +703,9 @@ potential-bugs:
       - 'java.util.HashSet'
       - 'java.util.LinkedHashMap'
       - 'java.util.HashMap'
-  DuplicateCaseInWhenExpression:
-    active: true
   ElseCaseInsteadOfExhaustiveWhen:
     active: false
+    ignoredSubjectTypes: []
   EqualsAlwaysReturnsTrueOrFalse:
     active: true
   EqualsWithHashCodeExist:
@@ -715,13 +717,20 @@ potential-bugs:
   HasPlatformType:
     active: true
   IgnoredReturnValue:
-    active: true # Custom
-    restrictToAnnotatedMethods: true
+    active: true
+    restrictToConfig: true
     returnValueAnnotations:
+      - 'CheckResult'
       - '*.CheckResult'
+      - 'CheckReturnValue'
       - '*.CheckReturnValue'
     ignoreReturnValueAnnotations:
+      - 'CanIgnoreReturnValue'
       - '*.CanIgnoreReturnValue'
+    returnValueTypes:
+      - 'kotlin.sequences.Sequence'
+      - 'kotlinx.coroutines.flow.*Flow'
+      - 'java.util.stream.*Stream'
     ignoreFunctionCall: []
   ImplicitDefaultLocale:
     active: true
@@ -752,15 +761,10 @@ potential-bugs:
   MissingPackageDeclaration:
     active: false
     excludes: ['**/*.kts']
-  MissingWhenCase:
-    active: true
-    allowElseExpression: true
   NullCheckOnMutableProperty:
     active: true # Custom
   NullableToStringCall:
     active: true # Custom
-  RedundantElseInWhen:
-    active: true
   UnconditionalJumpStatementInLoop:
     active: false
   UnnecessaryNotNullOperator:
@@ -785,6 +789,14 @@ potential-bugs:
 
 style:
   active: true
+  BracesOnIfStatements:
+    active: true # Custom
+    singleLine: 'never'
+    multiLine: 'always'
+  BracesOnWhenStatements:
+    active: false
+    singleLine: 'necessary'
+    multiLine: 'consistent'
   CanBeNonNullable:
     active: false
   CascadingCallWrapping:
@@ -796,7 +808,9 @@ style:
     active: true # Custom
   DataClassContainsFunctions:
     active: false
-    conversionFunctionPrefix: 'to'
+    conversionFunctionPrefix:
+      - 'to'
+    allowOperators: false
   DataClassShouldBeImmutable:
     active: true # Custom
   DestructuringDeclarationWithTooManyEntries:
@@ -815,12 +829,14 @@ style:
     includeLineWrapping: true # Custom
   ForbiddenComment:
     active: true
-    values:
-      - 'FIXME'
-      - 'STOPSHIP'
-      - 'TODO'
+    comments:
+      - reason: 'Forbidden FIXME todo marker in comment, please fix the problem.'
+        value: 'FIXME'
+      - reason: 'Forbidden STOPSHIP todo marker in comment, please address the problem before shipping the code.'
+        value: 'STOPSHIP'
+      - reason: 'Forbidden TODO todo marker in comment, please do the changes.'
+        value: 'TODO'
     allowedPatterns: ''
-    customMessage: ''
   ForbiddenImport:
     active: false
     imports: []
@@ -831,12 +847,6 @@ style:
       - 'kotlin.io.print'
       - 'kotlin.io.println'
       - 'kotlin.TODO' # Custom
-  ForbiddenPublicDataClass:
-    active: true
-    excludes: ['**']
-    ignorePackages:
-      - '*.internal'
-      - '*.internal.*'
   ForbiddenSuppress:
     active: false
     rules: []
@@ -848,15 +858,9 @@ style:
     active: true
     ignoreOverridableFunction: true
     ignoreActualFunction: true
-    excludedFunctions: ''
+    excludedFunctions: []
     ignoreAnnotated: # Custom
       - 'Provides'
-  LibraryCodeMustSpecifyReturnType:
-    active: true
-    excludes: ['**']
-  LibraryEntitiesShouldNotBePublic:
-    active: true
-    excludes: ['**']
   LoopWithTooManyJumpStatements:
     active: true
     maxJumpCount: 1
@@ -888,8 +892,6 @@ style:
     ignoreEnums: true # Custom
     ignoreRanges: false
     ignoreExtensionFunctions: true
-  MandatoryBracesIfStatements:
-    active: true # Custom
   MandatoryBracesLoops:
     active: true # Custom
   MaxChainedCallsOnSameLine:
@@ -936,7 +938,8 @@ style:
   ReturnCount:
     active: true
     max: 8 # Custom
-    excludedFunctions: 'equals'
+    excludedFunctions:
+      - 'equals'
     excludeLabeled: false
     excludeReturnFromLambda: true
     excludeGuardClauses: false

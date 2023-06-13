@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.leinardi.forlago.feature.debug.ui
 
 import android.os.Build
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -40,6 +45,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -53,8 +59,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
 import com.leinardi.forlago.feature.debug.R
 import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
@@ -74,7 +78,6 @@ import com.leinardi.forlago.library.ui.component.SettingsGroup
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 import com.leinardi.forlago.library.ui.component.SettingsMenuSwitch
 import com.leinardi.forlago.library.ui.component.TopAppBar
-import com.leinardi.forlago.library.ui.component.pagerTabIndicatorOffset
 import com.leinardi.forlago.library.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
@@ -102,7 +105,7 @@ private fun DebugScreen(
             modifier = modifier
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .padding(LocalMainScaffoldPadding.current.value)
-                .consumedWindowInsets(LocalMainScaffoldPadding.current.value)
+                .consumeWindowInsets(LocalMainScaffoldPadding.current.value)
                 .navigationBarsPadding(),
             topBar = {
                 TopAppBar(
@@ -324,7 +327,7 @@ private fun Features(
     state: State,
     modifier: Modifier = Modifier,
 ) {
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState { state.featureList.size }
     val scope = rememberCoroutineScope()
     Column(
         modifier = modifier,
@@ -333,7 +336,7 @@ private fun Features(
             selectedTabIndex = pagerState.currentPage,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    Modifier.pagerTabIndicatorOffset(pagerState, tabPositions),
+                    Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
                 )
             },
         ) {
@@ -346,7 +349,6 @@ private fun Features(
             }
         }
         HorizontalPager(
-            count = state.featureList.size,
             state = pagerState,
         ) { page ->
             state.featureList[page].composable()
