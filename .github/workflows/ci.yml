@@ -374,7 +374,7 @@ jobs:
 
       - name: Run emulator to generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@v2.28.0
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
@@ -389,9 +389,22 @@ jobs:
           channel: stable
           script: echo "Generated AVD snapshot for caching."
 
+      ## - name: Run integration tests
+      ##   # more info on https://github.com/ReactiveCircus/android-emulator-runner
+      ##   uses: reactivecircus/android-emulator-runner@v2.27.0
+      ##   with:
+      ##     api-level: ${{ matrix.api-level }}
+      ##     profile: Nexus 5
+      ##     target: playstore
+      ##     arch: x86_64
+      ##     force-avd-creation: false
+      ##     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+      ##     disable-animations: false
+      ##     script: cd handle-it-app && flutter test integration_test --flavor devtest --verbose
+
       ## Actual task
       - name: Run Android tests on API ${{ matrix.api-level }} / ${{ matrix.arch }} / ${{ matrix.target }}
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@v2.28.0
         with:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
@@ -408,7 +421,7 @@ jobs:
           script: |
             echo $GITHUB_REPOSITORY
             adb devices
-            ./gradlew connectedCheck
+            ./gradlew connectedAndroidTest
 
       - name: Make file path compatible with upload-artifact
         run: find . -path '*/build/*' -name '*:*' -exec bash -c 'mv "$0" "${0//:/_}"' {} \;

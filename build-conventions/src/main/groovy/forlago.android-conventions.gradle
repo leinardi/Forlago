@@ -76,7 +76,8 @@ android {
     packagingOptions {
         resources {
             // Use this block to exclude conflicting files that breaks your APK assemble task
-            // exclude "META-INF/AL2.0"
+            exclude "META-INF/LICENSE.md"
+            exclude "META-INF/LICENSE-notice.md"
         }
     }
     sourceSets {
@@ -90,6 +91,12 @@ kotlin {
         languageSettings {
             progressiveMode = true // deprecations and bug fixes for unstable code take effect immediately
         }
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions {
+        jvmTarget = config.android.javaVersion
     }
 }
 
