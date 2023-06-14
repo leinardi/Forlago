@@ -1,6 +1,5 @@
 plugins {
     id 'forlago.android-library-conventions'
-    alias(libs.plugins.apollo)
 }
 
 android {
@@ -11,14 +10,7 @@ android {
     }
 }
 
-apollo {
-    service("forlago") {
-        packageNamesFromFilePaths()
-    }
-}
-
 dependencies {
-    apolloMetadata projects.modules.libraryNetworkApi
     implementation projects.modules.libraryNavigationApi
     implementation projects.modules.libraryNetworkApi
 }
