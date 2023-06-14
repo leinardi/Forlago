@@ -15,13 +15,22 @@
  */
 
 plugins {
-    id 'forlago.android-feature-conventions'
+    id("forlago.android-library-conventions")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace 'com.leinardi.forlago.feature.bar'
-    resourcePrefix 'bar_'
+    namespace = "com.leinardi.forlago.library.navigation"
+    resourcePrefix = "navigation_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-bar-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-navigation-consumer-rules.pro")
     }
+}
+
+dependencies {
+    api(projects.modules.libraryNavigationApi)
+
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.hilt.compiler)
 }

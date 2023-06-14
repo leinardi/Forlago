@@ -31,6 +31,19 @@ dependencies {
 }
 
 // Workaround for https://github.com/detekt/detekt/issues/4743
-tasks.withType<Detekt>().configureEach {
-    exclude("com/leinardi/forlago/library/network/api/graphql/**/*.kt")
+tasks{
+    withType<Detekt>().configureEach {
+        exclude("com/leinardi/forlago/library/network/api/graphql/**/*.kt")
+    }
+    register<Exec>("refreshGraphQlSchema") {
+        val endpoint = "https://apollo-fullstack-tutorial.herokuapp.com/graphql"
+        val schemaPath = "modules/library-network-api/src/main/graphql/schema.graphqls"
+        workingDir(rootDir)
+        commandLine(
+            "./gradlew",
+            ":module:library-network-api:downloadApolloSchema",
+            "--endpoint=$endpoint",
+            "--schema=$schemaPath",
+        )
+    }
 }

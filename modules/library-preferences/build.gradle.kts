@@ -15,30 +15,24 @@
  */
 
 plugins {
-    id 'forlago.android-library-conventions'
-    id 'com.google.dagger.hilt.android'
+    id("forlago.android-library-conventions")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace 'com.leinardi.forlago.library.android'
-    resourcePrefix 'android_'
+    namespace = "com.leinardi.forlago.library.preferences"
+    resourcePrefix = "preferences_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-android-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-preferences-consumer-rules.pro")
     }
 }
 
 dependencies {
-    api projects.modules.libraryAndroidApi
-    implementation projects.modules.libraryI18n
+    api(projects.modules.libraryPreferencesApi)
+    implementation(projects.modules.libraryAndroidApi)
+    implementation(projects.modules.libraryUiApi)
 
-    implementation libs.play.core
-    implementation libs.play.core.ktx
-    implementation libs.androidx.security
-    implementation libs.androidx.startup
-    implementation libs.hilt.android
-    implementation libs.process.phoenix
-    implementation libs.tink
-    kapt libs.hilt.compiler
-
-    kaptTest libs.hilt.android.compiler
+    implementation(libs.hilt.android)
+    implementation(libs.timber)
+    kapt(libs.hilt.compiler)
 }

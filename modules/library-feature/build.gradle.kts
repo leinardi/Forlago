@@ -15,22 +15,28 @@
  */
 
 plugins {
-    id 'forlago.android-library-conventions'
-    id 'com.google.dagger.hilt.android'
+    id("forlago.android-library-conventions")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace 'com.leinardi.forlago.library.navigation'
-    resourcePrefix 'navigation_'
+    namespace = "com.leinardi.forlago.library.feature"
+    resourcePrefix = "feature_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-navigation-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-feature-consumer-rules.pro")
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 }
 
 dependencies {
-    api projects.modules.libraryNavigationApi
-
-    implementation libs.hilt.android
-    implementation libs.hilt.navigation.compose
-    kapt libs.hilt.compiler
+    api(project(":modules:library-navigation"))
+    api(libs.coroutines.core)
+    api(libs.coroutines.android)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }
