@@ -15,23 +15,27 @@
  */
 
 plugins {
-    id 'forlago.android-feature-conventions'
+    id("forlago.android-library-conventions")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace 'com.leinardi.forlago.feature.debug'
-    resourcePrefix 'debug_'
+    namespace = "com.leinardi.forlago.library.logging"
+    resourcePrefix = "logging_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-debug-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-logging-consumer-rules.pro")
     }
 }
 
 dependencies {
-    implementation projects.modules.featureAccountApi
-    implementation projects.modules.libraryNetworkApi
-    implementation projects.modules.libraryPreferencesApi
-
-    implementation libs.androidx.lifecycle.process
-    implementation libs.androidx.startup
-    implementation libs.seismic
+    api(projects.modules.libraryLoggingApi)
+    api(libs.timber)
+    implementation(libs.androidx.startup)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    if (rootProject.file("app/google-services.json").exists()) {
+        implementation(libs.firebase.perf)
+    }
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

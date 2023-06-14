@@ -15,28 +15,23 @@
  */
 
 plugins {
-    id 'forlago.android-library-conventions'
-    id 'com.google.dagger.hilt.android'
+    id("forlago.android-feature-conventions")
 }
 
 android {
-    namespace 'com.leinardi.forlago.library.feature'
-    resourcePrefix 'feature_'
+    namespace = "com.leinardi.forlago.feature.debug"
+    resourcePrefix = "debug_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-feature-consumer-rules.pro"
-    }
-    buildFeatures {
-        compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.androidx.compose.compiler.get()
+        consumerProguardFiles("$projectDir/proguard-debug-consumer-rules.pro")
     }
 }
 
 dependencies {
-    api project(':modules:library-navigation')
-    api libs.coroutines.core
-    api libs.coroutines.android
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(projects.modules.featureAccountApi)
+    implementation(projects.modules.libraryNetworkApi)
+    implementation(projects.modules.libraryPreferencesApi)
+
+    implementation(libs.androidx.lifecycle.process)
+    implementation(libs.androidx.startup)
+    implementation(libs.seismic)
 }

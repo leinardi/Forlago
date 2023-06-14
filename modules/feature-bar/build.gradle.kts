@@ -15,13 +15,13 @@
  */
 
 plugins {
-    id 'forlago.android-library-conventions'
+    id("forlago.android-feature-conventions")
 }
 
 android {
-    namespace 'com.leinardi.forlago.library.i18n'
-    resourcePrefix 'i18n_'
+    namespace = "com.leinardi.forlago.feature.bar"
+    resourcePrefix = "bar_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-i18n-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-bar-consumer-rules.pro")
     }
 }

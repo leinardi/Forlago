@@ -15,24 +15,13 @@
  */
 
 plugins {
-    id 'forlago.android-library-conventions'
-    id 'com.google.dagger.hilt.android'
+    id("forlago.android-feature-conventions")
 }
 
 android {
-    namespace 'com.leinardi.forlago.library.preferences'
-    resourcePrefix 'preferences_'
+    namespace = "com.leinardi.forlago.feature.foo"
+    resourcePrefix = "foo_"
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-preferences-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-foo-consumer-rules.pro")
     }
-}
-
-dependencies {
-    api projects.modules.libraryPreferencesApi
-    implementation projects.modules.libraryAndroidApi
-    implementation projects.modules.libraryUiApi
-
-    implementation libs.hilt.android
-    implementation libs.timber
-    kapt libs.hilt.compiler
 }
