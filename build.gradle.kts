@@ -15,26 +15,29 @@
  */
 
 plugins {
-    id 'forlago.config-conventions'
-    id 'forlago.buildlog-conventions'
-    id 'forlago.generate-module-conventions'
-    id 'forlago.spotless-conventions'
-    id 'forlago.versions-conventions'
-    id 'forlago.dependency-graph-conventions'
-    id 'forlago.violation-comments-to-github-conventions'
+    id("forlago.config-conventions")
+    id("forlago.buildlog-conventions")
+    id("forlago.generate-module-conventions")
+    id("forlago.spotless-conventions")
+    id("forlago.versions-conventions")
+    id("forlago.dependency-graph-conventions")
+    id("forlago.violation-comments-to-github-conventions")
     alias(libs.plugins.gradledoctor)
 }
 
 
 subprojects {
     gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        tasks.withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:unchecked")
+            options.compilerArgs.add("-Xlint:deprecation")
         }
     }
 }
 
-wrapper {
-    gradleVersion = libs.versions.gradle.get()
+tasks.withType<Wrapper> {
+    description = "Regenerates the Gradle Wrapper files"
     distributionType = Wrapper.DistributionType.ALL
+    gradleVersion = libs.versions.gradle.get()
 }
+
