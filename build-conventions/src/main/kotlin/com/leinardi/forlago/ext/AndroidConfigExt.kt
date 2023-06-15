@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-tasks.register("copyMergedManifests", Copy) {
-    dependsOn tasks.matching { (it.name ==~ /^process.*Manifest$/) }
-    mustRunAfter tasks.matching { (it.name ==~ /^process.*Manifest$/) }
-    mkdir 'versions/mergedManifests'
-    from("$buildDir/intermediates/merged_manifests") {
-        include '**/*.xml'
-    }
-    into 'versions/mergedManifests'
-    filter { line -> line.replaceAll("(android:version.*=\".*\")|(android:testOnly=\".*\")", "") }
+
+package com.leinardi.forlago.ext
+
+import org.gradle.api.JavaVersion
+import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.provider.Property
+import org.gradle.kotlin.dsl.getByType
+
+interface AndroidConfigExt : ExtensionAware {
+    val accountType: Property<String>
+    val compileSdk: Property<Int>
+    val javaVersion: Property<JavaVersion>
+    val minSdk: Property<Int>
+    val targetSdk: Property<Int>
 }
 
-check.dependsOn tasks.named("copyMergedManifests")
+internal inline val ConfigExt.android: AndroidConfigExt get() = extensions.getByType()
