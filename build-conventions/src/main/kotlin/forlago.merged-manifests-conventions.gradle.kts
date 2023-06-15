@@ -13,21 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-plugins {
-    id 'com.android.library'
-    id 'forlago.android-conventions'
-}
-
-android {
-    libraryVariants.all {
-        kotlin.sourceSets {
-            getByName(name) {
-                kotlin.srcDir("build/generated/ksp/${name}/kotlin")
-            }
+tasks {
+    register<Copy>("copyMergedManifests") {
+        dependsOn(tasks.matching { it.name matches "^process.*Manifest$".toRegex() })
+        mustRunAfter(tasks.matching { it.name matches "^process.*Manifest$".toRegex() })
+        mkdir("versions/mergedManifests")
+        from("$buildDir/intermediates/merged_manifests") {
+            include("**/*.xml")
         }
+        into("versions/mergedManifests")
+        filter { line -> line.replace("(android:version.*=\".*\")|(android:testOnly=\".*\")".toRegex(), "") }
     }
-}
 
-dependencies {
-    implementation libs.timber
+    named("check") {
+        dependsOn(tasks.named("copyMergedManifests"))
+    }
 }

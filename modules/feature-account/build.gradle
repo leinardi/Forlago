@@ -28,13 +28,13 @@ android {
     }
 
     buildTypes {
-        debug {
-            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}.debug\""
-            resValue 'string', 'account_type', "${config.android.accountType}.debug"
+        named("debug") {
+            buildConfigField("String", "ACCOUNT_TYPE", "\"${config.android.accountType.get()}.debug\"")
+            resValue("string", "account_type", "${config.android.accountType.get()}.debug")
         }
-        release {
-            buildConfigField "String", "ACCOUNT_TYPE", "\"${config.android.accountType}\""
-            resValue 'string', 'account_type', config.android.accountType
+        named("release") {
+            buildConfigField("String", "ACCOUNT_TYPE", "\"${config.android.accountType.get()}\"")
+            resValue("string", "account_type", config.android.accountType.get())
         }
     }
 }
