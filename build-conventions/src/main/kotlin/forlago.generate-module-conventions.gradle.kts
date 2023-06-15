@@ -27,7 +27,7 @@ tasks.register("generateFeatureDestinationObject") {
             val tokens = generatePlaceholderTokens()
             val templateDirPath = rootProject.file("modules/.module-template/destination")
             val navigationDir = rootProject.file(
-                "modules/library-navigation-api/src/main/kotlin/com/leinardi/forlado/library/navigation/api/destination/${tokens["placeholderlowercase"]}",
+                "modules/library-navigation-api/src/main/kotlin/com/leinardi/forlago/library/navigation/api/destination/${tokens["placeholderlowercase"]}",
             )
 
             from(templateDirPath)
@@ -193,8 +193,8 @@ fun printAddModuleHelp(tokens: Map<String, String>, moduleDirPath: File) {
             1. Declare the module in settings.gradle (alphabetically ordered):
                 // Modules
                 [...]
-                ':modules:${moduleDirPath.name}',
-                ':modules:${moduleDirPath.name}-api',
+                ":modules:${moduleDirPath.name}",
+                ":modules:${moduleDirPath.name}-api",
                 [...]
 
             2. Declare the dependency of the module on build.gradle that requires it (alphabetically ordered):
