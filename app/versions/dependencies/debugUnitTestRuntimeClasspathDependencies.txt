@@ -534,7 +534,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
 |    |         |         |    |    \--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |         |         |    \--- androidx.tracing:tracing:1.0.0 (*)
-|    |         |         +--- androidx.test.espresso:espresso-core:3.5.0
+|    |         |         +--- androidx.test.espresso:espresso-core:3.5.0 -> 3.5.1
 |    |         |         |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
 |    |         |         |    +--- androidx.test:core:1.5.0
 |    |         |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
@@ -549,7 +549,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         |         |    |    +--- com.google.guava:listenablefuture:1.0
 |    |         |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.8.21 (*)
 |    |         |         |    |    \--- androidx.concurrent:concurrent-futures:1.1.0 (*)
-|    |         |         |    +--- androidx.test:runner:1.5.0 -> 1.5.2
+|    |         |         |    +--- androidx.test:runner:1.5.2
 |    |         |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
 |    |         |         |    |    +--- androidx.test:annotation:1.0.1 (*)
 |    |         |         |    |    +--- androidx.test:monitor:1.6.1 (*)
@@ -557,7 +557,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         |         |    |    +--- androidx.tracing:tracing:1.0.0 (*)
 |    |         |         |    |    \--- junit:junit:4.13.2
 |    |         |         |    |         \--- org.hamcrest:hamcrest-core:1.3
-|    |         |         |    +--- androidx.test.espresso:espresso-idling-resource:3.5.0
+|    |         |         |    +--- androidx.test.espresso:espresso-idling-resource:3.5.1
 |    |         |         |    +--- com.squareup:javawriter:2.1.1
 |    |         |         |    +--- javax.inject:javax.inject:1
 |    |         |         |    +--- org.hamcrest:hamcrest-library:1.3
@@ -590,8 +590,8 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         +--- androidx.lifecycle:lifecycle-runtime:2.5.1 -> 2.6.1 (*)
 |    |         +--- androidx.test:core:1.5.0 (*)
 |    |         +--- androidx.test:monitor:1.6.1 (*)
-|    |         +--- androidx.test.espresso:espresso-core:3.3.0 -> 3.5.0 (*)
-|    |         +--- androidx.test.espresso:espresso-idling-resource:3.5.0
+|    |         +--- androidx.test.espresso:espresso-core:3.3.0 -> 3.5.1 (*)
+|    |         +--- androidx.test.espresso:espresso-idling-resource:3.5.0 -> 3.5.1
 |    |         +--- androidx.test.ext:junit:1.1.5
 |    |         |    +--- junit:junit:4.13.2 (*)
 |    |         |    +--- androidx.test:core:1.5.0 (*)
@@ -630,7 +630,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    +--- androidx.test:core:1.5.0 (*)
 |    |    +--- androidx.lifecycle:lifecycle-common:2.3.1 -> 2.6.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.8.21 (*)
-|    +--- androidx.test.espresso:espresso-core:3.5.0 (*)
+|    +--- androidx.test.espresso:espresso-core:3.5.1 (*)
 |    +--- androidx.test:runner:1.5.2 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1 (*)
 |    +--- com.google.dagger:hilt-android-testing:2.46.1
@@ -676,48 +676,48 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    \--- com.jakewharton.timber:timber:5.0.1 (*)
 +--- androidx.compose.ui:ui-test-junit4:1.5.0-beta01 (*)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
-+--- com.squareup.leakcanary:leakcanary-android:2.9.1
-|    +--- com.squareup.leakcanary:leakcanary-android-core:2.9.1
-|    |    +--- com.squareup.leakcanary:shark-android:2.9.1
++--- com.squareup.leakcanary:leakcanary-android:2.11
+|    +--- com.squareup.leakcanary:leakcanary-android-core:2.11
+|    |    +--- com.squareup.leakcanary:shark-android:2.11
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |    \--- com.squareup.leakcanary:shark:2.9.1
+|    |    |    \--- com.squareup.leakcanary:shark:2.11
 |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    |         +--- com.squareup.okio:okio:2.2.2 -> 3.3.0 (*)
-|    |    |         \--- com.squareup.leakcanary:shark-graph:2.9.1
+|    |    |         \--- com.squareup.leakcanary:shark-graph:2.11
 |    |    |              +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    |              +--- com.squareup.okio:okio:2.2.2 -> 3.3.0 (*)
-|    |    |              \--- com.squareup.leakcanary:shark-hprof:2.9.1
+|    |    |              \--- com.squareup.leakcanary:shark-hprof:2.11
 |    |    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |                   \--- com.squareup.leakcanary:shark-log:2.9.1
+|    |    |                   \--- com.squareup.leakcanary:shark-log:2.11
 |    |    |                        \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1
-|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher:2.9.1
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11
+|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher:2.11
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |    |    \--- com.squareup.leakcanary:shark-log:2.9.1 (*)
-|    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.9.1
-|    |    |    |    +--- com.squareup.leakcanary:shark-log:2.9.1 (*)
+|    |    |    |    \--- com.squareup.leakcanary:shark-log:2.11 (*)
+|    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.11
+|    |    |    |    +--- com.squareup.leakcanary:shark-log:2.11 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    |    +--- com.squareup.curtains:curtains:1.2.4
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.8.21 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:2.9.1
-|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1 (*)
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:2.11
+|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:2.9.1
-|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1 (*)
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:2.11
+|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    +--- com.squareup.leakcanary:leakcanary-object-watcher-android:2.9.1
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1 (*)
+|    +--- com.squareup.leakcanary:leakcanary-object-watcher-android:2.11
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.8.21 (*)
-|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.8.21 (*)
-|    \--- com.squareup.leakcanary:plumber-android:2.9.1
-|         +--- com.squareup.leakcanary:plumber-android-core:2.9.1
-|         |    +--- com.squareup.leakcanary:shark-log:2.9.1 (*)
-|         |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.9.1 (*)
-|         |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|         |    \--- com.squareup.curtains:curtains:1.2.4 (*)
-|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
+|    +--- com.squareup.leakcanary:plumber-android:2.11
+|    |    +--- com.squareup.leakcanary:plumber-android-core:2.11
+|    |    |    +--- com.squareup.leakcanary:shark-log:2.11 (*)
+|    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.11 (*)
+|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
+|    |    |    \--- com.squareup.curtains:curtains:1.2.4 (*)
+|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
+|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 +--- androidx.compose.ui:ui-tooling:1.5.0-beta01
 |    \--- androidx.compose.ui:ui-tooling-android:1.5.0-beta01
 |         +--- androidx.activity:activity-compose:1.7.0 -> 1.7.2 (*)
@@ -1384,17 +1384,17 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.21 (*)
 |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1 (*)
 |    |    +--- androidx.navigation:navigation-compose:2.7.0-alpha01 (*)
-|    |    +--- androidx.paging:paging-compose:3.2.0-beta01
+|    |    +--- androidx.paging:paging-compose:1.0.0-alpha20
 |    |    |    +--- androidx.compose.foundation:foundation:1.2.1 -> 1.5.0-beta01 (*)
 |    |    |    +--- androidx.compose.runtime:runtime:1.2.1 -> 1.5.0-beta01 (*)
-|    |    |    +--- androidx.paging:paging-common:3.2.0-beta01
+|    |    |    +--- androidx.paging:paging-common:3.2.0-alpha06
 |    |    |    |    +--- androidx.annotation:annotation:1.3.0 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.arch.core:core-common:2.2.0 (*)
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 (*)
 |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 -> 1.7.1 (*)
-|    |    |    |    \--- androidx.paging:paging-compose:3.2.0-beta01 (c)
+|    |    |    |    \--- androidx.paging:paging-compose:1.0.0-alpha20 (c)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 (*)
-|    |    |    \--- androidx.paging:paging-common:3.2.0-beta01 (c)
+|    |    |    \--- androidx.paging:paging-common:3.2.0-alpha06 (c)
 |    |    +--- io.coil-kt:coil-compose:2.4.0
 |    |    |    +--- io.coil-kt:coil-compose-base:2.4.0
 |    |    |    |    +--- androidx.core:core-ktx:1.9.0 -> 1.11.0-beta01 (*)
