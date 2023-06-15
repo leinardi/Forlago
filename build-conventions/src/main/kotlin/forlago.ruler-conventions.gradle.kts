@@ -15,23 +15,14 @@
  */
 
 plugins {
-    id 'io.gitlab.arturbosch.detekt'
+    id("com.spotify.ruler")
 }
 
-detekt {
-    toolVersion = libs.versions.detekt.get()
-    source = files("src/main/kotlin", "src/test/kotlin", "src/androidTest/kotlin")
-    parallel = true
-    autoCorrect = true
-}
-
-dependencies {
-    detektPlugins libs.detekt
-    detektPlugins libs.detekt.rules.compose
-    detektPlugins libs.detekt.twitter.compose.rules
-}
-
-afterEvaluate {
-    check.dependsOn tasks.named("detektMain")
-    check.dependsOn tasks.named("detektTest")
+ruler {
+    abi.set("arm64-v8a")
+    locale.set("en")
+    screenDensity.set(480)
+    sdkVersion.set(30)
+    ownershipFile.set(rootProject.file("config/ruler/ownership.yaml"))
+    defaultOwner.set("others")
 }
