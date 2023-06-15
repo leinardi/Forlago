@@ -41,8 +41,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.leinardi.forlago.library.ui.annotation.DevicePreviews
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
-import com.leinardi.forlago.library.ui.theme.ForlagoTheme
+import com.leinardi.forlago.library.ui.component.PreviewFeature
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -117,10 +118,10 @@ private fun @PlaceholderName@Screen(
     }
 }
 
-@Preview
+@DevicePreviews
 @Composable
 fun Preview@PlaceholderName@Screen() {
-    ForlagoTheme {
+    PreviewFeature {
         @PlaceholderName@Screen(@PlaceholderName@Contract.State("Preview"), Channel<@PlaceholderName@Contract.Effect>().receiveAsFlow()) {}
     }
 }
