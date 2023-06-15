@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2021 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id 'forlago.android-library-conventions'
-}
+package com.leinardi.forlago.library.navigation.api.destination.test
 
-android {
-    namespace "com.leinardi.forlago.library.@placeholderlowercase@"
-    resourcePrefix '@placeholder_snake_case@_'
-    defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-@placeholderlowercase@-consumer-rules.pro"
-    }
+import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
+
+@NavGraphDestination
+interface Test {
+    val text: String
 }
