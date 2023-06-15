@@ -1,0 +1,9 @@
+package com.leinardi.forlago.library.@placeholderlowercase@.interactor
+
+import com.leinardi.forlago.library.@placeholderlowercase@.api.interactor.FooInteractor
+import javax.inject.Inject
+
+internal class FooInteractorImpl @Inject constructor() : FooInteractor {
+    override operator fun invoke(): Boolean {
+    }
+}
