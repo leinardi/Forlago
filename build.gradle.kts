@@ -15,8 +15,8 @@
  */
 
 plugins {
-    id("forlago.config-conventions")
     id("forlago.buildlog-conventions")
+    id("forlago.config-conventions")
     id("forlago.generate-module-conventions")
     id("forlago.spotless-conventions")
     id("forlago.versions-conventions")
