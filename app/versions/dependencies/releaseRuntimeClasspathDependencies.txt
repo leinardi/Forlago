@@ -1239,17 +1239,17 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.21 (*)
 |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1 (*)
 |    |    +--- androidx.navigation:navigation-compose:2.7.0-alpha01 (*)
-|    |    +--- androidx.paging:paging-compose:3.2.0-beta01
+|    |    +--- androidx.paging:paging-compose:1.0.0-alpha20
 |    |    |    +--- androidx.compose.foundation:foundation:1.2.1 -> 1.5.0-beta01 (*)
 |    |    |    +--- androidx.compose.runtime:runtime:1.2.1 -> 1.5.0-beta01 (*)
-|    |    |    +--- androidx.paging:paging-common:3.2.0-beta01
+|    |    |    +--- androidx.paging:paging-common:3.2.0-alpha06
 |    |    |    |    +--- androidx.annotation:annotation:1.3.0 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.arch.core:core-common:2.2.0 (*)
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 (*)
 |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 -> 1.7.1 (*)
-|    |    |    |    \--- androidx.paging:paging-compose:3.2.0-beta01 (c)
+|    |    |    |    \--- androidx.paging:paging-compose:1.0.0-alpha20 (c)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 (*)
-|    |    |    \--- androidx.paging:paging-common:3.2.0-beta01 (c)
+|    |    |    \--- androidx.paging:paging-common:3.2.0-alpha06 (c)
 |    |    +--- io.coil-kt:coil-compose:2.4.0
 |    |    |    +--- io.coil-kt:coil-compose-base:2.4.0
 |    |    |    |    +--- androidx.core:core-ktx:1.9.0 -> 1.11.0-beta01 (*)
