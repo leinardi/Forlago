@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicInteger
 
 abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect : ViewEffect> : ViewModel() {
     // State (current state of views)
@@ -34,6 +35,8 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
     private val initialState: UiState by lazy { provideInitialState() }
     private val _viewState: MutableState<UiState> by lazy { mutableStateOf(initialState) }
     val viewState: State<UiState> by lazy { _viewState }
+
+    private val runningJobs = AtomicInteger(0)
 
     // Event (user actions)
     private val _event: MutableSharedFlow<UiEvent> = MutableSharedFlow()
@@ -50,6 +53,8 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
 
     abstract fun provideInitialState(): UiState
 
+    open fun onLoadingChanged(loading: Boolean) {}
+
     protected fun updateState(reducer: UiState.() -> UiState) {
         val newState = viewState.value.reducer()
         _viewState.value = newState
@@ -63,6 +68,18 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
 
     protected fun sendEffect(effectBuilder: () -> UiEffect) {
         viewModelScope.launch { _effect.send(effectBuilder()) }
+    }
+
+    protected suspend fun load(block: suspend () -> Unit) {
+        require(runningJobs.get() >= 0)
+        if (runningJobs.get() == 0) {
+            onLoadingChanged(true)
+        }
+        runningJobs.incrementAndGet()
+        block()
+        if (runningJobs.decrementAndGet() == 0) {
+            onLoadingChanged(false)
+        }
     }
 }
 
