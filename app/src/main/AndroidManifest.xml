@@ -14,7 +14,7 @@
         android:theme="@style/Ui.Theme.SplashScreen">
         <profileable
             android:shell="true"
-            tools:targetApi="29,q" />
+            tools:targetApi="q" />
         <!--
        singleTask is used instead of singleInstance because the latter breaks Espresso tests:
          https://github.com/android/android-test/issues/1115
