@@ -94,12 +94,6 @@ kotlin {
     }
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-    kotlinOptions {
-        jvmTarget = config.android.javaVersion
-    }
-}
-
 tasks.withType(Test) {
     testLogging {
         events "skipped", "failed"
