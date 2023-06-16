@@ -61,16 +61,6 @@ plugins.withType<AndroidBasePlugin>().configureEach {
             sourceCompatibility = config.android.javaVersion.get()
             targetCompatibility = config.android.javaVersion.get()
         }
-        kotlin {
-            sourceSets {
-                named("debug") {
-                    kotlin.srcDir("build/generated/ksp/debug/kotlin")
-                }
-                named("release") {
-                    kotlin.srcDir("build/generated/ksp/release/kotlin")
-                }
-            }
-        }
         testOptions {
             animationsDisabled = true
             unitTests {

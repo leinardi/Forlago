@@ -41,6 +41,9 @@ include(
         // Apps
         ":app",
 
+        // Baseline profiles
+        ":macrobenchmark",
+
         // Modules
         ":modules:feature-account",
         ":modules:feature-account-api",

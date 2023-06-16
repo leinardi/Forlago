@@ -71,6 +71,15 @@ android {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+        create("benchmark") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
+
+            matchingFallbacks.addAll(listOf("release"))
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules-benchmark.pro")
+            matchingFallbacks += listOf("release")
+            isDebuggable = false
+        }
     }
 }
 
@@ -101,6 +110,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.profileinstaller) // Need this to side load a Baseline Profile when Benchmarking
     implementation(libs.androidx.startup)
     implementation(libs.play.core)
     implementation(libs.play.core.ktx)
