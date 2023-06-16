@@ -63,8 +63,10 @@
         <meta-data
             android:name="firebase_performance_logcat_enabled"
             android:value="true" />
+
+        <profileable android:shell="true" />
         <!--
-         singleTask is used instead of singleInstance because the latter breaks Espresso tests:
+       singleTask is used instead of singleInstance because the latter breaks Espresso tests:
          https://github.com/android/android-test/issues/1115
         -->
         <activity

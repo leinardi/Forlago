@@ -1735,6 +1735,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    +--- project :modules:library-ui-api (*)
 |    \--- com.google.dagger:hilt-android:2.46.1 (*)
 +--- project :modules:library-ui (*)
++--- androidx.profileinstaller:profileinstaller:1.3.1 (*)
 +--- androidx.startup:startup-runtime:1.1.1 (*)
 +--- com.google.android.play:core:1.10.3
 \--- com.google.android.play:core-ktx:1.8.1 (*)
