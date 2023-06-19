@@ -49,5 +49,6 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation(libs.tink)
 
+    testImplementation(libs.robolectric)
     testImplementation(projects.modules.libraryNetworkApi)
 }

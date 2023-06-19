@@ -22,9 +22,13 @@ import android.accounts.AuthenticatorException
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import com.leinardi.forlago.feature.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
+import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor.ErrResult
 import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptDeterministicallyInteractor
@@ -42,10 +46,10 @@ internal class GetAccessTokenInteractorImpl @Inject constructor(
     private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
 ) : GetAccessTokenInteractor {
     @Suppress("TooGenericExceptionCaught", "Deprecation")
-    override suspend operator fun invoke(): GetAccessTokenInteractor.Result = withContext(dispatchers.io) {
+    override suspend operator fun invoke(): Result<String, ErrResult> = withContext(dispatchers.io) {
         val account = getAccountInteractor()
         if (account == null) {
-            return@withContext GetAccessTokenInteractor.Result.Failure.AccountNotFound
+            return@withContext Err(ErrResult.AccountNotFound)
         } else {
             try {
                 val bundle: Bundle = suspendCoroutine { cont ->
@@ -67,13 +71,13 @@ internal class GetAccessTokenInteractorImpl @Inject constructor(
 
                 val accessToken = bundle.getString(AccountManager.KEY_AUTHTOKEN)?.let { decryptDeterministicallyInteractor(it) }
                 if (!accessToken.isNullOrEmpty()) {
-                    return@withContext GetAccessTokenInteractor.Result.Success(accessToken)
+                    return@withContext Ok(accessToken)
                 } else if (bundle.containsKey(AccountManager.KEY_AUTHTOKEN)) {
                     Timber.w("Unable to decrypt the access token. Was the app data wiped? Re-authentication required.")
                     accountManager.invalidateAuthToken(account.type, AccountAuthenticatorConfig.AUTH_TOKEN_TYPE)
                     accountManager.setUserData(account, AbstractAccountAuthenticator.KEY_CUSTOM_TOKEN_EXPIRY, 0.toString())
                     invalidateRefreshTokenInteractor()
-                    return@withContext GetAccessTokenInteractor.Result.Failure.ReAuthenticationRequired
+                    return@withContext Err(ErrResult.ReAuthenticationRequired)
                 }
 
                 val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -82,15 +86,15 @@ internal class GetAccessTokenInteractorImpl @Inject constructor(
                     bundle[AccountManager.KEY_INTENT] as? Intent
                 }
                 if (intent != null) {
-                    return@withContext GetAccessTokenInteractor.Result.Failure.ReAuthenticationRequired
+                    return@withContext Err(ErrResult.ReAuthenticationRequired)
                 }
                 error("Unknown bundle value: $bundle")
             } catch (e: IOException) {
-                return@withContext GetAccessTokenInteractor.Result.Failure.NetworkError(e.message)
+                return@withContext Err(ErrResult.NetworkError(e.message))
             } catch (e: IllegalArgumentException) {
-                return@withContext GetAccessTokenInteractor.Result.Failure.BadArgumentsError(e.message)
+                return@withContext Err(ErrResult.BadArgumentsError(e.message))
             } catch (e: AuthenticatorException) {
-                return@withContext GetAccessTokenInteractor.Result.Failure.AccountAuthenticatorError(e.message)
+                return@withContext Err(ErrResult.AccountAuthenticatorError(e.message))
             }
         }
     }

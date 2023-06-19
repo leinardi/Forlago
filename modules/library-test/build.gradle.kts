@@ -40,5 +40,6 @@ dependencies {
     api(libs.kotlin.test)
     api(libs.kotlin.test.junit)
     api(libs.okhttp3.mockwebserver)
+    api(libs.mockk)
     kapt(libs.hilt.android.compiler)
 }
