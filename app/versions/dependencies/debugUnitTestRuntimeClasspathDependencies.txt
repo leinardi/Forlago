@@ -665,6 +665,67 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.20 -> 1.8.21 (*)
 |    |    +--- junit:junit:4.13 -> 4.13.2 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.6.10 -> 1.8.21 (*)
+|    +--- io.mockk:mockk:1.13.5
+|    |    \--- io.mockk:mockk-jvm:1.13.5
+|    |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 -> 1.8.21 (*)
+|    |         +--- io.mockk:mockk-dsl:1.13.5
+|    |         |    \--- io.mockk:mockk-dsl-jvm:1.13.5
+|    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 -> 1.8.21 (*)
+|    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
+|    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4 -> 1.7.1 (*)
+|    |         |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core -> 1.7.1 (*)
+|    |         |         +--- org.jetbrains.kotlin:kotlin-reflect:1.8.20
+|    |         |         |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.8.20 -> 1.8.21 (*)
+|    |         |         \--- io.mockk:mockk-core:1.13.5
+|    |         |              \--- io.mockk:mockk-core-jvm:1.13.5
+|    |         |                   +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 -> 1.8.21 (*)
+|    |         |                   +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
+|    |         |                   \--- org.jetbrains.kotlin:kotlin-reflect:1.8.20 (*)
+|    |         +--- io.mockk:mockk-agent:1.13.5
+|    |         |    \--- io.mockk:mockk-agent-jvm:1.13.5
+|    |         |         +--- org.objenesis:objenesis:3.3
+|    |         |         +--- net.bytebuddy:byte-buddy:1.12.20
+|    |         |         +--- net.bytebuddy:byte-buddy-agent:1.12.20
+|    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 -> 1.8.21 (*)
+|    |         |         +--- io.mockk:mockk-agent-api:1.13.5
+|    |         |         |    \--- io.mockk:mockk-agent-api-jvm:1.13.5
+|    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 -> 1.8.21 (*)
+|    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
+|    |         |         |         \--- org.jetbrains.kotlin:kotlin-reflect:1.8.20 (*)
+|    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
+|    |         |         +--- org.jetbrains.kotlin:kotlin-reflect:1.8.20 (*)
+|    |         |         \--- io.mockk:mockk-core:1.13.5 (*)
+|    |         +--- io.mockk:mockk-agent-api:1.13.5 (*)
+|    |         +--- io.mockk:mockk-core:1.13.5 (*)
+|    |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
+|    |         +--- org.slf4j:slf4j-api:2.0.5
+|    |         +--- junit:junit:4.13.2 (*)
+|    |         +--- org.junit.jupiter:junit-jupiter:5.8.2
+|    |         |    +--- org.junit:junit-bom:5.8.2
+|    |         |    |    +--- org.junit.jupiter:junit-jupiter:5.8.2 (c)
+|    |         |    |    +--- org.junit.jupiter:junit-jupiter-api:5.8.2 (c)
+|    |         |    |    +--- org.junit.jupiter:junit-jupiter-engine:5.8.2 (c)
+|    |         |    |    +--- org.junit.jupiter:junit-jupiter-params:5.8.2 (c)
+|    |         |    |    +--- org.junit.platform:junit-platform-commons:1.8.2 (c)
+|    |         |    |    \--- org.junit.platform:junit-platform-engine:1.8.2 (c)
+|    |         |    +--- org.junit.jupiter:junit-jupiter-api:5.8.2
+|    |         |    |    +--- org.junit:junit-bom:5.8.2 (*)
+|    |         |    |    +--- org.opentest4j:opentest4j:1.2.0
+|    |         |    |    \--- org.junit.platform:junit-platform-commons:1.8.2
+|    |         |    |         \--- org.junit:junit-bom:5.8.2 (*)
+|    |         |    +--- org.junit.jupiter:junit-jupiter-params:5.8.2
+|    |         |    |    +--- org.junit:junit-bom:5.8.2 (*)
+|    |         |    |    \--- org.junit.jupiter:junit-jupiter-api:5.8.2 (*)
+|    |         |    \--- org.junit.jupiter:junit-jupiter-engine:5.8.2
+|    |         |         +--- org.junit:junit-bom:5.8.2 (*)
+|    |         |         +--- org.junit.platform:junit-platform-engine:1.8.2
+|    |         |         |    +--- org.junit:junit-bom:5.8.2 (*)
+|    |         |         |    +--- org.opentest4j:opentest4j:1.2.0
+|    |         |         |    \--- org.junit.platform:junit-platform-commons:1.8.2 (*)
+|    |         |         \--- org.junit.jupiter:junit-jupiter-api:5.8.2 (*)
+|    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.6.4 -> 1.7.1 (*)
+|    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core -> 1.7.1 (*)
+|    |         \--- org.jetbrains.kotlin:kotlin-reflect:1.8.20 (*)
 |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
 |    +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.8.21 (*)
 |    +--- androidx.core:core-ktx:1.9.0 -> 1.11.0-beta01 (*)

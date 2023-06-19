@@ -16,17 +16,28 @@
 
 package com.leinardi.forlago.feature.account.api.interactor.token
 
-interface GetAccessTokenInteractor {
-    suspend operator fun invoke(): Result
+import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.mapError
+import com.leinardi.forlago.library.network.api.model.AuthCallError
 
-    sealed class Result {
-        data class Success(val accessToken: String) : Result()
-        sealed class Failure : Result() {
-            data class AccountAuthenticatorError(val errorMessage: String?) : Failure()
-            data class BadArgumentsError(val errorMessage: String?) : Failure()
-            data class NetworkError(val errorMessage: String?) : Failure()
-            object AccountNotFound : Failure()
-            object ReAuthenticationRequired : Failure()
-        }
+interface GetAccessTokenInteractor {
+    suspend operator fun invoke(): Result<String, ErrResult>
+
+    sealed class ErrResult {
+            data class AccountAuthenticatorError(val errorMessage: String?) : ErrResult()
+            data class BadArgumentsError(val errorMessage: String?) : ErrResult()
+            data class NetworkError(val errorMessage: String?) : ErrResult()
+            object AccountNotFound : ErrResult()
+            object ReAuthenticationRequired : ErrResult()
+    }
+}
+
+fun Result<String, GetAccessTokenInteractor.ErrResult>.mapToAuthCallError(): Result<String, AuthCallError> = mapError { errResult ->
+    when (errResult) {
+        is GetAccessTokenInteractor.ErrResult.AccountAuthenticatorError -> AuthCallError.UnrecoverableError(errResult.errorMessage)
+        is GetAccessTokenInteractor.ErrResult.AccountNotFound -> AuthCallError.UnrecoverableError()
+        is GetAccessTokenInteractor.ErrResult.BadArgumentsError -> AuthCallError.UnrecoverableError(errResult.errorMessage)
+        is GetAccessTokenInteractor.ErrResult.NetworkError -> AuthCallError.NetworkError(errResult.errorMessage)
+        is GetAccessTokenInteractor.ErrResult.ReAuthenticationRequired -> AuthCallError.ReAuthenticationRequired
     }
 }

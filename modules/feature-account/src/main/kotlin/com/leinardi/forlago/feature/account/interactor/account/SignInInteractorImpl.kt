@@ -16,31 +16,37 @@
 
 package com.leinardi.forlago.feature.account.interactor.account
 
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import com.leinardi.forlago.feature.account.api.interactor.account.SignInInteractor
+import com.leinardi.forlago.feature.account.api.interactor.account.SignInInteractor.OkResult
+import com.leinardi.forlago.feature.account.api.model.AuthErrResult
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import kotlinx.coroutines.delay
 import java.net.HttpURLConnection
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-import kotlin.random.Random
 
 internal class SignInInteractorImpl @Inject constructor(
     private val getFeaturesInteractor: GetFeaturesInteractor,
 ) : SignInInteractor {
     @Suppress("TooGenericExceptionCaught", "MagicNumber")
-    override suspend operator fun invoke(username: String, password: String): SignInInteractor.Result {
+    override suspend operator fun invoke(username: String, password: String, success: Boolean): Result<OkResult, AuthErrResult> {
         // This simulates fetching a new refresh token. The access token won't be valid 20% of the time.
         delay(TimeUnit.SECONDS.toMillis(2))
-        return if (Random.nextInt(5) != 0) {
+        return if (success) {
             getFeaturesInteractor().forEach { it.featureLifecycle.onSignIn() }
-            SignInInteractor.Result.Success(
-                username,
-                UUID.randomUUID().toString(),
-                UUID.randomUUID().toString(),
+            Ok(
+                OkResult(
+                    accessToken = UUID.randomUUID().toString(),
+                    refreshToken = UUID.randomUUID().toString(),
+                    username = username,
+                ),
             )
         } else {
-            SignInInteractor.Result.Failure.BadAuthentication(HttpURLConnection.HTTP_FORBIDDEN)
+            Err(AuthErrResult.BadAuthentication(HttpURLConnection.HTTP_FORBIDDEN))
         }
     }
 }

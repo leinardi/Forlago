@@ -20,18 +20,21 @@ import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInterac
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
+import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
 import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import timber.log.Timber
 import javax.inject.Inject
 
 internal class LogOutInteractorImpl @Inject constructor(
-    private val getFeaturesInteractor: GetFeaturesInteractor,
+    private val clearApolloCacheInteractor: ClearApolloCacheInteractor,
     private val forlagoNavigator: ForlagoNavigator,
+    private val getFeaturesInteractor: GetFeaturesInteractor,
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : LogOutInteractor {
     override suspend operator fun invoke(navigateToLogin: Boolean) {
         Timber.d("LogOut")
+        clearApolloCacheInteractor()
         getFeaturesInteractor().forEach { it.featureLifecycle.onSignOut }
         userDataStoreRepository.clearPreferencesStorage()
         if (navigateToLogin) {
