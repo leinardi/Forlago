@@ -31,6 +31,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi",
