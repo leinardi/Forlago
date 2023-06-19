@@ -15,16 +15,16 @@
  */
 
 plugins {
-    id 'forlago.android-feature-conventions'
+    id("forlago.android-feature-conventions")
     alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
-    namespace 'com.leinardi.forlago.feature.account'
-    resourcePrefix 'account_'
+    namespace = "com.leinardi.forlago.feature.account"
+    resourcePrefix = "account_"
 
     defaultConfig {
-        consumerProguardFiles "$projectDir/proguard-account-consumer-rules.pro"
+        consumerProguardFiles("$projectDir/proguard-account-consumer-rules.pro")
     }
 
     buildTypes {
@@ -40,14 +40,14 @@ android {
 }
 
 dependencies {
-    api projects.modules.featureAccountApi
-    implementation projects.modules.libraryNetworkApi
-    implementation projects.modules.libraryPreferencesApi
+    api(projects.modules.featureAccountApi)
+    implementation(projects.modules.libraryNetworkApi)
+    implementation(projects.modules.libraryPreferencesApi)
 
-    implementation libs.aboutlibraries
-    implementation libs.aboutlibraries.core
-    implementation libs.kotlinx.serialization
-    implementation libs.tink
+    implementation(libs.aboutlibraries)
+    implementation(libs.aboutlibraries.core)
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.tink)
 
-    testImplementation projects.modules.libraryNetworkApi
+    testImplementation(projects.modules.libraryNetworkApi)
 }
