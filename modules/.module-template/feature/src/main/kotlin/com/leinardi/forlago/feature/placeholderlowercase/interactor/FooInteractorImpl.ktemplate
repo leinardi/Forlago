@@ -1,4 +1,4 @@
-package com.veeva.link.feature.@placeholderlowercase@.interactor
+package com.leinardi.forlago.feature.@placeholderlowercase@.interactor
 
 import com.leinardi.forlago.feature.@placeholderlowercase@.api.interactor.FooInteractor
 import javax.inject.Inject
