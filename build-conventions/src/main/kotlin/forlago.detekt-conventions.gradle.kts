@@ -1,5 +1,3 @@
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-
 /*
  * Copyright 2022 Roberto Leinardi.
  *
@@ -16,6 +14,8 @@ import io.gitlab.arturbosch.detekt.extensions.DetektExtension
  * limitations under the License.
  */
 
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {

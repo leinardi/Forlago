@@ -20,7 +20,7 @@ plugins {
 
 android {
     namespace = "com.leinardi.forlago.feature.@placeholderlowercase@"
-    resourcePrefix = '@placeholder_snake_case@_'
+    resourcePrefix = "@placeholder_snake_case@_"
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-@placeholderlowercase@-consumer-rules.pro")
     }
