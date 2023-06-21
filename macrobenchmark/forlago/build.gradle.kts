@@ -39,7 +39,7 @@ android {
         }
     }
 
-    targetProjectPath = ":app"
+    targetProjectPath = ":apps:forlago"
     experimentalProperties["android.experimental.self-instrumenting"] = true
 
     buildTypes {

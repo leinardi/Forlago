@@ -103,7 +103,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-outputs
-          path: app/build/outputs
+          path: apps/forlago/build/outputs
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v1
@@ -112,11 +112,11 @@ jobs:
           tag_name: ${{ github.event.inputs.semver }}
           fail_on_unmatched_files: true
           files: |
-            app/build/outputs/apk/debug/forlago-debug.apk
-            app/build/outputs/apk/release/forlago-release.apk
-            app/build/outputs/bundle/debug/forlago-debug.aab
-            app/build/outputs/bundle/release/forlago-release.aab
-            app/build/outputs/mapping/release/mapping.txt
+            apps/forlago/build/outputs/apk/debug/forlago-debug.apk
+            apps/forlago/build/outputs/apk/release/forlago-release.apk
+            apps/forlago/build/outputs/bundle/debug/forlago-debug.aab
+            apps/forlago/build/outputs/bundle/release/forlago-release.aab
+            apps/forlago/build/outputs/mapping/release/mapping.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
