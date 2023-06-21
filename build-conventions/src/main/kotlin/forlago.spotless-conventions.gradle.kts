@@ -63,6 +63,6 @@ spotless {
 
 tasks {
     withType<SpotlessTask> {
-        mustRunAfter(":app:copyMergedManifests")
+        mustRunAfter(":apps:forlago:copyMergedManifests")
     }
 }

@@ -3,7 +3,7 @@
   enabled: true
   configuration:
     # put your package name here - it will be autofixed and checked
-    domainName: com.leinardi.forlago
+    domainName: com.leinardi
     # testDirs: test
     # can also use chapter names here (not only numbers)
     # expected values:  disabledChapters: "Naming, Comments, General, Variables, Functions, Classes"

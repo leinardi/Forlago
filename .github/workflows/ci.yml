@@ -118,7 +118,7 @@ jobs:
       #   uses: actions/upload-artifact@v3
       #   with:
       #     name: ruler
-      #     path: app/build/reports/ruler
+      #     path: apps/forlago/build/reports/ruler
 
   build-debug:
     name: Build debug
@@ -408,7 +408,7 @@ jobs:
           script: |
             echo $GITHUB_REPOSITORY
             adb devices
-            ./gradlew app:connectedCheck
+            ./gradlew apps:forlago:connectedCheck
 
       - name: Make file path compatible with upload-artifact
         run: find . -path '*/build/*' -name '*:*' -exec bash -c 'mv "$0" "${0//:/_}"' {} \;

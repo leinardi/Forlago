@@ -33,7 +33,7 @@ plugins {
 }
 val libs = the<LibrariesForLibs>()
 
-val applyGsmServicesPlugins = rootProject.file("app/google-services.json").exists()
+val applyGsmServicesPlugins = rootProject.file("apps/forlago/google-services.json").exists()
 if (applyGsmServicesPlugins) {
     project.plugins.apply("com.google.gms.google-services")
     project.plugins.apply("com.google.firebase.crashlytics")

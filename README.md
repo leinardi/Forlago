@@ -115,7 +115,7 @@ Baseline Profiles improve code execution speed from the first launch by avoiding
 Just run this command, and it will generate baseline-profile.txt to add to the project:
 
 ```bash
-./gradlew :macrobenchmark:pixel6Api31BenchmarkAndroidTest -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile -Dorg.gradle.workers.max=4
+./gradlew :macrobenchmark:forlago:pixel6Api31BenchmarkAndroidTest -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile -Dorg.gradle.workers.max=4
 ```
 
 The baseline profile generated will be at this path:
@@ -125,7 +125,7 @@ macrobenchmark/build/outputs/managed_device_android_test_additional_output/pixel
 
 And you have to rename and move it to:
 ```
-app/src/main/baselineProfiles/baseline-prof.txt
+apps/forlago/src/main/baselineProfiles/baseline-prof.txt
 ```
 
 ## Contributing 🤝
