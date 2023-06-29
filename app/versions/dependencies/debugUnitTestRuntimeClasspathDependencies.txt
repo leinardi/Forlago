@@ -520,7 +520,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
 |    |         |         |    |    \--- androidx.annotation:annotation-experimental:1.1.0 -> 1.3.0 (*)
 |    |         |         |    \--- androidx.tracing:tracing:1.0.0 (*)
-|    |         |         +--- androidx.test.espresso:espresso-core:3.5.0 -> 3.5.1
+|    |         |         +--- androidx.test.espresso:espresso-core:3.5.0
 |    |         |         |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
 |    |         |         |    +--- androidx.test:core:1.5.0
 |    |         |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
@@ -535,7 +535,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         |         |    |    +--- com.google.guava:listenablefuture:1.0
 |    |         |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.8.21 (*)
 |    |         |         |    |    \--- androidx.concurrent:concurrent-futures:1.1.0 (*)
-|    |         |         |    +--- androidx.test:runner:1.5.2
+|    |         |         |    +--- androidx.test:runner:1.5.0 -> 1.5.2
 |    |         |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.6.0 (*)
 |    |         |         |    |    +--- androidx.test:annotation:1.0.1 (*)
 |    |         |         |    |    +--- androidx.test:monitor:1.6.1 (*)
@@ -543,7 +543,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         |         |    |    +--- androidx.tracing:tracing:1.0.0 (*)
 |    |         |         |    |    \--- junit:junit:4.13.2
 |    |         |         |    |         \--- org.hamcrest:hamcrest-core:1.3
-|    |         |         |    +--- androidx.test.espresso:espresso-idling-resource:3.5.1
+|    |         |         |    +--- androidx.test.espresso:espresso-idling-resource:3.5.0
 |    |         |         |    +--- com.squareup:javawriter:2.1.1
 |    |         |         |    +--- javax.inject:javax.inject:1
 |    |         |         |    +--- org.hamcrest:hamcrest-library:1.3
@@ -576,8 +576,8 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |         +--- androidx.lifecycle:lifecycle-runtime:2.5.1 -> 2.6.1 (*)
 |    |         +--- androidx.test:core:1.5.0 (*)
 |    |         +--- androidx.test:monitor:1.6.1 (*)
-|    |         +--- androidx.test.espresso:espresso-core:3.3.0 -> 3.5.1 (*)
-|    |         +--- androidx.test.espresso:espresso-idling-resource:3.5.0 -> 3.5.1
+|    |         +--- androidx.test.espresso:espresso-core:3.3.0 -> 3.5.0 (*)
+|    |         +--- androidx.test.espresso:espresso-idling-resource:3.5.0
 |    |         +--- androidx.test.ext:junit:1.1.5
 |    |         |    +--- junit:junit:4.13.2 (*)
 |    |         |    +--- androidx.test:core:1.5.0 (*)
@@ -606,9 +606,9 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    +--- androidx.compose.ui:ui-tooling:1.5.0-beta01 (c)
 |    |    +--- androidx.compose.ui:ui-tooling-data:1.5.0-beta01 (c)
 |    |    +--- androidx.compose.ui:ui-tooling-preview:1.5.0-beta01 (c)
+|    |    +--- androidx.compose.ui:ui-util:1.5.0-beta01 (c)
 |    |    +--- androidx.compose.ui:ui-graphics:1.5.0-beta01 (c)
 |    |    +--- androidx.compose.ui:ui-text:1.5.0-beta01 (c)
-|    |    +--- androidx.compose.ui:ui-util:1.5.0-beta01 (c)
 |    |    +--- androidx.compose.ui:ui-unit:1.5.0-beta01 (c)
 |    |    +--- androidx.compose.ui:ui-geometry:1.5.0-beta01 (c)
 |    |    \--- androidx.compose.ui:ui-test:1.5.0-beta01 (c)
@@ -616,7 +616,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    +--- androidx.test:core:1.5.0 (*)
 |    |    +--- androidx.lifecycle:lifecycle-common:2.3.1 -> 2.6.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.8.21 (*)
-|    +--- androidx.test.espresso:espresso-core:3.5.1 (*)
+|    +--- androidx.test.espresso:espresso-core:3.5.0 (*)
 |    +--- androidx.test:runner:1.5.2 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1 (*)
 |    +--- com.google.dagger:hilt-android-testing:2.46.1
@@ -720,48 +720,48 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core -> 1.7.1 (*)
 |         \--- org.jetbrains.kotlin:kotlin-reflect:1.8.20 (*)
 +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
-+--- com.squareup.leakcanary:leakcanary-android:2.11
-|    +--- com.squareup.leakcanary:leakcanary-android-core:2.11
-|    |    +--- com.squareup.leakcanary:shark-android:2.11
++--- com.squareup.leakcanary:leakcanary-android:2.9.1
+|    +--- com.squareup.leakcanary:leakcanary-android-core:2.9.1
+|    |    +--- com.squareup.leakcanary:shark-android:2.9.1
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |    \--- com.squareup.leakcanary:shark:2.11
+|    |    |    \--- com.squareup.leakcanary:shark:2.9.1
 |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    |         +--- com.squareup.okio:okio:2.2.2 -> 3.3.0 (*)
-|    |    |         \--- com.squareup.leakcanary:shark-graph:2.11
+|    |    |         \--- com.squareup.leakcanary:shark-graph:2.9.1
 |    |    |              +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    |              +--- com.squareup.okio:okio:2.2.2 -> 3.3.0 (*)
-|    |    |              \--- com.squareup.leakcanary:shark-hprof:2.11
+|    |    |              \--- com.squareup.leakcanary:shark-hprof:2.9.1
 |    |    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |                   \--- com.squareup.leakcanary:shark-log:2.11
+|    |    |                   \--- com.squareup.leakcanary:shark-log:2.9.1
 |    |    |                        \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11
-|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher:2.11
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1
+|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher:2.9.1
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |    |    \--- com.squareup.leakcanary:shark-log:2.11 (*)
-|    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.11
-|    |    |    |    +--- com.squareup.leakcanary:shark-log:2.11 (*)
+|    |    |    |    \--- com.squareup.leakcanary:shark-log:2.9.1 (*)
+|    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.9.1
+|    |    |    |    +--- com.squareup.leakcanary:shark-log:2.9.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    |    +--- com.squareup.curtains:curtains:1.2.4
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.8.21 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:2.11
-|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11 (*)
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-androidx:2.9.1
+|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:2.11
-|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11 (*)
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-support-fragments:2.9.1
+|    |    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    +--- com.squareup.leakcanary:leakcanary-object-watcher-android:2.11
-|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.11 (*)
+|    +--- com.squareup.leakcanary:leakcanary-object-watcher-android:2.9.1
+|    |    +--- com.squareup.leakcanary:leakcanary-object-watcher-android-core:2.9.1 (*)
 |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.8.21 (*)
-|    +--- com.squareup.leakcanary:plumber-android:2.11
-|    |    +--- com.squareup.leakcanary:plumber-android-core:2.11
-|    |    |    +--- com.squareup.leakcanary:shark-log:2.11 (*)
-|    |    |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.11 (*)
-|    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    |    |    \--- com.squareup.curtains:curtains:1.2.4 (*)
-|    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
-|    \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
+|    +--- org.jetbrains.kotlin:kotlin-stdlib:1.4.21 -> 1.8.21 (*)
+|    \--- com.squareup.leakcanary:plumber-android:2.9.1
+|         +--- com.squareup.leakcanary:plumber-android-core:2.9.1
+|         |    +--- com.squareup.leakcanary:shark-log:2.9.1 (*)
+|         |    +--- com.squareup.leakcanary:leakcanary-android-utils:2.9.1 (*)
+|         |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
+|         |    \--- com.squareup.curtains:curtains:1.2.4 (*)
+|         \--- org.jetbrains.kotlin:kotlin-stdlib:1.3.72 -> 1.8.21 (*)
 +--- androidx.compose.ui:ui-tooling:1.5.0-beta01
 |    \--- androidx.compose.ui:ui-tooling-android:1.5.0-beta01
 |         +--- androidx.activity:activity-compose:1.7.0 -> 1.7.2 (*)
@@ -886,9 +886,9 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |         +--- androidx.compose.ui:ui-test-manifest:1.5.0-beta01 (c)
 |         +--- androidx.compose.ui:ui-tooling-data:1.5.0-beta01 (c)
 |         +--- androidx.compose.ui:ui-tooling-preview:1.5.0-beta01 (c)
+|         +--- androidx.compose.ui:ui-util:1.5.0-beta01 (c)
 |         +--- androidx.compose.ui:ui-graphics:1.5.0-beta01 (c)
 |         +--- androidx.compose.ui:ui-text:1.5.0-beta01 (c)
-|         +--- androidx.compose.ui:ui-util:1.5.0-beta01 (c)
 |         +--- androidx.compose.ui:ui-unit:1.5.0-beta01 (c)
 |         +--- androidx.compose.ui:ui-geometry:1.5.0-beta01 (c)
 |         \--- androidx.compose.ui:ui-test:1.5.0-beta01 (c)
@@ -1322,7 +1322,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    +--- androidx.startup:startup-runtime:1.1.1 (*)
-|    |    +--- com.google.firebase:firebase-analytics-ktx -> 21.3.0
+|    |    +--- com.google.firebase:firebase-analytics-ktx:21.3.0
 |    |    |    +--- com.google.firebase:firebase-analytics:21.3.0
 |    |    |    |    +--- com.google.android.gms:play-services-measurement:21.3.0
 |    |    |    |    |    +--- androidx.collection:collection:1.0.0 -> 1.2.0 (*)
@@ -1354,7 +1354,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    |    |    \--- com.google.android.gms:play-services-measurement-base:21.3.0 (*)
 |    |    |    |    |    +--- com.google.android.gms:play-services-tasks:18.0.1 -> 18.0.2
 |    |    |    |    |    |    \--- com.google.android.gms:play-services-basement:18.1.0 (*)
-|    |    |    |    |    +--- com.google.firebase:firebase-common:20.2.0 -> 20.3.2
+|    |    |    |    |    +--- com.google.firebase:firebase-common:20.2.0 -> 20.3.1
 |    |    |    |    |    |    +--- com.google.firebase:firebase-annotations:16.2.0
 |    |    |    |    |    |    |    \--- javax.inject:javax.inject:1
 |    |    |    |    |    |    +--- com.google.firebase:firebase-components:17.1.0
@@ -1366,7 +1366,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    |    |    \--- com.google.android.gms:play-services-tasks:18.0.2 (*)
 |    |    |    |    |    +--- com.google.firebase:firebase-components:17.0.1 -> 17.1.0 (*)
 |    |    |    |    |    +--- com.google.firebase:firebase-installations:17.0.1 -> 17.1.3
-|    |    |    |    |    |    +--- com.google.firebase:firebase-common:20.3.1 -> 20.3.2 (*)
+|    |    |    |    |    |    +--- com.google.firebase:firebase-common:20.3.1 (*)
 |    |    |    |    |    |    +--- com.google.firebase:firebase-installations-interop:17.1.0
 |    |    |    |    |    |    |    +--- com.google.android.gms:play-services-tasks:18.0.1 -> 18.0.2 (*)
 |    |    |    |    |    |    |    \--- com.google.firebase:firebase-annotations:16.1.0 -> 16.2.0 (*)
@@ -1382,8 +1382,8 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |         +--- com.google.android.gms:play-services-basement:18.1.0 (*)
 |    |    |    |         +--- com.google.android.gms:play-services-measurement-base:21.3.0 (*)
 |    |    |    |         \--- com.google.android.gms:play-services-measurement-impl:21.3.0 (*)
-|    |    |    +--- com.google.firebase:firebase-common:20.2.0 -> 20.3.2 (*)
-|    |    |    +--- com.google.firebase:firebase-common-ktx:20.2.0 -> 20.3.2
+|    |    |    +--- com.google.firebase:firebase-common:20.2.0 -> 20.3.1 (*)
+|    |    |    +--- com.google.firebase:firebase-common-ktx:20.2.0 -> 20.3.1
 |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4 -> 1.7.1
 |    |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1 (*)
 |    |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.7.1 (*)
@@ -1391,16 +1391,16 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20 -> 1.8.21 (*)
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.8.21 (*)
 |    |    |    |    +--- com.google.firebase:firebase-annotations:16.2.0 (*)
-|    |    |    |    +--- com.google.firebase:firebase-common:20.3.2 (*)
+|    |    |    |    +--- com.google.firebase:firebase-common:20.3.1 (*)
 |    |    |    |    +--- com.google.firebase:firebase-components:17.1.0 (*)
 |    |    |    |    \--- androidx.annotation:annotation:1.5.0 -> 1.6.0 (*)
 |    |    |    +--- com.google.firebase:firebase-components:17.0.1 -> 17.1.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50 -> 1.8.21 (*)
-|    |    +--- com.google.firebase:firebase-crashlytics-ktx -> 18.3.7
+|    |    +--- com.google.firebase:firebase-crashlytics-ktx:18.3.7
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.10 -> 1.8.21 (*)
-|    |    |    +--- com.google.firebase:firebase-common:20.3.1 -> 20.3.2 (*)
+|    |    |    +--- com.google.firebase:firebase-common:20.3.1 (*)
 |    |    |    +--- com.google.firebase:firebase-components:17.1.0 (*)
-|    |    |    +--- com.google.firebase:firebase-common-ktx:20.3.1 -> 20.3.2 (*)
+|    |    |    +--- com.google.firebase:firebase-common-ktx:20.3.1 (*)
 |    |    |    +--- com.google.firebase:firebase-crashlytics:18.3.7
 |    |    |    |    +--- com.google.firebase:firebase-installations:17.1.3 (*)
 |    |    |    |    +--- com.google.firebase:firebase-encoders:17.0.0
@@ -1409,7 +1409,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.6.0 (*)
 |    |    |    |    |    \--- com.google.firebase:firebase-encoders:17.0.0 (*)
 |    |    |    |    +--- com.google.firebase:firebase-annotations:16.2.0 (*)
-|    |    |    |    +--- com.google.firebase:firebase-common:20.3.1 -> 20.3.2 (*)
+|    |    |    |    +--- com.google.firebase:firebase-common:20.3.1 (*)
 |    |    |    |    +--- com.google.firebase:firebase-components:17.1.0 (*)
 |    |    |    |    +--- com.google.android.datatransport:transport-api:3.0.0
 |    |    |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.6.0 (*)
@@ -1431,16 +1431,7 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    +--- com.google.firebase:firebase-measurement-connector:18.0.2 -> 19.0.0 (*)
 |    |    |    |    \--- com.google.android.gms:play-services-tasks:18.0.1 -> 18.0.2 (*)
 |    |    |    \--- androidx.annotation:annotation:1.1.0 -> 1.6.0 (*)
-|    |    +--- com.google.dagger:hilt-android:2.46.1 (*)
-|    |    \--- com.google.firebase:firebase-bom:32.1.0
-|    |         +--- com.google.firebase:firebase-crashlytics-ktx:18.3.7 (c)
-|    |         +--- com.google.firebase:firebase-analytics-ktx:21.3.0 (c)
-|    |         +--- com.google.firebase:firebase-common:20.3.2 (c)
-|    |         +--- com.google.firebase:firebase-common-ktx:20.3.2 (c)
-|    |         +--- com.google.firebase:firebase-crashlytics:18.3.7 (c)
-|    |         +--- com.google.firebase:firebase-analytics:21.3.0 (c)
-|    |         +--- com.google.firebase:firebase-installations:17.1.3 (c)
-|    |         \--- com.google.firebase:firebase-encoders:17.0.0 (c)
+|    |    \--- com.google.dagger:hilt-android:2.46.1 (*)
 |    +--- project :modules:library-ui
 |    |    +--- project :modules:library-ui-api
 |    |    |    +--- androidx.appcompat:appcompat:1.6.1 (*)
@@ -1451,6 +1442,11 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    |    \--- com.jakewharton.timber:timber:5.0.1 (*)
+|    |    +--- com.google.accompanist:accompanist-flowlayout:0.31.3-beta
+|    |    |    +--- androidx.compose.foundation:foundation:1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.ui:ui-util:1.5.0-beta01 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 -> 1.7.1 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
 |    |    +--- com.google.accompanist:accompanist-navigation-material:0.31.3-beta
 |    |    |    +--- androidx.compose.foundation:foundation:1.5.0-beta01 (*)
 |    |    |    +--- androidx.compose.material:material:1.5.0-beta01 (*)
@@ -1472,24 +1468,8 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
 |    |    |    +--- androidx.compose.material:material:1.5.0-beta01 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
-|    |    +--- com.google.accompanist:accompanist-placeholder-material3:0.31.3-beta
-|    |    |    +--- androidx.compose.material3:material3:1.0.1 -> 1.1.0
-|    |    |    |    +--- androidx.activity:activity-compose:1.5.0 -> 1.7.2 (*)
-|    |    |    |    +--- androidx.compose.animation:animation-core:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.foundation:foundation:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.foundation:foundation-layout:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.material:material-icons-core:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.material:material-ripple:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.runtime:runtime:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.ui:ui:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.ui:ui-graphics:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.ui:ui-text:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.compose.ui:ui-util:1.4.1 -> 1.5.0-beta01 (*)
-|    |    |    |    +--- androidx.lifecycle:lifecycle-common-java8:2.6.1 (*)
-|    |    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.6.1 (*)
-|    |    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.6.1 (*)
-|    |    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.1 (*)
-|    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
+|    |    +--- com.google.accompanist:accompanist-placeholder-material:0.31.3-beta
+|    |    |    +--- androidx.compose.material:material:1.5.0-beta01 (*)
 |    |    |    +--- io.github.aakira:napier:1.4.1 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 -> 1.7.1 (*)
 |    |    |    +--- com.google.accompanist:accompanist-placeholder:0.31.3-beta
@@ -1498,6 +1478,11 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    |    +--- io.github.aakira:napier:1.4.1 (*)
 |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 -> 1.7.1 (*)
 |    |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
+|    |    +--- com.google.accompanist:accompanist-swiperefresh:0.31.3-beta
+|    |    |    +--- androidx.compose.material:material:1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.ui:ui-util:1.5.0-beta01 (*)
+|    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 -> 1.7.1 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 (*)
 |    |    +--- com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta
 |    |    |    +--- androidx.core:core-ktx:1.8.0 -> 1.11.0-beta01 (*)
@@ -1514,7 +1499,23 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |         +--- androidx.compose.material:material:1.5.0-beta01 (c)
 |    |    |         +--- androidx.compose.material:material-icons-core:1.5.0-beta01 (c)
 |    |    |         \--- androidx.compose.material:material-ripple:1.5.0-beta01 (c)
-|    |    +--- androidx.compose.material3:material3:1.1.0 (*)
+|    |    +--- androidx.compose.material3:material3:1.1.0
+|    |    |    +--- androidx.activity:activity-compose:1.5.0 -> 1.7.2 (*)
+|    |    |    +--- androidx.compose.animation:animation-core:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.foundation:foundation:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.foundation:foundation-layout:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.material:material-icons-core:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.material:material-ripple:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.runtime:runtime:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.ui:ui:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.ui:ui-graphics:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.ui:ui-text:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.compose.ui:ui-util:1.4.1 -> 1.5.0-beta01 (*)
+|    |    |    +--- androidx.lifecycle:lifecycle-common-java8:2.6.1 (*)
+|    |    |    +--- androidx.lifecycle:lifecycle-runtime:2.6.1 (*)
+|    |    |    +--- androidx.lifecycle:lifecycle-viewmodel:2.6.1 (*)
+|    |    |    +--- androidx.savedstate:savedstate-ktx:1.2.1 (*)
+|    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.20 -> 1.8.21
 |    |    +--- androidx.compose.runtime:runtime:1.5.0-beta01 (*)
 |    |    +--- androidx.compose.runtime:runtime-livedata:1.5.0-beta01
 |    |    |    +--- androidx.compose.runtime:runtime:1.5.0-beta01 (*)
@@ -1540,17 +1541,17 @@ debugUnitTestRuntimeClasspath - Runtime classpath of /debugUnitTest.
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.8.21 (*)
 |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1 (*)
 |    |    +--- androidx.navigation:navigation-compose:2.7.0-alpha01 (*)
-|    |    +--- androidx.paging:paging-compose:1.0.0-alpha20
+|    |    +--- androidx.paging:paging-compose:3.2.0-beta01
 |    |    |    +--- androidx.compose.foundation:foundation:1.2.1 -> 1.5.0-beta01 (*)
 |    |    |    +--- androidx.compose.runtime:runtime:1.2.1 -> 1.5.0-beta01 (*)
-|    |    |    +--- androidx.paging:paging-common:3.2.0-alpha06
+|    |    |    +--- androidx.paging:paging-common:3.2.0-beta01
 |    |    |    |    +--- androidx.annotation:annotation:1.3.0 -> 1.6.0 (*)
 |    |    |    |    +--- androidx.arch.core:core-common:2.2.0 (*)
 |    |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 (*)
 |    |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 -> 1.7.1 (*)
-|    |    |    |    \--- androidx.paging:paging-compose:1.0.0-alpha20 (c)
+|    |    |    |    \--- androidx.paging:paging-compose:3.2.0-beta01 (c)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 (*)
-|    |    |    \--- androidx.paging:paging-common:3.2.0-alpha06 (c)
+|    |    |    \--- androidx.paging:paging-common:3.2.0-beta01 (c)
 |    |    +--- io.coil-kt:coil-compose:2.4.0
 |    |    |    +--- io.coil-kt:coil-compose-base:2.4.0
 |    |    |    |    +--- androidx.core:core-ktx:1.9.0 -> 1.11.0-beta01 (*)
