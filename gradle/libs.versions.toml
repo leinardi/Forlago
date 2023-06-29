@@ -158,7 +158,7 @@ plugin-appversioning = "io.github.reactivecircus.appversioning:app-versioning-gr
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-easylauncher = "com.project.starter:easylauncher:6.2.0"
 plugin-firebase-crashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.9.2"
-plugin-firebase-perf = "com.google.firebase:perf-plugin:1.4.1"
+plugin-firebase-perf = "com.google.firebase:perf-plugin:1.4.2"
 plugin-google-services = "com.google.gms:google-services:4.3.14"
 plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

@@ -33,7 +33,7 @@ dependencies {
     implementation(libs.androidx.startup)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
-    if (rootProject.file("app/google-services.json").exists()) {
+    if (rootProject.file("apps/forlago/google-services.json").exists()) {
         implementation(libs.firebase.perf)
     }
     implementation(libs.hilt.android)
