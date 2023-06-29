@@ -86,10 +86,12 @@ androidx-test-orchestrator = "androidx.test:orchestrator:1.4.2"
 androidx-test-rules = "androidx.test:rules:1.4.0"
 androidx-test-runner = "androidx.test:runner:1.5.2"
 androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
+androidx-tracing = "androidx.tracing:tracing:1.1.0"
 apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo" }
 apollo-adapters = { module = "com.apollographql.apollo3:apollo-adapters", version.ref = "apollo" }
 apollo-cache = { module = "com.apollographql.apollo3:apollo-normalized-cache", version.ref = "apollo" }
 apollo-cache-sqlite = { module = "com.apollographql.apollo3:apollo-normalized-cache-sqlite", version.ref = "apollo" }
+apollo-idling-resource = { module = "com.apollographql.apollo3:apollo-idling-resource", version.ref = "apollo" }
 apollo-testing-support = { module = "com.apollographql.apollo3:apollo-testing-support", version.ref = "apollo" }
 coil-compose = "io.coil-kt:coil-compose:2.4.0"
 composecharts = "io.github.bytebeats:compose-charts:0.1.2"
@@ -100,10 +102,10 @@ desugar = "com.android.tools:desugar_jdk_libs:2.0.3"
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-rules-compose = "ru.kode:detekt-rules-compose:1.2.2"
 detekt-twitter-compose-rules = "com.twitter.compose.rules:detekt:0.0.26"
-firebase-analytics = "com.google.firebase:firebase-analytics-ktx:21.3.0"
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-bom = "com.google.firebase:firebase-bom:32.1.0"
-firebase-crashlytics = "com.google.firebase:firebase-crashlytics-ktx:18.3.7"
-firebase-perf = "com.google.firebase:firebase-perf-ktx:20.3.2"
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
@@ -112,6 +114,7 @@ hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.0.0"
 junit = "junit:junit:4.13.2"
 konfetti = "nl.dionsegijn:konfetti-compose:2.0.2"
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
+kotlin-faker = "io.github.serpro69:kotlin-faker:1.14.0"
 kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "kotlin-result" }
 kotlin-result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version.ref = "kotlin-result" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
