@@ -18,7 +18,6 @@ package com.leinardi.forlago.feature.foo.ui.foo
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
-import com.leinardi.forlago.feature.foo.R
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State

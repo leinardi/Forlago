@@ -23,14 +23,12 @@
         android:minSdkVersion="24"
         android:targetSdkVersion="33" />
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-    <uses-permission android:name="android.permission.REORDER_TASKS" />
 
     <permission
         android:name="com.leinardi.forlago.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
@@ -39,12 +37,6 @@
     <uses-permission android:name="com.leinardi.forlago.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Permission will be merged into the manifest of the hosting app. -->
     <!-- Is required to launch foreground extraction service for targetSdkVersion 28+. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
-    <queries>
-        <package android:name="androidx.test.orchestrator" />
-        <package android:name="androidx.test.services" />
-        <package android:name="com.google.android.apps.common.testing.services" />
-    </queries>
 
     <application
         android:name="com.leinardi.forlago.Forlago"
@@ -116,12 +108,12 @@
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
-                android:value="androidx.startup" />
-            <meta-data
-                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
                 android:value="androidx.startup" /> <!-- This entry makes ApolloInitializer discoverable. -->
             <meta-data
                 android:name="com.apollographql.apollo3.cache.normalized.sql.ApolloInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
@@ -178,31 +170,6 @@
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <activity
-            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
-            android:exported="true"
-            android:theme="@style/WhiteBackgroundTheme" >
-            <intent-filter android:priority="-100" >
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
-            android:exported="true"
-            android:theme="@style/WhiteBackgroundTheme" >
-            <intent-filter android:priority="-100" >
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
-            android:exported="true"
-            android:theme="@style/WhiteBackgroundDialogTheme" >
-            <intent-filter android:priority="-100" >
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <uses-library
             android:name="androidx.window.extensions"

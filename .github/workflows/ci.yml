@@ -7,6 +7,11 @@ on:
       - master
   workflow_dispatch:
 
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
 jobs:
   checks:
     name: Checking manifest and deps
@@ -17,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -43,11 +48,11 @@ jobs:
         with:
           arguments: copyMergedManifests
 
-      - uses: UnicornGlobal/has-changes-action@ea00e6f831a9e785271645729fa251907b314707
-        id: merged_manifests
+      - id: merged_manifests
+        run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_ENV
 
       - name: Check if there are changes
-        if: steps.merged_manifests.outputs.changed == 1
+        if: steps.merged_manifests.outputs.changed != 0
         run: |
           echo '::error::Uncommitted changes to the merged manifests!'
           git diff
@@ -58,14 +63,55 @@ jobs:
         with:
           arguments: generateRuntimeDependenciesReport
 
-      - uses: UnicornGlobal/has-changes-action@ea00e6f831a9e785271645729fa251907b314707
-        id: compile_dependencies_report
+      - id: compile_dependencies_report
+        run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_ENV
 
       - name: Check if there are changes
-        if: steps.compile_dependencies_report.outputs.changed == 1
+        if: steps.compile_dependencies_report.outputs.changed != 0
         run: |
           echo '::error::Uncommitted changes to the compile dependencies report!'
           exit 1
+
+  build-debug:
+    name: Build debug
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17.0.6
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      ## This is needed by secrets-gradle-plugin
+      - name: Create Local Properties File
+        run: touch local.properties
+
+      ## Actual tasks
+      - name: Build
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: false
+          arguments: assembleDebug assembleDebugAndroidTest -PsaveBuildLogToFile=true
+
+      - name: Archiving violations report
+        if: ${{ always() && github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: violations-build-debug
+          path: ./**/build/logs/buildlog*.txt
 
   build-release:
     name: Build release
@@ -76,7 +122,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -120,46 +166,6 @@ jobs:
       #     name: ruler
       #     path: apps/forlago/build/reports/ruler
 
-  build-debug:
-    name: Build debug
-    runs-on: ubuntu-latest
-    timeout-minutes: 40
-    env:
-      TERM: dumb
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 17.0.6
-
-      - name: Copy CI gradle.properties
-        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
-
-      - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
-
-      ## This is needed by secrets-gradle-plugin
-      - name: Create Local Properties File
-        run: touch local.properties
-
-      ## Actual tasks
-      - name: Build
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: assembleDebug -PsaveBuildLogToFile=true
-
-      - name: Archiving violations report
-        if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v3
-        with:
-          name: violations-build-debug
-          path: ./**/build/logs/buildlog*.txt
-
   detekt:
     name: Detekt
     runs-on: ubuntu-latest
@@ -169,7 +175,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -191,7 +197,7 @@ jobs:
       - name: Detekt
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: detektMain detektTest
+          arguments: detektDebug detektTest
 
       - name: Archiving violations report
         if: ${{ always() && github.event_name == 'pull_request' }}
@@ -209,7 +215,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -242,7 +248,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -289,7 +295,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -339,7 +345,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -433,7 +439,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup JDK
         uses: actions/setup-java@v3

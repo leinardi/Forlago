@@ -1,5 +1,5 @@
-- identifier: :app
-  owner: :app
+- identifier: :apps:forlago
+  owner: :apps:forlago
 
 - identifier: :modules:library*
   owner: :module:library*

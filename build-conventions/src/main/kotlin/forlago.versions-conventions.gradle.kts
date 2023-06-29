@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import org.gradle.internal.impldep.org.apache.commons.lang.CharSetUtils.keep
 import java.util.Locale
 
 plugins {

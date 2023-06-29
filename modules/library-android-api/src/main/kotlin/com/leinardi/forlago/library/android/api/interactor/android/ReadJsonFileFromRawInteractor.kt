@@ -18,7 +18,6 @@ package com.leinardi.forlago.library.android.api.interactor.android
 
 import android.app.Application
 import androidx.annotation.RawRes
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import timber.log.Timber
 import java.io.IOException

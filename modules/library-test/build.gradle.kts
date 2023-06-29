@@ -21,25 +21,24 @@ plugins {
 android {
     namespace = "com.leinardi.forlago.library.test"
     resourcePrefix = "test_"
+
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-test-consumer-rules.pro")
     }
 }
 
 dependencies {
-    api(project(":modules:library-android"))
-    api(libs.androidx.compose.ui)
-    api(libs.androidx.compose.ui.test.junit4)
-    api(libs.androidx.compose.ui.test.manifest)
+    api(projects.modules.libraryAndroidApi)
+
+    api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.test.core)
-    api(libs.androidx.test.espresso.core)
     api(libs.androidx.test.runner)
+    api(libs.apollo.testing.support)
     api(libs.coroutines.test)
     api(libs.hilt.android.testing)
     api(libs.junit)
     api(libs.kotlin.test)
     api(libs.kotlin.test.junit)
-    api(libs.okhttp3.mockwebserver)
     api(libs.mockk)
     kapt(libs.hilt.android.compiler)
 }

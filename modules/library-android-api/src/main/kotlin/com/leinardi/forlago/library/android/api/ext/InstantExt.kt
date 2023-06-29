@@ -38,8 +38,10 @@ fun Instant.toLocalizedSmartDateTime(context: Context): String {
     return when {
         truncatedTo(ChronoUnit.DAYS).equals(now.truncatedTo(ChronoUnit.DAYS)) ->
             DateUtils.formatDateTime(context, toEpochMilli(), DateUtils.FORMAT_SHOW_TIME)
+
         atZone(ZoneId.systemDefault()).year == now.atZone(ZoneId.systemDefault()).year ->
             DateUtils.formatDateTime(context, toEpochMilli(), DateUtils.FORMAT_ABBREV_MONTH or DateUtils.FORMAT_NO_YEAR)
+
         else ->
             DateUtils.formatDateTime(context, toEpochMilli(), DateUtils.FORMAT_NUMERIC_DATE)
     }

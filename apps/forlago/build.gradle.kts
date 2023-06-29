@@ -36,7 +36,7 @@ android {
 
     signingConfigs {
         getByName("debug") {
-            storeFile  = rootProject.file("release/app-debug.jks")
+            storeFile = rootProject.file("release/app-debug.jks")
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
@@ -77,8 +77,6 @@ android {
 
             matchingFallbacks.addAll(listOf("release"))
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules-benchmark.pro")
-            matchingFallbacks += listOf("release")
-            isDebuggable = false
         }
     }
 }
@@ -87,12 +85,11 @@ val serviceAccountCredentialsFile: File = rootProject.file("release/play-account
 if (serviceAccountCredentialsFile.exists()) {
     play {
         serviceAccountCredentials.set(serviceAccountCredentialsFile)
-        releaseStatus.set(if (track.get() == "internal") ReleaseStatus.DRAFT else ReleaseStatus.COMPLETED)
+        releaseStatus.set(if (track.get() == "internal") ReleaseStatus.COMPLETED else ReleaseStatus.DRAFT)
         defaultToAppBundles.set(true)
     }
 }
 println("play-account.json ${if (serviceAccountCredentialsFile.exists()) "" else "NOT "}found!")
-
 
 dependencies {
     // Modules
@@ -109,6 +106,7 @@ dependencies {
     implementation(projects.modules.libraryUi)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.profileinstaller) // Need this to side load a Baseline Profile when Benchmarking
     implementation(libs.androidx.startup)
@@ -118,4 +116,5 @@ dependencies {
     kaptAndroidTest(libs.hilt.android.compiler)
 
     debugImplementation(libs.androidx.compose.tooling)
+    debugImplementation(libs.androidx.tracing) // can be removed after the AGP fixes this https://github.com/android/android-test/issues/1755
 }

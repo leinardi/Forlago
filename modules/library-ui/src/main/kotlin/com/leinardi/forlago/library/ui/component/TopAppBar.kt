@@ -52,8 +52,7 @@ fun TopAppBar(
     contextualSubtitle: String = "",
     contextualColors: TopAppBarColors = TopAppBarDefaults.contextualTopAppBarColors(),
     contextualActions: @Composable RowScope.() -> Unit = {},
-
-    ) {
+) {
     androidx.compose.material3.TopAppBar(
         title = {
             Column {

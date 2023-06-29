@@ -54,6 +54,7 @@ internal class GetAppUpdateInfoInteractorImpl @Inject constructor(
                     priority in 4..5 && appUpdateInfo.isImmediateUpdateAllowed -> Result.ImmediateUpdateAvailable(appUpdateInfo)
                     else -> error("Priority must be between 0 and 5 inclusive: $priority")
                 }
+
                 else -> Result.UpdateNotAvailable
             }
         } catch (e: Exception) {

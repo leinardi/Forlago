@@ -95,8 +95,10 @@ fun ForlagoTheme(
     val myColorScheme = when {
         isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDarkTheme ->
             dynamicDarkColorScheme(LocalContext.current)
+
         isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isDarkTheme ->
             dynamicLightColorScheme(LocalContext.current)
+
         isDarkTheme -> DarkColors
         else -> LightColors
     }

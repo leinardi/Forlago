@@ -18,4 +18,6 @@ package com.leinardi.forlago.feature.account.api.interactor.account
 
 interface LogOutInteractor {
     suspend operator fun invoke(navigateToLogin: Boolean = true)
+
+    fun isSignOutInProgress(): Boolean
 }

@@ -51,7 +51,7 @@ fun NavGraphBuilder.addBottomSheetDestinations() {
         feature.bottomSheetDestinations.forEach { entry ->
             val destination = entry.key
             bottomSheet(destination.route, destination.arguments, destination.deepLinks) {
-                // LMOB-285: Remove once ModalBottomSheetLayout will support tonal elevation
+                // Remove once ModalBottomSheetLayout will support tonal elevation
                 Surface(
                     tonalElevation = BottomSheetDefaults.tonalElevation,
                 ) {

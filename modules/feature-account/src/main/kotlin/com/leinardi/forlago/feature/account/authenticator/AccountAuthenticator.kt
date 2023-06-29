@@ -273,15 +273,18 @@ class AccountAuthenticator @Inject constructor(
                         Timber.d("Returning a valid access token (expiry = ${expiryInMillis.toLongDateTimeString()}")
                         getValidAccessTokenBundle(account, encryptedAccessToken, expiryInMillis)
                     }
+
                     is RefreshAccessTokenInteractor.Result.Failure.BadAuthentication -> {
                         Timber.w("Unable to get a new access token: the user must re-enter the credentials")
                         bundleOf(AccountManager.KEY_INTENT to getAuthenticatorActivityIntent(response, account.type, options, false))
                     }
+
                     is RefreshAccessTokenInteractor.Result.Failure.NetworkError -> {
                         val error = "Network error while refreshing the token"
                         Timber.e(error)
                         getErrorBundle(AccountManager.ERROR_CODE_NETWORK_ERROR, error)
                     }
+
                     is RefreshAccessTokenInteractor.Result.Failure.UnexpectedError -> {
                         val error = "Unexpected error while refreshing the token"
                         Timber.e(error)

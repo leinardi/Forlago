@@ -61,6 +61,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnLogOutClicked -> logOut()
                 Event.OnOpenSignInScreenClicked ->
                     forlagoNavigator.navigate(SignInDestination.get(viewState.value.accountName != null))
+
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }

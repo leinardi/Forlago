@@ -31,12 +31,11 @@ plugins {
     id("forlago.ruler-conventions")
 }
 val libs = the<LibrariesForLibs>()
-
 val applyGsmServicesPlugins = rootProject.file("apps/forlago/google-services.json").exists()
 if (applyGsmServicesPlugins) {
-    project.plugins.apply("com.google.gms.google-services")
-    project.plugins.apply("com.google.firebase.crashlytics")
-    project.plugins.apply("com.google.firebase.firebase-perf")
+    plugins.apply("com.google.gms.google-services")
+    plugins.apply("com.google.firebase.crashlytics")
+    plugins.apply("com.google.firebase.firebase-perf")
 }
 println("google-services.json ${if (applyGsmServicesPlugins) "" else "NOT "}found!")
 
@@ -47,12 +46,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
-    applicationVariants.all {
-        kotlin.sourceSets {
-            getByName(name) {
-                kotlin.srcDir("build/generated/ksp/${name}/kotlin")
-            }
-        }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true  // https://developer.android.com/studio/write/java8-support#library-desugaring
+    }
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs + listOf(
@@ -72,23 +70,31 @@ easylauncher {
     }
 }
 
+aboutLibraries {
+    duplicationMode = DuplicateMode.MERGE
+    duplicationRule = DuplicateRule.SIMPLE
+}
+
 dependencies {
-    // Android
+    coreLibraryDesugaring(libs.desugar)
+    debugImplementation(libs.leakcanary)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui.ktx)
-
-    // General
+    implementation(libs.coroutines.android)
+    implementation(libs.coroutines.core)
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
-    kapt(libs.hilt.compiler)
+    implementation(libs.kotlin.result)
+    implementation(libs.kotlinx.collections.immutable)
     implementation(libs.timber)
-    debugImplementation(libs.leakcanary)
+    kapt(libs.hilt.compiler)
 
-    api(libs.androidx.compose.ui.test.junit4)
     testImplementation(project(":modules:library-test"))
+    androidTestImplementation(project(":modules:library-test-android"))
+    androidTestUtil(libs.androidx.test.orchestrator)
 }
 
 tasks.register<Copy>("installGitHooks") {
@@ -100,4 +106,3 @@ tasks.register<Copy>("installGitHooks") {
 afterEvaluate {
     tasks.named("preBuild").dependsOn("installGitHooks")
 }
-

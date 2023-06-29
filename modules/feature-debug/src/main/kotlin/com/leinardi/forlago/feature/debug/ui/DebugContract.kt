@@ -22,7 +22,7 @@ import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Features
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Options
-import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState

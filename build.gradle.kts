@@ -25,11 +25,10 @@ plugins {
     alias(libs.plugins.gradledoctor)
 }
 
-
 subprojects {
     gradle.projectsEvaluated {
         tasks.withType<JavaCompile> {
-        options.compilerArgs.add("-Xlint:unchecked")
+            options.compilerArgs.add("-Xlint:unchecked")
             options.compilerArgs.add("-Xlint:deprecation")
         }
     }
@@ -40,4 +39,3 @@ tasks.withType<Wrapper> {
     distributionType = Wrapper.DistributionType.ALL
     gradleVersion = libs.versions.gradle.get()
 }
-

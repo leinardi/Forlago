@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.library.network.di
 
+import androidx.annotation.VisibleForTesting
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
 import com.apollographql.apollo3.cache.normalized.api.NormalizedCacheFactory
@@ -23,12 +24,19 @@ import com.apollographql.apollo3.cache.normalized.logCacheMisses
 import com.apollographql.apollo3.cache.normalized.normalizedCache
 import com.apollographql.apollo3.network.okHttpClient
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
 import com.leinardi.forlago.library.network.BuildConfig
 import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
+import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
+import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.network.api.interactor.StoreCertificatePinningEnabledInteractor
+import com.leinardi.forlago.library.network.api.interactor.StoreEnvironmentInteractor
 import com.leinardi.forlago.library.network.interactor.ClearApolloCacheInteractorImpl
-import com.leinardi.forlago.library.preferences.api.interactor.ReadCertificatePinningIsEnabledInteractor
-import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.network.interactor.ReadCertificatePinningEnabledInteractorImpl
+import com.leinardi.forlago.library.network.interactor.ReadEnvironmentInteractorImpl
+import com.leinardi.forlago.library.network.interactor.StoreCertificatePinningEnabledInteractorImpl
+import com.leinardi.forlago.library.network.interactor.StoreEnvironmentInteractorImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -52,11 +60,7 @@ import javax.inject.Singleton
 
 @Module(includes = [NetworkModule.BindModule::class])
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
-    private const val NETWORK_TIMEOUT_IN_SECONDS = 30L
-    private const val MEMORY_CACHE_SIZE_IN_BYTES = 10 * 1024 * 1024
-    private val CACHE_EXPIRES_IN_MILLIS = TimeUnit.HOURS.toMillis(1)
-
+open class NetworkModule {
     @Provides
     @Singleton
     @IntoSet
@@ -82,7 +86,7 @@ object NetworkModule {
     @Singleton
     fun provideAddStageCertificatePinning(
         environment: ReadEnvironmentInteractor.Environment,
-        readCertificatePinningIsEnabledInteractor: ReadCertificatePinningIsEnabledInteractor,
+        readCertificatePinningEnabledInteractor: ReadCertificatePinningEnabledInteractor,
     ): CertificatePinner = CertificatePinner.Builder().apply {
         environment.certificatePinningConfigs.forEach { certificate ->
             if (certificate.isExpiring()) {
@@ -94,7 +98,7 @@ object NetworkModule {
                 }
             }
             runBlocking {
-                if (readCertificatePinningIsEnabledInteractor()) {
+                if (readCertificatePinningEnabledInteractor()) {
                     Timber.d("Certificate Pinning Enabled: $certificate")
                     certificate.hashes.forEach { add(certificate.domain, it.hash) }
                 } else {
@@ -172,11 +176,42 @@ object NetworkModule {
             .build()
     }
 
+    @Provides
+    @Singleton
+    fun provideReadEnvironmentInteractorEnvironment(
+        coroutineDispatchers: CoroutineDispatchers,
+        readEnvironmentInteractor: ReadEnvironmentInteractor,
+    ): ReadEnvironmentInteractor.Environment = readEnvironment(coroutineDispatchers, readEnvironmentInteractor)
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    protected open fun readEnvironment(
+        coroutineDispatchers: CoroutineDispatchers,
+        readEnvironmentInteractor: ReadEnvironmentInteractor,
+    ): ReadEnvironmentInteractor.Environment = runBlocking(coroutineDispatchers.io) { readEnvironmentInteractor() }
+
     @Module
     @InstallIn(SingletonComponent::class)
     internal interface BindModule {
         @Binds
         fun bindClearApolloCacheInteractor(bind: ClearApolloCacheInteractorImpl): ClearApolloCacheInteractor
+
+        @Binds
+        fun bindReadCertificatePinningEnabledInteractor(bind: ReadCertificatePinningEnabledInteractorImpl): ReadCertificatePinningEnabledInteractor
+
+        @Binds
+        fun bindReadEnvironmentInteractor(bind: ReadEnvironmentInteractorImpl): ReadEnvironmentInteractor
+
+        @Binds
+        fun bindStoreCertificatePinningEnabledInteractor(bind: StoreCertificatePinningEnabledInteractorImpl): StoreCertificatePinningEnabledInteractor
+
+        @Binds
+        fun bindStoreEnvironmentInteractor(bind: StoreEnvironmentInteractorImpl): StoreEnvironmentInteractor
+    }
+
+    companion object {
+        private const val MEMORY_CACHE_SIZE_IN_BYTES = 10 * 1024 * 1024
+        private const val NETWORK_TIMEOUT_IN_SECONDS = 30L
+        private val CACHE_EXPIRES_IN_MILLIS = TimeUnit.HOURS.toMillis(1)
     }
 }
 

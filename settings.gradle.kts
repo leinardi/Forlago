@@ -38,33 +38,34 @@ includeBuild("build-conventions")
 
 include(
 
-        // Apps
-        ":apps:forlago",
+    // Apps
+    ":apps:forlago",
 
-        // Baseline profiles
-        ":macrobenchmark:forlago",
+    // Baseline profiles
+    ":macrobenchmark:forlago",
 
-        // Modules
-        ":modules:feature-account",
-        ":modules:feature-account-api",
-        ":modules:feature-bar",
-        ":modules:feature-debug",
-        ":modules:feature-foo",
-        ":modules:library-android",
-        ":modules:library-android-api",
-        ":modules:library-feature",
-        ":modules:library-i18n",
-        ":modules:library-logging",
-        ":modules:library-logging-api",
-        ":modules:library-navigation",
-        ":modules:library-navigation-annotation",
-        ":modules:library-navigation-api",
-        ":modules:library-navigation-ksp",
-        ":modules:library-network",
-        ":modules:library-network-api",
-        ":modules:library-preferences",
-        ":modules:library-preferences-api",
-        ":modules:library-test",
-        ":modules:library-ui",
-        ":modules:library-ui-api",
-        )
+    // Modules
+    ":modules:feature-account",
+    ":modules:feature-account-api",
+    ":modules:feature-bar",
+    ":modules:feature-debug",
+    ":modules:feature-foo",
+    ":modules:library-android",
+    ":modules:library-android-api",
+    ":modules:library-feature",
+    ":modules:library-i18n",
+    ":modules:library-logging",
+    ":modules:library-logging-api",
+    ":modules:library-navigation",
+    ":modules:library-navigation-annotation",
+    ":modules:library-navigation-api",
+    ":modules:library-navigation-ksp",
+    ":modules:library-network",
+    ":modules:library-network-api",
+    ":modules:library-preferences",
+    ":modules:library-preferences-api",
+    ":modules:library-test",
+    ":modules:library-test-android",
+    ":modules:library-ui",
+    ":modules:library-ui-api",
+)

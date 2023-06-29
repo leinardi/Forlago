@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.kotlin.dsl.the
 
 plugins {
     id("com.android.library")
@@ -54,6 +53,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.timber)
 
+    androidTestImplementation(project(":modules:library-test-android"))
     androidTestUtil(libs.androidx.test.orchestrator)
 
     testImplementation(project(":modules:library-test"))

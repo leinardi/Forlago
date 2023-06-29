@@ -33,10 +33,10 @@ import com.leinardi.forlago.library.android.api.interactor.android.RestartApplic
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
-import com.leinardi.forlago.library.preferences.api.interactor.ReadCertificatePinningIsEnabledInteractor
-import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.library.preferences.api.interactor.StoreCertificatePinningIsEnabledInteractor
-import com.leinardi.forlago.library.preferences.api.interactor.StoreEnvironmentInteractor
+import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
+import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
+import com.leinardi.forlago.library.network.api.interactor.StoreCertificatePinningEnabledInteractor
+import com.leinardi.forlago.library.network.api.interactor.StoreEnvironmentInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -51,10 +51,10 @@ class DebugViewModel @Inject constructor(
     private val getDebugInfoInteractor: GetDebugInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
     private val logOutInteractor: LogOutInteractor,
-    private val readCertificatePinningIsEnabledInteractor: ReadCertificatePinningIsEnabledInteractor,
+    private val readCertificatePinningEnabledInteractor: ReadCertificatePinningEnabledInteractor,
     private val readEnvironmentInteractor: ReadEnvironmentInteractor,
     private val restartApplicationInteractor: RestartApplicationInteractor,
-    private val storeCertificatePinningIsEnabledInteractor: StoreCertificatePinningIsEnabledInteractor,
+    private val storeCertificatePinningEnabledInteractor: StoreCertificatePinningEnabledInteractor,
     private val storeEnvironmentInteractor: StoreEnvironmentInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
     init {
@@ -65,12 +65,16 @@ class DebugViewModel @Inject constructor(
                     appUpdateInfo = when (result) {
                         is Result.DeveloperTriggeredUpdateInProgress ->
                             "Developer triggered update in progress (priority ${result.appUpdateInfo.updatePriority()})"
+
                         is Result.FlexibleUpdateAvailable ->
                             "Flexible update available (priority ${result.appUpdateInfo.updatePriority()})"
+
                         is Result.ImmediateUpdateAvailable ->
                             "Immediate update available (priority ${result.appUpdateInfo.updatePriority()})"
+
                         is Result.LowPriorityUpdateAvailable ->
                             "Low priority update available (priority ${result.appUpdateInfo.updatePriority()})"
+
                         is Result.UpdateNotAvailable ->
                             "Update not available"
                     },
@@ -86,7 +90,7 @@ class DebugViewModel @Inject constructor(
             .map { State.Feature(checkNotNull(it.debugComposable), it.id) },
         selectedEnvironment = runBlocking { readEnvironmentInteractor() },  // This runBlocking is acceptable only because it's the debug screen
         certificatePinningEnabled = runBlocking { // This runBlocking is acceptable only because it's the debug screen
-            readCertificatePinningIsEnabledInteractor()
+            readCertificatePinningEnabledInteractor()
         },
     )
 
@@ -103,7 +107,7 @@ class DebugViewModel @Inject constructor(
 
     private fun handleOnEnableCertificatePinning(isEnableCertificatePinning: Boolean) {
         viewModelScope.launch {
-            storeCertificatePinningIsEnabledInteractor(isEnableCertificatePinning)
+            storeCertificatePinningEnabledInteractor(isEnableCertificatePinning)
             updateState { copy(certificatePinningEnabled = isEnableCertificatePinning) }
             restartApplicationInteractor()
         }

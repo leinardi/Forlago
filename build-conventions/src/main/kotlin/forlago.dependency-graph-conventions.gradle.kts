@@ -17,7 +17,6 @@
 /**
  * Taken from https://github.com/JakeWharton/SdkSearch/blob/master/gradle/projectDependencyGraph.gradle
  */
-
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import java.io.BufferedReader
 import java.util.Locale

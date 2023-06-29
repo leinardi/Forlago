@@ -24,11 +24,11 @@ interface GetAccessTokenInteractor {
     suspend operator fun invoke(): Result<String, ErrResult>
 
     sealed class ErrResult {
-            data class AccountAuthenticatorError(val errorMessage: String?) : ErrResult()
-            data class BadArgumentsError(val errorMessage: String?) : ErrResult()
-            data class NetworkError(val errorMessage: String?) : ErrResult()
-            object AccountNotFound : ErrResult()
-            object ReAuthenticationRequired : ErrResult()
+        data class AccountAuthenticatorError(val errorMessage: String?) : ErrResult()
+        data class BadArgumentsError(val errorMessage: String?) : ErrResult()
+        data class NetworkError(val errorMessage: String?) : ErrResult()
+        object AccountNotFound : ErrResult()
+        object ReAuthenticationRequired : ErrResult()
     }
 }
 

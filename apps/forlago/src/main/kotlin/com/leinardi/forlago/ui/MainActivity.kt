@@ -21,6 +21,8 @@ import android.content.Intent
 import android.content.IntentSender
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.PaddingValues
@@ -45,6 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.library.android.api.ext.getActivity
@@ -77,6 +80,13 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
 
     private val viewModel: MainViewModel by viewModels()
 
+    private val updateFlowResultLauncher = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+        when (result.resultCode) {
+            RESULT_CANCELED -> viewModel.onUiEvent(Event.OnInAppUpdateCancelled)
+            RESULT_IN_APP_UPDATE_FAILED -> viewModel.onUiEvent(Event.OnInAppUpdateFailed)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()  // must be called before super.onCreate()
         super.onCreate(savedInstanceState)
@@ -104,16 +114,12 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         viewModel.onUiEvent(Event.OnShown)
     }
 
-    @Deprecated("Deprecated in Java")
-    @Suppress("DEPRECATION")  // https://stackoverflow.com/q/65409381/293878
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IN_APP_UPDATE) {
-            when (resultCode) {
-                RESULT_CANCELED -> viewModel.onUiEvent(Event.OnInAppUpdateCancelled)
-                RESULT_IN_APP_UPDATE_FAILED -> viewModel.onUiEvent(Event.OnInAppUpdateFailed)
-            }
+    override fun onDestroy() {
+        // Workaround to prevent executing a deep link again on activity recreated (e.g. theme change)
+        if (intent.action == Intent.ACTION_VIEW) {
+            intent.data = null
         }
+        super.onDestroy()
     }
 
     fun startUpdateFlowForResult(
@@ -121,10 +127,18 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         @AppUpdateType appUpdateType: Int,
     ) {
         try {
+            val starter = IntentSenderForResultStarter { intent, _, fillInIntent, flagsMask, flagsValues, _, _ ->
+                val request = IntentSenderRequest.Builder(intent)
+                    .setFillInIntent(fillInIntent)
+                    .setFlags(flagsValues, flagsMask)
+                    .build()
+                updateFlowResultLauncher.launch(request)
+            }
+
             appUpdateManager.startUpdateFlowForResult(
                 appUpdateInfo,
                 appUpdateType,
-                this,
+                starter,
                 REQUEST_IN_APP_UPDATE,
             )
         } catch (e: IntentSender.SendIntentException) {
@@ -162,6 +176,7 @@ fun ForlagoMainScreen(
                     event.destination,
                     event.builder,
                 ).also { Timber.d("Navigate to ${event.destination}") }
+
                 is NavigatorEvent.HandleDeepLink -> navHostController.handleDeepLink(event.intent)
                 is NavigatorEvent.NavigateUp -> navHostController.navigateUp().also { Timber.d("Navigate Up successful = $it") }
                 is NavigatorEvent.NavigateBack -> navHostController.popBackStack().also { Timber.d("NavigateBack successful = $it") }

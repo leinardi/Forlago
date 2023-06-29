@@ -66,7 +66,7 @@ import com.leinardi.forlago.feature.debug.ui.DebugContract.State
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Features
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Options
-import com.leinardi.forlago.library.preferences.api.interactor.ReadEnvironmentInteractor.Environment
+import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor.Environment
 import com.leinardi.forlago.library.ui.annotation.DevicePreviews
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
@@ -136,6 +136,7 @@ private fun DebugScreen(
                         .fillMaxSize()
                         .padding(scaffoldPadding),
                 )
+
                 Options -> Options(
                     state = state,
                     sendEvent = sendEvent,
@@ -144,6 +145,7 @@ private fun DebugScreen(
                         .fillMaxSize()
                         .padding(scaffoldPadding),
                 )
+
                 Features -> Features(
                     state = state,
                     modifier = Modifier

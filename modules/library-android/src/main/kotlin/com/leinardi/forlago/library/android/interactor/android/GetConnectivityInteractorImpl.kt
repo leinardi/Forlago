@@ -39,12 +39,15 @@ internal class GetConnectivityInteractorImpl @Inject constructor(
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> GetConnectivityInteractor.State.Online(
                     GetConnectivityInteractor.Type.WIFI,
                 )
+
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> GetConnectivityInteractor.State.Online(
                     GetConnectivityInteractor.Type.CELLULAR,
                 )
+
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> GetConnectivityInteractor.State.Online(
                     GetConnectivityInteractor.Type.ETHERNET,
                 )
+
                 else -> GetConnectivityInteractor.State.Online(GetConnectivityInteractor.Type.UNKNOWN)
             }
         } else {

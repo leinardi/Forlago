@@ -84,8 +84,7 @@ fun InputChip(
         elevation = elevation,
         border = border,
         interactionSource = interactionSource,
-
-        )
+    )
 }
 
 @ThemePreviews

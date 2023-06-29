@@ -100,6 +100,7 @@ fun OutlinedTextField(
             ) {
                 Icon(passwordToggleIcon, null)
             }
+
             else -> trailingIcon?.invoke()
         }
     }

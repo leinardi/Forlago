@@ -47,7 +47,7 @@ dependencies {
 }
 
 // Workaround for https://github.com/detekt/detekt/issues/4743
-tasks{
+tasks {
     withType<Detekt>().configureEach {
         exclude("com/leinardi/forlago/library/network/api/graphql/**/*.kt")
     }

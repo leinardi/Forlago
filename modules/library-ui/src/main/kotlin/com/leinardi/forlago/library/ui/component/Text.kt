@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.google.accompanist.placeholder.material.placeholder
 import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
@@ -48,14 +47,14 @@ fun Text(
     lineHeight: TextUnit = TextUnit.Unspecified,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
-    minLines: Int = 0,
     maxLines: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
     onTextLayout: (TextLayoutResult) -> Unit = {},
     style: TextStyle = LocalTextStyle.current,
     placeholder: Boolean = false,
 ) {
     androidx.compose.material3.Text(
-        text = text.addEmptyLines(minLines),  // Workaround for https://issuetracker.google.com/issues/122476634
+        text = text,
         modifier = modifier.placeholder(placeholder),
         color = color,
         fontSize = fontSize,
@@ -69,12 +68,11 @@ fun Text(
         overflow = overflow,
         softWrap = softWrap,
         maxLines = maxLines,
+        minLines = minLines,
         onTextLayout = onTextLayout,
         style = style,
     )
 }
-
-private fun String.addEmptyLines(lines: Int) = this + "\n".repeat(lines)
 
 @ThemePreviews
 @Composable

@@ -20,13 +20,7 @@ import java.util.regex.Pattern
 
 fun CharSequence.isValidEmail(): Boolean {
     // Took from android.util.Patterns.EMAIL_ADDRESS (can't be used due to unit tests)
-    val expression = "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-        "\\@" +
-        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-        "(" +
-        "\\." +
-        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-        ")+"
+    val expression = """[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})+"""
     val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
     val matcher = pattern.matcher(this)
     return matcher.matches()

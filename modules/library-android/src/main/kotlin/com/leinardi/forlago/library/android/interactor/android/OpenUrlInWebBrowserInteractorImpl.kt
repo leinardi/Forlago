@@ -20,7 +20,6 @@ import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
-import com.leinardi.forlago.library.android.R
 import com.leinardi.forlago.library.android.api.interactor.android.OpenUrlInWebBrowserInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.ShowToastInteractor
 import timber.log.Timber

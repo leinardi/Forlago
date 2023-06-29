@@ -20,7 +20,6 @@ import android.content.Intent
 import androidx.annotation.StringRes
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
-import com.leinardi.forlago.R
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
@@ -43,6 +42,7 @@ object MainContract {
             val message: String,
             @StringRes val actionLabel: Int = com.leinardi.forlago.library.i18n.R.string.i18n_generic_snackbar_dismissal,
         ) : Effect()
+
         data class StartUpdateFlowForResult(val appUpdateInfo: AppUpdateInfo, @AppUpdateType val appUpdateType: Int) : Effect()
         object FinishActivity : Effect()
         object ShowSnackbarForCompleteUpdate : Effect()

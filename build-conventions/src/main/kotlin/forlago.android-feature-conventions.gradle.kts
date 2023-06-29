@@ -15,7 +15,6 @@
  */
 
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.kotlin.dsl.the
 
 plugins {
     id("forlago.android-library-conventions")
@@ -40,7 +39,7 @@ android {
             "-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi",
             "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
-            "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi"
+            "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
         )
     }
 }
@@ -68,5 +67,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(project(":modules:library-test-android"))
     androidTestUtil(libs.androidx.test.orchestrator)
 }
