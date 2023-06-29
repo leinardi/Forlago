@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-outputs
-          path: app/build/outputs
+          path: apps/forlago/build/outputs
 
       - run: |
           sudo mkdir -p /home/runner/work/_temp/_github_home
@@ -67,7 +67,7 @@ jobs:
       - name: Run MobSF Analysis
         uses: fundacaocerti/mobsf-action@96f53daa4d68a2caaeb5caf23ded96a10ebaf87b #v1.7.1
         env:
-          INPUT_FILE_NAME: app/build/outputs/apk/release/forlago-release.apk
+          INPUT_FILE_NAME: apps/forlago/build/outputs/apk/release/forlago-release.apk
           SCAN_TYPE: apk
           OUTPUT_FILE_NAME: mobsf-report
 

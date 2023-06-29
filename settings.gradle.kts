@@ -39,10 +39,10 @@ includeBuild("build-conventions")
 include(
 
         // Apps
-        ":app",
+        ":apps:forlago",
 
         // Baseline profiles
-        ":macrobenchmark",
+        ":macrobenchmark:forlago",
 
         // Modules
         ":modules:feature-account",

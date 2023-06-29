@@ -1,10 +1,10 @@
 
 ------------------------------------------------------------
-Project ':app'
+Project ':apps:forlago'
 ------------------------------------------------------------
 
 benchmarkUnitTestRuntimeClasspath - Runtime classpath of /benchmarkUnitTest.
-+--- project :app (*)
++--- project :apps:forlago (*)
 +--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.8.21
 |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21
 |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.21

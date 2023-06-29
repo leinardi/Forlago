@@ -1,6 +1,6 @@
 
 ------------------------------------------------------------
-Project ':app'
+Project ':apps:forlago'
 ------------------------------------------------------------
 
 debugAndroidTestRuntimeClasspath - Runtime classpath of /debugAndroidTest.
