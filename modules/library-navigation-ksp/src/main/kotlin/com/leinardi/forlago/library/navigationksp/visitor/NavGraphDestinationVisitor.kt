@@ -110,8 +110,8 @@ internal class NavGraphDestinationVisitor(
         qualifiedName: String,
     ) = classDeclaration.annotations
         .filter { it.shortName.asString().contains(checkNotNull(NavGraphDestination::class.simpleName)) }
-        .also {
-            require(it.count() == 1) {
+        .also { annotations ->
+            require(annotations.count() == 1) {
                 "$qualifiedName annotated with more than one @${NavGraphDestination::class.simpleName}"
             }
         }

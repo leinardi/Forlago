@@ -17,7 +17,6 @@
 plugins {
     id 'forlago.android-feature-conventions'
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.apollo)
 }
 
 android {
@@ -40,13 +39,8 @@ android {
     }
 }
 
-apollo {
-    packageNamesFromFilePaths()
-}
-
 dependencies {
     api projects.modules.featureAccountApi
-    apolloMetadata projects.modules.libraryNetworkApi
     implementation projects.modules.libraryNetworkApi
     implementation projects.modules.libraryPreferencesApi
 

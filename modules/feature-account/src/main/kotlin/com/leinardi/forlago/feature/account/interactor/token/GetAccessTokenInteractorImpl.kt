@@ -54,9 +54,9 @@ internal class GetAccessTokenInteractorImpl @Inject constructor(
                         AccountAuthenticatorConfig.AUTH_TOKEN_TYPE,
                         null,
                         false,
-                        {
+                        { accountManagerFuture ->
                             try {
-                                cont.resumeWith(kotlin.Result.success(it.result))
+                                cont.resumeWith(kotlin.Result.success(accountManagerFuture.result))
                             } catch (e: Exception) {
                                 cont.resumeWith(kotlin.Result.failure(e))
                             }

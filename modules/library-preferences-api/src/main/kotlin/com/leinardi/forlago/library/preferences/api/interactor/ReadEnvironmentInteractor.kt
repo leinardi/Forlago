@@ -30,7 +30,7 @@ interface ReadEnvironmentInteractor {
         DEV("https://api.dev.example.com", "https://apollo-fullstack-tutorial.herokuapp.com/graphql"),
         MOCK("https://localhost:8000", "https://localhost:8000"),
         PROD("https://api.example.com", "https://apollo-fullstack-tutorial.herokuapp.com/graphql"),
-        STAGE("https://api.stage.example.com", "https://apollo-fullstack-tutorial.herokuapp.com/graphql");
+        STAGE("https://api.stage.example.com", "https://apollo-fullstack-tutorial.herokuapp.com/graphql"),
     }
 }
 

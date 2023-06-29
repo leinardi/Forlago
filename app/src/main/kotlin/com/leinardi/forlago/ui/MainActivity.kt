@@ -38,7 +38,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
@@ -48,7 +47,6 @@ import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType
-import com.leinardi.forlago.R
 import com.leinardi.forlago.library.android.api.ext.getActivity
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.navigation.api.navigator.NavigatorEvent
@@ -156,12 +154,9 @@ fun ForlagoMainScreen(
     val bottomSheetNavigator = rememberBottomSheetNavigator(skipHalfExpanded = true)
     val navHostController = rememberNavController(bottomSheetNavigator)
     val activity = LocalContext.current.getActivity() as MainActivity
-    val keyboardController = LocalSoftwareKeyboardController.current
     val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(navHostController) {
         forlagoNavigator.destinations.onEach { event ->
-            Timber.d("backQueue = ${navHostController.backQueue.map { "route = ${it.destination.route}" }}")
-            keyboardController?.hide()
             when (event) {
                 is NavigatorEvent.Directions -> navHostController.navigate(
                     event.destination,
@@ -225,9 +220,9 @@ private suspend fun showSnackbarForCompleteUpdate(
     activity: MainActivity,
 ) {
     snackbarHostState.showSnackbar(
-        message = activity.getString(R.string.i18n_app_update_snackbar_download_ready_label),
+        message = activity.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_snackbar_download_ready_label),
         duration = SnackbarDuration.Indefinite,
-        actionLabel = activity.getString(R.string.i18n_app_update_snackbar_download_ready_button),
+        actionLabel = activity.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_snackbar_download_ready_button),
     ).also { snackbarResult ->
         if (snackbarResult == SnackbarResult.ActionPerformed) {
             activity.completeAppUpdate()

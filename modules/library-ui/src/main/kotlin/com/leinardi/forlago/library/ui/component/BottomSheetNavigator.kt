@@ -17,8 +17,6 @@
 package com.leinardi.forlago.library.ui.component
 
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.material.BottomSheetScaffoldState
-import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.SwipeableDefaults
@@ -41,24 +39,11 @@ fun rememberBottomSheetNavigator(
     skipHalfExpanded: Boolean = false,
 ): BottomSheetNavigator {
     val sheetState = rememberModalBottomSheetState(
-        ModalBottomSheetValue.Hidden,
-        animationSpec,
-        skipHalfExpanded,
+        initialValue = ModalBottomSheetValue.Hidden,
+        animationSpec = animationSpec,
+        skipHalfExpanded = skipHalfExpanded,
     )
     return remember(sheetState) {
         BottomSheetNavigator(sheetState = sheetState)
     }
 }
-
-val BottomSheetScaffoldState.expandProgressFraction: Float
-    get() {
-        val fraction = bottomSheetState.progress.fraction
-        val targetValue = bottomSheetState.targetValue
-        val currentValue = bottomSheetState.currentValue
-        return when {
-            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Collapsed -> 0f
-            currentValue == BottomSheetValue.Expanded && targetValue == BottomSheetValue.Expanded -> 1f
-            currentValue == BottomSheetValue.Collapsed && targetValue == BottomSheetValue.Expanded -> fraction
-            else -> 1 - fraction
-        }
-    }

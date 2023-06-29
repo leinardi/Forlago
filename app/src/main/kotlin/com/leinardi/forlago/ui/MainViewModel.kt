@@ -86,7 +86,9 @@ class MainViewModel @Inject constructor(
                     sendEffect { Effect.FinishActivity }
                 }
             }
-            is Event.OnInAppUpdateFailed -> sendEffect { Effect.ShowErrorSnackbar(app.getString(R.string.i18n_app_update_error)) }
+            is Event.OnInAppUpdateFailed -> sendEffect { Effect.ShowErrorSnackbar(
+                app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_error),
+            ) }
             is Event.OnIntentReceived -> handleOnIntentReceived(event)
             is Event.OnShown -> checkForUpdates(true)
         }
@@ -95,9 +97,9 @@ class MainViewModel @Inject constructor(
     private fun handleOnIntentReceived(event: Event.OnIntentReceived) {
         viewModelScope.launch {
             var handled = false
-            getFeaturesInteractor().forEach {
+            getFeaturesInteractor().forEach { feature ->
                 if (!handled) {
-                    it.handleIntent(event.intent).ifTrue { handled = true }
+                    feature.handleIntent(event.intent).ifTrue { handled = true }
                 }
             }
             if (!handled && event.isNewIntent) {

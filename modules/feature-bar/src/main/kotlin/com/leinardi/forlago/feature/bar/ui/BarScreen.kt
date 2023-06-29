@@ -21,7 +21,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.consumedWindowInsets
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -40,7 +40,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.leinardi.forlago.feature.bar.R
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
 import com.leinardi.forlago.library.ui.annotation.DevicePreviews
@@ -68,11 +67,11 @@ private fun BarScreen(
         modifier = Modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection)
             .padding(LocalMainScaffoldPadding.current.value)
-            .consumedWindowInsets(LocalMainScaffoldPadding.current.value)
+            .consumeWindowInsets(LocalMainScaffoldPadding.current.value)
             .navigationBarsPadding(),
         topBar = {
             TopAppBar(
-                title = stringResource(R.string.i18n_bar_screen_title),
+                title = stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_bar_screen_title),
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
                 modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 scrollBehavior = scrollBehavior,
@@ -93,7 +92,7 @@ private fun BarScreen(
         ) {
             Box(Modifier.fillMaxWidth()) {
                 Text(
-                    stringResource(R.string.i18n_bar_text_received, state.text),
+                    stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_bar_text_received, state.text),
                     Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
                     style = typography.headlineSmall,
@@ -103,7 +102,7 @@ private fun BarScreen(
                 onClick = { sendEvent(Event.OnBackButtonClicked) },
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                Text(stringResource(R.string.i18n_back))
+                Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_back))
             }
         }
     }

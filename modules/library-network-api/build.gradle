@@ -15,8 +15,10 @@ android {
 }
 
 apollo {
-    packageName = "com.leinardi.forlago.library.network.api.graphql"
-    generateApolloMetadata = true
+    service("forlago") {
+        packageName = "com.leinardi.forlago.library.network.api.graphql"
+        generateApolloMetadata = true
+    }
 }
 
 dependencies {

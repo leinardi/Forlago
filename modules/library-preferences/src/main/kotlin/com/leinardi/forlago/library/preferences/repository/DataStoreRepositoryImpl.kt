@@ -62,12 +62,12 @@ class DataStoreRepositoryImpl constructor(
     private fun <T> DataStore<Preferences>.getFromLocalStorage(
         preferencesKey: Preferences.Key<T>,
     ): Flow<T?> =
-        data.catch {
-            if (it is IOException) {
-                Timber.e(it, "Error while reading data store.")
+        data.catch { exception ->
+            if (exception is IOException) {
+                Timber.e(exception, "Error while reading data store.")
                 emit(emptyPreferences())
             } else {
-                throw it
+                throw exception
             }
         }.map {
             it[preferencesKey]

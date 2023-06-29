@@ -35,7 +35,6 @@ android {
         freeCompilerArgs += '-opt-in=androidx.compose.material.ExperimentalMaterialApi'
         freeCompilerArgs += '-opt-in=androidx.compose.material3.ExperimentalMaterial3Api'
         freeCompilerArgs += '-opt-in=androidx.compose.ui.ExperimentalComposeUiApi'
-        freeCompilerArgs += '-opt-in=com.google.accompanist.pager.ExperimentalPagerApi'
     }
 }
 
@@ -44,12 +43,9 @@ dependencies {
     implementation projects.modules.libraryAndroidApi
     implementation projects.modules.libraryI18n
     implementation projects.modules.libraryNavigationApi
-    api libs.accompanist.flowlayout
     api libs.accompanist.navigation.material
-    api libs.accompanist.pager
     api libs.accompanist.pager.indicators
     api libs.accompanist.placeholder
-    api libs.accompanist.swiperefresh
     api libs.accompanist.systemuicontroller
     api libs.androidx.appcompat
     api libs.androidx.compose.material // Still needed for stuff missing in M3, like ModalBottomSheetLayout
