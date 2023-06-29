@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import org.gradle.internal.impldep.org.apache.commons.lang.CharSetUtils.keep
 import java.util.Locale
 
 plugins {

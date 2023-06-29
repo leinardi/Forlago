@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -95,8 +95,10 @@ fun ForlagoTheme(
     val myColorScheme = when {
         isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDarkTheme ->
             dynamicDarkColorScheme(LocalContext.current)
+
         isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isDarkTheme ->
             dynamicLightColorScheme(LocalContext.current)
+
         isDarkTheme -> DarkColors
         else -> LightColors
     }

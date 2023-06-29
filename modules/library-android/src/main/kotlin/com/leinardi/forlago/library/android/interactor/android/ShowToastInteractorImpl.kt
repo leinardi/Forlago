@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ internal class ShowToastInteractorImpl @Inject constructor(
         // StrictMode complains about wrong context used to show the toast, but it's a false positive since the official documentation states that
         // an application context can and should be used: https://developer.android.com/guide/topics/ui/notifiers/toasts#Basics
         toast = noStrictMode(disableThread = false) {
-            Toast.makeText(application, text, if (shortLength) Toast.LENGTH_SHORT else Toast.LENGTH_LONG).also { it.show() }
+            Toast.makeText(application, text, if (shortLength) Toast.LENGTH_SHORT else Toast.LENGTH_LONG).apply { show() }
         }
     }
 }

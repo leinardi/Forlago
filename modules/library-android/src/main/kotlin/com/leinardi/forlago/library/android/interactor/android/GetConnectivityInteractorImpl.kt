@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,12 +39,15 @@ internal class GetConnectivityInteractorImpl @Inject constructor(
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> GetConnectivityInteractor.State.Online(
                     GetConnectivityInteractor.Type.WIFI,
                 )
+
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> GetConnectivityInteractor.State.Online(
                     GetConnectivityInteractor.Type.CELLULAR,
                 )
+
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> GetConnectivityInteractor.State.Online(
                     GetConnectivityInteractor.Type.ETHERNET,
                 )
+
                 else -> GetConnectivityInteractor.State.Online(GetConnectivityInteractor.Type.UNKNOWN)
             }
         } else {

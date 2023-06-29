@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,10 @@ plugins {
     alias(libs.plugins.gradledoctor)
 }
 
-
 subprojects {
     gradle.projectsEvaluated {
         tasks.withType<JavaCompile> {
-        options.compilerArgs.add("-Xlint:unchecked")
+            options.compilerArgs.add("-Xlint:unchecked")
             options.compilerArgs.add("-Xlint:deprecation")
         }
     }
@@ -40,4 +39,3 @@ tasks.withType<Wrapper> {
     distributionType = Wrapper.DistributionType.ALL
     gradleVersion = libs.versions.gradle.get()
 }
-

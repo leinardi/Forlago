@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ class AccountDebugViewModel @Inject constructor(
                 Event.OnLogOutClicked -> logOut()
                 Event.OnOpenSignInScreenClicked ->
                     forlagoNavigator.navigate(SignInDestination.get(viewState.value.accountName != null))
+
                 Event.OnViewAttached -> updateState()
                 Event.OnViewDetached -> Timber.d(">>> Detached")
             }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,9 @@ import com.android.build.gradle.api.AndroidBasePlugin
 import com.leinardi.forlago.ext.android
 import com.leinardi.forlago.ext.apps
 import com.leinardi.forlago.ext.config
-import com.leinardi.forlago.ext.forlago
+import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {
     id("kotlin-android")
@@ -48,19 +47,22 @@ plugins.withType<AndroidBasePlugin>().configureEach {
         defaultConfig {
             minSdk = config.android.minSdk.get()
             targetSdk = config.android.targetSdk.get()
+
+            manifestPlaceholders["deepLinkSchema"] = config.apps.deepLinkSchema.get()
+            buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${config.apps.deepLinkSchema.get()}\"")
+
             testInstrumentationRunner = "com.leinardi.forlago.library.test.runner.HiltTestRunner"
             // The following argument makes the Android Test Orchestrator run its
             // "pm clear" command after each test invocation. This command ensures
             // that the app's state is completely cleared between tests.
             setTestInstrumentationRunnerArguments(mutableMapOf("clearPackageData" to "true"))
-
-            buildConfigField("String", "DEEP_LINK_SCHEMA", "\"${config.apps.deepLinkSchema.get()}\"")
         }
 
         compileOptions {
             sourceCompatibility = config.android.javaVersion.get()
             targetCompatibility = config.android.javaVersion.get()
         }
+
         testOptions {
             animationsDisabled = true
             unitTests {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,11 +46,10 @@ dependencies {
     implementation(projects.modules.libraryAndroidApi)
     implementation(projects.modules.libraryI18n)
     implementation(projects.modules.libraryNavigationApi)
-    api(libs.accompanist.flowlayout)
+    implementation(projects.modules.libraryPreferencesApi)
     api(libs.accompanist.navigation.material)
     api(libs.accompanist.pager.indicators)
     api(libs.accompanist.placeholder)
-    api(libs.accompanist.swiperefresh)
     api(libs.accompanist.systemuicontroller)
     api(libs.androidx.appcompat)
     api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like ModalBottomSheetLayout
@@ -68,8 +67,7 @@ dependencies {
     api(libs.coil.compose)
     api(libs.material)
     implementation(libs.hilt.android)
-    debugApi(libs.androidx.customview) // Workaround for https://issuetracker.google.com/issues/227767363
+    debugApi(libs.androidx.customview)  // Workaround for https://issuetracker.google.com/issues/227767363
     debugApi(libs.androidx.customview.poolingcontainer)  // Workaround for https://issuetracker.google.com/issues/227767363
-    implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }

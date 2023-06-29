@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ plugins {
 
 dependencies {
     implementation(libs.plugin.aboutlibraries)
-    implementation(libs.plugin.android)
+    implementation(libs.plugin.android.gradle)
     implementation(libs.plugin.androidcachefix)
     implementation(libs.plugin.appversioning)
     implementation(libs.plugin.detekt)
@@ -37,8 +37,9 @@ dependencies {
     implementation(libs.plugin.ksp)
     implementation(libs.plugin.ruler)
     implementation(libs.plugin.spotless)
-    implementation(libs.plugin.versionsgradle)
+    implementation(libs.plugin.versions)
     implementation(libs.plugin.versions.update)
     implementation(libs.plugin.violation)
+    implementation(platform(libs.firebase.bom))
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }

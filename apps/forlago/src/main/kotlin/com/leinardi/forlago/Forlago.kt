@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import coil.memory.MemoryCache
 import coil.util.DebugLogger
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.feature.FeatureManager
-import com.leinardi.forlago.library.preferences.api.interactor.ReadCertificatePinningIsEnabledInteractor
+import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
@@ -42,7 +42,7 @@ class Forlago : Application(), ImageLoaderFactory {
 
     @Inject lateinit var okHttpClient: OkHttpClient
 
-    @Inject lateinit var readCertificatePinningIsEnabledInteractor: ReadCertificatePinningIsEnabledInteractor
+    @Inject lateinit var readCertificatePinningEnabledInteractor: ReadCertificatePinningEnabledInteractor
 
     override fun onCreate() {
         super.onCreate()
@@ -85,7 +85,7 @@ class Forlago : Application(), ImageLoaderFactory {
                         detectUnsafeIntentLaunch()
                     }
                     runBlocking {
-                        if (readCertificatePinningIsEnabledInteractor()) {
+                        if (readCertificatePinningEnabledInteractor()) {
                             detectCleartextNetwork()
                         }
                     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ fun NavGraphBuilder.addBottomSheetDestinations() {
         feature.bottomSheetDestinations.forEach { entry ->
             val destination = entry.key
             bottomSheet(destination.route, destination.arguments, destination.deepLinks) {
-                // LMOB-285: Remove once ModalBottomSheetLayout will support tonal elevation
+                // Remove once ModalBottomSheetLayout will support tonal elevation
                 Surface(
                     tonalElevation = BottomSheetDefaults.tonalElevation,
                 ) {

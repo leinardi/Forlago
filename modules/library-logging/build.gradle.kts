@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,10 @@ dependencies {
     implementation(libs.androidx.startup)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
-    if (rootProject.file("app/google-services.json").exists()) {
+    if (rootProject.file("apps/forlago/google-services.json").exists()) {
         implementation(libs.firebase.perf)
     }
     implementation(libs.hilt.android)
+    implementation(platform(libs.firebase.bom))
     kapt(libs.hilt.compiler)
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.gradle.kotlin.dsl.the
 
 plugins {
     id("com.android.library")
@@ -54,6 +53,7 @@ dependencies {
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.timber)
 
+    androidTestImplementation(project(":modules:library-test-android"))
     androidTestUtil(libs.androidx.test.orchestrator)
 
     testImplementation(project(":modules:library-test"))

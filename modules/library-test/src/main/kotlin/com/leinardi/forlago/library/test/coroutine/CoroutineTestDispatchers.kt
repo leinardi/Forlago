@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,13 @@
 package com.leinardi.forlago.library.test.coroutine
 
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 
+private val dispatcher = StandardTestDispatcher()
 val coroutineTestDispatchers = CoroutineDispatchers(
-    main = UnconfinedTestDispatcher(),
-    default = UnconfinedTestDispatcher(),
-    io = UnconfinedTestDispatcher(),
+    main = dispatcher,
+    default = dispatcher,
+    io = dispatcher,
     unconfined = UnconfinedTestDispatcher(),
 )

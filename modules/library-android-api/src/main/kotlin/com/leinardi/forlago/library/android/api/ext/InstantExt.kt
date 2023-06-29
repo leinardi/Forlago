@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +38,10 @@ fun Instant.toLocalizedSmartDateTime(context: Context): String {
     return when {
         truncatedTo(ChronoUnit.DAYS).equals(now.truncatedTo(ChronoUnit.DAYS)) ->
             DateUtils.formatDateTime(context, toEpochMilli(), DateUtils.FORMAT_SHOW_TIME)
+
         atZone(ZoneId.systemDefault()).year == now.atZone(ZoneId.systemDefault()).year ->
             DateUtils.formatDateTime(context, toEpochMilli(), DateUtils.FORMAT_ABBREV_MONTH or DateUtils.FORMAT_NO_YEAR)
+
         else ->
             DateUtils.formatDateTime(context, toEpochMilli(), DateUtils.FORMAT_NUMERIC_DATE)
     }

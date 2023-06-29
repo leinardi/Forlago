@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 /**
  * Taken from https://github.com/JakeWharton/SdkSearch/blob/master/gradle/projectDependencyGraph.gradle
  */
-
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import java.io.BufferedReader
 import java.util.Locale

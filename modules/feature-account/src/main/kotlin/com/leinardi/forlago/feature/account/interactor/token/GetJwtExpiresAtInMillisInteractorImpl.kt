@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.leinardi.forlago.feature.account.interactor.token
 import com.google.crypto.tink.subtle.Base64
 import com.leinardi.forlago.feature.account.api.interactor.token.GetJwtExpiresAtInMillisInteractor
 import com.leinardi.forlago.library.network.api.model.Jwt
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject

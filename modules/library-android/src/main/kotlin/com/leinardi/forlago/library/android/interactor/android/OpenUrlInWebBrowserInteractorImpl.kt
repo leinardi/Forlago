@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import android.app.Application
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
-import com.leinardi.forlago.library.android.R
 import com.leinardi.forlago.library.android.api.interactor.android.OpenUrlInWebBrowserInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.ShowToastInteractor
 import timber.log.Timber

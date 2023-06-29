@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import com.leinardi.forlago.library.ui.R
 import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.Spacing

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,11 @@ internal class LogOutInteractorImpl @Inject constructor(
     private val getFeaturesInteractor: GetFeaturesInteractor,
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : LogOutInteractor {
+    private var signOutInProgress: Boolean = false
+
     override suspend operator fun invoke(navigateToLogin: Boolean) {
         Timber.d("LogOut")
+        signOutInProgress = true
         clearApolloCacheInteractor()
         getFeaturesInteractor().forEach { it.featureLifecycle.onSignOut }
         userDataStoreRepository.clearPreferencesStorage()
@@ -43,5 +46,8 @@ internal class LogOutInteractorImpl @Inject constructor(
                 popUpTo(0) { inclusive = true }
             }
         }
+        signOutInProgress = false
     }
+
+    override fun isSignOutInProgress() = signOutInProgress
 }

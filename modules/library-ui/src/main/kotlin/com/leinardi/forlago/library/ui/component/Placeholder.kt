@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import androidx.compose.ui.composed
 import com.google.accompanist.placeholder.PlaceholderDefaults
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
-import com.google.accompanist.placeholder.material.color
-import com.google.accompanist.placeholder.material.fadeHighlightColor
+import com.google.accompanist.placeholder.material3.color
+import com.google.accompanist.placeholder.material3.fadeHighlightColor
 import com.google.accompanist.placeholder.placeholder
 
 const val InitialLoadingPlaceholderCount = 6

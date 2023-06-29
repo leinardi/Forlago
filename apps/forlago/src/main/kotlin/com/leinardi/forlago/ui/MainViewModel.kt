@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,13 @@
 package com.leinardi.forlago.ui
 
 import android.app.Application
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
-import com.leinardi.forlago.R
+import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInteractor
 import com.leinardi.forlago.library.android.api.ext.ifTrue
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.DeveloperTriggeredUpdateInProgress
@@ -31,8 +34,8 @@ import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateI
 import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateFlowInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
-import com.leinardi.forlago.library.preferences.api.interactor.GetMaterialYouFlowInteractor
-import com.leinardi.forlago.library.preferences.api.interactor.GetThemeFlowInteractor
+import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouFlowInteractor
+import com.leinardi.forlago.library.ui.api.interactor.GetThemeFlowInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import com.leinardi.forlago.library.ui.interactor.SetNightModeInteractor
 import com.leinardi.forlago.ui.MainContract.Effect
@@ -51,16 +54,21 @@ class MainViewModel @Inject constructor(
     getMaterialYouFlowInteractor: GetMaterialYouFlowInteractor,
     getThemeFlowInteractor: GetThemeFlowInteractor,
     private val app: Application,
+    private val forlagoNavigator: ForlagoNavigator,
     private val getAppUpdateInfoInteractor: GetAppUpdateInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
-    private val forlagoNavigator: ForlagoNavigator,
+    private val logOutInteractor: LogOutInteractor,
     setNightModeInteractor: SetNightModeInteractor,
-) : BaseViewModel<Event, State, Effect>() {
+) : BaseViewModel<Event, State, Effect>(), DefaultLifecycleObserver {
     @AppUpdateType private var appUpdateType: Int? = null
 
     init {
         getThemeFlowInteractor()
-            .onEach { setNightModeInteractor(it) }
+            .onEach { nightMode ->
+                if (!logOutInteractor.isSignOutInProgress()) {
+                    setNightModeInteractor(nightMode)
+                }
+            }
             .launchIn(viewModelScope)
         getMaterialYouFlowInteractor()
             .onEach { updateState { copy(dynamicColors = it) } }
@@ -73,6 +81,12 @@ class MainViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
         checkForUpdates()
+        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+    }
+
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
+        checkForUpdates(true)
     }
 
     override fun provideInitialState() = State(forlagoNavigator.homeDestination)
@@ -86,9 +100,13 @@ class MainViewModel @Inject constructor(
                     sendEffect { Effect.FinishActivity }
                 }
             }
-            is Event.OnInAppUpdateFailed -> sendEffect { Effect.ShowErrorSnackbar(
-                app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_error),
-            ) }
+
+            is Event.OnInAppUpdateFailed -> sendEffect {
+                Effect.ShowErrorSnackbar(
+                    app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_error),
+                )
+            }
+
             is Event.OnIntentReceived -> handleOnIntentReceived(event)
             is Event.OnShown -> checkForUpdates(true)
         }
@@ -117,14 +135,17 @@ class MainViewModel @Inject constructor(
                     Timber.d("MediumPriorityUpdateAvailable")
                     sendEffectStartUpdateFlowForResult(result.appUpdateInfo, result.appUpdateType)
                 }
+
                 result is ImmediateUpdateAvailable && !checkOnlyInProgress -> {
                     Timber.d("HighPriorityUpdateAvailable")
                     sendEffectStartUpdateFlowForResult(result.appUpdateInfo, result.appUpdateType)
                 }
+
                 result is DeveloperTriggeredUpdateInProgress -> {
                     Timber.d("DeveloperTriggeredUpdateInProgress")
                     sendEffectStartUpdateFlowForResult(result.appUpdateInfo, result.appUpdateType)
                 }
+
                 result is UpdateNotAvailable && !checkOnlyInProgress -> Timber.d("In-App update not available")
             }
         }

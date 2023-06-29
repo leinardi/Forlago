@@ -108,7 +108,8 @@ you can use the `release/encrypt-secrets.sh` to safely encrypt them (it's recomm
 
 ## Baseline Profile
 
-Baseline Profiles improve code execution speed from the first launch by avoiding interpretation and just-in-time (JIT) compilation steps for included code paths.
+Baseline Profiles improve code execution speed from the first launch by avoiding interpretation and just-in-time (JIT) compilation steps for included
+code paths.
 
 ### How to generate Baseline profile
 
@@ -119,11 +120,13 @@ Just run this command, and it will generate baseline-profile.txt to add to the p
 ```
 
 The baseline profile generated will be at this path:
+
 ```
 macrobenchmark/build/outputs/managed_device_android_test_additional_output/pixel6Api31/BaselineProfileGenerator_startup-baseline-prof.txt
 ```
 
 And you have to rename and move it to:
+
 ```
 apps/forlago/src/main/baselineProfiles/baseline-prof.txt
 ```

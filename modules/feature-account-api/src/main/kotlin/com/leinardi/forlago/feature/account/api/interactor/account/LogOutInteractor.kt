@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,4 +18,6 @@ package com.leinardi.forlago.feature.account.api.interactor.account
 
 interface LogOutInteractor {
     suspend operator fun invoke(navigateToLogin: Boolean = true)
+
+    fun isSignOutInProgress(): Boolean
 }

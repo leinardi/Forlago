@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2023 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.leinardi.forlago.library.android.api.interactor.android
 
 import android.app.Application
 import androidx.annotation.RawRes
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import timber.log.Timber
 import java.io.IOException

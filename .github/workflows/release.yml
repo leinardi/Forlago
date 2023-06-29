@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create release tag
         uses: actions/github-script@v5
@@ -54,7 +54,7 @@ jobs:
             })
 
       - name: Workaround to fetch the tag # Is there a better way to do it?
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
@@ -92,7 +92,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: publishBundle --track ${{ github.event.inputs.track }} --update-priority ${{ github.event.inputs.updatePriority }} --debug
+          arguments: publishBundle --track ${{ github.event.inputs.track }} --update-priority ${{ github.event.inputs.updatePriority }}
 
       - name: Clean secrets
         if: always()
@@ -121,7 +121,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Delete release tag
-        if: failure()
+        if: ${{ failure() || cancelled() }}
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
