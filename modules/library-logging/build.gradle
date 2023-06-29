@@ -37,6 +37,5 @@ dependencies {
         implementation libs.firebase.perf
     }
     implementation libs.hilt.android
-    implementation platform(libs.firebase.bom)
     kapt libs.hilt.compiler
 }

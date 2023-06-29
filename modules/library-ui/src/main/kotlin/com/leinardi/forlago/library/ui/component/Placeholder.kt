@@ -24,8 +24,8 @@ import androidx.compose.ui.composed
 import com.google.accompanist.placeholder.PlaceholderDefaults
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.fade
-import com.google.accompanist.placeholder.material3.color
-import com.google.accompanist.placeholder.material3.fadeHighlightColor
+import com.google.accompanist.placeholder.material.color
+import com.google.accompanist.placeholder.material.fadeHighlightColor
 import com.google.accompanist.placeholder.placeholder
 
 const val InitialLoadingPlaceholderCount = 6

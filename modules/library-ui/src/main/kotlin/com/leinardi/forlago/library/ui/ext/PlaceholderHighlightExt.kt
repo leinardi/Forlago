@@ -18,7 +18,7 @@ package com.leinardi.forlago.library.ui.ext
 
 import androidx.compose.runtime.Composable
 import com.google.accompanist.placeholder.PlaceholderHighlight
-import com.google.accompanist.placeholder.material3.fade
+import com.google.accompanist.placeholder.material.fade
 
 @Composable
 fun PlaceholderHighlight.Companion.default() = PlaceholderHighlight.fade()
