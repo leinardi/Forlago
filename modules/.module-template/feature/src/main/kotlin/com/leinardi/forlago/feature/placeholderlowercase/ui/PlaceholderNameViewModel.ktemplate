@@ -18,8 +18,8 @@ package com.leinardi.forlago.feature.@placeholderlowercase@.ui
 
 import androidx.lifecycle.SavedStateHandle
 import com.leinardi.forlago.library.ui.base.BaseViewModel
-import com.leinardi.forlago.library.navigation.ForlagoNavigator
-import com.leinardi.forlago.library.navigation.destination.@placeholderlowercase@.@PlaceholderName@Destination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
+import com.leinardi.forlago.library.navigation.api.destination.@placeholderlowercase@.@PlaceholderName@Destination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -28,8 +28,8 @@ class @PlaceholderName@ViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
     private val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<@PlaceholderName@Contract.Event, @PlaceholderName@Contract.State, @PlaceholderName@Contract.Effect>() {
-
-    override fun provideInitialState() = @PlaceholderName@Contract.State(savedStateHandle.get<String>(@PlaceholderName@Destination.TEXT_PARAM).orEmpty())
+    private val text: String = @PlaceholderName@Destination.Arguments.getText(savedStateHandle)
+    override fun provideInitialState() = @PlaceholderName@Contract.State(text)
 
     override fun handleEvent(event: @PlaceholderName@Contract.Event) {
         when (event) {

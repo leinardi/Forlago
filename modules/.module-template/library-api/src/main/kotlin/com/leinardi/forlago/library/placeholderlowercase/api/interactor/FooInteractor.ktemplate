@@ -1,0 +1,5 @@
+package com.leinardi.forlago.library.@placeholderlowercase@.api.interactor
+
+interface FooInteractor {
+    operator fun invoke(): Boolean
+}

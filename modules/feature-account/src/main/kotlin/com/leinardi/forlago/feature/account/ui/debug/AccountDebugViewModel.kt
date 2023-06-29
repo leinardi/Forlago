@@ -17,6 +17,8 @@
 package com.leinardi.forlago.feature.account.ui.debug
 
 import androidx.lifecycle.viewModelScope
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.account.RemoveAccountsInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenExpiryInteractor
@@ -79,19 +81,24 @@ class AccountDebugViewModel @Inject constructor(
         val result = getAccessTokenInteractor()
         Timber.d("getAccessToken result = $result")
         updateState()
-        when (result) {
-            is GetAccessTokenInteractor.Result.Success ->
-                sendEffect { Effect.ShowSnackbar("Access token = ${result.accessToken}") }
-            is GetAccessTokenInteractor.Result.Failure.AccountNotFound ->
-                sendEffect { Effect.ShowSnackbar("Account not found") }
-            is GetAccessTokenInteractor.Result.Failure.ReAuthenticationRequired ->
-                sendEffect { Effect.ShowSnackbar("Authentication required") }
-            is GetAccessTokenInteractor.Result.Failure.BadArgumentsError ->
-                sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }
-            is GetAccessTokenInteractor.Result.Failure.AccountAuthenticatorError ->
-                sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }
-            is GetAccessTokenInteractor.Result.Failure.NetworkError ->
-                sendEffect { Effect.ShowSnackbar(checkNotNull(result.errorMessage)) }
+        return when (result) {
+            is Ok -> sendEffect { Effect.ShowSnackbar("Access token = ${result.value}") }
+            is Err -> when (val accessTokenResult: GetAccessTokenInteractor.ErrResult = result.error) {
+                is GetAccessTokenInteractor.ErrResult.AccountAuthenticatorError ->
+                    sendEffect { Effect.ShowSnackbar(checkNotNull(accessTokenResult.errorMessage)) }
+
+                is GetAccessTokenInteractor.ErrResult.AccountNotFound ->
+                    sendEffect { Effect.ShowSnackbar("Account not found") }
+
+                is GetAccessTokenInteractor.ErrResult.BadArgumentsError ->
+                    sendEffect { Effect.ShowSnackbar(checkNotNull(accessTokenResult.errorMessage)) }
+
+                is GetAccessTokenInteractor.ErrResult.NetworkError ->
+                    sendEffect { Effect.ShowSnackbar(checkNotNull(accessTokenResult.errorMessage)) }
+
+                is GetAccessTokenInteractor.ErrResult.ReAuthenticationRequired ->
+                    sendEffect { Effect.ShowSnackbar("Re-Authentication required") }
+            }
         }
     }
 

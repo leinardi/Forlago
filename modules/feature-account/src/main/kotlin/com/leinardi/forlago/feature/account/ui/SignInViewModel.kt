@@ -18,11 +18,14 @@ package com.leinardi.forlago.feature.account.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
 import com.leinardi.forlago.feature.account.api.interactor.account.AddAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.account.SignInInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.SetRefreshTokenInteractor
+import com.leinardi.forlago.feature.account.api.model.AuthErrResult
 import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
 import com.leinardi.forlago.feature.account.ui.SignInContract.Event
 import com.leinardi.forlago.feature.account.ui.SignInContract.State
@@ -63,24 +66,28 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             updateState { copy(isLoading = true) }
             when (val result = signInInteractor(username, password)) {
-                is SignInInteractor.Result.Success -> handleSuccessfulSignIn(result.refreshToken, username)
-                is SignInInteractor.Result.Failure.BadAuthentication -> sendEffect {
-                    Effect.ShowErrorSnackbar(
-                        "SignInInteractor.Result.Failure.BadAuthentication",
-                        "OK",
-                    )
-                }
-                is SignInInteractor.Result.Failure.NetworkError -> sendEffect {
-                    Effect.ShowErrorSnackbar(
-                        "SignInInteractor.Result.Failure.NetworkError",
-                        "OK",
-                    )
-                }
-                is SignInInteractor.Result.Failure.UnexpectedError -> sendEffect {
-                    Effect.ShowErrorSnackbar(
-                        "SignInInteractor.Result.Failure.UnexpectedError",
-                        "OK",
-                    )
+                is Ok -> handleSuccessfulSignIn(result.value.refreshToken, username)
+                is Err -> when (result.error) {
+                    is AuthErrResult.BadAuthentication -> sendEffect {
+                        Effect.ShowErrorSnackbar(
+                            "SignInInteractor.Result.Failure.BadAuthentication",
+                            "OK",
+                        )
+                    }
+
+                    is AuthErrResult.NetworkError -> sendEffect {
+                        Effect.ShowErrorSnackbar(
+                            "SignInInteractor.Result.Failure.NetworkError",
+                            "OK",
+                        )
+                    }
+
+                    is AuthErrResult.UnexpectedError -> sendEffect {
+                        Effect.ShowErrorSnackbar(
+                            "SignInInteractor.Result.Failure.UnexpectedError",
+                            "OK",
+                        )
+                    }
                 }
             }
             updateState { copy(isLoading = false) }

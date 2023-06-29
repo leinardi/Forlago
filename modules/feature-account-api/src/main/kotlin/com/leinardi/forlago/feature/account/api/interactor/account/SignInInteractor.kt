@@ -16,20 +16,24 @@
 
 package com.leinardi.forlago.feature.account.api.interactor.account
 
+import com.github.michaelbull.result.Result
+import com.leinardi.forlago.feature.account.api.model.AuthErrResult
+import kotlin.random.Random
+
 interface SignInInteractor {
-    suspend operator fun invoke(username: String, password: String): Result
+    suspend operator fun invoke(
+        username: String,
+        password: String,
+        success: Boolean = Random.nextInt(FAILURE_RATE) != 0,
+    ): Result<OkResult, AuthErrResult>
 
-    sealed class Result {
-        data class Success(
-            val username: String,
-            val accessToken: String,
-            val refreshToken: String,
-        ) : Result()
+    data class OkResult(
+        val accessToken: String,
+        val refreshToken: String,
+        val username: String,
+    )
 
-        sealed class Failure : Result() {
-            data class BadAuthentication(val code: Int) : Failure()
-            data class NetworkError(val throwable: Throwable) : Failure()
-            data class UnexpectedError(val throwable: Throwable, val code: Int? = null) : Failure()
-        }
+    companion object {
+        const val FAILURE_RATE = 5
     }
 }

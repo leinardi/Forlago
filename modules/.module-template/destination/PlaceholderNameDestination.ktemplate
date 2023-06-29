@@ -14,29 +14,11 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigation.destination.@placeholderlowercase@
+package com.leinardi.forlago.library.navigation.api.destination.@placeholderlowercase@
 
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
-import androidx.navigation.navDeepLink
-import com.leinardi.forlago.library.navigation.BuildConfig
-import com.leinardi.forlago.library.navigation.NavigationDestination
+import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 
-object @PlaceholderName@Destination : NavigationDestination {
-    const val TEXT_PARAM = "text"
-    private const val @PLACEHOLDER_UPPERCASE@_ROUTE = "@placeholderlowercase@"
-
-    override val arguments = listOf(
-        navArgument(TEXT_PARAM) {
-            type = NavType.StringType
-        }
-    )
-
-    override val deepLinks = listOf(navDeepLink {
-        uriPattern = "${BuildConfig.DEEP_LINK_SCHEMA}://$@PLACEHOLDER_UPPERCASE@_ROUTE/{$TEXT_PARAM}"
-    })
-
-    override fun route() = "$@PLACEHOLDER_UPPERCASE@_ROUTE/{$TEXT_PARAM}"
-
-    fun createRoute(text: String) = "$@PLACEHOLDER_UPPERCASE@_ROUTE/$text"
+@NavGraphDestination
+interface @PlaceholderName@ {
+    val text: String
 }

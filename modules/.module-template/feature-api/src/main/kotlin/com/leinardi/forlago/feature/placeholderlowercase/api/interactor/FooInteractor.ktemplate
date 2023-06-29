@@ -1,0 +1,5 @@
+package com.leinardi.forlago.feature.@placeholderlowercase@.api.interactor
+
+interface FooInteractor {
+    suspend operator fun invoke(): Boolean
+}

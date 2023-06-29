@@ -16,25 +16,31 @@
 
 package com.leinardi.forlago.library.logging
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 
 class CrashlyticsTree : Timber.Tree() {
+    @SuppressLint("LogNotTimber")
     @Suppress("IDENTIFIER_LENGTH")  // The identifier name is coming from Timber
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         if (priority == Log.VERBOSE || priority == Log.DEBUG || priority == Log.INFO) {
             return
         }
-        val crashlytics = FirebaseCrashlytics.getInstance()
-        crashlytics.setCustomKey(CRASHLYTICS_KEY_PRIORITY, priority)
-        crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag.orEmpty())
-        crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message)
+        try {
+            val crashlytics = FirebaseCrashlytics.getInstance()
+            crashlytics.setCustomKey(CRASHLYTICS_KEY_PRIORITY, priority)
+            crashlytics.setCustomKey(CRASHLYTICS_KEY_TAG, tag.orEmpty())
+            crashlytics.setCustomKey(CRASHLYTICS_KEY_MESSAGE, message)
 
-        if (t == null) {
-            crashlytics.recordException(Exception(message))
-        } else {
-            crashlytics.recordException(t)
+            if (t == null) {
+                crashlytics.recordException(Exception(message))
+            } else {
+                crashlytics.recordException(t)
+            }
+        } catch (ex: java.lang.IllegalStateException) {
+            Log.e(CrashlyticsTree::class.simpleName, "", ex)
         }
     }
 

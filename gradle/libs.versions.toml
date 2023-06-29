@@ -30,18 +30,18 @@ retrofit = "2.9.0"
 [libraries]
 aboutlibraries = { module = "com.mikepenz:aboutlibraries-compose", version.ref = "aboutlibraries" }
 aboutlibraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutlibraries" }
+accompanist-flowlayout = { module = "com.google.accompanist:accompanist-flowlayout", version.ref = "accompanist" }
 accompanist-insets-ui = { module = "com.google.accompanist:accompanist-insets-ui", version.ref = "accompanist" }
 accompanist-navigation-material = { module = "com.google.accompanist:accompanist-navigation-material", version.ref = "accompanist" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanist" }
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
-accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material3", version.ref = "accompanist" }
+accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist" }
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist" }
 android-maps-utils = "com.google.maps.android:android-maps-utils:3.4.0"
 androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
 androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
 androidx-benchmark-macro-junit4 = "androidx.benchmark:benchmark-macro-junit4:1.2.0-alpha13"
-androidx-biometric = "androidx.biometric:biometric:1.2.0-alpha05"
-androidx-browser = "androidx.browser:browser:1.5.0"
 androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "androidx-compose-foundation" }
 androidx-compose-layout = { module = "androidx.compose.foundation:foundation-layout", version.ref = "androidx-compose-foundation" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-compose" }
@@ -86,12 +86,10 @@ androidx-test-orchestrator = "androidx.test:orchestrator:1.4.2"
 androidx-test-rules = "androidx.test:rules:1.4.0"
 androidx-test-runner = "androidx.test:runner:1.5.2"
 androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.2.0"
-androidx-tracing = "androidx.tracing:tracing:1.1.0"
 apollo = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollo" }
 apollo-adapters = { module = "com.apollographql.apollo3:apollo-adapters", version.ref = "apollo" }
 apollo-cache = { module = "com.apollographql.apollo3:apollo-normalized-cache", version.ref = "apollo" }
 apollo-cache-sqlite = { module = "com.apollographql.apollo3:apollo-normalized-cache-sqlite", version.ref = "apollo" }
-apollo-idling-resource = { module = "com.apollographql.apollo3:apollo-idling-resource", version.ref = "apollo" }
 apollo-testing-support = { module = "com.apollographql.apollo3:apollo-testing-support", version.ref = "apollo" }
 coil-compose = "io.coil-kt:coil-compose:2.4.0"
 composecharts = "io.github.bytebeats:compose-charts:0.1.2"
@@ -102,10 +100,10 @@ desugar = "com.android.tools:desugar_jdk_libs:2.0.3"
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-rules-compose = "ru.kode:detekt-rules-compose:1.2.2"
 detekt-twitter-compose-rules = "com.twitter.compose.rules:detekt:0.0.26"
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-analytics = "com.google.firebase:firebase-analytics-ktx:21.3.0"
 firebase-bom = "com.google.firebase:firebase-bom:32.1.0"
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
+firebase-crashlytics = "com.google.firebase:firebase-crashlytics-ktx:18.3.7"
+firebase-perf = "com.google.firebase:firebase-perf-ktx:20.3.2"
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
@@ -114,7 +112,6 @@ hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.0.0"
 junit = "junit:junit:4.13.2"
 konfetti = "nl.dionsegijn:konfetti-compose:2.0.2"
 kotlin-extensions = { module = "org.jetbrains.kotlin:kotlin-android-extensions", version.ref = "kotlin" }
-kotlin-faker = "io.github.serpro69:kotlin-faker:1.14.0"
 kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version.ref = "kotlin-result" }
 kotlin-result-coroutines = { module = "com.michael-bull.kotlin-result:kotlin-result-coroutines", version.ref = "kotlin-result" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
@@ -138,9 +135,19 @@ okhttp3-mockwebserver = { module = "com.squareup.okhttp3:mockwebserver", version
 play-core = "com.google.android.play:core:1.10.3"
 play-core-ktx = "com.google.android.play:core-ktx:1.8.1"
 play-services-maps = "com.google.android.gms:play-services-maps:18.1.0"
+process-phoenix = "com.jakewharton:process-phoenix:2.1.2"
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
+retrofit-kotlinx-serialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
+robolectric = "org.robolectric:robolectric:4.10.3"
+seismic = "com.squareup:seismic:1.0.3"
+speeddial = "com.leinardi.android:speed-dial.compose:2.0.0-alpha01"
+timber = "com.jakewharton.timber:timber:5.0.1"
+tink = "com.google.crypto.tink:tink-android:1.9.0"
+
 # plugins
 plugin-aboutlibraries = { module = "com.mikepenz.aboutlibraries.plugin:aboutlibraries-plugin", version.ref = "aboutlibraries" }
-plugin-android-gradle = "com.android.tools.build:gradle:8.0.2"
+plugin-android = "com.android.tools.build:gradle:8.0.2"
 plugin-androidcachefix = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin:2.6.1"
 plugin-androidx-navigation-safeargs = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 plugin-appversioning = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin:1.3.1"
@@ -154,23 +161,12 @@ plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 plugin-ruler = "com.spotify.ruler:ruler-gradle-plugin:1.3.0"
 plugin-spotless = "com.diffplug.spotless:spotless-plugin-gradle:6.18.0"
-plugin-versions = "com.github.ben-manes:gradle-versions-plugin:0.45.0"
+plugin-versionsgradle = "com.github.ben-manes:gradle-versions-plugin:0.45.0"
 plugin-versions-update = "nl.littlerobots.vcu:plugin:0.8.0"
 plugin-violation = "se.bjurr.violations:violation-comments-to-github-gradle-plugin:1.69.0"
-process-phoenix = "com.jakewharton:process-phoenix:2.1.2"
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-converter-scalars = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
-retrofit-kotlinx-serialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0"
-robolectric = "org.robolectric:robolectric:4.10.3"
-seismic = "com.squareup:seismic:1.0.3"
-speeddial = "com.leinardi.android:speed-dial.compose:2.0.0-alpha01"
-timber = "com.jakewharton.timber:timber:5.0.1"
-tink = "com.google.crypto.tink:tink-android:1.9.0"
-turingcomplete-onetimepassword = "dev.turingcomplete:kotlin-onetimepassword:2.4.0"
 
 [plugins]
 apollo = { id = "com.apollographql.apollo3", version.ref = "apollo" }
-apollo-external = { id = "com.apollographql.apollo3.external", version.ref = "apollo" }
 google-secrets = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:2.0.1"
 gradledoctor = "com.osacky.doctor:0.8.1"
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

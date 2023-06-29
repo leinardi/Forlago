@@ -18,6 +18,7 @@ package com.leinardi.forlago.feature.account.interactor.account
 
 import android.accounts.Account
 import android.accounts.AccountManager
+import com.github.michaelbull.result.mapError
 import com.leinardi.forlago.feature.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.feature.account.api.interactor.account.AddAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
@@ -39,10 +40,7 @@ internal class AddAccountInteractorImpl @Inject constructor(
             encryptInteractor(refreshToken),
             null,
         )
-        val result = getAccessTokenInteractor()
-        if (result is GetAccessTokenInteractor.Result.Failure) {
-            Timber.e("Unable to get accessToken: $result")
-        }
+        getAccessTokenInteractor().mapError { Timber.e("Unable to get accessToken: $it") }
         accountCreated
     }
 }
