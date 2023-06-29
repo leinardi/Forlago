@@ -28,7 +28,6 @@ plugins {
     id("forlago.merged-manifests-conventions")
     id("forlago.dependencies-conventions")
     id("com.starter.easylauncher")
-    id("com.google.firebase.firebase-perf")
     id("forlago.ruler-conventions")
 }
 val libs = the<LibrariesForLibs>()

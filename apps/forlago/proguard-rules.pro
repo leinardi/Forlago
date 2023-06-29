@@ -41,5 +41,3 @@
 
 # Dagger
 -dontwarn com.google.errorprone.annotations.*
-
--dontwarn com.google.firebase.perf.network.FirebasePerfUrlConnection
