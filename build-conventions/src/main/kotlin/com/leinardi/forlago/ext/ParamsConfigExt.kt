@@ -21,7 +21,6 @@ import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.getByType
 
 interface ParamsConfigExt : ExtensionAware {
-    val espressoCleanup: Property<Boolean>
     val saveBuildLogToFile: Property<Boolean>
 }
 

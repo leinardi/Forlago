@@ -27,9 +27,6 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-network-consumer-rules.pro")
     }
-    kotlinOptions {
-        freeCompilerArgs += '-opt-in=kotlinx.serialization.ExperimentalSerializationApi'
-    }
 }
 
 apollo {

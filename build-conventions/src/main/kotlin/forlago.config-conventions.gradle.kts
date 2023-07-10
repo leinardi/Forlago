@@ -40,7 +40,6 @@ val config = extensions.create<ConfigExt>("config").apply {
     }
 
     extensions.create<ParamsConfigExt>("params").apply {
-        espressoCleanup.convention((rootProject.extra.getOrNull("espressoCleanup") as? String).toBoolean())
         saveBuildLogToFile.convention((rootProject.extra.getOrNull("saveBuildLogToFile") as? String).toBoolean())
     }
 }

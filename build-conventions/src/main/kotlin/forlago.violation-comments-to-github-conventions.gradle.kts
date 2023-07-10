@@ -20,10 +20,11 @@ plugins {
 }
 
 tasks.register<ViolationCommentsToGitHubTask>("violationCommentsToGitHub") {
+    notCompatibleWithConfigurationCache("https://github.com/tomasbjerre/violation-comments-to-github-gradle-plugin/issues/13")
     setRepositoryOwner("leinardi")
     setRepositoryName("Forlago")
-    setPullRequestId(System.getProperties()["GITHUB_PULLREQUESTID"] as String?)
-    setoAuth2Token(System.getProperties()["GITHUB_OAUTH2TOKEN"] as String?)
+    setPullRequestId(System.getProperties()["GITHUB_PULLREQUESTID"] as? String)
+    setoAuth2Token(System.getProperties()["GITHUB_OAUTH2TOKEN"] as? String)
     setGitHubUrl("https://api.github.com/")
     setCreateCommentWithAllSingleFileComments(false)
     setCreateSingleFileComments(true)
