@@ -19,156 +19,158 @@
  */
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import java.io.BufferedReader
+import java.io.IOException
 import java.util.Locale
 
 val font = "Helvetica"
 
 tasks.register("projectDependencyGraph") {
+    notCompatibleWithConfigurationCache("https://github.com/vanniktech/gradle-dependency-graph-generator-plugin/issues/170")
     doLast {
-        val dot = File(rootProject.buildDir, "reports/dependencyGraph/project.dot")
-        dot.parentFile.mkdirs()
-        dot.delete()
+        if (isDotAvailable()) {
+            val dot = File(rootProject.buildDir, "reports/dependencyGraph/project.dot")
+            dot.parentFile.mkdirs()
+            dot.delete()
 
-        dot.writeText("digraph {\n")
-        dot.appendText("  graph [label=\"${rootProject.name}\\n \",labelloc=t,fontsize=30,ranksep=1.4,fontname=\"$font\"];\n")
-        dot.appendText("  node [style=filled, fillcolor=\"#bbbbbb\", fontname=\"$font\"];\n")
-        dot.appendText("  edge [fontname = \"$font\"];")
-        dot.appendText("  rankdir=TB;\n")
+            dot.writeText("digraph {\n")
+            dot.appendText("  graph [label=\"${rootProject.name}\\n \",labelloc=t,fontsize=30,ranksep=1.4,fontname=\"$font\"];\n")
+            dot.appendText("  node [style=filled, fillcolor=\"#bbbbbb\", fontname=\"$font\"];\n")
+            dot.appendText("  edge [fontname = \"$font\"];")
+            dot.appendText("  rankdir=TB;\n")
 
-        val rootProjects = mutableListOf<Project>()
-        val queue = mutableListOf(rootProject)
-        while (queue.isNotEmpty()) {
-            val project = queue.removeFirst()
-            rootProjects.add(project)
-            queue.addAll(project.childProjects.values)
-        }
-
-        val projects = LinkedHashSet<Project>()
-        val dependencies = LinkedHashMap<Pair<Project, Project>, List<String>>()
-        val androidProjects = mutableListOf<Project>()
-        val apiProjects = mutableListOf<Project>()
-        val featureProjects = mutableListOf<Project>()
-        val javaProjects = mutableListOf<Project>()
-        val jsProjects = mutableListOf<Project>()
-        val libraryProjects = mutableListOf<Project>()
-        val multiplatformProjects = mutableListOf<Project>()
-
-        queue.clear()
-        queue.add(rootProject)
-        while (queue.isNotEmpty()) {
-            val project = queue.removeFirst()
-            queue.addAll(project.childProjects.values)
-
-            if (project.name.endsWith("-api")) {
-                apiProjects.add(project)
-            } else {
-                if (project.plugins.hasPlugin("forlago.android-feature-conventions")) {
-                    featureProjects.add(project)
-                }
-                if (project.plugins.hasPlugin("forlago.android-library-conventions")) {
-                    libraryProjects.add(project)
-                }
-                if (project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
-                    multiplatformProjects.add(project)
-                }
-                if (project.plugins.hasPlugin("org.jetbrains.kotlin.js")) {
-                    jsProjects.add(project)
-                }
-                if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
-                    androidProjects.add(project)
-                }
-                if (project.plugins.hasPlugin("java-library") || project.plugins.hasPlugin("java")) {
-                    javaProjects.add(project)
-                }
+            val rootProjects = mutableListOf<Project>()
+            val queue = mutableListOf(rootProject)
+            while (queue.isNotEmpty()) {
+                val project = queue.removeFirst()
+                rootProjects.add(project)
+                queue.addAll(project.childProjects.values)
             }
 
-            project.configurations.forEach { config ->
-                config.dependencies
-                    .withType(ProjectDependency::class.java)
-                    .forEach { dependency ->
-                        if (project != rootProject) {
-                            projects.add(project)
-                            projects.add(dependency.dependencyProject)
-                            rootProjects.remove(dependency.dependencyProject)
+            val projects = LinkedHashSet<Project>()
+            val dependencies = LinkedHashMap<Pair<Project, Project>, List<String>>()
+            val androidProjects = mutableListOf<Project>()
+            val apiProjects = mutableListOf<Project>()
+            val featureProjects = mutableListOf<Project>()
+            val javaProjects = mutableListOf<Project>()
+            val jsProjects = mutableListOf<Project>()
+            val libraryProjects = mutableListOf<Project>()
+            val multiplatformProjects = mutableListOf<Project>()
 
-                            val graphKey = project to dependency.dependencyProject
-                            if (project != dependency.dependencyProject) {
-                                val traits = dependencies.computeIfAbsent(graphKey) { mutableListOf() }.toMutableList()
-                                if (config.name.lowercase(Locale.ROOT).endsWith("implementation")) {
-                                    traits.add("style=dotted")
+            queue.clear()
+            queue.add(rootProject)
+            while (queue.isNotEmpty()) {
+                val project = queue.removeFirst()
+                queue.addAll(project.childProjects.values)
+
+                if (project.name.endsWith("-api")) {
+                    apiProjects.add(project)
+                } else {
+                    if (project.plugins.hasPlugin("forlago.android-feature-conventions")) {
+                        featureProjects.add(project)
+                    }
+                    if (project.plugins.hasPlugin("forlago.android-library-conventions")) {
+                        libraryProjects.add(project)
+                    }
+                    if (project.plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")) {
+                        multiplatformProjects.add(project)
+                    }
+                    if (project.plugins.hasPlugin("org.jetbrains.kotlin.js")) {
+                        jsProjects.add(project)
+                    }
+                    if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
+                        androidProjects.add(project)
+                    }
+                    if (project.plugins.hasPlugin("java-library") || project.plugins.hasPlugin("java")) {
+                        javaProjects.add(project)
+                    }
+                }
+
+                project.configurations.forEach { config ->
+                    config.dependencies
+                        .withType(ProjectDependency::class.java)
+                        .forEach { dependency ->
+                            if (project != rootProject) {
+                                projects.add(project)
+                                projects.add(dependency.dependencyProject)
+                                rootProjects.remove(dependency.dependencyProject)
+
+                                val graphKey = project to dependency.dependencyProject
+                                if (project != dependency.dependencyProject) {
+                                    val traits = dependencies.computeIfAbsent(graphKey) { mutableListOf() }.toMutableList()
+                                    if (config.name.lowercase(Locale.ROOT).endsWith("implementation")) {
+                                        traits.add("style=dotted")
+                                    }
                                 }
                             }
                         }
-                    }
-            }
-        }
-
-        projects.sortedBy { it.path }
-
-        dot.appendText("\n  # Projects\n\n")
-        for (project in projects) {
-            val traits = mutableListOf<String>()
-
-            if (rootProjects.contains(project)) {
-                traits.add("shape=box")
+                }
             }
 
-            when {
-                apiProjects.contains(project) -> traits.add("fillcolor=\"#F0F4C3\"")
-                featureProjects.contains(project) -> traits.add("fillcolor=\"#689F38\"")
-                libraryProjects.contains(project) -> traits.add("fillcolor=\"#AED581\"")
-                multiplatformProjects.contains(project) -> traits.add("fillcolor=\"#A69BE4\"")
-                jsProjects.contains(project) -> traits.add("fillcolor=\"#F0DB4F\"")
-                androidProjects.contains(project) -> traits.add("fillcolor=\"#8BC34A\"")
-                javaProjects.contains(project) -> traits.add("fillcolor=\"#FF9800\"")
-                else -> traits.add("fillcolor=\"#EEEEEE\"")
+            projects.sortedBy { it.path }
+
+            dot.appendText("\n  # Projects\n\n")
+            for (project in projects) {
+                val traits = mutableListOf<String>()
+
+                if (rootProjects.contains(project)) {
+                    traits.add("shape=box")
+                }
+
+                when {
+                    apiProjects.contains(project) -> traits.add("fillcolor=\"#F0F4C3\"")
+                    featureProjects.contains(project) -> traits.add("fillcolor=\"#689F38\"")
+                    libraryProjects.contains(project) -> traits.add("fillcolor=\"#AED581\"")
+                    multiplatformProjects.contains(project) -> traits.add("fillcolor=\"#A69BE4\"")
+                    jsProjects.contains(project) -> traits.add("fillcolor=\"#F0DB4F\"")
+                    androidProjects.contains(project) -> traits.add("fillcolor=\"#8BC34A\"")
+                    javaProjects.contains(project) -> traits.add("fillcolor=\"#FF9800\"")
+                    else -> traits.add("fillcolor=\"#EEEEEE\"")
+                }
+
+                dot.appendText("  \"${project.path}\" [${traits.joinToString(", ")}];\n")
             }
 
-            dot.appendText("  \"${project.path}\" [${traits.joinToString(", ")}];\n")
-        }
-
-        dot.appendText("\n  {rank = same;")
-        for (project in projects) {
-            if (rootProjects.contains(project)) {
-                dot.appendText(" \"${project.path}\";")
+            dot.appendText("\n  {rank = same;")
+            for (project in projects) {
+                if (rootProjects.contains(project)) {
+                    dot.appendText(" \"${project.path}\";")
+                }
             }
-        }
-        dot.appendText("}\n")
+            dot.appendText("}\n")
 
-        dot.appendText("\n  # Dependencies\n\n")
-        dependencies.forEach { (key, traits) ->
-            dot.appendText("  \"${key.first.path}\" -> \"${key.second.path}\"")
-            if (traits.isNotEmpty()) {
-                dot.appendText(" [${traits.joinToString(", ")}]")
+            dot.appendText("\n  # Dependencies\n\n")
+            dependencies.forEach { (key, traits) ->
+                dot.appendText("  \"${key.first.path}\" -> \"${key.second.path}\"")
+                if (traits.isNotEmpty()) {
+                    dot.appendText(" [${traits.joinToString(", ")}]")
+                }
+                dot.appendText("\n")
             }
-            dot.appendText("\n")
-        }
 
-        dot.appendText("}\n")
+            dot.appendText("}\n")
 
-        val p = Runtime.getRuntime().exec(arrayOf("dot", "-Tpng", "-O", "project.dot"), emptyArray(), dot.parentFile)
-        p.waitFor()
-        require(p.exitValue() == 0) { p.errorStream.bufferedReader().use(BufferedReader::readText) }
+            val p = Runtime.getRuntime().exec(arrayOf("dot", "-Tpng", "-O", "project.dot"), emptyArray(), dot.parentFile)
+            p.waitFor()
+            require(p.exitValue() == 0) { p.errorStream.bufferedReader().use(BufferedReader::readText) }
 
-        println("Project module dependency graph created at ${dot.absolutePath}.png")
+            println("Project module dependency graph created at ${dot.absolutePath}.png")
 
-        copy {
-            from("${dot.absolutePath}.png")
-            into(rootProject.file("art"))
+            copy {
+                from("${dot.absolutePath}.png")
+                into(rootProject.file("art"))
+            }
+        }else{
+            logger.warn("w: Cannot find program \"dot\"")
         }
     }
 }
 
-// Add the task as check dependency only if dot is available
-@Suppress("TooGenericExceptionCaught")
-try {
-    val p = Runtime.getRuntime().exec(arrayOf("dot", "-V"), emptyArray())
-    p.waitFor()
-    if (p.exitValue() == 0) {
-        tasks.named("check").dependsOn("projectDependencyGraph")
-    } else {
-        logger.warn("w: {}", p.errorStream.bufferedReader().use(BufferedReader::readText))
-    }
-} catch (e: Exception) {
-    logger.warn("w: {}", e.message)
+fun isDotAvailable(): Boolean = try {
+    ProcessBuilder("dot", "-V").start().waitFor() == 0
+} catch (e: IOException) {
+    false
+} catch (e: InterruptedException) {
+    false
 }
+
+tasks.named("check").dependsOn("projectDependencyGraph")
