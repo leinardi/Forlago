@@ -18,6 +18,7 @@ package com.leinardi.forlago.feature.account.interactor.account
 
 import android.accounts.Account
 import android.accounts.AccountManager
+import android.os.Build
 import com.leinardi.forlago.feature.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
 import io.mockk.clearAllMocks
@@ -28,9 +29,11 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.TIRAMISU])  // With Roboelectric 4.10.3 maxSdkVersion supported = 33
 class GetAccountInteractorImplTest {
     private val accountManager: AccountManager = mockk()
 

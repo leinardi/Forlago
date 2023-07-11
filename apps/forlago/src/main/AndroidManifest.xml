@@ -25,9 +25,7 @@
         android:roundIcon="@mipmap/ui_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen">
-        <profileable
-            android:shell="true"
-            tools:targetApi="q" />
+
         <!--
        singleTask is used instead of singleInstance because the latter breaks Espresso tests:
          https://github.com/android/android-test/issues/1115

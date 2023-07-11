@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.feature.account.interactor.account
 
+import android.os.Build
 import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
@@ -36,8 +37,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [Build.VERSION_CODES.TIRAMISU])  // With Roboelectric 4.10.3 maxSdkVersion supported = 33
 class LogOutInteractorImplTest {
     private val clearApolloCacheInteractor: ClearApolloCacheInteractor = mockk()
     private val forlagoNavigator: ForlagoNavigator = mockk()

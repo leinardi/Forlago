@@ -25,10 +25,10 @@ import com.leinardi.forlago.ext.getOrNull
 val config = extensions.create<ConfigExt>("config").apply {
     extensions.create<AndroidConfigExt>("android").apply {
         accountType.convention("com.leinardi.forlago.auth")
-        compileSdk.convention(33)
+        compileSdk.convention(34)
         javaVersion.convention(JavaVersion.VERSION_17)
         minSdk.convention(24)
-        targetSdk.convention(33)
+        targetSdk.convention(34)
     }
 
     extensions.create<AppsConfigExt>("apps").apply {

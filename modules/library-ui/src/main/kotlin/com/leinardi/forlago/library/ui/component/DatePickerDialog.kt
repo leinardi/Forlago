@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.DisplayMode
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
@@ -37,7 +38,7 @@ fun DatePickerDialog(
     onPositiveButtonClick: (Long?) -> Unit,
     modifier: Modifier = Modifier,
     selection: Long? = null,
-    dateValidator: (Long) -> Boolean = { true },
+    selectableDates: SelectableDates = object : SelectableDates {},
     yearRange: IntRange = DatePickerDefaults.YearRange,
     initialDisplayMode: DisplayMode = DisplayMode.Picker,
     onNegativeButtonClick: (() -> Unit)? = null,
@@ -48,6 +49,7 @@ fun DatePickerDialog(
             initialSelectedDateMillis = selection,
             yearRange = yearRange,
             initialDisplayMode = initialDisplayMode,
+            selectableDates = selectableDates,
         )
         val confirmEnabled = remember { derivedStateOf { datePickerState.selectedDateMillis != null } }
         DatePickerDialog(
@@ -67,10 +69,7 @@ fun DatePickerDialog(
                 }
             },
         ) {
-            androidx.compose.material3.DatePicker(
-                state = datePickerState,
-                dateValidator = dateValidator,
-            )
+            androidx.compose.material3.DatePicker(state = datePickerState)
         }
     }
 }

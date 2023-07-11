@@ -21,7 +21,7 @@
 
     <uses-sdk
         android:minSdkVersion="24"
-        android:targetSdkVersion="33" />
+        android:targetSdkVersion="34" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -49,7 +49,7 @@
         android:roundIcon="@mipmap/ui_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen" >
-        <profileable android:shell="true" />
+
         <!--
        singleTask is used instead of singleInstance because the latter breaks Espresso tests:
          https://github.com/android/android-test/issues/1115
@@ -73,6 +73,10 @@
                 <data android:scheme="forlago" />
             </intent-filter>
         </activity>
+
+        <profileable
+            android:enabled="true"
+            android:shell="true" />
 
         <service
             android:name="com.leinardi.forlago.feature.account.authenticator.AuthenticatorService"
@@ -99,12 +103,12 @@
                 android:value="androidx.startup" />
             <meta-data
                 android:name="com.leinardi.forlago.library.logging.initializer.TimberInitializer"
-                android:value="androidx.startup" />
-            <meta-data
-                android:name="androidx.emoji2.text.EmojiCompatInitializer"
                 android:value="androidx.startup" /> <!-- This entry makes ApolloInitializer discoverable. -->
             <meta-data
                 android:name="com.apollographql.apollo3.cache.normalized.sql.ApolloInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.lifecycle.ProcessLifecycleInitializer"
@@ -149,10 +153,6 @@
             android:exported="false"
             android:initOrder="100" />
 
-        <activity
-            android:name="androidx.compose.ui.tooling.PreviewActivity"
-            android:exported="true" />
-
         <receiver
             android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
             android:enabled="true"
@@ -175,6 +175,10 @@
         <uses-library
             android:name="androidx.window.sidecar"
             android:required="false" />
+
+        <activity
+            android:name="androidx.compose.ui.tooling.PreviewActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.gms.version"
