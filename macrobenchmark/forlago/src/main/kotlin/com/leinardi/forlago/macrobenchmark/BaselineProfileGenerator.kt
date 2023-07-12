@@ -30,9 +30,9 @@ class BaselineProfileGenerator {
 
     @Test
     fun generate() {
-        rule.collectBaselineProfile(
+        rule.collect(
             packageName = BuildConfig.APPLICATION_ID.removeSuffix(".macrobenchmark"),
-            iterations = 1,
+            maxIterations = 1,
         ) {
             startApplicationJourney()
         }

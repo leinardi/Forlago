@@ -1181,7 +1181,8 @@ benchmarkUnitTestRuntimeClasspath - Runtime classpath of /benchmarkUnitTest.
 |    |    |    |         +--- androidx.lifecycle:lifecycle-runtime:2.6.1 (*)
 |    |    |    |         +--- androidx.lifecycle:lifecycle-viewmodel:2.6.1 (*)
 |    |    |    |         +--- androidx.savedstate:savedstate-ktx:1.2.1 (*)
-|    |    |    |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.22
+|    |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.22
+|    |    |    |         \--- androidx.compose.material3:material3-window-size-class:1.2.0-alpha03 (c)
 |    |    |    +--- io.github.aakira:napier:1.4.1 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4 -> 1.7.2 (*)
 |    |    |    +--- com.google.accompanist:accompanist-placeholder:0.31.5-beta
@@ -1207,6 +1208,15 @@ benchmarkUnitTestRuntimeClasspath - Runtime classpath of /benchmarkUnitTest.
 |    |    |         +--- androidx.compose.material:material-icons-core:1.6.0-alpha01 (c)
 |    |    |         \--- androidx.compose.material:material-ripple:1.6.0-alpha01 (c)
 |    |    +--- androidx.compose.material3:material3:1.2.0-alpha03 (*)
+|    |    +--- androidx.compose.material3:material3-window-size-class:1.1.1 -> 1.2.0-alpha03
+|    |    |    \--- androidx.compose.material3:material3-window-size-class-android:1.2.0-alpha03
+|    |    |         +--- androidx.compose.runtime:runtime:1.6.0-alpha01 (*)
+|    |    |         +--- androidx.compose.ui:ui:1.6.0-alpha01 (*)
+|    |    |         +--- androidx.compose.ui:ui-unit:1.6.0-alpha01 (*)
+|    |    |         +--- androidx.window:window:1.0.0 (*)
+|    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 (*)
+|    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.22
+|    |    |         \--- androidx.compose.material3:material3:1.2.0-alpha03 (c)
 |    |    +--- androidx.compose.runtime:runtime:1.5.0-beta03 -> 1.6.0-alpha01 (*)
 |    |    +--- androidx.compose.runtime:runtime-livedata:1.5.0-beta03 -> 1.6.0-alpha01
 |    |    |    +--- androidx.compose.runtime:runtime:1.6.0-alpha01 (*)

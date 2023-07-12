@@ -55,6 +55,7 @@ dependencies {
     api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like ModalBottomSheetLayout
     api(libs.androidx.compose.material.icons.extended)
     api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.material3.window.size)
     api(libs.androidx.compose.runtime)
     api(libs.androidx.compose.runtime.livedata)
     api(libs.androidx.compose.tooling)
