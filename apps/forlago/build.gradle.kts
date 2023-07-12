@@ -67,6 +67,7 @@ android {
                 // Otherwise just use the debug keystore (this is mainly for PR CI builds)
                 signingConfig = signingConfigs.getByName("debug")
             }
+            isProfileable = true
             isShrinkResources = true
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
