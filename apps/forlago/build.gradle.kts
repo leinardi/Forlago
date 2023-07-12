@@ -111,8 +111,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.profileinstaller) // Need this to side load a Baseline Profile when Benchmarking
     implementation(libs.androidx.startup)
-    implementation(libs.play.core)
-    implementation(libs.play.core.ktx)
 
     kaptAndroidTest(libs.hilt.android.compiler)
 
