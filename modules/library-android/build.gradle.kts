@@ -31,8 +31,6 @@ dependencies {
     api(projects.modules.libraryAndroidApi)
     implementation(projects.modules.libraryI18n)
 
-    implementation(libs.play.core)
-    implementation(libs.play.core.ktx)
     implementation(libs.androidx.security)
     implementation(libs.androidx.startup)
     implementation(libs.hilt.android)

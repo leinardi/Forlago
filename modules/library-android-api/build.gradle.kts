@@ -29,7 +29,8 @@ android {
 }
 
 dependencies {
-    api(libs.play.core)
+    api(libs.play.app.update)
+    api(libs.play.app.update.ktx)
     implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)
     implementation(libs.kotlinx.serialization)
