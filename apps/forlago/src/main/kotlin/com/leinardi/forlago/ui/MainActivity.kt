@@ -47,6 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType
@@ -137,8 +138,8 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
 
             appUpdateManager.startUpdateFlowForResult(
                 appUpdateInfo,
-                appUpdateType,
                 starter,
+                AppUpdateOptions.defaultOptions(appUpdateType),
                 REQUEST_IN_APP_UPDATE,
             )
         } catch (e: IntentSender.SendIntentException) {
