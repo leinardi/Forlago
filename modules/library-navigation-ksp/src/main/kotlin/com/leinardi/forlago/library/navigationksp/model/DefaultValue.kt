@@ -16,11 +16,9 @@
 
 package com.leinardi.forlago.library.navigationksp.model
 
-import com.google.devtools.ksp.symbol.KSPropertyDeclaration
-import com.leinardi.forlago.library.navigationksp.codegenerator.CodeGeneratorModel
+import com.squareup.kotlinpoet.ClassName
 
-data class DefaultValueProviderModel(
-    val className: String,
-    val packageName: String,
-    val propertiesWithDefaultValue: List<KSPropertyDeclaration>,
-) : CodeGeneratorModel
+data class DefaultValue(
+    val code: String,
+    val imports: List<ClassName> = emptyList(),
+)

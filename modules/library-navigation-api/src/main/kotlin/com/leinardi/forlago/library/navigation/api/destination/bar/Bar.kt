@@ -16,17 +16,9 @@
 
 package com.leinardi.forlago.library.navigation.api.destination.bar
 
-import com.leinardi.forlago.library.navigation.annotation.DefaultValueProvider
-import com.leinardi.forlago.library.navigation.annotation.HasDefaultValue
 import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 
-@NavGraphDestination(deepLink = true)
-interface Bar {
-    @HasDefaultValue
-    val text: String?
-
-    @DefaultValueProvider
-    companion object : BarDefaultValueProvider {
-        override val text: String? = null
-    }
-}
+@NavGraphDestination
+data class Bar(
+    val text: String? = null,
+)

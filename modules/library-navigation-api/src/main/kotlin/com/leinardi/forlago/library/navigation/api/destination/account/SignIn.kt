@@ -16,17 +16,9 @@
 
 package com.leinardi.forlago.library.navigation.api.destination.account
 
-import com.leinardi.forlago.library.navigation.annotation.DefaultValueProvider
-import com.leinardi.forlago.library.navigation.annotation.HasDefaultValue
 import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 
 @NavGraphDestination(deepLink = true)
-interface SignIn {
-    @HasDefaultValue
-    val reauthenticate: Boolean
-
-    @DefaultValueProvider
-    companion object : SignInDefaultValueProvider {
-        override val reauthenticate: Boolean = false
-    }
-}
+data class SignIn(
+    val reauthenticate: Boolean = true,
+)

@@ -23,8 +23,9 @@ import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSVisitorVoid
 import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 import com.leinardi.forlago.library.navigationksp.codegenerator.NavGraphDestinationCodeGenerator
+import com.leinardi.forlago.library.navigationksp.common.getDefaultValue
 import com.leinardi.forlago.library.navigationksp.ext.fieldByName
-import com.leinardi.forlago.library.navigationksp.ext.hasDefaultValue
+import com.leinardi.forlago.library.navigationksp.ext.isDataClass
 import com.leinardi.forlago.library.navigationksp.ext.isInterface
 import com.leinardi.forlago.library.navigationksp.ext.toNavTypePropertyName
 import com.leinardi.forlago.library.navigationksp.model.NavGraphDestinationModel
@@ -32,7 +33,6 @@ import com.squareup.kotlinpoet.ksp.toClassName
 import com.squareup.kotlinpoet.ksp.writeTo
 
 internal class NavGraphDestinationVisitor(
-    private val defaultValueProviderClassDeclaration: KSClassDeclaration?,
     private val resolver: Resolver,
     private val logger: KSPLogger,
     private val codeGenerator: CodeGenerator,
@@ -45,19 +45,28 @@ internal class NavGraphDestinationVisitor(
             )
             return
         }
-        if (!classDeclaration.isInterface()) {
+        if (!classDeclaration.isInterface() && !classDeclaration.isDataClass()) {
             logger.error(
-                "@${NavGraphDestination::class.simpleName} cannot target non-interface $qualifiedName",
+                "@${NavGraphDestination::class.simpleName} cannot target only interfaces and data classes $qualifiedName",
                 classDeclaration,
             )
             return
         }
-        if (classDeclaration.typeParameters.any()) {
-            logger.error(
-                "@${NavGraphDestination::class.simpleName} must interfaces with no type parameters",
-                classDeclaration,
-            )
-            return
+        if (classDeclaration.isInterface()) {
+            if (classDeclaration.getAllProperties().iterator().hasNext()) {
+                logger.error(
+                    "@${NavGraphDestination::class.simpleName} must not declare properties. Please use a data class instead.",
+                    classDeclaration,
+                )
+                return
+            }
+            if (classDeclaration.typeParameters.any()) {
+                logger.error(
+                    "@${NavGraphDestination::class.simpleName} must interfaces with no type parameters",
+                    classDeclaration,
+                )
+                return
+            }
         }
         val model = getModel(classDeclaration, qualifiedName)
         NavGraphDestinationCodeGenerator.generate(model).writeTo(codeGenerator = codeGenerator, aggregating = false)
@@ -81,17 +90,13 @@ internal class NavGraphDestinationVisitor(
             .map { property ->
                 val argumentType = property.type.resolve()
                 val isNullable = argumentType.isMarkedNullable
-                val defaultValueProviderClassName = if (property.hasDefaultValue()) {
-                    checkNotNull(defaultValueProviderClassDeclaration?.toClassName())
-                } else {
-                    null
-                }
+                val defaultValue = property.getDefaultValue(resolver)
                 NavGraphDestinationModel.ArgumentModel(
                     simpleName = property.simpleName.asString(),
                     typeName = argumentType.toClassName().copy(nullable = isNullable),
                     navTypePropertyName = argumentType.toNavTypePropertyName(resolver),
                     isNullable = isNullable,
-                    defaultValueProviderClassName = defaultValueProviderClassName,
+                    defaultValue = defaultValue,
                 )
             }
             .toList()

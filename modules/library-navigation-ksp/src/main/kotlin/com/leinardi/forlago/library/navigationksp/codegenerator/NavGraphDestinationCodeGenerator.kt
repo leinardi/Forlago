@@ -53,6 +53,7 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
         fileName = model.className,
     ).apply {
         indent("    ")
+        model.arguments.mapNotNull { it.defaultValue?.imports }.flatten().forEach { addImport(it.packageName, it.simpleName) }
         addType(generateDestinationObject(model))
     }.build()
 
@@ -135,8 +136,8 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                 if (model.isNullable) {
                     addStatement("nullable = %L", true)
                 }
-                model.defaultValueProviderClassName?.let { className ->
-                    addStatement("defaultValue = %T.${model.simpleName}", className)
+                model.defaultValue?.let {
+                    addStatement("defaultValue = %L", it.code)
                 }
                 endControlFlowWithTrailingComma()
             }
@@ -170,7 +171,7 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
         addParameters(
             model.arguments.map { argumentModel ->
                 ParameterSpec.builder(argumentModel.simpleName, argumentModel.typeName).apply {
-                    argumentModel.defaultValueProviderClassName?.let { defaultValue("%T.${argumentModel.simpleName}", it) }
+                    argumentModel.defaultValue?.let { defaultValue("%L", it.code) }
                 }.build()
             },
         )

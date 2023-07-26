@@ -22,13 +22,8 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.validate
-import com.leinardi.forlago.library.navigation.annotation.DefaultValueProvider
-import com.leinardi.forlago.library.navigation.annotation.HasDefaultValue
 import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
-import com.leinardi.forlago.library.navigationksp.ext.toDefaultValueProviderClassName
-import com.leinardi.forlago.library.navigationksp.visitor.DefaultValueProviderVisitor
 import com.leinardi.forlago.library.navigationksp.visitor.NavGraphDestinationVisitor
 
 @Suppress("UnusedPrivateMember")
@@ -42,55 +37,23 @@ internal class NavGraphDestinationProcessor(
         val navGraphDestinationClassDeclarations = resolver.getSymbolsWithAnnotation(checkNotNull(NavGraphDestination::class.qualifiedName))
             .filterIsInstance<KSClassDeclaration>()
             .toList()
-        val hasDefaultValuePropertyDeclarations = resolver.getSymbolsWithAnnotation(checkNotNull(HasDefaultValue::class.qualifiedName))
-            .filterIsInstance<KSPropertyDeclaration>()
-            .toList()
-        val defaultValueProviderClassDeclarations = resolver.getSymbolsWithAnnotation(checkNotNull(DefaultValueProvider::class.qualifiedName))
-            .filterIsInstance<KSClassDeclaration>()
-            .toList()
-        return if (hasDefaultValuePropertyDeclarations.isNotEmpty()) {
-            logger.info("Generate DefaultValueProviders")
-            navGraphDestinationClassDeclarations
-                .forEach { navGraphDestinationClassDeclaration ->
-                    if (hasDefaultValuePropertyDeclarations.any { it.parent == navGraphDestinationClassDeclaration }) {
-                        navGraphDestinationClassDeclaration.accept(DefaultValueProviderVisitor(logger, codeGenerator), Unit)
-                    }
-                }
-            navGraphDestinationClassDeclarations +
-                defaultValueProviderClassDeclarations +
-                hasDefaultValuePropertyDeclarations.filterNot { it.validate() }
-        } else {
-            logger.info("Generate Destinations")
 
-            val unableToProcess = navGraphDestinationClassDeclarations.filterNot { it.validate() } +
-                hasDefaultValuePropertyDeclarations.filterNot { it.validate() } +
-                defaultValueProviderClassDeclarations.filterNot { it.validate() }
+        logger.info("Generate Destinations")
 
-            navGraphDestinationClassDeclarations
-                .filter { it.validate() }
-                .forEach { navGraphDestinationClassDeclaration ->
-                    var defaultValueProviderClassDeclaration: KSClassDeclaration? = null
-                    defaultValueProviderClassDeclarations.forEach { classDeclaration ->
-                        val hasDefaultValueProvider = classDeclaration.superTypes
-                            .any {
-                                it.toString() == navGraphDestinationClassDeclaration.toDefaultValueProviderClassName() &&
-                                    it.resolve().declaration.packageName.asString() == navGraphDestinationClassDeclaration.packageName.asString()
-                            }
-                        if (hasDefaultValueProvider) {
-                            defaultValueProviderClassDeclaration = classDeclaration
-                        }
-                    }
-                    navGraphDestinationClassDeclaration.accept(
-                        NavGraphDestinationVisitor(
-                            defaultValueProviderClassDeclaration = defaultValueProviderClassDeclaration,
-                            resolver = resolver,
-                            logger = logger,
-                            codeGenerator = codeGenerator,
-                        ),
-                        Unit,
-                    )
-                }
-            unableToProcess
-        }
+        val unableToProcess = navGraphDestinationClassDeclarations.filterNot { it.validate() }
+
+        navGraphDestinationClassDeclarations
+            .filter { it.validate() }
+            .forEach { navGraphDestinationClassDeclaration ->
+                navGraphDestinationClassDeclaration.accept(
+                    NavGraphDestinationVisitor(
+                        resolver = resolver,
+                        logger = logger,
+                        codeGenerator = codeGenerator,
+                    ),
+                    Unit,
+                )
+            }
+        return unableToProcess
     }
 }

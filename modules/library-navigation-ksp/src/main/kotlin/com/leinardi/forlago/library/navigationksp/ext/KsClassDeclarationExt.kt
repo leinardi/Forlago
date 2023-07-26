@@ -18,7 +18,10 @@ package com.leinardi.forlago.library.navigationksp.ext
 
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.Modifier
 
 internal fun KSClassDeclaration.isInterface() = classKind == ClassKind.INTERFACE
+
+internal fun KSClassDeclaration.isDataClass() = classKind == ClassKind.CLASS && modifiers.contains(Modifier.DATA)
 
 internal fun KSClassDeclaration.toDefaultValueProviderClassName() = simpleName.asString() + "DefaultValueProvider"

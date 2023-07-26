@@ -17,7 +17,6 @@
 package com.leinardi.forlago.library.navigationksp.model
 
 import com.leinardi.forlago.library.navigationksp.codegenerator.CodeGeneratorModel
-import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.TypeName
 
 internal data class NavGraphDestinationModel(
@@ -33,6 +32,6 @@ internal data class NavGraphDestinationModel(
         val typeName: TypeName,
         val navTypePropertyName: String,
         val isNullable: Boolean,
-        val defaultValueProviderClassName: ClassName?,
+        val defaultValue: DefaultValue?,
     )
 }
