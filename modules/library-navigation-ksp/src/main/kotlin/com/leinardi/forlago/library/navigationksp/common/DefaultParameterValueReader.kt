@@ -149,7 +149,11 @@ object DefaultParameterValueReader {
             error("Navigation arguments with default values which uses a private declaration are not currently supported (near: '$auxText')")
         }
 
-        error("Wildcard imports (.*) are not allowed: $wholePackageImports")
+        if (wholePackageImports.isEmpty()) {
+            return DefaultValue(result)
+        } else {
+            error("Wildcard imports (.*) are not allowed: $wholePackageImports")
+        }
     }
 }
 

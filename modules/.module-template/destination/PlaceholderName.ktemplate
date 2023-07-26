@@ -19,6 +19,6 @@ package com.leinardi.forlago.library.navigation.api.destination.@placeholderlowe
 import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 
 @NavGraphDestination
-interface @PlaceholderName@ {
-    val text: String
-}
+data class @PlaceholderName@(
+    val text: String,
+)
