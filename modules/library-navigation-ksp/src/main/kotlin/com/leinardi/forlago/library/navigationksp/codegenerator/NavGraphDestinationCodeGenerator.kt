@@ -1,3 +1,5 @@
+package com.leinardi.forlago.library.navigationksp.codegenerator
+
 /*
  * Copyright 2023 Roberto Leinardi.
  *
@@ -14,8 +16,7 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigationksp.codegenerator
-
+import com.google.devtools.ksp.symbol.KSFile
 import com.leinardi.forlago.library.navigationksp.ext.endControlFlowWithTrailingComma
 import com.leinardi.forlago.library.navigationksp.model.NavGraphDestinationModel
 import com.squareup.kotlinpoet.BOOLEAN
@@ -31,6 +32,7 @@ import com.squareup.kotlinpoet.STRING
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.asClassName
 import com.squareup.kotlinpoet.buildCodeBlock
+import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import java.util.Locale
 
 internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestinationModel> {
@@ -69,18 +71,20 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                 addProperty(generateDeepLinksProperty(model))
             }
             if (model.arguments.isNotEmpty()) {
-                addProperty(generateArgumentsProperty(model.arguments))
+                addProperty(generateArgumentsProperty(model.arguments, model.containingFile))
             }
             addFunction(generateGetFun(model, nameProperty))
             if (model.arguments.isNotEmpty()) {
-                addType(generateArgumentsGetters(model.arguments))
+                addType(generateArgumentsGetters(model.arguments, model.containingFile))
             }
+            addOriginatingKSFile(model.containingFile)
         }.build()
     }
 
     private fun generateNameProperty(model: NavGraphDestinationModel) =
         PropertySpec.builder("NAME", String::class, KModifier.CONST)
             .initializer("%S", model.name)
+            .addOriginatingKSFile(model.containingFile)
             .build()
 
     private fun generateRouteProperty(model: NavGraphDestinationModel, nameProperty: PropertySpec): PropertySpec =
@@ -120,101 +124,123 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                     unindent()
                 },
             )
+            .addOriginatingKSFile(model.containingFile)
             .build()
 
-    private fun generateArgumentsProperty(argumentModels: List<NavGraphDestinationModel.ArgumentModel>) = PropertySpec.builder(
-        "arguments",
-        List::class.asClassName().parameterizedBy(CLASS_NAME_NAV_NAMED_NAV_ARGUMENT),
-        KModifier.OVERRIDE,
-    ).initializer(
-        buildCodeBlock {
-            addStatement("listOf(")
-            indent()
-            argumentModels.forEach { model ->
-                beginControlFlow("%M(%S)", MEMBER_NAME_NAV_ARGUMENT, model.simpleName)
-                addStatement("type = %T.${model.navTypePropertyName}", CLASS_NAME_NAV_TYPE)
-                if (model.isNullable) {
-                    addStatement("nullable = %L", true)
-                }
-                model.defaultValue?.let {
-                    addStatement("defaultValue = %L", it.code)
-                }
-                endControlFlowWithTrailingComma()
-            }
-            unindent()
-            add(")")
-        },
-    ).build()
-
-    private fun generateDeepLinksProperty(model: NavGraphDestinationModel) = PropertySpec.builder(
-        "deepLinks",
-        List::class.asClassName().parameterizedBy(CLASS_NAME_NAV_DEEP_LINK),
-        KModifier.OVERRIDE,
-    ).initializer(
-        buildCodeBlock {
-            addStatement("listOf(")
-            indent()
-            beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
-            addStatement("uriPattern = \"\${%M}://\$route\"", MEMBER_NAME_DEEP_LINK_SCHEMA)
-            endControlFlowWithTrailingComma()
-            if (model.arguments.any { it.isNullable }) {
-                beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
-                addStatement("uriPattern = \"\${%M}://\${route.substringBefore(\"?\")}\"", MEMBER_NAME_DEEP_LINK_SCHEMA)
-                endControlFlowWithTrailingComma()
-            }
-            unindent()
-            add(")")
-        },
-    ).build()
-
-    private fun generateGetFun(model: NavGraphDestinationModel, nameProperty: PropertySpec) = FunSpec.builder("get").apply {
-        addParameters(
-            model.arguments.map { argumentModel ->
-                ParameterSpec.builder(argumentModel.simpleName, argumentModel.typeName).apply {
-                    argumentModel.defaultValue?.let { defaultValue("%L", it.code) }
-                }.build()
-            },
+    private fun generateArgumentsProperty(
+        argumentModels: List<NavGraphDestinationModel.ArgumentModel>,
+        containingFile: KSFile,
+    ) = PropertySpec
+        .builder(
+            "arguments",
+            List::class.asClassName().parameterizedBy(CLASS_NAME_NAV_NAMED_NAV_ARGUMENT),
+            KModifier.OVERRIDE,
         )
-        returns(String::class)
-        addStatement(
-            "return %L",
+        .initializer(
             buildCodeBlock {
-                addStatement("%T().apply {", CLASS_NAME_URI_BUILDER)
+                addStatement("listOf(")
                 indent()
-                model.routePrefix?.let { prefix ->
-                    addStatement("appendEncodedPath(%S)", prefix)
-                }
-                addStatement("appendPath(%N)", nameProperty)
-                if (model.arguments.isNotEmpty()) {
-                    val (optional, mandatory) = partitionMandatoryOptionalArguments(model)
-                    mandatory.forEach { argumentModel ->
-                        if (argumentModel.typeName.copy(nullable = false) == STRING) {
-                            addStatement("appendPath(%L)", argumentModel.simpleName)
-                        } else {
-                            addStatement("appendPath(%L.toString())", argumentModel.simpleName)
-                        }
+                argumentModels.forEach { model ->
+                    beginControlFlow("%M(%S)", MEMBER_NAME_NAV_ARGUMENT, model.simpleName)
+                    addStatement("type = %T.${model.navTypePropertyName}", CLASS_NAME_NAV_TYPE)
+                    if (model.isNullable) {
+                        addStatement("nullable = %L", true)
                     }
-                    optional.forEach { argumentModel ->
-                        if (argumentModel.isNullable) {
-                            addStatement("%L?.let { appendQueryParameter(%S, it.toString()) }", argumentModel.simpleName, argumentModel.simpleName)
-                        } else {
-                            addStatement("appendQueryParameter(%S, %L.toString())", argumentModel.simpleName, argumentModel.simpleName)
-                        }
+                    model.defaultValue?.let {
+                        addStatement("defaultValue = %L", it.code)
                     }
+                    endControlFlowWithTrailingComma()
                 }
                 unindent()
-                addStatement("}")
-                indent()
-                addStatement(".build()")
-                addStatement(".toString()")
-                addStatement(".removePrefix(%S)", "/")
-                unindent()
+                add(")")
             },
         )
-    }.build()
+        .addOriginatingKSFile(containingFile)
+        .build()
 
-    private fun generateArgumentsGetters(arguments: List<NavGraphDestinationModel.ArgumentModel>): TypeSpec =
-        TypeSpec.objectBuilder("Arguments").apply {
+    private fun generateDeepLinksProperty(model: NavGraphDestinationModel) = PropertySpec
+        .builder(
+            "deepLinks",
+            List::class.asClassName().parameterizedBy(CLASS_NAME_NAV_DEEP_LINK),
+            KModifier.OVERRIDE,
+        )
+        .initializer(
+            buildCodeBlock {
+                addStatement("listOf(")
+                indent()
+                beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
+                addStatement("uriPattern = \"\${%M}://\$route\"", MEMBER_NAME_DEEP_LINK_SCHEMA)
+                endControlFlowWithTrailingComma()
+                if (model.arguments.any { it.isNullable }) {
+                    beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
+                    addStatement("uriPattern = \"\${%M}://\${route.substringBefore(\"?\")}\"", MEMBER_NAME_DEEP_LINK_SCHEMA)
+                    endControlFlowWithTrailingComma()
+                }
+                unindent()
+                add(")")
+            },
+        )
+        .addOriginatingKSFile(model.containingFile)
+        .build()
+
+    private fun generateGetFun(model: NavGraphDestinationModel, nameProperty: PropertySpec) = FunSpec.builder("get")
+        .apply {
+            addParameters(
+                model.arguments.map { argumentModel ->
+                    ParameterSpec.builder(argumentModel.simpleName, argumentModel.typeName).apply {
+                        argumentModel.defaultValue?.let { defaultValue("%L", it.code) }
+                    }.build()
+                },
+            )
+            returns(String::class)
+            addStatement(
+                "return %L",
+                buildCodeBlock {
+                    addStatement("%T().apply {", CLASS_NAME_URI_BUILDER)
+                    indent()
+                    model.routePrefix?.let { prefix ->
+                        addStatement("appendEncodedPath(%S)", prefix)
+                    }
+                    addStatement("appendPath(%N)", nameProperty)
+                    if (model.arguments.isNotEmpty()) {
+                        val (optional, mandatory) = partitionMandatoryOptionalArguments(model)
+                        mandatory.forEach { argumentModel ->
+                            if (argumentModel.typeName.copy(nullable = false) == STRING) {
+                                addStatement("appendPath(%L)", argumentModel.simpleName)
+                            } else {
+                                addStatement("appendPath(%L.toString())", argumentModel.simpleName)
+                            }
+                        }
+                        optional.forEach { argumentModel ->
+                            if (argumentModel.isNullable) {
+                                addStatement(
+                                    "%L?.let { appendQueryParameter(%S, it.toString()) }",
+                                    argumentModel.simpleName,
+                                    argumentModel.simpleName,
+                                )
+                            } else {
+                                addStatement("appendQueryParameter(%S, %L.toString())", argumentModel.simpleName, argumentModel.simpleName)
+                            }
+                        }
+                    }
+                    unindent()
+                    addStatement("}")
+                    indent()
+                    addStatement(".build()")
+                    addStatement(".toString()")
+                    addStatement(".removePrefix(%S)", "/")
+                    unindent()
+                },
+            )
+        }
+        .addOriginatingKSFile(model.containingFile)
+        .build()
+
+    private fun generateArgumentsGetters(
+        arguments: List<NavGraphDestinationModel.ArgumentModel>,
+        containingFile: KSFile,
+    ): TypeSpec = TypeSpec.objectBuilder("Arguments")
+        .apply {
             arguments.forEach { argumentModel ->
                 addFunction(
                     FunSpec.builder("get${argumentModel.simpleName.replaceFirstChar { it.titlecase(Locale.ROOT) }}").apply {
@@ -243,7 +269,9 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                     }.build(),
                 )
             }
-        }.build()
+        }
+        .addOriginatingKSFile(containingFile)
+        .build()
 
     private fun partitionMandatoryOptionalArguments(model: NavGraphDestinationModel) =
         model.arguments.partition { it.isNullable || it.typeName.copy(nullable = false) == BOOLEAN }

@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.library.navigationksp.model
 
+import com.google.devtools.ksp.symbol.KSFile
 import com.leinardi.forlago.library.navigationksp.codegenerator.CodeGeneratorModel
 import com.squareup.kotlinpoet.TypeName
 
@@ -26,6 +27,7 @@ internal data class NavGraphDestinationModel(
     val routePrefix: String?,
     val deepLink: Boolean,
     val arguments: List<ArgumentModel>,
+    val containingFile: KSFile,
 ) : CodeGeneratorModel {
     data class ArgumentModel(
         val simpleName: String,

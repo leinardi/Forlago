@@ -107,6 +107,7 @@ internal class NavGraphDestinationVisitor(
             deepLink = deepLink,
             routePrefix = routePrefix,
             arguments = arguments,
+            containingFile = checkNotNull(classDeclaration.containingFile),
         )
     }
 
