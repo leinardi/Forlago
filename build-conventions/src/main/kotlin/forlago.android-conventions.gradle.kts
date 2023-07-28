@@ -71,7 +71,7 @@ plugins.withType<AndroidBasePlugin>().configureEach {
             }
         }
 
-        if (this is CommonExtension<*, *, *, *>) {
+        if (this is CommonExtension<*, *, *, *, *>) {
             lint {
                 abortOnError = true
                 checkAllWarnings = false
@@ -103,7 +103,7 @@ plugins.withType<AndroidBasePlugin>().configureEach {
     }
 }
 
-fun CommonExtension<*, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
+fun CommonExtension<*, *, *, *, *>.kotlinOptions(block: KotlinJvmOptions.() -> Unit) {
     (this as ExtensionAware).extensions.configure("kotlinOptions", block)
 }
 
