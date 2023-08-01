@@ -25,8 +25,10 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalInspectionMode
+import com.leinardi.forlago.library.android.api.ext.requireActivity
 
-private val LightColors = lightColorScheme(
+private val forlagoLightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -50,13 +52,15 @@ private val LightColors = lightColorScheme(
     surfaceVariant = md_theme_light_surfaceVariant,
     onSurfaceVariant = md_theme_light_onSurfaceVariant,
     outline = md_theme_light_outline,
+    outlineVariant = md_theme_light_outlineVariant,
+    scrim = md_theme_light_scrim,
     inverseOnSurface = md_theme_light_inverseOnSurface,
     inverseSurface = md_theme_light_inverseSurface,
     inversePrimary = md_theme_light_inversePrimary,
     surfaceTint = md_theme_light_surfaceTint,
 )
 
-private val DarkColors = darkColorScheme(
+private val forlagoDarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -80,6 +84,8 @@ private val DarkColors = darkColorScheme(
     surfaceVariant = md_theme_dark_surfaceVariant,
     onSurfaceVariant = md_theme_dark_onSurfaceVariant,
     outline = md_theme_dark_outline,
+    outlineVariant = md_theme_dark_outlineVariant,
+    scrim = md_theme_dark_scrim,
     inverseOnSurface = md_theme_dark_inverseOnSurface,
     inverseSurface = md_theme_dark_inverseSurface,
     inversePrimary = md_theme_dark_inversePrimary,
@@ -88,23 +94,27 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun ForlagoTheme(
-    isDarkTheme: Boolean = isSystemInDarkTheme(),
-    isDynamicColor: Boolean = false,
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
-    val myColorScheme = when {
-        isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && isDarkTheme ->
-            dynamicDarkColorScheme(LocalContext.current)
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
 
-        isDynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isDarkTheme ->
-            dynamicLightColorScheme(LocalContext.current)
+        darkTheme -> forlagoDarkColorScheme
+        else -> forlagoLightColorScheme
+    }
 
-        isDarkTheme -> DarkColors
-        else -> LightColors
+    // https://issuetracker.google.com/issues/219993701
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !LocalInspectionMode.current) {
+        LocalContext.current.requireActivity().window.insetsController?.setSystemBarsAppearance(0, 0)
     }
 
     MaterialTheme(
-        colorScheme = myColorScheme,
+        colorScheme = colorScheme,
         shapes = ForlagoShapes,
         typography = ForlagoTypography,
         content = content,

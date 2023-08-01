@@ -49,6 +49,8 @@ val md_theme_light_inverseSurface = Color(0xFF2e3130)
 val md_theme_light_inversePrimary = Color(0xFFffb3ae)
 val md_theme_light_shadow = Color(0xFF000000)
 val md_theme_light_surfaceTint = Color(0xFFb4262d)
+val md_theme_light_outlineVariant = Color(0xFFBEC8C8)
+val md_theme_light_scrim = Color(0xFF000000)
 
 val md_theme_dark_primary = Color(0xFFffb3ae)
 val md_theme_dark_onPrimary = Color(0xFF69000b)
@@ -78,6 +80,8 @@ val md_theme_dark_inverseSurface = Color(0xFFe1e3e1)
 val md_theme_dark_inversePrimary = Color(0xFF910518)
 val md_theme_dark_shadow = Color(0xFF000000)
 val md_theme_dark_surfaceTint = Color(0xFFffb3ae)
+val md_theme_dark_outlineVariant = Color(0xFF3F4949)
+val md_theme_dark_scrim = Color(0xFF000000)
 
 val ColorScheme.warning: Color
     @Composable

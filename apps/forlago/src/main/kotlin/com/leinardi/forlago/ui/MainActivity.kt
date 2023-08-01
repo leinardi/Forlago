@@ -51,7 +51,7 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType
-import com.leinardi.forlago.library.android.api.ext.getActivity
+import com.leinardi.forlago.library.android.api.ext.requireActivity
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.navigation.api.navigator.NavigatorEvent
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            ForlagoTheme(isDynamicColor = viewModel.viewState.value.dynamicColors) {
+            ForlagoTheme(dynamicColor = viewModel.viewState.value.dynamicColors) {
                 ForlagoMainScreen(
                     effectFlow = viewModel.effect,
                     startDestination = viewModel.viewState.value.startDestination,
@@ -168,7 +168,7 @@ fun ForlagoMainScreen(
 ) {
     val bottomSheetNavigator = rememberBottomSheetNavigator(skipHalfExpanded = true)
     val navHostController = rememberNavController(bottomSheetNavigator)
-    val activity = LocalContext.current.getActivity() as MainActivity
+    val activity = LocalContext.current.requireActivity() as MainActivity
     val snackbarHostState = remember { SnackbarHostState() }
     LaunchedEffect(navHostController) {
         forlagoNavigator.destinations.onEach { event ->

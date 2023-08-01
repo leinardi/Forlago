@@ -16,20 +16,14 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
-import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
 fun Scaffold(
@@ -56,18 +50,4 @@ fun Scaffold(
         contentWindowInsets = contentWindowInsets,
         content = content,
     )
-}
-
-@ThemePreviews
-@Composable
-private fun PreviewScrim() {
-    ForlagoTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(128.dp),
-        ) {
-            Scrim(minHeight = 48.dp)
-        }
-    }
 }

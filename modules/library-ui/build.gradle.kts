@@ -67,6 +67,7 @@ dependencies {
     api(libs.androidx.paging)
     api(libs.coil.compose)
     api(libs.material)
+    api(libs.zoomable)
     implementation(libs.hilt.android)
     debugApi(libs.androidx.customview)  // Workaround for https://issuetracker.google.com/issues/227767363
     debugApi(libs.androidx.customview.poolingcontainer)  // Workaround for https://issuetracker.google.com/issues/227767363

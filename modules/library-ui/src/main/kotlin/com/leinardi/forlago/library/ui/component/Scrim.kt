@@ -18,36 +18,33 @@ package com.leinardi.forlago.library.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
 fun Scrim(
     modifier: Modifier = Modifier,
-    startColor: Color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.3f),
+    startColor: Color = MaterialTheme.colorScheme.scrim.copy(alpha = 0.5f),
     endColor: Color = Color.Transparent,
-    minHeight: Dp = 96.dp,
 ) {
     Box(
-        modifier = Modifier
-            .defaultMinSize(minHeight = minHeight)
-            .fillMaxWidth()
+        modifier = modifier
+            .fillMaxSize()
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(startColor, endColor),
                 ),
-            )
-            .then(modifier),
+            ),
     )
 }
 
@@ -58,9 +55,15 @@ private fun PreviewScrim() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(128.dp),
+                .height(IntrinsicSize.Min)
+                .background(MaterialTheme.colorScheme.onSurface),
         ) {
-            Scrim(minHeight = 48.dp)
+            Scrim()
+            TopAppBar(
+                title = "Lorem ipsum",
+                onNavigateUp = {},
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+            )
         }
     }
 }

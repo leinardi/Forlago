@@ -23,6 +23,8 @@ import android.content.ContextWrapper
 fun Context.getActivity(): Activity? =
     when (this) {
         is Activity -> this
-        is ContextWrapper -> this.baseContext.getActivity()
+        is ContextWrapper -> baseContext.getActivity()
         else -> null
     }
+
+fun Context.requireActivity(): Activity = checkNotNull(getActivity()) { "Could not find activity!" }
