@@ -17,9 +17,9 @@
 package com.leinardi.forlago.library.android.interactor.android
 
 import android.app.Application
-import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import androidx.core.content.ContextCompat
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -28,12 +28,12 @@ import javax.inject.Singleton
 internal class GetConnectivityInteractorImpl @Inject constructor(
     private val application: Application,
 ) : GetConnectivityInteractor {
-    private val connectivityManager by lazy { application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager }
+    private val connectivityManager by lazy { ContextCompat.getSystemService(application, ConnectivityManager::class.java) }
 
     override operator fun invoke() = getState()
 
     private fun getState(): GetConnectivityInteractor.State {
-        val networkCapabilities: NetworkCapabilities? = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+        val networkCapabilities: NetworkCapabilities? = connectivityManager?.getNetworkCapabilities(connectivityManager?.activeNetwork)
         return if (networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true) {
             when {
                 networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> GetConnectivityInteractor.State.Online(

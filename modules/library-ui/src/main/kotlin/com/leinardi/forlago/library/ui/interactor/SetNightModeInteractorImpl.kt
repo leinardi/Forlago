@@ -16,15 +16,26 @@
 
 package com.leinardi.forlago.library.ui.interactor
 
+import android.app.Application
+import android.app.UiModeManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import com.leinardi.forlago.library.ui.api.NightMode
 import com.leinardi.forlago.library.ui.api.interactor.SetNightModeInteractor
 import timber.log.Timber
 import javax.inject.Inject
 
-internal class SetNightModeInteractorImpl @Inject constructor() : SetNightModeInteractor {
+internal class SetNightModeInteractorImpl @Inject constructor(
+    private val application: Application,
+) : SetNightModeInteractor {
     override operator fun invoke(mode: NightMode) {
         Timber.d("Set night mode to $mode")
-        AppCompatDelegate.setDefaultNightMode(mode.intValue)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val uiModeManager = ContextCompat.getSystemService(application, UiModeManager::class.java)
+            uiModeManager?.setApplicationNightMode(mode.uiModeManagerValue)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(mode.appCompatDelegateValue)
+        }
     }
 }

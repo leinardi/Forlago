@@ -27,6 +27,6 @@ internal class StoreThemeInteractorImpl @Inject constructor(
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : StoreThemeInteractor {
     override suspend operator fun invoke(nightMode: NightMode) {
-        userDataStoreRepository.storeValue(THEME_PREF_KEY, nightMode.intValue)
+        userDataStoreRepository.storeValue(THEME_PREF_KEY, nightMode.appCompatDelegateValue)
     }
 }

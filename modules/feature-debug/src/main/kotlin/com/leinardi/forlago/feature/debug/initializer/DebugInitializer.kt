@@ -18,6 +18,7 @@ package com.leinardi.forlago.feature.debug.initializer
 
 import android.content.Context
 import android.hardware.SensorManager
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -45,7 +46,7 @@ class DebugInitializer : Initializer<ShakeDetector?>, DefaultLifecycleObserver {
     override fun create(context: Context): ShakeDetector {
         DebugInitializerEntryPoint.resolve(context).inject(this)
         if (BuildConfig.DEBUG) {
-            sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+            sensorManager = ContextCompat.getSystemService(context, SensorManager::class.java)
             ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         }
         return shakeDetector

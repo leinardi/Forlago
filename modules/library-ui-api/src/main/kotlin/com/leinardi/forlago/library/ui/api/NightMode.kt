@@ -16,14 +16,15 @@
 
 package com.leinardi.forlago.library.ui.api
 
+import android.app.UiModeManager
 import androidx.appcompat.app.AppCompatDelegate
 
-enum class NightMode(@AppCompatDelegate.NightMode val intValue: Int) {
-    DEFAULT(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM),
-    NO(AppCompatDelegate.MODE_NIGHT_NO),
-    YES(AppCompatDelegate.MODE_NIGHT_YES);
+enum class NightMode(@AppCompatDelegate.NightMode val appCompatDelegateValue: Int, val uiModeManagerValue: Int) {
+    DEFAULT(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, UiModeManager.MODE_NIGHT_AUTO),
+    NO(AppCompatDelegate.MODE_NIGHT_NO, UiModeManager.MODE_NIGHT_NO),
+    YES(AppCompatDelegate.MODE_NIGHT_YES, UiModeManager.MODE_NIGHT_YES);
 
     companion object {
-        fun fromIntValue(@AppCompatDelegate.NightMode value: Int) = values().first { it.intValue == value }
+        fun fromIntValue(@AppCompatDelegate.NightMode value: Int) = values().first { it.appCompatDelegateValue == value }
     }
 }

@@ -26,6 +26,6 @@ import javax.inject.Singleton
 class SetNightModeInteractor @Inject constructor() {
     operator fun invoke(mode: NightMode) {
         Timber.d("Set night mode to $mode")
-        AppCompatDelegate.setDefaultNightMode(mode.intValue)
+        AppCompatDelegate.setDefaultNightMode(mode.appCompatDelegateValue)
     }
 }
