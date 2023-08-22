@@ -86,7 +86,8 @@ val serviceAccountCredentialsFile: File = rootProject.file("release/play-account
 if (serviceAccountCredentialsFile.exists()) {
     play {
         serviceAccountCredentials.set(serviceAccountCredentialsFile)
-        releaseStatus.set(if (track.get() == "internal") ReleaseStatus.COMPLETED else ReleaseStatus.DRAFT)
+        // Uncomment once the app is published to the store
+        releaseStatus.set(/*if (track.get() == "internal") ReleaseStatus.COMPLETED else */ReleaseStatus.DRAFT)
         defaultToAppBundles.set(true)
     }
 }
