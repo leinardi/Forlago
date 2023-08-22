@@ -153,7 +153,7 @@ jobs:
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
         with:
-          arguments: bundleRelease # analyzeReleaseBundle <- Disable due to https://github.com/spotify/ruler/issues/116
+          arguments: :apps:forlago:bundleRelease # analyzeReleaseBundle <- Disable due to https://github.com/spotify/ruler/issues/116
 
       - name: Clean secrets
         if: always()
