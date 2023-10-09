@@ -48,9 +48,7 @@ dependencies {
     implementation(projects.modules.libraryNavigationApi)
     implementation(projects.modules.libraryPreferencesApi)
     api(libs.accompanist.navigation.material)
-    api(libs.accompanist.pager.indicators)
     api(libs.accompanist.placeholder)
-    api(libs.accompanist.systemuicontroller)
     api(libs.androidx.appcompat)
     api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like ModalBottomSheetLayout
     api(libs.androidx.compose.material.icons.extended)
