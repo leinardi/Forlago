@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.component.placeholder.placeholder
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
