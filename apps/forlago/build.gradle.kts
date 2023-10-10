@@ -113,7 +113,7 @@ dependencies {
     implementation(libs.androidx.profileinstaller) // Need this to side load a Baseline Profile when Benchmarking
     implementation(libs.androidx.startup)
 
-    kaptAndroidTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
 
     debugImplementation(libs.androidx.compose.tooling)
     debugImplementation(libs.androidx.tracing) // can be removed after the AGP fixes this https://github.com/android/android-test/issues/1755

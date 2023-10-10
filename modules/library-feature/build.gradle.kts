@@ -38,5 +38,5 @@ dependencies {
     api(libs.coroutines.core)
     api(libs.coroutines.android)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

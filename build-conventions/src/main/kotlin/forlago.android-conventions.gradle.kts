@@ -25,20 +25,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("kotlin-android")
-    id("kotlin-kapt")
     id("forlago.detekt-conventions")
     id("forlago.config-conventions")
 }
 
 val libs = the<LibrariesForLibs>()
-
-kapt {
-    useBuildCache = true
-    correctErrorTypes = true
-    javacOptions {
-        option("-Xmaxerrs", Integer.MAX_VALUE)
-    }
-}
 
 plugins.withType<AndroidBasePlugin>().configureEach {
     extensions.configure<BaseExtension> {

@@ -22,6 +22,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("com.android.application")
     id("forlago.android-conventions")
+    id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     id("com.google.dagger.hilt.android")
     id("com.mikepenz.aboutlibraries.plugin")
@@ -45,9 +46,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
-    }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true  // https://developer.android.com/studio/write/java8-support#library-desugaring
     }
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
@@ -76,7 +74,6 @@ aboutLibraries {
 }
 
 dependencies {
-    coreLibraryDesugaring(libs.desugar)
     debugImplementation(libs.leakcanary)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
@@ -90,7 +87,7 @@ dependencies {
     implementation(libs.kotlin.result)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.timber)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     testImplementation(project(":modules:library-test"))
     androidTestImplementation(project(":modules:library-test-android"))

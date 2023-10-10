@@ -71,11 +71,9 @@ class Forlago : Application(), ImageLoaderFactory {
                 .detectFileUriExposure()
                 .penaltyLog()
                 .penaltyDeath()
+                .detectContentUriWithoutPermission()
+                // .detectUntaggedSockets() // https://github.com/square/okhttp/issues/3537#issuecomment-974861679
                 .apply {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        detectContentUriWithoutPermission()
-                        // detectUntaggedSockets() // https://github.com/square/okhttp/issues/3537#issuecomment-974861679
-                    }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         detectCredentialProtectedWhileLocked()
                         detectImplicitDirectBoot()

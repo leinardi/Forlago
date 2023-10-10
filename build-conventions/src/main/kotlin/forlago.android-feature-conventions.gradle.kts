@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.kotlin.result)
     implementation(libs.kotlin.result.coroutines)
     implementation(libs.timber)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.ext.junit)

@@ -36,7 +36,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.process.phoenix)
     implementation(libs.tink)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
-    kaptTest(libs.hilt.android.compiler)
+    kspTest(libs.hilt.android.compiler)
 }

@@ -54,10 +54,10 @@ dependencies {
     implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.timber)
     implementation(libs.tink)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
-    kaptTest(libs.hilt.android.compiler)
+    kspTest(libs.hilt.android.compiler)
     testImplementation(libs.apollo.testing.support)
     testImplementation(libs.robolectric)
-    kaptAndroidTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
 }

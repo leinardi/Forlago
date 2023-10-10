@@ -25,9 +25,6 @@ pluginManagement {
 // https://docs.gradle.org/7.0/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-// https://docs.gradle.org/current/userguide/configuration_cache.html#config_cache:stable
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

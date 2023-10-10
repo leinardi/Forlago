@@ -38,5 +38,5 @@ dependencies {
     }
     implementation(libs.hilt.android)
     implementation(platform(libs.firebase.bom))
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }
