@@ -25,7 +25,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -40,6 +39,7 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -73,7 +73,6 @@ import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.library.ui.component.MainNavigationBarItem
 import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.Scaffold
-import com.leinardi.forlago.library.ui.component.ScrollableTabRow
 import com.leinardi.forlago.library.ui.component.SettingsGroup
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 import com.leinardi.forlago.library.ui.component.SettingsMenuSwitch
@@ -105,8 +104,7 @@ private fun DebugScreen(
             modifier = modifier
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
                 .padding(LocalMainScaffoldPadding.current.value)
-                .consumeWindowInsets(LocalMainScaffoldPadding.current.value)
-                .navigationBarsPadding(),
+                .consumeWindowInsets(LocalMainScaffoldPadding.current.value),
             topBar = {
                 TopAppBar(
                     title = stringResource(R.string.debug_screen),
@@ -334,10 +332,10 @@ private fun Features(
     Column(
         modifier = modifier,
     ) {
-        ScrollableTabRow(
+        PrimaryScrollableTabRow(
             selectedTabIndex = pagerState.currentPage,
             indicator = { tabPositions ->
-                TabRowDefaults.Indicator(
+                TabRowDefaults.PrimaryIndicator(
                     Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
                 )
             },

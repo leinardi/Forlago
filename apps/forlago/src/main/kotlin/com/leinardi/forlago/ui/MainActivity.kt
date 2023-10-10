@@ -37,7 +37,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -157,7 +156,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialNavigationApi::class)
+@OptIn(ExperimentalMaterialNavigationApi::class)
 @Suppress("ReusedModifierInstance")
 @Composable
 fun ForlagoMainScreen(
