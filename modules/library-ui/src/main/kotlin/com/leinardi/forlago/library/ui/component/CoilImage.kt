@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
+import com.leinardi.forlago.library.ui.component.placeholder.placeholder
 
 @Suppress("ModifierReused")
 @Composable

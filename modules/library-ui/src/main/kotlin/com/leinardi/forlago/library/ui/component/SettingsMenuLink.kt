@@ -24,15 +24,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -74,11 +72,10 @@ fun SettingsMenuLink(
             }
             SettingsTileTexts(title = title, subtitle = subtitle)
             if (action != null) {
-                Divider(
+                VerticalDivider(
                     modifier = Modifier
                         .padding(vertical = Spacing.half)
-                        .height(56.dp)
-                        .width(1.dp),
+                        .height(56.dp),
                 )
                 SettingsTileAction {
                     action.invoke()

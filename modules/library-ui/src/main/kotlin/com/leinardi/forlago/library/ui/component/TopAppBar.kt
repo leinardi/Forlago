@@ -19,8 +19,8 @@ package com.leinardi.forlago.library.ui.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.material.ContentAlpha
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Share
@@ -82,7 +82,7 @@ fun TopAppBar(
                         imageVector = if (contextual) {
                             Icons.Default.Clear
                         } else {
-                            Icons.Default.ArrowBack
+                            Icons.AutoMirrored.Default.ArrowBack
                         },
                         contentDescription = null,
                     )

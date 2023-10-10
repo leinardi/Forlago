@@ -37,11 +37,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
@@ -51,6 +49,7 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.google.android.play.core.install.model.ActivityResult.RESULT_IN_APP_UPDATE_FAILED
 import com.google.android.play.core.install.model.AppUpdateType
+import com.leinardi.forlago.library.android.api.ext.enableEdgeToEdgeCompat
 import com.leinardi.forlago.library.android.api.ext.requireActivity
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.navigation.api.navigator.NavigatorEvent
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()  // must be called before super.onCreate()
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        enableEdgeToEdgeCompat()
         setContent {
             ForlagoTheme(dynamicColor = viewModel.viewState.value.dynamicColors) {
                 ForlagoMainScreen(
@@ -157,7 +156,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     }
 }
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialNavigationApi::class)
+@OptIn(ExperimentalMaterialNavigationApi::class)
 @Suppress("ReusedModifierInstance")
 @Composable
 fun ForlagoMainScreen(

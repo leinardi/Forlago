@@ -25,9 +25,6 @@ plugins {
 val libs = the<LibrariesForLibs>()
 
 android {
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true  // https://developer.android.com/studio/write/java8-support#library-desugaring
-    }
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
@@ -44,7 +41,6 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring(libs.desugar)
     implementation(libs.androidx.core.ktx)
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)

@@ -31,8 +31,9 @@ android {
 dependencies {
     api(libs.play.app.update)
     api(libs.play.app.update.ktx)
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.room.runtime)
     implementation(libs.hilt.android)
     implementation(libs.kotlinx.serialization)
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

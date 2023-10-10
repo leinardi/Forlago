@@ -16,6 +16,7 @@
 
 plugins {
     id("forlago.android-library-conventions")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -40,5 +41,5 @@ dependencies {
     api(libs.kotlin.test)
     api(libs.kotlin.test.junit)
     api(libs.mockk)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 }

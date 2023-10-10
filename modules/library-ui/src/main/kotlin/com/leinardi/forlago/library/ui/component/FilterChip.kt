@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.component.placeholder.placeholder
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable

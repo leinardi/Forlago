@@ -16,10 +16,8 @@
 
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.SwipeableDefaults
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -35,12 +33,10 @@ import com.google.accompanist.navigation.material.ExperimentalMaterialNavigation
 @ExperimentalMaterialNavigationApi
 @Composable
 fun rememberBottomSheetNavigator(
-    animationSpec: AnimationSpec<Float> = SwipeableDefaults.AnimationSpec,
     skipHalfExpanded: Boolean = false,
 ): BottomSheetNavigator {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
-        animationSpec = animationSpec,
         skipHalfExpanded = skipHalfExpanded,
     )
     return remember(sheetState) {

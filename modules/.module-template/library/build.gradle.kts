@@ -15,5 +15,5 @@ dependencies {
     implementation(projects.modules.library@PlaceholderName@Api)
     implementation(libs.hilt.android)
 
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }
