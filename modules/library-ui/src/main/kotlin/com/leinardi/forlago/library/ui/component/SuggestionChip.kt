@@ -16,8 +16,8 @@
 
 package com.leinardi.forlago.library.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ChipBorder
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.SuggestionChipDefaults
@@ -39,7 +39,7 @@ fun SuggestionChip(
     shape: Shape = SuggestionChipDefaults.shape,
     colors: ChipColors = SuggestionChipDefaults.suggestionChipColors(),
     elevation: ChipElevation? = SuggestionChipDefaults.suggestionChipElevation(),
-    border: ChipBorder? = SuggestionChipDefaults.suggestionChipBorder(),
+    border: BorderStroke? = SuggestionChipDefaults.suggestionChipBorder(enabled),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     placeholder: Boolean = false,
 ) {

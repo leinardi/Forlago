@@ -47,10 +47,10 @@ fun AutoSizedCircularProgressIndicator(
         }
 
         CircularProgressIndicator(
-            progress = progress,
+            progress = { progress },
             modifier = Modifier.size(diameter + InternalPadding),
-            strokeWidth = (diameter * StrokeDiameterFraction).coerceAtLeast(1.dp),
             color = color,
+            strokeWidth = (diameter * StrokeDiameterFraction).coerceAtLeast(1.dp),
         )
     }
 }

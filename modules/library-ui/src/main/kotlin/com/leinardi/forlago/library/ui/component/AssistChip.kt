@@ -16,9 +16,9 @@
 
 package com.leinardi.forlago.library.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.ChipBorder
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.runtime.Composable
@@ -40,7 +40,7 @@ fun AssistChip(
     shape: Shape = AssistChipDefaults.shape,
     colors: ChipColors = AssistChipDefaults.assistChipColors(),
     elevation: ChipElevation? = AssistChipDefaults.assistChipElevation(),
-    border: ChipBorder? = AssistChipDefaults.assistChipBorder(),
+    border: BorderStroke? = AssistChipDefaults.assistChipBorder(enabled),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     placeholder: Boolean = false,
 ) {

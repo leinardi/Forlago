@@ -28,7 +28,7 @@ tasks.register("projectDependencyGraph") {
     notCompatibleWithConfigurationCache("https://github.com/vanniktech/gradle-dependency-graph-generator-plugin/issues/170")
     doLast {
         if (isDotAvailable()) {
-            val dot = File(rootProject.buildDir, "reports/dependencyGraph/project.dot")
+            val dot = rootProject.layout.buildDirectory.file("reports/dependencyGraph/project.dot").get().asFile
             dot.parentFile.mkdirs()
             dot.delete()
 
@@ -159,7 +159,7 @@ tasks.register("projectDependencyGraph") {
                 from("${dot.absolutePath}.png")
                 into(rootProject.file("art"))
             }
-        }else{
+        } else {
             logger.warn("w: Cannot find program \"dot\"")
         }
     }
