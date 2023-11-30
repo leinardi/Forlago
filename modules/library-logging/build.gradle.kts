@@ -25,9 +25,6 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-logging-consumer-rules.pro")
     }
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {

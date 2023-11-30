@@ -39,9 +39,6 @@ android {
             "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
         )
     }
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {

@@ -28,9 +28,6 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-network-api-consumer-rules.pro")
     }
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 apollo {
