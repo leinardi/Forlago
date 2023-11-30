@@ -30,7 +30,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
@@ -84,7 +84,7 @@ private val InternalPadding = Spacing.half
 
 private val StrokeDiameterFraction = DefaultStrokeWidth / DefaultDiameter
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewAutoSizedCircularProgressIndicator() {
     Column {

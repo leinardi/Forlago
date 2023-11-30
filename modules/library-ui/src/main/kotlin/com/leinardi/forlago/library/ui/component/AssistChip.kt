@@ -25,8 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -59,7 +59,7 @@ fun AssistChip(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewActionChipEnabled() {
     ForlagoTheme {
@@ -70,7 +70,7 @@ private fun PreviewActionChipEnabled() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewActionChipDisabled() {
     ForlagoTheme {

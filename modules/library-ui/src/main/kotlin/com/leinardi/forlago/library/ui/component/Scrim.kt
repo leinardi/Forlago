@@ -28,7 +28,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
+import com.leinardi.forlago.library.ui.preview.loremIpsum
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -48,7 +49,7 @@ fun Scrim(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewScrim() {
     ForlagoTheme {
@@ -60,7 +61,7 @@ private fun PreviewScrim() {
         ) {
             Scrim()
             TopAppBar(
-                title = "Lorem ipsum",
+                title = loremIpsum(2),
                 onNavigateUp = {},
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
             )

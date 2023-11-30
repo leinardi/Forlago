@@ -25,8 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -57,7 +57,7 @@ fun SuggestionChip(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewChoiceChipEnabled() {
     ForlagoTheme {
@@ -68,7 +68,7 @@ private fun PreviewChoiceChipEnabled() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewChoiceChipDisabled() {
     ForlagoTheme {

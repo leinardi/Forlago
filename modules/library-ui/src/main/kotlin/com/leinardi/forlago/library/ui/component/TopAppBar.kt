@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Icon
@@ -34,7 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextOverflow
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -106,7 +105,7 @@ fun TopAppBarDefaults.contextualTopAppBarColors(): TopAppBarColors =
         actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
     )
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewTopAppBarWithNavigationIcon() {
     ForlagoTheme {
@@ -116,7 +115,7 @@ private fun PreviewTopAppBarWithNavigationIcon() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewTopAppBarWithSubtitle() {
     ForlagoTheme {
@@ -127,7 +126,7 @@ private fun PreviewTopAppBarWithSubtitle() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewTopAppBarWithAction() {
     ForlagoTheme {
@@ -142,7 +141,7 @@ private fun PreviewTopAppBarWithAction() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewTopAppBarWithNavigationIconAndAction() {
     ForlagoTheme {
@@ -158,7 +157,7 @@ private fun PreviewTopAppBarWithNavigationIconAndAction() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewTopAppBarWithContextualModeAndAction() {
     ForlagoTheme {

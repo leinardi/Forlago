@@ -40,7 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.Spacing
 
@@ -85,7 +85,7 @@ fun SettingsMenuLink(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuLink() {
     ForlagoTheme {
@@ -95,7 +95,7 @@ private fun PreviewSettingsMenuLink() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuLinkSubtitle() {
     ForlagoTheme {
@@ -106,7 +106,7 @@ private fun PreviewSettingsMenuLinkSubtitle() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuLinkAction() {
     var rememberCheckBoxState by remember { mutableStateOf(true) }
@@ -126,7 +126,7 @@ private fun PreviewSettingsMenuLinkAction() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuLinkIcon() {
     ForlagoTheme {
@@ -138,7 +138,7 @@ private fun PreviewSettingsMenuLinkIcon() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuLinkIconAction() {
     var rememberCheckBoxState by remember { mutableStateOf(true) }

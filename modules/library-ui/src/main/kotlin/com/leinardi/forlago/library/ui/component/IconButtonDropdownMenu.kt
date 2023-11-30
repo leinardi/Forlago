@@ -36,7 +36,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
+import com.leinardi.forlago.library.ui.preview.loremIpsum
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -69,7 +70,7 @@ fun IconButtonDropdownMenu(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewExpertListDropDownMenu() {
     ForlagoTheme {
@@ -83,7 +84,7 @@ private fun PreviewExpertListDropDownMenu() {
                 },
                 content = {
                     DropdownMenuItem(
-                        text = { Text("Lorem ipsum") },
+                        text = { Text(loremIpsum(2)) },
                         onClick = { },
                     )
                 },

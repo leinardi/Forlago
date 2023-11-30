@@ -34,7 +34,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.Spacing
 
@@ -105,7 +105,7 @@ internal fun SettingsTileSubtitle(subtitle: @Composable () -> Unit) {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsIcon() {
     ForlagoTheme {
@@ -115,7 +115,7 @@ private fun PreviewSettingsIcon() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsIconPreviewEmpty() {
     ForlagoTheme {

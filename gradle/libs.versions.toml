@@ -104,7 +104,7 @@ coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", ve
 desugar = "com.android.tools:desugar_jdk_libs:2.0.4"
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-rules-compose = "ru.kode:detekt-rules-compose:1.3.0"
-detekt-twitter-compose-rules = "com.twitter.compose.rules:detekt:0.0.26"
+detekt-nlopez-compose-rules = "io.nlopez.compose.rules:detekt:0.3.3"
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-bom = "com.google.firebase:firebase-bom:32.6.0"
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }

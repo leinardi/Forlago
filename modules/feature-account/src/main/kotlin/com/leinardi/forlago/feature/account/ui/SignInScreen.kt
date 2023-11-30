@@ -54,13 +54,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.account.ui.SignInContract.Effect
 import com.leinardi.forlago.feature.account.ui.SignInContract.Event
 import com.leinardi.forlago.feature.account.ui.SignInContract.State
-import com.leinardi.forlago.library.ui.annotation.DevicePreviews
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.OutlinedTextField
 import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.ProgressButton
 import com.leinardi.forlago.library.ui.component.Scaffold
 import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.preview.PreviewDevices
 import com.leinardi.forlago.library.ui.theme.Spacing
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -177,7 +177,7 @@ private fun SignInScreen(
     }
 }
 
-@DevicePreviews
+@PreviewDevices
 @Composable
 private fun PreviewAccountScreen() {
     PreviewFeature {
