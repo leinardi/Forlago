@@ -26,6 +26,9 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-android-api-consumer-rules.pro")
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {

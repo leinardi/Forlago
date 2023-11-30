@@ -37,6 +37,9 @@ android {
             resValue("string", "account_type", config.android.accountType.get())
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {

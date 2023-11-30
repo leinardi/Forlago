@@ -80,6 +80,9 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules-benchmark.pro")
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 val serviceAccountCredentialsFile: File = rootProject.file("release/play-account.json")

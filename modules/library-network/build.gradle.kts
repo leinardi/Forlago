@@ -27,17 +27,20 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-network-consumer-rules.pro")
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 apollo {
     service("forlago") {
         packageNamesFromFilePaths()
+        dependsOn(projects.modules.libraryNetworkApi)
     }
 }
 
 dependencies {
     api(projects.modules.libraryNetworkApi)
-    apolloMetadata(projects.modules.libraryNetworkApi)
     implementation(projects.modules.libraryAndroidApi)
     implementation(projects.modules.libraryFeature)
     implementation(projects.modules.libraryI18n)

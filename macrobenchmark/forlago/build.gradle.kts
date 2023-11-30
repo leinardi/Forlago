@@ -52,6 +52,9 @@ android {
             matchingFallbacks.add("release")
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 androidComponents {
     beforeVariants(selector().all()) {

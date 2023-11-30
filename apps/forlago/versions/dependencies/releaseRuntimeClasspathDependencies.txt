@@ -793,52 +793,52 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    |    +--- project :modules:library-navigation-api (*)
 |    |    +--- project :modules:library-network-api
-|    |    |    +--- com.apollographql.apollo3:apollo-runtime:3.8.2
-|    |    |    |    \--- com.apollographql.apollo3:apollo-runtime-jvm:3.8.2
-|    |    |    |         +--- com.squareup.okhttp3:okhttp:4.9.3 -> 4.12.0
+|    |    |    +--- com.apollographql.apollo3:apollo-runtime:4.0.0-beta.2
+|    |    |    |    \--- com.apollographql.apollo3:apollo-runtime-jvm:4.0.0-beta.2
+|    |    |    |         +--- com.squareup.okhttp3:okhttp:4.11.0 -> 4.12.0
 |    |    |    |         |    +--- com.squareup.okio:okio:3.6.0
 |    |    |    |         |    |    \--- com.squareup.okio:okio-jvm:3.6.0
 |    |    |    |         |    |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10 (*)
 |    |    |    |         |    |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.9.10 -> 1.9.20 (*)
 |    |    |    |         |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21 -> 1.9.10 (*)
-|    |    |    |         +--- com.apollographql.apollo3:apollo-api:3.8.2
-|    |    |    |         |    \--- com.apollographql.apollo3:apollo-api-jvm:3.8.2
-|    |    |    |         |         +--- com.squareup.okio:okio:3.2.0 -> 3.6.0 (*)
-|    |    |    |         |         +--- com.benasher44:uuid:0.3.1
-|    |    |    |         |         |    \--- com.benasher44:uuid-jvm:0.3.1
-|    |    |    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.30 -> 1.9.10 (*)
-|    |    |    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.30 -> 1.9.20 (*)
-|    |    |    |         |         \--- com.apollographql.apollo3:apollo-annotations:3.8.2
-|    |    |    |         |              \--- com.apollographql.apollo3:apollo-annotations-jvm:3.8.2
-|    |    |    |         |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.9.20 (*)
-|    |    |    |         |                   \--- org.jetbrains:annotations:23.0.0
-|    |    |    |         +--- com.apollographql.apollo3:apollo-mpp-utils:3.8.2
-|    |    |    |         |    \--- com.apollographql.apollo3:apollo-mpp-utils-jvm:3.8.2
-|    |    |    |         |         \--- com.apollographql.apollo3:apollo-annotations:3.8.2 (*)
-|    |    |    |         +--- com.squareup.okio:okio:3.2.0 -> 3.6.0 (*)
-|    |    |    |         +--- com.benasher44:uuid:0.3.1 (*)
-|    |    |    |         \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 -> 1.7.3 (*)
-|    |    |    +--- com.apollographql.apollo3:apollo-adapters:3.8.2
-|    |    |    |    \--- com.apollographql.apollo3:apollo-adapters-jvm:3.8.2
-|    |    |    |         +--- com.apollographql.apollo3:apollo-api:3.8.2 (*)
-|    |    |    |         \--- org.jetbrains.kotlinx:kotlinx-datetime:0.4.0
-|    |    |    |              \--- org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.4.0
-|    |    |    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.7.0 -> 1.9.20 (*)
-|    |    |    |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.7.0 -> 1.9.20 (*)
-|    |    |    +--- com.apollographql.apollo3:apollo-normalized-cache:3.8.2
-|    |    |    |    \--- com.apollographql.apollo3:apollo-normalized-cache-jvm:3.8.2
-|    |    |    |         +--- com.apollographql.apollo3:apollo-runtime:3.8.2 (*)
-|    |    |    |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:3.8.2
-|    |    |    |         |    \--- com.apollographql.apollo3:apollo-normalized-cache-api-jvm:3.8.2
-|    |    |    |         |         +--- com.apollographql.apollo3:apollo-api:3.8.2 (*)
-|    |    |    |         |         +--- com.apollographql.apollo3:apollo-mpp-utils:3.8.2 (*)
-|    |    |    |         |         +--- com.benasher44:uuid:0.3.1 (*)
-|    |    |    |         |         \--- com.squareup.okio:okio:3.2.0 -> 3.6.0 (*)
-|    |    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4 -> 1.7.3 (*)
-|    |    |    |         \--- org.jetbrains.kotlinx:atomicfu:0.17.0
-|    |    |    |              \--- org.jetbrains.kotlinx:atomicfu-jvm:0.17.0
-|    |    |    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.6.0 -> 1.9.20 (*)
-|    |    |    |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.6.0 -> 1.9.20 (*)
+|    |    |    |         +--- com.apollographql.apollo3:apollo-api:4.0.0-beta.2
+|    |    |    |         |    \--- com.apollographql.apollo3:apollo-api-jvm:4.0.0-beta.2
+|    |    |    |         |         +--- com.squareup.okio:okio:3.5.0 -> 3.6.0 (*)
+|    |    |    |         |         +--- com.benasher44:uuid:0.8.0
+|    |    |    |         |         |    \--- com.benasher44:uuid-jvm:0.8.0
+|    |    |    |         |         |         +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0 -> 1.9.10 (*)
+|    |    |    |         |         |         \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.9.0 -> 1.9.20 (*)
+|    |    |    |         |         \--- com.apollographql.apollo3:apollo-annotations:4.0.0-beta.2
+|    |    |    |         |              \--- com.apollographql.apollo3:apollo-annotations-jvm:4.0.0-beta.2
+|    |    |    |         |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.9.20-RC -> 1.9.20 (*)
+|    |    |    |         |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.9.20-RC -> 1.9.20 (*)
+|    |    |    |         +--- com.apollographql.apollo3:apollo-mpp-utils:4.0.0-beta.2
+|    |    |    |         |    \--- com.apollographql.apollo3:apollo-mpp-utils-jvm:4.0.0-beta.2
+|    |    |    |         |         \--- com.apollographql.apollo3:apollo-annotations:4.0.0-beta.2 (*)
+|    |    |    |         +--- com.squareup.okio:okio:3.5.0 -> 3.6.0 (*)
+|    |    |    |         +--- com.benasher44:uuid:0.8.0 (*)
+|    |    |    |         \--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3 (*)
+|    |    |    +--- com.apollographql.apollo3:apollo-adapters:4.0.0-beta.2
+|    |    |    |    \--- com.apollographql.apollo3:apollo-adapters-jvm:4.0.0-beta.2
+|    |    |    |         +--- com.apollographql.apollo3:apollo-api:4.0.0-beta.2 (*)
+|    |    |    |         \--- org.jetbrains.kotlinx:kotlinx-datetime:0.4.1
+|    |    |    |              \--- org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.4.1
+|    |    |    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.21 -> 1.9.20 (*)
+|    |    |    |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.21 -> 1.9.20 (*)
+|    |    |    +--- com.apollographql.apollo3:apollo-normalized-cache:4.0.0-beta.2
+|    |    |    |    \--- com.apollographql.apollo3:apollo-normalized-cache-jvm:4.0.0-beta.2
+|    |    |    |         +--- com.apollographql.apollo3:apollo-runtime:4.0.0-beta.2 (*)
+|    |    |    |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:4.0.0-beta.2
+|    |    |    |         |    \--- com.apollographql.apollo3:apollo-normalized-cache-api-jvm:4.0.0-beta.2
+|    |    |    |         |         +--- com.apollographql.apollo3:apollo-api:4.0.0-beta.2 (*)
+|    |    |    |         |         +--- com.apollographql.apollo3:apollo-mpp-utils:4.0.0-beta.2 (*)
+|    |    |    |         |         +--- com.benasher44:uuid:0.8.0 (*)
+|    |    |    |         |         \--- com.squareup.okio:okio:3.5.0 -> 3.6.0 (*)
+|    |    |    |         +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3 (*)
+|    |    |    |         \--- org.jetbrains.kotlinx:atomicfu:0.20.1
+|    |    |    |              \--- org.jetbrains.kotlinx:atomicfu-jvm:0.20.1
+|    |    |    |                   +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.10 -> 1.9.20 (*)
+|    |    |    |                   \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.8.10 -> 1.9.20 (*)
 |    |    |    +--- com.squareup.retrofit2:retrofit:2.9.0
 |    |    |    |    \--- com.squareup.okhttp3:okhttp:3.14.9 -> 4.12.0 (*)
 |    |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.9.20 (*)
@@ -849,30 +849,29 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    |    +--- com.michael-bull.kotlin-result:kotlin-result-coroutines:1.1.18 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
-|    |    |    +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.8.2
-|    |    |    |    \--- com.apollographql.apollo3:apollo-normalized-cache-sqlite-android:3.8.2
-|    |    |    |         +--- androidx.sqlite:sqlite:2.1.0 -> 2.4.0
+|    |    |    +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:4.0.0-beta.2
+|    |    |    |    \--- com.apollographql.apollo3:apollo-normalized-cache-sqlite-android:4.0.0-beta.2
+|    |    |    |         +--- androidx.sqlite:sqlite:2.3.1 -> 2.4.0
 |    |    |    |         |    +--- androidx.annotation:annotation:1.0.0 -> 1.7.0 (*)
 |    |    |    |         |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 -> 1.9.20 (*)
 |    |    |    |         |    \--- androidx.sqlite:sqlite-framework:2.4.0 (c)
-|    |    |    |         +--- com.squareup.sqldelight:android-driver:1.5.5
-|    |    |    |         |    +--- com.squareup.sqldelight:runtime-jvm:1.5.5
-|    |    |    |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 -> 1.9.10 (*)
-|    |    |    |         |    |    \--- org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31 -> 1.9.20 (*)
-|    |    |    |         |    +--- androidx.sqlite:sqlite:2.1.0 -> 2.4.0 (*)
-|    |    |    |         |    +--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.31 -> 1.9.10 (*)
-|    |    |    |         |    \--- androidx.sqlite:sqlite-framework:2.1.0 -> 2.4.0
-|    |    |    |         |         +--- androidx.annotation:annotation:1.2.0 -> 1.7.0 (*)
-|    |    |    |         |         +--- androidx.sqlite:sqlite:2.4.0 (*)
-|    |    |    |         |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 -> 1.9.20 (*)
-|    |    |    |         |         \--- androidx.sqlite:sqlite:2.4.0 (c)
-|    |    |    |         +--- androidx.sqlite:sqlite-framework:2.1.0 -> 2.4.0 (*)
+|    |    |    |         +--- app.cash.sqldelight:android-driver:2.0.0
+|    |    |    |         |    +--- androidx.sqlite:sqlite-framework:2.3.1 -> 2.4.0
+|    |    |    |         |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.7.0 (*)
+|    |    |    |         |    |    +--- androidx.sqlite:sqlite:2.4.0 (*)
+|    |    |    |         |    |    +--- org.jetbrains.kotlin:kotlin-stdlib:1.8.22 -> 1.9.20 (*)
+|    |    |    |         |    |    \--- androidx.sqlite:sqlite:2.4.0 (c)
+|    |    |    |         |    +--- app.cash.sqldelight:runtime:2.0.0
+|    |    |    |         |    |    \--- app.cash.sqldelight:runtime-jvm:2.0.0
+|    |    |    |         |    |         \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22 -> 1.9.10 (*)
+|    |    |    |         |    +--- androidx.sqlite:sqlite:2.3.1 -> 2.4.0 (*)
+|    |    |    |         |    \--- org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22 -> 1.9.10 (*)
+|    |    |    |         +--- androidx.sqlite:sqlite-framework:2.3.1 -> 2.4.0 (*)
 |    |    |    |         +--- androidx.startup:startup-runtime:1.1.1 (*)
-|    |    |    |         +--- com.apollographql.apollo3:apollo-api:3.8.2 (*)
-|    |    |    |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:3.8.2 (*)
-|    |    |    |         +--- com.apollographql.apollo3:apollo-normalized-cache:3.8.2 (*)
-|    |    |    |         \--- com.squareup.sqldelight:runtime:1.5.5
-|    |    |    |              \--- com.squareup.sqldelight:runtime-jvm:1.5.5 (*)
+|    |    |    |         +--- com.apollographql.apollo3:apollo-api:4.0.0-beta.2 (*)
+|    |    |    |         +--- com.apollographql.apollo3:apollo-normalized-cache-api:4.0.0-beta.2 (*)
+|    |    |    |         +--- com.apollographql.apollo3:apollo-normalized-cache:4.0.0-beta.2 (*)
+|    |    |    |         \--- app.cash.sqldelight:runtime:2.0.0 (*)
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1
 |    |    |    |    \--- org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.1
 |    |    |    |         +--- org.jetbrains.kotlin:kotlin-stdlib:1.9.20 (*)
@@ -1545,7 +1544,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    +--- project :modules:library-navigation-api (*)
 |    +--- project :modules:library-preferences-api (*)
 |    +--- project :modules:library-ui-api (*)
-|    +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:3.8.2 (*)
+|    +--- com.apollographql.apollo3:apollo-normalized-cache-sqlite:4.0.0-beta.2 (*)
 |    +--- com.google.dagger:hilt-android:2.48.1 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1 (*)
 |    +--- com.squareup.okhttp3:logging-interceptor:4.12.0

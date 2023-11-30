@@ -24,4 +24,7 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-bar-consumer-rules.pro")
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }

@@ -24,4 +24,7 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-i18n-consumer-rules.pro")
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
