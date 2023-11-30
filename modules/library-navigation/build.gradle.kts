@@ -30,7 +30,6 @@ android {
 dependencies {
     api(projects.modules.libraryNavigationApi)
 
-    implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation.compose)
-    ksp(libs.hilt.compiler)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
 }

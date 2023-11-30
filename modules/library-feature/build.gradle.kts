@@ -37,6 +37,6 @@ dependencies {
     api(project(":modules:library-navigation"))
     api(libs.coroutines.core)
     api(libs.coroutines.android)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
 }

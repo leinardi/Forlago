@@ -1007,7 +1007,6 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.5 (*)
 |    |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    |    |    +--- com.google.dagger:hilt-android:2.48.1 (*)
-|    |    |    +--- androidx.hilt:hilt-navigation-compose:1.1.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.9.20 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3 (*)
 |    |    +--- org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3 (*)
@@ -1287,6 +1286,7 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    |    +--- androidx.core:core-splashscreen:1.0.1
 |    |    |    +--- androidx.annotation:annotation:1.2.0 -> 1.7.0 (*)
 |    |    |    \--- org.jetbrains.kotlin:kotlin-stdlib:1.6.21 -> 1.9.20 (*)
+|    |    +--- androidx.hilt:hilt-navigation-compose:1.1.0 (*)
 |    |    +--- androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2 (*)
 |    |    +--- androidx.navigation:navigation-compose:2.7.5 (*)
 |    |    +--- androidx.paging:paging-compose:3.2.1
@@ -1379,7 +1379,6 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    +--- androidx.navigation:navigation-fragment-ktx:2.7.5 (*)
 |    +--- androidx.navigation:navigation-ui-ktx:2.7.5 (*)
 |    +--- com.google.dagger:hilt-android:2.48.1 (*)
-|    +--- androidx.hilt:hilt-navigation-compose:1.1.0 (*)
 |    +--- project :modules:library-network-api (*)
 |    +--- project :modules:library-preferences-api (*)
 |    +--- com.mikepenz:aboutlibraries-compose:10.9.1
@@ -1431,7 +1430,6 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    +--- androidx.navigation:navigation-fragment-ktx:2.7.5 (*)
 |    +--- androidx.navigation:navigation-ui-ktx:2.7.5 (*)
 |    +--- com.google.dagger:hilt-android:2.48.1 (*)
-|    +--- androidx.hilt:hilt-navigation-compose:1.1.0 (*)
 |    \--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.9.20 (*)
 +--- project :modules:feature-debug
 |    +--- project :modules:library-feature (*)
@@ -1453,7 +1451,6 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    +--- androidx.navigation:navigation-fragment-ktx:2.7.5 (*)
 |    +--- androidx.navigation:navigation-ui-ktx:2.7.5 (*)
 |    +--- com.google.dagger:hilt-android:2.48.1 (*)
-|    +--- androidx.hilt:hilt-navigation-compose:1.1.0 (*)
 |    +--- project :modules:feature-account-api (*)
 |    +--- project :modules:library-network-api (*)
 |    +--- project :modules:library-preferences-api (*)
@@ -1481,7 +1478,6 @@ releaseUnitTestRuntimeClasspath - Runtime classpath of /releaseUnitTest.
 |    +--- androidx.navigation:navigation-fragment-ktx:2.7.5 (*)
 |    +--- androidx.navigation:navigation-ui-ktx:2.7.5 (*)
 |    +--- com.google.dagger:hilt-android:2.48.1 (*)
-|    +--- androidx.hilt:hilt-navigation-compose:1.1.0 (*)
 |    \--- org.jetbrains.kotlin:kotlin-parcelize-runtime:1.9.20 (*)
 +--- project :modules:library-android
 |    +--- project :modules:library-android-api (*)

@@ -33,7 +33,7 @@ dependencies {
     api(libs.play.app.update.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.room.runtime)
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
     implementation(libs.kotlinx.serialization)
-    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }

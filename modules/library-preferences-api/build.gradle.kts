@@ -30,5 +30,5 @@ dependencies {
     api(projects.modules.libraryUiApi)
 
     api(libs.androidx.datastore.preferences)
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
 }

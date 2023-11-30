@@ -15,7 +15,7 @@ detekt = "1.23.1"
 diktat = "1.2.5"
 gradle = "8.3"
 greclipse = "4.19"
-hilt = "2.48.1"
+dagger = "2.48.1"
 kotlin = "1.9.20"
 kotlin-result = "1.1.18"
 kotlinpoet = "1.15.1"
@@ -64,6 +64,7 @@ androidx-customview = "androidx.customview:customview:1.2.0-alpha02"
 androidx-customview-poolingcontainer = "androidx.customview:customview-poolingcontainer:1.0.0"
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "androidx-datastore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
+androidx-hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.1.0"
 androidx-lifecycle-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
@@ -101,6 +102,10 @@ composecharts = "io.github.bytebeats:compose-charts:0.1.2"
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
+dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
+dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 desugar = "com.android.tools:desugar_jdk_libs:2.0.4"
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-rules-compose = "ru.kode:detekt-rules-compose:1.3.0"
@@ -109,10 +114,6 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
 firebase-bom = "com.google.firebase:firebase-bom:32.6.0"
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = "androidx.hilt:hilt-navigation-compose:1.1.0"
 junit = "junit:junit:4.13.2"
 konfetti = "nl.dionsegijn:konfetti-compose:2.0.3"
@@ -159,12 +160,12 @@ plugin-android-gradle = "com.android.tools.build:gradle:8.2.0-rc03"
 plugin-androidcachefix = "gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin:3.0"
 plugin-androidx-navigation-safeargs = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 plugin-appversioning = "io.github.reactivecircus.appversioning:app-versioning-gradle-plugin:1.3.1"
+plugin-dagger-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "dagger" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-easylauncher = "com.project.starter:easylauncher:6.2.0"
 plugin-firebase-crashlytics = "com.google.firebase:firebase-crashlytics-gradle:2.9.9"
 plugin-firebase-perf = "com.google.firebase:perf-plugin:1.4.2"
 plugin-google-services = "com.google.gms:google-services:4.4.0"
-plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 plugin-ruler = "com.spotify.ruler:ruler-gradle-plugin:1.3.0"

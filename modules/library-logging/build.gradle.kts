@@ -36,7 +36,7 @@ dependencies {
     if (rootProject.file("apps/forlago/google-services.json").exists()) {
         implementation(libs.firebase.perf)
     }
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
     implementation(platform(libs.firebase.bom))
-    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }

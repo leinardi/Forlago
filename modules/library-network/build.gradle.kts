@@ -46,7 +46,7 @@ dependencies {
     implementation(projects.modules.libraryUiApi)
 
     implementation(libs.apollo.cache.sqlite)
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
     implementation(libs.kotlinx.serialization)
     implementation(libs.okhttp3.logging.interceptor)
     implementation(libs.retrofit)
@@ -54,10 +54,10 @@ dependencies {
     implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.timber)
     implementation(libs.tink)
-    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 
-    kspTest(libs.hilt.android.compiler)
+    kspTest(libs.dagger.hilt.android.compiler)
     testImplementation(libs.apollo.testing.support)
     testImplementation(libs.robolectric)
-    kspAndroidTest(libs.hilt.android.compiler)
+    kspAndroidTest(libs.dagger.hilt.android.compiler)
 }

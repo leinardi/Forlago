@@ -60,14 +60,15 @@ dependencies {
     api(libs.androidx.compose.ui)
     api(libs.androidx.constraintlayout.compose)
     api(libs.androidx.core.splashscreen)
+    api(libs.androidx.hilt.navigation.compose)
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.navigation.compose)
     api(libs.androidx.paging)
     api(libs.coil.compose)
     api(libs.material)
     api(libs.zoomable)
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
     debugApi(libs.androidx.customview)  // Workaround for https://issuetracker.google.com/issues/227767363
     debugApi(libs.androidx.customview.poolingcontainer)  // Workaround for https://issuetracker.google.com/issues/227767363
-    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }
