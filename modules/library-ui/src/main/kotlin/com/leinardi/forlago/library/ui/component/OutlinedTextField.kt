@@ -45,8 +45,8 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.constraintlayout.goneIf
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.Spacing
 
@@ -160,7 +160,7 @@ fun OutlinedTextField(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewOutlinedTextField() {
     ForlagoTheme {
@@ -168,7 +168,7 @@ private fun PreviewOutlinedTextField() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewOutlinedTextFieldEmpty() {
     ForlagoTheme {
@@ -176,7 +176,7 @@ private fun PreviewOutlinedTextFieldEmpty() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewOutlinedTextFieldEmptyHelperMessage() {
     ForlagoTheme {
@@ -184,7 +184,7 @@ private fun PreviewOutlinedTextFieldEmptyHelperMessage() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewOutlinedTextFieldEmptyHelperMessageCounterMessage() {
     ForlagoTheme {
@@ -192,7 +192,7 @@ private fun PreviewOutlinedTextFieldEmptyHelperMessageCounterMessage() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewOutlinedTextFieldErrorMessage() {
     ForlagoTheme {
@@ -200,7 +200,7 @@ private fun PreviewOutlinedTextFieldErrorMessage() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewOutlinedTextFieldErrorMessageCounterMessage() {
     ForlagoTheme {

@@ -32,7 +32,7 @@ dependencies {
     implementation(projects.modules.libraryAndroidApi)
     implementation(projects.modules.libraryUiApi)
 
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
     implementation(libs.timber)
-    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 }

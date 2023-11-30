@@ -33,10 +33,10 @@ dependencies {
 
     implementation(libs.androidx.security)
     implementation(libs.androidx.startup)
-    implementation(libs.hilt.android)
+    implementation(libs.dagger.hilt.android)
     implementation(libs.process.phoenix)
     implementation(libs.tink)
-    ksp(libs.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 
-    kspTest(libs.hilt.android.compiler)
+    kspTest(libs.dagger.hilt.android.compiler)
 }

@@ -16,8 +16,8 @@
 
 package com.leinardi.forlago.library.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material3.ChipBorder
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.material3.SuggestionChipDefaults
@@ -25,8 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -39,7 +39,7 @@ fun SuggestionChip(
     shape: Shape = SuggestionChipDefaults.shape,
     colors: ChipColors = SuggestionChipDefaults.suggestionChipColors(),
     elevation: ChipElevation? = SuggestionChipDefaults.suggestionChipElevation(),
-    border: ChipBorder? = SuggestionChipDefaults.suggestionChipBorder(),
+    border: BorderStroke? = SuggestionChipDefaults.suggestionChipBorder(enabled),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     placeholder: Boolean = false,
 ) {
@@ -57,7 +57,7 @@ fun SuggestionChip(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewChoiceChipEnabled() {
     ForlagoTheme {
@@ -68,7 +68,7 @@ private fun PreviewChoiceChipEnabled() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewChoiceChipDisabled() {
     ForlagoTheme {

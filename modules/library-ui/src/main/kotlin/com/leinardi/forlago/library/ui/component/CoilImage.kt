@@ -28,7 +28,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
 
-@Suppress("ModifierReused")
+@Suppress("ModifierReused", "ModifierNotUsedAtRoot")
 @Composable
 fun CoilImage(
     url: String?,

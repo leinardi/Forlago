@@ -30,7 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.Spacing
 
@@ -67,7 +67,7 @@ fun SettingsMenuSwitch(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuSwitchOn() {
     ForlagoTheme {
@@ -79,7 +79,7 @@ private fun PreviewSettingsMenuSwitchOn() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsMenuSwitchOff() {
     ForlagoTheme {

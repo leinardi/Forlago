@@ -30,7 +30,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
@@ -47,10 +47,10 @@ fun AutoSizedCircularProgressIndicator(
         }
 
         CircularProgressIndicator(
-            progress = progress,
+            progress = { progress },
             modifier = Modifier.size(diameter + InternalPadding),
-            strokeWidth = (diameter * StrokeDiameterFraction).coerceAtLeast(1.dp),
             color = color,
+            strokeWidth = (diameter * StrokeDiameterFraction).coerceAtLeast(1.dp),
         )
     }
 }
@@ -84,7 +84,7 @@ private val InternalPadding = Spacing.half
 
 private val StrokeDiameterFraction = DefaultStrokeWidth / DefaultDiameter
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewAutoSizedCircularProgressIndicator() {
     Column {

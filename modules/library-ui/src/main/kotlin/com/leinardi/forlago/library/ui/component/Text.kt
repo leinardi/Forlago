@@ -29,8 +29,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
+import com.leinardi.forlago.library.ui.preview.loremIpsum
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -75,10 +76,10 @@ fun Text(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewText() {
     ForlagoTheme {
-        Text("Lorem ipsum")
+        Text(loremIpsum(2))
     }
 }

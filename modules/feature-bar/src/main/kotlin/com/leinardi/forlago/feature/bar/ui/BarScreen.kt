@@ -42,11 +42,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
-import com.leinardi.forlago.library.ui.annotation.DevicePreviews
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.Scaffold
 import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.preview.PreviewDevices
 import com.leinardi.forlago.library.ui.theme.Spacing
 
 @Composable
@@ -108,7 +108,7 @@ private fun BarScreen(
     }
 }
 
-@DevicePreviews
+@PreviewDevices
 @Composable
 private fun PreviewBarScreen() {
     PreviewFeature {

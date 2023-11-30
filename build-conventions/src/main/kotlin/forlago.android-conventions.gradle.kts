@@ -49,6 +49,8 @@ plugins.withType<AndroidBasePlugin>().configureEach {
             setTestInstrumentationRunnerArguments(mutableMapOf("clearPackageData" to "true"))
         }
 
+        buildFeatures.buildConfig = true
+
         compileOptions {
             sourceCompatibility = config.android.javaVersion.get()
             targetCompatibility = config.android.javaVersion.get()

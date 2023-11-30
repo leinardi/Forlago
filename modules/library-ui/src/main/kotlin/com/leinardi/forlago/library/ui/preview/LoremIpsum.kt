@@ -14,21 +14,8 @@
  * limitations under the License.
  */
 
-plugins {
-    id("forlago.android-library-conventions")
-}
+package com.leinardi.forlago.library.ui.preview
 
-android {
-    namespace = "com.leinardi.forlago.library.preferences.api"
-    resourcePrefix = "preferences_api_"
-    defaultConfig {
-        consumerProguardFiles("$projectDir/proguard-preferences-api-consumer-rules.pro")
-    }
-}
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 
-dependencies {
-    api(projects.modules.libraryUiApi)
-
-    api(libs.androidx.datastore.preferences)
-    implementation(libs.dagger.hilt.android)
-}
+fun loremIpsum(words: Int): String = LoremIpsum(words).values.joinToString(" ")

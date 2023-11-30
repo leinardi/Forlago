@@ -16,17 +16,17 @@
 
 package com.leinardi.forlago.library.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.material3.AssistChipDefaults
-import androidx.compose.material3.ChipBorder
 import androidx.compose.material3.ChipColors
 import androidx.compose.material3.ChipElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -40,7 +40,7 @@ fun AssistChip(
     shape: Shape = AssistChipDefaults.shape,
     colors: ChipColors = AssistChipDefaults.assistChipColors(),
     elevation: ChipElevation? = AssistChipDefaults.assistChipElevation(),
-    border: ChipBorder? = AssistChipDefaults.assistChipBorder(),
+    border: BorderStroke? = AssistChipDefaults.assistChipBorder(enabled),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     placeholder: Boolean = false,
 ) {
@@ -59,7 +59,7 @@ fun AssistChip(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewActionChipEnabled() {
     ForlagoTheme {
@@ -70,7 +70,7 @@ private fun PreviewActionChipEnabled() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewActionChipDisabled() {
     ForlagoTheme {

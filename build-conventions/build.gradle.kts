@@ -32,7 +32,7 @@ dependencies {
     implementation(libs.plugin.firebase.crashlytics)
     implementation(libs.plugin.firebase.perf)
     implementation(libs.plugin.google.services)
-    implementation(libs.plugin.hilt)
+    implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.kotlin)
     implementation(libs.plugin.ksp)
     implementation(libs.plugin.ruler)

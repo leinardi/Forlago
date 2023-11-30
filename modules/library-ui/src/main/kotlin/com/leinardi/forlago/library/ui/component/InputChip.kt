@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.library.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.size
@@ -23,7 +24,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.InputChipDefaults
-import androidx.compose.material3.SelectableChipBorder
 import androidx.compose.material3.SelectableChipColors
 import androidx.compose.material3.SelectableChipElevation
 import androidx.compose.runtime.Composable
@@ -32,8 +32,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 
 @Composable
@@ -49,7 +49,7 @@ fun InputChip(
     shape: Shape = InputChipDefaults.shape,
     colors: SelectableChipColors = InputChipDefaults.inputChipColors(),
     elevation: SelectableChipElevation? = InputChipDefaults.inputChipElevation(),
-    border: SelectableChipBorder? = InputChipDefaults.inputChipBorder(),
+    border: BorderStroke? = InputChipDefaults.inputChipBorder(enabled, selected),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     placeholder: Boolean = false,
 ) {
@@ -88,7 +88,7 @@ fun InputChip(
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewInputChipEnabled() {
     ForlagoTheme {
@@ -101,7 +101,7 @@ private fun PreviewInputChipEnabled() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewInputChipDisabled() {
     ForlagoTheme {
@@ -115,7 +115,7 @@ private fun PreviewInputChipDisabled() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewInputChipSelected() {
     ForlagoTheme {

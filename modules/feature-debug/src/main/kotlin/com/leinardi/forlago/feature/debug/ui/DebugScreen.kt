@@ -67,7 +67,6 @@ import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarIt
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Options
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor.Environment
-import com.leinardi.forlago.library.ui.annotation.DevicePreviews
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
 import com.leinardi.forlago.library.ui.component.MainNavigationBarItem
@@ -77,6 +76,7 @@ import com.leinardi.forlago.library.ui.component.SettingsGroup
 import com.leinardi.forlago.library.ui.component.SettingsMenuLink
 import com.leinardi.forlago.library.ui.component.SettingsMenuSwitch
 import com.leinardi.forlago.library.ui.component.TopAppBar
+import com.leinardi.forlago.library.ui.preview.PreviewDevices
 import com.leinardi.forlago.library.ui.theme.Spacing
 import kotlinx.coroutines.launch
 
@@ -375,7 +375,7 @@ private val previewDebugInfo = GetDebugInfoInteractor.DebugInfo(
     ),
 )
 
-@DevicePreviews
+@PreviewDevices
 @Composable
 private fun PreviewDebugScreenInfo() {
     PreviewFeature {
@@ -383,7 +383,7 @@ private fun PreviewDebugScreenInfo() {
     }
 }
 
-@DevicePreviews
+@PreviewDevices
 @Composable
 private fun PreviewDebugScreenOptions() {
     PreviewFeature {
@@ -391,7 +391,7 @@ private fun PreviewDebugScreenOptions() {
     }
 }
 
-@DevicePreviews
+@PreviewDevices
 @Composable
 private fun PreviewDebugScreenFeatures() {
     PreviewFeature {

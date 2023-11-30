@@ -29,7 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.leinardi.forlago.library.ui.annotation.ThemePreviews
+import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 import com.leinardi.forlago.library.ui.theme.Spacing
 
@@ -65,7 +65,7 @@ internal fun SettingsGroupTitle(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun PreviewSettingsGroup() {
     ForlagoTheme {
