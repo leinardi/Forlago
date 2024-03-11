@@ -69,7 +69,8 @@ interface ForlagoNavigator {
      * @return true if the navigation request was successfully delivered to the View, false otherwise
      */
     fun navigateBack(): Boolean
+    fun navigateBackOrHome(): Boolean
     fun navigateHome(): Boolean
-    fun navigateToLogin(relogin: Boolean, builder: NavOptionsBuilder.() -> Unit = { launchSingleTop = true }): Boolean
+    fun navigateToLogin(builder: NavOptionsBuilder.() -> Unit = { launchSingleTop = true }): Boolean
     fun navigate(route: String, builder: NavOptionsBuilder.() -> Unit = { launchSingleTop = true }): Boolean
 }

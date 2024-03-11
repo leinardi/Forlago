@@ -16,18 +16,20 @@
 
 package com.leinardi.forlago.feature.bar.ui
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object BarContract {
     data class State(
         val text: String,
     ) : ViewState
 
     sealed class Event : ViewEvent {
-        object OnBackButtonClicked : Event()
-        object OnUpButtonClicked : Event()
+        data object OnBackButtonClicked : Event()
+        data object OnUpButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect

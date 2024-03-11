@@ -30,7 +30,7 @@ import com.leinardi.forlago.feature.account.api.interactor.token.PeekAccessToken
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Event
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.State
-import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
+import com.leinardi.forlago.feature.login.api.destination.LogInDestination
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -55,15 +55,13 @@ class AccountDebugViewModel @Inject constructor(
     override fun handleEvent(event: Event) {
         viewModelScope.launch {
             when (event) {
+                Event.OnActivityPaused -> Timber.d(">>> Detached")
+                Event.OnActivityResumed -> updateState()
                 Event.OnGetAccessTokenClicked -> getAccessToken()
                 Event.OnInvalidateAccessTokenClicked -> invalidateAccessToken()
                 Event.OnInvalidateRefreshTokenClicked -> invalidateRefreshToken()
                 Event.OnLogOutClicked -> logOut()
-                Event.OnOpenSignInScreenClicked ->
-                    forlagoNavigator.navigate(SignInDestination.get(viewState.value.accountName != null))
-
-                Event.OnViewAttached -> updateState()
-                Event.OnViewDetached -> Timber.d(">>> Detached")
+                Event.OnOpenLogInScreenClicked -> forlagoNavigator.navigate(LogInDestination.get())
             }
         }
     }

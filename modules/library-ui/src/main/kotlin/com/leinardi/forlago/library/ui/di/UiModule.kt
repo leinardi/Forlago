@@ -16,13 +16,13 @@
 
 package com.leinardi.forlago.library.ui.di
 
-import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouFlowInteractor
-import com.leinardi.forlago.library.ui.api.interactor.GetThemeFlowInteractor
+import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouStreamInteractor
+import com.leinardi.forlago.library.ui.api.interactor.GetThemeStreamInteractor
 import com.leinardi.forlago.library.ui.api.interactor.SetNightModeInteractor
 import com.leinardi.forlago.library.ui.api.interactor.StoreMaterialYouInteractor
 import com.leinardi.forlago.library.ui.api.interactor.StoreThemeInteractor
-import com.leinardi.forlago.library.ui.interactor.GetMaterialYouFlowInteractorImpl
-import com.leinardi.forlago.library.ui.interactor.GetThemeFlowInteractorImpl
+import com.leinardi.forlago.library.ui.interactor.GetMaterialYouStreamInteractorImpl
+import com.leinardi.forlago.library.ui.interactor.GetThemeStreamInteractorImpl
 import com.leinardi.forlago.library.ui.interactor.SetNightModeInteractorImpl
 import com.leinardi.forlago.library.ui.interactor.StoreMaterialYouInteractorImpl
 import com.leinardi.forlago.library.ui.interactor.StoreThemeInteractorImpl
@@ -35,10 +35,10 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 internal interface UiModule {
     @Binds
-    fun bindGetMaterialYouFlowInteractor(bind: GetMaterialYouFlowInteractorImpl): GetMaterialYouFlowInteractor
+    fun bindGetMaterialYouStreamInteractor(bind: GetMaterialYouStreamInteractorImpl): GetMaterialYouStreamInteractor
 
     @Binds
-    fun bindGetThemeFlowInteractor(bind: GetThemeFlowInteractorImpl): GetThemeFlowInteractor
+    fun bindGetThemeStreamInteractor(bind: GetThemeStreamInteractorImpl): GetThemeStreamInteractor
 
     @Binds
     fun bindSetNightModeInteractor(bind: SetNightModeInteractorImpl): SetNightModeInteractor

@@ -23,16 +23,18 @@ plugins {
 
 
 dependencies {
+    implementation(libs.kotlinx.serialization)
     implementation(libs.plugin.aboutlibraries)
     implementation(libs.plugin.android.gradle)
     implementation(libs.plugin.androidcachefix)
-    implementation(libs.plugin.appversioning)
+    implementation(libs.plugin.apollo)
+    implementation(libs.plugin.apollo.external)
+    implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.detekt)
     implementation(libs.plugin.easylauncher)
     implementation(libs.plugin.firebase.crashlytics)
     implementation(libs.plugin.firebase.perf)
     implementation(libs.plugin.google.services)
-    implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.kotlin)
     implementation(libs.plugin.ksp)
     implementation(libs.plugin.ruler)

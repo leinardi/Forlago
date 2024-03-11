@@ -34,6 +34,7 @@ package com.leinardi.forlago.library.navigationksp.codegenerator
 
 import com.google.devtools.ksp.symbol.KSFile
 import com.leinardi.forlago.library.navigationksp.ext.endControlFlowWithTrailingComma
+import com.leinardi.forlago.library.navigationksp.model.DefaultValue
 import com.leinardi.forlago.library.navigationksp.model.NavGraphDestinationModel
 import com.squareup.kotlinpoet.BOOLEAN
 import com.squareup.kotlinpoet.ClassName
@@ -52,19 +53,22 @@ import com.squareup.kotlinpoet.ksp.addOriginatingKSFile
 import java.util.Locale
 
 internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestinationModel> {
-    private val CLASS_NAME_BUILD_CONFIG = ClassName("com.leinardi.forlago.library.navigation.api", "BuildConfig")
     private val CLASS_NAME_NAVIGATION_DESTINATION = ClassName("com.leinardi.forlago.library.navigation.api.destination", "NavigationDestination")
     private val CLASS_NAME_NAV_DEEP_LINK = ClassName("androidx.navigation", "NavDeepLink")
     private val CLASS_NAME_NAV_DEEP_LINK_DSL = ClassName("androidx.navigation", "navDeepLink")
     private val CLASS_NAME_NAV_NAMED_NAV_ARGUMENT = ClassName("androidx.navigation", "NamedNavArgument")
     private val CLASS_NAME_NAV_TYPE = ClassName("androidx.navigation", "NavType")
     private val CLASS_NAME_SAVED_STATE_HANDLE = ClassName("androidx.lifecycle", "SavedStateHandle")
-    private val CLASS_NAME_STANDARD_CHARSETS = ClassName("java.nio.charset", "StandardCharsets")
     private val CLASS_NAME_URI_BUILDER = ClassName("android.net", "Uri").nestedClass("Builder")
-    private val CLASS_NAME_URL_DECODER = ClassName("java.net", "URLDecoder")
-    private val MEMBER_NAME_DEEP_LINK_SCHEMA = MemberName(CLASS_NAME_BUILD_CONFIG, "DEEP_LINK_SCHEMA")
+    private val MEMBER_NAME_DEEP_LINK_SCHEME = MemberName(CLASS_NAME_NAVIGATION_DESTINATION.nestedClass("Companion"), "DEEP_LINK_SCHEME")
     private val MEMBER_NAME_NAV_ARGUMENT = MemberName("androidx.navigation", "navArgument")
-    private val MEMBER_NAME_STANDARD_CHARSETS_UTF_8 = MemberName(CLASS_NAME_STANDARD_CHARSETS, "UTF_8")
+    private val startedViaDeepLinkArgument = NavGraphDestinationModel.ArgumentModel(
+        simpleName = "startedViaDeepLink",
+        typeName = BOOLEAN,
+        navTypePropertyName = "BoolType",
+        isNullable = false,
+        defaultValue = DefaultValue("true"),
+    )
 
     override fun generate(model: NavGraphDestinationModel): FileSpec = FileSpec.builder(
         packageName = model.packageName,
@@ -77,7 +81,11 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
 
     private fun generateDestinationObject(model: NavGraphDestinationModel): TypeSpec {
         val nameProperty = generateNameProperty(model)
-        val routeProperty = generateRouteProperty(model, nameProperty)
+        val arguments = model.arguments
+            .toMutableList()
+            .apply { add(startedViaDeepLinkArgument) }
+            .toList()
+        val routeProperty = generateRouteProperty(model, arguments, nameProperty)
 
         return TypeSpec.objectBuilder(model.className).apply {
             superclass(CLASS_NAME_NAVIGATION_DESTINATION)
@@ -86,12 +94,12 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
             if (model.deepLink) {
                 addProperty(generateDeepLinksProperty(model))
             }
-            if (model.arguments.isNotEmpty()) {
-                addProperty(generateArgumentsProperty(model.arguments, model.containingFile))
+            if (arguments.isNotEmpty()) {
+                addProperty(generateArgumentsProperty(arguments, model.containingFile))
             }
             addFunction(generateGetFun(model, nameProperty))
-            if (model.arguments.isNotEmpty()) {
-                addType(generateArgumentsGetters(model.arguments, model.containingFile))
+            if (arguments.isNotEmpty()) {
+                addType(generateArgumentsGetters(arguments, model.containingFile))
             }
             addOriginatingKSFile(model.containingFile)
         }.build()
@@ -103,7 +111,11 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
             .addOriginatingKSFile(model.containingFile)
             .build()
 
-    private fun generateRouteProperty(model: NavGraphDestinationModel, nameProperty: PropertySpec): PropertySpec =
+    private fun generateRouteProperty(
+        model: NavGraphDestinationModel,
+        arguments: List<NavGraphDestinationModel.ArgumentModel>,
+        nameProperty: PropertySpec,
+    ): PropertySpec =
         PropertySpec.builder("route", String::class, KModifier.OVERRIDE)
             .initializer(
                 buildCodeBlock {
@@ -113,8 +125,8 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                         addStatement(".appendEncodedPath(%S)", prefix)
                     }
                     addStatement(".appendPath(%N)", nameProperty)
-                    if (model.arguments.isNotEmpty()) {
-                        val (optional, mandatory) = partitionMandatoryOptionalArguments(model)
+                    if (arguments.isNotEmpty()) {
+                        val (optional, mandatory) = partitionMandatoryOptionalArguments(arguments)
                         mandatory.forEach { argumentModel ->
                             addStatement(".appendEncodedPath(%S)", "{${argumentModel.simpleName}}")
                         }
@@ -180,21 +192,26 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
             List::class.asClassName().parameterizedBy(CLASS_NAME_NAV_DEEP_LINK),
             KModifier.OVERRIDE,
         )
-        .initializer(
-            buildCodeBlock {
-                addStatement("listOf(")
-                indent()
-                beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
-                addStatement("uriPattern = \"\${%M}://\$route\"", MEMBER_NAME_DEEP_LINK_SCHEMA)
-                endControlFlowWithTrailingComma()
-                if (model.arguments.any { it.isNullable }) {
-                    beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
-                    addStatement("uriPattern = \"\${%M}://\${route.substringBefore(\"?\")}\"", MEMBER_NAME_DEEP_LINK_SCHEMA)
-                    endControlFlowWithTrailingComma()
-                }
-                unindent()
-                add(")")
-            },
+        .getter(
+            FunSpec
+                .getterBuilder()
+                .addCode(
+                    buildCodeBlock {
+                        add("return listOf(\n")
+                        indent()
+                        beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
+                        addStatement("uriPattern = \"\${%M}://\$route\"", MEMBER_NAME_DEEP_LINK_SCHEME)
+                        endControlFlowWithTrailingComma()
+                        if (model.arguments.any { it.isNullable }) {
+                            beginControlFlow("%T", CLASS_NAME_NAV_DEEP_LINK_DSL)
+                            addStatement("uriPattern = \"\${%M}://\${route.substringBefore(\"?\")}\"", MEMBER_NAME_DEEP_LINK_SCHEME)
+                            endControlFlowWithTrailingComma()
+                        }
+                        unindent()
+                        add(")")
+                    },
+                )
+                .build(),
         )
         .addOriginatingKSFile(model.containingFile)
         .build()
@@ -219,7 +236,7 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                     }
                     addStatement("appendPath(%N)", nameProperty)
                     if (model.arguments.isNotEmpty()) {
-                        val (optional, mandatory) = partitionMandatoryOptionalArguments(model)
+                        val (optional, mandatory) = partitionMandatoryOptionalArguments(model.arguments)
                         mandatory.forEach { argumentModel ->
                             if (argumentModel.typeName.copy(nullable = false) == STRING) {
                                 addStatement("appendPath(%L)", argumentModel.simpleName)
@@ -238,6 +255,7 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                                 addStatement("appendQueryParameter(%S, %L.toString())", argumentModel.simpleName, argumentModel.simpleName)
                             }
                         }
+                        addStatement("appendQueryParameter(%S, %L.toString())", startedViaDeepLinkArgument.simpleName, "false")
                     }
                     unindent()
                     addStatement("}")
@@ -271,11 +289,6 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
                                     indent()
                                 }
                                 addStatement("$savedStateHandleParamName.get<%T>(%S)", argumentModel.typeName, argumentModel.simpleName)
-                                if (argumentModel.typeName.copy(nullable = false) == STRING) {
-                                    indent()
-                                    addStatement("?.run { %T.decode(this, %M.name()) }", CLASS_NAME_URL_DECODER, MEMBER_NAME_STANDARD_CHARSETS_UTF_8)
-                                    unindent()
-                                }
                                 if (!argumentModel.isNullable) {
                                     unindent()
                                     addStatement(")")
@@ -289,6 +302,6 @@ internal object NavGraphDestinationCodeGenerator : CodeGenerator<NavGraphDestina
         .addOriginatingKSFile(containingFile)
         .build()
 
-    private fun partitionMandatoryOptionalArguments(model: NavGraphDestinationModel) =
-        model.arguments.partition { it.isNullable || it.typeName.copy(nullable = false) == BOOLEAN }
+    private fun partitionMandatoryOptionalArguments(arguments: List<NavGraphDestinationModel.ArgumentModel>) =
+        arguments.partition { it.isNullable || it.typeName.copy(nullable = false) == BOOLEAN }
 }

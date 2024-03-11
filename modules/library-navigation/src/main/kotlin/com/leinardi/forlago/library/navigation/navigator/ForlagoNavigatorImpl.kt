@@ -18,22 +18,22 @@ package com.leinardi.forlago.library.navigation.navigator
 
 import android.content.Intent
 import androidx.navigation.NavOptionsBuilder
-import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
-import com.leinardi.forlago.library.navigation.api.destination.foo.FooDestination
+import com.leinardi.forlago.feature.foo.api.destination.FooDestination
+import com.leinardi.forlago.feature.login.api.destination.LogInDestination
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.navigation.api.navigator.NavigatorEvent
+import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@ActivityRetainedScoped
 internal class ForlagoNavigatorImpl @Inject constructor() : ForlagoNavigator {
     // A capacity > 0 is required to not lose an event sent before the nav host starts collecting (e.g. Add account from System settings)
     private val navigationEvents = Channel<NavigatorEvent>(capacity = Channel.CONFLATED)
 
     override val destinations = navigationEvents.receiveAsFlow()
-    override val homeDestination = FooDestination.get()
+    override val homeDestination = FooDestination.route
 
     /**
      * Checks the given Intent for a Navigation deep link and navigates to the deep link if present.
@@ -81,13 +81,15 @@ internal class ForlagoNavigatorImpl @Inject constructor() : ForlagoNavigator {
      */
     override fun navigateBack(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateBack).isSuccess
 
+    override fun navigateBackOrHome(): Boolean = navigationEvents.trySend(NavigatorEvent.NavigateBackOrHome).isSuccess
+
     override fun navigateHome(): Boolean = navigate(homeDestination) {
         launchSingleTop = true
         popUpTo(0) { inclusive = true }
     }
 
-    override fun navigateToLogin(relogin: Boolean, builder: NavOptionsBuilder.() -> Unit): Boolean =
-        navigate(SignInDestination.get(relogin), builder)
+    override fun navigateToLogin(builder: NavOptionsBuilder.() -> Unit): Boolean =
+        navigate(LogInDestination.get(), builder)
 
     override fun navigate(route: String, builder: NavOptionsBuilder.() -> Unit): Boolean =
         navigationEvents.trySend(NavigatorEvent.Directions(route, builder)).isSuccess

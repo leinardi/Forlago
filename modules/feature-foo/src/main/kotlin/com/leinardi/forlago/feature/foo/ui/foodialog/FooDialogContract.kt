@@ -16,16 +16,18 @@
 
 package com.leinardi.forlago.feature.foo.ui.foodialog
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object FooDialogContract {
     object State : ViewState
 
     sealed class Event : ViewEvent {
-        object OnConfirmButtonClicked : Event()
-        object OnDismissButtonClicked : Event()
+        data object OnConfirmButtonClicked : Event()
+        data object OnDismissButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect

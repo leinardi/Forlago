@@ -37,10 +37,12 @@ android {
             resValue("string", "account_type", config.android.accountType.get())
         }
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
     api(projects.modules.featureAccountApi)
+    implementation(projects.modules.featureLoginApi)
     implementation(projects.modules.libraryNetworkApi)
     implementation(projects.modules.libraryPreferencesApi)
 

@@ -22,6 +22,8 @@ import org.gradle.kotlin.dsl.getByType
 
 interface ForlagoAppsConfigExt : ExtensionAware {
     val applicationId: Property<String>
+    val baseName: Property<String>
+    val deepLinkScheme: Property<String>
 }
 
 internal inline val AppsConfigExt.forlago: ForlagoAppsConfigExt get() = extensions.getByType()

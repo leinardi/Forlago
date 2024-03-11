@@ -25,18 +25,14 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-logging-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
     api(projects.modules.libraryLoggingApi)
-    api(libs.timber)
-    implementation(libs.androidx.startup)
     implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
-    if (rootProject.file("apps/forlago/google-services.json").exists()) {
-        implementation(libs.firebase.perf)
-    }
     implementation(libs.dagger.hilt.android)
     implementation(platform(libs.firebase.bom))
+
     ksp(libs.dagger.hilt.compiler)
 }

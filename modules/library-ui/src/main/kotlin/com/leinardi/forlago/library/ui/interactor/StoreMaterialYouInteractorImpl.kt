@@ -19,7 +19,7 @@ package com.leinardi.forlago.library.ui.interactor
 import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import com.leinardi.forlago.library.ui.api.interactor.StoreMaterialYouInteractor
-import com.leinardi.forlago.library.ui.interactor.GetMaterialYouFlowInteractorImpl.Companion.MATERIAL_YOU_PREF_KEY
+import com.leinardi.forlago.library.ui.interactor.GetMaterialYouStreamInteractorImpl.Companion.MATERIAL_YOU_PREF_KEY
 import javax.inject.Inject
 
 internal class StoreMaterialYouInteractorImpl @Inject constructor(

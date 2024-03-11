@@ -16,18 +16,9 @@
 
 package com.leinardi.forlago.feature.account.api.interactor.token
 
+import com.github.michaelbull.result.Result
+import com.leinardi.forlago.library.network.api.model.AuthErrResult
+
 interface RefreshAccessTokenInteractor {
-    suspend operator fun invoke(refreshToken: String): Result
-
-    sealed class Result {
-        data class Success(
-            val accessToken: String,
-        ) : Result()
-
-        sealed class Failure : Result() {
-            data class BadAuthentication(val code: Int) : Failure()
-            data class NetworkError(val throwable: Throwable) : Failure()
-            data class UnexpectedError(val throwable: Throwable, val code: Int? = null) : Failure()
-        }
-    }
+    suspend operator fun invoke(refreshToken: String): Result<String, AuthErrResult>
 }

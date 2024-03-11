@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import com.diffplug.gradle.spotless.SpotlessTask
-import com.diffplug.spotless.LineEnding
 import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {

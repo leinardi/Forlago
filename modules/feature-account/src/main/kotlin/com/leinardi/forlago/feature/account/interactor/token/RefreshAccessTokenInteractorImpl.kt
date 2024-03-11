@@ -16,16 +16,18 @@
 
 package com.leinardi.forlago.feature.account.interactor.token
 
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import com.leinardi.forlago.feature.account.api.interactor.token.RefreshAccessTokenInteractor
+import com.leinardi.forlago.library.network.api.model.AuthErrResult
 import kotlinx.coroutines.delay
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 internal class RefreshAccessTokenInteractorImpl @Inject constructor() : RefreshAccessTokenInteractor {
-    @Suppress("TooGenericExceptionCaught")
-    override suspend operator fun invoke(refreshToken: String): RefreshAccessTokenInteractor.Result {
+    override suspend operator fun invoke(refreshToken: String): Result<String, AuthErrResult> {
         delay(TimeUnit.SECONDS.toMillis(1))
-        return RefreshAccessTokenInteractor.Result.Success(accessToken = UUID.randomUUID().toString())
+        return Ok(UUID.randomUUID().toString())
     }
 }

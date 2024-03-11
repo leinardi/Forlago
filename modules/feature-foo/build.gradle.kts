@@ -25,3 +25,8 @@ android {
         consumerProguardFiles("$projectDir/proguard-foo-consumer-rules.pro")
     }
 }
+
+dependencies {
+    api(projects.modules.featureFooApi)
+    implementation(projects.modules.featureBarApi)
+}

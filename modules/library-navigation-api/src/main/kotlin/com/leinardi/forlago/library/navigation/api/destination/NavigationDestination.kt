@@ -37,4 +37,9 @@ abstract class NavigationDestination {
                 get() = System.currentTimeMillis()
         }
     }
+
+    companion object {
+        @Suppress("LateinitUsage") lateinit var DEEP_LINK_SCHEME: String
+        fun buildDeepLink(path: String?, scheme: String = DEEP_LINK_SCHEME) = "$scheme://${path.orEmpty()}"
+    }
 }

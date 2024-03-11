@@ -28,7 +28,7 @@ import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateI
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppVersionNameInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetDefaultLanguageCodeInteractor
-import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateFlowInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateStreamInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.OpenUrlInWebBrowserInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.RestartApplicationInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.ShareUrlInteractor
@@ -44,7 +44,7 @@ import com.leinardi.forlago.library.android.interactor.android.GetAppUpdateInfoI
 import com.leinardi.forlago.library.android.interactor.android.GetAppVersionNameInteractorImpl
 import com.leinardi.forlago.library.android.interactor.android.GetConnectivityInteractorImpl
 import com.leinardi.forlago.library.android.interactor.android.GetDefaultLanguageCodeInteractorImpl
-import com.leinardi.forlago.library.android.interactor.android.GetInstallStateUpdateFlowInteractorImpl
+import com.leinardi.forlago.library.android.interactor.android.GetInstallStateUpdateStreamInteractorImpl
 import com.leinardi.forlago.library.android.interactor.android.OpenUrlInWebBrowserInteractorImpl
 import com.leinardi.forlago.library.android.interactor.android.RestartApplicationInteractorImpl
 import com.leinardi.forlago.library.android.interactor.android.ShareUrlInteractorImpl
@@ -116,7 +116,7 @@ open class AndroidModule {
         fun bindGetDefaultLanguageCodeInteractor(bind: GetDefaultLanguageCodeInteractorImpl): GetDefaultLanguageCodeInteractor
 
         @Binds
-        fun bindGetInstallStateUpdateInteractor(bind: GetInstallStateUpdateFlowInteractorImpl): GetInstallStateUpdateFlowInteractor
+        fun bindGetInstallStateUpdateInteractor(bind: GetInstallStateUpdateStreamInteractorImpl): GetInstallStateUpdateStreamInteractor
 
         @Binds
         fun bindOpenUrlInWebBrowserInteractor(bind: OpenUrlInWebBrowserInteractorImpl): OpenUrlInWebBrowserInteractor

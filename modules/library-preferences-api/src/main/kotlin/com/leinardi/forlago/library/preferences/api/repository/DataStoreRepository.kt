@@ -20,7 +20,7 @@ import androidx.datastore.preferences.core.Preferences
 import kotlinx.coroutines.flow.Flow
 
 interface DataStoreRepository {
-    suspend fun clearPreferencesStorage()
+    suspend fun clearDataStore()
 
     fun <T> observeValue(key: Preferences.Key<T>): Flow<T?>
 

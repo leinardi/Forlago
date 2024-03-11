@@ -16,10 +16,12 @@
 
 package com.leinardi.forlago.feature.foo.ui.debug
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object FooDebugContract {
     object State : ViewState
 

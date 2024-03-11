@@ -16,20 +16,22 @@
 
 package com.leinardi.forlago.feature.foo.ui.foo
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object FooContract {
     data class State(
         val text: String,
-        val isLoading: Boolean = false,
+        val loading: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {
         data class OnBarButtonClicked(val text: String) : Event()
-        object OnShowMoreFooButtonClicked : Event()
-        object OnShowSnackbarButtonClicked : Event()
+        data object OnShowMoreFooButtonClicked : Event()
+        data object OnShowSnackbarButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect {

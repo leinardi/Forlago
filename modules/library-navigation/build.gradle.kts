@@ -29,6 +29,8 @@ android {
 
 dependencies {
     api(projects.modules.libraryNavigationApi)
+    implementation(projects.modules.featureFooApi)
+    implementation(projects.modules.featureLoginApi)
 
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.compiler)

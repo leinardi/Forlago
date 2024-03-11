@@ -25,6 +25,10 @@ plugins {
     alias(libs.plugins.gradledoctor)
 }
 
+doctor {
+    allowBuildingAllAndroidAppsSimultaneously.set(true)
+}
+
 subprojects {
     gradle.projectsEvaluated {
         tasks.withType<JavaCompile> {

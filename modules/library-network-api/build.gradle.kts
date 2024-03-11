@@ -18,7 +18,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("forlago.android-library-conventions")
-    alias(libs.plugins.apollo)
+    id("com.apollographql.apollo3")
     alias(libs.plugins.kotlinx.serialization)
 }
 

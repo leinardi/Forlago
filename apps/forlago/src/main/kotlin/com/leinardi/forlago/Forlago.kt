@@ -17,8 +17,6 @@
 package com.leinardi.forlago
 
 import android.app.Application
-import android.os.Build
-import android.os.StrictMode
 import android.os.SystemClock
 import android.util.Log
 import coil.ImageLoader
@@ -26,8 +24,10 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.util.DebugLogger
+import com.leinardi.forlago.library.android.api.strictmode.configureStrictMode
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.feature.FeatureManager
+import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
 import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.runBlocking
@@ -46,50 +46,10 @@ class Forlago : Application(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
-        configureStrictMode()
+        NavigationDestination.DEEP_LINK_SCHEME = BuildConfig.DEEP_LINK_SCHEME
+        configureStrictMode(runBlocking { readCertificatePinningEnabledInteractor() })
         registerFeatures()
         simulateHeavyLoad()
-    }
-
-    private fun configureStrictMode() {
-        // This can't be initialized using `androidx.startup.Initializer` or it will cause crashes in 3rd party libs using Content Providers
-        // and writing data on the main thread (e.g. LeakCanary and AndroidTestRunner).
-        if (BuildConfig.DEBUG) {
-            val builderThread = StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .permitDiskReads()
-                .permitCustomSlowCalls()
-                .penaltyLog()
-                .penaltyDeath()
-                .detectResourceMismatches()
-            StrictMode.setThreadPolicy(builderThread.build())
-
-            val builderVM = StrictMode.VmPolicy.Builder()
-                .detectActivityLeaks()
-                .detectLeakedSqlLiteObjects()
-                .detectLeakedRegistrationObjects()
-                .detectFileUriExposure()
-                .penaltyLog()
-                .penaltyDeath()
-                .detectContentUriWithoutPermission()
-                // .detectUntaggedSockets() // https://github.com/square/okhttp/issues/3537#issuecomment-974861679
-                .apply {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        detectCredentialProtectedWhileLocked()
-                        detectImplicitDirectBoot()
-                    }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                        detectIncorrectContextUse()
-                        detectUnsafeIntentLaunch()
-                    }
-                    runBlocking {
-                        if (readCertificatePinningEnabledInteractor()) {
-                            detectCleartextNetwork()
-                        }
-                    }
-                }
-            StrictMode.setVmPolicy(builderVM.build())
-        }
     }
 
     @Suppress("MagicNumber")

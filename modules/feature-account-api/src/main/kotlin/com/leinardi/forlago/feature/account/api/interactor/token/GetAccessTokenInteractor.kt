@@ -27,8 +27,8 @@ interface GetAccessTokenInteractor {
         data class AccountAuthenticatorError(val errorMessage: String?) : ErrResult()
         data class BadArgumentsError(val errorMessage: String?) : ErrResult()
         data class NetworkError(val errorMessage: String?) : ErrResult()
-        object AccountNotFound : ErrResult()
-        object ReAuthenticationRequired : ErrResult()
+        data object AccountNotFound : ErrResult()
+        data object ReAuthenticationRequired : ErrResult()
     }
 }
 

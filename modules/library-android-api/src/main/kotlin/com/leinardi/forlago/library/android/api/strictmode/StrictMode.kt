@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.library.android.api.strictmode
 
+import android.os.Build
 import android.os.StrictMode
 import com.leinardi.forlago.library.android.api.BuildConfig
 
@@ -35,5 +36,47 @@ fun <T> noStrictMode(disableVm: Boolean = true, disableThread: Boolean = true, b
         if (disableThread && BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(threadPolicy)
         }
+    }
+}
+
+// This can't be initialized using `androidx.startup.Initializer` or it will cause crashes in 3rd party libs using Content Providers
+// and writing data on the main thread (e.g. LeakCanary and AndroidTestRunner).
+fun configureStrictMode(detectCleartextNetwork: Boolean) {
+    if (BuildConfig.DEBUG) {
+        val builderThread = StrictMode.ThreadPolicy.Builder()
+            .detectAll()
+            .permitDiskReads()
+            .permitCustomSlowCalls()
+            .penaltyLog()
+            .penaltyDeath()
+            .detectResourceMismatches()
+        StrictMode.setThreadPolicy(builderThread.build())
+
+        val builderVM = StrictMode.VmPolicy.Builder()
+            .detectLeakedSqlLiteObjects()
+            .detectLeakedRegistrationObjects()
+            .detectFileUriExposure()
+            .penaltyLog()
+            .penaltyDeath()
+            .detectContentUriWithoutPermission()
+            // .detectUntaggedSockets() // https://github.com/square/okhttp/issues/3537#issuecomment-974861679
+            .apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    detectCredentialProtectedWhileLocked()
+                    detectImplicitDirectBoot()
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    // False positive on API < 30
+                    detectActivityLeaks()
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    detectIncorrectContextUse()
+                    // detectUnsafeIntentLaunch() // It detects deep links as unsafe
+                }
+                if (detectCleartextNetwork) {
+                    detectCleartextNetwork()
+                }
+            }
+        StrictMode.setVmPolicy(builderVM.build())
     }
 }

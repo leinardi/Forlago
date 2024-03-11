@@ -18,12 +18,7 @@ package com.leinardi.forlago.di
 
 import android.app.Application
 import com.leinardi.forlago.feature.account.AccountFeature
-import com.leinardi.forlago.feature.account.api.interactor.account.RemoveAccountsInteractor
-import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateAccessTokenInteractor
-import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
-import com.leinardi.forlago.library.android.api.interactor.android.DeleteWebViewDataInteractor
 import com.leinardi.forlago.library.feature.Feature
-import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.ui.MainActivity
 import dagger.Module
 import dagger.Provides
@@ -40,17 +35,8 @@ object AppModule {
     @IntoSet
     fun provideAccountFeature(
         application: Application,
-        deleteWebViewDataInteractor: DeleteWebViewDataInteractor,
-        invalidateAccessTokenInteractor: InvalidateAccessTokenInteractor,
-        invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
-        navigator: ForlagoNavigator,
-        removeAccountsInteractor: RemoveAccountsInteractor,
-    ): Feature = AccountFeature(
-        deleteWebViewDataInteractor = deleteWebViewDataInteractor,
-        invalidateAccessTokenInteractor = invalidateAccessTokenInteractor,
-        invalidateRefreshTokenInteractor = invalidateRefreshTokenInteractor,
+        accountFeatureFactory: AccountFeature.Factory,
+    ): Feature = accountFeatureFactory.create(
         mainActivityIntent = MainActivity.createIntent(application),
-        navigator = navigator,
-        removeAccountsInteractor = removeAccountsInteractor,
     )
 }

@@ -37,7 +37,7 @@ class DataStoreRepositoryImpl constructor(
 ) : DataStoreRepository {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = preferenceName)
 
-    override suspend fun clearPreferencesStorage() {
+    override suspend fun clearDataStore() {
         Timber.d("Clear $preferenceName data store")
         context.dataStore.edit {
             it.clear()

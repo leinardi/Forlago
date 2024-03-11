@@ -32,10 +32,10 @@ val config = extensions.create<ConfigExt>("config").apply {
     }
 
     extensions.create<AppsConfigExt>("apps").apply {
-        deepLinkSchema.convention("forlago")
-
         extensions.create<ForlagoAppsConfigExt>("forlago").apply {
             applicationId.convention("com.leinardi.forlago")
+            baseName.convention("forlago")
+            deepLinkScheme.convention("forlago")
         }
     }
 

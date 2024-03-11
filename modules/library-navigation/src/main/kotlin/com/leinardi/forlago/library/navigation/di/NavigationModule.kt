@@ -21,10 +21,10 @@ import com.leinardi.forlago.library.navigation.navigator.ForlagoNavigatorImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ActivityRetainedComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ActivityRetainedComponent::class)
 internal interface NavigationModule {
     @Binds
     fun bindLinkNavigator(bind: ForlagoNavigatorImpl): ForlagoNavigator

@@ -54,4 +54,3 @@ dependencies {
 
     testImplementation(project(":modules:library-test"))
 }
-

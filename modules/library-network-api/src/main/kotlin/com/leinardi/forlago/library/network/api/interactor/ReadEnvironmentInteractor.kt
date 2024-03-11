@@ -35,7 +35,7 @@ interface ReadEnvironmentInteractor {
 }
 
 data class CertificatePinningConfig(
-    val domain: String,
+    val domains: List<String>,
     val hashes: List<Hash>,
 ) {
     data class Hash(

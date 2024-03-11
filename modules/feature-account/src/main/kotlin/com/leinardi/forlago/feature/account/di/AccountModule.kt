@@ -18,9 +18,7 @@ package com.leinardi.forlago.feature.account.di
 
 import com.leinardi.forlago.feature.account.api.interactor.account.AddAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
-import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInteractor
 import com.leinardi.forlago.feature.account.api.interactor.account.RemoveAccountsInteractor
-import com.leinardi.forlago.feature.account.api.interactor.account.SignInInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenExpiryInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetJwtExpiresAtInMillisInteractor
@@ -33,9 +31,7 @@ import com.leinardi.forlago.feature.account.api.interactor.token.RefreshAccessTo
 import com.leinardi.forlago.feature.account.api.interactor.token.SetRefreshTokenInteractor
 import com.leinardi.forlago.feature.account.interactor.account.AddAccountInteractorImpl
 import com.leinardi.forlago.feature.account.interactor.account.GetAccountInteractorImpl
-import com.leinardi.forlago.feature.account.interactor.account.LogOutInteractorImpl
 import com.leinardi.forlago.feature.account.interactor.account.RemoveAccountsInteractorImpl
-import com.leinardi.forlago.feature.account.interactor.account.SignInInteractorImpl
 import com.leinardi.forlago.feature.account.interactor.token.GetAccessTokenExpiryInteractorImpl
 import com.leinardi.forlago.feature.account.interactor.token.GetAccessTokenInteractorImpl
 import com.leinardi.forlago.feature.account.interactor.token.GetJwtExpiresAtInMillisInteractorImpl
@@ -60,12 +56,6 @@ internal interface AccountModule {
 
     @Binds
     fun bindGetAccountInteractor(bind: GetAccountInteractorImpl): GetAccountInteractor
-
-    @Binds
-    fun bindSignInInteractor(bind: SignInInteractorImpl): SignInInteractor
-
-    @Binds
-    fun bindLogOutInteractor(bind: LogOutInteractorImpl): LogOutInteractor
 
     @Binds
     fun bindRemoveAccountsInteractor(bind: RemoveAccountsInteractorImpl): RemoveAccountsInteractor

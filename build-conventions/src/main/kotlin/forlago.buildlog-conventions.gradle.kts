@@ -26,7 +26,6 @@ if (config.params.saveBuildLogToFile.get()) {
     val buildLogDir = layout.buildDirectory.dir("logs")
     mkdir(buildLogDir)
     val buildLog = buildLogDir.get().file("buildlog-${datetime}.txt").asFile
-
     System.setProperty("org.gradle.color.error", "RED")
 
     val outputListener = StandardOutputListener { output -> buildLog.appendText(output.toString()) }

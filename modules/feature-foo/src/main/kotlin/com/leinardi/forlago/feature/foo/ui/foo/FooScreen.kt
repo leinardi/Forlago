@@ -130,7 +130,7 @@ private fun FooScreen(
             )
             ProgressButton(
                 onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
-                loading = state.isLoading,
+                loading = state.loading,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_send_text_to_bar))

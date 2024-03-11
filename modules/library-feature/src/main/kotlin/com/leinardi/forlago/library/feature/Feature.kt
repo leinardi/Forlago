@@ -19,6 +19,7 @@ package com.leinardi.forlago.library.feature
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
+import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 
 abstract class Feature {
     abstract val id: String
@@ -27,6 +28,6 @@ abstract class Feature {
     open val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
     open val debugComposable: @Composable (() -> Unit)? = null
     open val dialogDestinations: Map<NavigationDestination, @Composable () -> Unit> = emptyMap()
-    open val handleIntent: (suspend (intent: Intent) -> Boolean) = { false }
+    open val handleIntent: (suspend (intent: Intent, navigator: ForlagoNavigator) -> Boolean) = { _, _ -> false }
     open val featureLifecycle: FeatureLifecycle = FeatureLifecycle()
 }

@@ -14,4 +14,9 @@
   ~ limitations under the License.
   -->
 
-<lint />
+<lint>
+    <issue id="UnsafeOptInUsageError">
+        <option name="opt-in" value="androidx.compose.material3.ExperimentalMaterial3Api" />
+    </issue>
+</lint>
+

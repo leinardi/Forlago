@@ -52,7 +52,9 @@ android {
             matchingFallbacks.add("release")
         }
     }
+    buildFeatures.buildConfig = true
 }
+
 androidComponents {
     beforeVariants(selector().all()) {
         // enable only the benchmark buildType, since we only want to measure close to release performance

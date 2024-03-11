@@ -21,7 +21,7 @@ interface GetConnectivityInteractor {
 
     sealed class State {
         data class Online(val type: Type) : State()
-        object Offline : State()
+        data object Offline : State()
     }
 
     enum class Type {

@@ -39,8 +39,8 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.PrimaryScrollableTabRow
 import androidx.compose.material3.ProvideTextStyle
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Tab
@@ -60,7 +60,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.debug.R
-import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
+import com.leinardi.forlago.feature.debug.api.interactor.GetDebugInfoInteractor.DebugInfo
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Features
@@ -69,7 +69,7 @@ import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarIt
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor.Environment
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
-import com.leinardi.forlago.library.ui.component.MainNavigationBarItem
+import com.leinardi.forlago.library.ui.component.NavigationBarItemWithBadge
 import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.Scaffold
 import com.leinardi.forlago.library.ui.component.SettingsGroup
@@ -114,14 +114,16 @@ private fun DebugScreen(
             },
             snackbarHost = { SnackbarHost(snackbarHostState) },
             bottomBar = {
-                NavigationBar {
-                    state.bottomNavigationItems.forEachIndexed { index, screen ->
-                        MainNavigationBarItem(
-                            icon = screen.icon,
-                            label = screen.label,
-                            selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
-                            onClick = { sendEvent(Event.OnNavigationBarItemSelected(state.bottomNavigationItems[index])) },
-                        )
+                if (state.bottomNavigationItems.isNotEmpty()) {
+                    NavigationBar {
+                        state.bottomNavigationItems.forEachIndexed { index, screen ->
+                            NavigationBarItemWithBadge(
+                                icon = screen.icon,
+                                label = screen.label,
+                                selected = state.selectedNavigationItem == state.bottomNavigationItems[index],
+                                onClick = { sendEvent(Event.OnNavigationBarItemSelected(state.bottomNavigationItems[index])) },
+                            )
+                        }
                     }
                 }
             },
@@ -242,9 +244,7 @@ private fun Options(
             SettingsMenuSwitch(
                 title = { Text("Certificate Pinning") },
                 checked = state.certificatePinningEnabled,
-                onCheckedChange = {
-                    sendEvent(Event.OnEnableCertificatePinning(it))
-                },
+                onCheckedChange = { sendEvent(Event.OnEnableCertificatePinningChanged(it)) },
                 subtitle = { Text("Changing this value will restart the app") },
             )
         }
@@ -258,6 +258,20 @@ private fun Options(
                     .padding(horizontal = Spacing.x02),
             ) {
                 Text("Clear Apollo cache")
+            }
+        }
+        SettingsGroup(
+            title = { Text(text = "Remote config") },
+        ) {
+            Column(Modifier.padding(horizontal = Spacing.x02)) {
+                ProvideTextStyle(value = MaterialTheme.typography.bodyMedium) {
+                    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
+                        Text("testBoolean = ${state.testBoolean}")
+                        Text("testDouble = ${state.testDouble}")
+                        Text("testLong = ${state.testLong}")
+                        Text("testString = ${state.testString}")
+                    }
+                }
             }
         }
         SettingsGroup(
@@ -332,10 +346,10 @@ private fun Features(
     Column(
         modifier = modifier,
     ) {
-        PrimaryScrollableTabRow(
+        ScrollableTabRow(
             selectedTabIndex = pagerState.currentPage,
             indicator = { tabPositions ->
-                TabRowDefaults.PrimaryIndicator(
+                TabRowDefaults.SecondaryIndicator(
                     Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
                 )
             },
@@ -356,14 +370,14 @@ private fun Features(
     }
 }
 
-private val previewDebugInfo = GetDebugInfoInteractor.DebugInfo(
-    GetDebugInfoInteractor.DebugInfo.App(
+private val previewDebugInfo = DebugInfo(
+    DebugInfo.App(
         name = "App name",
         versionName = "versionName",
         versionCode = 123L,
         packageName = "packageName",
     ),
-    GetDebugInfoInteractor.DebugInfo.Device(
+    DebugInfo.Device(
         manufacturer = Build.MANUFACTURER,
         model = Build.MODEL,
         resolutionPx = "resolutionPx",

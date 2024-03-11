@@ -18,8 +18,8 @@ tasks {
         dependsOn(tasks.matching { it.name matches "^process.*Manifest$".toRegex() })
         mustRunAfter(tasks.matching { it.name matches "^process.*Manifest$".toRegex() })
         mkdir("versions/mergedManifests")
-        from(layout.buildDirectory.dir("intermediates/merged_manifests")) {
-            include("**/*.xml")
+        from(layout.buildDirectory.dir("intermediates/merged_manifests/release/processReleaseManifest/")) {
+            include("AndroidManifest.xml")
         }
         into("versions/mergedManifests")
         filter { line -> line.replace("(android:version.*=\".*\")|(android:testOnly=\".*\")".toRegex(), "") }

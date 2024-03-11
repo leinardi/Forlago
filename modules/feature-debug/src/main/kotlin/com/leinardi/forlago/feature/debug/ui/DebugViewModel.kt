@@ -22,11 +22,11 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.viewModelScope
-import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInteractor
-import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
+import com.leinardi.forlago.feature.debug.api.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Effect
 import com.leinardi.forlago.feature.debug.ui.DebugContract.Event
 import com.leinardi.forlago.feature.debug.ui.DebugContract.State
+import com.leinardi.forlago.feature.logout.api.interactor.LogOutInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result
 import com.leinardi.forlago.library.android.api.interactor.android.RestartApplicationInteractor
@@ -37,8 +37,11 @@ import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinnin
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.library.network.api.interactor.StoreCertificatePinningEnabledInteractor
 import com.leinardi.forlago.library.network.api.interactor.StoreEnvironmentInteractor
+import com.leinardi.forlago.library.remoteconfig.api.interactor.GetKillSwitchStreamInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -50,6 +53,7 @@ class DebugViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
     private val getDebugInfoInteractor: GetDebugInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
+    private val getKillSwitchStreamInteractor: GetKillSwitchStreamInteractor,
     private val logOutInteractor: LogOutInteractor,
     private val readCertificatePinningEnabledInteractor: ReadCertificatePinningEnabledInteractor,
     private val readEnvironmentInteractor: ReadEnvironmentInteractor,
@@ -80,6 +84,18 @@ class DebugViewModel @Inject constructor(
                     },
                 )
             }
+            getKillSwitchStreamInteractor.getBoolean("testBoolean")
+                .onEach { updateState { copy(testBoolean = it.value) } }
+                .launchIn(this)
+            getKillSwitchStreamInteractor.getDouble("testDouble")
+                .onEach { updateState { copy(testDouble = it.value) } }
+                .launchIn(this)
+            getKillSwitchStreamInteractor.getLong("testLong")
+                .onEach { updateState { copy(testLong = it.value) } }
+                .launchIn(this)
+            getKillSwitchStreamInteractor.getString("testString")
+                .onEach { updateState { copy(testString = it.value) } }
+                .launchIn(this)
         }
     }
 
@@ -96,19 +112,19 @@ class DebugViewModel @Inject constructor(
 
     override fun handleEvent(event: Event) {
         when (event) {
-            is Event.OnNavigationBarItemSelected -> updateState { copy(selectedNavigationItem = event.selectedNavigationItem) }
             is Event.OnClearApolloCacheClicked -> viewModelScope.launch { clearApolloCacheInteractor() }
+            is Event.OnEnableCertificatePinningChanged -> handleOnEnableCertificatePinning(event.boolean)
             is Event.OnEnvironmentSelected -> handleOnEnvironmentSelected(event.environment)
-            is Event.OnEnableCertificatePinning -> handleOnEnableCertificatePinning(event.boolean)
             is Event.OnForceCrashClicked -> throw DebugScreenTestCrashException()
+            is Event.OnNavigationBarItemSelected -> updateState { copy(selectedNavigationItem = event.selectedNavigationItem) }
             is Event.OnUpButtonClicked -> forlagoNavigator.navigateUp()
         }
     }
 
-    private fun handleOnEnableCertificatePinning(isEnableCertificatePinning: Boolean) {
+    private fun handleOnEnableCertificatePinning(isCertificatePinningEnable: Boolean) {
         viewModelScope.launch {
-            storeCertificatePinningEnabledInteractor(isEnableCertificatePinning)
-            updateState { copy(certificatePinningEnabled = isEnableCertificatePinning) }
+            storeCertificatePinningEnabledInteractor(isCertificatePinningEnable)
+            updateState { copy(certificatePinningEnabled = isCertificatePinningEnable) }
             restartApplicationInteractor()
         }
     }
@@ -125,9 +141,9 @@ class DebugViewModel @Inject constructor(
     }
 
     sealed class DebugNavigationBarItem(val label: String, val icon: ImageVector) {
-        object Info : DebugNavigationBarItem("Info", Icons.Filled.Info)
-        object Options : DebugNavigationBarItem("Options", Icons.Filled.BugReport)
-        object Features : DebugNavigationBarItem("Features", Icons.Filled.Star)
+        data object Info : DebugNavigationBarItem("Info", Icons.Filled.Info)
+        data object Options : DebugNavigationBarItem("Options", Icons.Filled.BugReport)
+        data object Features : DebugNavigationBarItem("Features", Icons.Filled.Star)
     }
 }
 

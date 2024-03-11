@@ -27,10 +27,10 @@ class LogScreenViewInteractorImpl @Inject constructor(
     override operator fun invoke(screenClass: String, screenName: String) {
         if (!BuildConfig.DEBUG) {
             Timber.e("Default FirebaseApp must be initialized for the log to work")
-// firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
-// param(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
-// param(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-// }
+            // firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+            // param(FirebaseAnalytics.Param.SCREEN_CLASS, screenClass)
+            // param(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+            // }
         }
     }
 }

@@ -31,8 +31,9 @@ plugins {
     id("com.starter.easylauncher")
     id("forlago.ruler-conventions")
 }
+
 val libs = the<LibrariesForLibs>()
-val applyGsmServicesPlugins = rootProject.file("apps/forlago/google-services.json").exists()
+val applyGsmServicesPlugins = project.file("google-services.json").exists()
 if (applyGsmServicesPlugins) {
     plugins.apply("com.google.gms.google-services")
     plugins.apply("com.google.firebase.crashlytics")
@@ -78,12 +79,12 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.navigation.fragment)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.coroutines.android)
     implementation(libs.coroutines.core)
     implementation(libs.dagger.hilt.android)
-    implementation(libs.hilt.navigation.compose)
     implementation(libs.kotlin.result)
     implementation(libs.kotlinx.collections.immutable)
     implementation(libs.timber)
@@ -101,5 +102,5 @@ tasks.register<Copy>("installGitHooks") {
 }
 
 afterEvaluate {
-    tasks.named("preBuild").dependsOn("installGitHooks")
+    tasks.named("build").dependsOn("installGitHooks")
 }

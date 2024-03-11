@@ -17,7 +17,7 @@
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
-    alias(libs.plugins.apollo)
+    id("com.apollographql.apollo3")
     alias(libs.plugins.kotlinx.serialization)
 }
 
@@ -27,6 +27,7 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-network-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 apollo {

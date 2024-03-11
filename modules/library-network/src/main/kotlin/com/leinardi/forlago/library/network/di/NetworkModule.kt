@@ -84,13 +84,13 @@ open class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAddStageCertificatePinning(
+    fun provideCertificatePinner(
         environment: ReadEnvironmentInteractor.Environment,
         readCertificatePinningEnabledInteractor: ReadCertificatePinningEnabledInteractor,
     ): CertificatePinner = CertificatePinner.Builder().apply {
         environment.certificatePinningConfigs.forEach { certificate ->
             if (certificate.isExpiring()) {
-                val message = "Certificates for domain '${certificate.domain}' have less than 1 month until expiration date!"
+                val message = "Certificates for domains [${certificate.domains.joinToString(", ")}] have less than 1 month until expiration date!"
                 if (BuildConfig.DEBUG) {
                     throw CertificateExpiringException(message)
                 } else {
@@ -100,7 +100,9 @@ open class NetworkModule {
             runBlocking {
                 if (readCertificatePinningEnabledInteractor()) {
                     Timber.d("Certificate Pinning Enabled: $certificate")
-                    certificate.hashes.forEach { add(certificate.domain, it.hash) }
+                    certificate.domains.forEach { domain ->
+                        certificate.hashes.forEach { hash -> add(domain, hash.hash) }
+                    }
                 } else {
                     Timber.d("Certificate Pinning Disabled")
                 }
