@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ pluginManagement {
 // https://docs.gradle.org/7.0/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -48,8 +49,15 @@ include(
     ":modules:feature-account",
     ":modules:feature-account-api",
     ":modules:feature-bar",
+    ":modules:feature-bar-api",
     ":modules:feature-debug",
+    ":modules:feature-debug-api",
     ":modules:feature-foo",
+    ":modules:feature-foo-api",
+    ":modules:feature-login",
+    ":modules:feature-login-api",
+    ":modules:feature-logout",
+    ":modules:feature-logout-api",
     ":modules:library-android",
     ":modules:library-android-api",
     ":modules:library-feature",
@@ -64,6 +72,8 @@ include(
     ":modules:library-network-api",
     ":modules:library-preferences",
     ":modules:library-preferences-api",
+    ":modules:library-remote-config",
+    ":modules:library-remote-config-api",
     ":modules:library-test",
     ":modules:library-test-android",
     ":modules:library-ui",

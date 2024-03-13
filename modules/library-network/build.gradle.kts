@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
-    alias(libs.plugins.apollo)
+    id("com.apollographql.apollo3")
     alias(libs.plugins.kotlinx.serialization)
 }
 
@@ -27,6 +27,7 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-network-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 apollo {

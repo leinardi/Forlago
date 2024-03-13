@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ pluginManagement {
 // https://docs.gradle.org/7.0/userguide/declaring_dependencies.html#sec:type-safe-project-accessors
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositories {
         gradlePluginPortal()

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.leinardi.forlago.feature.debug
 
 import androidx.compose.runtime.Composable
+import com.leinardi.forlago.feature.debug.api.destination.DebugDestination
 import com.leinardi.forlago.feature.debug.ui.DebugScreen
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
-import com.leinardi.forlago.library.navigation.api.destination.debug.DebugDestination
 
 class DebugFeature : Feature() {
     override val id = "Debug"

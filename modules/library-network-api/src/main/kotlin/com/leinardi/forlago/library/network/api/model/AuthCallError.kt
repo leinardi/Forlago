@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,5 +20,5 @@ sealed class AuthCallError {
     data class ApiError(val errorMessages: List<String>?) : AuthCallError()
     data class NetworkError(val errorMessage: String?) : AuthCallError()
     data class UnrecoverableError(val errorMessage: String? = null) : AuthCallError()
-    object ReAuthenticationRequired : AuthCallError()
+    data object ReAuthenticationRequired : AuthCallError()
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,9 @@
 
 package com.leinardi.forlago.feature.account.api.interactor.token
 
+import com.github.michaelbull.result.Result
+import com.leinardi.forlago.library.network.api.model.AuthErrResult
+
 interface RefreshAccessTokenInteractor {
-    suspend operator fun invoke(refreshToken: String): Result
-
-    sealed class Result {
-        data class Success(
-            val accessToken: String,
-        ) : Result()
-
-        sealed class Failure : Result() {
-            data class BadAuthentication(val code: Int) : Failure()
-            data class NetworkError(val throwable: Throwable) : Failure()
-            data class UnexpectedError(val throwable: Throwable, val code: Int? = null) : Failure()
-        }
-    }
+    suspend operator fun invoke(refreshToken: String): Result<String, AuthErrResult>
 }

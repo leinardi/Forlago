@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("forlago.android-library-conventions")
-    alias(libs.plugins.apollo)
+    id("com.apollographql.apollo3")
     alias(libs.plugins.kotlinx.serialization)
 }
 

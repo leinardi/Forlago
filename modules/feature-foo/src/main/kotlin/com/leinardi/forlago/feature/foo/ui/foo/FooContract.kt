@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,20 +16,22 @@
 
 package com.leinardi.forlago.feature.foo.ui.foo
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object FooContract {
     data class State(
         val text: String,
-        val isLoading: Boolean = false,
+        val loading: Boolean = false,
     ) : ViewState
 
     sealed class Event : ViewEvent {
         data class OnBarButtonClicked(val text: String) : Event()
-        object OnShowMoreFooButtonClicked : Event()
-        object OnShowSnackbarButtonClicked : Event()
+        data object OnShowMoreFooButtonClicked : Event()
+        data object OnShowSnackbarButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@
 package com.leinardi.forlago.feature.bar
 
 import androidx.compose.runtime.Composable
+import com.leinardi.forlago.feature.bar.api.destination.BarDestination
 import com.leinardi.forlago.feature.bar.ui.BarScreen
 import com.leinardi.forlago.feature.bar.ui.debug.BarDebugPage
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
-import com.leinardi.forlago.library.navigation.api.destination.bar.BarDestination
 
 class BarFeature : Feature() {
     override val id = "Bar"

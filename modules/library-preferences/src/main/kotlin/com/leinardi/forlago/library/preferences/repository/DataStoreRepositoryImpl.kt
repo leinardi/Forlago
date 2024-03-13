@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ class DataStoreRepositoryImpl constructor(
 ) : DataStoreRepository {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = preferenceName)
 
-    override suspend fun clearPreferencesStorage() {
+    override suspend fun clearDataStore() {
         Timber.d("Clear $preferenceName data store")
         context.dataStore.edit {
             it.clear()

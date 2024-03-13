@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.leinardi.forlago.feature.bar.ui
 
 import androidx.lifecycle.SavedStateHandle
+import com.leinardi.forlago.feature.bar.api.destination.BarDestination
 import com.leinardi.forlago.feature.bar.ui.BarContract.Effect
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
-import com.leinardi.forlago.library.navigation.api.destination.bar.BarDestination
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

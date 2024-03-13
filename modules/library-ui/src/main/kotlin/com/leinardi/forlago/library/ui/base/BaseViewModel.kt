@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.time.debounce
+import java.time.Duration
 import java.util.concurrent.atomic.AtomicInteger
 
 abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect : ViewEffect> : ViewModel() {
@@ -37,6 +40,7 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
     val viewState: State<UiState> by lazy { _viewState }
 
     private val runningJobs = AtomicInteger(0)
+    private val debouncedErrorChannel = Channel<suspend () -> Unit>()
 
     // Event (user actions)
     private val _event: MutableSharedFlow<UiEvent> = MutableSharedFlow()
@@ -49,9 +53,19 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
         _event.onEach {
             handleEvent(it)
         }.launchIn(viewModelScope)
+
+        debouncedErrorChannel
+            .consumeAsFlow()
+            .debounce(Duration.ofSeconds(1))
+            .onEach { it() }
+            .launchIn(viewModelScope)
     }
 
     abstract fun provideInitialState(): UiState
+
+    protected suspend fun debounceError(error: suspend () -> Unit) {
+        debouncedErrorChannel.send(error)
+    }
 
     open fun onLoadingChanged(loading: Boolean) {}
 
@@ -80,6 +94,12 @@ abstract class BaseViewModel<UiEvent : ViewEvent, UiState : ViewState, UiEffect 
         if (runningJobs.decrementAndGet() == 0) {
             onLoadingChanged(false)
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        _effect.close()
+        debouncedErrorChannel.close()
     }
 }
 

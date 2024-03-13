@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 import com.github.triplet.gradle.androidpublisher.ReleaseStatus
+import io.github.reactivecircus.appversioning.SemVer
+import java.time.Instant
+import kotlin.math.log10
+import kotlin.math.pow
 
 plugins {
     id("forlago.android-app-conventions")
-    id("forlago.app-versioning-conventions")
+    alias(libs.plugins.appversioning)
     alias(libs.plugins.tripletplay)
 }
 
@@ -27,7 +31,10 @@ println("Release keystore ${if (useReleaseKeystore) "" else "NOT "}found!")
 android {
     defaultConfig {
         applicationId = config.apps.forlago.applicationId.get()
-        setProperty("archivesBaseName", "forlago")
+        setProperty("archivesBaseName", config.apps.forlago.baseName.get())
+
+        manifestPlaceholders["deepLinkScheme"] = config.apps.forlago.deepLinkScheme.get()
+        buildConfigField("String", "DEEP_LINK_SCHEME", "\"${config.apps.forlago.deepLinkScheme.get()}\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"  // https://github.com/google/dagger/issues/2033
 
@@ -80,6 +87,7 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules-benchmark.pro")
         }
     }
+    buildFeatures.buildConfig = true
 }
 
 val serviceAccountCredentialsFile: File = rootProject.file("release/play-account.json")
@@ -93,23 +101,40 @@ if (serviceAccountCredentialsFile.exists()) {
 }
 println("play-account.json ${if (serviceAccountCredentialsFile.exists()) "" else "NOT "}found!")
 
+appVersioning {
+    overrideVersionCode { gitTag, _, _ ->
+        val semVer = SemVer.fromGitTag(gitTag)
+        val version = semVer.major * 10000 + semVer.minor * 100 + semVer.patch
+        val versionLength = (log10(version.toDouble()) + 1).toInt()
+        var epoch = Instant.now().epochSecond.toInt()
+        epoch -= epoch % 10.0.pow(versionLength.toDouble()).toInt()
+        version + epoch
+    }
+
+    overrideVersionName { gitTag, _, variantInfo ->
+        "${gitTag.rawTagName}${if (variantInfo.buildType == "debug") "-dev" else ""} (${gitTag.commitHash})"
+    }
+}
+
 dependencies {
     // Modules
     implementation(projects.modules.featureAccount)
     implementation(projects.modules.featureBar)
     implementation(projects.modules.featureDebug)
     implementation(projects.modules.featureFoo)
+    implementation(projects.modules.featureLogin)
+    implementation(projects.modules.featureLogout)
     implementation(projects.modules.libraryAndroid)
     implementation(projects.modules.libraryI18n)
     implementation(projects.modules.libraryLogging)
     implementation(projects.modules.libraryNavigation)
     implementation(projects.modules.libraryNetwork)
     implementation(projects.modules.libraryPreferences)
+    implementation(projects.modules.libraryRemoteConfig)
     implementation(projects.modules.libraryUi)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.lifecycle.process)
-    implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.profileinstaller) // Need this to side load a Baseline Profile when Benchmarking
     implementation(libs.androidx.startup)
 

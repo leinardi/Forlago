@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import androidx.navigation.NavOptionsBuilder
 sealed class NavigatorEvent {
     data class Directions(val destination: String, val builder: NavOptionsBuilder.() -> Unit) : NavigatorEvent()
     data class HandleDeepLink(val intent: Intent) : NavigatorEvent()
-    object NavigateBack : NavigatorEvent()
-    object NavigateUp : NavigatorEvent()
+    data object NavigateBack : NavigatorEvent()
+    data object NavigateBackOrHome : NavigatorEvent()
+    data object NavigateUp : NavigatorEvent()
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2023 Roberto Leinardi.
+  ~ Copyright 2024 Roberto Leinardi.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,20 +14,8 @@
   ~ limitations under the License.
   -->
 
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest>
 
-    <application>
-        <provider
-            android:authorities="${applicationId}.androidx-startup"
-            android:exported="false"
-            android:name="androidx.startup.InitializationProvider"
-            tools:node="merge">
-            <meta-data
-                android:name="com.leinardi.forlago.feature.debug.initializer.DebugInitializer"
-                android:value="androidx.startup" />
-
-        </provider>
-    </application>
+    <application />
 
 </manifest>

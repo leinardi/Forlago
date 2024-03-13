@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,16 +23,18 @@ plugins {
 
 
 dependencies {
+    implementation(libs.kotlinx.serialization)
     implementation(libs.plugin.aboutlibraries)
     implementation(libs.plugin.android.gradle)
     implementation(libs.plugin.androidcachefix)
-    implementation(libs.plugin.appversioning)
+    implementation(libs.plugin.apollo)
+    implementation(libs.plugin.apollo.external)
+    implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.detekt)
     implementation(libs.plugin.easylauncher)
     implementation(libs.plugin.firebase.crashlytics)
     implementation(libs.plugin.firebase.perf)
     implementation(libs.plugin.google.services)
-    implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.kotlin)
     implementation(libs.plugin.ksp)
     implementation(libs.plugin.ruler)

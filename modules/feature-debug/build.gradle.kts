@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,16 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-debug-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
+    api(projects.modules.featureDebugApi)
     implementation(projects.modules.featureAccountApi)
+    implementation(projects.modules.featureLogoutApi)
     implementation(projects.modules.libraryNetworkApi)
     implementation(projects.modules.libraryPreferencesApi)
+    implementation(projects.modules.libraryRemoteConfigApi)
 
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.startup)

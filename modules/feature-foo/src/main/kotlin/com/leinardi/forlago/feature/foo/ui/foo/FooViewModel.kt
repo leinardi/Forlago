@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@ package com.leinardi.forlago.feature.foo.ui.foo
 
 import android.app.Application
 import androidx.lifecycle.viewModelScope
+import com.leinardi.forlago.feature.bar.api.destination.BarDestination
+import com.leinardi.forlago.feature.foo.api.destination.FooDialogDestination
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Effect
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.Event
 import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
-import com.leinardi.forlago.library.navigation.api.destination.bar.BarDestination
-import com.leinardi.forlago.library.navigation.api.destination.foo.FooDialogDestination
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,6 +37,10 @@ class FooViewModel @Inject constructor(
     private val app: Application,
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState() = State(app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_foo_change_me))
+
+    override fun onLoadingChanged(loading: Boolean) {
+        updateState { copy(loading = loading) }
+    }
 
     override fun handleEvent(event: Event) {
         when (event) {
@@ -53,10 +57,10 @@ class FooViewModel @Inject constructor(
 
     private fun sendText(text: String) {
         viewModelScope.launch {
-            updateState { copy(isLoading = true) }
-            delay(TimeUnit.SECONDS.toMillis(2))
-            updateState { copy(isLoading = false) }
-            forlagoNavigator.navigate(BarDestination.get(text))
+            load {
+                delay(TimeUnit.SECONDS.toMillis(2))
+                forlagoNavigator.navigate(BarDestination.get(text))
+            }
         }
     }
 }

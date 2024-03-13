@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import com.leinardi.forlago.library.ui.api.NightMode
 import com.leinardi.forlago.library.ui.api.interactor.StoreThemeInteractor
-import com.leinardi.forlago.library.ui.interactor.GetThemeFlowInteractorImpl.Companion.THEME_PREF_KEY
+import com.leinardi.forlago.library.ui.interactor.GetThemeStreamInteractorImpl.Companion.THEME_PREF_KEY
 import javax.inject.Inject
 
 internal class StoreThemeInteractorImpl @Inject constructor(

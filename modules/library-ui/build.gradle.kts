@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ dependencies {
     implementation(projects.modules.libraryNavigationApi)
     implementation(projects.modules.libraryPreferencesApi)
     api(libs.accompanist.navigation.material)
-    api(libs.accompanist.placeholder)
+    api(libs.accompanist.permissions)
     api(libs.androidx.appcompat)
     api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like ModalBottomSheetLayout
     api(libs.androidx.compose.material.icons.extended)
@@ -58,6 +58,7 @@ dependencies {
     api(libs.androidx.compose.runtime.livedata)
     api(libs.androidx.compose.tooling)
     api(libs.androidx.compose.ui)
+    api(libs.androidx.compose.ui.util)
     api(libs.androidx.constraintlayout.compose)
     api(libs.androidx.core.splashscreen)
     api(libs.androidx.hilt.navigation.compose)

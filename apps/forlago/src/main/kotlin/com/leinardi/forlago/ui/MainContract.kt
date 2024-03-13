@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,14 @@ package com.leinardi.forlago.ui
 
 import android.content.Intent
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Immutable
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object MainContract {
     data class State(
         val startDestination: String,
@@ -32,9 +34,9 @@ object MainContract {
 
     sealed class Event : ViewEvent {
         data class OnIntentReceived(val intent: Intent, val isNewIntent: Boolean = false) : Event()
-        object OnInAppUpdateCancelled : Event()
-        object OnInAppUpdateFailed : Event()
-        object OnShown : Event()
+        data object OnActivityResumed : Event()
+        data object OnInAppUpdateCancelled : Event()
+        data object OnInAppUpdateFailed : Event()
     }
 
     sealed class Effect : ViewEffect {
@@ -44,7 +46,7 @@ object MainContract {
         ) : Effect()
 
         data class StartUpdateFlowForResult(val appUpdateInfo: AppUpdateInfo, @AppUpdateType val appUpdateType: Int) : Effect()
-        object FinishActivity : Effect()
-        object ShowSnackbarForCompleteUpdate : Effect()
+        data object FinishActivity : Effect()
+        data object ShowSnackbarForCompleteUpdate : Effect()
     }
 }

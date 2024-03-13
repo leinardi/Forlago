@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,11 @@ afterEvaluate {
     val compileDependencyReportTask = tasks.register("generateRuntimeDependenciesReport") {
         description = "Generates a text file containing the Runtime classpath dependencies."
     }
-    project.configurations.filter { it.name.contains("RuntimeClasspath") }.forEach { configuration ->
+    project.configurations.filter { config ->
+        !config.name.contains("TestRuntimeClasspath") &&
+            !config.name.startsWith("benchmark") &&
+            config.name.contains("RuntimeClasspath")
+    }.forEach { configuration ->
         val configurationTask = tasks.register(
             "generate${configuration.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }}DependenciesReport",
             DependencyReportTask::class.java,

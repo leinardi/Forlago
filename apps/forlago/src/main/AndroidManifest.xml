@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright 2023 Roberto Leinardi.
+  ~ Copyright 2024 Roberto Leinardi.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -31,14 +31,9 @@
         android:supportsRtl="true"
         android:theme="@style/Ui.Theme.SplashScreen">
 
-        <!--
-       singleTask is used instead of singleInstance because the latter breaks Espresso tests:
-         https://github.com/android/android-test/issues/1115
-        -->
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,7 +46,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="forlago" />
+                <data android:scheme="${deepLinkScheme}" />
             </intent-filter>
         </activity>
     </application>

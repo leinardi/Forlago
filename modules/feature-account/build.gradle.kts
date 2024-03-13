@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,10 +37,12 @@ android {
             resValue("string", "account_type", config.android.accountType.get())
         }
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
     api(projects.modules.featureAccountApi)
+    implementation(projects.modules.featureLoginApi)
     implementation(projects.modules.libraryNetworkApi)
     implementation(projects.modules.libraryPreferencesApi)
 

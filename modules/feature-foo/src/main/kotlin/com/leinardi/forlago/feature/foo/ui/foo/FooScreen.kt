@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,7 +130,7 @@ private fun FooScreen(
             )
             ProgressButton(
                 onClick = { sendEvent(Event.OnBarButtonClicked(textFieldValue.text)) },
-                loading = state.isLoading,
+                loading = state.loading,
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_foo_send_text_to_bar))

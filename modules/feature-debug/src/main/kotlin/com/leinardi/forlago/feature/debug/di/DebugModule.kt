@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,39 @@
 package com.leinardi.forlago.feature.debug.di
 
 import com.leinardi.forlago.feature.debug.DebugFeature
+import com.leinardi.forlago.feature.debug.api.interactor.DebugShakeDetectorInteractor
+import com.leinardi.forlago.feature.debug.api.interactor.GetDebugInfoInteractor
+import com.leinardi.forlago.feature.debug.interactor.DebugShakeDetectorInteractorImpl
+import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractorImpl
 import com.leinardi.forlago.library.feature.Feature
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [DebugModule.BindModule::class])
 @InstallIn(SingletonComponent::class)
 object DebugModule {
     @Provides
     @Singleton
     @IntoSet
     fun provideDebugFeature(): Feature = DebugFeature()
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    internal interface BindModule {
+        @Binds
+        fun bindGetDebugInfoInteractor(bind: GetDebugInfoInteractorImpl): GetDebugInfoInteractor
+    }
+}
+
+@Module
+@InstallIn(ActivityRetainedComponent::class)
+internal interface DebugActivityRetainedModule {
+    @Binds
+    fun bindDebugShakeDetectorInteractor(bind: DebugShakeDetectorInteractorImpl): DebugShakeDetectorInteractor
 }

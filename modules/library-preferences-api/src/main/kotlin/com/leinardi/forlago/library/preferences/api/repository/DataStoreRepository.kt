@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import androidx.datastore.preferences.core.Preferences
 import kotlinx.coroutines.flow.Flow
 
 interface DataStoreRepository {
-    suspend fun clearPreferencesStorage()
+    suspend fun clearDataStore()
 
     fun <T> observeValue(key: Preferences.Key<T>): Flow<T?>
 

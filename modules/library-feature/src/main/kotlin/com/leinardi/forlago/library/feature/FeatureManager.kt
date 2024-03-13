@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ class FeatureManager @Inject constructor() {
         features.forEach { feature -> _featureMap[feature.javaClass] = feature }
     }
 
-    suspend fun onUserSignIn() = features.map { it.featureLifecycle.onSignIn() }
+    suspend fun onUserLogin() = features.map { it.featureLifecycle.onLogin() }
 
-    suspend fun onUserSignOut() = features.reversed().map { it.featureLifecycle.onSignOut() }
+    suspend fun onUserLogout() = features.reversed().map { it.featureLifecycle.onLogout() }
 }

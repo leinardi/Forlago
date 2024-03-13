@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,4 +24,8 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-bar-consumer-rules.pro")
     }
+}
+
+dependencies {
+    api(projects.modules.featureBarApi)
 }

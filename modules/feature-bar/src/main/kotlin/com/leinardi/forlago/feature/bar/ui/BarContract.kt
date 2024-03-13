@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,20 @@
 
 package com.leinardi.forlago.feature.bar.ui
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object BarContract {
     data class State(
         val text: String,
     ) : ViewState
 
     sealed class Event : ViewEvent {
-        object OnBackButtonClicked : Event()
-        object OnUpButtonClicked : Event()
+        data object OnBackButtonClicked : Event()
+        data object OnUpButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect

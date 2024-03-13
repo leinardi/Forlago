@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ if (config.params.saveBuildLogToFile.get()) {
     val buildLogDir = layout.buildDirectory.dir("logs")
     mkdir(buildLogDir)
     val buildLog = buildLogDir.get().file("buildlog-${datetime}.txt").asFile
-
     System.setProperty("org.gradle.color.error", "RED")
 
     val outputListener = StandardOutputListener { output -> buildLog.appendText(output.toString()) }

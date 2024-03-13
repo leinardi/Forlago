@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,14 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-logging-api-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
+    api(libs.timber)
+    implementation(libs.androidx.startup)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.perf)
     implementation(libs.kotlinx.serialization)
+    implementation(platform(libs.firebase.bom))
 }

@@ -290,7 +290,7 @@
   enabled: false # Custom
 # Checks that backticks (``) are not used in the identifier name, except the case when it is test method (marked with @Test annotation)
 - name: BACKTICKS_PROHIBITED
-  enabled: true
+  enabled: false # Custom
   # all code blocks annotated with  @Nested, @ParameterizedTest (JUnit 5) will
   # be ignored and not checked.
   ignoreAnnotated: [Nested, ParameterizedTest]
@@ -443,7 +443,7 @@
     maxLambdaLength: 15 # max length of lambda without parameters # Custom
 # Checks that using unnecessary, custom label
 - name: CUSTOM_LABEL
-  enabled: true
+  enabled: false # Custom
 # Checks that outer lambda has explicit parameter name
 - name: PARAMETER_NAME_IN_OUTER_LAMBDA
   enabled: false

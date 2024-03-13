@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,20 @@
 
 package com.leinardi.forlago.feature.@placeholderlowercase@.ui
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object @PlaceholderName@Contract {
     data class State(
         val text: String, // Remove if not used
     ) : ViewState
 
     sealed class Event : ViewEvent {
-        object OnBackButtonClicked : Event() // Remove if not used
-        object OnShowSnackbarButtonClicked : Event() // Remove if not used
+        data object OnBackButtonClicked : Event() // Remove if not used
+        data object OnShowSnackbarButtonClicked : Event() // Remove if not used
     }
 
     sealed class Effect : ViewEffect {

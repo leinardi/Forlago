@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,14 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-logging-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
     api(projects.modules.libraryLoggingApi)
-    api(libs.timber)
-    implementation(libs.androidx.startup)
     implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
-    if (rootProject.file("apps/forlago/google-services.json").exists()) {
-        implementation(libs.firebase.perf)
-    }
     implementation(libs.dagger.hilt.android)
     implementation(platform(libs.firebase.bom))
+
     ksp(libs.dagger.hilt.compiler)
 }

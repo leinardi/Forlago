@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +32,10 @@ val config = extensions.create<ConfigExt>("config").apply {
     }
 
     extensions.create<AppsConfigExt>("apps").apply {
-        deepLinkSchema.convention("forlago")
-
         extensions.create<ForlagoAppsConfigExt>("forlago").apply {
             applicationId.convention("com.leinardi.forlago")
+            baseName.convention("forlago")
+            deepLinkScheme.convention("forlago")
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.leinardi.forlago.feature.debug.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import com.leinardi.forlago.feature.debug.interactor.GetDebugInfoInteractor
+import com.leinardi.forlago.feature.debug.api.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Features
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Info
 import com.leinardi.forlago.feature.debug.ui.DebugViewModel.DebugNavigationBarItem.Options
@@ -26,6 +26,7 @@ import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentIntera
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
+import kotlin.enums.EnumEntries
 
 @Immutable
 object DebugContract {
@@ -39,9 +40,13 @@ object DebugContract {
             Options,
             Features,
         ),
-        val environments: Array<ReadEnvironmentInteractor.Environment> = ReadEnvironmentInteractor.Environment.values(),
-        val selectedNavigationItem: DebugViewModel.DebugNavigationBarItem = bottomNavigationItems[0],
         val certificatePinningEnabled: Boolean = true,
+        val environments: EnumEntries<ReadEnvironmentInteractor.Environment> = ReadEnvironmentInteractor.Environment.entries,
+        val selectedNavigationItem: DebugViewModel.DebugNavigationBarItem = bottomNavigationItems.first(),
+        val testBoolean: Boolean? = null,
+        val testDouble: Double? = null,
+        val testLong: Long? = null,
+        val testString: String? = null,
     ) : ViewState {
         data class Feature(
             val composable: @Composable () -> Unit,
@@ -50,12 +55,12 @@ object DebugContract {
     }
 
     sealed class Event : ViewEvent {
+        data class OnEnableCertificatePinningChanged(val boolean: Boolean) : Event()
         data class OnNavigationBarItemSelected(val selectedNavigationItem: DebugViewModel.DebugNavigationBarItem) : Event()
         data class OnEnvironmentSelected(val environment: ReadEnvironmentInteractor.Environment) : Event()
-        data class OnEnableCertificatePinning(val boolean: Boolean) : Event()
-        object OnClearApolloCacheClicked : Event()
-        object OnForceCrashClicked : Event()
-        object OnUpButtonClicked : Event()
+        data object OnClearApolloCacheClicked : Event()
+        data object OnForceCrashClicked : Event()
+        data object OnUpButtonClicked : Event()
     }
 
     sealed class Effect : ViewEffect

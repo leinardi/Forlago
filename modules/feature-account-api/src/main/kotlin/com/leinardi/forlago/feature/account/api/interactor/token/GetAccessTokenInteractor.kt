@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ interface GetAccessTokenInteractor {
         data class AccountAuthenticatorError(val errorMessage: String?) : ErrResult()
         data class BadArgumentsError(val errorMessage: String?) : ErrResult()
         data class NetworkError(val errorMessage: String?) : ErrResult()
-        object AccountNotFound : ErrResult()
-        object ReAuthenticationRequired : ErrResult()
+        data object AccountNotFound : ErrResult()
+        data object ReAuthenticationRequired : ErrResult()
     }
 }
 

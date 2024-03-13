@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import com.diffplug.gradle.spotless.SpotlessTask
-import com.diffplug.spotless.LineEnding
 import org.gradle.accessors.dm.LibrariesForLibs
 
 plugins {

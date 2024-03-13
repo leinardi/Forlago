@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,5 +36,10 @@ abstract class NavigationDestination {
             val uniqueId
                 get() = System.currentTimeMillis()
         }
+    }
+
+    companion object {
+        @Suppress("LateinitUsage") lateinit var DEEP_LINK_SCHEME: String
+        fun buildDeepLink(path: String?, scheme: String = DEEP_LINK_SCHEME) = "$scheme://${path.orEmpty()}"
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,12 @@
 
 package com.leinardi.forlago.feature.account.ui.debug
 
+import androidx.compose.runtime.Immutable
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
 
+@Immutable
 object AccountDebugContract {
     data class State(
         val accountName: String?,
@@ -29,13 +31,13 @@ object AccountDebugContract {
     ) : ViewState
 
     sealed class Event : ViewEvent {
-        object OnGetAccessTokenClicked : Event()
-        object OnInvalidateAccessTokenClicked : Event()
-        object OnInvalidateRefreshTokenClicked : Event()
-        object OnLogOutClicked : Event()
-        object OnOpenSignInScreenClicked : Event()
-        object OnViewAttached : Event()
-        object OnViewDetached : Event()
+        data object OnActivityResumed : Event()
+        data object OnActivityPaused : Event()
+        data object OnGetAccessTokenClicked : Event()
+        data object OnInvalidateAccessTokenClicked : Event()
+        data object OnInvalidateRefreshTokenClicked : Event()
+        data object OnLogOutClicked : Event()
+        data object OnOpenLogInScreenClicked : Event()
     }
 
     sealed class Effect : ViewEffect {

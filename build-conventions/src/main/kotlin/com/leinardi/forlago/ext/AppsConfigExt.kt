@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,8 @@
 package com.leinardi.forlago.ext
 
 import org.gradle.api.plugins.ExtensionAware
-import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.getByType
 
-interface AppsConfigExt : ExtensionAware {
-    val deepLinkSchema: Property<String>
-}
+interface AppsConfigExt : ExtensionAware
 
 internal inline val ConfigExt.apps: AppsConfigExt get() = extensions.getByType()

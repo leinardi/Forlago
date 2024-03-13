@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("forlago.android-library-conventions")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -26,20 +27,17 @@ android {
     defaultConfig {
         consumerProguardFiles("$projectDir/proguard-navigation-api-consumer-rules.pro")
     }
+    buildFeatures.buildConfig = true
 }
 
 dependencies {
-    implementation(projects.modules.libraryNavigationAnnotation)
-    ksp(projects.modules.libraryNavigationKsp)
-
+    api(projects.modules.libraryNavigationAnnotation)
     api(libs.androidx.navigation.compose)
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
 }
 
 // Workaround for https://github.com/detekt/detekt/issues/4743
 tasks.withType<Detekt>().configureEach {
     exclude("com/leinardi/forlago/library/navigation/api/destination/**/*Destination.kt")
-}
-
-afterEvaluate {
-    tasks.named("compileDebugKotlin").configure { shouldRunAfter(tasks.named("kspDebugKotlin")) }
 }

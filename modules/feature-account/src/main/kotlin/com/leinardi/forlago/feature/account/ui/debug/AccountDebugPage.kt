@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
+import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Event
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.State
 import com.leinardi.forlago.library.android.api.ext.toLongDateTimeString
 import com.leinardi.forlago.library.ui.component.LocalSnackbarHostState
@@ -49,10 +50,6 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AccountDebugPage(viewModel: AccountDebugViewModel = hiltViewModel()) {
-    DisposableEffect(viewModel) {
-        viewModel.onUiEvent(AccountDebugContract.Event.OnViewAttached)
-        onDispose { viewModel.onUiEvent(AccountDebugContract.Event.OnViewDetached) }
-    }
     AccountDebugPage(
         state = viewModel.viewState.value,
         effectFlow = viewModel.effect,
@@ -64,9 +61,15 @@ fun AccountDebugPage(viewModel: AccountDebugViewModel = hiltViewModel()) {
 private fun AccountDebugPage(
     state: State,
     effectFlow: Flow<Effect>,
-    sendEvent: (event: AccountDebugContract.Event) -> Unit,
+    sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    LifecycleResumeEffect {
+        sendEvent(Event.OnActivityResumed)
+        onPauseOrDispose {
+            sendEvent(Event.OnActivityPaused)
+        }
+    }
     val snackbarHostState = LocalSnackbarHostState.current
     LaunchedEffect(effectFlow) {
         effectFlow.onEach { effect ->
@@ -122,9 +125,9 @@ private fun ColumnScope.AccountInfo(state: State) {
 }
 
 @Composable
-private fun ColumnScope.EventButtons(sendEvent: (event: AccountDebugContract.Event) -> Unit) {
+private fun ColumnScope.EventButtons(sendEvent: (event: Event) -> Unit) {
     Button(
-        onClick = { sendEvent(AccountDebugContract.Event.OnGetAccessTokenClicked) },
+        onClick = { sendEvent(Event.OnGetAccessTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Spacing.x02),
@@ -132,7 +135,7 @@ private fun ColumnScope.EventButtons(sendEvent: (event: AccountDebugContract.Eve
         Text("Get access token")
     }
     Button(
-        onClick = { sendEvent(AccountDebugContract.Event.OnInvalidateAccessTokenClicked) },
+        onClick = { sendEvent(Event.OnInvalidateAccessTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Spacing.x02),
@@ -140,7 +143,7 @@ private fun ColumnScope.EventButtons(sendEvent: (event: AccountDebugContract.Eve
         Text("Invalidate access token")
     }
     Button(
-        onClick = { sendEvent(AccountDebugContract.Event.OnInvalidateRefreshTokenClicked) },
+        onClick = { sendEvent(Event.OnInvalidateRefreshTokenClicked) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Spacing.x02),
@@ -148,7 +151,7 @@ private fun ColumnScope.EventButtons(sendEvent: (event: AccountDebugContract.Eve
         Text("Invalidate refresh token")
     }
     Button(
-        onClick = { sendEvent(AccountDebugContract.Event.OnOpenSignInScreenClicked) },
+        onClick = { sendEvent(Event.OnOpenLogInScreenClicked) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Spacing.x02),
@@ -156,7 +159,7 @@ private fun ColumnScope.EventButtons(sendEvent: (event: AccountDebugContract.Eve
         Text("Open Sign In screen")
     }
     Button(
-        onClick = { sendEvent(AccountDebugContract.Event.OnLogOutClicked) },
+        onClick = { sendEvent(Event.OnLogOutClicked) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = Spacing.x02),

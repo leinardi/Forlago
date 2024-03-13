@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,9 @@ android {
             matchingFallbacks.add("release")
         }
     }
+    buildFeatures.buildConfig = true
 }
+
 androidComponents {
     beforeVariants(selector().all()) {
         // enable only the benchmark buildType, since we only want to measure close to release performance

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
@@ -95,8 +97,9 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
             ForlagoTheme(dynamicColor = viewModel.viewState.value.dynamicColors) {
                 ForlagoMainScreen(
                     effectFlow = viewModel.effect,
-                    startDestination = viewModel.viewState.value.startDestination,
                     forlagoNavigator = forlagoNavigator,
+                    sendEvent = { viewModel.onUiEvent(it) },
+                    startDestination = viewModel.viewState.value.startDestination,
                 )
             }
         }
@@ -107,11 +110,6 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         super.onNewIntent(intent)
         setIntent(intent)
         viewModel.onUiEvent(Event.OnIntentReceived(intent, true))
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.onUiEvent(Event.OnShown)
     }
 
     override fun onDestroy() {
@@ -157,14 +155,18 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
 }
 
 @OptIn(ExperimentalMaterialNavigationApi::class)
-@Suppress("ReusedModifierInstance")
+@Suppress("ReusedModifierInstance", "ModifierNotUsedAtRoot")
 @Composable
 fun ForlagoMainScreen(
     effectFlow: Flow<Effect>,
     forlagoNavigator: ForlagoNavigator,
+    sendEvent: (event: Event) -> Unit,
     startDestination: String,
     modifier: Modifier = Modifier,
 ) {
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        sendEvent(Event.OnActivityResumed)
+    }
     val bottomSheetNavigator = rememberBottomSheetNavigator(skipHalfExpanded = true)
     val navHostController = rememberNavController(bottomSheetNavigator)
     val activity = LocalContext.current.requireActivity() as MainActivity
@@ -178,8 +180,14 @@ fun ForlagoMainScreen(
                 ).also { Timber.d("Navigate to ${event.destination}") }
 
                 is NavigatorEvent.HandleDeepLink -> navHostController.handleDeepLink(event.intent)
-                is NavigatorEvent.NavigateUp -> navHostController.navigateUp().also { Timber.d("Navigate Up successful = $it") }
                 is NavigatorEvent.NavigateBack -> navHostController.popBackStack().also { Timber.d("NavigateBack successful = $it") }
+                is NavigatorEvent.NavigateBackOrHome -> if (navHostController.previousBackStackEntry != null) {
+                    navHostController.popBackStack()
+                } else {
+                    forlagoNavigator.navigateHome()
+                }
+
+                is NavigatorEvent.NavigateUp -> navHostController.navigateUp().also { Timber.d("Navigate Up successful = $it") }
             }
         }.launchIn(this)
     }

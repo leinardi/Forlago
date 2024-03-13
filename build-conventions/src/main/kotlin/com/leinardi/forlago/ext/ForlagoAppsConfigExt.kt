@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import org.gradle.kotlin.dsl.getByType
 
 interface ForlagoAppsConfigExt : ExtensionAware {
     val applicationId: Property<String>
+    val baseName: Property<String>
+    val deepLinkScheme: Property<String>
 }
 
 internal inline val AppsConfigExt.forlago: ForlagoAppsConfigExt get() = extensions.getByType()

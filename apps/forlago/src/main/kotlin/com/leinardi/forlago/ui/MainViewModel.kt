@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@
 package com.leinardi.forlago.ui
 
 import android.app.Application
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.viewModelScope
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
-import com.leinardi.forlago.feature.account.api.interactor.account.LogOutInteractor
+import com.leinardi.forlago.feature.debug.api.interactor.DebugShakeDetectorInteractor
+import com.leinardi.forlago.feature.logout.api.interactor.LogOutInteractor
 import com.leinardi.forlago.library.android.api.ext.ifTrue
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.DeveloperTriggeredUpdateInProgress
@@ -31,11 +29,11 @@ import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateI
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.ImmediateUpdateAvailable
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.LowPriorityUpdateAvailable
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.UpdateNotAvailable
-import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateFlowInteractor
+import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateStreamInteractor
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
-import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouFlowInteractor
-import com.leinardi.forlago.library.ui.api.interactor.GetThemeFlowInteractor
+import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouStreamInteractor
+import com.leinardi.forlago.library.ui.api.interactor.GetThemeStreamInteractor
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import com.leinardi.forlago.library.ui.interactor.SetNightModeInteractor
 import com.leinardi.forlago.ui.MainContract.Effect
@@ -50,49 +48,51 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    getInstallStateUpdateFlowInteractor: GetInstallStateUpdateFlowInteractor,
-    getMaterialYouFlowInteractor: GetMaterialYouFlowInteractor,
-    getThemeFlowInteractor: GetThemeFlowInteractor,
+    getInstallStateUpdateStreamInteractor: GetInstallStateUpdateStreamInteractor,
+    getMaterialYouStreamInteractor: GetMaterialYouStreamInteractor,
+    getThemeStreamInteractor: GetThemeStreamInteractor,
     private val app: Application,
+    private val debugShakeDetectorInteractor: DebugShakeDetectorInteractor,
     private val forlagoNavigator: ForlagoNavigator,
     private val getAppUpdateInfoInteractor: GetAppUpdateInfoInteractor,
     private val getFeaturesInteractor: GetFeaturesInteractor,
     private val logOutInteractor: LogOutInteractor,
     setNightModeInteractor: SetNightModeInteractor,
-) : BaseViewModel<Event, State, Effect>(), DefaultLifecycleObserver {
+) : BaseViewModel<Event, State, Effect>() {
     @AppUpdateType private var appUpdateType: Int? = null
 
     init {
-        getThemeFlowInteractor()
+        getThemeStreamInteractor()
             .onEach { nightMode ->
-                if (!logOutInteractor.isSignOutInProgress()) {
+                if (!logOutInteractor.isLogOutInProgress()) {
                     setNightModeInteractor(nightMode)
                 }
             }
             .launchIn(viewModelScope)
-        getMaterialYouFlowInteractor()
+        getMaterialYouStreamInteractor()
             .onEach { updateState { copy(dynamicColors = it) } }
             .launchIn(viewModelScope)
-        getInstallStateUpdateFlowInteractor()
+        getInstallStateUpdateStreamInteractor()
             .onEach { result ->
-                if (result is GetInstallStateUpdateFlowInteractor.Result.Downloaded) {
+                if (result is GetInstallStateUpdateStreamInteractor.Result.Downloaded) {
                     sendEffect { Effect.ShowSnackbarForCompleteUpdate }
                 }
             }
             .launchIn(viewModelScope)
         checkForUpdates()
-        ProcessLifecycleOwner.get().lifecycle.addObserver(this)
+        debugShakeDetectorInteractor.startObserving()
     }
 
-    override fun onResume(owner: LifecycleOwner) {
-        super.onResume(owner)
-        checkForUpdates(true)
+    override fun onCleared() {
+        super.onCleared()
+        debugShakeDetectorInteractor.stopObserving()
     }
 
     override fun provideInitialState() = State(forlagoNavigator.homeDestination)
 
     override fun handleEvent(event: Event) {
         when (event) {
+            is Event.OnActivityResumed -> checkForUpdates(true)
             is Event.OnInAppUpdateCancelled -> {
                 Timber.d("In-App update cancelled")
                 if (appUpdateType == AppUpdateType.IMMEDIATE) {
@@ -101,14 +101,17 @@ class MainViewModel @Inject constructor(
                 }
             }
 
-            is Event.OnInAppUpdateFailed -> sendEffect {
-                Effect.ShowErrorSnackbar(
-                    app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_error),
-                )
+            is Event.OnInAppUpdateFailed -> viewModelScope.launch {
+                debounceError {
+                    sendEffect {
+                        Effect.ShowErrorSnackbar(
+                            app.getString(com.leinardi.forlago.library.i18n.R.string.i18n_app_update_error),
+                        )
+                    }
+                }
             }
 
             is Event.OnIntentReceived -> handleOnIntentReceived(event)
-            is Event.OnShown -> checkForUpdates(true)
         }
     }
 
@@ -117,7 +120,7 @@ class MainViewModel @Inject constructor(
             var handled = false
             getFeaturesInteractor().forEach { feature ->
                 if (!handled) {
-                    feature.handleIntent(event.intent).ifTrue { handled = true }
+                    feature.handleIntent(event.intent, forlagoNavigator).ifTrue { handled = true }
                 }
             }
             if (!handled && event.isNewIntent) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Roberto Leinardi.
+ * Copyright 2024 Roberto Leinardi.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,56 +16,47 @@
 
 package com.leinardi.forlago.feature.account
 
-import android.accounts.AccountManager
 import android.content.Intent
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.feature.account.api.interactor.account.RemoveAccountsInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateAccessTokenInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
-import com.leinardi.forlago.feature.account.ui.SignInScreen
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugPage
 import com.leinardi.forlago.library.android.api.interactor.android.DeleteWebViewDataInteractor
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.feature.FeatureLifecycle
-import com.leinardi.forlago.library.navigation.api.destination.NavigationDestination
-import com.leinardi.forlago.library.navigation.api.destination.account.SignInDestination
-import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
+import com.leinardi.forlago.library.preferences.api.di.User
+import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
-class AccountFeature(
+class AccountFeature @AssistedInject constructor(
+    @Assisted val mainActivityIntent: Intent,
     private val deleteWebViewDataInteractor: DeleteWebViewDataInteractor,
     private val invalidateAccessTokenInteractor: InvalidateAccessTokenInteractor,
     private val invalidateRefreshTokenInteractor: InvalidateRefreshTokenInteractor,
-    private val navigator: ForlagoNavigator,
     private val removeAccountsInteractor: RemoveAccountsInteractor,
-    val mainActivityIntent: Intent,
+    @User private val userDataStoreRepository: DataStoreRepository,
 ) : Feature() {
-    override val id = "Account"
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            @Assisted mainActivityIntent: Intent,
+        ): AccountFeature
+    }
 
-    override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
-        SignInDestination to { SignInScreen() },
-    )
+    override val id = "Account"
 
     override val debugComposable: @Composable () -> Unit = { AccountDebugPage() }
 
-    override val handleIntent: suspend (Intent) -> Boolean = { intent ->
-        if (intent.hasExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE)) {
-            val isNewAccount = intent.getBooleanExtra(AccountAuthenticatorConfig.KEY_IS_NEW_ACCOUNT, false)
-            navigator.navigate(SignInDestination.get(!isNewAccount)) {
-                launchSingleTop = true
-                popUpTo(0) { inclusive = true }
-            }
-            true
-        } else {
-            false
-        }
-    }
-
     override val featureLifecycle: FeatureLifecycle = FeatureLifecycle(
-        onSignOut = {
+        onLogout = {
             invalidateAccessTokenInteractor()
             invalidateRefreshTokenInteractor()
             removeAccountsInteractor()
             deleteWebViewDataInteractor()
+            userDataStoreRepository.clearDataStore()
         },
     )
 }
