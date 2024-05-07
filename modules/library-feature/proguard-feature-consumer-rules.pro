@@ -1,0 +1,1 @@
+-keep class * extends com.leinardi.forlago.library.feature.Feature { *; }
