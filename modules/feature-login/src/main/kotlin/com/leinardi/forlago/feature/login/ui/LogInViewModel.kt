@@ -17,8 +17,6 @@
 package com.leinardi.forlago.feature.login.ui
 
 import androidx.lifecycle.viewModelScope
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.leinardi.forlago.feature.account.api.interactor.account.AddAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
@@ -27,6 +25,7 @@ import com.leinardi.forlago.feature.login.api.interactor.LogInInteractor
 import com.leinardi.forlago.feature.login.ui.LogInContract.Effect
 import com.leinardi.forlago.feature.login.ui.LogInContract.Event
 import com.leinardi.forlago.feature.login.ui.LogInContract.State
+import com.leinardi.forlago.library.android.api.interactor.android.ShowToastInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.network.api.model.AuthErrResult
 import com.leinardi.forlago.library.ui.base.BaseViewModel
@@ -40,8 +39,10 @@ class LogInViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
     private val getAccessTokenInteractor: GetAccessTokenInteractor,
     private val getAccountInteractor: GetAccountInteractor,
+    private val handleAuthErrResultHelper: HandleAuthErrResultHelper,
     private val logInInteractor: LogInInteractor,
     private val setRefreshTokenInteractor: SetRefreshTokenInteractor,
+    private val showToastInteractor: ShowToastInteractor,
 ) : BaseViewModel<Event, State, Effect>() {
     override fun provideInitialState(): State {
         val username = getAccountInteractor()?.name
@@ -61,28 +62,15 @@ class LogInViewModel @Inject constructor(
     private fun logIn(username: String, password: String) {
         viewModelScope.launch {
             updateState { copy(isLoading = true) }
-            when (val result = logInInteractor(username, password)) {
-                is Ok -> handleSuccessfulLogIn(result.value.refreshToken, username)
-                is Err -> when (result.error) {
-                    is AuthErrResult.BadAuthentication -> sendEffect {
-                        Effect.ShowErrorSnackbar(
-                            "BadAuthentication",
-                            "OK",
-                        )
-                    }
-
-                    is AuthErrResult.NetworkError -> sendEffect {
-                        Effect.ShowErrorSnackbar(
-                            "NetworkError",
-                            "OK",
-                        )
-                    }
-
-                    is AuthErrResult.UnexpectedError -> sendEffect {
-                        Effect.ShowErrorSnackbar(
-                            "UnexpectedError",
-                            "OK",
-                        )
+            val result = logInInteractor(username, password)
+            if (result.isOk) {
+                handleSuccessfulLogIn(result.value.refreshToken, username)
+            } else {
+                handleAuthErrResultHelper(result.error) { error ->
+                    if (result.error is AuthErrResult.BadAuthentication) {
+                        updateState { copy(passwordError = error) }
+                    } else {
+                        showToastInteractor(error)
                     }
                 }
             }

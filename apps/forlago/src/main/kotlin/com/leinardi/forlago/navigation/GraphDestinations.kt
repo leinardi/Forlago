@@ -16,15 +16,16 @@
 
 package com.leinardi.forlago.navigation
 
-import androidx.compose.material3.Surface
+import androidx.compose.material.navigation.bottomSheet
+import androidx.compose.material3.BottomSheetDefaults
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.contentColorFor
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.google.accompanist.navigation.material.bottomSheet
 import com.leinardi.forlago.di.AppEntryPoints
 import com.leinardi.forlago.library.android.initializer.ContextProvider
-import com.leinardi.forlago.library.ui.component.BottomSheetDefaults
 import dagger.hilt.EntryPoints
 
 fun NavGraphBuilder.addComposableDestinations() {
@@ -45,16 +46,13 @@ fun NavGraphBuilder.addDialogDestinations() {
     }
 }
 
-@ExperimentalMaterialNavigationApi
 fun NavGraphBuilder.addBottomSheetDestinations() {
     getFeatures().forEach { feature ->
         feature.bottomSheetDestinations.forEach { entry ->
             val destination = entry.key
             bottomSheet(destination.route, destination.arguments, destination.deepLinks) {
-                // Remove once ModalBottomSheetLayout will support tonal elevation
-                Surface(
-                    tonalElevation = BottomSheetDefaults.tonalElevation,
-                ) {
+                // Remove CompositionLocalProvider after migration to Material 3 Navigation
+                CompositionLocalProvider(LocalContentColor provides contentColorFor(BottomSheetDefaults.ContainerColor)) {
                     entry.value()
                 }
             }

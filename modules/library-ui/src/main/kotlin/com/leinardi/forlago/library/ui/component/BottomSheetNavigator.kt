@@ -14,32 +14,32 @@
  * limitations under the License.
  */
 
+@file:Suppress("Material2")
+
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.SpringSpec
 import androidx.compose.material.ModalBottomSheetValue
+import androidx.compose.material.navigation.BottomSheetNavigator
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.google.accompanist.navigation.material.BottomSheetNavigator
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 
 /**
  * Create and remember a [BottomSheetNavigator]
  *
  * @return a [BottomSheetNavigator]
  */
-@OptIn(ExperimentalMaterialApi::class)
-@ExperimentalMaterialNavigationApi
 @Composable
 fun rememberBottomSheetNavigator(
     skipHalfExpanded: Boolean = false,
+    animationSpec: AnimationSpec<Float> = SpringSpec(),
 ): BottomSheetNavigator {
     val sheetState = rememberModalBottomSheetState(
         initialValue = ModalBottomSheetValue.Hidden,
         skipHalfExpanded = skipHalfExpanded,
+        animationSpec = animationSpec,
     )
-    return remember(sheetState) {
-        BottomSheetNavigator(sheetState = sheetState)
-    }
+    return remember(sheetState) { BottomSheetNavigator(sheetState) }
 }

@@ -106,6 +106,12 @@ Once you have these 3 files in the following paths:
 
 you can use the `release/encrypt-secrets.sh` to safely encrypt them (it's recommended to use a very strong passphrase).
 
+### Get the latest version of the GraphQL schema
+
+```bash
+./gradlew :module:library-network-api:downloadForlagoApolloSchemaFromIntrospection
+```
+
 ## Baseline Profile
 
 Baseline Profiles improve code execution speed from the first launch by avoiding interpretation and just-in-time (JIT) compilation steps for included

@@ -18,7 +18,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("forlago.android-library-conventions")
-    id("com.apollographql.apollo3")
+    alias(libs.plugins.apollo)
     alias(libs.plugins.kotlinx.serialization)
 }
 
@@ -34,6 +34,10 @@ apollo {
     service("forlago") {
         packageName.set("com.leinardi.forlago.library.network.api.graphql")
         generateApolloMetadata.set(true)
+        introspection {
+            endpointUrl.set("https://apollo-fullstack-tutorial.herokuapp.com/graphql")
+            schemaFile.set(file("src/main/graphql/schema.graphqls"))
+        }
     }
 }
 
@@ -50,16 +54,5 @@ dependencies {
 tasks {
     withType<Detekt>().configureEach {
         exclude("com/leinardi/forlago/library/network/api/graphql/**/*.kt")
-    }
-    register<Exec>("refreshGraphQlSchema") {
-        val endpoint = "https://apollo-fullstack-tutorial.herokuapp.com/graphql"
-        val schemaPath = "modules/library-network-api/src/main/graphql/schema.graphqls"
-        workingDir(rootDir)
-        commandLine(
-            "./gradlew",
-            ":module:library-network-api:downloadApolloSchema",
-            "--endpoint=$endpoint",
-            "--schema=$schemaPath",
-        )
     }
 }

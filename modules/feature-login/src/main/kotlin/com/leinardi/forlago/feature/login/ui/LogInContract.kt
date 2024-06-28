@@ -28,6 +28,7 @@ object LogInContract {
         val username: String,
         val password: String,
         val isLoading: Boolean = false,
+        val passwordError: String? = null,
     ) : ViewState
 
     sealed class Event : ViewEvent {
