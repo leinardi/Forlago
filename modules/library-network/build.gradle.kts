@@ -17,7 +17,7 @@
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
-    id("com.apollographql.apollo3")
+    alias(libs.plugins.apollo)
     alias(libs.plugins.kotlinx.serialization)
 }
 

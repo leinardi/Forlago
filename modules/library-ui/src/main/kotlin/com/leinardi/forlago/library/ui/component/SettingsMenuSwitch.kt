@@ -23,12 +23,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
@@ -40,11 +42,15 @@ fun SettingsMenuSwitch(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit),
     modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     icon: (@Composable () -> Unit)? = null,
     subtitle: (@Composable () -> Unit)? = null,
     enabled: Boolean = true,
 ) {
-    Surface(modifier = modifier.toggleable(enabled = enabled, value = checked, onValueChange = onCheckedChange)) {
+    Surface(
+        modifier = modifier.toggleable(enabled = enabled, value = checked, onValueChange = onCheckedChange),
+        color = backgroundColor,
+    ) {
         val alpha = if (enabled) 1f else ContentAlpha.disabled
         Row(
             modifier = Modifier

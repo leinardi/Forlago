@@ -44,7 +44,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateOptions
@@ -154,7 +153,6 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
     }
 }
 
-@OptIn(ExperimentalMaterialNavigationApi::class)
 @Suppress("ReusedModifierInstance", "ModifierNotUsedAtRoot")
 @Composable
 fun ForlagoMainScreen(

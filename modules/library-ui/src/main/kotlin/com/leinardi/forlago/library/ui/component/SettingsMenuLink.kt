@@ -28,6 +28,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
@@ -39,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.leinardi.forlago.library.ui.preview.PreviewThemes
 import com.leinardi.forlago.library.ui.theme.ForlagoTheme
@@ -48,13 +50,17 @@ import com.leinardi.forlago.library.ui.theme.Spacing
 fun SettingsMenuLink(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.surface,
     icon: (@Composable () -> Unit)? = null,
     subtitle: (@Composable () -> Unit)? = null,
     action: (@Composable () -> Unit)? = null,
     enabled: Boolean = true,
     onClick: () -> Unit = {},
 ) {
-    Surface(modifier = modifier) {
+    Surface(
+        modifier = modifier,
+        color = backgroundColor,
+    ) {
         val alpha = if (enabled) 1f else ContentAlpha.disabled
         Row(
             modifier = Modifier

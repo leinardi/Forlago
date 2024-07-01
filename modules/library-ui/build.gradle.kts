@@ -47,11 +47,11 @@ dependencies {
     implementation(projects.modules.libraryI18n)
     implementation(projects.modules.libraryNavigationApi)
     implementation(projects.modules.libraryPreferencesApi)
-    api(libs.accompanist.navigation.material)
     api(libs.accompanist.permissions)
     api(libs.androidx.appcompat)
     api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like ModalBottomSheetLayout
     api(libs.androidx.compose.material.icons.extended)
+    api(libs.androidx.compose.material.navigation)
     api(libs.androidx.compose.material3)
     api(libs.androidx.compose.material3.window.size)
     api(libs.androidx.compose.runtime)

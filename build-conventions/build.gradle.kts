@@ -23,12 +23,10 @@ plugins {
 
 
 dependencies {
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.apollo.compiler)
     implementation(libs.plugin.aboutlibraries)
     implementation(libs.plugin.android.gradle)
     implementation(libs.plugin.androidcachefix)
-    implementation(libs.plugin.apollo)
-    implementation(libs.plugin.apollo.external)
     implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.detekt)
     implementation(libs.plugin.easylauncher)

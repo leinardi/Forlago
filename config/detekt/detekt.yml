@@ -23,22 +23,40 @@ formatting: # KtLint
     autoCorrect: true
     indentSize: 4
   AnnotationSpacing:
-    active: true # Custom
+    active: true
     autoCorrect: true
   ArgumentListWrapping:
     active: true
     autoCorrect: true
     indentSize: 4
     maxLineLength: 150 # Custom
+  BinaryExpressionWrapping:
+    active: true # Custom
+    autoCorrect: true
+    maxLineLength: 150 # Custom
+    indentSize: 4
+  BlankLineBeforeDeclaration:
+    active: true
+    autoCorrect: true
   BlockCommentInitialStarAlignment:
     active: true
     autoCorrect: true
+  ChainMethodContinuation:
+    active: true # Custom
+    autoCorrect: true
+    indentSize: 4
+    maxLineLength: 150 # Custom
   ChainWrapping:
     active: true
     autoCorrect: true
     indentSize: 4
   ClassName:
     active: false
+  ClassSignature:
+    active: false
+    autoCorrect: true
+    indentSize: 4
+    maxLineLength: 120
   CommentSpacing:
     active: true
     autoCorrect: true
@@ -46,19 +64,20 @@ formatting: # KtLint
     active: true
     autoCorrect: true
     indentSize: 4
+  ConditionWrapping:
+    active: false
+    autoCorrect: true
+    indentSize: 4
   ContextReceiverMapping:
     active: true # Custom
     autoCorrect: true
     maxLineLength: 150 # Custom
     indentSize: 4
-  DiscouragedCommentLocation:
-    active: true # Custom
-    autoCorrect: true
   EnumEntryNameCase:
     active: true
     autoCorrect: true
   EnumWrapping:
-    active: false
+    active: false # Custom
     autoCorrect: true
     indentSize: 4
   Filename:
@@ -70,6 +89,16 @@ formatting: # KtLint
   FunKeywordSpacing:
     active: true
     autoCorrect: true
+  FunctionExpressionBody:
+    active: true # Custom
+    autoCorrect: true
+    indentSize: 4
+    maxLineLength: 150 # Custom
+  FunctionLiteral:
+    active: true # Custom
+    autoCorrect: true
+    indentSize: 4
+    maxLineLength: 150 # Custom
   FunctionName:
     active: false
   FunctionReturnTypeSpacing:
@@ -86,15 +115,18 @@ formatting: # KtLint
   FunctionStartOfBodySpacing:
     active: true
     autoCorrect: true
+  FunctionTypeModifierSpacing:
+    active: true # Custom
+    autoCorrect: true
   FunctionTypeReferenceSpacing:
     active: true
     autoCorrect: true
   IfElseBracing:
-    active: false
+    active: true
     autoCorrect: true
     indentSize: 4
   IfElseWrapping:
-    active: false
+    active: true
     autoCorrect: true
     indentSize: 4
   ImportOrdering:
@@ -111,8 +143,10 @@ formatting: # KtLint
     indentSize: 4
   MaximumLineLength:
     active: false # Custom
-    maxLineLength: 120
+    maxLineLength: 150 # Custom
     ignoreBackTickedIdentifier: false
+  MixedConditionOperators:
+    active: false
   ModifierListSpacing:
     active: true
     autoCorrect: true
@@ -124,6 +158,10 @@ formatting: # KtLint
     autoCorrect: true
     indentSize: 4
   MultilineExpressionWrapping:
+    active: false # Custom
+    autoCorrect: true
+    indentSize: 4
+  MultilineLoop:
     active: false
     autoCorrect: true
     indentSize: 4
@@ -131,7 +169,7 @@ formatting: # KtLint
     active: true
     autoCorrect: true
   NoBlankLineInList:
-    active: true # Custom
+    active: true
     autoCorrect: true
   NoBlankLinesInChainedMethodCalls:
     active: true
@@ -140,12 +178,14 @@ formatting: # KtLint
     active: true
     autoCorrect: true
   NoConsecutiveComments:
-    active: false
+    active: false # Custom
   NoEmptyClassBody:
     active: true
     autoCorrect: true
+  NoEmptyFile:
+    active: true
   NoEmptyFirstLineInClassBody:
-    active: true # Custom
+    active: true
     autoCorrect: true
     indentSize: 4
   NoEmptyFirstLineInMethodBlock:
@@ -164,7 +204,7 @@ formatting: # KtLint
     active: true
     autoCorrect: true
   NoSingleLineBlockComment:
-    active: false
+    active: false # Custom
     autoCorrect: true
     indentSize: 4
   NoTrailingSpaces:
@@ -180,14 +220,14 @@ formatting: # KtLint
     active: false # Custom duplicate of WildcardImport
     packagesToUseImportOnDemandProperty: 'java.util.*,kotlinx.android.synthetic.**'
   NullableTypeSpacing:
-    active: false
+    active: true
     autoCorrect: true
   PackageName:
     active: false # Custom
-    autoCorrect: true
   ParameterListSpacing:
-    active: false
+    active: true
     autoCorrect: true
+    maxLineLength: 150 # Custom
   ParameterListWrapping:
     active: true
     autoCorrect: true
@@ -197,7 +237,7 @@ formatting: # KtLint
     active: true
     autoCorrect: true
     indentSize: 4
-    maxLineLength: 120
+    maxLineLength: 150 # Custom
   PropertyName:
     active: false
   PropertyWrapping:
@@ -217,6 +257,7 @@ formatting: # KtLint
   SpacingAroundCurly:
     active: true
     autoCorrect: true
+    indentSize: 4
   SpacingAroundDot:
     active: true
     autoCorrect: true
@@ -247,11 +288,15 @@ formatting: # KtLint
   SpacingBetweenFunctionNameAndOpeningParenthesis:
     active: true
     autoCorrect: true
+  StatementWrapping:
+    active: true
+    autoCorrect: true
+    indentSize: 4
   StringTemplate:
     active: true
     autoCorrect: true
   StringTemplateIndent:
-    active: false
+    active: true
     autoCorrect: true
     indentSize: 4
   TrailingCommaOnCallSite:
@@ -263,20 +308,28 @@ formatting: # KtLint
     autoCorrect: true
     useTrailingCommaOnDeclarationSite: true
   TryCatchFinallySpacing:
-    active: false
+    active: true
     autoCorrect: true
     indentSize: 4
+  TypeArgumentComment:
+    active: true
   TypeArgumentListSpacing:
-    active: true # Custom
+    active: true
     autoCorrect: true
     indentSize: 4
+  TypeParameterComment:
+    active: true
   TypeParameterListSpacing:
-    active: false
+    active: true
     autoCorrect: true
     indentSize: 4
   UnnecessaryParenthesesBeforeTrailingLambda:
     active: true
     autoCorrect: true
+  ValueArgumentComment:
+    active: true
+  ValueParameterComment:
+    active: true
   Wrapping:
     active: true
     autoCorrect: true
@@ -308,7 +361,7 @@ console-reports:
     - 'NotificationReport'
     - 'FindingsReport'
     - 'FileBasedFindingsReport'
-    # - 'LiteFindingsReport'
+  #  - 'LiteFindingsReport'
 
 output-reports:
   active: true
@@ -418,9 +471,9 @@ complexity:
     includePrivateDeclarations: false
     ignoreOverloaded: false
   CyclomaticComplexMethod:
-    active: false
-    threshold: 30 # Custom
-    ignoreSingleWhenExpression: true # Custom
+    active: false # Custom
+    threshold: 15
+    ignoreSingleWhenExpression: false
     ignoreSimpleWhenEntries: false
     ignoreNestingFunctions: false
     nestingFunctions:
@@ -759,7 +812,7 @@ naming:
   TopLevelPropertyNaming:
     active: true
     excludes: [
-        '**/modules/library-ui/src/main/kotlin/com/leinardi/forlago/library/ui/component/**',
+        '**/library-ui/src/main/kotlin/com/leinardi/forlago/library/ui/component/**',
       ] # Custom
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
@@ -1090,7 +1143,7 @@ style:
   MultilineLambdaItParameter:
     active: true # Custom
   MultilineRawStringIndentation:
-    active: true # Custom
+    active: false
     indentSize: 4
     trimmingMethods:
       - 'trimIndent'
@@ -1263,49 +1316,87 @@ compose:
 Compose:
   ComposableAnnotationNaming:
     active: true
+  ComposableNaming:
+    active: true
+    # -- You can optionally disable the checks in this rule for regex matches against the composable name (e.g. molecule presenters)
+    # allowedComposableFunctionNames: .*Presenter,.*MoleculePresenter
+  ComposableParamOrder:
+    active: true
+    # -- You can optionally have a list of types to be treated as lambdas (e.g. typedefs or fun interfaces not picked up automatically)
+    # treatAsLambda: MyLambdaType
   CompositionLocalAllowlist:
     active: false # Custom
-    # You can optionally define a list of CompositionLocals that are allowed here
+    # -- You can optionally define a list of CompositionLocals that are allowed here
     # allowedCompositionLocals: LocalSomething,LocalSomethingElse
   CompositionLocalNaming:
     active: true
   ContentEmitterReturningValues:
     active: true
-    # You can optionally add your own composables here
+    # -- You can optionally add your own composables here
     # contentEmitters: MyComposable,MyOtherComposable
+  ContentTrailingLambda:
+    active: true
+    # -- You can optionally have a list of types to be treated as composable lambdas (e.g. typedefs or fun interfaces not picked up automatically)
+    # treatAsComposableLambda: MyComposableLambdaType
   DefaultsVisibility:
     active: true
+  LambdaParameterInRestartableEffect:
+    active: false # Custom
+    # -- You can optionally have a list of types to be treated as lambdas (e.g. typedefs or fun interfaces not picked up automatically)
+    # treatAsLambda: MyLambdaType
+  Material2:
+    active: true #Custom # Opt-in, disabled by default. Turn on if you want to disallow Material 2 usages.
+    # -- You can optionally allow parts of it, if you are in the middle of a migration.
+    allowedFromM2:
+      - 'icons.Icons0'
+      - 'navigation'
   ModifierClickableOrder:
     active: true
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
   ModifierComposable:
     active: true
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
+  ModifierComposed:
+    active: true
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
   ModifierMissing:
     active: true
-    # You can optionally control the visibility of which composables to check for here
-    # Possible values are: `only_public`, `public_and_internal` and `all` (default is `only_public`)
+    # -- You can optionally control the visibility of which composables to check for here
+    # -- Possible values are: `only_public`, `public_and_internal` and `all` (default is `only_public`)
     # checkModifiersForVisibility: only_public
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
   ModifierNaming:
     active: true
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
   ModifierNotUsedAtRoot:
     active: true
-    # You can optionally add your own composables here
+    # -- You can optionally add your own composables here
     # contentEmitters: MyComposable,MyOtherComposable
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
   ModifierReused:
     active: true
+    # -- You can optionally add your own Modifier types
+    # customModifiers: BananaModifier,PotatoModifier
   ModifierWithoutDefault:
     active: true
   MultipleEmitters:
     active: true
-    # You can optionally add your own composables here
+    # -- You can optionally add your own composables here that will count as content emitters
     # contentEmitters: MyComposable,MyOtherComposable
+    # -- You can add composables here that you don't want to count as content emitters (e.g. custom dialogs or modals)
+    # contentEmittersDenylist: MyNonEmitterComposable
   MutableParams:
+    active: true
+  MutableStateAutoboxing:
+    active: true
+  MutableStateParam:
     active: false # Custom https://github.com/mrmans0n/compose-rules/issues/133
-  ComposableNaming:
-    active: true
-    # You can optionally disable the checks in this rule for regex matches against the composable name (e.g. molecule presenters)
-    # allowedComposableFunctionNames: .*Presenter,.*MoleculePresenter
-  ComposableParamOrder:
-    active: true
   PreviewAnnotationNaming:
     active: true
   PreviewPublic:
@@ -1317,11 +1408,14 @@ Compose:
   UnstableCollections:
     active: true
   ViewModelForwarding:
-    active:
-      true
-      # You can optionally use this rule on things other than types ending in "ViewModel" or "Presenter" (which are the defaults). You can add your own via a regex here:
-      # allowedStateHolderNames: .*ViewModel,.*Presenter
+    active: true
+    # -- You can optionally use this rule on things other than types ending in "ViewModel" or "Presenter" (which are the defaults). You can add your own via a regex here:
+    # allowedStateHolderNames: .*ViewModel,.*Presenter
+    # -- You can optionally add an allowlist for Composable names that won't be affected by this rule
+    # allowedForwarding: .*Content,.*FancyStuff
+    # -- You can optionally add an allowlist for ViewModel/StateHolder names that won't be affected by this rule
+    # allowedForwardingOfTypes: PotatoViewModel,(Apple|Banana)ViewModel,.*FancyViewModel
   ViewModelInjection:
     active: true
-    # You can optionally add your own ViewModel factories here
+    # -- You can optionally add your own ViewModel factories here
     # viewModelFactories: hiltViewModel,potatoViewModel

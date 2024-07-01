@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
+@file:Suppress("Material2")
+
 package com.leinardi.forlago.library.ui.component
 
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.ModalBottomSheetDefaults
-import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.rememberModalBottomSheetState
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.navigation.BottomSheetNavigator
+import androidx.compose.material3.BottomSheetDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
@@ -30,65 +29,39 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
-import com.google.accompanist.navigation.material.BottomSheetNavigator
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
+import androidx.compose.ui.unit.dp
 
-@Composable
-@ExperimentalMaterialApi
-fun ModalBottomSheetLayout(
-    sheetContent: @Composable ColumnScope.() -> Unit,
-    modifier: Modifier = Modifier,
-    sheetState: ModalBottomSheetState =
-        rememberModalBottomSheetState(ModalBottomSheetValue.Hidden),
-    sheetShape: Shape = BottomSheetDefaults.Shape,
-    sheetElevation: Dp = ModalBottomSheetDefaults.Elevation,
-    sheetBackgroundColor: Color = MaterialTheme.colorScheme.surface,
-    sheetContentColor: Color = contentColorFor(sheetBackgroundColor),
-    scrimColor: Color = ModalBottomSheetDefaults.scrimColor,
-    content: @Composable () -> Unit,
-) {
-    // Migrate to Material 3 version once available
-    androidx.compose.material.ModalBottomSheetLayout(
-        sheetContent = {
-            // Remove once ModalBottomSheetLayout will support tonal elevation
-            Surface(
-                tonalElevation = BottomSheetDefaults.tonalElevation,
-            ) {
-                sheetContent()
-            }
-        },
-        modifier = modifier,
-        sheetState = sheetState,
-        sheetShape = sheetShape,
-        sheetElevation = sheetElevation,
-        sheetBackgroundColor = sheetBackgroundColor,
-        sheetContentColor = sheetContentColor,
-        scrimColor = scrimColor,
-        content = content,
-    )
-}
-
-@ExperimentalMaterialNavigationApi
 @Composable
 fun ModalBottomSheetLayout(
     bottomSheetNavigator: BottomSheetNavigator,
     modifier: Modifier = Modifier,
-    sheetShape: Shape = BottomSheetDefaults.Shape,
+    shape: Shape = BottomSheetDefaults.ExpandedShape,
+    containerColor: Color = BottomSheetDefaults.ContainerColor,
+    contentColor: Color = contentColorFor(containerColor),
     sheetElevation: Dp = ModalBottomSheetDefaults.Elevation,
-    sheetBackgroundColor: Color = MaterialTheme.colorScheme.surface,
-    sheetContentColor: Color = contentColorFor(sheetBackgroundColor),
-    scrimColor: Color = ModalBottomSheetDefaults.scrimColor,
+    tonalElevation: Dp = 0.dp,
+    scrimColor: Color = BottomSheetDefaults.ScrimColor,
     content: @Composable () -> Unit,
 ) {
-    // Migrate to Material 3 version once available
-    com.google.accompanist.navigation.material.ModalBottomSheetLayout(
+    // Migrate to Material 3: https://issuetracker.google.com/issues/328949006
+    androidx.compose.material.navigation.ModalBottomSheetLayout(
         bottomSheetNavigator = bottomSheetNavigator,
         modifier = modifier,
-        sheetShape = sheetShape,
+        sheetShape = shape,
         sheetElevation = sheetElevation,
-        sheetBackgroundColor = sheetBackgroundColor,
-        sheetContentColor = sheetContentColor,
+        sheetBackgroundColor = containerColor,
+        sheetContentColor = contentColor,
         scrimColor = scrimColor,
-        content = content,
+        content = {
+            Surface(
+                modifier = modifier.fillMaxWidth(),
+                shape = shape,
+                color = containerColor,
+                contentColor = contentColor,
+                tonalElevation = tonalElevation,
+            ) {
+                content()
+            }
+        },
     )
 }

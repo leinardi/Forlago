@@ -23,8 +23,6 @@ import android.accounts.AccountManager
 import android.app.Application
 import android.os.Bundle
 import androidx.core.os.bundleOf
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
 import com.leinardi.forlago.feature.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.feature.account.AccountFeature
 import com.leinardi.forlago.feature.account.api.interactor.token.GetJwtExpiresAtInMillisInteractor
@@ -258,18 +256,17 @@ class AccountAuthenticator @Inject constructor(
             val refreshToken: String? = accountManager.getPassword(account)
             if (!refreshToken.isNullOrEmpty() && !isJwtExpiredInteractor(refreshToken)) {
                 Timber.d("Refreshing the access token...")
-                return when (val result = runBlocking { refreshAccessTokenInteractor(refreshToken) }) {
-                    is Ok -> {
-                        Timber.d("Access token successfully refreshed")
-                        val refreshedAccessToken = result.value
-                        expiryInMillis = getJwtExpiresAtInMillisInteractor(result.value)
-                        accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTH_TOKEN_TYPE, refreshedAccessToken)
-                        accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
-                        Timber.d("Returning a valid access token (expiry = ${expiryInMillis.toLongDateTimeString()}")
-                        getValidAccessTokenBundle(account, refreshedAccessToken, expiryInMillis)
-                    }
-
-                    is Err -> when (result.error) {
+                val result = runBlocking { refreshAccessTokenInteractor(refreshToken) }
+                return if (result.isOk) {
+                    Timber.d("Access token successfully refreshed")
+                    val refreshedAccessToken = result.value
+                    expiryInMillis = getJwtExpiresAtInMillisInteractor(result.value)
+                    accountManager.setAuthToken(account, AccountAuthenticatorConfig.AUTH_TOKEN_TYPE, refreshedAccessToken)
+                    accountManager.setUserData(account, KEY_CUSTOM_TOKEN_EXPIRY, expiryInMillis.toString())
+                    Timber.d("Returning a valid access token (expiry = ${expiryInMillis.toLongDateTimeString()}")
+                    getValidAccessTokenBundle(account, refreshedAccessToken, expiryInMillis)
+                } else {
+                    when (result.error) {
                         is AuthErrResult.BadAuthentication -> {
                             Timber.w("Unable to get a new access token: the user must re-enter the credentials")
                             bundleOf(AccountManager.KEY_INTENT to getAuthenticatorActivityIntent(response, account.type, options, false))

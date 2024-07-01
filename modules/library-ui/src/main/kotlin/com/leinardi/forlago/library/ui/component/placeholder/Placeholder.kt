@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("LongMethod", "LongParameterList", "MagicNumber", "MatchingDeclarationName")
+@file:Suppress("LongMethod", "LongParameterList", "MagicNumber", "MatchingDeclarationName", "ModifierComposed")
 
 package com.leinardi.forlago.library.ui.component.placeholder
 
@@ -26,9 +26,9 @@ import androidx.compose.animation.core.Transition
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.core.updateTransition
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
@@ -247,7 +247,7 @@ public fun Modifier.placeholder(
     val transitionState = remember { MutableTransitionState(visible) }.apply {
         targetState = visible
     }
-    val transition = updateTransition(transitionState, "placeholder_crossfade")
+    val transition = rememberTransition(transitionState, "placeholder_crossfade")
 
     val placeholderAlpha by transition.animateFloat(
         transitionSpec = placeholderFadeTransitionSpec,
@@ -266,11 +266,12 @@ public fun Modifier.placeholder(
     // Run the optional animation spec and update the progress if the placeholder is visible
     val animationSpec = highlight?.animationSpec
     if (animationSpec != null && (visible || placeholderAlpha >= 0.01f)) {
-        val infiniteTransition = rememberInfiniteTransition()
+        val infiniteTransition = rememberInfiniteTransition("placeholder_infinite_transition")
         highlightProgress = infiniteTransition.animateFloat(
             initialValue = 0f,
             targetValue = 1f,
             animationSpec = animationSpec,
+            label = "placeholder_highlight_animation",
         ).value
     }
 
