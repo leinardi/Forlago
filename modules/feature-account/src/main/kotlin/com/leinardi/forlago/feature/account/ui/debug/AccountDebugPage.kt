@@ -33,8 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.compose.LifecycleEventEffect
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Effect
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.Event
 import com.leinardi.forlago.feature.account.ui.debug.AccountDebugContract.State
@@ -65,11 +64,11 @@ private fun AccountDebugPage(
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+    LifecycleResumeEffect("AccountDebugLifecycleResumeEffect") {
         sendEvent(Event.OnActivityResumed)
-    }
-    LifecycleEventEffect(Lifecycle.Event.ON_PAUSE) {
-        sendEvent(Event.OnActivityPaused)
+        onPauseOrDispose {
+            sendEvent(Event.OnActivityPaused)
+        }
     }
     val snackbarHostState = LocalSnackbarHostState.current
     LaunchedEffect(effectFlow) {
