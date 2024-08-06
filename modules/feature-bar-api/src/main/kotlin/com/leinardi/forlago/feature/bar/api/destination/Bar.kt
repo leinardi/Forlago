@@ -21,4 +21,5 @@ import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 @NavGraphDestination
 data class Bar(
     val text: String? = null,
+    val id: String? = null,
 )

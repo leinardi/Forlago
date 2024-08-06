@@ -19,6 +19,7 @@ package com.leinardi.forlago.feature.foo
 import androidx.compose.runtime.Composable
 import com.leinardi.forlago.feature.foo.api.destination.FooDestination
 import com.leinardi.forlago.feature.foo.api.destination.FooDialogDestination
+import com.leinardi.forlago.feature.foo.ui.bottomnavigation.FooNavigationBarItem
 import com.leinardi.forlago.feature.foo.ui.debug.FooDebugPage
 import com.leinardi.forlago.feature.foo.ui.foo.FooScreen
 import com.leinardi.forlago.feature.foo.ui.foodialog.FooDialogScreen
@@ -27,6 +28,13 @@ import com.leinardi.forlago.library.navigation.api.destination.NavigationDestina
 
 class FooFeature : Feature() {
     override val id = "Foo"
+
+    override val bottomNavigationEntry: NavigationBarEntry = NavigationBarEntry(
+        priority = 1,
+        route = FooDestination.route,
+        item = { selected, onClick -> FooNavigationBarItem(selected = selected, onClick = onClick) },
+        enabled = true,
+    )
 
     override val composableDestinations: Map<NavigationDestination, @Composable () -> Unit> = mapOf(
         FooDestination to { FooScreen() },

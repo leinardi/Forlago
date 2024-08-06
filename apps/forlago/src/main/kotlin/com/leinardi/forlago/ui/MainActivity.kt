@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
         setContent {
             ForlagoTheme(dynamicColor = viewModel.viewState.value.dynamicColors) {
                 ForlagoMainScreen(
+                    state = viewModel.viewState.value,
                     effectFlow = viewModel.effect,
                     forlagoNavigator = forlagoNavigator,
                     sendEvent = { viewModel.onUiEvent(it) },
@@ -156,6 +157,7 @@ class MainActivity : AppCompatActivity() {  // AppCompatActivity is needed to be
 @Suppress("ReusedModifierInstance", "ModifierNotUsedAtRoot")
 @Composable
 fun ForlagoMainScreen(
+    state: MainContract.State,
     effectFlow: Flow<Effect>,
     forlagoNavigator: ForlagoNavigator,
     sendEvent: (event: Event) -> Unit,
@@ -219,6 +221,7 @@ fun ForlagoMainScreen(
             modifier = modifier.imePadding(),
         ) {
             Scaffold(
+                bottomBar = { MainNavigationBar(navHostController, state.mainNavigationBarEntries) },
                 snackbarHost = { SnackbarHost(snackbarHostState) },
             ) { scaffoldPadding: PaddingValues ->
                 mainScaffoldPadding.value = scaffoldPadding

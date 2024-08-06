@@ -21,15 +21,19 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.Immutable
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.install.model.AppUpdateType
+import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.ui.base.ViewEffect
 import com.leinardi.forlago.library.ui.base.ViewEvent
 import com.leinardi.forlago.library.ui.base.ViewState
+import kotlinx.collections.immutable.ImmutableMap
+import kotlinx.collections.immutable.persistentMapOf
 
 @Immutable
 object MainContract {
     data class State(
         val startDestination: String,
         val dynamicColors: Boolean = false,
+        val mainNavigationBarEntries: ImmutableMap<String, Feature.NavigationBarEntry> = persistentMapOf(),
     ) : ViewState
 
     sealed class Event : ViewEvent {

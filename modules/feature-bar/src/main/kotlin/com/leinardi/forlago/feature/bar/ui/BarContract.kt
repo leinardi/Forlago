@@ -24,6 +24,7 @@ import com.leinardi.forlago.library.ui.base.ViewState
 @Immutable
 object BarContract {
     data class State(
+        val editModeEnabled: Boolean = false,
         val text: String,
     ) : ViewState
 

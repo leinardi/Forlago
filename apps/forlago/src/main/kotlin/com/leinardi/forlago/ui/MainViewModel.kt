@@ -30,6 +30,7 @@ import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateI
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.LowPriorityUpdateAvailable
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result.UpdateNotAvailable
 import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateStreamInteractor
+import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouStreamInteractor
@@ -40,6 +41,7 @@ import com.leinardi.forlago.ui.MainContract.Effect
 import com.leinardi.forlago.ui.MainContract.Event
 import com.leinardi.forlago.ui.MainContract.State
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -81,6 +83,7 @@ class MainViewModel @Inject constructor(
             .launchIn(viewModelScope)
         checkForUpdates()
         debugShakeDetectorInteractor.startObserving()
+        populateNavigationBar()
     }
 
     override fun onCleared() {
@@ -152,6 +155,17 @@ class MainViewModel @Inject constructor(
                 result is UpdateNotAvailable && !checkOnlyInProgress -> Timber.d("In-App update not available")
             }
         }
+    }
+
+    private fun populateNavigationBar() {
+        val mainNavigationBarEntries = mutableMapOf<String, Feature.NavigationBarEntry>()
+        getFeaturesInteractor()
+            .filter { it.bottomNavigationEntry?.enabled == true }
+            .sortedByDescending { it.bottomNavigationEntry?.priority }
+            .forEach { feature ->
+                feature.bottomNavigationEntry?.let { entry -> mainNavigationBarEntries[entry.route] = entry }
+            }
+        updateState { copy(mainNavigationBarEntries = mainNavigationBarEntries.toImmutableMap()) }
     }
 
     private fun sendEffectStartUpdateFlowForResult(

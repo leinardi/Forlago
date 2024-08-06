@@ -31,7 +31,8 @@ class BarViewModel @Inject constructor(
     private val forlagoNavigator: ForlagoNavigator,
     private val savedStateHandle: SavedStateHandle,
 ) : BaseViewModel<Event, State, Effect>() {
-    override fun provideInitialState() = State(BarDestination.Arguments.getText(savedStateHandle).orEmpty())
+    val id: String? = BarDestination.Arguments.getId(savedStateHandle)
+    override fun provideInitialState() = State(editModeEnabled = id == null, text = BarDestination.Arguments.getText(savedStateHandle).orEmpty())
 
     override fun handleEvent(event: Event) {
         when (event) {

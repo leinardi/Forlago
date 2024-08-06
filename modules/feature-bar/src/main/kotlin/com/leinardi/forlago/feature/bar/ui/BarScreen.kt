@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.leinardi.forlago.feature.bar.ui.BarContract.Event
 import com.leinardi.forlago.feature.bar.ui.BarContract.State
+import com.leinardi.forlago.library.ui.component.BottomButtonBar
 import com.leinardi.forlago.library.ui.component.LocalMainScaffoldPadding
 import com.leinardi.forlago.library.ui.component.PreviewFeature
 import com.leinardi.forlago.library.ui.component.Scaffold
@@ -65,17 +66,34 @@ private fun BarScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
             .padding(LocalMainScaffoldPadding.current.value)
             .consumeWindowInsets(LocalMainScaffoldPadding.current.value)
-            .navigationBarsPadding(),
+            .then(
+                if (state.editModeEnabled) {
+                    Modifier.navigationBarsPadding()
+                } else {
+                    Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+                },
+            ),
         topBar = {
             TopAppBar(
                 title = stringResource(com.leinardi.forlago.library.i18n.R.string.i18n_bar_screen_title),
                 onNavigateUp = { sendEvent(Event.OnUpButtonClicked) },
-                modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
                 scrollBehavior = scrollBehavior,
+                contextual = state.editModeEnabled,
             )
+        },
+        bottomBar = {
+            if (!state.editModeEnabled) {
+                BottomButtonBar {
+                    Button(
+                        onClick = { },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .navigationBarsPadding(),
+                    ) { Text("Save") }
+                }
+            }
         },
     ) { scaffoldPadding ->
         Column(
@@ -112,6 +130,6 @@ private fun BarScreen(
 @Composable
 private fun PreviewBarScreen() {
     PreviewFeature {
-        BarScreen(State("Preview")) {}
+        BarScreen(State(text = "Preview")) {}
     }
 }

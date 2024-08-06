@@ -26,9 +26,7 @@ import com.leinardi.forlago.feature.foo.ui.foo.FooContract.State
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -58,7 +56,6 @@ class FooViewModel @Inject constructor(
     private fun sendText(text: String) {
         viewModelScope.launch {
             load {
-                delay(TimeUnit.SECONDS.toMillis(2))
                 forlagoNavigator.navigate(BarDestination.get(text))
             }
         }
