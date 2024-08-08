@@ -151,6 +151,7 @@ private fun LogInScreen(
                 value = password,
                 onValueChange = { password = it },
                 label = "Password",
+                errorMessage = state.passwordError,
                 passwordToggleEnabled = true,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,

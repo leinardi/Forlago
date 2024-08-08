@@ -43,12 +43,12 @@ import com.leinardi.forlago.library.ui.theme.ForlagoTheme
 @Composable
 fun IconButtonDropdownMenu(
     icon: @Composable () -> Unit,
-    content: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     expanded: MutableState<Boolean> = rememberSaveable { mutableStateOf(false) },
     offset: DpOffset = DpOffset(0.dp, 0.dp),
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Box(
         modifier = modifier,

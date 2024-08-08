@@ -64,7 +64,7 @@ private fun AccountDebugPage(
     sendEvent: (event: Event) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    LifecycleResumeEffect {
+    LifecycleResumeEffect("AccountDebugLifecycleResumeEffect") {
         sendEvent(Event.OnActivityResumed)
         onPauseOrDispose {
             sendEvent(Event.OnActivityPaused)
