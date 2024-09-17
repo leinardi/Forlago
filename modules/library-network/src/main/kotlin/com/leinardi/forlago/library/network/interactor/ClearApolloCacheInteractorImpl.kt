@@ -16,8 +16,8 @@
 
 package com.leinardi.forlago.library.network.interactor
 
-import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.cache.normalized.apolloStore
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.cache.normalized.apolloStore
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
 import kotlinx.coroutines.withContext

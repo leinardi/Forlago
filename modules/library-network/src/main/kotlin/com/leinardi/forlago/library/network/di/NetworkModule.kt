@@ -17,12 +17,12 @@
 package com.leinardi.forlago.library.network.di
 
 import androidx.annotation.VisibleForTesting
-import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
-import com.apollographql.apollo3.cache.normalized.api.NormalizedCacheFactory
-import com.apollographql.apollo3.cache.normalized.logCacheMisses
-import com.apollographql.apollo3.cache.normalized.normalizedCache
-import com.apollographql.apollo3.network.okHttpClient
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.cache.normalized.api.MemoryCacheFactory
+import com.apollographql.apollo.cache.normalized.api.NormalizedCacheFactory
+import com.apollographql.apollo.cache.normalized.logCacheMisses
+import com.apollographql.apollo.cache.normalized.normalizedCache
+import com.apollographql.apollo.network.okHttpClient
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor

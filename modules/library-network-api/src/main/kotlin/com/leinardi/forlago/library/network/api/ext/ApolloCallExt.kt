@@ -16,7 +16,7 @@
 
 package com.leinardi.forlago.library.network.api.ext
 
-import com.apollographql.apollo3.ApolloCall
-import com.apollographql.apollo3.api.Operation
+import com.apollographql.apollo.ApolloCall
+import com.apollographql.apollo.api.Operation
 
 fun <D : Operation.Data> ApolloCall<D>.addAuthorizationHeader(accessToken: String) = this.addHttpHeader("Authorization", "JWT $accessToken")
