@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigationksp.ext
+package com.leinardi.forlago.library.ksp.common.codegenerator
 
-import com.google.devtools.ksp.symbol.ClassKind
-import com.google.devtools.ksp.symbol.KSClassDeclaration
-import com.google.devtools.ksp.symbol.Modifier
+import com.squareup.kotlinpoet.FileSpec
 
-internal fun KSClassDeclaration.isInterface() = classKind == ClassKind.INTERFACE
+interface CodeGenerator<T : CodeGeneratorModel> {
+    fun generate(model: T): FileSpec
+}
 
-internal fun KSClassDeclaration.isDataClass() = classKind == ClassKind.CLASS && modifiers.contains(Modifier.DATA)
-
-internal fun KSClassDeclaration.toDefaultValueProviderClassName() = simpleName.asString() + "DefaultValueProvider"
+interface CodeGeneratorModel

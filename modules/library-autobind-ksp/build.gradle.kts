@@ -26,9 +26,10 @@ ksp {
 }
 
 dependencies {
+    implementation(projects.modules.libraryAutobindAnnotation)
     implementation(projects.modules.libraryKspCommon)
-    implementation(projects.modules.libraryNavigationAnnotation)
 
+    implementation(libs.dagger.hilt.core)
     implementation(libs.kotlinpoet)
     implementation(libs.kotlinpoet.ksp)
     implementation(libs.ksp.symbol.processing.api)

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigationksp.model
+package com.leinardi.forlago.library.ksp.common.ext
 
-import com.squareup.kotlinpoet.ClassName
+import com.squareup.kotlinpoet.CodeBlock
 
-data class DefaultValue(
-    val code: String,
-    val imports: List<ClassName> = emptyList(),
-)
+fun CodeBlock.Builder.endControlFlowWithTrailingComma(): CodeBlock.Builder = apply {
+    unindent()
+    add("},\n")
+}

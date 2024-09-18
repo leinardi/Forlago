@@ -112,6 +112,7 @@ dagger-hilt-android = { module = "com.google.dagger:hilt-android", version.ref =
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 dagger-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
 dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
+dagger-hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "dagger" }
 desugar = "com.android.tools:desugar_jdk_libs:2.1.2"
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-nlopez-compose-rules = "io.nlopez.compose.rules:detekt:0.4.11"

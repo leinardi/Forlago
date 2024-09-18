@@ -21,12 +21,12 @@ import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSVisitorVoid
+import com.leinardi.forlago.library.ksp.common.ext.fieldByName
+import com.leinardi.forlago.library.ksp.common.ext.isDataClass
+import com.leinardi.forlago.library.ksp.common.ext.isInterface
 import com.leinardi.forlago.library.navigation.annotation.NavGraphDestination
 import com.leinardi.forlago.library.navigationksp.codegenerator.NavGraphDestinationCodeGenerator
 import com.leinardi.forlago.library.navigationksp.common.getDefaultValue
-import com.leinardi.forlago.library.navigationksp.ext.fieldByName
-import com.leinardi.forlago.library.navigationksp.ext.isDataClass
-import com.leinardi.forlago.library.navigationksp.ext.isInterface
 import com.leinardi.forlago.library.navigationksp.ext.toNavTypePropertyName
 import com.leinardi.forlago.library.navigationksp.model.NavGraphDestinationModel
 import com.squareup.kotlinpoet.ksp.toClassName

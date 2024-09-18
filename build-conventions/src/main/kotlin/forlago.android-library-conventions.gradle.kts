@@ -40,6 +40,20 @@ android {
     }
 }
 
+tasks {
+    withType<Test> {
+        // Avoid to run each unit test twice since on library modules we do not have release specific code
+        if (name.endsWith("ReleaseUnitTest")) {
+            enabled = false
+        }
+    }
+
+    // Workaround for https://github.com/detekt/detekt/issues/4743
+    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        exclude("**/*AutoBindModule.kt")
+    }
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.coroutines.android)

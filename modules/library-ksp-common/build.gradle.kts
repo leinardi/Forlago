@@ -14,9 +14,13 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigationksp.ext
+plugins {
+    id("forlago.kotlin-library-conventions")
+    id("forlago.detekt-conventions")
+}
 
-import com.google.devtools.ksp.symbol.KSAnnotation
-
-@Suppress("UNCHECKED_CAST")
-internal fun <T> KSAnnotation.fieldByName(name: String): T = arguments.find { it.name?.asString() == name }?.value as T
+dependencies {
+    implementation(libs.kotlinpoet)
+    implementation(libs.kotlinpoet.ksp)
+    implementation(libs.ksp.symbol.processing.api)
+}

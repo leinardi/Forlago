@@ -25,7 +25,7 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.FileLocation
 import com.google.devtools.ksp.symbol.KSPropertyDeclaration
 import com.google.devtools.ksp.symbol.NonExistLocation
-import com.leinardi.forlago.library.navigationksp.model.DefaultValue
+import com.leinardi.forlago.library.ksp.common.model.DefaultValue
 import com.squareup.kotlinpoet.ClassName
 import java.io.BufferedReader
 import java.io.File

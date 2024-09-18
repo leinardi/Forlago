@@ -16,20 +16,13 @@
 
 plugins {
     id("forlago.kotlin-library-conventions")
-    id("com.google.devtools.ksp")
-    id("forlago.detekt-conventions")
+    id("com.android.lint")
 }
 
-ksp {
-    arg("autoserviceKsp.verify", "true")
-    arg("autoserviceKsp.verbose", "true")
+kotlin {
+    explicitApi()
 }
 
 dependencies {
-    implementation(projects.modules.libraryKspCommon)
-    implementation(projects.modules.libraryNavigationAnnotation)
-
-    implementation(libs.kotlinpoet)
-    implementation(libs.kotlinpoet.ksp)
-    implementation(libs.ksp.symbol.processing.api)
+    api(libs.dagger.hilt.core)
 }

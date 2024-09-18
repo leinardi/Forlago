@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-plugins {
-    id("forlago.kotlin-library-conventions")
-    id("com.google.devtools.ksp")
-    id("forlago.detekt-conventions")
-}
+package com.leinardi.forlago.library.ksp.common.model
 
-ksp {
-    arg("autoserviceKsp.verify", "true")
-    arg("autoserviceKsp.verbose", "true")
-}
+import com.squareup.kotlinpoet.ClassName
 
-dependencies {
-    implementation(projects.modules.libraryKspCommon)
-    implementation(projects.modules.libraryNavigationAnnotation)
-
-    implementation(libs.kotlinpoet)
-    implementation(libs.kotlinpoet.ksp)
-    implementation(libs.ksp.symbol.processing.api)
-}
+data class DefaultValue(
+    val code: String,
+    val imports: List<ClassName> = emptyList(),
+)

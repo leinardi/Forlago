@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigationksp.codegenerator
+package com.leinardi.forlago.library.ksp.common.ext
 
-import com.squareup.kotlinpoet.FileSpec
+import com.google.devtools.ksp.symbol.KSAnnotation
 
-interface CodeGenerator<T : CodeGeneratorModel> {
-    fun generate(model: T): FileSpec
-}
-
-interface CodeGeneratorModel
+@Suppress("UNCHECKED_CAST")
+fun <T> KSAnnotation.fieldByName(name: String): T = arguments.find { it.name?.asString() == name }?.value as T
