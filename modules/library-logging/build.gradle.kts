@@ -30,9 +30,11 @@ android {
 
 dependencies {
     api(projects.modules.libraryLoggingApi)
+    implementation(projects.modules.libraryAutobindAnnotation)
     implementation(libs.firebase.analytics)
     implementation(libs.dagger.hilt.android)
     implementation(platform(libs.firebase.bom))
 
     ksp(libs.dagger.hilt.compiler)
+    ksp(projects.modules.libraryAutobindKsp)
 }

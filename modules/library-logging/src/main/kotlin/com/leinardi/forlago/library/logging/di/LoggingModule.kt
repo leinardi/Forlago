@@ -28,18 +28,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module(includes = [LoggingModule.BindModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 object LoggingModule {
     @Singleton
     @Provides
     fun provideAnalytics(): FirebaseAnalytics = Firebase.analytics
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal interface BindModule {
-        // Android Interactors
-        @Binds
-        fun bindCopyToClipboardInteractor(bind: LogScreenViewInteractorImpl): LogScreenViewInteractor
-    }
 }
