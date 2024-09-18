@@ -1451,6 +1451,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7 (*)
 |    |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    |    +--- project :modules:library-android-api (*)
+|    |    +--- project :modules:library-autobind-annotation (*)
 |    |    +--- project :modules:library-i18n (*)
 |    |    +--- project :modules:library-navigation-api (*)
 |    |    +--- project :modules:library-preferences-api
@@ -1741,6 +1742,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    +--- com.michael-bull.kotlin-result:kotlin-result-coroutines:2.0.0 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7 (*)
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    +--- project :modules:library-autobind-annotation (*)
 |    +--- project :modules:library-i18n (*)
 |    +--- androidx.security:security-crypto:1.0.0
 |    |    +--- androidx.annotation:annotation:1.1.0 -> 1.8.1 (*)
@@ -1761,6 +1763,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    +--- com.michael-bull.kotlin-result:kotlin-result-coroutines:2.0.0 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7 (*)
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    +--- project :modules:library-autobind-annotation (*)
 |    +--- com.google.firebase:firebase-analytics-ktx -> 22.1.0
 |    |    +--- com.google.firebase:firebase-analytics:22.1.0
 |    |    |    +--- com.google.android.gms:play-services-measurement:22.1.0
@@ -1844,6 +1847,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7 (*)
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
 |    +--- project :modules:library-android-api (*)
+|    +--- project :modules:library-autobind-annotation (*)
 |    +--- project :modules:library-feature (*)
 |    +--- project :modules:library-i18n (*)
 |    +--- project :modules:library-navigation-api (*)
@@ -1888,6 +1892,7 @@ releaseRuntimeClasspath - Runtime classpath of /release.
 |    +--- com.michael-bull.kotlin-result:kotlin-result-coroutines:2.0.0 (*)
 |    +--- org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7 (*)
 |    +--- com.jakewharton.timber:timber:5.0.1 (*)
+|    +--- project :modules:library-autobind-annotation (*)
 |    +--- project :modules:library-logging-api (*)
 |    +--- androidx.lifecycle:lifecycle-process:2.8.5 (*)
 |    +--- androidx.startup:startup-runtime:1.1.1 (*)

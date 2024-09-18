@@ -36,10 +36,6 @@ internal class AutoBindVisitor(
         val ksAnnotation = getAnnotation(classDeclaration, qualifiedName)
         val packageName = classDeclaration.packageName.asString()
         val annotatedClassSimpleName = classDeclaration.simpleName.asString()
-        logger.warn("JAE1 $ksAnnotation - $packageName $annotatedClassSimpleName") // TODO
-        logger.warn("JAE2 ${classDeclaration.superTypes.first().resolve()}") // TODO
-        logger.warn("JAE3 ${getComponents(ksAnnotation)}") // TODO
-        logger.warn("JAE4 ${classDeclaration.containingFile}") // TODO
         return AutoBindModel(
             packageName = packageName,
             moduleName = annotatedClassSimpleName + "AutoBindModule",

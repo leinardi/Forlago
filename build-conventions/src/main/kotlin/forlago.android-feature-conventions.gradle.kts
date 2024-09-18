@@ -46,8 +46,8 @@ android {
 
 dependencies {
     api(project(":modules:library-feature"))
-    implementation(project(":modules:library-autobind-annotation"))
     implementation(project(":modules:library-android-api"))
+    implementation(project(":modules:library-autobind-annotation"))
     implementation(project(":modules:library-i18n"))
     implementation(project(":modules:library-logging-api"))
     implementation(project(":modules:library-ui"))

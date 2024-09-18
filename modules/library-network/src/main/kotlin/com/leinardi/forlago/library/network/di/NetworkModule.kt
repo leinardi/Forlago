@@ -27,17 +27,8 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
 import com.leinardi.forlago.library.network.BuildConfig
-import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
 import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.library.network.api.interactor.StoreCertificatePinningEnabledInteractor
-import com.leinardi.forlago.library.network.api.interactor.StoreEnvironmentInteractor
-import com.leinardi.forlago.library.network.interactor.ClearApolloCacheInteractorImpl
-import com.leinardi.forlago.library.network.interactor.ReadCertificatePinningEnabledInteractorImpl
-import com.leinardi.forlago.library.network.interactor.ReadEnvironmentInteractorImpl
-import com.leinardi.forlago.library.network.interactor.StoreCertificatePinningEnabledInteractorImpl
-import com.leinardi.forlago.library.network.interactor.StoreEnvironmentInteractorImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

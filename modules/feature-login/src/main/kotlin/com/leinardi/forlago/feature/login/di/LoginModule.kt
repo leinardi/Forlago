@@ -17,12 +17,7 @@
 package com.leinardi.forlago.feature.login.di
 
 import com.leinardi.forlago.feature.login.LoginFeature
-import com.leinardi.forlago.feature.login.api.interactor.IsLogInInProgressInteractor
-import com.leinardi.forlago.feature.login.api.interactor.LogInInteractor
-import com.leinardi.forlago.feature.login.interactor.IsLogInInProgressInteractorImpl
-import com.leinardi.forlago.feature.login.interactor.LogInInteractorImpl
 import com.leinardi.forlago.library.feature.Feature
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
