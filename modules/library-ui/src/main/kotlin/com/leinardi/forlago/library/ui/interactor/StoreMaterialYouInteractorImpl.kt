@@ -16,12 +16,14 @@
 
 package com.leinardi.forlago.library.ui.interactor
 
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import com.leinardi.forlago.library.ui.api.interactor.StoreMaterialYouInteractor
 import com.leinardi.forlago.library.ui.interactor.GetMaterialYouStreamInteractorImpl.Companion.MATERIAL_YOU_PREF_KEY
 import javax.inject.Inject
 
+@AutoBind
 internal class StoreMaterialYouInteractorImpl @Inject constructor(
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : StoreMaterialYouInteractor {

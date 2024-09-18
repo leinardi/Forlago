@@ -21,11 +21,13 @@ import android.app.UiModeManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.ui.api.NightMode
 import com.leinardi.forlago.library.ui.api.interactor.SetNightModeInteractor
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class SetNightModeInteractorImpl @Inject constructor(
     private val application: Application,
 ) : SetNightModeInteractor {

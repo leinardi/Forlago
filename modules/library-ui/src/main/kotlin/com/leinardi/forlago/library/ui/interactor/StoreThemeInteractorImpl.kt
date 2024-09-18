@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.library.ui.interactor
 
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import com.leinardi.forlago.library.ui.api.NightMode
@@ -23,6 +24,7 @@ import com.leinardi.forlago.library.ui.api.interactor.StoreThemeInteractor
 import com.leinardi.forlago.library.ui.interactor.GetThemeStreamInteractorImpl.Companion.THEME_PREF_KEY
 import javax.inject.Inject
 
+@AutoBind
 internal class StoreThemeInteractorImpl @Inject constructor(
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : StoreThemeInteractor {
