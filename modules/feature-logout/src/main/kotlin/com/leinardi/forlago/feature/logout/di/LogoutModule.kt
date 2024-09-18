@@ -37,10 +37,3 @@ object LogoutModule {
     @IntoSet
     fun provideLogoutFeature(): Feature = LogoutFeature()
 }
-
-@Module
-@InstallIn(ActivityRetainedComponent::class)
-internal interface LogoutActivityRetainedModule {
-    @Binds
-    fun bindLogOutInteractor(bind: LogOutInteractorImpl): LogOutInteractor
-}
