@@ -21,9 +21,11 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.core.content.ContextCompat
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class GetConnectivityInteractorImpl @Inject constructor(
     private val application: Application,

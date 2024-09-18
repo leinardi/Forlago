@@ -19,9 +19,11 @@ package com.leinardi.forlago.library.android.interactor.encryption
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptDeterministicallyInteractor
 import com.leinardi.forlago.library.android.encryption.CryptoHelper
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@AutoBind
 internal class EncryptDeterministicallyInteractorImpl @Inject constructor(
     private val cryptoHelper: CryptoHelper,
     private val dispatchers: CoroutineDispatchers,

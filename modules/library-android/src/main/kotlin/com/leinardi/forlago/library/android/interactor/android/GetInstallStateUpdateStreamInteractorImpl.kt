@@ -20,6 +20,7 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.InstallStatus
 import com.leinardi.forlago.library.android.api.interactor.android.GetInstallStateUpdateStreamInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.onFailure
 import kotlinx.coroutines.channels.trySendBlocking
@@ -28,6 +29,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class GetInstallStateUpdateStreamInteractorImpl @Inject constructor(
     private val appUpdateManager: AppUpdateManager,
 ) : GetInstallStateUpdateStreamInteractor {

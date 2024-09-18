@@ -62,7 +62,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Singleton
 
-@Module(includes = [AndroidModule.BindModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 open class AndroidModule {
     @Provides
@@ -92,55 +92,4 @@ open class AndroidModule {
     protected open fun getAppUpdateManager(
         application: Application,
     ): AppUpdateManager = AppUpdateManagerFactory.create(application)
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal interface BindModule {
-        // Android Interactors
-        @Binds
-        fun bindCopyToClipboardInteractor(bind: CopyToClipboardInteractorImpl): CopyToClipboardInteractor
-
-        @Binds
-        fun bindDeleteWebViewDataInteractor(bind: DeleteWebViewDataInteractorImpl): DeleteWebViewDataInteractor
-
-        @Binds
-        fun bindGetAppUpdateInfoInteractor(bind: GetAppUpdateInfoInteractorImpl): GetAppUpdateInfoInteractor
-
-        @Binds
-        fun bindGetAppVersionNameInteractor(bind: GetAppVersionNameInteractorImpl): GetAppVersionNameInteractor
-
-        @Binds
-        fun bindGetConnectivityInteractor(bind: GetConnectivityInteractorImpl): GetConnectivityInteractor
-
-        @Binds
-        fun bindGetDefaultLanguageCodeInteractor(bind: GetDefaultLanguageCodeInteractorImpl): GetDefaultLanguageCodeInteractor
-
-        @Binds
-        fun bindGetInstallStateUpdateInteractor(bind: GetInstallStateUpdateStreamInteractorImpl): GetInstallStateUpdateStreamInteractor
-
-        @Binds
-        fun bindOpenUrlInWebBrowserInteractor(bind: OpenUrlInWebBrowserInteractorImpl): OpenUrlInWebBrowserInteractor
-
-        @Binds
-        fun bindRestartApplicationInteractor(bind: RestartApplicationInteractorImpl): RestartApplicationInteractor
-
-        @Binds
-        fun bindShareUrlInteractor(bind: ShareUrlInteractorImpl): ShareUrlInteractor
-
-        @Binds
-        fun bindShowToastInteractor(bind: ShowToastInteractorImpl): ShowToastInteractor
-
-        // Encryption interactors
-        @Binds
-        fun bindDecryptDeterministicallyInteractor(bind: DecryptDeterministicallyInteractorImpl): DecryptDeterministicallyInteractor
-
-        @Binds
-        fun bindDecryptInteractor(bind: DecryptInteractorImpl): DecryptInteractor
-
-        @Binds
-        fun bindEncryptDeterministicallyInteractor(bind: EncryptDeterministicallyInteractorImpl): EncryptDeterministicallyInteractor
-
-        @Binds
-        fun bindEncryptInteractor(bind: EncryptInteractorImpl): EncryptInteractor
-    }
 }

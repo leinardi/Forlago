@@ -22,9 +22,11 @@ import android.content.Intent
 import android.net.Uri
 import com.leinardi.forlago.library.android.api.interactor.android.OpenUrlInWebBrowserInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.ShowToastInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class OpenUrlInWebBrowserInteractorImpl @Inject constructor(
     private val application: Application,
     private val showToastInteractor: ShowToastInteractor,

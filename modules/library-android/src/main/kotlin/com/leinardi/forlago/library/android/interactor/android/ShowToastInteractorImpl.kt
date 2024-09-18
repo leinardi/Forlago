@@ -20,9 +20,11 @@ import android.app.Application
 import android.widget.Toast
 import com.leinardi.forlago.library.android.api.interactor.android.ShowToastInteractor
 import com.leinardi.forlago.library.android.api.strictmode.noStrictMode
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class ShowToastInteractorImpl @Inject constructor(
     private val application: Application,
