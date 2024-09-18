@@ -24,10 +24,12 @@ import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateAcces
 import com.leinardi.forlago.feature.account.api.interactor.token.PeekAccessTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptDeterministicallyInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class InvalidateAccessTokenInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,

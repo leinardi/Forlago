@@ -21,9 +21,11 @@ import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInt
 import com.leinardi.forlago.feature.account.api.interactor.token.SetRefreshTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@AutoBind
 internal class SetRefreshTokenInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,

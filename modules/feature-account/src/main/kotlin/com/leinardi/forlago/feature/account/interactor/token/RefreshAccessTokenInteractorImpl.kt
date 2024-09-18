@@ -19,12 +19,14 @@ package com.leinardi.forlago.feature.account.interactor.token
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.leinardi.forlago.feature.account.api.interactor.token.RefreshAccessTokenInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.model.AuthErrResult
 import kotlinx.coroutines.delay
 import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@AutoBind
 internal class RefreshAccessTokenInteractorImpl @Inject constructor() : RefreshAccessTokenInteractor {
     override suspend operator fun invoke(refreshToken: String): Result<String, AuthErrResult> {
         delay(TimeUnit.SECONDS.toMillis(1))

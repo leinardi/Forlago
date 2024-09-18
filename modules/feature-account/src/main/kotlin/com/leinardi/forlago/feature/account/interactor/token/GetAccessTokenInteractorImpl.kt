@@ -32,12 +32,14 @@ import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenI
 import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptDeterministicallyInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 import kotlin.coroutines.suspendCoroutine
 
+@AutoBind
 internal class GetAccessTokenInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
     private val decryptDeterministicallyInteractor: DecryptDeterministicallyInteractor,

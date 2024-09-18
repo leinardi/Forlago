@@ -20,10 +20,12 @@ import android.accounts.AccountManager
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class InvalidateRefreshTokenInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,
