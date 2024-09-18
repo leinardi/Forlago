@@ -58,7 +58,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module(includes = [NetworkModule.BindModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 open class NetworkModule {
     @Provides
@@ -190,25 +190,6 @@ open class NetworkModule {
         coroutineDispatchers: CoroutineDispatchers,
         readEnvironmentInteractor: ReadEnvironmentInteractor,
     ): ReadEnvironmentInteractor.Environment = runBlocking(coroutineDispatchers.io) { readEnvironmentInteractor() }
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal interface BindModule {
-        @Binds
-        fun bindClearApolloCacheInteractor(bind: ClearApolloCacheInteractorImpl): ClearApolloCacheInteractor
-
-        @Binds
-        fun bindReadCertificatePinningEnabledInteractor(bind: ReadCertificatePinningEnabledInteractorImpl): ReadCertificatePinningEnabledInteractor
-
-        @Binds
-        fun bindReadEnvironmentInteractor(bind: ReadEnvironmentInteractorImpl): ReadEnvironmentInteractor
-
-        @Binds
-        fun bindStoreCertificatePinningEnabledInteractor(bind: StoreCertificatePinningEnabledInteractorImpl): StoreCertificatePinningEnabledInteractor
-
-        @Binds
-        fun bindStoreEnvironmentInteractor(bind: StoreEnvironmentInteractorImpl): StoreEnvironmentInteractor
-    }
 
     companion object {
         private const val MEMORY_CACHE_SIZE_IN_BYTES = 10 * 1024 * 1024

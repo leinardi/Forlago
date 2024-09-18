@@ -17,12 +17,14 @@
 package com.leinardi.forlago.library.network.interactor
 
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor.Environment
 import com.leinardi.forlago.library.preferences.api.di.App
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import javax.inject.Inject
 
+@AutoBind
 internal class ReadEnvironmentInteractorImpl @Inject constructor(
     @App private val dataStoreRepository: DataStoreRepository,
 ) : ReadEnvironmentInteractor {

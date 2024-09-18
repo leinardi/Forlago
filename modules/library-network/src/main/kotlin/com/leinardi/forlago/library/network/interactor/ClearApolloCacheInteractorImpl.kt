@@ -19,11 +19,13 @@ package com.leinardi.forlago.library.network.interactor
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.cache.normalized.apolloStore
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class ClearApolloCacheInteractorImpl @Inject constructor(
     private val apolloClient: ApolloClient,
     private val dispatchers: CoroutineDispatchers,

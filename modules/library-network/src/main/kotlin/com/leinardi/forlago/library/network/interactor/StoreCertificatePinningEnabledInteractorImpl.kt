@@ -16,11 +16,13 @@
 
 package com.leinardi.forlago.library.network.interactor
 
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.interactor.StoreCertificatePinningEnabledInteractor
 import com.leinardi.forlago.library.preferences.api.di.App
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import javax.inject.Inject
 
+@AutoBind
 internal class StoreCertificatePinningEnabledInteractorImpl @Inject constructor(
     @App private val appDataStoreRepository: DataStoreRepository,
 ) : StoreCertificatePinningEnabledInteractor {
