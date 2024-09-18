@@ -30,21 +30,11 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
 
-@Module(includes = [LoginModule.BindModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 object LoginModule {
     @Provides
     @Singleton
     @IntoSet
     fun provideLoginFeature(): Feature = LoginFeature()
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal interface BindModule {
-        @Binds
-        fun bindLogInInteractor(bind: LogInInteractorImpl): LogInInteractor
-
-        @Binds
-        fun bindIsLogInInProgressInteractor(bind: IsLogInInProgressInteractorImpl): IsLogInInProgressInteractor
-    }
 }
