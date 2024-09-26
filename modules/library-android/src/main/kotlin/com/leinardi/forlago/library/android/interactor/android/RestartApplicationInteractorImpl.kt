@@ -19,8 +19,10 @@ package com.leinardi.forlago.library.android.interactor.android
 import android.app.Application
 import com.jakewharton.processphoenix.ProcessPhoenix
 import com.leinardi.forlago.library.android.api.interactor.android.RestartApplicationInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 
+@AutoBind
 internal class RestartApplicationInteractorImpl @Inject constructor(
     private val application: Application,
 ) : RestartApplicationInteractor {

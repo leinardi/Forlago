@@ -21,6 +21,7 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.leinardi.forlago.feature.login.api.interactor.LogInInteractor
 import com.leinardi.forlago.feature.login.api.interactor.LogInInteractor.OkResult
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.network.api.model.AuthErrResult
 import kotlinx.coroutines.delay
@@ -29,6 +30,7 @@ import java.util.UUID
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@AutoBind
 internal class LogInInteractorImpl @Inject constructor(
     private val getFeaturesInteractor: GetFeaturesInteractor,
 ) : LogInInteractor {

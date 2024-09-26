@@ -30,7 +30,9 @@ android {
 }
 dependencies {
     api(projects.modules.libraryRemoteConfigApi)
+    implementation(projects.modules.libraryAutobindAnnotation)
     implementation(projects.modules.libraryLoggingApi)
+    ksp(projects.modules.libraryAutobindKsp)
 
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.startup)

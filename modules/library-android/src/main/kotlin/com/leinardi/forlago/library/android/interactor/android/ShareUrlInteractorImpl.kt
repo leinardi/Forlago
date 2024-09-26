@@ -19,8 +19,10 @@ package com.leinardi.forlago.library.android.interactor.android
 import android.app.Application
 import android.content.Intent
 import com.leinardi.forlago.library.android.api.interactor.android.ShareUrlInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 
+@AutoBind
 internal class ShareUrlInteractorImpl @Inject constructor(
     private val application: Application,
 ) : ShareUrlInteractor {

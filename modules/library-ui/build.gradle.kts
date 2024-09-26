@@ -44,6 +44,7 @@ android {
 dependencies {
     api(projects.modules.libraryUiApi)
     implementation(projects.modules.libraryAndroidApi)
+    implementation(projects.modules.libraryAutobindAnnotation)
     implementation(projects.modules.libraryI18n)
     implementation(projects.modules.libraryNavigationApi)
     implementation(projects.modules.libraryPreferencesApi)
@@ -72,4 +73,5 @@ dependencies {
     debugApi(libs.androidx.customview)  // Workaround for https://issuetracker.google.com/issues/227767363
     debugApi(libs.androidx.customview.poolingcontainer)  // Workaround for https://issuetracker.google.com/issues/227767363
     ksp(libs.dagger.hilt.compiler)
+    ksp(projects.modules.libraryAutobindKsp)
 }

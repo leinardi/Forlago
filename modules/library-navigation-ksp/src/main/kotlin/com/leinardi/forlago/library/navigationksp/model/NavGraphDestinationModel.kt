@@ -17,7 +17,8 @@
 package com.leinardi.forlago.library.navigationksp.model
 
 import com.google.devtools.ksp.symbol.KSFile
-import com.leinardi.forlago.library.navigationksp.codegenerator.CodeGeneratorModel
+import com.leinardi.forlago.library.ksp.common.codegenerator.CodeGeneratorModel
+import com.leinardi.forlago.library.ksp.common.model.DefaultValue
 import com.squareup.kotlinpoet.TypeName
 
 internal data class NavGraphDestinationModel(

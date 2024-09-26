@@ -20,6 +20,7 @@ import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigValue
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.remoteconfig.api.interactor.GetFeatureFlagInteractor
 import com.leinardi.forlago.library.remoteconfig.api.model.RemoteConfigValue
 import com.leinardi.forlago.library.remoteconfig.getRemoteConfigDefaults
@@ -27,6 +28,7 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class GetFeatureFlagInteractorImpl @Inject constructor(
     application: Application,

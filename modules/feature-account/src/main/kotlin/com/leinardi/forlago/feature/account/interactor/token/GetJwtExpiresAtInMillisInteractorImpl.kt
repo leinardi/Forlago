@@ -18,11 +18,13 @@ package com.leinardi.forlago.feature.account.interactor.token
 
 import com.google.crypto.tink.subtle.Base64
 import com.leinardi.forlago.feature.account.api.interactor.token.GetJwtExpiresAtInMillisInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.model.Jwt
 import kotlinx.serialization.json.Json
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@AutoBind
 internal class GetJwtExpiresAtInMillisInteractorImpl @Inject constructor(
     private val json: Json,
 ) : GetJwtExpiresAtInMillisInteractor {

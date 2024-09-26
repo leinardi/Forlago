@@ -30,7 +30,9 @@ android {
 
 dependencies {
     api(projects.modules.libraryAndroidApi)
+    implementation(projects.modules.libraryAutobindAnnotation)
     implementation(projects.modules.libraryI18n)
+    ksp(projects.modules.libraryAutobindKsp)
 
     implementation(libs.androidx.security)
     implementation(libs.androidx.startup)

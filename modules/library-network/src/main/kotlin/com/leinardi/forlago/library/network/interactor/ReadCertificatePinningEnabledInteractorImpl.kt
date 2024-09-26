@@ -17,11 +17,13 @@
 package com.leinardi.forlago.library.network.interactor
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
 import com.leinardi.forlago.library.preferences.api.di.App
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import javax.inject.Inject
 
+@AutoBind
 internal class ReadCertificatePinningEnabledInteractorImpl @Inject constructor(
     @App private val appDataStoreRepository: DataStoreRepository,
 ) : ReadCertificatePinningEnabledInteractor {

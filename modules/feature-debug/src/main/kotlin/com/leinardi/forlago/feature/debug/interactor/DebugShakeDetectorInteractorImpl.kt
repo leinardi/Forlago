@@ -25,12 +25,15 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.leinardi.forlago.feature.debug.api.destination.DebugDestination
 import com.leinardi.forlago.feature.debug.api.interactor.DebugShakeDetectorInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.squareup.seismic.ShakeDetector
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@AutoBind([ActivityRetainedComponent::class])
 @ActivityRetainedScoped
 internal class DebugShakeDetectorInteractorImpl @Inject constructor(
     application: Application,

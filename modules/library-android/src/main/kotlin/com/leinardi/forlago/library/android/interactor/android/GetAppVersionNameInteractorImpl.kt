@@ -20,9 +20,11 @@ import android.app.Application
 import android.content.pm.PackageManager
 import android.os.Build
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppVersionNameInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class GetAppVersionNameInteractorImpl @Inject constructor(
     private val application: Application,
 ) : GetAppVersionNameInteractor {

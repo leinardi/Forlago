@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.leinardi.forlago.library.navigationksp.ext
+package com.leinardi.forlago.library.ksp.common.ext
 
-import com.squareup.kotlinpoet.CodeBlock
+import com.google.devtools.ksp.symbol.ClassKind
+import com.google.devtools.ksp.symbol.KSClassDeclaration
+import com.google.devtools.ksp.symbol.Modifier
 
-internal fun CodeBlock.Builder.endControlFlowWithTrailingComma(): CodeBlock.Builder = apply {
-    unindent()
-    add("},\n")
-}
+fun KSClassDeclaration.isInterface() = classKind == ClassKind.INTERFACE
+
+fun KSClassDeclaration.isDataClass() = classKind == ClassKind.CLASS && modifiers.contains(Modifier.DATA)
+
+fun KSClassDeclaration.toDefaultValueProviderClassName() = simpleName.asString() + "DefaultValueProvider"

@@ -16,6 +16,7 @@
 
 package com.leinardi.forlago.library.network.interactor
 
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
 import com.leinardi.forlago.library.network.api.interactor.StoreEnvironmentInteractor
 import com.leinardi.forlago.library.network.interactor.ReadEnvironmentInteractorImpl.Companion.ENVIRONMENT_PREF_KEY
@@ -23,6 +24,7 @@ import com.leinardi.forlago.library.preferences.api.di.App
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import javax.inject.Inject
 
+@AutoBind
 internal class StoreEnvironmentInteractorImpl @Inject constructor(
     @App private val appDataStoreRepository: DataStoreRepository,
 ) : StoreEnvironmentInteractor {

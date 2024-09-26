@@ -16,12 +16,12 @@
 
 package com.leinardi.forlago.library.network.api
 
-import com.apollographql.apollo3.cache.normalized.FetchPolicy.CacheFirst
-import com.apollographql.apollo3.cache.normalized.FetchPolicy.CacheOnly
-import com.apollographql.apollo3.cache.normalized.FetchPolicy.NetworkFirst
-import com.apollographql.apollo3.cache.normalized.FetchPolicy.NetworkOnly
+import com.apollographql.apollo.cache.normalized.FetchPolicy.CacheFirst
+import com.apollographql.apollo.cache.normalized.FetchPolicy.CacheOnly
+import com.apollographql.apollo.cache.normalized.FetchPolicy.NetworkFirst
+import com.apollographql.apollo.cache.normalized.FetchPolicy.NetworkOnly
 
-enum class FetchPolicy(val apollo: com.apollographql.apollo3.cache.normalized.FetchPolicy) {
+enum class FetchPolicy(val apollo: com.apollographql.apollo.cache.normalized.FetchPolicy) {
     /**
      * Try the cache, if that failed, try the network.
      *

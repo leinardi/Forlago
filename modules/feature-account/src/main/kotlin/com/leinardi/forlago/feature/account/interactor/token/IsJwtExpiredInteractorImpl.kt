@@ -18,9 +18,11 @@ package com.leinardi.forlago.feature.account.interactor.token
 
 import com.leinardi.forlago.feature.account.api.interactor.token.GetJwtExpiresAtInMillisInteractor
 import com.leinardi.forlago.feature.account.api.interactor.token.IsJwtExpiredInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import java.time.Clock
 import javax.inject.Inject
 
+@AutoBind
 internal class IsJwtExpiredInteractorImpl @Inject constructor(
     private val clock: Clock,
     private val getJwtExpiresAtInMillisInteractor: GetJwtExpiresAtInMillisInteractor,

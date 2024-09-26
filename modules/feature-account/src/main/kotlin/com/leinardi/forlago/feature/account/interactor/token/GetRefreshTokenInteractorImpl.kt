@@ -22,11 +22,13 @@ import com.leinardi.forlago.feature.account.api.interactor.token.GetRefreshToken
 import com.leinardi.forlago.feature.account.api.interactor.token.InvalidateRefreshTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.DecryptInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.security.GeneralSecurityException
 import javax.inject.Inject
 
+@AutoBind
 internal class GetRefreshTokenInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
     private val decryptInteractor: DecryptInteractor,

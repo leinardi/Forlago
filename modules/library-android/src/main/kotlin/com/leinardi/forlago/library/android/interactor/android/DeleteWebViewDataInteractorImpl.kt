@@ -20,9 +20,11 @@ import android.webkit.CookieManager
 import android.webkit.WebStorage
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.DeleteWebViewDataInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@AutoBind
 internal class DeleteWebViewDataInteractorImpl @Inject constructor(
     private val dispatchers: CoroutineDispatchers,
 ) : DeleteWebViewDataInteractor {

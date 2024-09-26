@@ -40,11 +40,13 @@ apollo {
 dependencies {
     api(projects.modules.libraryNetworkApi)
     implementation(projects.modules.libraryAndroidApi)
+    implementation(projects.modules.libraryAutobindAnnotation)
     implementation(projects.modules.libraryFeature)
     implementation(projects.modules.libraryI18n)
     implementation(projects.modules.libraryNavigationApi)
     implementation(projects.modules.libraryPreferencesApi)
     implementation(projects.modules.libraryUiApi)
+    ksp(projects.modules.libraryAutobindKsp)
 
     implementation(libs.apollo.cache.sqlite)
     implementation(libs.dagger.hilt.android)

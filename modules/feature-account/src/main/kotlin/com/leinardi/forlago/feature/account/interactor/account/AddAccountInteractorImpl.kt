@@ -24,10 +24,12 @@ import com.leinardi.forlago.feature.account.api.interactor.account.AddAccountInt
 import com.leinardi.forlago.feature.account.api.interactor.token.GetAccessTokenInteractor
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.encryption.EncryptInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 internal class AddAccountInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
     private val dispatchers: CoroutineDispatchers,

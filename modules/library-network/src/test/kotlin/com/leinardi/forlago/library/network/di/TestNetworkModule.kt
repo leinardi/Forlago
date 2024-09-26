@@ -22,7 +22,7 @@ import dagger.Module
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 
-@Module(includes = [NetworkModule.BindModule::class])
+@Module
 @TestInstallIn(
     components = [SingletonComponent::class],
     replaces = [NetworkModule::class],

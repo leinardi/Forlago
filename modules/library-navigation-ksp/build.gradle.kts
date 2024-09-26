@@ -26,6 +26,7 @@ ksp {
 }
 
 dependencies {
+    implementation(projects.modules.libraryKspCommon)
     implementation(projects.modules.libraryNavigationAnnotation)
 
     implementation(libs.kotlinpoet)

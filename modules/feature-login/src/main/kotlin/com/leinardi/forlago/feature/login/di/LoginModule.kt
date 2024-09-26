@@ -17,12 +17,7 @@
 package com.leinardi.forlago.feature.login.di
 
 import com.leinardi.forlago.feature.login.LoginFeature
-import com.leinardi.forlago.feature.login.api.interactor.IsLogInInProgressInteractor
-import com.leinardi.forlago.feature.login.api.interactor.LogInInteractor
-import com.leinardi.forlago.feature.login.interactor.IsLogInInProgressInteractorImpl
-import com.leinardi.forlago.feature.login.interactor.LogInInteractorImpl
 import com.leinardi.forlago.library.feature.Feature
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,21 +25,11 @@ import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
 
-@Module(includes = [LoginModule.BindModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 object LoginModule {
     @Provides
     @Singleton
     @IntoSet
     fun provideLoginFeature(): Feature = LoginFeature()
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal interface BindModule {
-        @Binds
-        fun bindLogInInteractor(bind: LogInInteractorImpl): LogInInteractor
-
-        @Binds
-        fun bindIsLogInInProgressInteractor(bind: IsLogInInProgressInteractorImpl): IsLogInInProgressInteractor
-    }
 }

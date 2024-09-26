@@ -33,8 +33,9 @@ package com.leinardi.forlago.library.navigationksp.codegenerator
  */
 
 import com.google.devtools.ksp.symbol.KSFile
-import com.leinardi.forlago.library.navigationksp.ext.endControlFlowWithTrailingComma
-import com.leinardi.forlago.library.navigationksp.model.DefaultValue
+import com.leinardi.forlago.library.ksp.common.codegenerator.CodeGenerator
+import com.leinardi.forlago.library.ksp.common.ext.endControlFlowWithTrailingComma
+import com.leinardi.forlago.library.ksp.common.model.DefaultValue
 import com.leinardi.forlago.library.navigationksp.model.NavGraphDestinationModel
 import com.squareup.kotlinpoet.BOOLEAN
 import com.squareup.kotlinpoet.ClassName

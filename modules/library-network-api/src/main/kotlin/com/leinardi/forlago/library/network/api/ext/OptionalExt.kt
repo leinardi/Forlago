@@ -16,6 +16,6 @@
 
 package com.leinardi.forlago.library.network.api.ext
 
-import com.apollographql.apollo3.api.Optional
+import com.apollographql.apollo.api.Optional
 
 fun <T> T?.toOptional(): Optional<T> = Optional.presentIfNotNull(this)

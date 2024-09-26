@@ -16,11 +16,13 @@
 
 package com.leinardi.forlago.library.logging.interactor
 
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.logging.BuildConfig
 import com.leinardi.forlago.library.logging.api.interactor.LogScreenViewInteractor
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind
 class LogScreenViewInteractorImpl @Inject constructor(
 // private val firebaseAnalytics: FirebaseAnalytics,
 ) : LogScreenViewInteractor {

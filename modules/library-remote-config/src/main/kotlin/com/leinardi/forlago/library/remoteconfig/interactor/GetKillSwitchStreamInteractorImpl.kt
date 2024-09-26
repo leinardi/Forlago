@@ -23,6 +23,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.ConfigUpdate
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.configUpdates
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.remoteconfig.api.interactor.GetFeatureFlagInteractor
 import com.leinardi.forlago.library.remoteconfig.api.interactor.GetKillSwitchStreamInteractor
 import com.leinardi.forlago.library.remoteconfig.api.model.RemoteConfigValue
@@ -39,6 +40,7 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class GetKillSwitchStreamInteractorImpl @Inject constructor(
     application: Application,

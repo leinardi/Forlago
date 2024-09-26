@@ -17,6 +17,7 @@
 package com.leinardi.forlago.library.ui.interactor
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import com.leinardi.forlago.library.ui.api.interactor.GetMaterialYouStreamInteractor
@@ -24,6 +25,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@AutoBind
 internal class GetMaterialYouStreamInteractorImpl @Inject constructor(
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : GetMaterialYouStreamInteractor {

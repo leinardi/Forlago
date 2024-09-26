@@ -17,11 +17,13 @@
 package com.leinardi.forlago.library.ui.interactor
 
 import androidx.appcompat.app.AppCompatDelegate
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.ui.api.NightMode
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 class SetNightModeInteractor @Inject constructor() {
     operator fun invoke(mode: NightMode) {

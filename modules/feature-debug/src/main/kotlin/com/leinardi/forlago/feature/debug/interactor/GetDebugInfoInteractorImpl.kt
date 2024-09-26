@@ -22,8 +22,10 @@ import android.os.Build
 import androidx.core.content.pm.PackageInfoCompat
 import com.leinardi.forlago.feature.debug.api.interactor.GetDebugInfoInteractor
 import com.leinardi.forlago.feature.debug.api.interactor.GetDebugInfoInteractor.DebugInfo
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 
+@AutoBind
 internal class GetDebugInfoInteractorImpl @Inject constructor(
     private val context: Application,
 ) : GetDebugInfoInteractor {

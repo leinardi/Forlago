@@ -17,9 +17,11 @@
 package com.leinardi.forlago.feature.login.interactor
 
 import com.leinardi.forlago.feature.login.api.interactor.IsLogInInProgressInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class IsLogInInProgressInteractorImpl @Inject constructor() : IsLogInInProgressInteractor {
     private var inProgress = false

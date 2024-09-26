@@ -17,27 +17,18 @@
 package com.leinardi.forlago.library.network.di
 
 import androidx.annotation.VisibleForTesting
-import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.cache.normalized.api.MemoryCacheFactory
-import com.apollographql.apollo3.cache.normalized.api.NormalizedCacheFactory
-import com.apollographql.apollo3.cache.normalized.logCacheMisses
-import com.apollographql.apollo3.cache.normalized.normalizedCache
-import com.apollographql.apollo3.network.okHttpClient
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.cache.normalized.api.MemoryCacheFactory
+import com.apollographql.apollo.cache.normalized.api.NormalizedCacheFactory
+import com.apollographql.apollo.cache.normalized.logCacheMisses
+import com.apollographql.apollo.cache.normalized.normalizedCache
+import com.apollographql.apollo.network.okHttpClient
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.GetConnectivityInteractor
 import com.leinardi.forlago.library.network.BuildConfig
-import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
 import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinningEnabledInteractor
 import com.leinardi.forlago.library.network.api.interactor.ReadEnvironmentInteractor
-import com.leinardi.forlago.library.network.api.interactor.StoreCertificatePinningEnabledInteractor
-import com.leinardi.forlago.library.network.api.interactor.StoreEnvironmentInteractor
-import com.leinardi.forlago.library.network.interactor.ClearApolloCacheInteractorImpl
-import com.leinardi.forlago.library.network.interactor.ReadCertificatePinningEnabledInteractorImpl
-import com.leinardi.forlago.library.network.interactor.ReadEnvironmentInteractorImpl
-import com.leinardi.forlago.library.network.interactor.StoreCertificatePinningEnabledInteractorImpl
-import com.leinardi.forlago.library.network.interactor.StoreEnvironmentInteractorImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,7 +49,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module(includes = [NetworkModule.BindModule::class])
+@Module
 @InstallIn(SingletonComponent::class)
 open class NetworkModule {
     @Provides
@@ -190,25 +181,6 @@ open class NetworkModule {
         coroutineDispatchers: CoroutineDispatchers,
         readEnvironmentInteractor: ReadEnvironmentInteractor,
     ): ReadEnvironmentInteractor.Environment = runBlocking(coroutineDispatchers.io) { readEnvironmentInteractor() }
-
-    @Module
-    @InstallIn(SingletonComponent::class)
-    internal interface BindModule {
-        @Binds
-        fun bindClearApolloCacheInteractor(bind: ClearApolloCacheInteractorImpl): ClearApolloCacheInteractor
-
-        @Binds
-        fun bindReadCertificatePinningEnabledInteractor(bind: ReadCertificatePinningEnabledInteractorImpl): ReadCertificatePinningEnabledInteractor
-
-        @Binds
-        fun bindReadEnvironmentInteractor(bind: ReadEnvironmentInteractorImpl): ReadEnvironmentInteractor
-
-        @Binds
-        fun bindStoreCertificatePinningEnabledInteractor(bind: StoreCertificatePinningEnabledInteractorImpl): StoreCertificatePinningEnabledInteractor
-
-        @Binds
-        fun bindStoreEnvironmentInteractor(bind: StoreEnvironmentInteractorImpl): StoreEnvironmentInteractor
-    }
 
     companion object {
         private const val MEMORY_CACHE_SIZE_IN_BYTES = 10 * 1024 * 1024

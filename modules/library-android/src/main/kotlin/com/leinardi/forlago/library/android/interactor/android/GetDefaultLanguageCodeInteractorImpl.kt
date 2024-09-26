@@ -18,8 +18,10 @@ package com.leinardi.forlago.library.android.interactor.android
 
 import android.app.Application
 import com.leinardi.forlago.library.android.api.interactor.android.GetDefaultLanguageCodeInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 
+@AutoBind
 internal class GetDefaultLanguageCodeInteractorImpl @Inject constructor(
     private val application: Application,
 ) : GetDefaultLanguageCodeInteractor {

@@ -17,14 +17,10 @@
 package com.leinardi.forlago.feature.logout.di
 
 import com.leinardi.forlago.feature.logout.LogoutFeature
-import com.leinardi.forlago.feature.logout.api.interactor.LogOutInteractor
-import com.leinardi.forlago.feature.logout.interactor.LogOutInteractorImpl
 import com.leinardi.forlago.library.feature.Feature
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
@@ -36,11 +32,4 @@ object LogoutModule {
     @Singleton
     @IntoSet
     fun provideLogoutFeature(): Feature = LogoutFeature()
-}
-
-@Module
-@InstallIn(ActivityRetainedComponent::class)
-internal interface LogoutActivityRetainedModule {
-    @Binds
-    fun bindLogOutInteractor(bind: LogOutInteractorImpl): LogOutInteractor
 }

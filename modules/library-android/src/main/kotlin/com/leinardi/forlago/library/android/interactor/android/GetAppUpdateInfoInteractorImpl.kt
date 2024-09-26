@@ -25,11 +25,13 @@ import com.google.android.play.core.ktx.requestAppUpdateInfo
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor
 import com.leinardi.forlago.library.android.api.interactor.android.GetAppUpdateInfoInteractor.Result
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class GetAppUpdateInfoInteractorImpl @Inject constructor(
     private val appUpdateManager: AppUpdateManager,

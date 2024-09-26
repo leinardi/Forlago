@@ -17,6 +17,7 @@
 package com.leinardi.forlago.library.ui.interactor
 
 import androidx.datastore.preferences.core.intPreferencesKey
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.preferences.api.di.User
 import com.leinardi.forlago.library.preferences.api.repository.DataStoreRepository
 import com.leinardi.forlago.library.ui.api.NightMode
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@AutoBind
 internal class GetThemeStreamInteractorImpl @Inject constructor(
     @User private val userDataStoreRepository: DataStoreRepository,
 ) : GetThemeStreamInteractor {

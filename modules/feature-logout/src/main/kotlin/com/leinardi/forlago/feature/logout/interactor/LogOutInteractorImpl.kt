@@ -18,13 +18,16 @@ package com.leinardi.forlago.feature.logout.interactor
 
 import com.leinardi.forlago.feature.login.api.interactor.IsLogInInProgressInteractor
 import com.leinardi.forlago.feature.logout.api.interactor.LogOutInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import com.leinardi.forlago.library.feature.interactor.GetFeaturesInteractor
 import com.leinardi.forlago.library.navigation.api.navigator.ForlagoNavigator
 import com.leinardi.forlago.library.network.api.interactor.ClearApolloCacheInteractor
+import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import timber.log.Timber
 import javax.inject.Inject
 
+@AutoBind([ActivityRetainedComponent::class])
 @ActivityRetainedScoped
 internal class LogOutInteractorImpl @Inject constructor(
     private val clearApolloCacheInteractor: ClearApolloCacheInteractor,

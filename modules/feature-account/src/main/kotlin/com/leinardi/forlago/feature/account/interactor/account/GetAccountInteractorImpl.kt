@@ -20,8 +20,10 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import com.leinardi.forlago.feature.account.AccountAuthenticatorConfig
 import com.leinardi.forlago.feature.account.api.interactor.account.GetAccountInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import javax.inject.Inject
 
+@AutoBind
 internal class GetAccountInteractorImpl @Inject constructor(
     private val accountManager: AccountManager,
 ) : GetAccountInteractor {

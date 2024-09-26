@@ -22,11 +22,13 @@ import android.content.ClipboardManager
 import androidx.core.content.ContextCompat
 import com.leinardi.forlago.library.android.api.coroutine.CoroutineDispatchers
 import com.leinardi.forlago.library.android.api.interactor.android.CopyToClipboardInteractor
+import com.leinardi.forlago.library.annotation.AutoBind
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@AutoBind
 @Singleton
 internal class CopyToClipboardInteractorImpl @Inject constructor(
     private val application: Application,
