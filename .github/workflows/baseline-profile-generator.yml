@@ -1,7 +1,6 @@
 name: Baseline Profile generator
 
 on:
-  pull_request:
   workflow_dispatch:
 
 # This allows a subsequently queued workflow run to interrupt previous runs
@@ -12,23 +11,38 @@ concurrency:
 jobs:
   generate-baseline-profile:
     name: Generate Baseline Profile
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 120
     env:
       TERM: dumb
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Setup JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 17.0.6
 
-      - name: Copy CI gradle.properties
-        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -36,33 +50,28 @@ jobs:
       - name: Create Local Properties File
         run: touch local.properties
 
-      - name: Install GMD image for baseline profile generation
-        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager "system-images;android-33;aosp_atd;x86_64"
-
       - name: Accept Android licenses
         run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-      # Cleans managed device if previously settle and space currently is not available
-      - name: Clean Managed Devices
-        run: ./gradlew cleanManagedDevices --unused-only
-        ## enabledRules=BaselineProfile:
-        ## Required to skip macrobenchmark tests.
-        ## Read more at https://developer.android.com/topic/performance/benchmarking/benchmarking-in-ci#real-devices
-        ## Read more at https://developer.android.com/topic/performance/benchmarking/macrobenchmark-overview#configuration-errors
-        ## gradle.workers.max:
-        ## Required to avoid running multiple managed device tests concurrently. Read more at https://issuetracker.google.com/issues/193118030
-
       - name: Generate Baseline Profile
-        run: |
-          ./gradlew :macrobenchmark:forlago:pixel6Api31BenchmarkAndroidTest
-            -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=BaselineProfile
-            -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
-            -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-            -Pandroid.experimental.androidTest.numManagedDeviceShards=1
-            -Pandroid.experimental.testOptions.managedDevices.maxConcurrentDevices=1
-            -Pandroid.experimental.testOptions.managedDevices.setupTimeoutMinutes=180
-            --max-workers=1
-            --info
+        run: ./gradlew :macrobenchmark:forlago:pixel6Api31BenchmarkAndroidTest
+          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=baselineprofile
+          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
+          -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
+
+      - name: List generated files
+        run: ls -R /home/runner/work/Forlago/Forlago/macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel6Api31
 
       - name: Move & Rename Baseline Profile
-        run: mv -f macrobenchmark/build/outputs/managed_device_android_test_additional_output/pixel6Api31/BaselineProfileGenerator_startup-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
+        run: mv -f /home/runner/work/Forlago/Forlago/macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel6Api31/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@dcd5fd746d53dd8de555c0f10bca6c35628be47a
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Update Baseline Profile'
+          committer: GitHub <noreply@github.com>
+          branch: task/baseline-profile
+          delete-branch: true
+          title: 'Task: Update Baseline Profile'
+          body: 'Auto-generated PR'

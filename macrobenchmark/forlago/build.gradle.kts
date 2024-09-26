@@ -18,6 +18,7 @@ import com.android.build.api.dsl.ManagedVirtualDevice
 plugins {
     id("com.android.test")
     id("forlago.android-conventions")
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -25,6 +26,7 @@ android {
 
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
     }
 
     testOptions {
@@ -53,6 +55,16 @@ android {
         }
     }
     buildFeatures.buildConfig = true
+}
+
+baselineProfile {
+    // This specifies the managed devices to use that you run the tests on.
+    managedDevices.clear()
+    managedDevices += "pixel6Api31"
+
+    // Don't use a connected device but rely on a GMD for consistency between local and CI builds.
+    useConnectedDevices = false
+
 }
 
 androidComponents {
