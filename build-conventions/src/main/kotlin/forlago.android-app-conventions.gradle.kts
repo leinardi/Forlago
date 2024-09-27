@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import com.android.build.gradle.internal.tasks.factory.dependsOn
+import com.leinardi.forlago.gmd.configureGradleManagedDevices
 import com.mikepenz.aboutlibraries.plugin.DuplicateMode
 import com.mikepenz.aboutlibraries.plugin.DuplicateRule
 import com.project.starter.easylauncher.filter.ChromeLikeFilter
@@ -51,6 +52,7 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
+    configureGradleManagedDevices(this)
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs + listOf(
             "-opt-in=androidx.compose.material.ExperimentalMaterialApi",
