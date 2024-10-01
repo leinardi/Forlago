@@ -31,7 +31,7 @@ println("Release keystore ${if (useReleaseKeystore) "" else "NOT "}found!")
 android {
     defaultConfig {
         applicationId = config.apps.forlago.applicationId.get()
-        setProperty("archivesBaseName", config.apps.forlago.baseName.get())
+        base.archivesName.set(config.apps.forlago.baseName.get())
 
         manifestPlaceholders["deepLinkScheme"] = config.apps.forlago.deepLinkScheme.get()
         buildConfigField("String", "DEEP_LINK_SCHEME", "\"${config.apps.forlago.deepLinkScheme.get()}\"")

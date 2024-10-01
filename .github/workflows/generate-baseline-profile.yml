@@ -1,0 +1,78 @@
+name: Generate Baseline Profile
+
+on:
+  workflow_dispatch:
+
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  generate-baseline-profile:
+    name: Generate Baseline Profile
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      TERM: dumb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17.0.10
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Create Local Properties File
+        run: touch local.properties
+
+      - name: Accept Android licenses
+        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Generate Baseline Profile
+        run: ./gradlew :macrobenchmark:forlago:pixel6Api31BenchmarkAndroidTest
+          -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=baselineprofile
+
+      - name: Move & Rename Baseline Profile
+        run: mv -f macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel6Api31/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5e914681df9dc83aa4e4905692ca88beb2f9e91f
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Update Baseline Profile'
+          committer: Github Actions [bot] <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          branch: update-baseline-profile
+          delete-branch: true
+          title: 'Update Baseline Profile'
+          body: |
+            This pull request updates the Android Baseline Profile to improve app performance.
+
+            **Why this is important:**
+            Baseline Profiles help optimize the frequently used code paths, ensuring better app responsiveness, smoother UI rendering, and improved
+            runtime efficiency. This update ensures that the app continues to benefit from optimized performance based on the latest code changes.

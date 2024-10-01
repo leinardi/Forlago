@@ -330,7 +330,7 @@ jobs:
     name: Espresso tests
     # Android emulators require hardware acceleration (HAXM on Mac & Windows, QEMU on Linux) from the host to run fast.
     # The macOS VM provided by GitHub Actions is the only one that currently supports it.
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
       JAVA_TOOL_OPTIONS: -Xmx4g
@@ -339,13 +339,23 @@ jobs:
       # Allow tests to continue on other devices if they fail on one device.
       fail-fast: false
       matrix:
-        api-level: [26, 30]
-        target: [google_apis]
-        arch: [x86_64]
+        device: [pixel2]
+        api-level: [28, 31]
+        system-image-source: [google]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls /dev/kvm
+
+      - name: Copy CI gradle.properties
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -353,8 +363,11 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
-      - name: Copy CI gradle.properties
-        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -363,58 +376,11 @@ jobs:
       - name: Create Local Properties File
         run: touch local.properties
 
-      - name: AVD cache
-        uses: actions/cache@v2
-        id: avd-cache
-        with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-            ~/.android/debug.keystore
-          key: avd-${{ matrix.api-level }}-${{ matrix.arch }}-${{ matrix.target }}
+      - name: Accept Android licenses
+        run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-      - name: Assemble Android tests
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: assembleAndroidTest
-
-      - name: Run emulator to generate snapshot for caching
-        if: steps.avd-cache.outputs.cache-hit != 'true'
-        uses: reactivecircus/android-emulator-runner@v2.31.0
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: ${{ matrix.arch }}
-          profile: Galaxy Nexus
-          cores: 2
-          sdcard-path-or-size: 100M
-          avd-name: api${{ matrix.api-level }}-${{ matrix.arch }}-${{ matrix.target }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          channel: stable
-          script: echo "Generated AVD snapshot for caching."
-
-      ## Actual task
-      - name: Run Android tests on API ${{ matrix.api-level }} / ${{ matrix.arch }} / ${{ matrix.target }}
-        uses: reactivecircus/android-emulator-runner@v2.31.0
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: ${{ matrix.arch }}
-          profile: Galaxy Nexus
-          cores: 2
-          ram-size: 2048M
-          sdcard-path-or-size: 100M
-          avd-name: api${{ matrix.api-level }}-${{ matrix.arch }}-${{ matrix.target }}
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          channel: stable
-          script: |
-            echo $GITHUB_REPOSITORY
-            adb devices
-            ./gradlew apps:forlago:connectedCheck
+      - name: Run Espresso tests on ${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}
+        run: ./gradlew :apps:forlago:${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}DebugAndroidTest
 
       - name: Make file path compatible with upload-artifact
         run: find . -path '*/build/*' -name '*:*' -exec bash -c 'mv "$0" "${0//:/_}"' {} \;
@@ -423,7 +389,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: instrumentation-test-results-${{ matrix.api-level }}-${{ matrix.arch }}-${{ matrix.target }}
+          name: instrumentation-test-results-${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}
           path: |
             **/build/reports/*
             **/build/outputs/*/connected/*

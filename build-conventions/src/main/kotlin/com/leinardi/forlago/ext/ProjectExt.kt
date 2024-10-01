@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-plugins {
-    id("forlago.config-conventions")
-    id("forlago.buildlog-conventions")
-    id("forlago.generate-module-conventions")
-    id("forlago.spotless-conventions")
-    id("forlago.versions-conventions")
-    id("forlago.dependency-graph-conventions")
-    id("forlago.violation-comments-to-github-conventions")
-    alias(libs.plugins.gradledoctor)
-}
+package com.leinardi.forlago.ext
 
-doctor {
-    allowBuildingAllAndroidAppsSimultaneously.set(true)
-}
+import org.gradle.api.Project
+import org.gradle.api.plugins.JavaPlugin
+import org.gradle.api.tasks.compile.JavaCompile
+import org.gradle.kotlin.dsl.withType
 
-tasks.withType<Wrapper> {
-    description = "Regenerates the Gradle Wrapper files"
-    distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = libs.versions.gradle.get()
+fun Project.configureJavaCompile() {
+    plugins.withType<JavaPlugin> {
+        tasks.withType<JavaCompile>().configureEach {
+            options.compilerArgs.add("-Xlint:deprecation")
+            options.compilerArgs.add("-Xlint:unchecked")
+        }
+    }
 }
