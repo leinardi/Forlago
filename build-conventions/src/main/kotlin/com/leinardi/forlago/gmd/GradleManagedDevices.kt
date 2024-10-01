@@ -3,28 +3,28 @@ package com.leinardi.forlago.gmd
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.ManagedVirtualDevice
 import org.gradle.kotlin.dsl.create
-import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.invoke
 
 /**
  * Configure project for Gradle managed devices
  */
-internal fun configureGradleManagedDevices(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+@Suppress("UnstableApiUsage")
+internal fun CommonExtension<*, *, *, *, *, *>.configureGradleManagedDevices(
+    minApiLevel: Int,
+    maxApiLevel: Int,
+    device: String = "Pixel 2",
+    systemImageSource: String = "google",
 ) {
-    val pixel6Api31 = DeviceConfig("Pixel 6", 31, "aosp")
-    val pixel6Api28 = DeviceConfig("Pixel 6", 28, "aosp")
+    val allDevices: List<DeviceConfig> = (minApiLevel..maxApiLevel).map { apiLevel -> DeviceConfig(device, apiLevel, systemImageSource) }
 
-    val allDevices = listOf(pixel6Api31, pixel6Api28)
-
-    commonExtension.testOptions {
+    testOptions {
         managedDevices {
             devices {
                 allDevices.forEach { deviceConfig ->
                     create<ManagedVirtualDevice>(deviceConfig.taskName).apply {
-                        device = deviceConfig.device
+                        this.device = deviceConfig.device
                         apiLevel = deviceConfig.apiLevel
-                        systemImageSource = deviceConfig.systemImageSource
+                        this.systemImageSource = deviceConfig.systemImageSource
                     }
                 }
             }

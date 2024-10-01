@@ -339,7 +339,9 @@ jobs:
       # Allow tests to continue on other devices if they fail on one device.
       fail-fast: false
       matrix:
+        device: [pixel2]
         api-level: [28, 31]
+        system-image-source: [google]
 
     steps:
       - name: Checkout
@@ -377,12 +379,8 @@ jobs:
       - name: Accept Android licenses
         run: yes | "$ANDROID_HOME"/cmdline-tools/latest/bin/sdkmanager --licenses || true
 
-      - name: Run Espresso tests on Pixel6 Api${{ matrix.api-level }} AOSP
-        run:
-          ./gradlew :apps:forlago:pixel6Api${{ matrix.api-level }}aospDebugAndroidTest
-          -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true
-          -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
-          --max-workers=1
+      - name: Run Espresso tests on ${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}
+        run: ./gradlew :apps:forlago:${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}DebugAndroidTest
 
       - name: Make file path compatible with upload-artifact
         run: find . -path '*/build/*' -name '*:*' -exec bash -c 'mv "$0" "${0//:/_}"' {} \;
@@ -391,7 +389,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: instrumentation-test-results-${{ matrix.api-level }}
+          name: instrumentation-test-results-${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}
           path: |
             **/build/reports/*
             **/build/outputs/*/connected/*

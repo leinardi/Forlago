@@ -16,12 +16,15 @@
 
 import com.leinardi.forlago.ext.android
 import com.leinardi.forlago.ext.config
+import com.leinardi.forlago.ext.configureJavaCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("forlago.config-conventions")
 }
+
+configureJavaCompile()
 
 kotlin {
     sourceSets.all {

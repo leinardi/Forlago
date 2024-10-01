@@ -17,7 +17,7 @@ coroutines = "1.9.0-RC"
 dagger = "2.52"
 detekt = "1.23.6"
 diktat = "1.2.5"
-gradle = "8.7"
+gradle = "8.10.2"
 greclipse = "4.19"
 # @pin until androidx-compose-compiler supports it
 kotlin = "1.9.25"
