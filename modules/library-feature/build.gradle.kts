@@ -17,6 +17,7 @@
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -28,13 +29,11 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
-    }
 }
 
 dependencies {
     api(project(":modules:library-navigation"))
+
     api(libs.coroutines.core)
     api(libs.coroutines.android)
     implementation(libs.dagger.hilt.android)

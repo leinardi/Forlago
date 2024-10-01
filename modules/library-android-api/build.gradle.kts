@@ -30,6 +30,7 @@ android {
 }
 
 dependencies {
+    api(libs.androidx.core.splashscreen)
     api(libs.play.app.update)
     api(libs.play.app.update.ktx)
     implementation(libs.androidx.activity.compose)
@@ -37,4 +38,6 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     implementation(libs.kotlinx.serialization)
     ksp(libs.dagger.hilt.compiler)
+
+    testImplementation(libs.robolectric)
 }

@@ -17,6 +17,7 @@
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -27,9 +28,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs + listOf(
@@ -48,9 +46,11 @@ dependencies {
     implementation(projects.modules.libraryI18n)
     implementation(projects.modules.libraryNavigationApi)
     implementation(projects.modules.libraryPreferencesApi)
+    ksp(projects.modules.libraryAutobindKsp)
+
     api(libs.accompanist.permissions)
     api(libs.androidx.appcompat)
-    api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like ModalBottomSheetLayout
+    api(libs.androidx.compose.material) // Still needed for stuff missing in M3, like Compose Navigation
     api(libs.androidx.compose.material.icons.extended)
     api(libs.androidx.compose.material.navigation)
     api(libs.androidx.compose.material3)
@@ -61,7 +61,6 @@ dependencies {
     api(libs.androidx.compose.ui)
     api(libs.androidx.compose.ui.util)
     api(libs.androidx.constraintlayout.compose)
-    api(libs.androidx.core.splashscreen)
     api(libs.androidx.hilt.navigation.compose)
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.navigation.compose)
@@ -73,5 +72,4 @@ dependencies {
     debugApi(libs.androidx.customview)  // Workaround for https://issuetracker.google.com/issues/227767363
     debugApi(libs.androidx.customview.poolingcontainer)  // Workaround for https://issuetracker.google.com/issues/227767363
     ksp(libs.dagger.hilt.compiler)
-    ksp(projects.modules.libraryAutobindKsp)
 }

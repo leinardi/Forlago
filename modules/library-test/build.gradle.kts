@@ -15,7 +15,8 @@
  */
 
 plugins {
-    id("forlago.android-library-conventions")
+    id("com.android.library")
+    id("forlago.android-conventions")
     id("com.google.devtools.ksp")
 }
 
@@ -30,6 +31,7 @@ android {
 
 dependencies {
     api(projects.modules.libraryAndroidApi)
+    api(projects.modules.libraryLoggingApi)
 
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.test.core)
@@ -37,7 +39,6 @@ dependencies {
     api(libs.apollo.testing.support)
     api(libs.coroutines.test)
     api(libs.dagger.hilt.android.testing)
-    api(libs.junit)
     api(libs.kotlin.test)
     api(libs.kotlin.test.junit)
     api(libs.mockk)

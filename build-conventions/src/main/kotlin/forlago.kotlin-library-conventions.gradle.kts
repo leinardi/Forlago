@@ -16,6 +16,7 @@
 
 import com.leinardi.forlago.ext.android
 import com.leinardi.forlago.ext.config
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -34,6 +35,6 @@ tasks {
         testLogging.events("skipped", "failed")
     }
     withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = config.android.javaVersion.get().toString()
+        compilerOptions.jvmTarget.set(JvmTarget.fromTarget(config.android.javaVersion.get().toString()))
     }
 }

@@ -51,6 +51,7 @@ tasks.register("generateFeatureDestinationObject") {
 }
 
 tasks.register("generateFeatureApiModule") {
+    notCompatibleWithConfigurationCache("Cannot serialize Gradle script object references")
     doLast {
         copy {
             includeEmptyDirs = false
@@ -82,7 +83,7 @@ tasks.register("generateFeatureApiModule") {
 
 tasks.register("generateFeatureModule") {
     dependsOn("generateFeatureApiModule")
-    dependsOn("generateFeatureDestinationObject")
+    notCompatibleWithConfigurationCache("Cannot serialize Gradle script object references")
     doLast {
         copy {
             includeEmptyDirs = false
@@ -115,6 +116,7 @@ tasks.register("generateFeatureModule") {
 }
 
 tasks.register("generateLibraryApiModule") {
+    notCompatibleWithConfigurationCache("Cannot serialize Gradle script object references")
     doLast {
         copy {
             includeEmptyDirs = false
@@ -146,6 +148,7 @@ tasks.register("generateLibraryApiModule") {
 
 tasks.register("generateLibraryModule") {
     dependsOn("generateLibraryApiModule")
+    notCompatibleWithConfigurationCache("Cannot serialize Gradle script object references")
     doLast {
         copy {
             includeEmptyDirs = false

@@ -1296,6 +1296,8 @@ compose:
     active: true
   PublicComposablePreview:
     active: true
+  ComposableEventParameterNaming:
+    active: false # Custom
   UnnecessaryEventHandlerParameter:
     active: true
   ComposableParametersOrdering:
@@ -1311,6 +1313,7 @@ compose:
   ConditionCouldBeLifted:
     active: false
     ignoreCallsWithArgumentNames: ['modifier']
+
 Compose:
   ComposableAnnotationNaming:
     active: true
@@ -1338,6 +1341,7 @@ Compose:
     # treatAsLambda: MyLambdaType
     # -- You can optionally have a list of types to be treated as composable lambdas (e.g. typedefs or fun interfaces not picked up automatically).
     # -- The difference with treatAsLambda is that those need `@Composable` MyLambdaType in the definition, while these won't.
+    # treatAsComposableLambda: MyComposableLambdaType
   DefaultsVisibility:
     active: true
   LambdaParameterInRestartableEffect:

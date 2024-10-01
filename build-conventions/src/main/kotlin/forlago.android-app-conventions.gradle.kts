@@ -24,6 +24,7 @@ plugins {
     id("forlago.android-conventions")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
+    id("org.jetbrains.kotlin.plugin.compose")
     id("com.google.dagger.hilt.android")
     id("com.mikepenz.aboutlibraries.plugin")
     id("forlago.merged-manifests-conventions")
@@ -44,9 +45,6 @@ println("google-services.json ${if (applyGsmServicesPlugins) "" else "NOT "}foun
 android {
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"

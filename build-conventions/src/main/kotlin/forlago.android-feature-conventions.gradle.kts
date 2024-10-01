@@ -19,6 +19,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 val libs = the<LibrariesForLibs>()
@@ -26,9 +27,6 @@ val libs = the<LibrariesForLibs>()
 android {
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
@@ -41,6 +39,20 @@ android {
             "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api",
             "-opt-in=androidx.compose.ui.ExperimentalComposeUiApi",
         )
+    }
+}
+
+tasks {
+    withType<Test> {
+        // Avoid to run each unit test twice since on feature modules we do not have release specific code
+        if (name.endsWith("ReleaseUnitTest")) {
+            enabled = false
+        }
+    }
+
+    // Workaround for https://github.com/detekt/detekt/issues/4743
+    withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+        exclude("**/*AutoBindModule.kt")
     }
 }
 
