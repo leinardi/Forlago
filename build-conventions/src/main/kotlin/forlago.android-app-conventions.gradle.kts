@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 import com.android.build.gradle.internal.tasks.factory.dependsOn
+import com.leinardi.forlago.ext.android
+import com.leinardi.forlago.ext.config
+import com.leinardi.forlago.ext.configureGradleManagedDevices
 import com.mikepenz.aboutlibraries.plugin.DuplicateMode
 import com.mikepenz.aboutlibraries.plugin.DuplicateRule
 import com.project.starter.easylauncher.filter.ChromeLikeFilter
@@ -59,6 +62,7 @@ android {
             "-opt-in=androidx.compose.ui.test.ExperimentalTestApi",
         )
     }
+    configureGradleManagedDevices(minApiLevel = config.android.minSdk.get(), maxApiLevel = config.android.targetSdk.get())
 }
 
 easylauncher {

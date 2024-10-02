@@ -19,7 +19,6 @@ import com.android.build.gradle.api.AndroidBasePlugin
 import com.leinardi.forlago.ext.android
 import com.leinardi.forlago.ext.config
 import com.leinardi.forlago.ext.configureJavaCompile
-import com.leinardi.forlago.gmd.configureGradleManagedDevices
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -77,8 +76,6 @@ plugins.withType<AndroidBasePlugin>().configureEach {
                 )
                 jvmTarget = config.android.javaVersion.get().toString()
             }
-
-            configureGradleManagedDevices(minApiLevel = config.android.minSdk.get(), maxApiLevel = config.android.targetSdk.get())
         }
 
         packagingOptions {
