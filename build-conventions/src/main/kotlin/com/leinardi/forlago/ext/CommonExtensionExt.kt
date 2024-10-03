@@ -40,7 +40,7 @@ fun CommonExtension<*, *, *, *, *, *>.configureGradleManagedDevices(
         managedDevices {
             devices {
                 allDevices.forEach { deviceConfig ->
-                    create<ManagedVirtualDevice>(deviceConfig.deviceName).apply {
+                    create<ManagedVirtualDevice>(deviceConfig.deviceName) {
                         this.device = deviceConfig.device
                         apiLevel = deviceConfig.apiLevel
                         this.systemImageSource = deviceConfig.systemImageSource
