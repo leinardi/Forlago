@@ -62,7 +62,7 @@ android {
             "-opt-in=androidx.compose.ui.test.ExperimentalTestApi",
         )
     }
-    configureGradleManagedDevices(minApiLevel = config.android.minSdk.get(), maxApiLevel = config.android.targetSdk.get())
+    // configureGradleManagedDevices(minApiLevel = config.android.minSdk.get(), maxApiLevel = config.android.targetSdk.get())
 }
 
 easylauncher {

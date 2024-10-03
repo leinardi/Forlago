@@ -62,14 +62,14 @@ jobs:
 
       - name: Generate Baseline Profile
         run: |
-          ./gradlew :macrobenchmark:forlago:pixel2Api31googleBenchmarkAndroidTest \
+          ./gradlew :macrobenchmark:forlago:pixel6Api31BenchmarkAndroidTest \
             -Pandroid.testInstrumentationRunnerArguments.androidx.benchmark.enabledRules=baselineprofile \
             -Pandroid.experimental.testOptions.managedDevices.emulator.showKernelLogging=true  \
             -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" \
             --no-configuration-cache
 
       - name: Move & Rename Baseline Profile
-        run: mv -f macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel2Api31google/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
+        run: mv -f macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel6Api31/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
