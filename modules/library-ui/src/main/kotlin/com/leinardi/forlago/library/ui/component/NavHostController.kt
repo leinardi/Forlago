@@ -29,8 +29,8 @@ fun <T> NavHostController.setResult(key: String, value: T): Boolean = previousBa
 
 @Composable
 fun <T : NavigationDestination.Result> NavHostController.observeResult(key: String, onResult: (T) -> Unit): Boolean =
-    currentBackStackEntry?.let { entry ->
-        entry.savedStateHandle.getLiveData<T>(key).observe(LocalLifecycleOwner.current) { result ->
+    currentBackStackEntry?.run {
+        savedStateHandle.getLiveData<T>(key).observe(LocalLifecycleOwner.current) { result ->
             if (!result.consumed) {
                 result.consumed = true
                 onResult(result)

@@ -101,9 +101,6 @@
                 android:value="androidx.startup" />
             <meta-data
                 android:name="com.leinardi.forlago.library.logging.api.initializer.TimberInitializer"
-                android:value="androidx.startup" /> <!-- This entry makes ApolloInitializer discoverable. -->
-            <meta-data
-                android:name="com.apollographql.apollo.cache.normalized.sql.ApolloInitializer"
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.emoji2.text.EmojiCompatInitializer"
@@ -113,6 +110,9 @@
                 android:value="androidx.startup" />
             <meta-data
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" /> <!-- This entry makes ApolloInitializer discoverable. -->
+            <meta-data
+                android:name="com.apollographql.apollo.cache.normalized.sql.ApolloInitializer"
                 android:value="androidx.startup" />
         </provider>
 
@@ -211,6 +211,11 @@
         <uses-library
             android:name="androidx.window.sidecar"
             android:required="false" />
+
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"
