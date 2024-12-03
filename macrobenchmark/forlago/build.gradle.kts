@@ -13,13 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.android.build.api.dsl.ManagedVirtualDevice
+
+@file:Suppress("UnstableApiUsage")
+
+import com.leinardi.forlago.ext.configureGradleManagedDevice
+import com.leinardi.forlago.model.DeviceConfig
 
 plugins {
     id("com.android.test")
     id("forlago.android-conventions")
     alias(libs.plugins.baselineprofile)
 }
+
+val deviceConfig = DeviceConfig(
+    device = "Pixel 2",
+    apiLevel = 31,
+    systemImageSource = "google",
+)
 
 android {
     namespace = config.apps.forlago.applicationId.get() + ".macrobenchmark"
@@ -29,17 +39,8 @@ android {
         testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
     }
 
-    testOptions {
-        managedDevices {
-            devices {
-                create<ManagedVirtualDevice>("pixel6Api31") {
-                    device = "Pixel 6"
-                    apiLevel = 31
-                    systemImageSource = "aosp"
-                }
-            }
-        }
-    }
+
+    configureGradleManagedDevice(deviceConfig)
 
     targetProjectPath = ":apps:forlago"
     experimentalProperties["android.experimental.self-instrumenting"] = true
@@ -60,7 +61,7 @@ android {
 baselineProfile {
     // This specifies the managed devices to use that you run the tests on.
     managedDevices.clear()
-    managedDevices += "pixel6Api31"
+    managedDevices += deviceConfig.deviceName
 
     // Don't use a connected device but rely on a GMD for consistency between local and CI builds.
     useConnectedDevices = false
