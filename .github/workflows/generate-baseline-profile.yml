@@ -69,7 +69,7 @@ jobs:
             --no-configuration-cache
 
       - name: Move & Rename Baseline Profile
-        run: mv -f macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel2Api31google/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
+        run: mv -f macrobenchmark/forlago/build/intermediates/managed_device_android_test_additional_output/benchmark/pixel2Api31googleBenchmarkAndroidTest/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
