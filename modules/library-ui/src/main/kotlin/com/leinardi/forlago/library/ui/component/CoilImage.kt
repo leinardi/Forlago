@@ -24,8 +24,12 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.DefaultAlpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import coil.compose.SubcomposeAsyncImage
-import coil.request.ImageRequest
+import coil3.compose.AsyncImagePainter.State
+import coil3.compose.SubcomposeAsyncImage
+import coil3.compose.SubcomposeAsyncImageScope
+import coil3.request.ImageRequest
+import coil3.request.allowHardware
+import coil3.request.crossfade
 import com.leinardi.forlago.library.ui.component.placeholder.placeholder
 
 @Suppress("ModifierReused", "ModifierNotUsedAtRoot")
@@ -35,11 +39,20 @@ fun CoilImage(
     contentDescription: String?,
     modifier: Modifier = Modifier,
     crossfade: Boolean = true,
-    error: @Composable (() -> Unit)? = null,
+    loading: @Composable (SubcomposeAsyncImageScope.(State.Loading) -> Unit)? = {
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .placeholder(true),
+        ) {}
+    },
+    error: @Composable (SubcomposeAsyncImageScope.(State.Error) -> Unit)? = null,
+    onSuccess: ((State.Success) -> Unit)? = null,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Crop,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
+    allowHardwareBitmaps: Boolean = true,
     placeholder: Boolean = false,
 ) {
     if (placeholder) {
@@ -47,11 +60,13 @@ fun CoilImage(
     } else {
         SubcomposeAsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
+                .allowHardware(allowHardwareBitmaps)
                 .data(url)
                 .crossfade(crossfade)
                 .build(),
-            loading = { Box(modifier = modifier.placeholder(true)) {} },
-            error = { error?.invoke() },
+            loading = loading,
+            error = error,
+            onSuccess = onSuccess,
             contentDescription = contentDescription,
             modifier = modifier,
             alignment = alignment,

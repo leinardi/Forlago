@@ -17,6 +17,7 @@
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -27,9 +28,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     kotlinOptions {
         freeCompilerArgs = freeCompilerArgs + listOf(
@@ -66,7 +64,7 @@ dependencies {
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.navigation.compose)
     api(libs.androidx.paging)
-    api(libs.coil.compose)
+    api(libs.bundles.coil)
     api(libs.material)
     api(libs.zoomable)
     implementation(libs.dagger.hilt.android)
