@@ -19,6 +19,7 @@ import org.gradle.accessors.dm.LibrariesForLibs
 plugins {
     id("forlago.android-library-conventions")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 val libs = the<LibrariesForLibs>()
@@ -26,9 +27,6 @@ val libs = the<LibrariesForLibs>()
 android {
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"

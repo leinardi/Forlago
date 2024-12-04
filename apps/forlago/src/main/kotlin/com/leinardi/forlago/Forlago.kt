@@ -18,12 +18,15 @@ package com.leinardi.forlago
 
 import android.app.Application
 import android.os.SystemClock
-import android.util.Log
-import coil.ImageLoader
-import coil.ImageLoaderFactory
-import coil.disk.DiskCache
-import coil.memory.MemoryCache
-import coil.util.DebugLogger
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.SingletonImageLoader
+import coil3.disk.DiskCache
+import coil3.memory.MemoryCache
+import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.request.crossfade
+import coil3.util.DebugLogger
+import coil3.util.Logger
 import com.leinardi.forlago.library.android.api.strictmode.configureStrictMode
 import com.leinardi.forlago.library.feature.Feature
 import com.leinardi.forlago.library.feature.FeatureManager
@@ -32,10 +35,11 @@ import com.leinardi.forlago.library.network.api.interactor.ReadCertificatePinnin
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
+import okio.Path.Companion.toOkioPath
 import javax.inject.Inject
 
 @HiltAndroidApp
-class Forlago : Application(), ImageLoaderFactory {
+class Forlago : Application(), SingletonImageLoader.Factory {
     @Inject lateinit var featureManager: FeatureManager
 
     @Inject lateinit var featureSet: Set<@JvmSuppressWildcards Feature>
@@ -61,26 +65,24 @@ class Forlago : Application(), ImageLoaderFactory {
         featureManager.register(featureSet.toList())
     }
 
-    override fun newImageLoader(): ImageLoader = ImageLoader.Builder(this)
+    override fun newImageLoader(context: PlatformContext): ImageLoader = ImageLoader.Builder(context)
         .memoryCache {
-            MemoryCache.Builder(this)
-                .maxSizePercent(COIL_MEMORY_CACHE_SIZE_PERCENT)
+            MemoryCache.Builder()
+                .maxSizePercent(context, COIL_MEMORY_CACHE_SIZE_PERCENT)
                 .build()
         }
         .diskCache {
             DiskCache.Builder()
-                .directory(filesDir.resolve(COIL_DISK_CACHE_DIRECTORY_NAME))
+                .directory(filesDir.resolve(COIL_DISK_CACHE_DIRECTORY_NAME).toOkioPath())
                 .maxSizeBytes(COIL_DISK_CACHE_SIZE)
                 .build()
         }
-        .okHttpClient { okHttpClient }
+        .components { add(OkHttpNetworkFetcherFactory(callFactory = { okHttpClient })) }
         .crossfade(true)
-        // Ignore the network cache headers and always read from/write to the disk cache.
-        .respectCacheHeaders(false)
         // Enable logging to the standard Android log if this is a debug build.
         .apply {
             if (BuildConfig.DEBUG) {
-                logger(DebugLogger(Log.VERBOSE))
+                logger(DebugLogger(Logger.Level.Verbose))
             }
         }
         .build()

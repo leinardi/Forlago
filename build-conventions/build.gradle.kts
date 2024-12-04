@@ -27,6 +27,7 @@ dependencies {
     implementation(libs.plugin.aboutlibraries)
     implementation(libs.plugin.android.gradle)
     implementation(libs.plugin.androidcachefix)
+    implementation(libs.plugin.compose.compiler)
     implementation(libs.plugin.dagger.hilt)
     implementation(libs.plugin.detekt)
     implementation(libs.plugin.easylauncher)
