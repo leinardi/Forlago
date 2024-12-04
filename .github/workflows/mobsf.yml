@@ -21,11 +21,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -37,11 +40,9 @@ jobs:
           ENCRYPT_KEY: ${{ secrets.ENCRYPT_KEY }}
 
       - name: Build
-        uses: gradle/gradle-build-action@v2
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
-        with:
-          arguments: assembleRelease
+        run: ./gradlew assembleRelease
 
       - name: Clean secrets
         if: always()
@@ -49,7 +50,7 @@ jobs:
 
       - name: Upload build outputs
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-outputs
           path: apps/forlago/build/outputs
@@ -78,13 +79,13 @@ jobs:
           REPO_NAME: ${{ github.event.repository.name }}
 
       - name: Upload MobSF Analysis PDF Result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mobsf-report.pdf
           path: mobsf-report.pdf
 
       - name: Upload MobSF Analysis JSON Result
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: mobsf-report.json
           path: mobsf-report.json

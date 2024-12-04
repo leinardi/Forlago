@@ -32,11 +32,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -44,9 +47,7 @@ jobs:
 
       ## Actual task
       - name: Check merged manifests
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: copyMergedManifests
+        run: ./gradlew copyMergedManifests
 
       - id: merged_manifests
         run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_ENV
@@ -59,9 +60,7 @@ jobs:
           exit 1
 
       - name: Check compile dependencies report
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: generateRuntimeDependenciesReport
+        run: ./gradlew generateRuntimeDependenciesReport
 
       - id: compile_dependencies_report
         run: echo "changed=$(git status --porcelain | wc -l)" >> $GITHUB_ENV
@@ -89,11 +88,16 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -101,14 +105,11 @@ jobs:
 
       ## Actual tasks
       - name: Build
-        uses: gradle/gradle-build-action@v2
-        with:
-          cache-read-only: false
-          arguments: assembleDebug assembleDebugAndroidTest -PsaveBuildLogToFile=true
+        run: ./gradlew assembleDebug assembleDebugAndroidTest -PsaveBuildLogToFile=true
 
       - name: Archiving violations report
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: violations-build-debug
           path: ./**/build/logs/buildlog*.txt
@@ -132,11 +133,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -149,11 +153,9 @@ jobs:
 
       ## Actual task
       - name: Build
-        uses: gradle/gradle-build-action@v2
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
-        with:
-          arguments: :apps:forlago:bundleRelease # analyzeReleaseBundle <- Disable due to https://github.com/spotify/ruler/issues/116
+        run: ./gradlew :apps:forlago:bundleRelease # analyzeReleaseBundle <- Disable due to https://github.com/spotify/ruler/issues/116
 
       - name: Clean secrets
         if: always()
@@ -161,7 +163,7 @@ jobs:
 
       # Disable due to https://github.com/spotify/ruler/issues/116
       # - name: Upload Ruler report
-      #   uses: actions/upload-artifact@v3
+      #   uses: actions/upload-artifact@v4
       #   with:
       #     name: ruler
       #     path: apps/forlago/build/reports/ruler
@@ -183,11 +185,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -195,13 +200,11 @@ jobs:
 
       ## Actual tasks
       - name: Detekt
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: detektDebug detektTest
+        run: ./gradlew detektDebug detektTest
 
       - name: Archiving violations report
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: violations-detekt
           path: ./**/reports/detekt/*.xml
@@ -223,11 +226,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -235,9 +241,7 @@ jobs:
 
       ## Actual tasks
       - name: Spotless
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: spotlessCheck
+        run: ./gradlew spotlessCheck
 
   android-lint:
     name: Android Lint
@@ -256,11 +260,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -268,20 +275,18 @@ jobs:
 
       ## Actual tasks
       - name: Lint
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: lint
+        run: ./gradlew lint
 
       - name: Upload Lint results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: android-lint-html-report
           path: ./**/build/reports/lint-results-*.html
 
       - name: Archiving violations report
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: violations-android-lint
           path: ./**/reports/lint-results*.xml
@@ -303,11 +308,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -315,13 +323,11 @@ jobs:
 
       ## Actual tasks
       - name: Unit tests
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: testDebugUnitTest
+        run: ./gradlew testDebugUnitTest
 
       - name: Archiving violations report
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: violations-unit-tests
           path: ./**/build/test-results/test*/*.xml
@@ -370,7 +376,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -387,7 +393,7 @@ jobs:
 
       - name: Upload results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: instrumentation-test-results-${{ matrix.device }}Api${{ matrix.api-level }}${{ matrix.system-image-source }}
           path: |
@@ -413,40 +419,40 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
         run: touch local.properties
 
       - name: Fetching build-debug result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: violations-build-debug
 
       - name: Fetching detekt result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: violations-detekt
 
       - name: Fetching android-lint result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: violations-android-lint
 
       - name: Fetching unit-tests result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: violations-unit-tests
 
       ## Actual tasks
       - name: Publishing violation comments to PR
         if: ${{ always() && github.event_name == 'pull_request' }}
-        uses: gradle/gradle-build-action@v2
-        with:
-          cache-read-only: true
-          arguments: violationCommentsToGitHub -DGITHUB_PULLREQUESTID=${{ github.event.number }} -DGITHUB_OAUTH2TOKEN=${{ secrets.GITHUB_TOKEN }} --info
+        run: ./gradlew violationCommentsToGitHub -DGITHUB_PULLREQUESTID=${{ github.event.number }} -DGITHUB_OAUTH2TOKEN=${{ secrets.GITHUB_TOKEN }} --info
