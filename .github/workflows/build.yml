@@ -21,11 +21,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17.0.10
 
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -38,18 +41,16 @@ jobs:
 
       ## Actual task
       - name: Build
-        uses: gradle/gradle-build-action@v2
         env:
           ORG_GRADLE_PROJECT_RELEASE_KEYSTORE_PWD: ${{ secrets.RELEASE_KEYSTORE_PWD }}
-        with:
-          arguments: assemble
+        run: ./gradlew assemble
 
       - name: Clean secrets
         if: always()
         run: ./release/clean-secrets.sh
 
       - name: Upload build outputs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-outputs
           path: apps/forlago/build/outputs

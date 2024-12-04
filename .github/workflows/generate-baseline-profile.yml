@@ -52,7 +52,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/actions/wrapper-validation@v3
 
       - name: Create Local Properties File
         run: touch local.properties
@@ -69,10 +69,10 @@ jobs:
             --no-configuration-cache
 
       - name: Move & Rename Baseline Profile
-        run: mv -f macrobenchmark/forlago/build/intermediates/managed_device_android_test_additional_output/benchmark/pixel2Api31googleBenchmarkAndroidTest/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
+        run: mv -f macrobenchmark/forlago/build/outputs/managed_device_android_test_additional_output/benchmark/pixel2Api31google/BaselineProfileGenerator_generate-baseline-prof.txt  apps/forlago/src/main/baselineProfiles/baseline-prof.txt
 
       - name: Upload build outputs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: macrobenchmark-build-outputs
