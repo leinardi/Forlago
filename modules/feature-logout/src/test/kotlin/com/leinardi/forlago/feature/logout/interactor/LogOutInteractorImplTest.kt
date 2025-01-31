@@ -38,7 +38,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.TIRAMISU])  // With Roboelectric 4.10.3 maxSdkVersion supported = 33
+@Config(sdk = [Build.VERSION_CODES.VANILLA_ICE_CREAM])  // Robolectric 4.14 adds support for Android V (SDK 35)
 class LogOutInteractorImplTest {
     private val clearApolloCacheInteractor: ClearApolloCacheInteractor = mockk()
     private val forlagoNavigator: ForlagoNavigator = mockk()

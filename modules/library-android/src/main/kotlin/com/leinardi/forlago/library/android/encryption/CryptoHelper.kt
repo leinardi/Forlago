@@ -25,6 +25,7 @@ import com.google.crypto.tink.KeyTemplate
 import com.google.crypto.tink.KeyTemplates
 import com.google.crypto.tink.PublicKeySign
 import com.google.crypto.tink.PublicKeyVerify
+import com.google.crypto.tink.RegistryConfiguration
 import com.google.crypto.tink.aead.AeadConfig
 import com.google.crypto.tink.daead.DeterministicAeadConfig
 import com.google.crypto.tink.integration.android.AndroidKeysetManager
@@ -160,10 +161,10 @@ class CryptoHelper(
                 .build()
                 .keysetHandle
 
-            val aead = aeadKeysetHandle.getPrimitive(Aead::class.java)
-            val deterministicAead = deterministicAeadKeysetHandle.getPrimitive(DeterministicAead::class.java)
-            val signer = signKeysetHandle.getPrimitive(PublicKeySign::class.java)
-            val verifier = signKeysetHandle.publicKeysetHandle.getPrimitive(PublicKeyVerify::class.java)
+            val aead = aeadKeysetHandle.getPrimitive(RegistryConfiguration.get(), Aead::class.java)
+            val deterministicAead = deterministicAeadKeysetHandle.getPrimitive(RegistryConfiguration.get(), DeterministicAead::class.java)
+            val signer = signKeysetHandle.getPrimitive(RegistryConfiguration.get(), PublicKeySign::class.java)
+            val verifier = signKeysetHandle.publicKeysetHandle.getPrimitive(RegistryConfiguration.get(), PublicKeyVerify::class.java)
 
             return CryptoHelper(aead, deterministicAead, signer, verifier)
         }
