@@ -17,5 +17,5 @@
 package com.leinardi.forlago.library.android.api.interactor.android
 
 interface CopyToClipboardInteractor {
-    suspend operator fun invoke(text: String, description: String = "")
+    suspend operator fun invoke(text: String, description: String = "", isSensitive: Boolean = false, preTiramisuToastMessage: String? = null)
 }

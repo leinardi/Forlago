@@ -29,7 +29,7 @@ tasks.register("projectDependencyGraph") {
     doLast {
         if (isDotAvailable()) {
             val dot = rootProject.layout.buildDirectory.file("reports/dependencyGraph/project.dot").get().asFile
-            dot.parentFile.mkdirs()
+            dot.parentFile?.mkdirs()
             dot.delete()
 
             dot.writeText("digraph {\n")
@@ -91,11 +91,11 @@ tasks.register("projectDependencyGraph") {
                         .forEach { dependency ->
                             if (project != rootProject) {
                                 projects.add(project)
-                                projects.add(dependency.dependencyProject)
-                                rootProjects.remove(dependency.dependencyProject)
+                                projects.add(project.project(dependency.path))
+                                rootProjects.remove(project.project(dependency.path))
 
-                                val graphKey = project to dependency.dependencyProject
-                                if (project != dependency.dependencyProject) {
+                                val graphKey = project to project.project(dependency.path)
+                                if (project != project.project(dependency.path)) {
                                     val traits = dependencies.computeIfAbsent(graphKey) { mutableListOf() }.toMutableList()
                                     if (config.name.lowercase(Locale.ROOT).endsWith("implementation")) {
                                         traits.add("style=dotted")

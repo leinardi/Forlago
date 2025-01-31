@@ -17,7 +17,6 @@
 package com.leinardi.forlago.library.android.api.ext
 
 import android.graphics.Color
-import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -28,11 +27,7 @@ fun ComponentActivity.enableEdgeToEdgeCompat(
     isNavigationBarContrastEnforced: Boolean = false,
 ) {
     enableEdgeToEdge(statusBarStyle, navigationBarStyle)
-    // For API29(Q) or higher and 3-button navigation,
-    // the following code must be written to make the navigation color completely transparent.
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        window.isNavigationBarContrastEnforced = isNavigationBarContrastEnforced
-    }
+    window.isNavigationBarContrastEnforced = isNavigationBarContrastEnforced
 }
 
 /**

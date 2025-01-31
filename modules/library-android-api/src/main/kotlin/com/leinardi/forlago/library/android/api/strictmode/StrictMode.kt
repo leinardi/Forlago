@@ -59,12 +59,10 @@ fun configureStrictMode(detectCleartextNetwork: Boolean) {
             .penaltyLog()
             .penaltyDeath()
             .detectContentUriWithoutPermission()
+            .detectCredentialProtectedWhileLocked()
+            .detectImplicitDirectBoot()
             // .detectUntaggedSockets() // https://github.com/square/okhttp/issues/3537#issuecomment-974861679
             .apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    detectCredentialProtectedWhileLocked()
-                    detectImplicitDirectBoot()
-                }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     // False positive on API < 30
                     detectActivityLeaks()
