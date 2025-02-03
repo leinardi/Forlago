@@ -20,7 +20,7 @@
      >
 
     <uses-sdk
-        android:minSdkVersion="26"
+        android:minSdkVersion="29"
         android:targetSdkVersion="35" />
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -174,10 +174,6 @@
             android:name="com.google.firebase.sessions.SessionLifecycleService"
             android:enabled="true"
             android:exported="false" />
-
-        <property
-            android:name="android.adservices.AD_SERVICES_CONFIG"
-            android:resource="@xml/ga_ad_services_config" />
 
         <provider
             android:name="com.google.firebase.provider.FirebaseInitProvider"

@@ -27,7 +27,7 @@ val config = extensions.create<ConfigExt>("config").apply {
         accountType.convention("com.leinardi.forlago.auth")
         compileSdk.convention(35)
         javaVersion.convention(JavaVersion.VERSION_17)
-        minSdk.convention(26)
+        minSdk.convention(29)
         targetSdk.convention(35)
     }
 

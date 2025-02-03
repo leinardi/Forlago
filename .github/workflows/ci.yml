@@ -38,9 +38,6 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
         run: touch local.properties
@@ -96,9 +93,6 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
         run: touch local.properties
@@ -138,9 +132,6 @@ jobs:
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
-
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -191,9 +182,6 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
         run: touch local.properties
@@ -232,9 +220,6 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
         run: touch local.properties
@@ -265,9 +250,6 @@ jobs:
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
-
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -314,9 +296,6 @@ jobs:
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
-
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
         run: touch local.properties
@@ -346,7 +325,7 @@ jobs:
       fail-fast: false
       matrix:
         device: [pixel2]
-        api-level: [28, 31]
+        api-level: [29, 31]
         system-image-source: [google]
 
     steps:
@@ -374,9 +353,6 @@ jobs:
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
@@ -424,9 +400,6 @@ jobs:
 
       - name: Copy CI gradle.properties
         run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
-
-      - name: Validate gradle wrapper
-        uses: gradle/actions/wrapper-validation@v3
 
       ## This is needed by secrets-gradle-plugin
       - name: Create Local Properties File
