@@ -920,6 +920,8 @@ LFi;
 LFi0;
 HSPLFi0;-><clinit>()V
 LFl;
+LFl0;
+HSPLFl0;-><clinit>()V
 LFm;
 HSPLFm;-><init>(LNm;I)V
 HSPLFm;->a(LNm;)V
@@ -1075,6 +1077,8 @@ HSPLGk0;->k(Ljava/lang/Object;)Ljava/lang/Object;
 HSPLGk0;->n(Ljava/lang/Object;)Ljava/lang/Object;
 LGl;
 HSPLGl;->h0(Ljava/util/List;Ljava/util/Comparator;)V
+LGl0;
+HSPLGl0;-><clinit>()V
 LGm;
 HSPLGm;-><init>(Ljava/lang/Object;ILjava/lang/Object;)V
 HSPLGm;->h(LlV;LaV;)V
@@ -1268,6 +1272,7 @@ HSPLHl;->i0(Ljava/util/Collection;Ljava/lang/Iterable;)V
 LHl0;
 HSPLHl0;-><clinit>()V
 HSPLHl0;-><init>(I)V
+HSPLHl0;->a(LO20;)V
 HSPLHl0;->b()V
 LHm;
 LHn;
@@ -1578,6 +1583,7 @@ HSPLJl;->g(J)F
 HSPLJl;->h(J)F
 LJl0;
 HSPLJl0;-><init>(JLJl0;I)V
+HSPLJl0;->g()I
 LJm;
 HSPLJm;-><init>(LNm;)V
 LJn0;
@@ -1642,6 +1648,7 @@ HSPLKH;-><clinit>()V
 HSPLKH;-><init>([F[F)V
 LKI;
 HSPLKI;-><init>(Landroidx/fragment/app/c;I)V
+PLKI;->a(Ljava/lang/Object;)V
 LKJ;
 HSPLKJ;-><init>(LQJ;)V
 HSPLKJ;->b()LQJ;
@@ -2034,6 +2041,8 @@ LN10;
 HSPLN10;-><init>(Lm2;JIZ)V
 HSPLN10;->g(LN10;Lfj;JLen0;LMt0;LYz;)V
 HSPLN10;->j(I)V
+LN20;
+HSPLN20;-><init>(LP20;LO20;)V
 LN4;
 HSPLN4;-><init>(ILx20;Ljava/lang/Object;Ljava/lang/Object;)V
 HSPLN4;-><init>(LOy;Lcf0;LeG;)V
@@ -2154,6 +2163,7 @@ HSPLNm;->i(Llq;)V
 HSPLNm;->j(Ln60;)V
 HSPLNm;->l(Landroid/os/Bundle;)V
 HSPLNm;->onCreate(Landroid/os/Bundle;)V
+PLNm;->onTrimMemory(I)V
 LNp0;
 HSPLNp0;-><clinit>()V
 LNr;
@@ -2184,6 +2194,11 @@ LO2;
 HSPLO2;-><clinit>()V
 HSPLO2;->I()LW80;
 HSPLO2;->l(I)Ljava/lang/Object;
+LO20;
+HSPLO20;-><init>(LP20;Lbj;)V
+HSPLO20;->C(Ljava/lang/Object;)V
+HSPLO20;->b(LPk0;I)V
+HSPLO20;->w(Ljava/lang/Object;LnJ;)LI2;
 LO4;
 HSPLO4;-><init>(LiJ;LmJ;LZq;)V
 HSPLO4;->j(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
@@ -2388,7 +2403,10 @@ LPd0;
 HSPLPd0;-><init>(ILhp0;LkJ;)V
 HSPLPd0;->c()V
 HSPLPd0;->f()LkJ;
+HSPLPd0;->k()V
 HSPLPd0;->l()V
+HSPLPd0;->m()V
+HSPLPd0;->t(LkJ;)Ldp0;
 LPf;
 LPg;
 HSPLPg;-><init>(LcG;LZq;LRg;)V
@@ -2409,6 +2427,7 @@ HSPLPj0;-><init>()V
 LPk0;
 HSPLPk0;-><clinit>()V
 HSPLPk0;-><init>(JLPk0;I)V
+HSPLPk0;->d()Z
 HSPLPk0;->i()V
 LPl0;
 LPm;
@@ -2984,6 +3003,7 @@ HSPLU1;-><init>(Landroid/content/Context;)V
 LU10;
 HSPLU10;-><init>()V
 HSPLU10;-><init>(I)V
+PLU10;->a()V
 HSPLU10;->d(I)I
 HSPLU10;->e(I)Ljava/lang/Object;
 HSPLU10;->f(I)V
@@ -4377,6 +4397,7 @@ Landroidx/fragment/app/b;
 HSPLandroidx/fragment/app/b;-><init>(Landroidx/fragment/app/c;I)V
 Landroidx/fragment/app/c;
 HSPLandroidx/fragment/app/c;-><init>()V
+PLandroidx/fragment/app/c;->H()Z
 HSPLandroidx/fragment/app/c;->K(IZ)V
 HSPLandroidx/fragment/app/c;->L()V
 HSPLandroidx/fragment/app/c;->Z()V
@@ -5178,6 +5199,7 @@ HSPLf50;->g(Lp10;)I
 HSPLf50;->h(I)Z
 Lf6;
 HSPLf6;-><init>(Landroid/content/res/Configuration;LYN;)V
+PLf6;->onTrimMemory(I)V
 Lf7;
 HSPLf7;-><clinit>()V
 Lf70;
@@ -5323,6 +5345,7 @@ HSPLg50;->d()Lg50;
 HSPLg50;->i()Z
 Lg6;
 HSPLg6;-><init>(Llg0;)V
+PLg6;->onTrimMemory(I)V
 Lg7;
 HSPLg7;-><init>(Lk7;IZJ)V
 HSPLg7;->a(IILandroid/text/TextUtils$TruncateAt;IIIII)LRu0;
@@ -5827,6 +5850,7 @@ HSPLjF0;->j([FI[FI)F
 HSPLjF0;->p([F)F
 HSPLjF0;->q(Ljava/lang/String;)V
 HSPLjF0;->s(FFFF)F
+HSPLjF0;->u(LPk0;JLmJ;)Ljava/lang/Object;
 HSPLjF0;->y(Landroid/content/Context;)Landroid/app/Activity;
 HSPLjF0;->z(J)J
 LjG;
@@ -6554,7 +6578,6 @@ HSPLno0;->e(Z)V
 HSPLno0;->f([II)I
 HSPLno0;->g(I)I
 HSPLno0;->h(IIII)I
-HSPLno0;->i()V
 HSPLno0;->j()V
 HSPLno0;->k(I)V
 HSPLno0;->m()I
@@ -6562,13 +6585,13 @@ HSPLno0;->n()I
 HSPLno0;->o()I
 HSPLno0;->p(I)I
 HSPLno0;->q(I)I
+HSPLno0;->r(I)V
 HSPLno0;->s(II)V
 HSPLno0;->t(Llo0;I)V
 HSPLno0;->u(I)V
 HSPLno0;->v(II)V
 HSPLno0;->w(I)Ljava/lang/Object;
 HSPLno0;->x([II)I
-HSPLno0;->y(Ljava/lang/Object;)Ljava/lang/Object;
 HSPLno0;->z()V
 Lnp0;
 Lnr;
@@ -6820,6 +6843,10 @@ HSPLp30;->r()Ljava/util/ArrayList;
 HSPLp30;->u()V
 HSPLp30;->v()V
 Lp4;
+Lp40;
+HSPLp40;-><init>(ILhp0;LkJ;Ldp0;)V
+HSPLp40;->c()V
+HSPLp40;->f()LkJ;
 Lp60;
 HSPLp60;->H(Le50;)V
 Lp70;
@@ -7213,6 +7240,7 @@ Lrr0;
 HSPLrr0;-><clinit>()V
 Lru;
 HSPLru;-><init>(LDu;Lbr;)V
+HSPLru;->n(Ljava/lang/Object;)Ljava/lang/Object;
 Lrv0;
 Lrw0;
 HSPLrw0;-><init>(DDDDD)V
@@ -7803,7 +7831,9 @@ Lvw0;
 Lvx0;
 HSPLvx0;-><clinit>()V
 HSPLvx0;->E()Ljava/util/ArrayList;
+HSPLvx0;->L(Ljava/lang/Object;)LPk0;
 HSPLvx0;->O(LeH;)V
+HSPLvx0;->P(Ljava/lang/Object;)Z
 HSPLvx0;->R(ILjava/lang/Object;)Z
 HSPLvx0;->V(LYn;)Z
 HSPLvx0;->W(FFF)F
@@ -8082,6 +8112,7 @@ HSPLxh;->h(LkJ;LZq;)Ljava/lang/Object;
 HSPLxh;->s(Ljava/lang/Object;LmJ;)Ljava/lang/Object;
 Lxi0;
 HSPLxi0;-><init>(Lp2;Lbr;)V
+HSPLxi0;->n(Ljava/lang/Object;)Ljava/lang/Object;
 Lxk;
 HSPLxk;-><init>(LNQ;)V
 HSPLxk;->c(Ljava/lang/Throwable;)Z
